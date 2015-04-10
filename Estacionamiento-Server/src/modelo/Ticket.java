@@ -19,7 +19,7 @@ public class Ticket {
 	Descuento descuento;
 	Usuario usuario; //usuario del sistema (util para arqueo caja)
 	
-	String tipoIngreso; //si hay que cobrar por hora o por estadia.
+	String tipoIngreso; //si hay que cobrar por hora o por estadia
 	
 	public long getIdTicket() {
 		return idTicket;
