@@ -1,10 +1,13 @@
 package modelo;
 
-import java.util.Date;
+import java.sql.Date;
 
 public class MovimientoCC 
 {
+	long idMovimiento;
 	Date fecha;
 	String descripcion;
-	double monto;
+	double montoCobrado;
+	String estado;
+	Ticket ticket;
 }

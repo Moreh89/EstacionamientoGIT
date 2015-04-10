@@ -1,8 +1,12 @@
 package controlador;
 
 import java.sql.Connection;
+import java.util.ArrayList;
 
 import modelo.Cliente;
+import modelo.ColorVehiculo;
+import modelo.Descuento;
+import modelo.ModeloVehiculo;
 import modelo.Tarifa;
 import modelo.Ticket;
 import modelo.Usuario;
@@ -10,11 +14,15 @@ import persistencia.PoolConnection;
 
 public class Controlador {
 
-	private Tarifa tarifa;
+	private ArrayList<Tarifa> tarifas;
 	private Cliente cliente;
 	private Ticket ticket;
 	private Usuario usuarioActual;
-
+	private ArrayList<ColorVehiculo> coloresVehiculos;
+	private ArrayList<ModeloVehiculo> modelosVehiculos;
+	private ArrayList<Descuento> descuentos;
+	private double tasaInteres;
+	
 	private static Controlador instancia;
 
 	public static void main(String []args)

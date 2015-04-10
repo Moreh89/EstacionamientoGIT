@@ -2,7 +2,7 @@ package modelo;
 
 public class Usuario 
 {
-	
+	long idUsuario;
 	String userName;
 	String password;
 	String permisos;
@@ -10,6 +10,15 @@ public class Usuario
 	String apellido;
 	String tipoDocumento;
 	String numeroDocumento;
+	
+	
+	
+	public long getIdUsuario() {
+		return idUsuario;
+	}
+	public void setIdUsuario(long idUsuario) {
+		this.idUsuario = idUsuario;
+	}
 	public String getPermisos() {
 		return permisos;
 	}
