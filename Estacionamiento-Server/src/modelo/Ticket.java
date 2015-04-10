@@ -1,40 +1,64 @@
 package modelo;
 
+import java.sql.Date;
 import java.sql.Time;
 
 public class Ticket {
-	String codigo;
-	String montoCobrado;
+	
 
+
+	long idTicket;
+	double montoCobrado;
+	String estado;
 	//Time puede cambiarse si no es compatible con hibernate
-	Time horarioIngreso;
-	Time horarioEgreso;
+	Date fechaLlegada;
+	Date fechaSalida;
 
 	Vehiculo vehiculo;
 	Cliente cliente;
-	public String getCodigo() {
-		return codigo;
+	Descuento descuento;
+	Usuario usuario; //usuario del sistema (util para arqueo caja)
+	
+	String tipoIngreso; //si hay que cobrar por hora o por estadia
+	
+	public long getIdTicket() {
+		return idTicket;
 	}
-	public void setCodigo(String codigo) {
-		this.codigo = codigo;
+	public void setIdTicket(long idTicket) {
+		this.idTicket = idTicket;
 	}
-	public String getMontoCobrado() {
+	public double getMontoCobrado() {
 		return montoCobrado;
 	}
-	public void setMontoCobrado(String montoCobrado) {
+	public void setMontoCobrado(double montoCobrado) {
 		this.montoCobrado = montoCobrado;
 	}
-	public Time getHorarioIngreso() {
-		return horarioIngreso;
+	
+	
+	
+	public Descuento getDescuento() {
+		return descuento;
 	}
-	public void setHorarioIngreso(Time horarioIngreso) {
-		this.horarioIngreso = horarioIngreso;
+	public void setDescuento(Descuento descuento) {
+		this.descuento = descuento;
 	}
-	public Time getHorarioEgreso() {
-		return horarioEgreso;
+	public String getEstado() {
+		return estado;
 	}
-	public void setHorarioEgreso(Time horarioEgreso) {
-		this.horarioEgreso = horarioEgreso;
+	public void setEstado(String estado) {
+		this.estado = estado;
+	}
+	public Date getFechaLlegada() {
+		return fechaLlegada;
+	}
+	public void setFechaLlegada(Date fechaLlegada) {
+		this.fechaLlegada = fechaLlegada;
+	}
+	public Date getFechaSalida() {
+		return fechaSalida;
+	}
+	public void setFechaSalida(Date fechaSalida) {
+		this.fechaSalida = fechaSalida;
 	}
 	public Vehiculo getVehiculo() {
 		return vehiculo;
@@ -54,11 +78,11 @@ public class Ticket {
 	{
 		double montoCobrar=0;        
 
-		if(cliente.equals("porHora"))
+		if(tipoIngreso.equals("porHora"))
 		{
 			montoCobrar=cobroPorHora(cantidadMinutos, tarifa);
 		}
-		else if(cliente.equals("porEstadia"))
+		else if(tipoIngreso.equals("porEstadia"))
 		{
 			montoCobrar=cobroPorEstadia(cantidadMinutos, tarifa);
 		}
@@ -91,24 +115,24 @@ public class Ticket {
 	{
 		double montoCobrar=0;
 
-		if(cantidadMinutos<=tarifa.getTiempoMediaEstadia_min())
+		if(cantidadMinutos<=tarifa.getTiempoMediaEstadia_minuto())
 		{
 			montoCobrar=tarifa.getCostoMediaEstadia();
 		}
-		else if(cantidadMinutos<=tarifa.getTiempoEstadia_min())
+		else if(cantidadMinutos<=tarifa.getTiempoEstadia_minuto())
 		{
 			montoCobrar=tarifa.getCostoEstadia();
 		}
 		else
 		{
-			double cantidadHsEstadia=(int)(cantidadMinutos/tarifa.getTiempoEstadia_min());
+			double cantidadHsEstadia=(int)(cantidadMinutos/tarifa.getTiempoEstadia_minuto());
 			montoCobrar=montoCobrar+tarifa.getCostoEstadia()*cantidadHsEstadia;
-			cantidadMinutos=cantidadMinutos-cantidadHsEstadia*tarifa.getTiempoEstadia_min();			
-			double cantidadHsMediaEstadia=(int)(cantidadMinutos/tarifa.getTiempoMediaEstadia_min());
+			cantidadMinutos=cantidadMinutos-cantidadHsEstadia*tarifa.getTiempoEstadia_minuto();			
+			double cantidadHsMediaEstadia=(int)(cantidadMinutos/tarifa.getTiempoMediaEstadia_minuto());
 			if(cantidadHsMediaEstadia>=0)
 			{
 				montoCobrar=montoCobrar+tarifa.getCostoMediaEstadia()*cantidadHsMediaEstadia;
-				cantidadMinutos=cantidadMinutos-cantidadHsMediaEstadia*tarifa.getTiempoMediaEstadia_min();
+				cantidadMinutos=cantidadMinutos-cantidadHsMediaEstadia*tarifa.getTiempoMediaEstadia_minuto();
 			}			
 			//con el Math.ceil redondeo al techo.
 			double countFracciones=(int)Math.ceil((cantidadMinutos)/tarifa.getTiempoFraccion());

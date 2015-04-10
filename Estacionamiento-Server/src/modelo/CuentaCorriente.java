@@ -4,7 +4,7 @@ import java.util.ArrayList;
 
 public class CuentaCorriente {
 
-	int numeroCuenta;
+	long idCuentaCorriente;
 	ArrayList<MovimientoCC> movimientos;
 	
 	

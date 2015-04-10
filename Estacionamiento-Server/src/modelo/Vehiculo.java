@@ -3,11 +3,11 @@ package modelo;
 public class Vehiculo 
 {
 	//para mi no justifica herencia
+	long idVehiculo;
 	String patente;
-	String color;
-	String categoria;
-	String marca;
-	String modelo;
+	CategoriaVehiculo categoria;
+	ModeloVehiculo modelo;
+	ColorVehiculo color;
 	
 	
 }
