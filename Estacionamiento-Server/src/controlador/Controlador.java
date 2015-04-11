@@ -21,6 +21,8 @@ public class Controlador {
 	private ArrayList<ColorVehiculo> coloresVehiculos;
 	private ArrayList<ModeloVehiculo> modelosVehiculos;
 	private ArrayList<Descuento> descuentos;
+	private ArrayList<Descuento> cocheras;
+	
 	private double tasaInteres;
 	
 	private static Controlador instancia;

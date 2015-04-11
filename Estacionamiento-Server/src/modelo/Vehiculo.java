@@ -9,5 +9,7 @@ public class Vehiculo
 	ModeloVehiculo modelo;
 	ColorVehiculo color;
 	
+	//aplica solo a clientes del tipo mensual
+	
 	
 }

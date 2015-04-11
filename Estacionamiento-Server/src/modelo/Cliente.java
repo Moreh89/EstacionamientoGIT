@@ -20,6 +20,7 @@ public class Cliente {
 	String estado;
 	ArrayList <String> personasAutorizadasARetirar;
 	String razonSocial;
+	ArrayList <Cochera> cocheras; 
 	
 
 	CuentaCorriente cuentaCorriente;
