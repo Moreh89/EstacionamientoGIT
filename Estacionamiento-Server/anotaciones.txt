@@ -1,0 +1,27 @@
+Altas:
+	Ingreso Vehiculo -> Rapido
+	Pantalla vehiculo
+	
+	Cliente -> Llamar pantalla alta vehiculo y asociarlo. + Automatico cuentaCorriente
+	Pago de deuda Cliente -> Cobra usuario cualquiera? 
+	
+	
+ABMs:
+	Usuario
+	Tarifas
+	Clientes
+	Vehiculos
+	ModeloVehiculos
+	Cochera
+	tasaInteres
+	
+	
+	
+Reportes:
+	Arqueo caja
+	Cantidad vehiculos (cantidad de tickets estado prePago y abiertos)
+	Reporte clientes deudores (cC negativa)
+	Reporte MovimientosCC
+	reporte de cantidad de cochera alquiladas mensual
+	
+	
