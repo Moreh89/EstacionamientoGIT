@@ -5,7 +5,7 @@ import java.sql.Time;
 
 public class Ticket {
 	
-	//Rodrigo estuva aca
+	//Rodrigo estuva aca x2
 
 	long idTicket;
 	double montoCobrado;
