@@ -2,19 +2,19 @@ package modelo;
 
 public class Tarifa {
 
-	long idTarifa;
-	CategoriaVehiculo categoria;
+	private long idTarifa;
+	private CategoriaVehiculo categoria;
 
-	double costoMinimo=33;
-	double costoFraccion=2.75;
-	double costoHora=33;
-	double costoMediaEstadia=100;
-	double costoEstadia=133;
+	private double costoMinimo=33;
+	private double costoFraccion=2.75;
+	private double costoHora=33;
+	private double costoMediaEstadia=100;
+	private double costoEstadia=133;
 	
-	double tiempoMinimo=60;
-	double tiempoFraccion=5;
-	double tiempoMediaEstadia_minuto=720;
-	double tiempoEstadia_minuto=1440;
+	private double tiempoMinimo=60;
+	private double tiempoFraccion=5;
+	private double tiempoMediaEstadia_minuto=720;
+	private double tiempoEstadia_minuto=1440;
 	
 	
 	

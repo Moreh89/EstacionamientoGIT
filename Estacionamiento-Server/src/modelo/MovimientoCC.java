@@ -4,10 +4,10 @@ import java.sql.Date;
 
 public class MovimientoCC 
 {
-	long idMovimiento;
-	Date fecha;
-	String descripcion;
-	double montoCobrado;
-	String estado;
-	Ticket ticket;
+	private long idMovimiento;
+	private Date fecha;
+	private String descripcion;
+	private double montoCobrado;
+	private String estado;
+	private Ticket ticket;
 }

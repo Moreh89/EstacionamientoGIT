@@ -2,8 +2,9 @@ package modelo;
 
 public class ColorVehiculo {
 	
-	long idColor;
-	String descripcion;
+	private long idColor;
+	private String descripcion;
+	
 	public long getIdColor() {
 		return idColor;
 	}

@@ -6,6 +6,7 @@ public class PersonaAutorizada {
 
 	private long idPersonaAut;
 	private String nombre;
+	
 	public long getIdPersonaAut() {
 		return idPersonaAut;
 	}

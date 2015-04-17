@@ -3,11 +3,11 @@ package modelo;
 public class Vehiculo 
 {
 	//para mi no justifica herencia
-	long idVehiculo;
-	String patente;
-	CategoriaVehiculo categoria;
-	ModeloVehiculo modelo;
-	ColorVehiculo color;
+	private long idVehiculo;
+	private String patente;
+	private CategoriaVehiculo categoria;
+	private ModeloVehiculo modelo;
+	private ColorVehiculo color;
 	
 	//aplica solo a clientes del tipo mensual
 	

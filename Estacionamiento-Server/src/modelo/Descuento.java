@@ -2,8 +2,8 @@ package modelo;
 
 public class Descuento {
 
-	long idDescuento;
-	String descripcion;
-	double descuento;
+	private long idDescuento;
+	private String descripcion;
+	private double descuento;
 	
 }

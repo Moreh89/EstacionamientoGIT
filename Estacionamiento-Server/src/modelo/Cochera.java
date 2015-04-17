@@ -2,12 +2,12 @@ package modelo;
 
 
 public class Cochera {
-	long idCochera;
-	double costoCochera;
-	Cliente cliente;
-	ESTADO estado;
+	private long idCochera;
+	private double costoCochera;
+	private Cliente cliente;
+	private ESTADO estado;
 	
-	private enum ESTADO {
+	public enum ESTADO {
 		ACTIVO,
 		INACTIVO;
 	}

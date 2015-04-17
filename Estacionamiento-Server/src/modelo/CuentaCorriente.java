@@ -1,11 +1,11 @@
 package modelo;
 
-import java.util.ArrayList;
+import java.util.List;
 
 public class CuentaCorriente {
 
-	long idCuentaCorriente;
-	ArrayList<MovimientoCC> movimientos;
+	private long idCuentaCorriente;
+	private List<MovimientoCC> movimientos;
 	
 	
 }

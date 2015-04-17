@@ -5,21 +5,20 @@ import java.sql.Time;
 
 public class Ticket {
 	
-	//Rodrigo estuva aca x2
 
-	long idTicket;
-	double montoCobrado;
-	String estado;
+	private long idTicket;
+	private double montoCobrado;
+	private String estado;
 	//Time puede cambiarse si no es compatible con hibernate
-	Date fechaLlegada;
-	Date fechaSalida;
+	private Date fechaLlegada;
+	private Date fechaSalida;
 
-	Vehiculo vehiculo;
-	Cliente cliente;
-	Descuento descuento;
-	Usuario usuario; //usuario del sistema (util para arqueo caja)
+	private Vehiculo vehiculo;
+	private Cliente cliente;
+	private Descuento descuento;
+	private Usuario usuario; //usuario del sistema (util para arqueo caja)
 	
-	String tipoIngreso; //si hay que cobrar por hora o por estadia.
+	private String tipoIngreso; //si hay que cobrar por hora o por estadia.
 	
 	public long getIdTicket() {
 		return idTicket;

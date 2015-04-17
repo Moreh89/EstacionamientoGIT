@@ -2,16 +2,16 @@ package modelo;
 
 public class Usuario 
 {
-	long idUsuario;
-	String userName;
-	String password;
-	PERMISOS permisos;
-	String nombre;
-	String apellido;
-	String tipoDocumento;
-	String numeroDocumento;
+	private long idUsuario;
+	private String userName;
+	private String password;
+	private PERMISOS permisos;
+	private String nombre;
+	private String apellido;
+	private String tipoDocumento;
+	private String numeroDocumento;
 	
-	private enum PERMISOS {
+	public enum PERMISOS {
 		ADMIN,
 		CAJA;
 	}

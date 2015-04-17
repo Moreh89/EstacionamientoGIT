@@ -1,6 +1,6 @@
 package modelo;
 
 public class CategoriaVehiculo {
-	long idCategoria;
-	String descripcion;
+	private long idCategoria;
+	private String descripcion;
 }
