@@ -1,9 +1,15 @@
 package modelo;
 
+
 public class Cochera {
 	long idCochera;
 	double costoCochera;
 	Cliente cliente;
-	String estado;
+	ESTADO estado;
+	
+	private enum ESTADO {
+		ACTIVO,
+		INACTIVO;
+	}
 	
 }

@@ -10,7 +10,6 @@ import modelo.ModeloVehiculo;
 import modelo.Tarifa;
 import modelo.Ticket;
 import modelo.Usuario;
-import persistencia.PoolConnection;
 
 public class Controlador {
 

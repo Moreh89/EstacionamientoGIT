@@ -1,0 +1,72 @@
+package persistencia.clases;
+
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToOne;
+import javax.persistence.Table;
+
+@Entity
+@Table(name = "Cochera")
+public class Cochera {
+	
+	@Id
+	@GeneratedValue(strategy=GenerationType.AUTO)
+	private long idCochera;
+	private double costoCochera;
+	@OneToOne
+	@JoinColumn(name="Cliente")
+	private Cliente cliente;
+	private ESTADO estado;
+	
+	public enum ESTADO {
+		ACTIVO,
+		INACTIVO;
+	}
+
+	public long getIdCochera() {
+		return idCochera;
+	}
+
+	public void setIdCochera(long idCochera) {
+		this.idCochera = idCochera;
+	}
+
+	public double getCostoCochera() {
+		return costoCochera;
+	}
+
+	public void setCostoCochera(double costoCochera) {
+		this.costoCochera = costoCochera;
+	}
+
+	public Cliente getCliente() {
+		return cliente;
+	}
+
+	public void setCliente(Cliente cliente) {
+		this.cliente = cliente;
+	}
+
+	public ESTADO getEstado() {
+		return estado;
+	}
+
+	public void setEstado(ESTADO estado) {
+		this.estado = estado;
+	}
+
+	public Cochera(long idCochera, double costoCochera, Cliente cliente,
+			ESTADO estado) {
+		super();
+		this.idCochera = idCochera;
+		this.costoCochera = costoCochera;
+		this.cliente = cliente;
+		this.estado = estado;
+	}
+	
+	
+	
+}

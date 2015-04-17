@@ -1,50 +1,72 @@
-package modelo;
+package persistencia.clases;
 
-import java.util.ArrayList;
+import java.util.List;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
+import javax.persistence.Table;
+
+@Entity
+@Table (name = "Cliente")
 
 public class Cliente {
 	
-	//justifica herencia?
-
+	@Id
+	@GeneratedValue(strategy=GenerationType.AUTO)
 	long idCliente;
-	TIPO_CLIENTE tipoCliente;
-	String nombre;
-	String apellido;
-	TIPO_DOC tipoDocumento;
-	String numeroDocumento;
-	String telefono1;
-	String telefono2;
-	String direccion;
-	String direccion2;
+	private TIPO_CLIENTE tipoCliente;
+	private String nombre;
+	private String apellido;
+	private TIPO_DOC tipoDocumento;
+	private String numeroDocumento;
+	private String telefono1;
+	private String telefono2;
+	private String direccion;
+	private String direccion2;
 	//campo para comentarios
-	String descripcion;
-	String correoElectronico;
-	ESTADO estado;
-	ArrayList <String> personasAutorizadasARetirar;
-	String razonSocial;
-	ArrayList <Cochera> cocheras; 
+	private String descripcion;
+	private String correoElectronico;
+	private ESTADO estado;
+	@OneToMany
+	@JoinColumn(name="PersonaAut")
+	private List<PersonaAutorizada> personasAutorizadasARetirar;
+	private String razonSocial;
+	@OneToMany
+	@JoinColumn(name="Cliente")
+	private List<Cochera> cocheras; 
+	@OneToOne
+	@JoinColumn(name="CuentaCorriente")
+	private CuentaCorriente cuentaCorriente;
+	@OneToMany
+	@JoinColumn(name="Cliente")
+	private List<Vehiculo> vehiculos;
 	
-	private enum TIPO_CLIENTE {
+	public enum TIPO_CLIENTE {
 		FIJO_PERSONA,
 		FIJO_EMPRESA,
 		TEMPORAL;
 	}
 	
-	private enum TIPO_DOC {
+	public enum TIPO_DOC {
 		DNI,
 		LU,
 		PASS,
 		OTRO;
 	}
 	
-	private enum ESTADO {
+	public enum ESTADO {
 		ACTIVO,
 		INACTIVO;
 	}
 	
-	CuentaCorriente cuentaCorriente;
-	ArrayList<Vehiculo> vehiculos;
+
+	
+	
 	public long getIdCliente() {
 		return idCliente;
 	}
@@ -123,11 +145,11 @@ public class Cliente {
 	public void setEstado(ESTADO estado) {
 		this.estado = estado;
 	}
-	public ArrayList<String> getPersonasAutorizadasARetirar() {
+	public List<PersonaAutorizada> getPersonasAutorizadasARetirar() {
 		return personasAutorizadasARetirar;
 	}
 	public void setPersonasAutorizadasARetirar(
-			ArrayList<String> personasAutorizadasARetirar) {
+			List<PersonaAutorizada> personasAutorizadasARetirar) {
 		this.personasAutorizadasARetirar = personasAutorizadasARetirar;
 	}
 	public String getRazonSocial() {
@@ -142,25 +164,25 @@ public class Cliente {
 	public void setCuentaCorriente(CuentaCorriente cuentaCorriente) {
 		this.cuentaCorriente = cuentaCorriente;
 	}
-	public ArrayList<Vehiculo> getVehiculos() {
+	public List<Vehiculo> getVehiculos() {
 		return vehiculos;
 	}
-	public void setVehiculos(ArrayList<Vehiculo> vehiculos) {
+	public void setVehiculos(List<Vehiculo> vehiculos) {
 		this.vehiculos = vehiculos;
 	}
-	public ArrayList<Cochera> getCocheras() {
+	public List<Cochera> getCocheras() {
 		return cocheras;
 	}
-	public void setCocheras(ArrayList<Cochera> cocheras) {
+	public void setCocheras(List<Cochera> cocheras) {
 		this.cocheras = cocheras;
 	}
 	public Cliente(long idCliente, TIPO_CLIENTE tipoCliente, String nombre,
 			String apellido, TIPO_DOC tipoDocumento, String numeroDocumento,
 			String telefono1, String telefono2, String direccion,
 			String direccion2, String descripcion, String correoElectronico,
-			ESTADO estado, ArrayList<String> personasAutorizadasARetirar,
-			String razonSocial, ArrayList<Cochera> cocheras,
-			CuentaCorriente cuentaCorriente, ArrayList<Vehiculo> vehiculos) {
+			ESTADO estado, List<PersonaAutorizada> personasAutorizadasARetirar,
+			String razonSocial, List<Cochera> cocheras,
+			CuentaCorriente cuentaCorriente, List<Vehiculo> vehiculos) {
 		super();
 		this.idCliente = idCliente;
 		this.tipoCliente = tipoCliente;

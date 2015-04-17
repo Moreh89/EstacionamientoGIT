@@ -1,17 +1,28 @@
-package modelo;
+package persistencia.clases;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Table;
+
+@Entity
+@Table(name = "Usuario")
 public class Usuario 
 {
-	long idUsuario;
-	String userName;
-	String password;
-	PERMISOS permisos;
-	String nombre;
-	String apellido;
-	String tipoDocumento;
-	String numeroDocumento;
+	@Id
+	@GeneratedValue(strategy=GenerationType.AUTO)
+	private long idUsuario;
+	private String userName;
+	private String password;
+	private PERMISOS permisos;
+	private String nombre;
+	private String apellido;
+	private String tipoDocumento;
+	private String numeroDocumento;
 	
-	private enum PERMISOS {
+	
+	public enum PERMISOS {
 		ADMIN,
 		CAJA;
 	}
@@ -63,6 +74,19 @@ public class Usuario
 	}
 	public void setPassword(String password) {
 		this.password = password;
+	}
+	public Usuario(long idUsuario, String userName, String password,
+			PERMISOS permisos, String nombre, String apellido,
+			String tipoDocumento, String numeroDocumento) {
+		super();
+		this.idUsuario = idUsuario;
+		this.userName = userName;
+		this.password = password;
+		this.permisos = permisos;
+		this.nombre = nombre;
+		this.apellido = apellido;
+		this.tipoDocumento = tipoDocumento;
+		this.numeroDocumento = numeroDocumento;
 	}
 	
 	
