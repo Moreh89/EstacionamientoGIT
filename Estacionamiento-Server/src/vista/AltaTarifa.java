@@ -31,6 +31,7 @@ public class AltaTarifa extends JDialog {
 	private JLabel labelCostoHora;
 	private JTextField textField;
 	private JTextField textField_1;
+	private JTextField textFieldFraccion;
 	
 	/**
 	 * Launch the application.
@@ -212,6 +213,23 @@ public class AltaTarifa extends JDialog {
 		gbc_textField.gridx = 1;
 		gbc_textField.gridy = 4;
 		panel.add(textField, gbc_textField);
+		
+		JLabel lblTiempoFraccion = new JLabel("Tiempo Fraccion:");
+		GridBagConstraints gbc_lblTiempoFraccion = new GridBagConstraints();
+		gbc_lblTiempoFraccion.anchor = GridBagConstraints.WEST;
+		gbc_lblTiempoFraccion.insets = new Insets(0, 0, 5, 5);
+		gbc_lblTiempoFraccion.gridx = 3;
+		gbc_lblTiempoFraccion.gridy = 4;
+		panel.add(lblTiempoFraccion, gbc_lblTiempoFraccion);
+		
+		textFieldFraccion = new JTextField();
+		textFieldFraccion.setColumns(10);
+		GridBagConstraints gbc_textFieldFraccion = new GridBagConstraints();
+		gbc_textFieldFraccion.insets = new Insets(0, 0, 5, 0);
+		gbc_textFieldFraccion.fill = GridBagConstraints.HORIZONTAL;
+		gbc_textFieldFraccion.gridx = 4;
+		gbc_textFieldFraccion.gridy = 4;
+		panel.add(textFieldFraccion, gbc_textFieldFraccion);
 		
 		JLabel lblCostoEstadia = new JLabel("Costo Estadia:");
 		GridBagConstraints gbc_lblCostoEstadia = new GridBagConstraints();
