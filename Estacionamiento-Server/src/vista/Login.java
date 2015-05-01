@@ -224,9 +224,21 @@ public class Login extends javax.swing.JDialog implements ActionListener{
 						boolean validar = Controlador.getInstancia().validarLogin(usuarioText.getText(), passwordText.getText());
 						
 						if (validar == true){
-							MenuInicial mpc = new MenuInicial ();
-							mpc.setVisible(true);
-							dispose();
+							
+//DIFERENCIA ENTRE USUARIO ADMIN Y OPERADOR
+							if(usuarioText.getText().equals("admin"))
+							{
+								MenuInicial mpc = new MenuInicial ();
+								mpc.setVisible(true);
+								dispose();
+							}
+							if(usuarioText.getText().equals("operador"))
+							{
+								MenuOperador mop = new MenuOperador ();
+								mop.setVisible(true);
+								dispose();
+							}
+							
 							
 						}else{
 							JOptionPane.showMessageDialog(null, "Usuario y Contrase�a Invalidos", "Login", JOptionPane.ERROR_MESSAGE);
