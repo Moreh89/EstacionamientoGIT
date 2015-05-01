@@ -1,40 +1,18 @@
 package vista;
 
 import java.awt.EventQueue;
-import java.util.ArrayList;
-
-
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
-import javax.swing.table.DefaultTableModel;
-import javax.swing.table.TableModel;
-import javax.swing.table.TableRowSorter;
 import javax.swing.ImageIcon;
 import javax.swing.JDialog;
 import javax.swing.JLabel;
-import javax.swing.JOptionPane;
-import javax.swing.JScrollPane;
 import javax.swing.JTextField;
 import javax.swing.JButton;
-import javax.swing.JSeparator;
-import javax.swing.JComboBox;
-import javax.swing.DefaultComboBoxModel;
-import javax.swing.JTable;
-import javax.swing.ListSelectionModel;
-import javax.swing.RowFilter;
-
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
-
-import javax.swing.border.EtchedBorder;
-
-import controlador.Controlador;
-import javax.swing.JSplitPane;
 import java.awt.GridBagLayout;
 import java.awt.GridBagConstraints;
 import java.awt.Insets;
-import javax.swing.JList;
-import javax.swing.AbstractListModel;
 import javax.swing.JTextArea;
 
 public class AltaCliente extends JDialog implements ActionListener{
@@ -44,10 +22,8 @@ public class AltaCliente extends JDialog implements ActionListener{
 	 */
 	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
-	private DefaultTableModel model;
-	
-	
-	private TableRowSorter<TableModel> sorter;
+
+
 	private JTextField textFieldNombre;
 	private JTextField textFieldApellido;
 	private JTextField textFieldTelefono1;
@@ -106,22 +82,7 @@ public class AltaCliente extends JDialog implements ActionListener{
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
-		model = new DefaultTableModel(){
-			/**
-			 * 
-			 */
-			private static final long serialVersionUID = 1L;
 
-			@Override
-			public boolean isCellEditable(int row, int column) {
-				return false;
-			}
-		};
-		
-		model.addColumn("Nombre");
-		model.addColumn("Apellido");
-		model.addColumn("Tipo Doc.");
-		model.addColumn("Numero");
 		
 		panel = new JPanel();
 		panel.setBounds(6, 6, 627, 215);
@@ -359,14 +320,14 @@ public class AltaCliente extends JDialog implements ActionListener{
 			altaPersonaAutorizada.setVisible(true);
 
 		}
-		if(event.getSource()==buttonAgregarPersonaAutorizada)
+		if(event.getSource()==buttonCancelar)
 		{
-			this.setVisible(false);
+			dispose();
 			
 		}
 		if(event.getSource()==buttonCrearCliente)
 		{
-			this.setVisible(false);
+			dispose();
 		}
 		
 		

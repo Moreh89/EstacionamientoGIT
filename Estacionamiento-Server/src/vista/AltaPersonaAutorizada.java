@@ -6,39 +6,24 @@ import java.awt.EventQueue;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
-
 import java.awt.GridBagLayout;
-
-import javax.swing.JMenuBar;
-import javax.swing.JMenu;
-import javax.swing.JMenuItem;
 import javax.swing.JLabel;
-
 import java.awt.GridBagConstraints;
-
-import javax.swing.JComboBox;
-
 import java.awt.Insets;
-
-import javax.swing.DefaultComboBoxModel;
 import javax.swing.JTextField;
 import javax.swing.JButton;
 import javax.swing.ImageIcon;
-import javax.swing.SwingConstants;
-
 import java.awt.Font;
-import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-@SuppressWarnings("rawtypes")
 public class AltaPersonaAutorizada extends JFrame implements ActionListener{
 
 	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
 	private JTextField textFieldNumeroTicket;
 	private JLabel lblNombre;
-	private JButton btnBorrar;
+	private JButton btnCancelar;
 	private JButton btnCrear;
 	private JLabel labelApellido;
 	private JTextField textField;
@@ -62,10 +47,10 @@ public class AltaPersonaAutorizada extends JFrame implements ActionListener{
 	/**
 	 * Create the frame.
 	 */
-	@SuppressWarnings("unchecked")
+
 	public AltaPersonaAutorizada() {
 		setTitle("Alta Persona Autorizada");
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		setBounds(100, 100, 418, 137);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -123,19 +108,24 @@ public class AltaPersonaAutorizada extends JFrame implements ActionListener{
 		   gbc_btnCrear.gridy = 1;
 		   contentPane.add(btnCrear, gbc_btnCrear);
 		 
-		  btnBorrar = new JButton("Borrar");
-		  btnBorrar.setIcon(new ImageIcon(MenuOperador.class.getResource("/image/cancel.png")));
+		  btnCancelar = new JButton("Cancelar");
+		  btnCancelar.setIcon(new ImageIcon(MenuOperador.class.getResource("/image/cancel.png")));
 		  GridBagConstraints gbc_btnBorrar = new GridBagConstraints();
 		  gbc_btnBorrar.gridwidth = 2;
 		  gbc_btnBorrar.insets = new Insets(0, 0, 0, 5);
 		  gbc_btnBorrar.gridx = 1;
 		  gbc_btnBorrar.gridy = 2;
-		  contentPane.add(btnBorrar, gbc_btnBorrar);
+		  contentPane.add(btnCancelar, gbc_btnBorrar);
+		  btnCancelar.addActionListener(this);
+		  
+		  this.setLocationRelativeTo(null);
 	}
 
 	@Override
-	public void actionPerformed(ActionEvent e) {
-		// TODO Auto-generated method stub
+	public void actionPerformed(ActionEvent event) {
+		if (event.getSource() == btnCancelar){
+			dispose();
+		}
 		
 	}
 

@@ -54,6 +54,7 @@ public class AltaTarifa extends JDialog {
 	 * Create the frame.
 	 */
 	public AltaTarifa() {
+		setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
 		initGUI();
 	}
 	

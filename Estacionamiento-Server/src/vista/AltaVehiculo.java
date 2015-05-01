@@ -6,28 +6,16 @@ import java.awt.EventQueue;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
-
 import java.awt.GridBagLayout;
-
-import javax.swing.JMenuBar;
-import javax.swing.JMenu;
-import javax.swing.JMenuItem;
 import javax.swing.JLabel;
-
 import java.awt.GridBagConstraints;
-
 import javax.swing.JComboBox;
-
 import java.awt.Insets;
-
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JTextField;
 import javax.swing.JButton;
 import javax.swing.ImageIcon;
-import javax.swing.SwingConstants;
-
 import java.awt.Font;
-import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -73,7 +61,7 @@ public class AltaVehiculo extends JFrame implements ActionListener{
 	@SuppressWarnings("unchecked")
 	public AltaVehiculo() {
 		setTitle("Alta Vehiculo");
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		setBounds(100, 100, 492, 291);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -216,6 +204,8 @@ public class AltaVehiculo extends JFrame implements ActionListener{
 		  gbc_btnCrear.gridx = 4;
 		  gbc_btnCrear.gridy = 6;
 		  contentPane.add(btnCrear, gbc_btnCrear);
+		  
+		 this.setLocationRelativeTo(null);
 	}
 
 	@Override
