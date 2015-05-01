@@ -35,7 +35,6 @@ public class BuscardorCliente extends JDialog {
 	private JPanel contentPane;
 	private JTextField buscarTextField;
 	private DefaultTableModel model;
-//	private ArrayList <PacienteDTO> pacientes;
 	private JComboBox comboBox;
 	
 	
@@ -131,7 +130,7 @@ public class BuscardorCliente extends JDialog {
 		contentPane.add(separator);
 		
 		comboBox = new JComboBox();
-		comboBox.setModel(new DefaultComboBoxModel(new String[] {"DNI", "LRE", "LU", "Apellido"}));
+		comboBox.setModel(new DefaultComboBoxModel(new String[] {"DNI", "CUIT", "LU"}));
 		comboBox.setBounds(280, 14, 114, 25);
 		contentPane.add(comboBox);
 		
@@ -362,8 +361,6 @@ public class BuscardorCliente extends JDialog {
 		buttonAceptar.setBounds(404, 315, 116, 86);
 		contentPane.add(buttonAceptar);
 		
-		llenarTabla();
-		
 		this.setLocationRelativeTo(null);
 		//setAlwaysOnTop(true);
 		setModal(true);
@@ -393,22 +390,6 @@ public class BuscardorCliente extends JDialog {
 		sorter.setRowFilter(rf);
 		}
 	
-	public void llenarTabla()
-	{
-//		pacientes = Sistema.getInstancia().getPacientes();
-//
-//		model.setNumRows(pacientes.size());
-//		for (int i = 0; i < pacientes.size(); i++) {
-//			model.setValueAt(pacientes.get(i).getNombre(), i, 0);
-//			model.setValueAt(pacientes.get(i).getApellido(), i,1);
-//			model.setValueAt(pacientes.get(i).getTipoDoc(), i, 2);	
-//			model.setValueAt(pacientes.get(i).getDni(), i, 3);		
-//		}
-//		
-//		table.setModel(model);
-//		sorter = new TableRowSorter<TableModel>(model);
-//		table.setRowSorter(sorter);
-		
-	}
+
 }
 

@@ -37,7 +37,7 @@ import javax.swing.JList;
 import javax.swing.AbstractListModel;
 import javax.swing.JTextArea;
 
-public class AltaCliente extends JDialog {
+public class AltaCliente extends JDialog implements ActionListener{
 
 	/**
 	 * 
@@ -57,8 +57,7 @@ public class AltaCliente extends JDialog {
 	private JTextField textFieldEmail;
 	private JTextField textFieldRazonSocial;
 	private JLabel labelEmail;
-	private JButton btnAgregarPersonaAutorizada;
-	private JTextField textFieldCuentaCorriente;
+	private JButton buttonAgregarPersonaAutorizada;
 	private JPanel panel;
 	private JLabel labelNombre;
 	private JLabel labelApellido;
@@ -66,11 +65,9 @@ public class AltaCliente extends JDialog {
 	private JLabel labelTelefono2;
 	private JLabel labelDireccion1;
 	private JLabel labelDireccion2;
-	private JLabel labelCuentaCorriente;
-	private JButton btnAltaCuentaCorriente;
 	private JLabel labelVehiculos;
 	private JTextArea textArea;
-	private JButton button;
+	private JButton buttonAgregarVehiculo;
 	private JLabel labelPersonaAutorizada;
 	private JTextArea textAreaPersonasAutorizadas;
 	private JButton buttonCancelar;
@@ -104,7 +101,7 @@ public class AltaCliente extends JDialog {
 		setTitle("Alta Cliente");
 		setResizable(false);
 		//setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 661, 396);
+		setBounds(100, 100, 661, 318);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
@@ -127,13 +124,13 @@ public class AltaCliente extends JDialog {
 		model.addColumn("Numero");
 		
 		panel = new JPanel();
-		panel.setBounds(6, 6, 604, 287);
+		panel.setBounds(6, 6, 627, 215);
 		contentPane.add(panel);
 		GridBagLayout gbl_panel = new GridBagLayout();
 		gbl_panel.columnWidths = new int[]{124, 200, 0, 0, 200, 0};
-		gbl_panel.rowHeights = new int[] {28, 28, 28, 28, 30, 35, 35, 35, 0};
+		gbl_panel.rowHeights = new int[] {28, 28, 28, 28, 35, 35, 0};
 		gbl_panel.columnWeights = new double[]{0.0, 1.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
-		gbl_panel.rowWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
+		gbl_panel.rowWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
 		panel.setLayout(gbl_panel);
 		
 		labelNombre = new JLabel("Nombre:");
@@ -272,45 +269,13 @@ public class AltaCliente extends JDialog {
 		gbc_textFieldRazonSocial.gridy = 3;
 		panel.add(textFieldRazonSocial, gbc_textFieldRazonSocial);
 		
-		labelCuentaCorriente = new JLabel("Cuenta Corriente:");
-		GridBagConstraints gbc_labelCuentaCorriente = new GridBagConstraints();
-		gbc_labelCuentaCorriente.fill = GridBagConstraints.VERTICAL;
-		gbc_labelCuentaCorriente.insets = new Insets(0, 0, 5, 5);
-		gbc_labelCuentaCorriente.anchor = GridBagConstraints.WEST;
-		gbc_labelCuentaCorriente.gridx = 0;
-		gbc_labelCuentaCorriente.gridy = 5;
-		panel.add(labelCuentaCorriente, gbc_labelCuentaCorriente);
-		
-		textFieldCuentaCorriente = new JTextField();
-		textFieldCuentaCorriente.setEnabled(false);
-		textFieldCuentaCorriente.setEditable(false);
-		textFieldCuentaCorriente.setColumns(10);
-		GridBagConstraints gbc_textFieldCuentaCorriente = new GridBagConstraints();
-		gbc_textFieldCuentaCorriente.fill = GridBagConstraints.BOTH;
-		gbc_textFieldCuentaCorriente.insets = new Insets(0, 0, 5, 5);
-		gbc_textFieldCuentaCorriente.gridx = 1;
-		gbc_textFieldCuentaCorriente.gridy = 5;
-		panel.add(textFieldCuentaCorriente, gbc_textFieldCuentaCorriente);
-		
-		btnAltaCuentaCorriente = new JButton("Alta");
-		GridBagConstraints gbc_btnAltaCuentaCorriente = new GridBagConstraints();
-		gbc_btnAltaCuentaCorriente.fill = GridBagConstraints.BOTH;
-		gbc_btnAltaCuentaCorriente.insets = new Insets(0, 0, 5, 0);
-		gbc_btnAltaCuentaCorriente.gridx = 4;
-		gbc_btnAltaCuentaCorriente.gridy = 5;
-		panel.add(btnAltaCuentaCorriente, gbc_btnAltaCuentaCorriente);
-		btnAltaCuentaCorriente.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-			}
-		});
-		
 		labelVehiculos = new JLabel("Vehiculos:");
 		GridBagConstraints gbc_labelVehiculos = new GridBagConstraints();
 		gbc_labelVehiculos.fill = GridBagConstraints.VERTICAL;
 		gbc_labelVehiculos.insets = new Insets(0, 0, 5, 5);
 		gbc_labelVehiculos.anchor = GridBagConstraints.WEST;
 		gbc_labelVehiculos.gridx = 0;
-		gbc_labelVehiculos.gridy = 6;
+		gbc_labelVehiculos.gridy = 4;
 		panel.add(labelVehiculos, gbc_labelVehiculos);
 		
 		textArea = new JTextArea();
@@ -320,17 +285,19 @@ public class AltaCliente extends JDialog {
 		gbc_textArea.insets = new Insets(0, 0, 5, 5);
 		gbc_textArea.fill = GridBagConstraints.BOTH;
 		gbc_textArea.gridx = 1;
-		gbc_textArea.gridy = 6;
+		gbc_textArea.gridy = 4;
 		panel.add(textArea, gbc_textArea);
 		
-		button = new JButton("Agregar");
-		button.setIcon(new ImageIcon(AltaCliente.class.getResource("/image/plus.png")));
-		GridBagConstraints gbc_button = new GridBagConstraints();
-		gbc_button.fill = GridBagConstraints.BOTH;
-		gbc_button.insets = new Insets(0, 0, 5, 0);
-		gbc_button.gridx = 4;
-		gbc_button.gridy = 6;
-		panel.add(button, gbc_button);
+		buttonAgregarVehiculo = new JButton("Agregar");
+		buttonAgregarVehiculo.setIcon(new ImageIcon(AltaCliente.class.getResource("/image/plus.png")));
+		GridBagConstraints gbc_buttonAgregarVehiculo = new GridBagConstraints();
+		gbc_buttonAgregarVehiculo.fill = GridBagConstraints.BOTH;
+		gbc_buttonAgregarVehiculo.insets = new Insets(0, 0, 5, 0);
+		gbc_buttonAgregarVehiculo.gridx = 4;
+		gbc_buttonAgregarVehiculo.gridy = 4;
+		panel.add(buttonAgregarVehiculo, gbc_buttonAgregarVehiculo);
+		buttonAgregarVehiculo.addActionListener(this);
+
 		
 		labelPersonaAutorizada = new JLabel("Autorizados:");
 		GridBagConstraints gbc_labelPersonaAutorizada = new GridBagConstraints();
@@ -338,7 +305,7 @@ public class AltaCliente extends JDialog {
 		gbc_labelPersonaAutorizada.anchor = GridBagConstraints.WEST;
 		gbc_labelPersonaAutorizada.insets = new Insets(0, 0, 0, 5);
 		gbc_labelPersonaAutorizada.gridx = 0;
-		gbc_labelPersonaAutorizada.gridy = 7;
+		gbc_labelPersonaAutorizada.gridy = 5;
 		panel.add(labelPersonaAutorizada, gbc_labelPersonaAutorizada);
 		
 		textAreaPersonasAutorizadas = new JTextArea();
@@ -348,30 +315,63 @@ public class AltaCliente extends JDialog {
 		gbc_textAreaPersonasAutorizadas.insets = new Insets(0, 0, 0, 5);
 		gbc_textAreaPersonasAutorizadas.fill = GridBagConstraints.BOTH;
 		gbc_textAreaPersonasAutorizadas.gridx = 1;
-		gbc_textAreaPersonasAutorizadas.gridy = 7;
+		gbc_textAreaPersonasAutorizadas.gridy = 5;
 		panel.add(textAreaPersonasAutorizadas, gbc_textAreaPersonasAutorizadas);
 		
-		btnAgregarPersonaAutorizada = new JButton("Agregar");
-		GridBagConstraints gbc_btnAgregarPersonaAutorizada = new GridBagConstraints();
-		gbc_btnAgregarPersonaAutorizada.fill = GridBagConstraints.BOTH;
-		gbc_btnAgregarPersonaAutorizada.gridx = 4;
-		gbc_btnAgregarPersonaAutorizada.gridy = 7;
-		panel.add(btnAgregarPersonaAutorizada, gbc_btnAgregarPersonaAutorizada);
-		btnAgregarPersonaAutorizada.setIcon(new ImageIcon(AltaCliente.class.getResource("/image/plus.png")));
+		buttonAgregarPersonaAutorizada = new JButton("Agregar");
+		GridBagConstraints gbc_buttonAgregarPersonaAutorizada = new GridBagConstraints();
+		gbc_buttonAgregarPersonaAutorizada.fill = GridBagConstraints.BOTH;
+		gbc_buttonAgregarPersonaAutorizada.gridx = 4;
+		gbc_buttonAgregarPersonaAutorizada.gridy = 5;
+		panel.add(buttonAgregarPersonaAutorizada, gbc_buttonAgregarPersonaAutorizada);
+		buttonAgregarPersonaAutorizada.setIcon(new ImageIcon(AltaCliente.class.getResource("/image/plus.png")));
+		buttonAgregarPersonaAutorizada.addActionListener(this);
 		
 		buttonCancelar = new JButton("Cancelar");
 		buttonCancelar.setIcon(new ImageIcon(BuscardorCliente.class.getResource("/image/cancel.png")));
-		buttonCancelar.setBounds(212, 305, 116, 32);
+		buttonCancelar.setBounds(202, 233, 116, 32);
 		contentPane.add(buttonCancelar);
+		buttonCancelar.addActionListener(this);
 		
 		buttonCrearCliente = new JButton("Crear Cliente");
+		buttonCrearCliente.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+			}
+		});
 		buttonCrearCliente.setIcon(new ImageIcon(BuscardorCliente.class.getResource("/image/ok.png")));
-		buttonCrearCliente.setBounds(462, 305, 148, 56);
+		buttonCrearCliente.setBounds(485, 227, 148, 56);
 		contentPane.add(buttonCrearCliente);
+		buttonCrearCliente.addActionListener(this);
 		
 		this.setLocationRelativeTo(null);
 		//setAlwaysOnTop(true);
 		setModal(true);
+	}
+
+	@Override
+	public void actionPerformed(ActionEvent event) {
+		if(event.getSource()==buttonAgregarVehiculo)
+		{
+			AltaVehiculo altaVehiculo=new AltaVehiculo();
+			altaVehiculo.setVisible(true);
+		}
+		if(event.getSource()==buttonAgregarPersonaAutorizada)
+		{
+			AltaPersonaAutorizada altaPersonaAutorizada=new AltaPersonaAutorizada();
+			altaPersonaAutorizada.setVisible(true);
+
+		}
+		if(event.getSource()==buttonAgregarPersonaAutorizada)
+		{
+			this.setVisible(false);
+			
+		}
+		if(event.getSource()==buttonCrearCliente)
+		{
+			this.setVisible(false);
+		}
+		
+		
 	}
 	
 	
