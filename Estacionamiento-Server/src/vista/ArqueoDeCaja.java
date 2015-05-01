@@ -5,10 +5,8 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
-
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
-import javax.swing.JComboBox;
 import javax.swing.JDialog;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -20,7 +18,7 @@ import org.jdesktop.swingx.JXDatePicker;
 //import reportes.ReporteEjemplo;
 import java.awt.Font;
 
-public class PlanillaMensualDialog extends JDialog {
+public class ArqueoDeCaja extends JDialog {
 
 	/**
 	 * 
@@ -29,7 +27,6 @@ public class PlanillaMensualDialog extends JDialog {
 	private final JPanel contentPanel = new JPanel();
 	private JXDatePicker fechaHasta;
 	private JXDatePicker fechaDesde;
-	private JComboBox obraSocialComboBox;
 	private JButton exportarButton;
 	private JButton cancelarButton;
 
@@ -38,7 +35,7 @@ public class PlanillaMensualDialog extends JDialog {
 	 */
 	public static void main(String[] args) {
 		try {
-			PlanillaMensualDialog dialog = new PlanillaMensualDialog();
+			ArqueoDeCaja dialog = new ArqueoDeCaja();
 			dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
 			dialog.setVisible(true);
 		} catch (Exception e) {
@@ -49,22 +46,13 @@ public class PlanillaMensualDialog extends JDialog {
 	/**
 	 * Create the dialog.
 	 */
-	public PlanillaMensualDialog() {
-		setTitle("Planilla Facturaci\u00F3n");
+	public ArqueoDeCaja() {
+		setTitle("Cierre Facturaci\u00F3n");
 		setBounds(100, 100, 289, 173);
 		getContentPane().setLayout(new BorderLayout());
 		contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
 		getContentPane().add(contentPanel, BorderLayout.CENTER);
 		contentPanel.setLayout(null);
-		
-		JLabel lblObraSocial = new JLabel("Obra Social");
-		lblObraSocial.setFont(new Font("Tahoma", Font.BOLD, 11));
-		lblObraSocial.setBounds(10, 11, 79, 14);
-		contentPanel.add(lblObraSocial);
-		
-		obraSocialComboBox = new JComboBox();
-		obraSocialComboBox.setBounds(103, 7, 149, 22);
-		contentPanel.add(obraSocialComboBox);
 		
 		JLabel lblFechaaDesde = new JLabel("Fecha Desde");
 		lblFechaaDesde.setFont(new Font("Tahoma", Font.BOLD, 11));
@@ -89,17 +77,7 @@ public class PlanillaMensualDialog extends JDialog {
 		fechaHasta.setBounds(103, 57, 149, 22);
 		contentPanel.add(fechaHasta);
 		
-		exportarButton = new JButton("Exportar");
-		exportarButton.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-//				try {
-////					ReporteEjemplo rej = new ReporteEjemplo();
-//				} catch (JRException e1) {
-//					// TODO Auto-generated catch block
-//					e1.printStackTrace();
-//				}
-			}
-		});
+		exportarButton = new JButton("Generar");
 		exportarButton.setIcon(new ImageIcon(BuscardorUsuario.class.getResource("/image/pdf.png")));
 		exportarButton.setBounds(29, 104, 116, 32);
 		contentPanel.add(exportarButton);

@@ -21,15 +21,14 @@ import javax.swing.JTable;
 import javax.swing.ListSelectionModel;
 import javax.swing.RowFilter;
 
-//import DTO.UsuarioDTO;
-
-import controlador.Controlador;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+
 import javax.swing.border.EtchedBorder;
 
 import java.awt.Font;
 
+@SuppressWarnings("rawtypes")
 public class BuscardorUsuario extends JDialog {
 
 	/**
@@ -42,6 +41,7 @@ public class BuscardorUsuario extends JDialog {
 	private DefaultTableModel model;
 	private JScrollPane scrollPane;
 //	private ArrayList <UsuarioDTO> usuarios;
+
 	private JComboBox comboBox;
 	
 	
@@ -53,6 +53,7 @@ public class BuscardorUsuario extends JDialog {
 	
 	
 
+	@SuppressWarnings("unchecked")
 	public void initGUI(){
 		setTitle("Buscar Usuarios");
 		setResizable(false);
@@ -171,6 +172,7 @@ public class BuscardorUsuario extends JDialog {
 		nuevoMedicobutton.setBounds(10, 74, 140, 40);
 		panel.add(nuevoMedicobutton);
 		modificarButton.addActionListener(new ActionListener() {
+			@SuppressWarnings("unused")
 			public void actionPerformed(ActionEvent e) {
 				
 				int registro = table.getSelectedRow();

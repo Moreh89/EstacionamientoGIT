@@ -280,9 +280,19 @@ public class MenuInicial extends JFrame implements ActionListener {
 	}
 
 	@Override
-	public void actionPerformed(ActionEvent e) {
-		// TODO Auto-generated method stub
-		
+	public void actionPerformed(ActionEvent event) {
+		if (event.getSource() == mntmBuscarCliente){
+			 new BuscardorCliente().setVisible(true);
+		}
+		if (event.getSource() == mntmModificacionUsuario){
+			 new BuscardorUsuario().setVisible(true);
+		}
+		if (event.getSource() == mntmArqueoDeCaja){
+			new ArqueoDeCaja().setVisible(true);
+		}
+		if (event.getSource() == mntmCambiarClave){
+			new CambioContrasenia().setVisible(true);
+		}
 	}
 
 }
