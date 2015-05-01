@@ -22,8 +22,6 @@ public class AltaTarifa extends JDialog {
 	 */
 	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
-
-	private JTextField textFieldNombre;
 	private JTextField textFieldTelefono1;
 	private JTextField textFieldTelefono2;
 	private JTextField textFieldDireccion1;
@@ -79,37 +77,20 @@ public class AltaTarifa extends JDialog {
 		gbl_panel.rowWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
 		panel.setLayout(gbl_panel);
 		
-		JLabel labelNombre = new JLabel("Nombre:");
-		GridBagConstraints gbc_labelNombre = new GridBagConstraints();
-		gbc_labelNombre.anchor = GridBagConstraints.WEST;
-		gbc_labelNombre.insets = new Insets(0, 0, 5, 5);
-		gbc_labelNombre.gridx = 0;
-		gbc_labelNombre.gridy = 0;
-		panel.add(labelNombre, gbc_labelNombre);
-		
-		textFieldNombre = new JTextField();
-		GridBagConstraints gbc_textFieldNombre = new GridBagConstraints();
-		gbc_textFieldNombre.fill = GridBagConstraints.HORIZONTAL;
-		gbc_textFieldNombre.insets = new Insets(0, 0, 5, 5);
-		gbc_textFieldNombre.gridx = 1;
-		gbc_textFieldNombre.gridy = 0;
-		panel.add(textFieldNombre, gbc_textFieldNombre);
-		textFieldNombre.setColumns(10);
-		
 		JLabel labelCategoria = new JLabel("Categoria:");
 		GridBagConstraints gbc_labelCategoria = new GridBagConstraints();
 		gbc_labelCategoria.anchor = GridBagConstraints.WEST;
 		gbc_labelCategoria.insets = new Insets(0, 0, 5, 5);
-		gbc_labelCategoria.gridx = 3;
+		gbc_labelCategoria.gridx = 0;
 		gbc_labelCategoria.gridy = 0;
 		panel.add(labelCategoria, gbc_labelCategoria);
 		
 		JComboBox comboBoxCategoria = new JComboBox();
 		comboBoxCategoria.setModel(new DefaultComboBoxModel(new String[] {"1 Auto", "2 Camioneta", "3 Moto", "4 Bicicleta"}));
 		GridBagConstraints gbc_comboBoxCategoria = new GridBagConstraints();
-		gbc_comboBoxCategoria.insets = new Insets(0, 0, 5, 0);
+		gbc_comboBoxCategoria.insets = new Insets(0, 0, 5, 5);
 		gbc_comboBoxCategoria.fill = GridBagConstraints.HORIZONTAL;
-		gbc_comboBoxCategoria.gridx = 4;
+		gbc_comboBoxCategoria.gridx = 1;
 		gbc_comboBoxCategoria.gridy = 0;
 		panel.add(comboBoxCategoria, gbc_comboBoxCategoria);
 		
