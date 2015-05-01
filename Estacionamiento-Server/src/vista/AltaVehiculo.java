@@ -36,7 +36,7 @@ public class AltaVehiculo extends JFrame implements ActionListener{
 	private JLabel lblModelo;
 	private JComboBox comboBoxModelo;
 	private JLabel lblObservacion;
-	private JButton btnBorrar;
+	private JButton btnCancelar;
 	private JButton btnCrear;
 
 	/**
@@ -183,8 +183,8 @@ public class AltaVehiculo extends JFrame implements ActionListener{
 		contentPane.add(textField, gbc_textField);
 		textField.setColumns(10);
 		
-		 btnBorrar = new JButton("Borrar");
-		 btnBorrar.setIcon(new ImageIcon(MenuOperador.class.getResource("/image/cancel.png")));
+		 btnCancelar = new JButton("Cancelar");
+		 btnCancelar.setIcon(new ImageIcon(MenuOperador.class.getResource("/image/cancel.png")));
 		 GridBagConstraints gbc_btnBorrar = new GridBagConstraints();
 		 gbc_btnBorrar.gridheight = 2;
 		 gbc_btnBorrar.anchor = GridBagConstraints.NORTH;
@@ -192,7 +192,8 @@ public class AltaVehiculo extends JFrame implements ActionListener{
 		 gbc_btnBorrar.insets = new Insets(0, 0, 5, 5);
 		 gbc_btnBorrar.gridx = 2;
 		 gbc_btnBorrar.gridy = 6;
-		 contentPane.add(btnBorrar, gbc_btnBorrar);
+		 contentPane.add(btnCancelar, gbc_btnBorrar);
+		 btnCancelar.addActionListener(this);
 		 
 		  btnCrear = new JButton("Crear Vehiculo");
 		  btnCrear.setFont(new Font("Lucida Grande", Font.PLAIN, 16));
@@ -209,8 +210,10 @@ public class AltaVehiculo extends JFrame implements ActionListener{
 	}
 
 	@Override
-	public void actionPerformed(ActionEvent e) {
-		// TODO Auto-generated method stub
+	public void actionPerformed(ActionEvent event) {
+		if (event.getSource() == btnCancelar){
+			dispose();
+		}
 		
 	}
 
