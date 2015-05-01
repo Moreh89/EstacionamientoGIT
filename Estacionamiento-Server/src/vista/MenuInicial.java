@@ -12,10 +12,14 @@ import javax.swing.JToolBar;
 import java.awt.GridBagLayout;
 import javax.swing.JMenu;
 import javax.swing.ImageIcon;
+import javax.swing.JTextField;
+import javax.swing.SwingConstants;
+import java.awt.Font;
 
 public class MenuInicial extends JFrame {
 
 	private JPanel contentPane;
+	private JTextField txtEstacionamiento;
 
 	/**
 	 * Launch the application.
@@ -39,12 +43,13 @@ public class MenuInicial extends JFrame {
 	public MenuInicial() {
 		setTitle("Gestor Estacionamiento");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 450, 300);
+		setBounds(100, 100, 704, 427);
 		
 		JMenuBar menuBar = new JMenuBar();
 		setJMenuBar(menuBar);
 		
 		JMenu mnABM = new JMenu("ABM");
+		mnABM.setIcon(new ImageIcon(MenuInicial.class.getResource("/image/plus.png")));
 		menuBar.add(mnABM);
 		
 		JMenu mnCliente = new JMenu("Cliente");
@@ -87,6 +92,7 @@ public class MenuInicial extends JFrame {
 		mnVehiculo.add(mntmBajaVehiculo);
 		
 		JMenu mnGestionClientes = new JMenu("Gestion Clientes");
+		mnGestionClientes.setIcon(new ImageIcon(MenuInicial.class.getResource("/image/paciente.png")));
 		menuBar.add(mnGestionClientes);
 		
 		JMenuItem mntmAsociacionCocheras = new JMenuItem("Asociacion Cocheras");
@@ -99,6 +105,7 @@ public class MenuInicial extends JFrame {
 		mnGestionClientes.add(mntmPersonasAutorizadas);
 		
 		JMenu mnGestionEstacionamiento = new JMenu("Gestion Estacionamiento");
+		mnGestionEstacionamiento.setIcon(new ImageIcon(MenuInicial.class.getResource("/image/modificar.png")));
 		menuBar.add(mnGestionEstacionamiento);
 		
 		JMenu mnCocheras = new JMenu("Cocheras");
@@ -168,6 +175,7 @@ public class MenuInicial extends JFrame {
 		mnTasaInteres.add(mntmModificacionTasaInteres);
 		
 		JMenu mnConsultas = new JMenu("Consultas");
+		mnConsultas.setIcon(new ImageIcon(MenuInicial.class.getResource("/image/buscar.png")));
 		menuBar.add(mnConsultas);
 		
 		JMenuItem mntmArqueoDeCaja = new JMenuItem("Arqueo de Caja");
@@ -183,6 +191,7 @@ public class MenuInicial extends JFrame {
 		mnConsultas.add(mntmDeudores);
 		
 		JMenu mnMiCuenta = new JMenu("Mi Cuenta");
+		mnMiCuenta.setIcon(new ImageIcon(MenuInicial.class.getResource("/image/users.png")));
 		menuBar.add(mnMiCuenta);
 		
 		JMenuItem mntmCambiarClave = new JMenuItem("Cambiar Clave");
@@ -195,12 +204,16 @@ public class MenuInicial extends JFrame {
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
-		GridBagLayout gbl_contentPane = new GridBagLayout();
-		gbl_contentPane.columnWidths = new int[]{0};
-		gbl_contentPane.rowHeights = new int[]{0};
-		gbl_contentPane.columnWeights = new double[]{Double.MIN_VALUE};
-		gbl_contentPane.rowWeights = new double[]{Double.MIN_VALUE};
-		contentPane.setLayout(gbl_contentPane);
+		contentPane.setLayout(new BorderLayout(0, 0));
+		
+		txtEstacionamiento = new JTextField();
+		txtEstacionamiento.setFont(new Font("Lucida Grande", Font.BOLD, 42));
+		txtEstacionamiento.setHorizontalAlignment(SwingConstants.CENTER);
+		txtEstacionamiento.setEditable(false);
+		txtEstacionamiento.setEnabled(false);
+		txtEstacionamiento.setText("Estacionamiento");
+		contentPane.add(txtEstacionamiento, BorderLayout.CENTER);
+		txtEstacionamiento.setColumns(10);
 	}
 
 }
