@@ -114,9 +114,9 @@ public class AltaCliente extends JDialog {
 		panel.setBounds(6, 6, 604, 287);
 		contentPane.add(panel);
 		GridBagLayout gbl_panel = new GridBagLayout();
-		gbl_panel.columnWidths = new int[]{124, 200, 0, 200, 0};
+		gbl_panel.columnWidths = new int[]{124, 200, 0, 0, 200, 0};
 		gbl_panel.rowHeights = new int[] {28, 28, 28, 28, 30, 35, 35, 35, 0};
-		gbl_panel.columnWeights = new double[]{0.0, 1.0, 0.0, 0.0, Double.MIN_VALUE};
+		gbl_panel.columnWeights = new double[]{0.0, 1.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
 		gbl_panel.rowWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
 		panel.setLayout(gbl_panel);
 		
@@ -141,7 +141,7 @@ public class AltaCliente extends JDialog {
 		GridBagConstraints gbc_labelApellido = new GridBagConstraints();
 		gbc_labelApellido.anchor = GridBagConstraints.WEST;
 		gbc_labelApellido.insets = new Insets(0, 0, 5, 5);
-		gbc_labelApellido.gridx = 2;
+		gbc_labelApellido.gridx = 3;
 		gbc_labelApellido.gridy = 0;
 		panel.add(labelApellido, gbc_labelApellido);
 		
@@ -150,7 +150,7 @@ public class AltaCliente extends JDialog {
 		GridBagConstraints gbc_textFieldApellido = new GridBagConstraints();
 		gbc_textFieldApellido.fill = GridBagConstraints.HORIZONTAL;
 		gbc_textFieldApellido.insets = new Insets(0, 0, 5, 0);
-		gbc_textFieldApellido.gridx = 3;
+		gbc_textFieldApellido.gridx = 4;
 		gbc_textFieldApellido.gridy = 0;
 		panel.add(textFieldApellido, gbc_textFieldApellido);
 		
@@ -175,7 +175,7 @@ public class AltaCliente extends JDialog {
 		GridBagConstraints gbc_labelTelefono2 = new GridBagConstraints();
 		gbc_labelTelefono2.anchor = GridBagConstraints.WEST;
 		gbc_labelTelefono2.insets = new Insets(0, 0, 5, 5);
-		gbc_labelTelefono2.gridx = 2;
+		gbc_labelTelefono2.gridx = 3;
 		gbc_labelTelefono2.gridy = 1;
 		panel.add(labelTelefono2, gbc_labelTelefono2);
 		
@@ -184,7 +184,7 @@ public class AltaCliente extends JDialog {
 		GridBagConstraints gbc_textFieldTelefono2 = new GridBagConstraints();
 		gbc_textFieldTelefono2.fill = GridBagConstraints.HORIZONTAL;
 		gbc_textFieldTelefono2.insets = new Insets(0, 0, 5, 0);
-		gbc_textFieldTelefono2.gridx = 3;
+		gbc_textFieldTelefono2.gridx = 4;
 		gbc_textFieldTelefono2.gridy = 1;
 		panel.add(textFieldTelefono2, gbc_textFieldTelefono2);
 		
@@ -209,7 +209,7 @@ public class AltaCliente extends JDialog {
 		GridBagConstraints gbc_labelDireccion2 = new GridBagConstraints();
 		gbc_labelDireccion2.anchor = GridBagConstraints.WEST;
 		gbc_labelDireccion2.insets = new Insets(0, 0, 5, 5);
-		gbc_labelDireccion2.gridx = 2;
+		gbc_labelDireccion2.gridx = 3;
 		gbc_labelDireccion2.gridy = 2;
 		panel.add(labelDireccion2, gbc_labelDireccion2);
 		
@@ -218,7 +218,7 @@ public class AltaCliente extends JDialog {
 		GridBagConstraints gbc_textFieldDireccion2 = new GridBagConstraints();
 		gbc_textFieldDireccion2.fill = GridBagConstraints.HORIZONTAL;
 		gbc_textFieldDireccion2.insets = new Insets(0, 0, 5, 0);
-		gbc_textFieldDireccion2.gridx = 3;
+		gbc_textFieldDireccion2.gridx = 4;
 		gbc_textFieldDireccion2.gridy = 2;
 		panel.add(textFieldDireccion2, gbc_textFieldDireccion2);
 		
@@ -243,7 +243,7 @@ public class AltaCliente extends JDialog {
 		GridBagConstraints gbc_labelRazonSocial = new GridBagConstraints();
 		gbc_labelRazonSocial.anchor = GridBagConstraints.WEST;
 		gbc_labelRazonSocial.insets = new Insets(0, 0, 5, 5);
-		gbc_labelRazonSocial.gridx = 2;
+		gbc_labelRazonSocial.gridx = 3;
 		gbc_labelRazonSocial.gridy = 3;
 		panel.add(labelRazonSocial, gbc_labelRazonSocial);
 		
@@ -252,7 +252,7 @@ public class AltaCliente extends JDialog {
 		GridBagConstraints gbc_textFieldRazonSocial = new GridBagConstraints();
 		gbc_textFieldRazonSocial.fill = GridBagConstraints.HORIZONTAL;
 		gbc_textFieldRazonSocial.insets = new Insets(0, 0, 5, 0);
-		gbc_textFieldRazonSocial.gridx = 3;
+		gbc_textFieldRazonSocial.gridx = 4;
 		gbc_textFieldRazonSocial.gridy = 3;
 		panel.add(textFieldRazonSocial, gbc_textFieldRazonSocial);
 		
@@ -280,7 +280,7 @@ public class AltaCliente extends JDialog {
 		GridBagConstraints gbc_btnAltaCuentaCorriente = new GridBagConstraints();
 		gbc_btnAltaCuentaCorriente.fill = GridBagConstraints.BOTH;
 		gbc_btnAltaCuentaCorriente.insets = new Insets(0, 0, 5, 0);
-		gbc_btnAltaCuentaCorriente.gridx = 3;
+		gbc_btnAltaCuentaCorriente.gridx = 4;
 		gbc_btnAltaCuentaCorriente.gridy = 5;
 		panel.add(btnAltaCuentaCorriente, gbc_btnAltaCuentaCorriente);
 		btnAltaCuentaCorriente.addActionListener(new ActionListener() {
@@ -312,7 +312,7 @@ public class AltaCliente extends JDialog {
 		GridBagConstraints gbc_button = new GridBagConstraints();
 		gbc_button.fill = GridBagConstraints.BOTH;
 		gbc_button.insets = new Insets(0, 0, 5, 0);
-		gbc_button.gridx = 3;
+		gbc_button.gridx = 4;
 		gbc_button.gridy = 6;
 		panel.add(button, gbc_button);
 		
@@ -338,7 +338,7 @@ public class AltaCliente extends JDialog {
 		btnAgregarPersonaAutorizada = new JButton("Agregar");
 		GridBagConstraints gbc_btnAgregarPersonaAutorizada = new GridBagConstraints();
 		gbc_btnAgregarPersonaAutorizada.fill = GridBagConstraints.BOTH;
-		gbc_btnAgregarPersonaAutorizada.gridx = 3;
+		gbc_btnAgregarPersonaAutorizada.gridx = 4;
 		gbc_btnAgregarPersonaAutorizada.gridy = 7;
 		panel.add(btnAgregarPersonaAutorizada, gbc_btnAgregarPersonaAutorizada);
 		btnAgregarPersonaAutorizada.setIcon(new ImageIcon(AltaCliente.class.getResource("/image/plus.png")));
