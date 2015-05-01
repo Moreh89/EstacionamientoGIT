@@ -1,6 +1,7 @@
 package vista;
 
 import java.awt.EventQueue;
+
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import javax.swing.ImageIcon;
@@ -10,12 +11,15 @@ import javax.swing.JTextField;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.DefaultComboBoxModel;
+
 import java.awt.GridBagLayout;
 import java.awt.GridBagConstraints;
 import java.awt.Insets;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 
-public class AltaTarifa extends JDialog {
+public class AltaTarifa extends JDialog implements ActionListener{
 
 	/**
 	 * 
@@ -32,6 +36,7 @@ public class AltaTarifa extends JDialog {
 	private JTextField textField;
 	private JTextField textField_1;
 	private JTextField textFieldFraccion;
+	private JButton buttonCancelar;
 	
 	/**
 	 * Launch the application.
@@ -62,14 +67,14 @@ public class AltaTarifa extends JDialog {
 	public void initGUI(){
 		setTitle("Alta Tarifa");
 		setResizable(false);
-		setBounds(100, 100, 617, 396);
+		setBounds(100, 100, 617, 325);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 		
 		JPanel panel = new JPanel();
-		panel.setBounds(6, 6, 604, 287);
+		panel.setBounds(6, 6, 604, 219);
 		contentPane.add(panel);
 		GridBagLayout gbl_panel = new GridBagLayout();
 		gbl_panel.columnWidths = new int[]{124, 200, 0, 0, 200, 0};
@@ -248,18 +253,27 @@ public class AltaTarifa extends JDialog {
 		gbc_textField_1.gridy = 5;
 		panel.add(textField_1, gbc_textField_1);
 		
-		JButton buttonCancelar = new JButton("Cancelar");
+		buttonCancelar = new JButton("Cancelar");
 		buttonCancelar.setIcon(new ImageIcon(BuscardorCliente.class.getResource("/image/cancel.png")));
-		buttonCancelar.setBounds(93, 305, 116, 32);
+		buttonCancelar.setBounds(139, 237, 148, 56);
 		contentPane.add(buttonCancelar);
+		buttonCancelar.addActionListener(this);
 		
 		JButton buttonCrearTarifa = new JButton("Crear Tarifa");
 		buttonCrearTarifa.setIcon(new ImageIcon(BuscardorCliente.class.getResource("/image/ok.png")));
-		buttonCrearTarifa.setBounds(397, 305, 148, 56);
+		buttonCrearTarifa.setBounds(332, 237, 148, 56);
 		contentPane.add(buttonCrearTarifa);
 		
 		this.setLocationRelativeTo(null);
 
+	}
+
+	@Override
+	public void actionPerformed(ActionEvent event) {
+		if(event.getSource() == buttonCancelar){
+			dispose();
+		}
+		
 	}
 	
 
