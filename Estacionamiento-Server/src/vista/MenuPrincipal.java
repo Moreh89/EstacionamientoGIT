@@ -37,7 +37,6 @@ public class MenuPrincipal extends javax.swing.JFrame {
 //	private UsuarioDTO usuarioActual;
 	private Usuario usuarioActual;
 	private JLabel solpaLabel;
-	private JToolBar toolbar;
 	private JStatusBar statusBar;
 	private JLabel dateLabel;
 	private JLabel timeLabel;
@@ -61,9 +60,6 @@ public class MenuPrincipal extends javax.swing.JFrame {
 				menuFacturacion();
 				menuMicuenta();
 			}
-			
-			toolbar = new JToolBar("Botonera");
-			getContentPane().add(toolbar, BorderLayout.NORTH);
 			
 						
 			statusBar = new JStatusBar();
@@ -90,7 +86,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
 		     timerThread = new TimerThread(dateLabel, timeLabel);
 		     timerThread.start();
 			
-			setSize(640, 480);
+			setSize(1141, 657);
 			setTitle("ESTACIONAMIENTO");
 			setExtendedState(JFrame.MAXIMIZED_BOTH);
 			setLocationRelativeTo(null);
