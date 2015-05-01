@@ -59,7 +59,6 @@ public class AltaCliente extends JDialog {
 	private JLabel labelEmail;
 	private JButton btnAgregarPersonaAutorizada;
 	private JTextField textFieldCuentaCorriente;
-	private JTextField textFieldPatente;
 	
 	/**
 	 * Launch the application.
@@ -89,7 +88,7 @@ public class AltaCliente extends JDialog {
 		setTitle("Alta Cliente");
 		setResizable(false);
 		//setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 661, 377);
+		setBounds(100, 100, 661, 396);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
@@ -112,12 +111,12 @@ public class AltaCliente extends JDialog {
 		model.addColumn("Numero");
 		
 		JPanel panel = new JPanel();
-		panel.setBounds(6, 6, 604, 275);
+		panel.setBounds(6, 6, 604, 287);
 		contentPane.add(panel);
 		GridBagLayout gbl_panel = new GridBagLayout();
 		gbl_panel.columnWidths = new int[]{124, 200, 0, 200, 0};
-		gbl_panel.rowHeights = new int[]{28, 28, 28, 28, 28, 28, 28, 28, 0};
-		gbl_panel.columnWeights = new double[]{0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
+		gbl_panel.rowHeights = new int[] {28, 28, 28, 28, 30, 35, 35, 35, 0};
+		gbl_panel.columnWeights = new double[]{0.0, 1.0, 0.0, 0.0, Double.MIN_VALUE};
 		gbl_panel.rowWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
 		panel.setLayout(gbl_panel);
 		
@@ -259,6 +258,7 @@ public class AltaCliente extends JDialog {
 		
 		JLabel labelCuentaCorriente = new JLabel("Cuenta Corriente:");
 		GridBagConstraints gbc_labelCuentaCorriente = new GridBagConstraints();
+		gbc_labelCuentaCorriente.fill = GridBagConstraints.VERTICAL;
 		gbc_labelCuentaCorriente.insets = new Insets(0, 0, 5, 5);
 		gbc_labelCuentaCorriente.anchor = GridBagConstraints.WEST;
 		gbc_labelCuentaCorriente.gridx = 0;
@@ -270,7 +270,7 @@ public class AltaCliente extends JDialog {
 		textFieldCuentaCorriente.setEditable(false);
 		textFieldCuentaCorriente.setColumns(10);
 		GridBagConstraints gbc_textFieldCuentaCorriente = new GridBagConstraints();
-		gbc_textFieldCuentaCorriente.fill = GridBagConstraints.HORIZONTAL;
+		gbc_textFieldCuentaCorriente.fill = GridBagConstraints.BOTH;
 		gbc_textFieldCuentaCorriente.insets = new Insets(0, 0, 5, 5);
 		gbc_textFieldCuentaCorriente.gridx = 1;
 		gbc_textFieldCuentaCorriente.gridy = 5;
@@ -278,7 +278,7 @@ public class AltaCliente extends JDialog {
 		
 		JButton btnAltaCuentaCorriente = new JButton("Alta");
 		GridBagConstraints gbc_btnAltaCuentaCorriente = new GridBagConstraints();
-		gbc_btnAltaCuentaCorriente.fill = GridBagConstraints.HORIZONTAL;
+		gbc_btnAltaCuentaCorriente.fill = GridBagConstraints.BOTH;
 		gbc_btnAltaCuentaCorriente.insets = new Insets(0, 0, 5, 0);
 		gbc_btnAltaCuentaCorriente.gridx = 3;
 		gbc_btnAltaCuentaCorriente.gridy = 5;
@@ -288,35 +288,37 @@ public class AltaCliente extends JDialog {
 			}
 		});
 		
-		JLabel labelVehiculo = new JLabel("Vehiculo:");
-		GridBagConstraints gbc_labelVehiculo = new GridBagConstraints();
-		gbc_labelVehiculo.insets = new Insets(0, 0, 5, 5);
-		gbc_labelVehiculo.anchor = GridBagConstraints.WEST;
-		gbc_labelVehiculo.gridx = 0;
-		gbc_labelVehiculo.gridy = 6;
-		panel.add(labelVehiculo, gbc_labelVehiculo);
+		JLabel labelVehiculos = new JLabel("Vehiculos:");
+		GridBagConstraints gbc_labelVehiculos = new GridBagConstraints();
+		gbc_labelVehiculos.fill = GridBagConstraints.VERTICAL;
+		gbc_labelVehiculos.insets = new Insets(0, 0, 5, 5);
+		gbc_labelVehiculos.anchor = GridBagConstraints.WEST;
+		gbc_labelVehiculos.gridx = 0;
+		gbc_labelVehiculos.gridy = 6;
+		panel.add(labelVehiculos, gbc_labelVehiculos);
 		
-		textFieldPatente = new JTextField();
-		textFieldPatente.setEnabled(false);
-		textFieldPatente.setEditable(false);
-		textFieldPatente.setColumns(10);
-		GridBagConstraints gbc_textFieldPatente = new GridBagConstraints();
-		gbc_textFieldPatente.fill = GridBagConstraints.HORIZONTAL;
-		gbc_textFieldPatente.insets = new Insets(0, 0, 5, 5);
-		gbc_textFieldPatente.gridx = 1;
-		gbc_textFieldPatente.gridy = 6;
-		panel.add(textFieldPatente, gbc_textFieldPatente);
+		JTextArea textArea = new JTextArea();
+		textArea.setEnabled(false);
+		textArea.setEditable(false);
+		GridBagConstraints gbc_textArea = new GridBagConstraints();
+		gbc_textArea.insets = new Insets(0, 0, 5, 5);
+		gbc_textArea.fill = GridBagConstraints.BOTH;
+		gbc_textArea.gridx = 1;
+		gbc_textArea.gridy = 6;
+		panel.add(textArea, gbc_textArea);
 		
-		JButton btnAltaVehiculo = new JButton("Alta");
-		GridBagConstraints gbc_btnAltaVehiculo = new GridBagConstraints();
-		gbc_btnAltaVehiculo.fill = GridBagConstraints.HORIZONTAL;
-		gbc_btnAltaVehiculo.insets = new Insets(0, 0, 5, 0);
-		gbc_btnAltaVehiculo.gridx = 3;
-		gbc_btnAltaVehiculo.gridy = 6;
-		panel.add(btnAltaVehiculo, gbc_btnAltaVehiculo);
+		JButton button = new JButton("Agregar");
+		button.setIcon(new ImageIcon(AltaCliente.class.getResource("/image/plus.png")));
+		GridBagConstraints gbc_button = new GridBagConstraints();
+		gbc_button.fill = GridBagConstraints.BOTH;
+		gbc_button.insets = new Insets(0, 0, 5, 0);
+		gbc_button.gridx = 3;
+		gbc_button.gridy = 6;
+		panel.add(button, gbc_button);
 		
 		JLabel labelPersonaAutorizada = new JLabel("Autorizados:");
 		GridBagConstraints gbc_labelPersonaAutorizada = new GridBagConstraints();
+		gbc_labelPersonaAutorizada.fill = GridBagConstraints.VERTICAL;
 		gbc_labelPersonaAutorizada.anchor = GridBagConstraints.WEST;
 		gbc_labelPersonaAutorizada.insets = new Insets(0, 0, 0, 5);
 		gbc_labelPersonaAutorizada.gridx = 0;
@@ -335,7 +337,7 @@ public class AltaCliente extends JDialog {
 		
 		btnAgregarPersonaAutorizada = new JButton("Agregar");
 		GridBagConstraints gbc_btnAgregarPersonaAutorizada = new GridBagConstraints();
-		gbc_btnAgregarPersonaAutorizada.fill = GridBagConstraints.HORIZONTAL;
+		gbc_btnAgregarPersonaAutorizada.fill = GridBagConstraints.BOTH;
 		gbc_btnAgregarPersonaAutorizada.gridx = 3;
 		gbc_btnAgregarPersonaAutorizada.gridy = 7;
 		panel.add(btnAgregarPersonaAutorizada, gbc_btnAgregarPersonaAutorizada);
@@ -343,12 +345,12 @@ public class AltaCliente extends JDialog {
 		
 		JButton buttonCancelar = new JButton("Cancelar");
 		buttonCancelar.setIcon(new ImageIcon(BuscardorCliente.class.getResource("/image/cancel.png")));
-		buttonCancelar.setBounds(211, 293, 116, 32);
+		buttonCancelar.setBounds(212, 305, 116, 32);
 		contentPane.add(buttonCancelar);
 		
 		JButton buttonCrearCliente = new JButton("Crear Cliente");
 		buttonCrearCliente.setIcon(new ImageIcon(BuscardorCliente.class.getResource("/image/ok.png")));
-		buttonCrearCliente.setBounds(462, 286, 148, 56);
+		buttonCrearCliente.setBounds(462, 305, 148, 56);
 		contentPane.add(buttonCrearCliente);
 		
 		llenarTabla();
