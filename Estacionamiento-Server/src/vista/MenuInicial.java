@@ -37,6 +37,7 @@ public class MenuInicial extends JFrame {
 	 * Create the frame.
 	 */
 	public MenuInicial() {
+		setTitle("Gestor Estacionamiento");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 450, 300);
 		
@@ -159,6 +160,12 @@ public class MenuInicial extends JFrame {
 		
 		JMenuItem mntmModificacionTarifa = new JMenuItem("Modificacion");
 		mnTarifas.add(mntmModificacionTarifa);
+		
+		JMenu mnTasaInteres = new JMenu("Tasa Interes");
+		mnGestionEstacionamiento.add(mnTasaInteres);
+		
+		JMenuItem mntmModificacionTasaInteres = new JMenuItem("Modificacion");
+		mnTasaInteres.add(mntmModificacionTasaInteres);
 		
 		JMenu mnConsultas = new JMenu("Consultas");
 		menuBar.add(mnConsultas);
