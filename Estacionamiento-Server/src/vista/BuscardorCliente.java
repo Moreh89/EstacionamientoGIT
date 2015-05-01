@@ -60,6 +60,8 @@ public class BuscardorCliente extends JDialog {
 	private JTextField textFieldEstadoCuentaCorriente;
 	private JTextField textFieldEstadoCliente;
 	private JLabel labelEstadoCliente;
+	private JLabel labelPersonasAutorizadas;
+	private JTextField textFieldPersonasAutorizadas;
 	
 	/**
 	 * Launch the application.
@@ -89,7 +91,7 @@ public class BuscardorCliente extends JDialog {
 		setTitle("Buscar Clientes");
 		setResizable(false);
 		//setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 531, 425);
+		setBounds(100, 100, 531, 491);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
@@ -142,13 +144,13 @@ public class BuscardorCliente extends JDialog {
 		contentPane.add(comboBox);
 		
 		JPanel panel = new JPanel();
-		panel.setBounds(10, 56, 384, 336);
+		panel.setBounds(10, 56, 384, 391);
 		contentPane.add(panel);
 		GridBagLayout gbl_panel = new GridBagLayout();
 		gbl_panel.columnWidths = new int[]{0, 0, 0};
-		gbl_panel.rowHeights = new int[]{0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
+		gbl_panel.rowHeights = new int[]{0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
 		gbl_panel.columnWeights = new double[]{0.0, 1.0, Double.MIN_VALUE};
-		gbl_panel.rowWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
+		gbl_panel.rowWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 1.0, Double.MIN_VALUE};
 		panel.setLayout(gbl_panel);
 		
 		JLabel labelNombre = new JLabel("Nombre:");
@@ -324,7 +326,7 @@ public class BuscardorCliente extends JDialog {
 		
 		labelEstadoCliente = new JLabel("Estado Cliente:");
 		GridBagConstraints gbc_labelEstadoCliente = new GridBagConstraints();
-		gbc_labelEstadoCliente.insets = new Insets(0, 0, 0, 5);
+		gbc_labelEstadoCliente.insets = new Insets(0, 0, 5, 5);
 		gbc_labelEstadoCliente.anchor = GridBagConstraints.EAST;
 		gbc_labelEstadoCliente.gridx = 0;
 		gbc_labelEstadoCliente.gridy = 9;
@@ -335,19 +337,38 @@ public class BuscardorCliente extends JDialog {
 		textFieldEstadoCliente.setEditable(false);
 		textFieldEstadoCliente.setColumns(10);
 		GridBagConstraints gbc_textFieldEstadoCliente = new GridBagConstraints();
+		gbc_textFieldEstadoCliente.insets = new Insets(0, 0, 5, 0);
 		gbc_textFieldEstadoCliente.fill = GridBagConstraints.HORIZONTAL;
 		gbc_textFieldEstadoCliente.gridx = 1;
 		gbc_textFieldEstadoCliente.gridy = 9;
 		panel.add(textFieldEstadoCliente, gbc_textFieldEstadoCliente);
 		
+		labelPersonasAutorizadas = new JLabel("Personas Autorizadas:");
+		GridBagConstraints gbc_labelPersonasAutorizadas = new GridBagConstraints();
+		gbc_labelPersonasAutorizadas.anchor = GridBagConstraints.EAST;
+		gbc_labelPersonasAutorizadas.insets = new Insets(0, 0, 0, 5);
+		gbc_labelPersonasAutorizadas.gridx = 0;
+		gbc_labelPersonasAutorizadas.gridy = 10;
+		panel.add(labelPersonasAutorizadas, gbc_labelPersonasAutorizadas);
+		
+		textFieldPersonasAutorizadas = new JTextField();
+		textFieldPersonasAutorizadas.setEnabled(false);
+		textFieldPersonasAutorizadas.setEditable(false);
+		textFieldPersonasAutorizadas.setColumns(10);
+		GridBagConstraints gbc_textFieldPersonasAutorizadas = new GridBagConstraints();
+		gbc_textFieldPersonasAutorizadas.fill = GridBagConstraints.BOTH;
+		gbc_textFieldPersonasAutorizadas.gridx = 1;
+		gbc_textFieldPersonasAutorizadas.gridy = 10;
+		panel.add(textFieldPersonasAutorizadas, gbc_textFieldPersonasAutorizadas);
+		
 		JButton buttonCancelar = new JButton("Cancelar");
 		buttonCancelar.setIcon(new ImageIcon(BuscardorCliente.class.getResource("/image/cancel.png")));
-		buttonCancelar.setBounds(404, 223, 116, 32);
+		buttonCancelar.setBounds(404, 415, 116, 32);
 		contentPane.add(buttonCancelar);
 		
 		JButton buttonAceptar = new JButton("Aceptar");
 		buttonAceptar.setIcon(new ImageIcon(BuscardorCliente.class.getResource("/image/ok.png")));
-		buttonAceptar.setBounds(404, 279, 116, 86);
+		buttonAceptar.setBounds(404, 315, 116, 86);
 		contentPane.add(buttonAceptar);
 		
 		llenarTabla();
