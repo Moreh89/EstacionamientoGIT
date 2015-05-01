@@ -344,8 +344,6 @@ public class AltaCliente extends JDialog implements ActionListener{
 		buttonCrearCliente.addActionListener(this);
 		
 		this.setLocationRelativeTo(null);
-		//setAlwaysOnTop(true);
-		setModal(true);
 	}
 
 	@Override

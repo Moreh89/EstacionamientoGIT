@@ -74,15 +74,15 @@ public class AltaVehiculo extends JFrame implements ActionListener{
 	public AltaVehiculo() {
 		setTitle("Alta Vehiculo");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 492, 284);
+		setBounds(100, 100, 492, 291);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		GridBagLayout gbl_contentPane = new GridBagLayout();
 		gbl_contentPane.columnWidths = new int[]{0, 0, 0, 0, 0, 0};
-		gbl_contentPane.rowHeights = new int[]{0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
+		gbl_contentPane.rowHeights = new int[]{0, 0, 0, 0, 0, 0, 0, 20, 0};
 		gbl_contentPane.columnWeights = new double[]{0.0, 0.0, 0.0, 0.0, 1.0, Double.MIN_VALUE};
-		gbl_contentPane.rowWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 1.0, 1.0, Double.MIN_VALUE};
+		gbl_contentPane.rowWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
 		contentPane.setLayout(gbl_contentPane);
 		this.toFront();
 		this.repaint();
@@ -194,26 +194,28 @@ public class AltaVehiculo extends JFrame implements ActionListener{
 		gbc_textField.gridy = 4;
 		contentPane.add(textField, gbc_textField);
 		textField.setColumns(10);
-		 
-		  btnBorrar = new JButton("Borrar");
-		  btnBorrar.setIcon(new ImageIcon(MenuOperador.class.getResource("/image/cancel.png")));
-		  GridBagConstraints gbc_btnBorrar = new GridBagConstraints();
-		  gbc_btnBorrar.gridwidth = 2;
-		  gbc_btnBorrar.insets = new Insets(0, 0, 5, 5);
-		  gbc_btnBorrar.gridx = 1;
-		  gbc_btnBorrar.gridy = 6;
-		  contentPane.add(btnBorrar, gbc_btnBorrar);
 		
-		 btnCrear = new JButton("Crear Vehiculo");
-		btnCrear.setFont(new Font("Lucida Grande", Font.PLAIN, 16));
-		btnCrear.setIcon(new ImageIcon(AltaVehiculo.class.getResource("/image/ok.png")));
-		GridBagConstraints gbc_btnCrear = new GridBagConstraints();
-		gbc_btnCrear.gridheight = 2;
-		gbc_btnCrear.fill = GridBagConstraints.BOTH;
-		gbc_btnCrear.insets = new Insets(0, 0, 5, 0);
-		gbc_btnCrear.gridx = 4;
-		gbc_btnCrear.gridy = 6;
-		contentPane.add(btnCrear, gbc_btnCrear);
+		 btnBorrar = new JButton("Borrar");
+		 btnBorrar.setIcon(new ImageIcon(MenuOperador.class.getResource("/image/cancel.png")));
+		 GridBagConstraints gbc_btnBorrar = new GridBagConstraints();
+		 gbc_btnBorrar.gridheight = 2;
+		 gbc_btnBorrar.anchor = GridBagConstraints.NORTH;
+		 gbc_btnBorrar.gridwidth = 2;
+		 gbc_btnBorrar.insets = new Insets(0, 0, 5, 5);
+		 gbc_btnBorrar.gridx = 2;
+		 gbc_btnBorrar.gridy = 6;
+		 contentPane.add(btnBorrar, gbc_btnBorrar);
+		 
+		  btnCrear = new JButton("Crear Vehiculo");
+		  btnCrear.setFont(new Font("Lucida Grande", Font.PLAIN, 16));
+		  btnCrear.setIcon(new ImageIcon(AltaVehiculo.class.getResource("/image/ok.png")));
+		  GridBagConstraints gbc_btnCrear = new GridBagConstraints();
+		  gbc_btnCrear.fill = GridBagConstraints.VERTICAL;
+		  gbc_btnCrear.gridheight = 2;
+		  gbc_btnCrear.insets = new Insets(0, 0, 5, 0);
+		  gbc_btnCrear.gridx = 4;
+		  gbc_btnCrear.gridy = 6;
+		  contentPane.add(btnCrear, gbc_btnCrear);
 	}
 
 	@Override
