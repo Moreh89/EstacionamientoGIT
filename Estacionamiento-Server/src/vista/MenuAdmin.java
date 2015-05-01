@@ -17,7 +17,7 @@ import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-public class MenuInicial extends JFrame implements ActionListener {
+public class MenuAdmin extends JFrame implements ActionListener {
 
 	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
@@ -45,15 +45,13 @@ public class MenuInicial extends JFrame implements ActionListener {
 	private JMenuItem mntmAltaCochera;
 	private JMenuItem mntmModificacionCochera;
 	private JMenu mnColor;
-	private JMenuItem mntmAltaColor;
-	private JMenuItem mntmModificacionColor;
+	private JMenuItem mntmGestionColor;
 	private JMenu mnDescuentos;
 	private JMenuItem mntmAltaDescuento;
 	private JMenuItem mntmModificacionDescuento;
 	private JMenuItem mntmBajaModificacion;
 	private JMenu mnModelo;
-	private JMenuItem mntmAltaModelo;
-	private JMenuItem mntmModificacionModelo;
+	private JMenuItem mntmGestionModelo;
 	private JMenu mnTarifas;
 	private JMenuItem mntmAltaTarifa;
 	private JMenuItem mntmModificacionTarifa;
@@ -72,7 +70,7 @@ public class MenuInicial extends JFrame implements ActionListener {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					MenuInicial frame = new MenuInicial();
+					MenuAdmin frame = new MenuAdmin();
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -84,7 +82,7 @@ public class MenuInicial extends JFrame implements ActionListener {
 	/**
 	 * Create the frame.
 	 */
-	public MenuInicial() {
+	public MenuAdmin() {
 		setTitle("Gestor Estacionamiento");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 704, 427);
@@ -93,11 +91,11 @@ public class MenuInicial extends JFrame implements ActionListener {
 		setJMenuBar(menuBar);
 		
 		mnABM = new JMenu("ABM");
-		mnABM.setIcon(new ImageIcon(MenuInicial.class.getResource("/image/plus.png")));
+		mnABM.setIcon(new ImageIcon(MenuAdmin.class.getResource("/image/plus.png")));
 		menuBar.add(mnABM);
 		
 		mnCliente = new JMenu("Cliente");
-		mnCliente.setIcon(new ImageIcon(MenuInicial.class.getResource("/image/paciente.png")));
+		mnCliente.setIcon(new ImageIcon(MenuAdmin.class.getResource("/image/paciente.png")));
 		mnABM.add(mnCliente);
 		
 		mntmAltaCliente = new JMenuItem("Alta");
@@ -113,7 +111,7 @@ public class MenuInicial extends JFrame implements ActionListener {
 		mntmBajaCliente.addActionListener(this);
 		
 		mnUsuario = new JMenu("Usuario");
-		mnUsuario.setIcon(new ImageIcon(MenuInicial.class.getResource("/image/users.png")));
+		mnUsuario.setIcon(new ImageIcon(MenuAdmin.class.getResource("/image/users.png")));
 		mnABM.add(mnUsuario);
 		
 		mntmAltaUsuario = new JMenuItem("Alta");
@@ -129,7 +127,7 @@ public class MenuInicial extends JFrame implements ActionListener {
 		mntmBajaUsuario.addActionListener(this);
 		
 		mnVehiculo = new JMenu("Vehiculo");
-		mnVehiculo.setIcon(new ImageIcon(MenuInicial.class.getResource("/image/alquilar.png")));
+		mnVehiculo.setIcon(new ImageIcon(MenuAdmin.class.getResource("/image/alquilar.png")));
 		mnABM.add(mnVehiculo);
 		
 		mntmAltaVehiculo = new JMenuItem("Alta");
@@ -145,7 +143,7 @@ public class MenuInicial extends JFrame implements ActionListener {
 		mntmBajaVehiculo.addActionListener(this);
 		
 		mnGestionClientes = new JMenu("Gestion Clientes");
-		mnGestionClientes.setIcon(new ImageIcon(MenuInicial.class.getResource("/image/paciente.png")));
+		mnGestionClientes.setIcon(new ImageIcon(MenuAdmin.class.getResource("/image/paciente.png")));
 		menuBar.add(mnGestionClientes);
 		
 		mntmAsociacionCocheras = new JMenuItem("Asociacion Cocheras");
@@ -161,7 +159,7 @@ public class MenuInicial extends JFrame implements ActionListener {
 		mntmPersonasAutorizadas.addActionListener(this);
 		
 		mnGestionEstacionamiento = new JMenu("Gestion Estacionamiento");
-		mnGestionEstacionamiento.setIcon(new ImageIcon(MenuInicial.class.getResource("/image/modificar.png")));
+		mnGestionEstacionamiento.setIcon(new ImageIcon(MenuAdmin.class.getResource("/image/modificar.png")));
 		menuBar.add(mnGestionEstacionamiento);
 		
 		mnCocheras = new JMenu("Cocheras");
@@ -178,13 +176,10 @@ public class MenuInicial extends JFrame implements ActionListener {
 		mnColor = new JMenu("Color");
 		mnGestionEstacionamiento.add(mnColor);
 		
-		mntmAltaColor = new JMenuItem("Alta");
-		mnColor.add(mntmAltaColor);
-		mntmAltaColor.addActionListener(this);
-		
-		mntmModificacionColor = new JMenuItem("Modificacion");
-		mnColor.add(mntmModificacionColor);
-		mntmModificacionColor.addActionListener(this);
+		mntmGestionColor = new JMenuItem("Gestionar");
+		mnColor.add(mntmGestionColor);
+		mntmGestionColor.addActionListener(this);
+	
 		
 		mnDescuentos = new JMenu("Descuentos");
 		mnGestionEstacionamiento.add(mnDescuentos);
@@ -204,13 +199,9 @@ public class MenuInicial extends JFrame implements ActionListener {
 		mnModelo = new JMenu("Modelo");
 		mnGestionEstacionamiento.add(mnModelo);
 		
-		mntmAltaModelo = new JMenuItem("Alta");
-		mnModelo.add(mntmAltaModelo);
-		mntmAltaModelo.addActionListener(this);
-		
-		mntmModificacionModelo = new JMenuItem("Modificacion");
-		mnModelo.add(mntmModificacionModelo);
-		mntmModificacionModelo.addActionListener(this);
+		mntmGestionModelo = new JMenuItem("Gestionar");
+		mnModelo.add(mntmGestionModelo);
+		mntmGestionModelo.addActionListener(this);
 		
 		mnTarifas = new JMenu("Tarifas");
 		mnGestionEstacionamiento.add(mnTarifas);
@@ -231,7 +222,7 @@ public class MenuInicial extends JFrame implements ActionListener {
 		mntmModificacionTasaInteres.addActionListener(this);
 		
 		mnConsultas = new JMenu("Consultas");
-		mnConsultas.setIcon(new ImageIcon(MenuInicial.class.getResource("/image/buscar.png")));
+		mnConsultas.setIcon(new ImageIcon(MenuAdmin.class.getResource("/image/buscar.png")));
 		menuBar.add(mnConsultas);
 		
 		mntmArqueoDeCaja = new JMenuItem("Arqueo de Caja");
@@ -251,16 +242,16 @@ public class MenuInicial extends JFrame implements ActionListener {
 		mntmDeudores.addActionListener(this);
 		
 		mnMiCuenta = new JMenu("Mi Cuenta");
-		mnMiCuenta.setIcon(new ImageIcon(MenuInicial.class.getResource("/image/users.png")));
+		mnMiCuenta.setIcon(new ImageIcon(MenuAdmin.class.getResource("/image/users.png")));
 		menuBar.add(mnMiCuenta);
 		
 		mntmCambiarClave = new JMenuItem("Cambiar Clave");
-		mntmCambiarClave.setIcon(new ImageIcon(MenuInicial.class.getResource("/image/key.png")));
+		mntmCambiarClave.setIcon(new ImageIcon(MenuAdmin.class.getResource("/image/key.png")));
 		mnMiCuenta.add(mntmCambiarClave);
 		mntmCambiarClave.addActionListener(this);
 		
 		mntmSalir = new JMenuItem("Salir");
-		mntmSalir.setIcon(new ImageIcon(MenuInicial.class.getResource("/image/exit.png")));
+		mntmSalir.setIcon(new ImageIcon(MenuAdmin.class.getResource("/image/exit.png")));
 		mnMiCuenta.add(mntmSalir);
 		mntmSalir.addActionListener(this);
 		
@@ -292,6 +283,15 @@ public class MenuInicial extends JFrame implements ActionListener {
 		}
 		if (event.getSource() == mntmCambiarClave){
 			new CambioContrasenia().setVisible(true);
+		}
+		if (event.getSource() == mntmGestionColor){
+			new GestionColor().setVisible(true);
+		}
+		if (event.getSource() == mntmGestionModelo){
+			new GestionModelo().setVisible(true);
+		}
+		if (event.getSource() == mntmModificacionTasaInteres){
+			new ModificarInteres().setVisible(true);
 		}
 	}
 

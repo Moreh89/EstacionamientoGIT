@@ -33,7 +33,7 @@ public class Cliente {
 	private String correoElectronico;
 	private ESTADO estado;
 	@OneToMany
-	@JoinColumn(name="PersonaAut")
+	@JoinColumn(name="Cliente")
 	private List<PersonaAutorizada> personasAutorizadasARetirar;
 	private String razonSocial;
 	@OneToMany

@@ -228,7 +228,7 @@ public class Login extends javax.swing.JDialog implements ActionListener{
 //DIFERENCIA ENTRE USUARIO ADMIN Y OPERADOR
 							if(usuarioText.getText().equals("admin"))
 							{
-								MenuInicial mpc = new MenuInicial ();
+								MenuAdmin mpc = new MenuAdmin ();
 								mpc.setVisible(true);
 								dispose();
 							}
