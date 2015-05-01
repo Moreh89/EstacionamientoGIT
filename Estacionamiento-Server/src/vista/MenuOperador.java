@@ -301,6 +301,8 @@ public class MenuOperador extends JFrame {
 		contentPane.add(btnGuardarF, gbc_btnGuardarF);
 		
 		JButton btnTicketF = new JButton("Ticket F7");
+		btnTicketF.setFont(new Font("Lucida Grande", Font.PLAIN, 16));
+		btnTicketF.setIcon(new ImageIcon(MenuOperador.class.getResource("/image/printer.png")));
 		GridBagConstraints gbc_btnTicketF = new GridBagConstraints();
 		gbc_btnTicketF.gridheight = 2;
 		gbc_btnTicketF.fill = GridBagConstraints.BOTH;
