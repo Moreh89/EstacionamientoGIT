@@ -268,10 +268,18 @@ public class MenuAdmin extends JFrame implements ActionListener {
 		txtEstacionamiento.setText("Estacionamiento");
 		contentPane.add(txtEstacionamiento, BorderLayout.CENTER);
 		txtEstacionamiento.setColumns(10);
+		
+		this.setLocationRelativeTo(null);
 	}
 
 	@Override
-	public void actionPerformed(ActionEvent event) {
+	public void actionPerformed(ActionEvent event){
+		if (event.getSource() == mntmAltaCliente){
+			new AltaCliente().setVisible(true);
+		}
+		if (event.getSource() == mntmAltaVehiculo){
+			new AltaVehiculo().setVisible(true);
+		}
 		if (event.getSource() == mntmBuscarCliente){
 			 new BuscardorCliente().setVisible(true);
 		}
