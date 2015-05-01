@@ -293,6 +293,9 @@ public class MenuAdmin extends JFrame implements ActionListener {
 		if (event.getSource() == mntmModificacionTasaInteres){
 			new ModificarInteres().setVisible(true);
 		}
+		if (event.getSource() == mntmSalir){
+			dispose();
+		}
 	}
 
 }
