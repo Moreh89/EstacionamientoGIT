@@ -33,6 +33,9 @@ import javax.swing.JSplitPane;
 import java.awt.GridBagLayout;
 import java.awt.GridBagConstraints;
 import java.awt.Insets;
+import javax.swing.JList;
+import javax.swing.AbstractListModel;
+import javax.swing.JTextArea;
 
 public class BuscardorCliente extends JDialog {
 
@@ -61,7 +64,6 @@ public class BuscardorCliente extends JDialog {
 	private JTextField textFieldEstadoCliente;
 	private JLabel labelEstadoCliente;
 	private JLabel labelPersonasAutorizadas;
-	private JTextField textFieldPersonasAutorizadas;
 	
 	/**
 	 * Launch the application.
@@ -351,15 +353,14 @@ public class BuscardorCliente extends JDialog {
 		gbc_labelPersonasAutorizadas.gridy = 10;
 		panel.add(labelPersonasAutorizadas, gbc_labelPersonasAutorizadas);
 		
-		textFieldPersonasAutorizadas = new JTextField();
-		textFieldPersonasAutorizadas.setEnabled(false);
-		textFieldPersonasAutorizadas.setEditable(false);
-		textFieldPersonasAutorizadas.setColumns(10);
-		GridBagConstraints gbc_textFieldPersonasAutorizadas = new GridBagConstraints();
-		gbc_textFieldPersonasAutorizadas.fill = GridBagConstraints.BOTH;
-		gbc_textFieldPersonasAutorizadas.gridx = 1;
-		gbc_textFieldPersonasAutorizadas.gridy = 10;
-		panel.add(textFieldPersonasAutorizadas, gbc_textFieldPersonasAutorizadas);
+		JTextArea textAreaPersonasAutorizadas = new JTextArea();
+		textAreaPersonasAutorizadas.setEnabled(false);
+		textAreaPersonasAutorizadas.setEditable(false);
+		GridBagConstraints gbc_textAreaPersonasAutorizadas = new GridBagConstraints();
+		gbc_textAreaPersonasAutorizadas.fill = GridBagConstraints.BOTH;
+		gbc_textAreaPersonasAutorizadas.gridx = 1;
+		gbc_textAreaPersonasAutorizadas.gridy = 10;
+		panel.add(textAreaPersonasAutorizadas, gbc_textAreaPersonasAutorizadas);
 		
 		JButton buttonCancelar = new JButton("Cancelar");
 		buttonCancelar.setIcon(new ImageIcon(BuscardorCliente.class.getResource("/image/cancel.png")));
