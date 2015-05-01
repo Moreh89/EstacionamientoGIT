@@ -224,7 +224,7 @@ public class Login extends javax.swing.JDialog implements ActionListener{
 						boolean validar = Controlador.getInstancia().validarLogin(usuarioText.getText(), passwordText.getText());
 						
 						if (validar == true){
-							MenuPrincipal mpc = new MenuPrincipal ();
+							MenuInicial mpc = new MenuInicial ();
 							mpc.setVisible(true);
 							dispose();
 							
