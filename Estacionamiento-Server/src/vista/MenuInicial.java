@@ -99,14 +99,68 @@ public class MenuInicial extends JFrame {
 		JMenu mnTarifas = new JMenu("Tarifas");
 		mnGestionEstacionamiento.add(mnTarifas);
 		
+		JMenuItem mntmAltaTarifa = new JMenuItem("Alta");
+		mnTarifas.add(mntmAltaTarifa);
+		
+		JMenuItem mntmModificacionTarifa = new JMenuItem("Modificacion");
+		mnTarifas.add(mntmModificacionTarifa);
+		
+		JMenuItem mntmBajaTarifa = new JMenuItem("Baja");
+		mnTarifas.add(mntmBajaTarifa);
+		
 		JMenu mnDescuentos = new JMenu("Descuentos");
 		mnGestionEstacionamiento.add(mnDescuentos);
+		
+		JMenuItem mntmAltaDescuento = new JMenuItem("Alta");
+		mnDescuentos.add(mntmAltaDescuento);
+		
+		JMenuItem mntmModificacionDescuento = new JMenuItem("Modificacion");
+		mnDescuentos.add(mntmModificacionDescuento);
+		
+		JMenuItem mntmBajaModificacion = new JMenuItem("Baja");
+		mnDescuentos.add(mntmBajaModificacion);
 		
 		JMenu mnCocheras = new JMenu("Cocheras");
 		mnGestionEstacionamiento.add(mnCocheras);
 		
+		JMenuItem mntmAltaCochera = new JMenuItem("Alta");
+		mnCocheras.add(mntmAltaCochera);
+		
+		JMenuItem mntmModificacionCochera = new JMenuItem("Modificacion");
+		mnCocheras.add(mntmModificacionCochera);
+		
+		JMenuItem mntmBajaCochera = new JMenuItem("Baja");
+		mnCocheras.add(mntmBajaCochera);
+		
+		JMenu mnExpensas = new JMenu("Expensas");
+		mnGestionEstacionamiento.add(mnExpensas);
+		
+		JMenuItem mntmAltaExpensa = new JMenuItem("Alta");
+		mnExpensas.add(mntmAltaExpensa);
+		
+		JMenuItem mntmModificacionExpensa = new JMenuItem("Modificacion");
+		mnExpensas.add(mntmModificacionExpensa);
+		
+		JMenuItem mntmBajaExpensa = new JMenuItem("Baja");
+		mnExpensas.add(mntmBajaExpensa);
+		
+		JMenu mnColor = new JMenu("Color");
+		mnGestionEstacionamiento.add(mnColor);
+		
+		JMenu mnModelo = new JMenu("Modelo");
+		mnGestionEstacionamiento.add(mnModelo);
+		
 		JMenu mnConsultas = new JMenu("Consultas");
 		menuBar.add(mnConsultas);
+		
+		JMenuItem mntmArqueoDeCaja = new JMenuItem("Arqueo de Caja");
+		mnConsultas.add(mntmArqueoDeCaja);
+		
+		JMenuItem mntmCantidadAutos = new JMenuItem("Cantidad Autos");
+		mnConsultas.add(mntmCantidadAutos);
+		
+		JMenuItem mntmDeudores = new JMenuItem("Deudores");
+		mnConsultas.add(mntmDeudores);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
