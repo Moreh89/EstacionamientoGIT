@@ -3,7 +3,6 @@ package vista;
 import java.awt.EventQueue;
 import java.util.ArrayList;
 
-
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import javax.swing.table.DefaultTableModel;
@@ -12,36 +11,26 @@ import javax.swing.table.TableRowSorter;
 import javax.swing.ImageIcon;
 import javax.swing.JDialog;
 import javax.swing.JLabel;
-import javax.swing.JOptionPane;
-import javax.swing.JScrollPane;
+import javax.swing.JTextArea;
 import javax.swing.JTextField;
 import javax.swing.JButton;
 import javax.swing.JSeparator;
 import javax.swing.JComboBox;
 import javax.swing.DefaultComboBoxModel;
-import javax.swing.JTable;
-import javax.swing.ListSelectionModel;
 import javax.swing.RowFilter;
 
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
-
-import javax.swing.border.EtchedBorder;
-
-import controlador.Controlador;
-import javax.swing.JSplitPane;
 import java.awt.GridBagLayout;
 import java.awt.GridBagConstraints;
 import java.awt.Insets;
-import javax.swing.JList;
-import javax.swing.AbstractListModel;
-import javax.swing.JTextArea;
 
+
+
+@SuppressWarnings("rawtypes")
 public class BuscardorCliente extends JDialog {
 
-	/**
-	 * 
-	 */
+
 	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
 	private JTextField buscarTextField;
@@ -89,6 +78,7 @@ public class BuscardorCliente extends JDialog {
 	}
 	
 	
+	@SuppressWarnings("unchecked")
 	public void initGUI(){
 		setTitle("Buscar Clientes");
 		setResizable(false);
