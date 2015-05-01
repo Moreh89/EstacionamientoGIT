@@ -15,6 +15,8 @@ import javax.swing.JOptionPane;
 import javax.swing.JSeparator;
 import javax.swing.JTextField;
 import javax.swing.SwingUtilities;
+import javax.swing.UIManager;
+import javax.swing.UIManager.LookAndFeelInfo;
 
 import controlador.Controlador;
 
@@ -72,6 +74,13 @@ public class Login extends javax.swing.JDialog implements ActionListener{
 	@SuppressWarnings("serial")
 	private void initGUI() {
 		try {
+			
+		    for (LookAndFeelInfo info : UIManager.getInstalledLookAndFeels()) {
+		        if ("Nimbus".equals(info.getName())) {
+		            UIManager.setLookAndFeel(info.getClassName());
+		            break;
+		        }
+		    }
 			
 					getContentPane().setLayout(null);
 				
@@ -220,7 +229,7 @@ public class Login extends javax.swing.JDialog implements ActionListener{
 							dispose();
 							
 						}else{
-							JOptionPane.showMessageDialog(null, "Usuario y Contraseña Invalidos", "Login", JOptionPane.ERROR_MESSAGE);
+							JOptionPane.showMessageDialog(null, "Usuario y Contraseï¿½a Invalidos", "Login", JOptionPane.ERROR_MESSAGE);
 						}
 						
 					}
