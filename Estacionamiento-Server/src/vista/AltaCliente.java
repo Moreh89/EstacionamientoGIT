@@ -59,6 +59,22 @@ public class AltaCliente extends JDialog {
 	private JLabel labelEmail;
 	private JButton btnAgregarPersonaAutorizada;
 	private JTextField textFieldCuentaCorriente;
+	private JPanel panel;
+	private JLabel labelNombre;
+	private JLabel labelApellido;
+	private JLabel labelTelefono1;
+	private JLabel labelTelefono2;
+	private JLabel labelDireccion1;
+	private JLabel labelDireccion2;
+	private JLabel labelCuentaCorriente;
+	private JButton btnAltaCuentaCorriente;
+	private JLabel labelVehiculos;
+	private JTextArea textArea;
+	private JButton button;
+	private JLabel labelPersonaAutorizada;
+	private JTextArea textAreaPersonasAutorizadas;
+	private JButton buttonCancelar;
+	private JButton buttonCrearCliente;
 	
 	/**
 	 * Launch the application.
@@ -110,7 +126,7 @@ public class AltaCliente extends JDialog {
 		model.addColumn("Tipo Doc.");
 		model.addColumn("Numero");
 		
-		JPanel panel = new JPanel();
+		panel = new JPanel();
 		panel.setBounds(6, 6, 604, 287);
 		contentPane.add(panel);
 		GridBagLayout gbl_panel = new GridBagLayout();
@@ -120,7 +136,7 @@ public class AltaCliente extends JDialog {
 		gbl_panel.rowWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
 		panel.setLayout(gbl_panel);
 		
-		JLabel labelNombre = new JLabel("Nombre:");
+		labelNombre = new JLabel("Nombre:");
 		GridBagConstraints gbc_labelNombre = new GridBagConstraints();
 		gbc_labelNombre.anchor = GridBagConstraints.WEST;
 		gbc_labelNombre.insets = new Insets(0, 0, 5, 5);
@@ -137,7 +153,7 @@ public class AltaCliente extends JDialog {
 		panel.add(textFieldNombre, gbc_textFieldNombre);
 		textFieldNombre.setColumns(10);
 		
-		JLabel labelApellido = new JLabel("Apellido:");
+		labelApellido = new JLabel("Apellido:");
 		GridBagConstraints gbc_labelApellido = new GridBagConstraints();
 		gbc_labelApellido.anchor = GridBagConstraints.WEST;
 		gbc_labelApellido.insets = new Insets(0, 0, 5, 5);
@@ -154,7 +170,7 @@ public class AltaCliente extends JDialog {
 		gbc_textFieldApellido.gridy = 0;
 		panel.add(textFieldApellido, gbc_textFieldApellido);
 		
-		JLabel labelTelefono1 = new JLabel("Telefono 1:");
+		labelTelefono1 = new JLabel("Telefono 1:");
 		GridBagConstraints gbc_labelTelefono1 = new GridBagConstraints();
 		gbc_labelTelefono1.anchor = GridBagConstraints.WEST;
 		gbc_labelTelefono1.insets = new Insets(0, 0, 5, 5);
@@ -171,7 +187,7 @@ public class AltaCliente extends JDialog {
 		gbc_textFieldTelefono1.gridy = 1;
 		panel.add(textFieldTelefono1, gbc_textFieldTelefono1);
 		
-		JLabel labelTelefono2 = new JLabel("Telefono 2:");
+		labelTelefono2 = new JLabel("Telefono 2:");
 		GridBagConstraints gbc_labelTelefono2 = new GridBagConstraints();
 		gbc_labelTelefono2.anchor = GridBagConstraints.WEST;
 		gbc_labelTelefono2.insets = new Insets(0, 0, 5, 5);
@@ -188,7 +204,7 @@ public class AltaCliente extends JDialog {
 		gbc_textFieldTelefono2.gridy = 1;
 		panel.add(textFieldTelefono2, gbc_textFieldTelefono2);
 		
-		JLabel labelDireccion1 = new JLabel("Direccion 1:");
+		labelDireccion1 = new JLabel("Direccion 1:");
 		GridBagConstraints gbc_labelDireccion1 = new GridBagConstraints();
 		gbc_labelDireccion1.anchor = GridBagConstraints.WEST;
 		gbc_labelDireccion1.insets = new Insets(0, 0, 5, 5);
@@ -205,7 +221,7 @@ public class AltaCliente extends JDialog {
 		gbc_textFieldDireccion1.gridy = 2;
 		panel.add(textFieldDireccion1, gbc_textFieldDireccion1);
 		
-		JLabel labelDireccion2 = new JLabel("Direccion 2:");
+		labelDireccion2 = new JLabel("Direccion 2:");
 		GridBagConstraints gbc_labelDireccion2 = new GridBagConstraints();
 		gbc_labelDireccion2.anchor = GridBagConstraints.WEST;
 		gbc_labelDireccion2.insets = new Insets(0, 0, 5, 5);
@@ -256,7 +272,7 @@ public class AltaCliente extends JDialog {
 		gbc_textFieldRazonSocial.gridy = 3;
 		panel.add(textFieldRazonSocial, gbc_textFieldRazonSocial);
 		
-		JLabel labelCuentaCorriente = new JLabel("Cuenta Corriente:");
+		labelCuentaCorriente = new JLabel("Cuenta Corriente:");
 		GridBagConstraints gbc_labelCuentaCorriente = new GridBagConstraints();
 		gbc_labelCuentaCorriente.fill = GridBagConstraints.VERTICAL;
 		gbc_labelCuentaCorriente.insets = new Insets(0, 0, 5, 5);
@@ -276,7 +292,7 @@ public class AltaCliente extends JDialog {
 		gbc_textFieldCuentaCorriente.gridy = 5;
 		panel.add(textFieldCuentaCorriente, gbc_textFieldCuentaCorriente);
 		
-		JButton btnAltaCuentaCorriente = new JButton("Alta");
+		btnAltaCuentaCorriente = new JButton("Alta");
 		GridBagConstraints gbc_btnAltaCuentaCorriente = new GridBagConstraints();
 		gbc_btnAltaCuentaCorriente.fill = GridBagConstraints.BOTH;
 		gbc_btnAltaCuentaCorriente.insets = new Insets(0, 0, 5, 0);
@@ -288,7 +304,7 @@ public class AltaCliente extends JDialog {
 			}
 		});
 		
-		JLabel labelVehiculos = new JLabel("Vehiculos:");
+		labelVehiculos = new JLabel("Vehiculos:");
 		GridBagConstraints gbc_labelVehiculos = new GridBagConstraints();
 		gbc_labelVehiculos.fill = GridBagConstraints.VERTICAL;
 		gbc_labelVehiculos.insets = new Insets(0, 0, 5, 5);
@@ -297,7 +313,7 @@ public class AltaCliente extends JDialog {
 		gbc_labelVehiculos.gridy = 6;
 		panel.add(labelVehiculos, gbc_labelVehiculos);
 		
-		JTextArea textArea = new JTextArea();
+		textArea = new JTextArea();
 		textArea.setEnabled(false);
 		textArea.setEditable(false);
 		GridBagConstraints gbc_textArea = new GridBagConstraints();
@@ -307,7 +323,7 @@ public class AltaCliente extends JDialog {
 		gbc_textArea.gridy = 6;
 		panel.add(textArea, gbc_textArea);
 		
-		JButton button = new JButton("Agregar");
+		button = new JButton("Agregar");
 		button.setIcon(new ImageIcon(AltaCliente.class.getResource("/image/plus.png")));
 		GridBagConstraints gbc_button = new GridBagConstraints();
 		gbc_button.fill = GridBagConstraints.BOTH;
@@ -316,7 +332,7 @@ public class AltaCliente extends JDialog {
 		gbc_button.gridy = 6;
 		panel.add(button, gbc_button);
 		
-		JLabel labelPersonaAutorizada = new JLabel("Autorizados:");
+		labelPersonaAutorizada = new JLabel("Autorizados:");
 		GridBagConstraints gbc_labelPersonaAutorizada = new GridBagConstraints();
 		gbc_labelPersonaAutorizada.fill = GridBagConstraints.VERTICAL;
 		gbc_labelPersonaAutorizada.anchor = GridBagConstraints.WEST;
@@ -325,7 +341,7 @@ public class AltaCliente extends JDialog {
 		gbc_labelPersonaAutorizada.gridy = 7;
 		panel.add(labelPersonaAutorizada, gbc_labelPersonaAutorizada);
 		
-		JTextArea textAreaPersonasAutorizadas = new JTextArea();
+		textAreaPersonasAutorizadas = new JTextArea();
 		textAreaPersonasAutorizadas.setEditable(false);
 		textAreaPersonasAutorizadas.setEnabled(false);
 		GridBagConstraints gbc_textAreaPersonasAutorizadas = new GridBagConstraints();
@@ -343,39 +359,21 @@ public class AltaCliente extends JDialog {
 		panel.add(btnAgregarPersonaAutorizada, gbc_btnAgregarPersonaAutorizada);
 		btnAgregarPersonaAutorizada.setIcon(new ImageIcon(AltaCliente.class.getResource("/image/plus.png")));
 		
-		JButton buttonCancelar = new JButton("Cancelar");
+		buttonCancelar = new JButton("Cancelar");
 		buttonCancelar.setIcon(new ImageIcon(BuscardorCliente.class.getResource("/image/cancel.png")));
 		buttonCancelar.setBounds(212, 305, 116, 32);
 		contentPane.add(buttonCancelar);
 		
-		JButton buttonCrearCliente = new JButton("Crear Cliente");
+		buttonCrearCliente = new JButton("Crear Cliente");
 		buttonCrearCliente.setIcon(new ImageIcon(BuscardorCliente.class.getResource("/image/ok.png")));
 		buttonCrearCliente.setBounds(462, 305, 148, 56);
 		contentPane.add(buttonCrearCliente);
-		
-		llenarTabla();
 		
 		this.setLocationRelativeTo(null);
 		//setAlwaysOnTop(true);
 		setModal(true);
 	}
 	
-	public void llenarTabla()
-	{
-//		pacientes = Sistema.getInstancia().getPacientes();
-//
-//		model.setNumRows(pacientes.size());
-//		for (int i = 0; i < pacientes.size(); i++) {
-//			model.setValueAt(pacientes.get(i).getNombre(), i, 0);
-//			model.setValueAt(pacientes.get(i).getApellido(), i,1);
-//			model.setValueAt(pacientes.get(i).getTipoDoc(), i, 2);	
-//			model.setValueAt(pacientes.get(i).getDni(), i, 3);		
-//		}
-//		
-//		table.setModel(model);
-//		sorter = new TableRowSorter<TableModel>(model);
-//		table.setRowSorter(sorter);
-		
-	}
+	
 }
 
