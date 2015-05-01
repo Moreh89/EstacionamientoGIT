@@ -68,7 +68,7 @@ public class AltaCliente extends JDialog {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					BuscardorCliente frame = new BuscardorCliente();
+					AltaCliente frame = new AltaCliente();
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -89,7 +89,7 @@ public class AltaCliente extends JDialog {
 		setTitle("Alta Cliente");
 		setResizable(false);
 		//setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 628, 392);
+		setBounds(100, 100, 661, 377);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
@@ -112,10 +112,10 @@ public class AltaCliente extends JDialog {
 		model.addColumn("Numero");
 		
 		JPanel panel = new JPanel();
-		panel.setBounds(6, 6, 604, 307);
+		panel.setBounds(6, 6, 604, 275);
 		contentPane.add(panel);
 		GridBagLayout gbl_panel = new GridBagLayout();
-		gbl_panel.columnWidths = new int[]{124, 255, 0, 0, 0};
+		gbl_panel.columnWidths = new int[]{124, 200, 0, 200, 0};
 		gbl_panel.rowHeights = new int[]{28, 28, 28, 28, 28, 28, 28, 28, 0};
 		gbl_panel.columnWeights = new double[]{0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
 		gbl_panel.rowWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
@@ -123,7 +123,7 @@ public class AltaCliente extends JDialog {
 		
 		JLabel labelNombre = new JLabel("Nombre:");
 		GridBagConstraints gbc_labelNombre = new GridBagConstraints();
-		gbc_labelNombre.anchor = GridBagConstraints.EAST;
+		gbc_labelNombre.anchor = GridBagConstraints.WEST;
 		gbc_labelNombre.insets = new Insets(0, 0, 5, 5);
 		gbc_labelNombre.gridx = 0;
 		gbc_labelNombre.gridy = 0;
@@ -140,7 +140,7 @@ public class AltaCliente extends JDialog {
 		
 		JLabel labelApellido = new JLabel("Apellido:");
 		GridBagConstraints gbc_labelApellido = new GridBagConstraints();
-		gbc_labelApellido.anchor = GridBagConstraints.EAST;
+		gbc_labelApellido.anchor = GridBagConstraints.WEST;
 		gbc_labelApellido.insets = new Insets(0, 0, 5, 5);
 		gbc_labelApellido.gridx = 2;
 		gbc_labelApellido.gridy = 0;
@@ -157,7 +157,7 @@ public class AltaCliente extends JDialog {
 		
 		JLabel labelTelefono1 = new JLabel("Telefono 1:");
 		GridBagConstraints gbc_labelTelefono1 = new GridBagConstraints();
-		gbc_labelTelefono1.anchor = GridBagConstraints.EAST;
+		gbc_labelTelefono1.anchor = GridBagConstraints.WEST;
 		gbc_labelTelefono1.insets = new Insets(0, 0, 5, 5);
 		gbc_labelTelefono1.gridx = 0;
 		gbc_labelTelefono1.gridy = 1;
@@ -174,7 +174,7 @@ public class AltaCliente extends JDialog {
 		
 		JLabel labelTelefono2 = new JLabel("Telefono 2:");
 		GridBagConstraints gbc_labelTelefono2 = new GridBagConstraints();
-		gbc_labelTelefono2.anchor = GridBagConstraints.EAST;
+		gbc_labelTelefono2.anchor = GridBagConstraints.WEST;
 		gbc_labelTelefono2.insets = new Insets(0, 0, 5, 5);
 		gbc_labelTelefono2.gridx = 2;
 		gbc_labelTelefono2.gridy = 1;
@@ -191,7 +191,7 @@ public class AltaCliente extends JDialog {
 		
 		JLabel labelDireccion1 = new JLabel("Direccion 1:");
 		GridBagConstraints gbc_labelDireccion1 = new GridBagConstraints();
-		gbc_labelDireccion1.anchor = GridBagConstraints.EAST;
+		gbc_labelDireccion1.anchor = GridBagConstraints.WEST;
 		gbc_labelDireccion1.insets = new Insets(0, 0, 5, 5);
 		gbc_labelDireccion1.gridx = 0;
 		gbc_labelDireccion1.gridy = 2;
@@ -208,7 +208,7 @@ public class AltaCliente extends JDialog {
 		
 		JLabel labelDireccion2 = new JLabel("Direccion 2:");
 		GridBagConstraints gbc_labelDireccion2 = new GridBagConstraints();
-		gbc_labelDireccion2.anchor = GridBagConstraints.EAST;
+		gbc_labelDireccion2.anchor = GridBagConstraints.WEST;
 		gbc_labelDireccion2.insets = new Insets(0, 0, 5, 5);
 		gbc_labelDireccion2.gridx = 2;
 		gbc_labelDireccion2.gridy = 2;
@@ -225,7 +225,7 @@ public class AltaCliente extends JDialog {
 		
 		labelEmail = new JLabel("Email:");
 		GridBagConstraints gbc_labelEmail = new GridBagConstraints();
-		gbc_labelEmail.anchor = GridBagConstraints.EAST;
+		gbc_labelEmail.anchor = GridBagConstraints.WEST;
 		gbc_labelEmail.insets = new Insets(0, 0, 5, 5);
 		gbc_labelEmail.gridx = 0;
 		gbc_labelEmail.gridy = 3;
@@ -242,7 +242,7 @@ public class AltaCliente extends JDialog {
 		
 		JLabel labelRazonSocial = new JLabel("Razon Social:");
 		GridBagConstraints gbc_labelRazonSocial = new GridBagConstraints();
-		gbc_labelRazonSocial.anchor = GridBagConstraints.EAST;
+		gbc_labelRazonSocial.anchor = GridBagConstraints.WEST;
 		gbc_labelRazonSocial.insets = new Insets(0, 0, 5, 5);
 		gbc_labelRazonSocial.gridx = 2;
 		gbc_labelRazonSocial.gridy = 3;
@@ -260,7 +260,7 @@ public class AltaCliente extends JDialog {
 		JLabel labelCuentaCorriente = new JLabel("Cuenta Corriente:");
 		GridBagConstraints gbc_labelCuentaCorriente = new GridBagConstraints();
 		gbc_labelCuentaCorriente.insets = new Insets(0, 0, 5, 5);
-		gbc_labelCuentaCorriente.anchor = GridBagConstraints.EAST;
+		gbc_labelCuentaCorriente.anchor = GridBagConstraints.WEST;
 		gbc_labelCuentaCorriente.gridx = 0;
 		gbc_labelCuentaCorriente.gridy = 5;
 		panel.add(labelCuentaCorriente, gbc_labelCuentaCorriente);
@@ -291,7 +291,7 @@ public class AltaCliente extends JDialog {
 		JLabel labelVehiculo = new JLabel("Vehiculo:");
 		GridBagConstraints gbc_labelVehiculo = new GridBagConstraints();
 		gbc_labelVehiculo.insets = new Insets(0, 0, 5, 5);
-		gbc_labelVehiculo.anchor = GridBagConstraints.EAST;
+		gbc_labelVehiculo.anchor = GridBagConstraints.WEST;
 		gbc_labelVehiculo.gridx = 0;
 		gbc_labelVehiculo.gridy = 6;
 		panel.add(labelVehiculo, gbc_labelVehiculo);
@@ -317,6 +317,7 @@ public class AltaCliente extends JDialog {
 		
 		JLabel labelPersonaAutorizada = new JLabel("Autorizados:");
 		GridBagConstraints gbc_labelPersonaAutorizada = new GridBagConstraints();
+		gbc_labelPersonaAutorizada.anchor = GridBagConstraints.WEST;
 		gbc_labelPersonaAutorizada.insets = new Insets(0, 0, 0, 5);
 		gbc_labelPersonaAutorizada.gridx = 0;
 		gbc_labelPersonaAutorizada.gridy = 7;
@@ -342,12 +343,12 @@ public class AltaCliente extends JDialog {
 		
 		JButton buttonCancelar = new JButton("Cancelar");
 		buttonCancelar.setIcon(new ImageIcon(BuscardorCliente.class.getResource("/image/cancel.png")));
-		buttonCancelar.setBounds(116, 307, 116, 32);
+		buttonCancelar.setBounds(211, 293, 116, 32);
 		contentPane.add(buttonCancelar);
 		
 		JButton buttonCrearCliente = new JButton("Crear Cliente");
 		buttonCrearCliente.setIcon(new ImageIcon(BuscardorCliente.class.getResource("/image/ok.png")));
-		buttonCrearCliente.setBounds(404, 295, 148, 56);
+		buttonCrearCliente.setBounds(462, 286, 148, 56);
 		contentPane.add(buttonCrearCliente);
 		
 		llenarTabla();
