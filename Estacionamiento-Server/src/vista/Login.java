@@ -241,7 +241,7 @@ public class Login extends javax.swing.JDialog implements ActionListener{
 							
 							
 						}else{
-							JOptionPane.showMessageDialog(null, "Usuario y Contrase�a Invalidos", "Login", JOptionPane.ERROR_MESSAGE);
+							JOptionPane.showMessageDialog(null, "Usuario y Contraseña Invalidos", "Login", JOptionPane.ERROR_MESSAGE);
 						}
 						
 					}

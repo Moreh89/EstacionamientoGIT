@@ -8,22 +8,66 @@ import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
-import javax.swing.JToolBar;
-import java.awt.GridBagLayout;
 import javax.swing.JMenu;
 import javax.swing.ImageIcon;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
+
 import java.awt.Font;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
-public class MenuInicial extends JFrame {
+public class MenuInicial extends JFrame implements ActionListener {
 
+	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
 	private JTextField txtEstacionamiento;
+	private JMenuBar menuBar;
+	private JMenu mnABM;
+	private JMenu mnCliente;
+	private JMenuItem mntmAltaCliente;
+	private JMenuItem mntmModificacionCliente;
+	private JMenuItem mntmBajaCliente;
+	private JMenu mnUsuario;
+	private JMenuItem mntmAltaUsuario;
+	private JMenuItem mntmModificacionUsuario;
+	private JMenuItem mntmBajaUsuario;
+	private JMenu mnVehiculo;
+	private JMenuItem mntmAltaVehiculo;
+	private JMenuItem mntmModificacionVehiculo;
+	private JMenuItem mntmBajaVehiculo;
+	private JMenu mnGestionClientes;
+	private JMenuItem mntmAsociacionCocheras;
+	private JMenuItem mntmCuentaCorriente;
+	private JMenuItem mntmPersonasAutorizadas;
+	private JMenu mnGestionEstacionamiento;
+	private JMenu mnCocheras;
+	private JMenuItem mntmAltaCochera;
+	private JMenuItem mntmModificacionCochera;
+	private JMenu mnColor;
+	private JMenuItem mntmAltaColor;
+	private JMenuItem mntmModificacionColor;
+	private JMenu mnDescuentos;
+	private JMenuItem mntmAltaDescuento;
+	private JMenuItem mntmModificacionDescuento;
+	private JMenuItem mntmBajaModificacion;
+	private JMenu mnModelo;
+	private JMenuItem mntmAltaModelo;
+	private JMenuItem mntmModificacionModelo;
+	private JMenu mnTarifas;
+	private JMenuItem mntmAltaTarifa;
+	private JMenuItem mntmModificacionTarifa;
+	private JMenu mnTasaInteres;
+	private JMenuItem mntmModificacionTasaInteres;
+	private JMenu mnConsultas;
+	private JMenuItem mntmArqueoDeCaja;
+	private JMenuItem mntmBuscarCliente;
+	private JMenuItem mntmCantidadAutos;
+	private JMenuItem mntmDeudores;
+	private JMenu mnMiCuenta;
+	private JMenuItem mntmCambiarClave;
+	private JMenuItem mntmSalir;
 
-	/**
-	 * Launch the application.
-	 */
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
@@ -45,162 +89,181 @@ public class MenuInicial extends JFrame {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 704, 427);
 		
-		JMenuBar menuBar = new JMenuBar();
+		menuBar = new JMenuBar();
 		setJMenuBar(menuBar);
 		
-		JMenu mnABM = new JMenu("ABM");
+		mnABM = new JMenu("ABM");
 		mnABM.setIcon(new ImageIcon(MenuInicial.class.getResource("/image/plus.png")));
 		menuBar.add(mnABM);
 		
-		JMenu mnCliente = new JMenu("Cliente");
+		mnCliente = new JMenu("Cliente");
 		mnCliente.setIcon(new ImageIcon(MenuInicial.class.getResource("/image/paciente.png")));
 		mnABM.add(mnCliente);
 		
-		JMenuItem mntmAltaCliente = new JMenuItem("Alta");
+		mntmAltaCliente = new JMenuItem("Alta");
 		mnCliente.add(mntmAltaCliente);
+		mntmAltaCliente.addActionListener(this);
 		
-		JMenuItem mntmModificacionCliente = new JMenuItem("Modificacion");
+		mntmModificacionCliente = new JMenuItem("Modificacion");
 		mnCliente.add(mntmModificacionCliente);
+		mntmModificacionCliente.addActionListener(this);
 		
-		JMenuItem mntmBajaCliente = new JMenuItem("Baja");
+		mntmBajaCliente = new JMenuItem("Baja");
 		mnCliente.add(mntmBajaCliente);
+		mntmBajaCliente.addActionListener(this);
 		
-		JMenu mnUsuario = new JMenu("Usuario");
+		mnUsuario = new JMenu("Usuario");
 		mnUsuario.setIcon(new ImageIcon(MenuInicial.class.getResource("/image/users.png")));
 		mnABM.add(mnUsuario);
 		
-		JMenuItem mntmAltaUsuario = new JMenuItem("Alta");
+		mntmAltaUsuario = new JMenuItem("Alta");
 		mnUsuario.add(mntmAltaUsuario);
+		mntmAltaUsuario.addActionListener(this);
 		
-		JMenuItem mntmModificacionUsuario = new JMenuItem("Modificacion");
+		mntmModificacionUsuario = new JMenuItem("Modificacion");
 		mnUsuario.add(mntmModificacionUsuario);
+		mntmModificacionUsuario.addActionListener(this);
 		
-		JMenuItem mntmBajaUsuario = new JMenuItem("Baja");
+		mntmBajaUsuario = new JMenuItem("Baja");
 		mnUsuario.add(mntmBajaUsuario);
+		mntmBajaUsuario.addActionListener(this);
 		
-		JMenu mnVehiculo = new JMenu("Vehiculo");
+		mnVehiculo = new JMenu("Vehiculo");
 		mnVehiculo.setIcon(new ImageIcon(MenuInicial.class.getResource("/image/alquilar.png")));
 		mnABM.add(mnVehiculo);
 		
-		JMenuItem mntmAltaVehiculo = new JMenuItem("Alta");
+		mntmAltaVehiculo = new JMenuItem("Alta");
 		mnVehiculo.add(mntmAltaVehiculo);
+		mntmAltaVehiculo.addActionListener(this);
 		
-		JMenuItem mntmModificacionVehiculo = new JMenuItem("Modificacion");
+		mntmModificacionVehiculo = new JMenuItem("Modificacion");
 		mnVehiculo.add(mntmModificacionVehiculo);
+		mntmModificacionVehiculo.addActionListener(this);
 		
-		JMenuItem mntmBajaVehiculo = new JMenuItem("Baja");
+		mntmBajaVehiculo = new JMenuItem("Baja");
 		mnVehiculo.add(mntmBajaVehiculo);
+		mntmBajaVehiculo.addActionListener(this);
 		
-		JMenu mnGestionClientes = new JMenu("Gestion Clientes");
+		mnGestionClientes = new JMenu("Gestion Clientes");
 		mnGestionClientes.setIcon(new ImageIcon(MenuInicial.class.getResource("/image/paciente.png")));
 		menuBar.add(mnGestionClientes);
 		
-		JMenuItem mntmAsociacionCocheras = new JMenuItem("Asociacion Cocheras");
+		mntmAsociacionCocheras = new JMenuItem("Asociacion Cocheras");
 		mnGestionClientes.add(mntmAsociacionCocheras);
+		mntmAsociacionCocheras.addActionListener(this);
 		
-		JMenuItem mntmCuentaCorriente = new JMenuItem("Cuenta Corriente");
+		mntmCuentaCorriente = new JMenuItem("Cuenta Corriente");
 		mnGestionClientes.add(mntmCuentaCorriente);
+		mntmCuentaCorriente.addActionListener(this);
 		
-		JMenuItem mntmPersonasAutorizadas = new JMenuItem("Personas Autorizadas");
+		mntmPersonasAutorizadas = new JMenuItem("Personas Autorizadas");
 		mnGestionClientes.add(mntmPersonasAutorizadas);
+		mntmPersonasAutorizadas.addActionListener(this);
 		
-		JMenu mnGestionEstacionamiento = new JMenu("Gestion Estacionamiento");
+		mnGestionEstacionamiento = new JMenu("Gestion Estacionamiento");
 		mnGestionEstacionamiento.setIcon(new ImageIcon(MenuInicial.class.getResource("/image/modificar.png")));
 		menuBar.add(mnGestionEstacionamiento);
 		
-		JMenu mnCocheras = new JMenu("Cocheras");
+		mnCocheras = new JMenu("Cocheras");
 		mnGestionEstacionamiento.add(mnCocheras);
 		
-		JMenuItem mntmAltaCochera = new JMenuItem("Alta");
+		mntmAltaCochera = new JMenuItem("Alta");
 		mnCocheras.add(mntmAltaCochera);
+		mntmAltaCochera.addActionListener(this);
 		
-		JMenuItem mntmModificacionCochera = new JMenuItem("Modificacion");
+		mntmModificacionCochera = new JMenuItem("Modificacion");
 		mnCocheras.add(mntmModificacionCochera);
+		mntmModificacionCochera.addActionListener(this);
 		
-		JMenu mnColor = new JMenu("Color");
+		mnColor = new JMenu("Color");
 		mnGestionEstacionamiento.add(mnColor);
 		
-		JMenuItem mntmAltaColor = new JMenuItem("Alta");
+		mntmAltaColor = new JMenuItem("Alta");
 		mnColor.add(mntmAltaColor);
+		mntmAltaColor.addActionListener(this);
 		
-		JMenuItem mntmModificacionColor = new JMenuItem("Modificacion");
+		mntmModificacionColor = new JMenuItem("Modificacion");
 		mnColor.add(mntmModificacionColor);
+		mntmModificacionColor.addActionListener(this);
 		
-		JMenu mnDescuentos = new JMenu("Descuentos");
+		mnDescuentos = new JMenu("Descuentos");
 		mnGestionEstacionamiento.add(mnDescuentos);
 		
-		JMenuItem mntmAltaDescuento = new JMenuItem("Alta");
+		mntmAltaDescuento = new JMenuItem("Alta");
 		mnDescuentos.add(mntmAltaDescuento);
+		mntmAltaDescuento.addActionListener(this);
 		
-		JMenuItem mntmModificacionDescuento = new JMenuItem("Modificacion");
+		mntmModificacionDescuento = new JMenuItem("Modificacion");
 		mnDescuentos.add(mntmModificacionDescuento);
+		mntmModificacionDescuento.addActionListener(this);
 		
-		JMenuItem mntmBajaModificacion = new JMenuItem("Baja");
+		mntmBajaModificacion = new JMenuItem("Baja");
 		mnDescuentos.add(mntmBajaModificacion);
+		mntmBajaModificacion.addActionListener(this);
 		
-		JMenu mnExpensas = new JMenu("Expensas");
-		mnGestionEstacionamiento.add(mnExpensas);
-		
-		JMenuItem mntmAltaExpensa = new JMenuItem("Alta");
-		mnExpensas.add(mntmAltaExpensa);
-		
-		JMenuItem mntmModificacionExpensa = new JMenuItem("Modificacion");
-		mnExpensas.add(mntmModificacionExpensa);
-		
-		JMenuItem mntmBajaExpensa = new JMenuItem("Baja");
-		mnExpensas.add(mntmBajaExpensa);
-		
-		JMenu mnModelo = new JMenu("Modelo");
+		mnModelo = new JMenu("Modelo");
 		mnGestionEstacionamiento.add(mnModelo);
 		
-		JMenuItem mntmAltaModelo = new JMenuItem("Alta");
+		mntmAltaModelo = new JMenuItem("Alta");
 		mnModelo.add(mntmAltaModelo);
+		mntmAltaModelo.addActionListener(this);
 		
-		JMenuItem mntmModificacionModelo = new JMenuItem("Modificacion");
+		mntmModificacionModelo = new JMenuItem("Modificacion");
 		mnModelo.add(mntmModificacionModelo);
+		mntmModificacionModelo.addActionListener(this);
 		
-		JMenu mnTarifas = new JMenu("Tarifas");
+		mnTarifas = new JMenu("Tarifas");
 		mnGestionEstacionamiento.add(mnTarifas);
 		
-		JMenuItem mntmAltaTarifa = new JMenuItem("Alta");
+		mntmAltaTarifa = new JMenuItem("Alta");
 		mnTarifas.add(mntmAltaTarifa);
+		mntmAltaTarifa.addActionListener(this);
 		
-		JMenuItem mntmModificacionTarifa = new JMenuItem("Modificacion");
+		mntmModificacionTarifa = new JMenuItem("Modificacion");
 		mnTarifas.add(mntmModificacionTarifa);
+		mntmAltaTarifa.addActionListener(this);
 		
-		JMenu mnTasaInteres = new JMenu("Tasa Interes");
+		mnTasaInteres = new JMenu("Tasa Interes");
 		mnGestionEstacionamiento.add(mnTasaInteres);
 		
-		JMenuItem mntmModificacionTasaInteres = new JMenuItem("Modificacion");
+		mntmModificacionTasaInteres = new JMenuItem("Modificacion");
 		mnTasaInteres.add(mntmModificacionTasaInteres);
+		mntmModificacionTasaInteres.addActionListener(this);
 		
-		JMenu mnConsultas = new JMenu("Consultas");
+		mnConsultas = new JMenu("Consultas");
 		mnConsultas.setIcon(new ImageIcon(MenuInicial.class.getResource("/image/buscar.png")));
 		menuBar.add(mnConsultas);
 		
-		JMenuItem mntmArqueoDeCaja = new JMenuItem("Arqueo de Caja");
+		mntmArqueoDeCaja = new JMenuItem("Arqueo de Caja");
 		mnConsultas.add(mntmArqueoDeCaja);
+		mntmArqueoDeCaja.addActionListener(this);
 		
-		JMenuItem mntmBuscarCliente = new JMenuItem("Buscar Cliente");
+		mntmBuscarCliente = new JMenuItem("Buscar Cliente");
 		mnConsultas.add(mntmBuscarCliente);
+		mntmBuscarCliente.addActionListener(this);
 		
-		JMenuItem mntmCantidadAutos = new JMenuItem("Cantidad Autos");
+		mntmCantidadAutos = new JMenuItem("Cantidad Autos");
 		mnConsultas.add(mntmCantidadAutos);
+		mntmCantidadAutos.addActionListener(this);
 		
-		JMenuItem mntmDeudores = new JMenuItem("Deudores");
+		mntmDeudores = new JMenuItem("Deudores");
 		mnConsultas.add(mntmDeudores);
+		mntmDeudores.addActionListener(this);
 		
-		JMenu mnMiCuenta = new JMenu("Mi Cuenta");
+		mnMiCuenta = new JMenu("Mi Cuenta");
 		mnMiCuenta.setIcon(new ImageIcon(MenuInicial.class.getResource("/image/users.png")));
 		menuBar.add(mnMiCuenta);
 		
-		JMenuItem mntmCambiarClave = new JMenuItem("Cambiar Clave");
+		mntmCambiarClave = new JMenuItem("Cambiar Clave");
 		mntmCambiarClave.setIcon(new ImageIcon(MenuInicial.class.getResource("/image/key.png")));
 		mnMiCuenta.add(mntmCambiarClave);
+		mntmCambiarClave.addActionListener(this);
 		
-		JMenuItem mntmSalir = new JMenuItem("Salir");
+		mntmSalir = new JMenuItem("Salir");
 		mntmSalir.setIcon(new ImageIcon(MenuInicial.class.getResource("/image/exit.png")));
 		mnMiCuenta.add(mntmSalir);
+		mntmSalir.addActionListener(this);
+		
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
@@ -214,6 +277,12 @@ public class MenuInicial extends JFrame {
 		txtEstacionamiento.setText("Estacionamiento");
 		contentPane.add(txtEstacionamiento, BorderLayout.CENTER);
 		txtEstacionamiento.setColumns(10);
+	}
+
+	@Override
+	public void actionPerformed(ActionEvent e) {
+		// TODO Auto-generated method stub
+		
 	}
 
 }
