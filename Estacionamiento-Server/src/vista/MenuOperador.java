@@ -64,6 +64,7 @@ public class MenuOperador extends JFrame {
 		setJMenuBar(menuBar);
 		
 		JMenu mnAltas = new JMenu("Altas");
+		mnAltas.setIcon(new ImageIcon(MenuOperador.class.getResource("/image/plus.png")));
 		menuBar.add(mnAltas);
 		
 		JMenuItem mntmModelo = new JMenuItem("Modelo");
@@ -73,13 +74,18 @@ public class MenuOperador extends JFrame {
 		mnAltas.add(mntmColor);
 		
 		JMenu mnConsultas = new JMenu("Consultas");
+		mnConsultas.setIcon(new ImageIcon(MenuOperador.class.getResource("/image/buscar.png")));
 		menuBar.add(mnConsultas);
 		
 		JMenuItem mntmArqueoDeCaja = new JMenuItem("Arqueo de Caja");
 		mnConsultas.add(mntmArqueoDeCaja);
 		
 		JMenu mnMiCuenta = new JMenu("Mi Cuenta");
+		mnMiCuenta.setIcon(new ImageIcon(MenuOperador.class.getResource("/image/users.png")));
 		menuBar.add(mnMiCuenta);
+		
+		JMenuItem mntmCambiarContrasea = new JMenuItem("Cambiar Contraseña");
+		mnMiCuenta.add(mntmCambiarContrasea);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
@@ -152,6 +158,7 @@ public class MenuOperador extends JFrame {
 		contentPane.add(lblColor, gbc_lblColor);
 		
 		JComboBox comboBoxColor = new JComboBox();
+		comboBoxColor.setModel(new DefaultComboBoxModel(new String[] {"1 Rojo", "2 Azul", "3 Verde", "4 Negro", "5 Blanco"}));
 		GridBagConstraints gbc_comboBoxColor = new GridBagConstraints();
 		gbc_comboBoxColor.gridwidth = 2;
 		gbc_comboBoxColor.insets = new Insets(0, 0, 5, 5);
@@ -169,6 +176,7 @@ public class MenuOperador extends JFrame {
 		contentPane.add(lblModelo, gbc_lblModelo);
 		
 		JComboBox comboBoxModelo = new JComboBox();
+		comboBoxModelo.setModel(new DefaultComboBoxModel(new String[] {"1 Mercedes", "2 Fiat Palio", "3 Chevrolet Aveo"}));
 		GridBagConstraints gbc_comboBoxModelo = new GridBagConstraints();
 		gbc_comboBoxModelo.fill = GridBagConstraints.HORIZONTAL;
 		gbc_comboBoxModelo.insets = new Insets(0, 0, 5, 0);
@@ -185,6 +193,7 @@ public class MenuOperador extends JFrame {
 		contentPane.add(lblDescuento, gbc_lblDescuento);
 		
 		JComboBox comboBoxDescuento = new JComboBox();
+		comboBoxDescuento.setModel(new DefaultComboBoxModel(new String[] {"0 N/A", "1 Farmacia 10%", "2 Socio 20%"}));
 		GridBagConstraints gbc_comboBoxDescuento = new GridBagConstraints();
 		gbc_comboBoxDescuento.gridwidth = 2;
 		gbc_comboBoxDescuento.insets = new Insets(0, 0, 5, 5);
@@ -276,6 +285,7 @@ public class MenuOperador extends JFrame {
 		textField.setColumns(10);
 		
 		JButton btnCanelarF = new JButton("Canelar F2");
+		btnCanelarF.setIcon(new ImageIcon(MenuOperador.class.getResource("/image/cancel.png")));
 		GridBagConstraints gbc_btnCanelarF = new GridBagConstraints();
 		gbc_btnCanelarF.insets = new Insets(0, 0, 5, 5);
 		gbc_btnCanelarF.gridx = 0;
@@ -283,6 +293,7 @@ public class MenuOperador extends JFrame {
 		contentPane.add(btnCanelarF, gbc_btnCanelarF);
 		
 		JButton btnGuardarF = new JButton("Guardar F5");
+		btnGuardarF.setIcon(new ImageIcon(MenuOperador.class.getResource("/image/modificar.png")));
 		GridBagConstraints gbc_btnGuardarF = new GridBagConstraints();
 		gbc_btnGuardarF.insets = new Insets(0, 0, 5, 5);
 		gbc_btnGuardarF.gridx = 1;
@@ -311,10 +322,10 @@ public class MenuOperador extends JFrame {
 		contentPane.add(lblTotalAPagar, gbc_lblTotalAPagar);
 		
 		textField_1 = new JTextField();
-		textField_1.setEnabled(false);
+		textField_1.setText("250");
 		textField_1.setEditable(false);
 		textField_1.setHorizontalAlignment(SwingConstants.CENTER);
-		textField_1.setFont(new Font("Lucida Grande", Font.BOLD, 22));
+		textField_1.setFont(new Font("Lucida Grande", Font.BOLD, 28));
 		textField_1.setForeground(Color.RED);
 		GridBagConstraints gbc_textField_1 = new GridBagConstraints();
 		gbc_textField_1.gridheight = 2;
@@ -327,6 +338,8 @@ public class MenuOperador extends JFrame {
 		textField_1.setColumns(10);
 		
 		JButton btnCobrarF = new JButton("Cobrar F8");
+		btnCobrarF.setFont(new Font("Lucida Grande", Font.PLAIN, 16));
+		btnCobrarF.setIcon(new ImageIcon(MenuOperador.class.getResource("/image/cash.png")));
 		GridBagConstraints gbc_btnCobrarF = new GridBagConstraints();
 		gbc_btnCobrarF.gridheight = 2;
 		gbc_btnCobrarF.insets = new Insets(0, 0, 5, 0);
@@ -358,6 +371,7 @@ public class MenuOperador extends JFrame {
 		panel.add(lblIngreso, gbc_lblIngreso);
 		
 		textFieldIngreso = new JTextField();
+		textFieldIngreso.setText("10/01/2015 10:20");
 		textFieldIngreso.setEnabled(false);
 		textFieldIngreso.setEditable(false);
 		GridBagConstraints gbc_textFieldIngreso = new GridBagConstraints();
@@ -377,6 +391,7 @@ public class MenuOperador extends JFrame {
 		panel.add(lblEgreso, gbc_lblEgreso);
 		
 		textFieldEgreso = new JTextField();
+		textFieldEgreso.setText("10/01/2015 10:25");
 		textFieldEgreso.setEnabled(false);
 		textFieldEgreso.setEditable(false);
 		GridBagConstraints gbc_textFieldEgreso = new GridBagConstraints();
@@ -396,6 +411,7 @@ public class MenuOperador extends JFrame {
 		panel.add(lblEstadia_1, gbc_lblEstadia_1);
 		
 		textField_2 = new JTextField();
+		textField_2.setText("00:05");
 		textField_2.setEnabled(false);
 		textField_2.setEditable(false);
 		textField_2.setColumns(10);
