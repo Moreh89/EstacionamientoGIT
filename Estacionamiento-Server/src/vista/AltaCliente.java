@@ -1,6 +1,7 @@
 package vista;
 
 import java.awt.EventQueue;
+
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import javax.swing.ImageIcon;
@@ -8,12 +9,16 @@ import javax.swing.JDialog;
 import javax.swing.JLabel;
 import javax.swing.JTextField;
 import javax.swing.JButton;
+
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import java.awt.GridBagLayout;
 import java.awt.GridBagConstraints;
 import java.awt.Insets;
+
 import javax.swing.JTextArea;
+
+import controlador.Controlador;
 
 public class AltaCliente extends JDialog implements ActionListener{
 
@@ -48,6 +53,7 @@ public class AltaCliente extends JDialog implements ActionListener{
 	private JTextArea textAreaPersonasAutorizadas;
 	private JButton buttonCancelar;
 	private JButton buttonCrearCliente;
+	
 	
 	/**
 	 * Launch the application.
@@ -311,7 +317,7 @@ public class AltaCliente extends JDialog implements ActionListener{
 	public void actionPerformed(ActionEvent event) {
 		if(event.getSource()==buttonAgregarVehiculo)
 		{
-			AltaVehiculo altaVehiculo=new AltaVehiculo();
+			AgregarVehiculo altaVehiculo=new AgregarVehiculo();
 			altaVehiculo.setVisible(true);
 		}
 		if(event.getSource()==buttonAgregarPersonaAutorizada)
@@ -327,7 +333,11 @@ public class AltaCliente extends JDialog implements ActionListener{
 		}
 		if(event.getSource()==buttonCrearCliente)
 		{
+			Controlador.getInstancia().altaCliente(textFieldNombre.getText(), textFieldApellido.getText(), textFieldTelefono1.getText(), textFieldTelefono2.getText(),
+					textFieldDireccion1.getText(), textFieldDireccion2.getText(), textFieldEmail.getText(), textFieldRazonSocial.getText()
+					,textAreaPersonasAutorizadas.getText(), textArea.getText());
 			dispose();
+			
 		}
 		
 		
