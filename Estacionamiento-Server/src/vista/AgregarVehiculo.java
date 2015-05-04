@@ -2,6 +2,7 @@ package vista;
 
 
 import java.awt.EventQueue;
+import java.awt.Panel;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
@@ -229,6 +230,8 @@ public class AgregarVehiculo extends JFrame implements ActionListener{
 			
 			dispose();
 		}
+		
+
 	}
 
 }

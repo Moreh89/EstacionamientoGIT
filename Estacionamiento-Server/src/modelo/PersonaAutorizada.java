@@ -24,6 +24,8 @@ public class PersonaAutorizada {
 		this.idPersonaAut = idPersonaAut;
 		this.nombre = nombre;
 	}
+	public PersonaAutorizada() {
+	}
 	
 	
 
