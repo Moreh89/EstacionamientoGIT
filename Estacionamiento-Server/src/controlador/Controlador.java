@@ -129,7 +129,11 @@ public class Controlador {
 
 		if(clienteActual==null)
 		{
-			
+			if(vehiculosActuales==null)
+			{
+				vehiculosActuales=new ArrayList<Vehiculo>();
+			}
+
 			Vehiculo vehiculo=new Vehiculo();
 
 			CategoriaVehiculo categoriaVehiculo=new CategoriaVehiculo();
@@ -158,13 +162,16 @@ public class Controlador {
 	public void agregarPersonaAutorizada(String nombre, String apellido) {
 		if(clienteActual==null)
 		{
-			personasAutorizadasActuales=new ArrayList<PersonaAutorizada>();
+			if(personasAutorizadasActuales==null)
+			{
+				personasAutorizadasActuales=new ArrayList<PersonaAutorizada>();
+			}
 			PersonaAutorizada personaAutorizada = new PersonaAutorizada();
 			personaAutorizada.setNombre(nombre+" "+apellido);
 			personasAutorizadasActuales.add(personaAutorizada);
 		}
-		
-		
+
+
 	}
 
 

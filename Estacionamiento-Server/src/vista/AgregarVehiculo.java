@@ -47,6 +47,7 @@ public class AgregarVehiculo extends JFrame implements ActionListener{
 	private JButton btnCancelar;
 	private JButton btnCrearVehiculo;
 	private JButton btnFinalizarAlta;
+	private AltaCliente altaCliente;
 
 	/**
 	 * Launch the application.
@@ -55,7 +56,7 @@ public class AgregarVehiculo extends JFrame implements ActionListener{
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					AgregarVehiculo frame = new AgregarVehiculo();
+					AgregarVehiculo frame = new AgregarVehiculo(null);
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -66,9 +67,11 @@ public class AgregarVehiculo extends JFrame implements ActionListener{
 
 	/**
 	 * Create the frame.
+	 * @param altaCliente 
 	 */
 	@SuppressWarnings("unchecked")
-	public AgregarVehiculo() {
+	public AgregarVehiculo(AltaCliente altaCliente) {
+		this.altaCliente=altaCliente;
 		setTitle("Alta Vehiculo");
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		setBounds(100, 100, 492, 349);
@@ -217,21 +220,24 @@ public class AgregarVehiculo extends JFrame implements ActionListener{
 		{
 			Controlador.getInstancia().agregarVehiculo(comboBoxCategoriaVehiculo.getSelectedIndex(), textFieldPatente.getText(),
 					comboBoxColor.getSelectedIndex(), comboBoxModelo.getSelectedIndex(),textFieldObservacion.getText());
-			comboBoxCategoriaVehiculo.setSelectedIndex(0);
-			textFieldPatente.setText("");
-			comboBoxColor.setSelectedIndex(0);
-			comboBoxModelo.setSelectedIndex(0);
-			textFieldObservacion.setText("");
-			
-			
+			limpiarCampos();
 		}
 		if(event.getSource()==btnFinalizarAlta)
 		{
-			
+			altaCliente.agregarVehiculosAltaCliente(Controlador.getInstancia().vehiculosActuales);
 			dispose();
 		}
 		
 
+	}
+	
+	private void limpiarCampos()
+	{
+		comboBoxCategoriaVehiculo.setSelectedIndex(0);
+		textFieldPatente.setText("");
+		comboBoxColor.setSelectedIndex(0);
+		comboBoxModelo.setSelectedIndex(0);
+		textFieldObservacion.setText("");
 	}
 
 }

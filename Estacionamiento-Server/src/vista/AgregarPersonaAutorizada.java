@@ -18,13 +18,15 @@ import javax.swing.JTextField;
 import javax.swing.JButton;
 import javax.swing.ImageIcon;
 
+import modelo.PersonaAutorizada;
 import controlador.Controlador;
 
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 
-public class AltaPersonaAutorizada extends JFrame implements ActionListener{
+public class AgregarPersonaAutorizada extends JFrame implements ActionListener{
 
 	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
@@ -35,7 +37,7 @@ public class AltaPersonaAutorizada extends JFrame implements ActionListener{
 	private JLabel labelApellido;
 	private JTextField textFieldApellido;
 	private JButton buttonAgregar;
-
+	private AltaCliente altaCliente;
 	/**
 	 * Launch the application.
 	 */
@@ -43,7 +45,7 @@ public class AltaPersonaAutorizada extends JFrame implements ActionListener{
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					AltaPersonaAutorizada frame = new AltaPersonaAutorizada();
+					AgregarPersonaAutorizada frame = new AgregarPersonaAutorizada(null);
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -54,9 +56,11 @@ public class AltaPersonaAutorizada extends JFrame implements ActionListener{
 
 	/**
 	 * Create the frame.
+	 * @param altaCliente 
 	 */
 
-	public AltaPersonaAutorizada() {
+	public AgregarPersonaAutorizada(AltaCliente altaCliente) {
+		this.altaCliente=altaCliente;
 		setTitle("Alta Persona Autorizada");
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		setBounds(100, 100, 418, 200);
@@ -117,7 +121,7 @@ public class AltaPersonaAutorizada extends JFrame implements ActionListener{
 		btnCancelar.addActionListener(this);
 
 		buttonAgregar = new JButton("Agregar");
-		buttonAgregar.setIcon(new ImageIcon(AltaPersonaAutorizada.class.getResource("/image/plus.png")));
+		buttonAgregar.setIcon(new ImageIcon(AgregarPersonaAutorizada.class.getResource("/image/plus.png")));
 		buttonAgregar.setFont(new Font("Dialog", Font.PLAIN, 16));
 		GridBagConstraints gbc_buttonAgregar = new GridBagConstraints();
 		gbc_buttonAgregar.fill = GridBagConstraints.HORIZONTAL;
@@ -130,7 +134,7 @@ public class AltaPersonaAutorizada extends JFrame implements ActionListener{
 
 		btnCrear = new JButton("Finalizar");
 		btnCrear.setFont(new Font("Lucida Grande", Font.PLAIN, 16));
-		btnCrear.setIcon(new ImageIcon(AltaPersonaAutorizada.class.getResource("/image/ok.png")));
+		btnCrear.setIcon(new ImageIcon(AgregarPersonaAutorizada.class.getResource("/image/ok.png")));
 		GridBagConstraints gbc_btnCrear = new GridBagConstraints();
 		gbc_btnCrear.gridheight = 2;
 		gbc_btnCrear.fill = GridBagConstraints.BOTH;
@@ -140,8 +144,10 @@ public class AltaPersonaAutorizada extends JFrame implements ActionListener{
 		btnCrear.addActionListener(this);
 
 		this.setLocationRelativeTo(null);
+		
+			
 	}
-
+	
 	@Override
 	public void actionPerformed(ActionEvent event) {
 		if (event.getSource() == btnCancelar){
@@ -150,14 +156,20 @@ public class AltaPersonaAutorizada extends JFrame implements ActionListener{
 		if(event.getSource()==buttonAgregar)
 		{
 			Controlador.getInstancia().agregarPersonaAutorizada(textFieldNombre.getText(), textFieldApellido.getText());
-			
-			dispose();
+			limpiarCampos();
 		}
 		if(event.getSource()==btnCrear)
 		{
-
+			altaCliente.agregarPersonasAutorizadasAltaCliente(Controlador.getInstancia().personasAutorizadasActuales);
+			dispose();
 		}
 
+	}
+
+	private void limpiarCampos()
+	{
+		textFieldApellido.setText("");
+		textFieldNombre.setText("");
 	}
 
 }
