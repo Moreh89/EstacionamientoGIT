@@ -30,6 +30,7 @@ import java.awt.Font;
 import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.Toolkit;
 
 @SuppressWarnings("rawtypes")
 public class MenuOperador extends JFrame implements ActionListener{
@@ -100,6 +101,8 @@ public class MenuOperador extends JFrame implements ActionListener{
 	 */
 	@SuppressWarnings("unchecked")
 	public MenuOperador() {
+		setIconImage(Toolkit.getDefaultToolkit().getImage(MenuOperador.class.getResource("/image/printer.png")));
+		setResizable(false);
 		setTitle("Gertor Ingresos");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 774, 420);
