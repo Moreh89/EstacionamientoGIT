@@ -79,7 +79,7 @@ public class ArqueoDeCaja extends JDialog {
 		
 		exportarButton = new JButton("Generar");
 		exportarButton.setIcon(new ImageIcon(BuscardorUsuario.class.getResource("/image/pdf.png")));
-		exportarButton.setBounds(29, 104, 116, 32);
+		exportarButton.setBounds(10, 88, 116, 32);
 		contentPanel.add(exportarButton);
 		
 		cancelarButton = new JButton("Cancelar");
@@ -89,7 +89,7 @@ public class ArqueoDeCaja extends JDialog {
 			}
 		});
 		cancelarButton.setIcon(new ImageIcon(BuscardorUsuario.class.getResource("/image/cancel.png")));
-		cancelarButton.setBounds(155, 104, 116, 32);
+		cancelarButton.setBounds(138, 88, 116, 32);
 		contentPanel.add(cancelarButton);
 		
 		this.setLocationRelativeTo(null);

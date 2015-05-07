@@ -76,6 +76,8 @@ public class ModificarInteres extends JDialog {
 		contentPanel.add(cancelarButton);
 		
 		textFieldInteres = new JTextField();
+		textFieldInteres.setText("10%");
+		textFieldInteres.setEditable(false);
 		textFieldInteres.setBounds(137, 28, 134, 28);
 		contentPanel.add(textFieldInteres);
 		textFieldInteres.setColumns(10);

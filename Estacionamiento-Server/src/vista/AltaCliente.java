@@ -255,16 +255,17 @@ public class AltaCliente extends JDialog implements ActionListener{
 		gbc_textAreaVehiculos.gridx = 1;
 		gbc_textAreaVehiculos.gridy = 4;
 		panelAltaCliente.add(textAreaVehiculos, gbc_textAreaVehiculos);
-
-		buttonAgregarVehiculo = new JButton("Agregar");
-		buttonAgregarVehiculo.setIcon(new ImageIcon(AltaCliente.class.getResource("/image/plus.png")));
-		GridBagConstraints gbc_buttonAgregarVehiculo = new GridBagConstraints();
-		gbc_buttonAgregarVehiculo.fill = GridBagConstraints.BOTH;
-		gbc_buttonAgregarVehiculo.insets = new Insets(0, 0, 5, 0);
-		gbc_buttonAgregarVehiculo.gridx = 4;
-		gbc_buttonAgregarVehiculo.gridy = 4;
-		panelAltaCliente.add(buttonAgregarVehiculo, gbc_buttonAgregarVehiculo);
-		buttonAgregarVehiculo.addActionListener(this);
+		
+				buttonAgregarVehiculo = new JButton("Agregar");
+				buttonAgregarVehiculo.setIcon(new ImageIcon(AltaCliente.class.getResource("/image/plus.png")));
+				GridBagConstraints gbc_buttonAgregarVehiculo = new GridBagConstraints();
+				gbc_buttonAgregarVehiculo.gridwidth = 2;
+				gbc_buttonAgregarVehiculo.fill = GridBagConstraints.BOTH;
+				gbc_buttonAgregarVehiculo.insets = new Insets(0, 0, 5, 5);
+				gbc_buttonAgregarVehiculo.gridx = 3;
+				gbc_buttonAgregarVehiculo.gridy = 4;
+				panelAltaCliente.add(buttonAgregarVehiculo, gbc_buttonAgregarVehiculo);
+				buttonAgregarVehiculo.addActionListener(this);
 
 
 		labelPersonaAutorizada = new JLabel("Autorizados:");
@@ -288,8 +289,9 @@ public class AltaCliente extends JDialog implements ActionListener{
 
 		buttonAgregarPersonaAutorizada = new JButton("Agregar");
 		GridBagConstraints gbc_buttonAgregarPersonaAutorizada = new GridBagConstraints();
+		gbc_buttonAgregarPersonaAutorizada.gridwidth = 2;
 		gbc_buttonAgregarPersonaAutorizada.fill = GridBagConstraints.BOTH;
-		gbc_buttonAgregarPersonaAutorizada.gridx = 4;
+		gbc_buttonAgregarPersonaAutorizada.gridx = 3;
 		gbc_buttonAgregarPersonaAutorizada.gridy = 5;
 		panelAltaCliente.add(buttonAgregarPersonaAutorizada, gbc_buttonAgregarPersonaAutorizada);
 		buttonAgregarPersonaAutorizada.setIcon(new ImageIcon(AltaCliente.class.getResource("/image/plus.png")));
@@ -297,7 +299,7 @@ public class AltaCliente extends JDialog implements ActionListener{
 
 		buttonCancelar = new JButton("Cancelar");
 		buttonCancelar.setIcon(new ImageIcon(BuscardorCliente.class.getResource("/image/cancel.png")));
-		buttonCancelar.setBounds(202, 233, 116, 32);
+		buttonCancelar.setBounds(113, 221, 188, 56);
 		contentPaneAltaCliente.add(buttonCancelar);
 		buttonCancelar.addActionListener(this);
 
@@ -307,7 +309,7 @@ public class AltaCliente extends JDialog implements ActionListener{
 			}
 		});
 		buttonCrearCliente.setIcon(new ImageIcon(BuscardorCliente.class.getResource("/image/ok.png")));
-		buttonCrearCliente.setBounds(485, 227, 148, 56);
+		buttonCrearCliente.setBounds(411, 221, 188, 56);
 		contentPaneAltaCliente.add(buttonCrearCliente);
 		buttonCrearCliente.addActionListener(this);
 

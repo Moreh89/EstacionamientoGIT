@@ -74,7 +74,7 @@ public class AgregarVehiculo extends JFrame implements ActionListener{
 		this.altaCliente=altaCliente;
 		setTitle("Alta Vehiculo");
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-		setBounds(100, 100, 492, 349);
+		setBounds(100, 100, 492, 306);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
@@ -173,23 +173,12 @@ public class AgregarVehiculo extends JFrame implements ActionListener{
 		 gbc_textFieldObservacion.gridy = 3;
 		 contentPane.add(textFieldObservacion, gbc_textFieldObservacion);
 		 textFieldObservacion.setColumns(10);
-		 
-		  btnCancelar = new JButton("Cancelar");
-		  btnCancelar.setIcon(new ImageIcon(MenuOperador.class.getResource("/image/cancel.png")));
-		  GridBagConstraints gbc_btnCancelar = new GridBagConstraints();
-		  gbc_btnCancelar.anchor = GridBagConstraints.NORTH;
-		  gbc_btnCancelar.insets = new Insets(0, 0, 5, 5);
-		  gbc_btnCancelar.gridwidth = 2;
-		  gbc_btnCancelar.gridx = 0;
-		  gbc_btnCancelar.gridy = 4;
-		  contentPane.add(btnCancelar, gbc_btnCancelar);
-		  btnCancelar.addActionListener(this);
 		  
 		   btnCrearVehiculo = new JButton("Agregar Vehiculo");
 		   btnCrearVehiculo.setFont(new Font("Lucida Grande", Font.PLAIN, 16));
 		   btnCrearVehiculo.setIcon(new ImageIcon(AgregarVehiculo.class.getResource("/image/plus.png")));
 		   GridBagConstraints gbc_btnCrearVehiculo = new GridBagConstraints();
-		   gbc_btnCrearVehiculo.fill = GridBagConstraints.VERTICAL;
+		   gbc_btnCrearVehiculo.fill = GridBagConstraints.BOTH;
 		   gbc_btnCrearVehiculo.insets = new Insets(0, 0, 5, 0);
 		   gbc_btnCrearVehiculo.gridx = 3;
 		   gbc_btnCrearVehiculo.gridy = 4;
@@ -200,11 +189,21 @@ public class AgregarVehiculo extends JFrame implements ActionListener{
 		  btnFinalizarAlta.setIcon(new ImageIcon(AgregarVehiculo.class.getResource("/image/ok.png")));
 		  btnFinalizarAlta.setFont(new Font("Dialog", Font.PLAIN, 16));
 		  GridBagConstraints gbc_btnFinalizarAlta = new GridBagConstraints();
-		  gbc_btnFinalizarAlta.gridheight = 2;
-		  gbc_btnFinalizarAlta.fill = GridBagConstraints.VERTICAL;
+		  gbc_btnFinalizarAlta.fill = GridBagConstraints.BOTH;
 		  gbc_btnFinalizarAlta.gridx = 3;
-		  gbc_btnFinalizarAlta.gridy = 5;
+		  gbc_btnFinalizarAlta.gridy = 6;
 		  contentPane.add(btnFinalizarAlta, gbc_btnFinalizarAlta);
+		  
+		   btnCancelar = new JButton("Cancelar");
+		   btnCancelar.setIcon(new ImageIcon(MenuOperador.class.getResource("/image/cancel.png")));
+		   GridBagConstraints gbc_btnCancelar = new GridBagConstraints();
+		   gbc_btnCancelar.fill = GridBagConstraints.BOTH;
+		   gbc_btnCancelar.insets = new Insets(0, 0, 0, 5);
+		   gbc_btnCancelar.gridwidth = 2;
+		   gbc_btnCancelar.gridx = 0;
+		   gbc_btnCancelar.gridy = 6;
+		   contentPane.add(btnCancelar, gbc_btnCancelar);
+		   btnCancelar.addActionListener(this);
 		  btnFinalizarAlta.addActionListener(this);
 		  
 		 this.setLocationRelativeTo(null);
