@@ -2,8 +2,6 @@ package vista;
 
 import java.awt.EventQueue;
 import java.awt.Graphics2D;
-import javax.print.DocFlavor;
-import javax.print.DocPrintJob;
 import javax.print.PrintService;
 import javax.print.PrintServiceLookup;
 import javax.swing.JFrame;
@@ -47,9 +45,10 @@ public class PrintTicket extends JFrame {
 					PrintTicket frame = new PrintTicket();
 					frame.setVisible(true);
 
-					printAuto();
-					// para imprimir lo que se ve en la ventana
-					// printWork(frame);
+
+					// para imprimir lo que se ve en la ventana seleccionando printer
+					 printWork(frame);
+					
 
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -126,10 +125,8 @@ public class PrintTicket extends JFrame {
 
 	}
 
-	public static void usingBarbecueAsSwingComponent(JPanel contentPane)
-			throws BarcodeException {
-	}
 
+//Otros ejemplos de creacion de barras
 	public static void drawingBarcodeDirectToGraphics()
 			throws BarcodeException, OutputException {
 		// Always get a Barcode from the BarcodeFactory
@@ -166,7 +163,7 @@ public class PrintTicket extends JFrame {
 
 	public static void printWork(final JFrame frame) {
 		PrinterJob pj = PrinterJob.getPrinterJob();
-		pj.setJobName(" Opt De Solver Printing ");
+		pj.setJobName(" Imprimir Ticket ");
 
 		pj.setPrintable(new Printable() {
 			@Override
@@ -177,53 +174,49 @@ public class PrintTicket extends JFrame {
 				Graphics2D g2 = (Graphics2D) pg;
 				g2.translate(pf.getImageableX(), pf.getImageableY());
 				frame.paint(g2);
-				/* I've tried the following commented codes but they don't work */
-				// MainAppPanel.this.printAll(g2);
-				// MainAppPanel.this.print(g2);
-				// MainAppPanel.this.print(g2);
 				return Printable.PAGE_EXISTS;
 			}
 		});
-		if (pj.printDialog() == false)
-			return;
+		
+//Este te permite elegir la printer
+//		if (pj.printDialog() == false) return;
+		
+
+//Elegir printer automatico start
 		try {
+			PrintService printerTouse = null;
+			PrintService[] printServices = PrintServiceLookup.lookupPrintServices(
+					null, null);
+			
+//Para saber el nombre de tus impresoras
+//			for (PrintService printer : printServices) {
+//				System.out.println("Impresora: " + printer.getName()+"/n");
+//			}
+			
+			
+// aca iria el atributo con el nombre de la impresora
+			for (PrintService printer : printServices) {
+				if (printer.getName().equalsIgnoreCase(
+//				"Microsoft XPS Document Writer")) {
+					"\\\\ABBDAT05\\ABB-FL6-SC645-HP5550")) {
+					printerTouse = printer;
+				}
+			}
+			if(printerTouse== null){
+				printerTouse = PrintServiceLookup
+	            .lookupDefaultPrintService();
+			}
+
+			pj.setPrintService(printerTouse);
 			pj.print();
+			
+//Elegir printer end			
+			
+
 		} catch (PrinterException xcp) {
 			xcp.printStackTrace(System.err);
 		}
 	}
 
-	@SuppressWarnings("unused")
-	public static void printAuto() {
-		PrintService printerTouse = null;
-
-		PrintService[] printServices = PrintServiceLookup.lookupPrintServices(
-				null, null);
-		System.out.println("Number of print services: " + printServices.length);
-		for (PrintService printer : printServices) {
-			System.out.println("Printer: " + printer.getName()); 
-
-		}
-
-		for (PrintService printer : printServices) {
-			if (printer.getName().equalsIgnoreCase(
-					"\\\\ABBDAT05\\ABB-FL6-SC645-HP5550")) {
-				printerTouse = printer;
-			}
-		}
-
-		DocPrintJob pj = printerTouse.createPrintJob();
-
-		// Sin terminar
-
-		// PrintService defaultService =
-		// PrintServiceLookup.lookupDefaultPrintService();
-
-		DocFlavor[] docFalvor = printServices[0].getSupportedDocFlavors();
-		for (int i = 0; i < docFalvor.length; i++) {
-			System.out.println(docFalvor[i].getMimeType());
-		}
-
-	}
 
 }
