@@ -1,0 +1,137 @@
+Operador:
+1)
+Boton Vehiculos en cochera, cuentan solo tickets abiertos - mostrar un Listado de tickets abiertos y total - Poder imprimir listado con patentes, modelo y color
+Buscar tickets por patente solo abiertos
+Estado: Boton agregado (Tickets abiertos)
+
+2)
+5 minutos de anular ticket
+
+3)
+En operador agrega opcion de prepagado con un monto. Si pago 3 dis y se va en 2 pierde la plata, si se queda mas se le cobra exedente
+Prepago aparece en la caja pero el ticket esta abierto
+El descuento del prepago se sigue en curso
+Estado: Campo PrePago agregado, campo estadia si/no eliminado (es automatico)
+
+4)
+Mostrar usuario Actual en la pantalla de operador
+Estado: Completado
+
+5)
+Al buscar un ticket si no se realizo accion avisar antes de pasar a otro - te olvidaste de cerrarlo?
+
+6)
+Operador bloquea categoria despues de guardar
+
+7)
+Modifica F2
+Imprima F5
+Cobro F7
+Nuevo ticket (limpiar todo) F4
+F8 Alta color
+F9 Alta modelo
+Estado: listo
+
+8)
+agregar Operador pago de mensuales
+
+9)
+agregar Operador pago de expensas 
+
+10)
+Agrandar testos y campos en operador
+Estado: Listo
+
+Sistema:
+1)
+Le cobro a la cochera
+Estado: Cochera tiene costo ahora
+
+2)
+mensuales pagan intereses, poder definir rangos de interes - Expensa a partir del dia 15 (tiene 15 dias para pagar)
+Mensual - Cobro tiene fecha de vencimiento - Hasta que fecha tienen para pagar es general hasta el dia 10, que se pueda cambiar
+
+3)
+Al buscar personas poder hacerlo por nombre y selecionar de la lista
+
+4)
+Tickets asignados a cliente no van a cierre de caja, porque no se cobraron
+
+5)
+Arqueo de caja, listado de tickets cobrados, y si se mandaron a un cliente a cual
+Poder elegir el usuario si sos admin, sino solo del mio
+En el de admin agregar una lista con los usuarios (todos o por usuario)
+
+6)
+Modelos asociados a tipo vehiculo
+
+7)
+Opcion de cerrar session vuelve al menu login
+
+8)
+Las cocheras tienen un %del total de expensas (0,035 ej) a esto se le asigna el porcentual de expensas
+
+9)
+Alta usuario - Falta DNI y CUIL
+Persona, agragar obsevacion, DNI y CUIL/CUIT por separado
+Estado: Cuil agregado a cliente
+
+10)
+Cliente tiene cocheras, cochera tiene un costo mensual y la expensa
+La cochera puede o no pagar expensas
+Estado: El cliente tiene cocheras, hay que agregarlo a alta cliente
+
+11)
+Ver historial de cuenta corriente del cliente en Usuario (Admin y Operador)
+Esto va dentro de buscar cliente
+
+12)
+Dar de alta categorias desde admin (Opcional si hay tiempo) - Cambiar 4x4 en vez de camioneta
+
+13)
+Admin puede agregar o quitar elementos en la cuenta corriente
+
+14)
+Vehiculos ABM sacar de Admin
+
+15)
+Asociacion cocheras ya va dentro de modificar cliente, eliminar item del menu admin
+
+16)
+Personas autorizadas ver en operador (buscar cliente en detalle)
+
+17)
+Sacar cocheras de gestion estacionamineto
+
+18)
+Pago de expensas automatico en base a los clientes q son duenos de cocheras
+
+19)
+Pase de hora a media estadia y estadia es auto
+
+20)
+Estadia y media estadia van en rangos con precio fijo, se elimina el conteo de hora y min, al terminar lo que es la estadia vuelve a iniciar el ciclo, hay que agregar la duracion maxima de la estadia
+Cambiar Tiempo Media estadia a tiempo inicio media estadia
+Cambiar tiempo estadia a tiempo inicio estadia
+agregar tiempo fin estadia
+al terminar el ciclo empieza nuevamente por fracciones
+Tarifa puede ser auto (30% moto de auto, 10% bici de auto) 4x4 libre
+
+
+21)
+CANOPUS S.A. Logo E
+
+22)
+Poder exportar la informacion (backups).
+
+23)
+Poder borrar tickets de >x fecha de antigueadad desde admin
+
+
+Otros:
+Misma computadora imprime en 2 impresoras, el sistema tiene que poder imprimir en distintas impresoras 
+
+Epson 129C
+
+Mediado fines de Julio - pago en tres meses 25K, incluye revision durante los tres meses
+acordamos sopoerte a futuro en ese momento

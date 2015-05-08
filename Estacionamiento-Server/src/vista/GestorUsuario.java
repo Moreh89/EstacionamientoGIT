@@ -1,7 +1,6 @@
 package vista;
 
 import java.util.ArrayList;
-
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import javax.swing.table.DefaultTableModel;
@@ -10,26 +9,20 @@ import javax.swing.table.TableRowSorter;
 import javax.swing.ImageIcon;
 import javax.swing.JDialog;
 import javax.swing.JLabel;
-import javax.swing.JOptionPane;
 import javax.swing.JScrollPane;
 import javax.swing.JTextField;
 import javax.swing.JButton;
 import javax.swing.JSeparator;
-import javax.swing.JComboBox;
-import javax.swing.DefaultComboBoxModel;
-import javax.swing.JTable;
-import javax.swing.ListSelectionModel;
 import javax.swing.RowFilter;
-
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
-
 import javax.swing.border.EtchedBorder;
-
 import java.awt.Font;
+import javax.swing.ScrollPaneConstants;
+import javax.swing.JList;
 
 @SuppressWarnings("rawtypes")
-public class BuscardorUsuario extends JDialog {
+public class GestorUsuario extends JDialog {
 
 	/**
 	 * 
@@ -37,44 +30,37 @@ public class BuscardorUsuario extends JDialog {
 	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
 	private JTextField buscarTextField;
-	private JTable table;
 	private DefaultTableModel model;
 	private JScrollPane scrollPane;
-//	private ArrayList <UsuarioDTO> usuarios;
-
-	private JComboBox comboBox;
 	
 	
 	private TableRowSorter<TableModel> sorter;
 	
-	public BuscardorUsuario() {
+	public GestorUsuario() {
+		setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
 		initGUI();
 	}
 	
 	
 
-	@SuppressWarnings("unchecked")
 	public void initGUI(){
-		setTitle("Buscar Usuarios");
+		setTitle("Gestor Usuarios");
 		setResizable(false);
-		//setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 699, 324);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 		
-		JLabel lblBuscar = new JLabel("Buscar");
+		JLabel lblBuscar = new JLabel("ID:");
 		lblBuscar.setFont(new Font("Tahoma", Font.BOLD, 11));
 		lblBuscar.setBounds(10, 19, 46, 14);
 		contentPane.add(lblBuscar);
 		
 		buscarTextField = new JTextField();
-		buscarTextField.setBounds(53, 14, 217, 25);
+		buscarTextField.setBounds(53, 14, 339, 25);
 		contentPane.add(buscarTextField);
 		buscarTextField.setColumns(10);
-		
-		table = new JTable();
 		model = new DefaultTableModel(){
 			/**
 			 * 
@@ -92,16 +78,13 @@ public class BuscardorUsuario extends JDialog {
 		model.addColumn("DNI");
 		model.addColumn("Nombre Usuario");
 		model.addColumn("Borrado");
-	
-		
-		table.setBounds(10, 65, 510, 202);
-		scrollPane = new JScrollPane(table);
+		scrollPane = new JScrollPane();
+		scrollPane.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
 		scrollPane.setBounds(10, 64, 510, 224);
 		getContentPane().add(scrollPane);
 		
-		//table.setModel(model);
-		table.getTableHeader().setReorderingAllowed(false) ;
-		table.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+		JList list = new JList();
+		scrollPane.setViewportView(list);
 		
 		
 		JButton buscarButton = new JButton("Buscar");
@@ -113,16 +96,11 @@ public class BuscardorUsuario extends JDialog {
 		});
 		buscarButton.setBounds(404, 7, 116, 32);
 		contentPane.add(buscarButton);
-		buscarButton.setIcon(new ImageIcon(BuscardorUsuario.class.getResource("/image/search.png")));
+		buscarButton.setIcon(new ImageIcon(GestorUsuario.class.getResource("/image/search.png")));
 		
 		JSeparator separator = new JSeparator();
 		separator.setBounds(10, 47, 510, 6);
 		contentPane.add(separator);
-		
-		comboBox = new JComboBox();
-		comboBox.setModel(new DefaultComboBoxModel(new String[] {"DNI", "Nombre", "Apellido"}));
-		comboBox.setBounds(280, 14, 114, 25);
-		contentPane.add(comboBox);
 		
 		JPanel panel = new JPanel();
 		panel.setBorder(new EtchedBorder(EtchedBorder.LOWERED, null, null));
@@ -136,18 +114,15 @@ public class BuscardorUsuario extends JDialog {
 		nuevoAdministrativoButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				dispose();
-//				AltaUsuarioAdministrativo au = new AltaUsuarioAdministrativo();
-//				au.setVisible(true);
 				
 			}
 		});
-		nuevoAdministrativoButton.setIcon(new ImageIcon(BuscardorUsuario.class.getResource("/image/plus.png")));
+		nuevoAdministrativoButton.setIcon(new ImageIcon(GestorUsuario.class.getResource("/image/plus.png")));
 		
 		JButton modificarButton = new JButton("Modificar");
 		modificarButton.setBounds(10, 130, 140, 32);
 		panel.add(modificarButton);
-		modificarButton.setIcon(new ImageIcon(BuscardorUsuario.class.getResource("/image/modificar.png")));
-		//contentPane.add(table);
+		modificarButton.setIcon(new ImageIcon(GestorUsuario.class.getResource("/image/modificar.png")));
 		
 		JButton cancelarButton = new JButton("Cancelar");
 		cancelarButton.setBounds(10, 265, 140, 32);
@@ -157,45 +132,27 @@ public class BuscardorUsuario extends JDialog {
 				dispose();
 			}
 		});
-		cancelarButton.setIcon(new ImageIcon(BuscardorUsuario.class.getResource("/image/cancel.png")));
+		cancelarButton.setIcon(new ImageIcon(GestorUsuario.class.getResource("/image/cancel.png")));
 		
-		JButton nuevoMedicobutton = new JButton("<html>Usuario <br>M\u00E9dico</br></html>");
-		nuevoMedicobutton.addActionListener(new ActionListener() {
+		JButton nuevoOperadorbutton = new JButton("<html>Usuario <br>Operador</br></html>");
+		nuevoOperadorbutton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				
 				dispose();
-//				AltaUsuarioMedico au = new AltaUsuarioMedico();
-//				au.setVisible(true);
+
 			}
 		});
-		nuevoMedicobutton.setIcon(new ImageIcon(BuscardorUsuario.class.getResource("/image/plus.png")));
-		nuevoMedicobutton.setBounds(10, 74, 140, 40);
-		panel.add(nuevoMedicobutton);
+		nuevoOperadorbutton.setIcon(new ImageIcon(GestorUsuario.class.getResource("/image/plus.png")));
+		nuevoOperadorbutton.setBounds(10, 74, 140, 40);
+		panel.add(nuevoOperadorbutton);
 		modificarButton.addActionListener(new ActionListener() {
-			@SuppressWarnings("unused")
 			public void actionPerformed(ActionEvent e) {
 				
-				int registro = table.getSelectedRow();
-				if (registro == -1){
-					JOptionPane.showMessageDialog(null, "Debe Selccionar un usuario para Modificar", "Modificar Usuario", JOptionPane.ERROR_MESSAGE);
-				}else{
-					int dniUsuario = (Integer) table.getValueAt(registro, 2);
-					
-				//	System.out.println("----->"+dniUsuario);
-//						UsuarioDTO user = Sistema.getInstancia().getUsuario(dniUsuario);
-//						ModificarUsuario mu = new ModificarUsuario(user);
-//						mu.setVisible(true);
-						dispose();
-						
-				}
 				
 			}
 		});
 		
-		llenarTabla();
-		
 		this.setLocationRelativeTo(null);
-		//setAlwaysOnTop(true);
 		setModal(true);
 	}
 	
@@ -206,11 +163,7 @@ public class BuscardorUsuario extends JDialog {
 		RowFilter<TableModel, Object> rf = null;
 		@SuppressWarnings("unused")
 		int indiceColumnaTabla = 2;
-		switch (comboBox.getSelectedIndex()) {
-		case 0: indiceColumnaTabla = 2;break;//DNI
-		case 1: indiceColumnaTabla = 3;break;//Usuario
-		case 2: indiceColumnaTabla = 1;break;//Apellido
-		}
+
 		
 		try {
 			String text = buscarTextField.getText();
@@ -230,27 +183,6 @@ public class BuscardorUsuario extends JDialog {
 		}
 	
 	
-	
-	public void llenarTabla(){
-//		usuarios = Sistema.getInstancia().getUsuarios();
-//
-//		model.setNumRows(usuarios.size());
-//		for (int i = 0; i < usuarios.size(); i++) {
-//			model.setValueAt(usuarios.get(i).getNombre(), i, 0);
-//			model.setValueAt(usuarios.get(i).getApellido(), i, 1);
-//			model.setValueAt(usuarios.get(i).getDni(), i, 2);
-//			model.setValueAt(usuarios.get(i).getUserName(), i, 3);
-//			if (usuarios.get(i).isBorrado() == true){
-//				model.setValueAt("SI", i, 4);	
-//			}else
-//				model.setValueAt("NO", i, 4);
-			
-//		}
-//		
-//		table.setModel(model);
-//		sorter = new TableRowSorter<TableModel>(model);
-//		table.setRowSorter(sorter);
-		
-	}
+
 }
 

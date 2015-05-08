@@ -14,6 +14,8 @@ import javax.swing.JList;
 import javax.swing.AbstractListModel;
 import javax.swing.JScrollPane;
 import javax.swing.ScrollPaneConstants;
+import javax.swing.JComboBox;
+import javax.swing.DefaultComboBoxModel;
 
 public class GestionModelo extends JDialog {
 
@@ -66,13 +68,13 @@ public class GestionModelo extends JDialog {
 				dispose();
 			}
 		});
-		cancelarButton.setIcon(new ImageIcon(BuscardorUsuario.class.getResource("/image/cancel.png")));
+		cancelarButton.setIcon(new ImageIcon(GestorUsuario.class.getResource("/image/cancel.png")));
 		cancelarButton.setBounds(283, 320, 116, 32);
 		contentPanel.add(cancelarButton);
 		
 		JScrollPane scrollPane = new JScrollPane();
 		scrollPane.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
-		scrollPane.setBounds(6, 6, 307, 303);
+		scrollPane.setBounds(6, 49, 307, 260);
 		contentPanel.add(scrollPane);
 		
 		JList list = new JList();
@@ -88,24 +90,29 @@ public class GestionModelo extends JDialog {
 		scrollPane.setViewportView(list);
 		
 		textFieldAgregarColor = new JTextField();
-		textFieldAgregarColor.setBounds(325, 6, 203, 32);
+		textFieldAgregarColor.setBounds(325, 82, 203, 32);
 		contentPanel.add(textFieldAgregarColor);
 		textFieldAgregarColor.setColumns(10);
 		
 		btnAgregarColor = new JButton("Agregar Modelo");
 		btnAgregarColor.setIcon(new ImageIcon(GestionModelo.class.getResource("/image/plus.png")));
-		btnAgregarColor.setBounds(325, 49, 203, 29);
+		btnAgregarColor.setBounds(325, 125, 203, 29);
 		contentPanel.add(btnAgregarColor);
 		
 		textField = new JTextField();
-		textField.setBounds(325, 130, 203, 32);
+		textField.setBounds(325, 206, 203, 32);
 		contentPanel.add(textField);
 		textField.setColumns(10);
 		
 		btnModificarColor = new JButton("Modificar Modelo");
 		btnModificarColor.setIcon(new ImageIcon(GestionModelo.class.getResource("/image/modificar.png")));
-		btnModificarColor.setBounds(325, 170, 203, 29);
+		btnModificarColor.setBounds(325, 246, 203, 29);
 		contentPanel.add(btnModificarColor);
+		
+		JComboBox comboBox = new JComboBox();
+		comboBox.setModel(new DefaultComboBoxModel(new String[] {"1 Auto", "2 4X4", "3 Moto", "4 Bicicleta"}));
+		comboBox.setBounds(6, 11, 307, 32);
+		contentPanel.add(comboBox);
 		
 		this.setLocationRelativeTo(null);
 		setModal(true);

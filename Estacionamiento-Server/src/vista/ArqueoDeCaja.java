@@ -17,6 +17,11 @@ import org.jdesktop.swingx.JXDatePicker;
 
 //import reportes.ReporteEjemplo;
 import java.awt.Font;
+import java.awt.GridBagLayout;
+import java.awt.GridBagConstraints;
+import java.awt.Insets;
+import javax.swing.JComboBox;
+import javax.swing.DefaultComboBoxModel;
 
 public class ArqueoDeCaja extends JDialog {
 
@@ -29,6 +34,8 @@ public class ArqueoDeCaja extends JDialog {
 	private JXDatePicker fechaDesde;
 	private JButton exportarButton;
 	private JButton cancelarButton;
+	@SuppressWarnings("rawtypes")
+	private JComboBox comboBox;
 
 	/**
 	 * Launch the application.
@@ -46,41 +53,69 @@ public class ArqueoDeCaja extends JDialog {
 	/**
 	 * Create the dialog.
 	 */
+	@SuppressWarnings({ "rawtypes", "unchecked" })
 	public ArqueoDeCaja() {
 		setTitle("Cierre Facturaci\u00F3n");
-		setBounds(100, 100, 289, 173);
+		setBounds(100, 100, 290, 212);
 		getContentPane().setLayout(new BorderLayout());
 		contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
 		getContentPane().add(contentPanel, BorderLayout.CENTER);
-		contentPanel.setLayout(null);
+		GridBagLayout gbl_contentPanel = new GridBagLayout();
+		gbl_contentPanel.columnWidths = new int[]{111, 23, 116, 0};
+		gbl_contentPanel.rowHeights = new int[]{32, 40, 40, 32, 0};
+		gbl_contentPanel.columnWeights = new double[]{1.0, 0.0, 0.0, Double.MIN_VALUE};
+		gbl_contentPanel.rowWeights = new double[]{0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
+		contentPanel.setLayout(gbl_contentPanel);
 		
-		JLabel lblFechaaDesde = new JLabel("Fecha Desde");
+		comboBox = new JComboBox();
+		comboBox.setModel(new DefaultComboBoxModel(new String[] {"Todos", "Admin", "Operador"}));
+		GridBagConstraints gbc_comboBox = new GridBagConstraints();
+		gbc_comboBox.gridwidth = 3;
+		gbc_comboBox.insets = new Insets(0, 0, 5, 5);
+		gbc_comboBox.fill = GridBagConstraints.HORIZONTAL;
+		gbc_comboBox.gridx = 0;
+		gbc_comboBox.gridy = 0;
+		contentPanel.add(comboBox, gbc_comboBox);
+		
+		JLabel lblFechaaDesde = new JLabel("Fecha Desde:");
 		lblFechaaDesde.setFont(new Font("Tahoma", Font.BOLD, 11));
-		
-		lblFechaaDesde.setBounds(10, 36, 79, 14);
-		contentPanel.add(lblFechaaDesde);
+		GridBagConstraints gbc_lblFechaaDesde = new GridBagConstraints();
+		gbc_lblFechaaDesde.fill = GridBagConstraints.HORIZONTAL;
+		gbc_lblFechaaDesde.insets = new Insets(0, 0, 5, 5);
+		gbc_lblFechaaDesde.gridx = 0;
+		gbc_lblFechaaDesde.gridy = 1;
+		contentPanel.add(lblFechaaDesde, gbc_lblFechaaDesde);
 		
 		fechaDesde = new JXDatePicker();
 		fechaDesde.setDate(Calendar.getInstance().getTime());
 		fechaDesde.setFormats(new SimpleDateFormat("dd/MM/yyyy"));
-		fechaDesde.setBounds(103, 32, 149, 22);
-		contentPanel.add(fechaDesde);
+		GridBagConstraints gbc_fechaDesde = new GridBagConstraints();
+		gbc_fechaDesde.fill = GridBagConstraints.BOTH;
+		gbc_fechaDesde.insets = new Insets(0, 0, 5, 0);
+		gbc_fechaDesde.gridwidth = 2;
+		gbc_fechaDesde.gridx = 1;
+		gbc_fechaDesde.gridy = 1;
+		contentPanel.add(fechaDesde, gbc_fechaDesde);
 		
-		JLabel lblFechaHasta = new JLabel("Fecha Hasta");
+		JLabel lblFechaHasta = new JLabel("Fecha Hasta:");
 		lblFechaHasta.setFont(new Font("Tahoma", Font.BOLD, 11));
-		lblFechaHasta.setBounds(10, 61, 79, 14);
-		contentPanel.add(lblFechaHasta);
+		GridBagConstraints gbc_lblFechaHasta = new GridBagConstraints();
+		gbc_lblFechaHasta.fill = GridBagConstraints.HORIZONTAL;
+		gbc_lblFechaHasta.insets = new Insets(0, 0, 5, 5);
+		gbc_lblFechaHasta.gridx = 0;
+		gbc_lblFechaHasta.gridy = 2;
+		contentPanel.add(lblFechaHasta, gbc_lblFechaHasta);
 		
 		fechaHasta = new JXDatePicker();
 		fechaHasta.setDate(Calendar.getInstance().getTime());
 		fechaHasta.setFormats(new SimpleDateFormat("dd/MM/yyyy"));
-		fechaHasta.setBounds(103, 57, 149, 22);
-		contentPanel.add(fechaHasta);
-		
-		exportarButton = new JButton("Generar");
-		exportarButton.setIcon(new ImageIcon(BuscardorUsuario.class.getResource("/image/pdf.png")));
-		exportarButton.setBounds(10, 88, 116, 32);
-		contentPanel.add(exportarButton);
+		GridBagConstraints gbc_fechaHasta = new GridBagConstraints();
+		gbc_fechaHasta.fill = GridBagConstraints.BOTH;
+		gbc_fechaHasta.insets = new Insets(0, 0, 5, 0);
+		gbc_fechaHasta.gridwidth = 2;
+		gbc_fechaHasta.gridx = 1;
+		gbc_fechaHasta.gridy = 2;
+		contentPanel.add(fechaHasta, gbc_fechaHasta);
 		
 		cancelarButton = new JButton("Cancelar");
 		cancelarButton.addActionListener(new ActionListener() {
@@ -88,9 +123,21 @@ public class ArqueoDeCaja extends JDialog {
 				dispose();
 			}
 		});
-		cancelarButton.setIcon(new ImageIcon(BuscardorUsuario.class.getResource("/image/cancel.png")));
-		cancelarButton.setBounds(138, 88, 116, 32);
-		contentPanel.add(cancelarButton);
+		
+		exportarButton = new JButton("Generar");
+		exportarButton.setIcon(new ImageIcon(GestorUsuario.class.getResource("/image/pdf.png")));
+		GridBagConstraints gbc_exportarButton = new GridBagConstraints();
+		gbc_exportarButton.fill = GridBagConstraints.HORIZONTAL;
+		gbc_exportarButton.insets = new Insets(0, 0, 0, 5);
+		gbc_exportarButton.gridx = 0;
+		gbc_exportarButton.gridy = 3;
+		contentPanel.add(exportarButton, gbc_exportarButton);
+		cancelarButton.setIcon(new ImageIcon(GestorUsuario.class.getResource("/image/cancel.png")));
+		GridBagConstraints gbc_cancelarButton = new GridBagConstraints();
+		gbc_cancelarButton.fill = GridBagConstraints.HORIZONTAL;
+		gbc_cancelarButton.gridx = 2;
+		gbc_cancelarButton.gridy = 3;
+		contentPanel.add(cancelarButton, gbc_cancelarButton);
 		
 		this.setLocationRelativeTo(null);
 		setModal(true);

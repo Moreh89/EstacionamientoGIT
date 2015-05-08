@@ -2,32 +2,25 @@ package vista;
 
 
 import java.awt.EventQueue;
-import java.awt.Panel;
-
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
-
 import java.awt.GridBagLayout;
-
 import javax.swing.JLabel;
-
 import java.awt.GridBagConstraints;
-
 import javax.swing.JComboBox;
-
 import java.awt.Insets;
-
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JTextField;
 import javax.swing.JButton;
 import javax.swing.ImageIcon;
-
 import controlador.Controlador;
-
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import javax.swing.JScrollPane;
+import javax.swing.ScrollPaneConstants;
+import javax.swing.JList;
 
 @SuppressWarnings("rawtypes")
 public class AgregarVehiculo extends JFrame implements ActionListener{
@@ -48,6 +41,11 @@ public class AgregarVehiculo extends JFrame implements ActionListener{
 	private JButton btnCrearVehiculo;
 	private JButton btnFinalizarAlta;
 	private AltaCliente altaCliente;
+	private JPanel panel;
+	private JScrollPane scrollPane;
+	private JList listVehiculos;
+	private JButton btnEliminar;
+	private JLabel lblVehiculos;
 
 	/**
 	 * Launch the application.
@@ -72,9 +70,9 @@ public class AgregarVehiculo extends JFrame implements ActionListener{
 	@SuppressWarnings("unchecked")
 	public AgregarVehiculo(AltaCliente altaCliente) {
 		this.altaCliente=altaCliente;
-		setTitle("Alta Vehiculo");
+		setTitle("Gestion Vehiculo");
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-		setBounds(100, 100, 492, 306);
+		setBounds(100, 100, 492, 509);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
@@ -83,9 +81,9 @@ public class AgregarVehiculo extends JFrame implements ActionListener{
 		this.setFocusable(true);
 		GridBagLayout gbl_contentPane = new GridBagLayout();
 		gbl_contentPane.columnWidths = new int[]{78, 122, 45, 206, 0};
-		gbl_contentPane.rowHeights = new int[]{28, 26, 35, 46, 45, 36, 0, 0};
-		gbl_contentPane.columnWeights = new double[]{0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
-		gbl_contentPane.rowWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
+		gbl_contentPane.rowHeights = new int[]{28, 26, 35, 46, 45, 36, 0, 0, 0, 0, 0, 0, 0, 0, 0};
+		gbl_contentPane.columnWeights = new double[]{1.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
+		gbl_contentPane.rowWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
 		contentPane.setLayout(gbl_contentPane);
 		 
 		  lblCategoria = new JLabel("Categoria:");
@@ -97,7 +95,7 @@ public class AgregarVehiculo extends JFrame implements ActionListener{
 		  contentPane.add(lblCategoria, gbc_lblCategoria);
 		 
 		  comboBoxCategoriaVehiculo = new JComboBox();
-		  comboBoxCategoriaVehiculo.setModel(new DefaultComboBoxModel(new String[] {"1 Auto", "2 Camioneta", "3 Moto", "4 Bicicleta"}));
+		  comboBoxCategoriaVehiculo.setModel(new DefaultComboBoxModel(new String[] {"1 Auto", "2 4X4", "3 Moto", "4 Bicicleta"}));
 		  GridBagConstraints gbc_comboBoxCategoriaVehiculo = new GridBagConstraints();
 		  gbc_comboBoxCategoriaVehiculo.fill = GridBagConstraints.HORIZONTAL;
 		  gbc_comboBoxCategoriaVehiculo.insets = new Insets(0, 0, 5, 5);
@@ -184,15 +182,49 @@ public class AgregarVehiculo extends JFrame implements ActionListener{
 		   gbc_btnCrearVehiculo.gridy = 4;
 		   contentPane.add(btnCrearVehiculo, gbc_btnCrearVehiculo);
 		   btnCrearVehiculo.addActionListener(this);
+		    
+		    lblVehiculos = new JLabel("Vehiculos:");
+		    GridBagConstraints gbc_lblVehiculos = new GridBagConstraints();
+		    gbc_lblVehiculos.insets = new Insets(0, 0, 5, 5);
+		    gbc_lblVehiculos.gridx = 0;
+		    gbc_lblVehiculos.gridy = 5;
+		    contentPane.add(lblVehiculos, gbc_lblVehiculos);
+		    
+		    panel = new JPanel();
+		    GridBagConstraints gbc_panel = new GridBagConstraints();
+		    gbc_panel.gridheight = 5;
+		    gbc_panel.gridwidth = 4;
+		    gbc_panel.insets = new Insets(0, 0, 5, 0);
+		    gbc_panel.fill = GridBagConstraints.BOTH;
+		    gbc_panel.gridx = 0;
+		    gbc_panel.gridy = 6;
+		    contentPane.add(panel, gbc_panel);
+		    GridBagLayout gbl_panel = new GridBagLayout();
+		    gbl_panel.columnWidths = new int[]{228, 0};
+		    gbl_panel.rowHeights = new int[]{23, 0};
+		    gbl_panel.columnWeights = new double[]{1.0, Double.MIN_VALUE};
+		    gbl_panel.rowWeights = new double[]{1.0, Double.MIN_VALUE};
+		    panel.setLayout(gbl_panel);
+		    
+		    scrollPane = new JScrollPane();
+		    scrollPane.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
+		    GridBagConstraints gbc_scrollPane = new GridBagConstraints();
+		    gbc_scrollPane.fill = GridBagConstraints.BOTH;
+		    gbc_scrollPane.gridx = 0;
+		    gbc_scrollPane.gridy = 0;
+		    panel.add(scrollPane, gbc_scrollPane);
+		    
+		    listVehiculos = new JList();
+		    scrollPane.setViewportView(listVehiculos);
 		   
-		  btnFinalizarAlta = new JButton("Finalizar Alta");
-		  btnFinalizarAlta.setIcon(new ImageIcon(AgregarVehiculo.class.getResource("/image/ok.png")));
-		  btnFinalizarAlta.setFont(new Font("Dialog", Font.PLAIN, 16));
-		  GridBagConstraints gbc_btnFinalizarAlta = new GridBagConstraints();
-		  gbc_btnFinalizarAlta.fill = GridBagConstraints.BOTH;
-		  gbc_btnFinalizarAlta.gridx = 3;
-		  gbc_btnFinalizarAlta.gridy = 6;
-		  contentPane.add(btnFinalizarAlta, gbc_btnFinalizarAlta);
+		   btnEliminar = new JButton("Eliminar");
+		   btnEliminar.setFont(new Font("Dialog", Font.PLAIN, 16));
+		   GridBagConstraints gbc_btnEliminar = new GridBagConstraints();
+		   gbc_btnEliminar.fill = GridBagConstraints.HORIZONTAL;
+		   gbc_btnEliminar.insets = new Insets(0, 0, 5, 0);
+		   gbc_btnEliminar.gridx = 3;
+		   gbc_btnEliminar.gridy = 11;
+		   contentPane.add(btnEliminar, gbc_btnEliminar);
 		  
 		   btnCancelar = new JButton("Cancelar");
 		   btnCancelar.setIcon(new ImageIcon(MenuOperador.class.getResource("/image/cancel.png")));
@@ -201,9 +233,18 @@ public class AgregarVehiculo extends JFrame implements ActionListener{
 		   gbc_btnCancelar.insets = new Insets(0, 0, 0, 5);
 		   gbc_btnCancelar.gridwidth = 2;
 		   gbc_btnCancelar.gridx = 0;
-		   gbc_btnCancelar.gridy = 6;
+		   gbc_btnCancelar.gridy = 13;
 		   contentPane.add(btnCancelar, gbc_btnCancelar);
 		   btnCancelar.addActionListener(this);
+		  
+		  btnFinalizarAlta = new JButton("Finalizar");
+		  btnFinalizarAlta.setIcon(new ImageIcon(AgregarVehiculo.class.getResource("/image/ok.png")));
+		  btnFinalizarAlta.setFont(new Font("Dialog", Font.PLAIN, 16));
+		  GridBagConstraints gbc_btnFinalizarAlta = new GridBagConstraints();
+		  gbc_btnFinalizarAlta.fill = GridBagConstraints.BOTH;
+		  gbc_btnFinalizarAlta.gridx = 3;
+		  gbc_btnFinalizarAlta.gridy = 13;
+		  contentPane.add(btnFinalizarAlta, gbc_btnFinalizarAlta);
 		  btnFinalizarAlta.addActionListener(this);
 		  
 		 this.setLocationRelativeTo(null);

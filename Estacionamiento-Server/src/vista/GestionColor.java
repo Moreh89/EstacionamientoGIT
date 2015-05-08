@@ -66,7 +66,7 @@ public class GestionColor extends JDialog {
 				dispose();
 			}
 		});
-		cancelarButton.setIcon(new ImageIcon(BuscardorUsuario.class.getResource("/image/cancel.png")));
+		cancelarButton.setIcon(new ImageIcon(GestorUsuario.class.getResource("/image/cancel.png")));
 		cancelarButton.setBounds(283, 320, 116, 32);
 		contentPanel.add(cancelarButton);
 		

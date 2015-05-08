@@ -71,7 +71,7 @@ public class ModificarInteres extends JDialog {
 				dispose();
 			}
 		});
-		cancelarButton.setIcon(new ImageIcon(BuscardorUsuario.class.getResource("/image/cancel.png")));
+		cancelarButton.setIcon(new ImageIcon(GestorUsuario.class.getResource("/image/cancel.png")));
 		cancelarButton.setBounds(155, 104, 116, 32);
 		contentPanel.add(cancelarButton);
 		
