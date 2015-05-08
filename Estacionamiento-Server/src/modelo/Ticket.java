@@ -1,7 +1,6 @@
 package modelo;
 
 import java.sql.Date;
-import java.sql.Time;
 
 public class Ticket {
 	
@@ -20,6 +19,14 @@ public class Ticket {
 	
 	private String tipoIngreso; //si hay que cobrar por hora o por estadia.
 	
+	private double prepago; //Si ya pago algo
+	
+	public double getPrepago() {
+		return prepago;
+	}
+	public void setPrepago(double prepago) {
+		this.prepago = prepago;
+	}
 	public long getIdTicket() {
 		return idTicket;
 	}
@@ -32,9 +39,6 @@ public class Ticket {
 	public void setMontoCobrado(double montoCobrado) {
 		this.montoCobrado = montoCobrado;
 	}
-	
-	
-	
 	public Descuento getDescuento() {
 		return descuento;
 	}
@@ -71,8 +75,18 @@ public class Ticket {
 	public void setCliente(Cliente cliente) {
 		this.cliente = cliente;
 	}
-
-
+	public Usuario getUsuario() {
+		return usuario;
+	}
+	public void setUsuario(Usuario usuario) {
+		this.usuario = usuario;
+	}
+	public String getTipoIngreso() {
+		return tipoIngreso;
+	}
+	public void setTipoIngreso(String tipoIngreso) {
+		this.tipoIngreso = tipoIngreso;
+	}
 	public double cobrar(int cantidadMinutos, Tarifa tarifa)
 	{
 		double montoCobrar=0;        

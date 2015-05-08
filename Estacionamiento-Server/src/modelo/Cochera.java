@@ -6,6 +6,7 @@ public class Cochera {
 	private double costoCochera;
 	private Cliente cliente;
 	private ESTADO estado;
+	private float costo;
 	
 	public enum ESTADO {
 		ACTIVO,

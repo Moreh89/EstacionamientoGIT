@@ -64,7 +64,6 @@ public class MenuOperador extends JFrame implements ActionListener{
 	private JLabel lblDescuento;
 	private JComboBox comboBoxDescuento;
 	private JLabel lblEstadia;
-	private JComboBox comboBoxEstadia;
 	private JLabel lblCliente;
 	private JButton btnButtonBuscarCliente;
 	private JLabel lblPerdidaTicket;
@@ -79,6 +78,9 @@ public class MenuOperador extends JFrame implements ActionListener{
 	private JLabel lblIngreso;
 	private JLabel lblEgreso;
 	private JLabel lblEstadia_1;
+	private JTextField textFieldPrepado;
+	private JLabel labelUsuario;
+	private JMenuItem mntmTicketsAbiertos;
 
 	/**
 	 * Launch the application.
@@ -101,49 +103,63 @@ public class MenuOperador extends JFrame implements ActionListener{
 	 */
 	@SuppressWarnings("unchecked")
 	public MenuOperador() {
+		setFont(new Font("Dialog", Font.BOLD, 20));
 		setIconImage(Toolkit.getDefaultToolkit().getImage(MenuOperador.class.getResource("/image/printer.png")));
 		setResizable(false);
 		setTitle("Gertor Ingresos");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 774, 420);
+		setBounds(100, 100, 1218, 775);
 		
 		 menuBar = new JMenuBar();
+		 menuBar.setFont(new Font("Segoe UI", Font.PLAIN, 20));
 		setJMenuBar(menuBar);
 		
 		 mnAltas = new JMenu("Altas");
+		 mnAltas.setFont(new Font("Segoe UI", Font.BOLD, 20));
 		mnAltas.setIcon(new ImageIcon(MenuOperador.class.getResource("/image/plus.png")));
 		menuBar.add(mnAltas);
 		
-		 mntmModelo = new JMenuItem("Modelo");
+		 mntmModelo = new JMenuItem("Modelo F8");
+		 mntmModelo.setFont(new Font("Segoe UI", Font.PLAIN, 20));
 		mnAltas.add(mntmModelo);
 		
-		 mntmColor = new JMenuItem("Color");
+		 mntmColor = new JMenuItem("Color F9");
+		 mntmColor.setFont(new Font("Segoe UI", Font.PLAIN, 20));
 		mnAltas.add(mntmColor);
 		
 		 mnConsultas = new JMenu("Consultas");
+		 mnConsultas.setFont(new Font("Segoe UI", Font.BOLD, 20));
 		mnConsultas.setIcon(new ImageIcon(MenuOperador.class.getResource("/image/buscar.png")));
 		menuBar.add(mnConsultas);
+		 
+		 mntmTicketsAbiertos = new JMenuItem("Tickets abiertos");
+		 mntmTicketsAbiertos.setFont(new Font("Segoe UI", Font.PLAIN, 20));
+		 mnConsultas.add(mntmTicketsAbiertos);
 		
 		 mntmArqueoDeCaja = new JMenuItem("Arqueo de Caja");
+		 mntmArqueoDeCaja.setFont(new Font("Segoe UI", Font.PLAIN, 20));
 		mnConsultas.add(mntmArqueoDeCaja);
 		
 		 mnMiCuenta = new JMenu("Mi Cuenta");
+		 mnMiCuenta.setFont(new Font("Segoe UI", Font.BOLD, 20));
 		mnMiCuenta.setIcon(new ImageIcon(MenuOperador.class.getResource("/image/users.png")));
 		menuBar.add(mnMiCuenta);
 		
-		 mntmCambiarContrasea = new JMenuItem("Cambiar Contraseña");
+		 mntmCambiarContrasea = new JMenuItem("Cambiar Contrase\u00F1a");
+		 mntmCambiarContrasea.setFont(new Font("Segoe UI", Font.PLAIN, 20));
 		mnMiCuenta.add(mntmCambiarContrasea);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		GridBagLayout gbl_contentPane = new GridBagLayout();
-		gbl_contentPane.columnWidths = new int[]{0, 0, 0, 0, 0, 0};
-		gbl_contentPane.rowHeights = new int[]{0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
+		gbl_contentPane.columnWidths = new int[]{200, 250, 67, 200, 0, 0};
+		gbl_contentPane.rowHeights = new int[]{70, 69, 70, 70, 70, 70, 0, 0, 60, 70, 0, 50, 0};
 		gbl_contentPane.columnWeights = new double[]{0.0, 0.0, 0.0, 0.0, 1.0, Double.MIN_VALUE};
-		gbl_contentPane.rowWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 1.0, Double.MIN_VALUE};
+		gbl_contentPane.rowWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
 		contentPane.setLayout(gbl_contentPane);
 		
 		 lblCodigoTicket = new JLabel("Codigo Ticket:");
+		 lblCodigoTicket.setFont(new Font("Tahoma", Font.PLAIN, 30));
 		GridBagConstraints gbc_lblCodigoTicket = new GridBagConstraints();
 		gbc_lblCodigoTicket.anchor = GridBagConstraints.EAST;
 		gbc_lblCodigoTicket.insets = new Insets(0, 0, 5, 5);
@@ -152,16 +168,28 @@ public class MenuOperador extends JFrame implements ActionListener{
 		contentPane.add(lblCodigoTicket, gbc_lblCodigoTicket);
 		
 		textFieldNumeroTicket = new JTextField();
+		textFieldNumeroTicket.setFont(new Font("Tahoma", Font.PLAIN, 30));
 		textFieldNumeroTicket.setColumns(10);
 		GridBagConstraints gbc_textFieldNumeroTicket = new GridBagConstraints();
 		gbc_textFieldNumeroTicket.gridwidth = 2;
 		gbc_textFieldNumeroTicket.insets = new Insets(0, 0, 5, 5);
-		gbc_textFieldNumeroTicket.fill = GridBagConstraints.HORIZONTAL;
+		gbc_textFieldNumeroTicket.fill = GridBagConstraints.BOTH;
 		gbc_textFieldNumeroTicket.gridx = 1;
 		gbc_textFieldNumeroTicket.gridy = 0;
 		contentPane.add(textFieldNumeroTicket, gbc_textFieldNumeroTicket);
+		 
+		 labelUsuario = new JLabel("Admin");
+		 labelUsuario.setHorizontalAlignment(SwingConstants.CENTER);
+		 labelUsuario.setForeground(Color.BLUE);
+		 labelUsuario.setFont(new Font("Dialog", Font.BOLD, 30));
+		 GridBagConstraints gbc_labelUsuario = new GridBagConstraints();
+		 gbc_labelUsuario.insets = new Insets(0, 0, 5, 0);
+		 gbc_labelUsuario.gridx = 4;
+		 gbc_labelUsuario.gridy = 0;
+		 contentPane.add(labelUsuario, gbc_labelUsuario);
 		
 		 lblCategoria = new JLabel("Categoria:");
+		 lblCategoria.setFont(new Font("Tahoma", Font.PLAIN, 30));
 		GridBagConstraints gbc_lblCategoria = new GridBagConstraints();
 		gbc_lblCategoria.insets = new Insets(0, 0, 5, 5);
 		gbc_lblCategoria.anchor = GridBagConstraints.EAST;
@@ -170,16 +198,18 @@ public class MenuOperador extends JFrame implements ActionListener{
 		contentPane.add(lblCategoria, gbc_lblCategoria);
 		
 		 comboBoxTipoVehiculo = new JComboBox();
+		 comboBoxTipoVehiculo.setFont(new Font("Tahoma", Font.PLAIN, 30));
 		comboBoxTipoVehiculo.setModel(new DefaultComboBoxModel(new String[] {"1 Auto", "2 Camioneta", "3 Moto", "4 Bicicleta"}));
 		GridBagConstraints gbc_comboBoxTipoVehiculo = new GridBagConstraints();
 		gbc_comboBoxTipoVehiculo.gridwidth = 2;
 		gbc_comboBoxTipoVehiculo.insets = new Insets(0, 0, 5, 5);
-		gbc_comboBoxTipoVehiculo.fill = GridBagConstraints.HORIZONTAL;
+		gbc_comboBoxTipoVehiculo.fill = GridBagConstraints.BOTH;
 		gbc_comboBoxTipoVehiculo.gridx = 1;
 		gbc_comboBoxTipoVehiculo.gridy = 1;
 		contentPane.add(comboBoxTipoVehiculo, gbc_comboBoxTipoVehiculo);
 		
 		 lblPatente = new JLabel("Patente:");
+		 lblPatente.setFont(new Font("Tahoma", Font.PLAIN, 30));
 		GridBagConstraints gbc_lblPatente = new GridBagConstraints();
 		gbc_lblPatente.anchor = GridBagConstraints.EAST;
 		gbc_lblPatente.insets = new Insets(0, 0, 5, 5);
@@ -188,6 +218,7 @@ public class MenuOperador extends JFrame implements ActionListener{
 		contentPane.add(lblPatente, gbc_lblPatente);
 		
 		textFieldPatente = new JTextField();
+		textFieldPatente.setFont(new Font("Tahoma", Font.PLAIN, 30));
 		GridBagConstraints gbc_textFieldPatente = new GridBagConstraints();
 		gbc_textFieldPatente.fill = GridBagConstraints.BOTH;
 		gbc_textFieldPatente.insets = new Insets(0, 0, 5, 0);
@@ -197,6 +228,7 @@ public class MenuOperador extends JFrame implements ActionListener{
 		textFieldPatente.setColumns(10);
 		
 		 lblColor = new JLabel("Color:");
+		 lblColor.setFont(new Font("Tahoma", Font.PLAIN, 30));
 		GridBagConstraints gbc_lblColor = new GridBagConstraints();
 		gbc_lblColor.anchor = GridBagConstraints.EAST;
 		gbc_lblColor.insets = new Insets(0, 0, 5, 5);
@@ -205,16 +237,18 @@ public class MenuOperador extends JFrame implements ActionListener{
 		contentPane.add(lblColor, gbc_lblColor);
 		
 		 comboBoxColor = new JComboBox();
+		 comboBoxColor.setFont(new Font("Tahoma", Font.PLAIN, 30));
 		comboBoxColor.setModel(new DefaultComboBoxModel(new String[] {"1 Rojo", "2 Azul", "3 Verde", "4 Negro", "5 Blanco"}));
 		GridBagConstraints gbc_comboBoxColor = new GridBagConstraints();
 		gbc_comboBoxColor.gridwidth = 2;
 		gbc_comboBoxColor.insets = new Insets(0, 0, 5, 5);
-		gbc_comboBoxColor.fill = GridBagConstraints.HORIZONTAL;
+		gbc_comboBoxColor.fill = GridBagConstraints.BOTH;
 		gbc_comboBoxColor.gridx = 1;
 		gbc_comboBoxColor.gridy = 2;
 		contentPane.add(comboBoxColor, gbc_comboBoxColor);
 		
 		 lblModelo = new JLabel("Modelo:");
+		 lblModelo.setFont(new Font("Tahoma", Font.PLAIN, 30));
 		GridBagConstraints gbc_lblModelo = new GridBagConstraints();
 		gbc_lblModelo.anchor = GridBagConstraints.EAST;
 		gbc_lblModelo.insets = new Insets(0, 0, 5, 5);
@@ -223,15 +257,17 @@ public class MenuOperador extends JFrame implements ActionListener{
 		contentPane.add(lblModelo, gbc_lblModelo);
 		
 		 comboBoxModelo = new JComboBox();
+		 comboBoxModelo.setFont(new Font("Tahoma", Font.PLAIN, 30));
 		comboBoxModelo.setModel(new DefaultComboBoxModel(new String[] {"1 Mercedes", "2 Fiat Palio", "3 Chevrolet Aveo"}));
 		GridBagConstraints gbc_comboBoxModelo = new GridBagConstraints();
-		gbc_comboBoxModelo.fill = GridBagConstraints.HORIZONTAL;
+		gbc_comboBoxModelo.fill = GridBagConstraints.BOTH;
 		gbc_comboBoxModelo.insets = new Insets(0, 0, 5, 0);
 		gbc_comboBoxModelo.gridx = 4;
 		gbc_comboBoxModelo.gridy = 2;
 		contentPane.add(comboBoxModelo, gbc_comboBoxModelo);
 		
 		 lblDescuento = new JLabel("Descuento:");
+		 lblDescuento.setFont(new Font("Tahoma", Font.PLAIN, 30));
 		GridBagConstraints gbc_lblDescuento = new GridBagConstraints();
 		gbc_lblDescuento.anchor = GridBagConstraints.EAST;
 		gbc_lblDescuento.insets = new Insets(0, 0, 5, 5);
@@ -240,33 +276,37 @@ public class MenuOperador extends JFrame implements ActionListener{
 		contentPane.add(lblDescuento, gbc_lblDescuento);
 		
 		 comboBoxDescuento = new JComboBox();
+		 comboBoxDescuento.setFont(new Font("Tahoma", Font.PLAIN, 30));
 		comboBoxDescuento.setModel(new DefaultComboBoxModel(new String[] {"0 N/A", "1 Farmacia 10%", "2 Socio 20%"}));
 		GridBagConstraints gbc_comboBoxDescuento = new GridBagConstraints();
 		gbc_comboBoxDescuento.gridwidth = 2;
 		gbc_comboBoxDescuento.insets = new Insets(0, 0, 5, 5);
-		gbc_comboBoxDescuento.fill = GridBagConstraints.HORIZONTAL;
+		gbc_comboBoxDescuento.fill = GridBagConstraints.BOTH;
 		gbc_comboBoxDescuento.gridx = 1;
 		gbc_comboBoxDescuento.gridy = 3;
 		contentPane.add(comboBoxDescuento, gbc_comboBoxDescuento);
 		
-		 lblEstadia = new JLabel("Estadia:");
+		 lblEstadia = new JLabel("PrePago:");
+		 lblEstadia.setFont(new Font("Tahoma", Font.PLAIN, 30));
 		GridBagConstraints gbc_lblEstadia = new GridBagConstraints();
 		gbc_lblEstadia.anchor = GridBagConstraints.EAST;
 		gbc_lblEstadia.insets = new Insets(0, 0, 5, 5);
 		gbc_lblEstadia.gridx = 3;
 		gbc_lblEstadia.gridy = 3;
 		contentPane.add(lblEstadia, gbc_lblEstadia);
-		
-		 comboBoxEstadia = new JComboBox();
-		comboBoxEstadia.setModel(new DefaultComboBoxModel(new String[] {"1 No", "2 Si"}));
-		GridBagConstraints gbc_comboBoxEstadia = new GridBagConstraints();
-		gbc_comboBoxEstadia.anchor = GridBagConstraints.WEST;
-		gbc_comboBoxEstadia.insets = new Insets(0, 0, 5, 0);
-		gbc_comboBoxEstadia.gridx = 4;
-		gbc_comboBoxEstadia.gridy = 3;
-		contentPane.add(comboBoxEstadia, gbc_comboBoxEstadia);
+		 
+		 textFieldPrepado = new JTextField();
+		 textFieldPrepado.setFont(new Font("Tahoma", Font.PLAIN, 30));
+		 textFieldPrepado.setColumns(10);
+		 GridBagConstraints gbc_textFieldPrepado = new GridBagConstraints();
+		 gbc_textFieldPrepado.insets = new Insets(0, 0, 5, 0);
+		 gbc_textFieldPrepado.fill = GridBagConstraints.BOTH;
+		 gbc_textFieldPrepado.gridx = 4;
+		 gbc_textFieldPrepado.gridy = 3;
+		 contentPane.add(textFieldPrepado, gbc_textFieldPrepado);
 		
 		 lblCliente = new JLabel("Cliente:");
+		 lblCliente.setFont(new Font("Tahoma", Font.PLAIN, 30));
 		GridBagConstraints gbc_lblCliente = new GridBagConstraints();
 		gbc_lblCliente.anchor = GridBagConstraints.EAST;
 		gbc_lblCliente.insets = new Insets(0, 0, 5, 5);
@@ -275,11 +315,12 @@ public class MenuOperador extends JFrame implements ActionListener{
 		contentPane.add(lblCliente, gbc_lblCliente);
 		
 		textFieldCliente = new JTextField();
+		textFieldCliente.setFont(new Font("Tahoma", Font.PLAIN, 30));
 		textFieldCliente.setEnabled(false);
 		textFieldCliente.setEditable(false);
 		GridBagConstraints gbc_textFieldCliente = new GridBagConstraints();
 		gbc_textFieldCliente.insets = new Insets(0, 0, 5, 5);
-		gbc_textFieldCliente.fill = GridBagConstraints.HORIZONTAL;
+		gbc_textFieldCliente.fill = GridBagConstraints.BOTH;
 		gbc_textFieldCliente.gridx = 1;
 		gbc_textFieldCliente.gridy = 4;
 		contentPane.add(textFieldCliente, gbc_textFieldCliente);
@@ -289,13 +330,14 @@ public class MenuOperador extends JFrame implements ActionListener{
 		btnButtonBuscarCliente.setHorizontalAlignment(SwingConstants.LEFT);
 		btnButtonBuscarCliente.setIcon(new ImageIcon(MenuOperador.class.getResource("/image/search.png")));
 		GridBagConstraints gbc_btnButtonBuscarCliente = new GridBagConstraints();
-		gbc_btnButtonBuscarCliente.fill = GridBagConstraints.HORIZONTAL;
+		gbc_btnButtonBuscarCliente.fill = GridBagConstraints.BOTH;
 		gbc_btnButtonBuscarCliente.insets = new Insets(0, 0, 5, 5);
 		gbc_btnButtonBuscarCliente.gridx = 2;
 		gbc_btnButtonBuscarCliente.gridy = 4;
 		contentPane.add(btnButtonBuscarCliente, gbc_btnButtonBuscarCliente);
 		
 		 lblPerdidaTicket = new JLabel("Perdida Ticket:");
+		 lblPerdidaTicket.setFont(new Font("Tahoma", Font.PLAIN, 30));
 		GridBagConstraints gbc_lblPerdidaTicket = new GridBagConstraints();
 		gbc_lblPerdidaTicket.anchor = GridBagConstraints.EAST;
 		gbc_lblPerdidaTicket.insets = new Insets(0, 0, 5, 5);
@@ -304,8 +346,10 @@ public class MenuOperador extends JFrame implements ActionListener{
 		contentPane.add(lblPerdidaTicket, gbc_lblPerdidaTicket);
 		
 		 comboBoxPerdidaTicket = new JComboBox();
+		 comboBoxPerdidaTicket.setFont(new Font("Tahoma", Font.PLAIN, 30));
 		comboBoxPerdidaTicket.setModel(new DefaultComboBoxModel<Object>(new String[] {"1 No", "2 Si"}));
 		GridBagConstraints gbc_comboBoxPerdidaTicket = new GridBagConstraints();
+		gbc_comboBoxPerdidaTicket.fill = GridBagConstraints.VERTICAL;
 		gbc_comboBoxPerdidaTicket.anchor = GridBagConstraints.WEST;
 		gbc_comboBoxPerdidaTicket.insets = new Insets(0, 0, 5, 0);
 		gbc_comboBoxPerdidaTicket.gridx = 4;
@@ -313,6 +357,7 @@ public class MenuOperador extends JFrame implements ActionListener{
 		contentPane.add(comboBoxPerdidaTicket, gbc_comboBoxPerdidaTicket);
 		
 		 lblObservacion = new JLabel("Observacion:");
+		 lblObservacion.setFont(new Font("Tahoma", Font.PLAIN, 30));
 		GridBagConstraints gbc_lblObservacion = new GridBagConstraints();
 		gbc_lblObservacion.anchor = GridBagConstraints.EAST;
 		gbc_lblObservacion.insets = new Insets(0, 0, 5, 5);
@@ -331,24 +376,28 @@ public class MenuOperador extends JFrame implements ActionListener{
 		contentPane.add(textField, gbc_textField);
 		textField.setColumns(10);
 		
-		 btnCanelarF = new JButton("Canelar F2");
+		 btnCanelarF = new JButton("Canelar F4");
+		 btnCanelarF.setFont(new Font("Tahoma", Font.PLAIN, 20));
 		btnCanelarF.setIcon(new ImageIcon(MenuOperador.class.getResource("/image/cancel.png")));
 		GridBagConstraints gbc_btnCanelarF = new GridBagConstraints();
+		gbc_btnCanelarF.fill = GridBagConstraints.HORIZONTAL;
 		gbc_btnCanelarF.insets = new Insets(0, 0, 5, 5);
 		gbc_btnCanelarF.gridx = 0;
 		gbc_btnCanelarF.gridy = 7;
 		contentPane.add(btnCanelarF, gbc_btnCanelarF);
 		
-		 btnGuardarF = new JButton("Guardar F5");
+		 btnGuardarF = new JButton("Guardar F2");
+		 btnGuardarF.setFont(new Font("Tahoma", Font.PLAIN, 20));
 		btnGuardarF.setIcon(new ImageIcon(MenuOperador.class.getResource("/image/modificar.png")));
 		GridBagConstraints gbc_btnGuardarF = new GridBagConstraints();
+		gbc_btnGuardarF.fill = GridBagConstraints.HORIZONTAL;
 		gbc_btnGuardarF.insets = new Insets(0, 0, 5, 5);
 		gbc_btnGuardarF.gridx = 1;
 		gbc_btnGuardarF.gridy = 7;
 		contentPane.add(btnGuardarF, gbc_btnGuardarF);
 		
-		 btnTicketF = new JButton("Ticket F7");
-		btnTicketF.setFont(new Font("Lucida Grande", Font.PLAIN, 16));
+		 btnTicketF = new JButton("Ticket F5");
+		btnTicketF.setFont(new Font("Dialog", Font.PLAIN, 30));
 		btnTicketF.setIcon(new ImageIcon(MenuOperador.class.getResource("/image/printer.png")));
 		GridBagConstraints gbc_btnTicketF = new GridBagConstraints();
 		gbc_btnTicketF.gridheight = 2;
@@ -360,7 +409,7 @@ public class MenuOperador extends JFrame implements ActionListener{
 		
 		 lblTotalAPagar = new JLabel("Total a Pagar:");
 		lblTotalAPagar.setForeground(Color.BLUE);
-		lblTotalAPagar.setFont(new Font("Lucida Grande", Font.BOLD, 16));
+		lblTotalAPagar.setFont(new Font("Dialog", Font.BOLD, 30));
 		lblTotalAPagar.setHorizontalAlignment(SwingConstants.CENTER);
 		GridBagConstraints gbc_lblTotalAPagar = new GridBagConstraints();
 		gbc_lblTotalAPagar.gridwidth = 4;
@@ -374,7 +423,7 @@ public class MenuOperador extends JFrame implements ActionListener{
 		textField_1.setText("250");
 		textField_1.setEditable(false);
 		textField_1.setHorizontalAlignment(SwingConstants.CENTER);
-		textField_1.setFont(new Font("Lucida Grande", Font.BOLD, 28));
+		textField_1.setFont(new Font("Dialog", Font.BOLD, 40));
 		textField_1.setForeground(Color.RED);
 		GridBagConstraints gbc_textField_1 = new GridBagConstraints();
 		gbc_textField_1.gridheight = 2;
@@ -386,8 +435,8 @@ public class MenuOperador extends JFrame implements ActionListener{
 		contentPane.add(textField_1, gbc_textField_1);
 		textField_1.setColumns(10);
 		
-		 btnCobrarF = new JButton("Cobrar F8");
-		btnCobrarF.setFont(new Font("Lucida Grande", Font.PLAIN, 16));
+		 btnCobrarF = new JButton("Cobrar F7");
+		btnCobrarF.setFont(new Font("Dialog", Font.PLAIN, 30));
 		btnCobrarF.setIcon(new ImageIcon(MenuOperador.class.getResource("/image/cash.png")));
 		GridBagConstraints gbc_btnCobrarF = new GridBagConstraints();
 		gbc_btnCobrarF.gridheight = 2;
@@ -404,71 +453,77 @@ public class MenuOperador extends JFrame implements ActionListener{
 		gbc_panel.gridx = 0;
 		gbc_panel.gridy = 11;
 		contentPane.add(panel, gbc_panel);
-		GridBagLayout gbl_panel = new GridBagLayout();
-		gbl_panel.columnWidths = new int[]{0, 0, 0, 0, 0, 0, 0};
-		gbl_panel.rowHeights = new int[]{0, 0};
-		gbl_panel.columnWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
-		gbl_panel.rowWeights = new double[]{0.0, Double.MIN_VALUE};
-		panel.setLayout(gbl_panel);
-		
-		 lblIngreso = new JLabel("Ingreso:");
-		GridBagConstraints gbc_lblIngreso = new GridBagConstraints();
-		gbc_lblIngreso.fill = GridBagConstraints.HORIZONTAL;
-		gbc_lblIngreso.insets = new Insets(0, 0, 0, 5);
-		gbc_lblIngreso.gridx = 0;
-		gbc_lblIngreso.gridy = 0;
-		panel.add(lblIngreso, gbc_lblIngreso);
-		
-		textFieldIngreso = new JTextField();
-		textFieldIngreso.setText("10/01/2015 10:20");
-		textFieldIngreso.setEnabled(false);
-		textFieldIngreso.setEditable(false);
-		GridBagConstraints gbc_textFieldIngreso = new GridBagConstraints();
-		gbc_textFieldIngreso.fill = GridBagConstraints.HORIZONTAL;
-		gbc_textFieldIngreso.insets = new Insets(0, 0, 0, 5);
-		gbc_textFieldIngreso.gridx = 1;
-		gbc_textFieldIngreso.gridy = 0;
-		panel.add(textFieldIngreso, gbc_textFieldIngreso);
-		textFieldIngreso.setColumns(10);
-		
-		 lblEgreso = new JLabel("Egreso:");
-		GridBagConstraints gbc_lblEgreso = new GridBagConstraints();
-		gbc_lblEgreso.fill = GridBagConstraints.HORIZONTAL;
-		gbc_lblEgreso.insets = new Insets(0, 0, 0, 5);
-		gbc_lblEgreso.gridx = 2;
-		gbc_lblEgreso.gridy = 0;
-		panel.add(lblEgreso, gbc_lblEgreso);
-		
-		textFieldEgreso = new JTextField();
-		textFieldEgreso.setText("10/01/2015 10:25");
-		textFieldEgreso.setEnabled(false);
-		textFieldEgreso.setEditable(false);
-		GridBagConstraints gbc_textFieldEgreso = new GridBagConstraints();
-		gbc_textFieldEgreso.fill = GridBagConstraints.HORIZONTAL;
-		gbc_textFieldEgreso.insets = new Insets(0, 0, 0, 5);
-		gbc_textFieldEgreso.gridx = 3;
-		gbc_textFieldEgreso.gridy = 0;
-		panel.add(textFieldEgreso, gbc_textFieldEgreso);
-		textFieldEgreso.setColumns(10);
-		
-		 lblEstadia_1 = new JLabel("Estadia:");
-		GridBagConstraints gbc_lblEstadia_1 = new GridBagConstraints();
-		gbc_lblEstadia_1.fill = GridBagConstraints.HORIZONTAL;
-		gbc_lblEstadia_1.insets = new Insets(0, 0, 0, 5);
-		gbc_lblEstadia_1.gridx = 4;
-		gbc_lblEstadia_1.gridy = 0;
-		panel.add(lblEstadia_1, gbc_lblEstadia_1);
-		
-		textField_2 = new JTextField();
-		textField_2.setText("00:05");
-		textField_2.setEnabled(false);
-		textField_2.setEditable(false);
-		textField_2.setColumns(10);
-		GridBagConstraints gbc_textField_2 = new GridBagConstraints();
-		gbc_textField_2.fill = GridBagConstraints.HORIZONTAL;
-		gbc_textField_2.gridx = 5;
-		gbc_textField_2.gridy = 0;
-		panel.add(textField_2, gbc_textField_2);
+		 GridBagLayout gbl_panel = new GridBagLayout();
+		 gbl_panel.columnWidths = new int[]{188, 202, 159, 207, 239, 202, 0};
+		 gbl_panel.rowHeights = new int[]{22, 0};
+		 gbl_panel.columnWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
+		 gbl_panel.rowWeights = new double[]{1.0, Double.MIN_VALUE};
+		 panel.setLayout(gbl_panel);
+		 
+		  lblIngreso = new JLabel("Ingreso:");
+		  lblIngreso.setFont(new Font("Tahoma", Font.PLAIN, 30));
+		  GridBagConstraints gbc_lblIngreso = new GridBagConstraints();
+		  gbc_lblIngreso.anchor = GridBagConstraints.EAST;
+		  gbc_lblIngreso.insets = new Insets(0, 0, 0, 5);
+		  gbc_lblIngreso.gridx = 0;
+		  gbc_lblIngreso.gridy = 0;
+		  panel.add(lblIngreso, gbc_lblIngreso);
+		 
+		 textFieldIngreso = new JTextField();
+		 textFieldIngreso.setFont(new Font("Tahoma", Font.BOLD, 20));
+		 textFieldIngreso.setText("10/01/2015 10:20");
+		 textFieldIngreso.setEnabled(false);
+		 textFieldIngreso.setEditable(false);
+		 GridBagConstraints gbc_textFieldIngreso = new GridBagConstraints();
+		 gbc_textFieldIngreso.fill = GridBagConstraints.BOTH;
+		 gbc_textFieldIngreso.insets = new Insets(0, 0, 0, 5);
+		 gbc_textFieldIngreso.gridx = 1;
+		 gbc_textFieldIngreso.gridy = 0;
+		 panel.add(textFieldIngreso, gbc_textFieldIngreso);
+		 textFieldIngreso.setColumns(10);
+		 
+		  lblEgreso = new JLabel("Egreso:");
+		  lblEgreso.setFont(new Font("Tahoma", Font.PLAIN, 30));
+		  GridBagConstraints gbc_lblEgreso = new GridBagConstraints();
+		  gbc_lblEgreso.anchor = GridBagConstraints.EAST;
+		  gbc_lblEgreso.insets = new Insets(0, 0, 0, 5);
+		  gbc_lblEgreso.gridx = 2;
+		  gbc_lblEgreso.gridy = 0;
+		  panel.add(lblEgreso, gbc_lblEgreso);
+		 
+		 textFieldEgreso = new JTextField();
+		 textFieldEgreso.setFont(new Font("Tahoma", Font.BOLD, 20));
+		 textFieldEgreso.setText("10/01/2015 10:25");
+		 textFieldEgreso.setEnabled(false);
+		 textFieldEgreso.setEditable(false);
+		 GridBagConstraints gbc_textFieldEgreso = new GridBagConstraints();
+		 gbc_textFieldEgreso.fill = GridBagConstraints.BOTH;
+		 gbc_textFieldEgreso.insets = new Insets(0, 0, 0, 5);
+		 gbc_textFieldEgreso.gridx = 3;
+		 gbc_textFieldEgreso.gridy = 0;
+		 panel.add(textFieldEgreso, gbc_textFieldEgreso);
+		 textFieldEgreso.setColumns(10);
+		 
+		  lblEstadia_1 = new JLabel("Estadia:");
+		  lblEstadia_1.setFont(new Font("Tahoma", Font.PLAIN, 30));
+		  GridBagConstraints gbc_lblEstadia_1 = new GridBagConstraints();
+		  gbc_lblEstadia_1.anchor = GridBagConstraints.EAST;
+		  gbc_lblEstadia_1.insets = new Insets(0, 0, 0, 5);
+		  gbc_lblEstadia_1.gridx = 4;
+		  gbc_lblEstadia_1.gridy = 0;
+		  panel.add(lblEstadia_1, gbc_lblEstadia_1);
+		 
+		 textField_2 = new JTextField();
+		 textField_2.setFont(new Font("Tahoma", Font.BOLD, 20));
+		 textField_2.setText("00:05");
+		 textField_2.setEnabled(false);
+		 textField_2.setEditable(false);
+		 textField_2.setColumns(10);
+		 GridBagConstraints gbc_textField_2 = new GridBagConstraints();
+		 gbc_textField_2.fill = GridBagConstraints.BOTH;
+		 gbc_textField_2.gridx = 5;
+		 gbc_textField_2.gridy = 0;
+		 panel.add(textField_2, gbc_textField_2);
 	}
 
 	@Override

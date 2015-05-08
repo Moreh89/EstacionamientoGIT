@@ -39,6 +39,16 @@ public class Ticket {
 	
 	private String tipoIngreso; //si hay que cobrar por hora o por estadia.
 	
+	private double prepago; //Si ya pago algo
+	
+	
+	
+	public double getPrepago() {
+		return prepago;
+	}
+	public void setPrepago(double prepago) {
+		this.prepago = prepago;
+	}
 	public long getIdTicket() {
 		return idTicket;
 	}

@@ -32,6 +32,7 @@ public class Cliente {
 	private String descripcion;
 	private String correoElectronico;
 	private ESTADO estado;
+	private String cuil;
 	@OneToMany
 	@JoinColumn(name="Cliente")
 	private List<PersonaAutorizada> personasAutorizadasARetirar;
@@ -67,6 +68,12 @@ public class Cliente {
 
 	
 	
+	public String getCuil() {
+		return cuil;
+	}
+	public void setCuil(String cuil) {
+		this.cuil = cuil;
+	}
 	public long getIdCliente() {
 		return idCliente;
 	}
