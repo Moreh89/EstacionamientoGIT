@@ -25,6 +25,7 @@ import java.awt.Graphics;
 import java.awt.Insets;
 import javax.swing.JTextPane;
 import java.awt.Toolkit;
+import java.awt.Font;
 
 @SuppressWarnings("serial")
 public class PrintTicket extends JFrame {
@@ -66,7 +67,7 @@ public class PrintTicket extends JFrame {
 				PrintTicket.class.getResource("/image/printer.png")));
 		setResizable(false);
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-		setBounds(100, 100, 220, 300);
+		setBounds(100, 100, 128, 300);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
@@ -98,9 +99,10 @@ public class PrintTicket extends JFrame {
 			panelAttributes.setLayout(gbl_panelAttributes);
 
 			txtpnfechaIng = new JTextPane();
+			txtpnfechaIng.setFont(new Font("Tahoma", Font.PLAIN, 16));
 			txtpnfechaIng.setContentType("text/html");
 			txtpnfechaIng
-					.setText("<html>Fecha Ing: 10/01/2015 10:30<br>Vehiculo: Auto<br>Modelo: Chevrolet Aveo<br>Patente: 343<br></html>");
+					.setText("<html><b>Fecha Ing:<br>10/01/2015 10:30<br>Vehiculo: Auto<br>Modelo:<br>Chevrolet Aveo<br>Patente:<br>343</b><br></html>");
 			GridBagConstraints gbc_txtpnfechaIng = new GridBagConstraints();
 			gbc_txtpnfechaIng.fill = GridBagConstraints.BOTH;
 			gbc_txtpnfechaIng.gridx = 0;
@@ -109,14 +111,16 @@ public class PrintTicket extends JFrame {
 
 			panel = new JPanel();
 			GridBagConstraints gbc_panel = new GridBagConstraints();
-			gbc_panel.anchor = GridBagConstraints.SOUTH;
-			gbc_panel.fill = GridBagConstraints.HORIZONTAL;
+			gbc_panel.anchor = GridBagConstraints.SOUTHWEST;
 			gbc_panel.gridx = 0;
 			gbc_panel.gridy = 1;
 			contentPane.add(panel, gbc_panel);
 
 			// Always get a Barcode from the BarcodeFactory
 			barcode = BarcodeFactory.create2of7("0123456789");
+			barcode.setBarHeight(30);
+			barcode.setBarWidth(1);
+
 			panel.add(barcode);
 
 		} catch (BarcodeException e) {
