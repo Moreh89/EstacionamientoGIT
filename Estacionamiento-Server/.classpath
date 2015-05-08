@@ -28,5 +28,7 @@
 	<classpathentry kind="lib" path="lib/mysql-connector-java-5.1.6-bin.jar"/>
 	<classpathentry kind="lib" path="lib/sqljdbc.jar"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.junit.JUNIT_CONTAINER/3"/>
+	<classpathentry kind="lib" path="lib/barbecue-1.5-beta1.jar"/>
+	<classpathentry kind="lib" path="lib/jdom.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
