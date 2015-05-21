@@ -10,6 +10,9 @@ import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
+import modelo.CategoriaVehiculo;
+import modelo.ModeloVehiculo;
+
 @Entity
 @Table(name = "Ticket")
 public class Ticket {
@@ -19,14 +22,17 @@ public class Ticket {
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	private long idTicket;
 	private double montoCobrado;
-	private String estado;
+	private Estado estado;
 	//Time puede cambiarse si no es compatible con hibernate
 	private Date fechaLlegada;
 	private Date fechaSalida;
 
 	@OneToOne
-	@JoinColumn(name="Vehiculo")
-	private Vehiculo vehiculo;
+	@JoinColumn(name="CatergoriaVehiculo")
+	private CategoriaVehiculo catergoriaVehiculo;
+	@OneToOne
+	@JoinColumn(name="ModeloVehiculo")
+	private ModeloVehiculo modeloVehiculo;
 	@OneToOne
 	@JoinColumn(name="Cliente")
 	private Cliente cliente;
@@ -40,8 +46,13 @@ public class Ticket {
 	private String tipoIngreso; //si hay que cobrar por hora o por estadia.
 	
 	private double prepago; //Si ya pago algo
+	private String observacion;
 	
-	
+	public enum Estado {
+		ABIERTO,
+		PREPAGO,
+		CERRADO;
+	}
 	
 	public double getPrepago() {
 		return prepago;
@@ -67,10 +78,10 @@ public class Ticket {
 	public void setDescuento(Descuento descuento) {
 		this.descuento = descuento;
 	}
-	public String getEstado() {
+	public Estado getEstado() {
 		return estado;
 	}
-	public void setEstado(String estado) {
+	public void setEstado(Estado estado) {
 		this.estado = estado;
 	}
 	public Date getFechaLlegada() {
@@ -84,12 +95,6 @@ public class Ticket {
 	}
 	public void setFechaSalida(Date fechaSalida) {
 		this.fechaSalida = fechaSalida;
-	}
-	public Vehiculo getVehiculo() {
-		return vehiculo;
-	}
-	public void setVehiculo(Vehiculo vehiculo) {
-		this.vehiculo = vehiculo;
 	}
 	public Cliente getCliente() {
 		return cliente;
@@ -109,22 +114,26 @@ public class Ticket {
 	public void setTipoIngreso(String tipoIngreso) {
 		this.tipoIngreso = tipoIngreso;
 	}
-	public Ticket(long idTicket, double montoCobrado, String estado,
-			Date fechaLlegada, Date fechaSalida, Vehiculo vehiculo,
-			Cliente cliente, Descuento descuento, Usuario usuario,
-			String tipoIngreso) {
-		super();
-		this.idTicket = idTicket;
-		this.montoCobrado = montoCobrado;
-		this.estado = estado;
-		this.fechaLlegada = fechaLlegada;
-		this.fechaSalida = fechaSalida;
-		this.vehiculo = vehiculo;
-		this.cliente = cliente;
-		this.descuento = descuento;
-		this.usuario = usuario;
-		this.tipoIngreso = tipoIngreso;
+	
+	public String getObservacion() {
+		return observacion;
 	}
+	public void setObservacion(String observacion) {
+		this.observacion = observacion;
+	}
+	public CategoriaVehiculo getCatergoriaVehiculo() {
+		return catergoriaVehiculo;
+	}
+	public void setCatergoriaVehiculo(CategoriaVehiculo catergoriaVehiculo) {
+		this.catergoriaVehiculo = catergoriaVehiculo;
+	}
+	public ModeloVehiculo getModeloVehiculo() {
+		return modeloVehiculo;
+	}
+	public void setModeloVehiculo(ModeloVehiculo modeloVehiculo) {
+		this.modeloVehiculo = modeloVehiculo;
+	}
+	public Ticket() {}
 
 
 

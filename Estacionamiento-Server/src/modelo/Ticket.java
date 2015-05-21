@@ -1,25 +1,34 @@
 package modelo;
 
 import java.sql.Date;
+import java.util.GregorianCalendar;
 
 public class Ticket {
 	
 
 	private long idTicket;
 	private double montoCobrado;
-	private String estado;
+	//Estado ABIERTO/PREPAGO/CERRADO
+	private Estado estado;
 	//Time puede cambiarse si no es compatible con hibernate
 	private Date fechaLlegada;
 	private Date fechaSalida;
-
-	private Vehiculo vehiculo;
+	private CategoriaVehiculo catergoriaVehiculo;
+	private ModeloVehiculo modeloVehiculo;
 	private Cliente cliente;
 	private Descuento descuento;
 	private Usuario usuario; //usuario del sistema (util para arqueo caja)
-	
+	//TODO Esto hay que sacarlo
 	private String tipoIngreso; //si hay que cobrar por hora o por estadia.
-	
 	private double prepago; //Si ya pago algo
+	private String observacion;
+	
+	public enum Estado {
+		ABIERTO,
+		PREPAGO,
+		CERRADO;
+	}
+	
 	
 	public double getPrepago() {
 		return prepago;
@@ -45,10 +54,10 @@ public class Ticket {
 	public void setDescuento(Descuento descuento) {
 		this.descuento = descuento;
 	}
-	public String getEstado() {
+	public Estado getEstado() {
 		return estado;
 	}
-	public void setEstado(String estado) {
+	public void setEstado(Estado estado) {
 		this.estado = estado;
 	}
 	public Date getFechaLlegada() {
@@ -62,12 +71,6 @@ public class Ticket {
 	}
 	public void setFechaSalida(Date fechaSalida) {
 		this.fechaSalida = fechaSalida;
-	}
-	public Vehiculo getVehiculo() {
-		return vehiculo;
-	}
-	public void setVehiculo(Vehiculo vehiculo) {
-		this.vehiculo = vehiculo;
 	}
 	public Cliente getCliente() {
 		return cliente;
@@ -86,6 +89,46 @@ public class Ticket {
 	}
 	public void setTipoIngreso(String tipoIngreso) {
 		this.tipoIngreso = tipoIngreso;
+	}
+	public String getObservacion() {
+		return observacion;
+	}
+	public void setObservacion(String observacion) {
+		this.observacion = observacion;
+	}
+	public CategoriaVehiculo getCatergoriaVehiculo() {
+		return catergoriaVehiculo;
+	}
+	public void setCatergoriaVehiculo(CategoriaVehiculo catergoriaVehiculo) {
+		this.catergoriaVehiculo = catergoriaVehiculo;
+	}
+	public ModeloVehiculo getModeloVehiculo() {
+		return modeloVehiculo;
+	}
+	public void setModeloVehiculo(ModeloVehiculo modeloVehiculo) {
+		this.modeloVehiculo = modeloVehiculo;
+	}
+	public Ticket(CategoriaVehiculo catvehiculo,ModeloVehiculo modVehiculo, Cliente cliente,
+			Descuento descuento, Usuario usuario,
+			double prepago, String obsevacion) {
+		super();
+		
+		//TODO convertir el DATE como corresponde
+		this.fechaLlegada = (Date) GregorianCalendar.getInstance().getTime();
+		this.fechaSalida = null;
+		
+		if(prepago == 0)	this.estado = Ticket.Estado.ABIERTO;
+		else 				this.estado = Ticket.Estado.PREPAGO;
+		
+		this.montoCobrado = 0;
+		this.catergoriaVehiculo = catvehiculo;
+		this.modeloVehiculo = modVehiculo;
+		this.cliente = cliente;
+		this.descuento = descuento;
+		this.usuario = usuario;
+		this.tipoIngreso = null;
+		this.prepago = prepago;
+		this.observacion = obsevacion;
 	}
 	public double cobrar(int cantidadMinutos, Tarifa tarifa)
 	{
