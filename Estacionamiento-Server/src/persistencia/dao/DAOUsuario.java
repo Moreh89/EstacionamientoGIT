@@ -19,7 +19,7 @@ public class DAOUsuario {
 	}
 
 	public Usuario buscarUsuario(String userName) {
-		persistencia.clases.Usuario usuarioP=(persistencia.clases.Usuario) HibernateDAO.getInstancia().getObjectWithString("UsuarioP", "userName", userName);
+		persistencia.clases.Usuario usuarioP=(persistencia.clases.Usuario) HibernateDAO.getInstancia().getObjectWithString("Usuario", "userName", userName);
 		Usuario usuario=Converter.convertUsuarioPersistenciaToModelo(usuarioP);
 		
 		return usuario;

@@ -7,7 +7,7 @@ public class Converter {
 
 	public static modelo.Usuario convertUsuarioPersistenciaToModelo(persistencia.clases.Usuario usuarioPersistencia)
 	{
-		Usuario usuarioModelo=new Usuario();
+		Usuario usuarioModelo=new modelo.Usuario();
 		
 		usuarioModelo.setIdUsuario(usuarioPersistencia.getIdUsuario());
 		usuarioModelo.setUserName(usuarioPersistencia.getUserName());
