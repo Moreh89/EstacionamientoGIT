@@ -10,8 +10,8 @@ import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
-import modelo.CategoriaVehiculo;
-import modelo.ModeloVehiculo;
+import persistencia.clases.CategoriaVehiculo;
+import persistencia.clases.ModeloVehiculo;
 
 @Entity
 @Table(name = "Ticket")
