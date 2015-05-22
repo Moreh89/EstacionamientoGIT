@@ -1,8 +1,7 @@
 package persistencia.dao;
-import persistencia.Converter;
 import modelo.Usuario;
+import persistencia.Converter;
 import persistencia.HibernateDAO;
-import persistencia.clases.UsuarioP;
 
 public class DAOUsuario {
 
@@ -20,7 +19,7 @@ public class DAOUsuario {
 	}
 
 	public Usuario buscarUsuario(String userName) {
-		UsuarioP usuarioP=(UsuarioP) HibernateDAO.getInstancia().getObjectWithString("UsuarioP", "userName", userName);
+		persistencia.clases.Usuario usuarioP=(persistencia.clases.Usuario) HibernateDAO.getInstancia().getObjectWithString("UsuarioP", "userName", userName);
 		Usuario usuario=Converter.convertUsuarioPersistenciaToModelo(usuarioP);
 		
 		return usuario;

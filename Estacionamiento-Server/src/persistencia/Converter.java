@@ -1,19 +1,21 @@
-package controlador;
+package persistencia;
 
+import modelo.Usuario;
 import persistencia.clases.*;
 
 public class Converter {
 
-	public modelo.Usuario convertUsuarioPersistenciaToModelo(persistencia.clases.Usuario usuarioPersistencia)
+	public static modelo.Usuario convertUsuarioPersistenciaToModelo(persistencia.clases.Usuario usuarioPersistencia)
 	{
-		modelo.Usuario usuarioModelo;
+		Usuario usuarioModelo=new Usuario();
 		
 		usuarioModelo.setIdUsuario(usuarioPersistencia.getIdUsuario());
 		usuarioModelo.setUserName(usuarioPersistencia.getUserName());
 		usuarioModelo.setPassword(usuarioPersistencia.getPassword());
+		
 //		TODO verificar permisos que el enum de persistencia no coincide.
 		
-		usuarioModelo.setPermisos(usuarioPersistencia.getPermisos());
+//		usuarioModelo.setPermisos(usuarioPersistencia.getPermisos());
 		
 		usuarioModelo.setNombre(usuarioPersistencia.getNombre());
 		usuarioModelo.setApellido(usuarioPersistencia.getApellido());

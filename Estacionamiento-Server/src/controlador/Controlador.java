@@ -3,7 +3,7 @@ package controlador;
 
 import java.util.ArrayList;
 
-import persistencia.dao.DAOTicket;
+import persistencia.dao.*;
 import modelo.*;
 
 public class Controlador {
@@ -35,9 +35,9 @@ public class Controlador {
 		return instancia;
 	}
 
-	public boolean validarContrasenaActual(int dni, String psw) {
+	public boolean validarContrasenaActual(String userName, String psw) {
 
-		Usuario u = buscarUsuario(dni);
+		Usuario u = buscarUsuario(userName);
 
 		if (u != null) {
 			if (psw.equals(u.getPassword())) {
@@ -49,34 +49,30 @@ public class Controlador {
 	}
 
 	public boolean validarLogin(String userName, String password) {
-		return true;
 		// HARDCODEADO PARA INGRESAR CON CUALQUIER USUARIO Y CLAVE
 
-		// String pswEnc = Encriptacion.Encriptar(password);
-		//
-		// Usuario u = this.buscarUsuario(userName, pswEnc) ;
-		//
-		// if (u!=null){
-		//
-		// if(pswEnc.equals(u.getPassword())){
-		// usuarioActual = u.getView();
-		// return true;
-		// }
-		// else
-		// return false;
-		// }
-		// return false;
+		//		 String pswEnc = Encriptacion.Encriptar(password);
+
+		Usuario u = this.buscarUsuario(userName);
+
+		if (u!=null){
+
+			if(password.equals(u.getPassword())){
+				//		 usuarioActual = u.getView();
+				usuarioActual= u;
+				return true;
+			}
+			else
+				return false;
+		}
+		return false;
 	}
 
-	public Usuario buscarUsuario(String userName, String password) {
-
-		return null;
+	public Usuario buscarUsuario(String userName) 
+	{
+		return DAOUsuario.getInstance().buscarUsuario(userName);
 	}
 
-	public Usuario buscarUsuario(int dni) {
-
-		return null;
-	}
 
 	public Usuario getUsuarioActual() {
 		return usuarioActual;
@@ -151,21 +147,21 @@ public class Controlador {
 	public String generarTicket(String tipoVehiculo, String modelo,
 			String color, String descuento, String patente,
 			String cliente, String prepago, String obsevacion, String usuario) {
-		
+
 		CategoriaVehiculo catve= new CategoriaVehiculo();
 		ModeloVehiculo modve = new ModeloVehiculo();
 		Cliente cl = new Cliente();
 		Descuento des = new Descuento();
-		
+
 		//TODO buscar categoriaVe, modeloVe, cliente, descuento
-		
+
 		Ticket tck = new Ticket( catve, modve, cl, des, usuarioActual, Double.valueOf(prepago), obsevacion);
 		this.ticket = tck;
-		
+
 		long numeroTck = DAOTicket.getInstance().persistir(tck);
-		
+
 		return String.valueOf(numeroTck);
-		
+
 	}
 
 }
