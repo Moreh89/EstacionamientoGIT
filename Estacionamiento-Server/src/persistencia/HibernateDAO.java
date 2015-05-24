@@ -2,6 +2,7 @@ package persistencia;
 
 import java.util.List;
 
+import org.hibernate.SQLQuery;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 
@@ -126,6 +127,17 @@ public class HibernateDAO {
 		session.getTransaction().commit();
 		session.flush();
 		return obj;
+	}
+	
+	public boolean backUp(String databaseName, String path,String fileNameBackup)
+	{
+		Session session = getSession();
+		session.beginTransaction();
+//TODO CREAR EL QUERY, NO EJECUTA PARECE. La línea ya está.
+		SQLQuery query=session.createSQLQuery("BACKUP DATABASE " + databaseName + " TO DISK = " + path +fileNameBackup);
+		query.executeUpdate();
+		session.flush();
+		return true;
 	}
 	
 }

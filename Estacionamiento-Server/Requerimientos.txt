@@ -64,9 +64,11 @@ En el de admin agregar una lista con los usuarios (todos o por usuario)
 
 6)
 Modelos asociados a tipo vehiculo
+	NOTA: DIRÍA QUE MODELO Y TIPO VEHICULO CARGUEN A MEMORIA DE LA BASE CUANDO INICIA EL SISTEMA, POR UN TEMA DE PERFORMANCE.
 
 7)
 Opcion de cerrar session vuelve al menu login
+Estado: Resuelto
 
 8)
 Las cocheras tienen un %del total de expensas (0,035 ej) a esto se le asigna el porcentual de expensas
@@ -123,6 +125,7 @@ CANOPUS S.A. Logo E
 
 22)
 Poder exportar la informacion (backups).
+ESTADO: HECHO para adminsitrador
 
 23)
 Poder borrar tickets de >x fecha de antigueadad desde admin

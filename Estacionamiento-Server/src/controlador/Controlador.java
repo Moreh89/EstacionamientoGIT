@@ -1,8 +1,17 @@
 package controlador;
 
 
+import java.io.File;
+import java.io.IOException;
+import java.sql.SQLException;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 
+import com.mysql.jdbc.Statement;
+
+import persistencia.HibernateDAO;
 import persistencia.dao.*;
 import modelo.*;
 
@@ -29,7 +38,8 @@ public class Controlador {
 	}
 
 	public static Controlador getInstancia() {
-		if (instancia == null) {
+		if (instancia == null) 
+		{
 			instancia = new Controlador();
 		}
 		return instancia;
@@ -79,7 +89,7 @@ public class Controlador {
 	}
 
 	public boolean probarConexion() {
-		// HARDCODEADO
+		// TODO HARDCODEADO
 		return true;
 		// Connection con = PoolConnection.getPoolConnection().getConnection();
 		// if (con == null){
@@ -95,9 +105,20 @@ public class Controlador {
 
 	public void altaCliente(String nombre, String apellido, String telefono1,
 			String telefono2, String direccion1, String direccion2,
-			String email, String razonSocial, String vehiculosPantentes,
-			String personasAutorizadas) {
-		// TODO Auto-generated method stub
+			String email, String razonSocial, ArrayList<String> listPersonasAutorizadas,
+			ArrayList<String> listVehiculos) {
+		Cliente cliente=new Cliente();
+		cliente.setNombre(nombre);
+		cliente.setApellido(apellido);
+		cliente.setTelefono1(telefono1);
+		cliente.setTelefono2(telefono2);
+		cliente.setDireccion(direccion1);
+		cliente.setDireccion2(direccion2);
+		cliente.setCorreoElectronico(email);
+		cliente.setRazonSocial(razonSocial);
+
+
+		// TODO vehiculos patentes y personas autorizadas
 
 	}
 
@@ -161,6 +182,71 @@ public class Controlador {
 		long numeroTck = DAOTicket.getInstance().persistir(tck);
 
 		return String.valueOf(numeroTck);
+
+	}
+
+
+	public boolean backUp(String letraDisco){
+
+//		TODO settear la letra de disco. Asegurarse que ande en el C primero, despues vemos como definir la letra.
+		String path= "'" + letraDisco + ":/Temp/";
+
+		DateFormat dateFormat = new SimpleDateFormat("yyyyMMddHHmmss"); 
+		Date date = new Date(); 
+		dateFormat.format(date); 
+
+		String fileNameBackup = "backUp_"+dateFormat.format(date)+".BAK'"; 
+		
+		HibernateDAO.getInstancia().backUp("ESTACIONAMIENTO", path, fileNameBackup);
+
+		return true;
+		
+		//		String path = "C:/";
+		//		
+		//		if (con!=null){
+		//			String dataBaseName =  PoolConnection.getPoolConnection().getDataBaseName();
+		//			String comand ="BACKUP DATABASE " +  dataBaseName + " TO DISK = "; 
+		//			
+		//			
+		//			 File miDir = new File (".");
+		//			 try {
+		//				  path = miDir.getCanonicalPath()+"/";
+		//			} catch (IOException e1) {
+		//				e1.printStackTrace();
+		//			}
+		//			
+		//			
+		//			DateFormat dateFormat = new SimpleDateFormat("yyyyMMddHHmmss"); 
+		//			Date date = new Date(); 
+		//			dateFormat.format(date); 
+		//			
+		//			String nameBackup = dataBaseName+ "_"+dateFormat.format(date)+".BAK"; 
+		//					
+		//			String dbackup =comand + "'"+ path +nameBackup+"'";
+		//		
+		//			Statement callBackupDbase = null;
+		//			
+		//			try {
+		//				con.setAutoCommit(true);
+		//				callBackupDbase = con.createStatement();
+		//			} catch (SQLException e) {
+		//				e.printStackTrace();
+		//			}
+		//			
+		//			if(callBackupDbase != null){
+		//				try {
+		//					callBackupDbase.execute(dbackup);
+		//					return true;
+		//				}catch (SQLException e) {
+		//					e.printStackTrace();
+		//					return false;
+		//				}
+		//			}else return false;
+		//			
+		//			
+		//		}else
+		//			return false;	
+		//	}
 
 	}
 

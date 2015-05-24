@@ -65,6 +65,8 @@ public class MenuAdmin extends JFrame implements ActionListener {
 	private JMenu mnMiCuenta;
 	private JMenuItem mntmCambiarClave;
 	private JMenuItem mntmSalir;
+	private JMenu menuSistema;
+	private JMenuItem menuItemBackUp;
 
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
@@ -241,6 +243,13 @@ public class MenuAdmin extends JFrame implements ActionListener {
 		mnConsultas.add(mntmDeudores);
 		mntmDeudores.addActionListener(this);
 		
+		menuSistema = new JMenu("Gestion Sistema");
+		menuBar.add(menuSistema);
+		
+		menuItemBackUp = new JMenuItem("Realizar BackUp");
+		menuSistema.add(menuItemBackUp);
+		menuItemBackUp.addActionListener(this);
+		
 		mnMiCuenta = new JMenu("Mi Cuenta");
 		mnMiCuenta.setIcon(new ImageIcon(MenuAdmin.class.getResource("/image/users.png")));
 		menuBar.add(mnMiCuenta);
@@ -304,9 +313,15 @@ public class MenuAdmin extends JFrame implements ActionListener {
 		if (event.getSource() == mntmAltaTarifa){
 			new AltaTarifa().setVisible(true);
 		}
+		if (event.getSource() == menuItemBackUp){
+			new BackupBD().setVisible(true);
+		}
 		if (event.getSource() == mntmSalir){
+			new Login().setVisible(true);
 			dispose();
 		}
+		
+		
 	}
 
 }

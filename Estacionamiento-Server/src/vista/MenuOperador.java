@@ -82,6 +82,7 @@ public class MenuOperador extends JFrame implements ActionListener {
 	private JTextField textFieldPrepago;
 	private JLabel labelUsuario;
 	private JMenuItem mntmTicketsAbiertos;
+	private JMenuItem mntmCerrarSesion;
 
 	/**
 	 * Launch the application.
@@ -125,10 +126,14 @@ public class MenuOperador extends JFrame implements ActionListener {
 		mntmModelo = new JMenuItem("Modelo F8");
 		mntmModelo.setFont(new Font("Segoe UI", Font.PLAIN, 20));
 		mnAltas.add(mntmModelo);
+		mntmModelo.addActionListener(this);
+
 
 		mntmColor = new JMenuItem("Color F9");
 		mntmColor.setFont(new Font("Segoe UI", Font.PLAIN, 20));
 		mnAltas.add(mntmColor);
+		mntmColor.addActionListener(this);
+
 
 		mnConsultas = new JMenu("Consultas");
 		mnConsultas.setFont(new Font("Segoe UI", Font.BOLD, 20));
@@ -136,13 +141,19 @@ public class MenuOperador extends JFrame implements ActionListener {
 				.getResource("/image/buscar.png")));
 		menuBar.add(mnConsultas);
 
+
 		mntmTicketsAbiertos = new JMenuItem("Tickets abiertos");
 		mntmTicketsAbiertos.setFont(new Font("Segoe UI", Font.PLAIN, 20));
 		mnConsultas.add(mntmTicketsAbiertos);
+		mntmTicketsAbiertos.addActionListener(this);
+
 
 		mntmArqueoDeCaja = new JMenuItem("Arqueo de Caja");
 		mntmArqueoDeCaja.setFont(new Font("Segoe UI", Font.PLAIN, 20));
 		mnConsultas.add(mntmArqueoDeCaja);
+		mntmArqueoDeCaja.addActionListener(this);
+
+
 
 		mnMiCuenta = new JMenu("Mi Cuenta");
 		mnMiCuenta.setFont(new Font("Segoe UI", Font.BOLD, 20));
@@ -153,6 +164,15 @@ public class MenuOperador extends JFrame implements ActionListener {
 		mntmCambiarContrasea = new JMenuItem("Cambiar Contrase\u00F1a");
 		mntmCambiarContrasea.setFont(new Font("Segoe UI", Font.PLAIN, 20));
 		mnMiCuenta.add(mntmCambiarContrasea);
+		mntmCambiarContrasea.addActionListener(this);
+
+
+		mntmCerrarSesion = new JMenuItem("Cerrar Sesion");
+		mntmCerrarSesion.setFont(new Font("Segoe UI", Font.PLAIN, 20));
+		mnMiCuenta.add(mntmCerrarSesion);
+		mntmCerrarSesion.addActionListener(this);
+
+
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
@@ -165,6 +185,8 @@ public class MenuOperador extends JFrame implements ActionListener {
 		gbl_contentPane.rowWeights = new double[] { 0.0, 0.0, 0.0, 0.0, 0.0,
 				0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE };
 		contentPane.setLayout(gbl_contentPane);
+
+
 
 		lblCodigoTicket = new JLabel("Codigo Ticket:");
 		lblCodigoTicket.setFont(new Font("Tahoma", Font.PLAIN, 30));
@@ -549,8 +571,8 @@ public class MenuOperador extends JFrame implements ActionListener {
 	public void actionPerformed(ActionEvent event) {
 
 		if (event.getSource() == btnCobrarF) {
-			
-			
+
+
 			String numeroTicket= Controlador.getInstancia()
 					.generarTicket(
 							(String) comboBoxTipoVehiculo.getSelectedItem(),
@@ -563,11 +585,28 @@ public class MenuOperador extends JFrame implements ActionListener {
 							textFieldObsevacion.getText(),
 							labelUsuario.getText());
 			textFieldNumeroTicket.setText(numeroTicket);
-			
-			//TODO bloquear botones y demas hasta que elija nuevo
 
+			//TODO bloquear botones y demas hasta que elija nuevo
 		}
 
-	}
+		if (event.getSource() == mntmCerrarSesion){
+			new Login().setVisible(true);
+			dispose();			
+		}
+		if (event.getSource() == mntmArqueoDeCaja){
+			new ArqueoDeCaja().setVisible(true);
+		}	
+		if (event.getSource() == mntmModelo){
+//		TODO	ALTA COLOR new GestionColor().setVisible(true);
+		}
+		if (event.getSource() == mntmColor){
+//		TODO ALTA MODELO 	new GestionModelo().setVisible(true);
+		}
+		if (event.getSource() == mntmCambiarContrasea){
+			new CambioContrasenia().setVisible(true);
+		}	
+		
 
+
+	}
 }
