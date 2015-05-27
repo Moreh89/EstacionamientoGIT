@@ -9,6 +9,8 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 
+import javax.swing.JPasswordField;
+
 import com.mysql.jdbc.Statement;
 
 import persistencia.HibernateDAO;
@@ -59,10 +61,6 @@ public class Controlador {
 	}
 
 	public boolean validarLogin(String userName, String password) {
-		// HARDCODEADO PARA INGRESAR CON CUALQUIER USUARIO Y CLAVE
-
-		//		 String pswEnc = Encriptacion.Encriptar(password);
-
 		Usuario u = this.buscarUsuario(userName);
 
 		if (u!=null){
@@ -88,20 +86,9 @@ public class Controlador {
 		return usuarioActual;
 	}
 
-	public boolean probarConexion() {
-		// TODO HARDCODEADO
-		return true;
-		// Connection con = PoolConnection.getPoolConnection().getConnection();
-		// if (con == null){
-		// return false;
-		// }else
-		// return true;
-	}
 
-	public boolean validarPermiso(String string) {
-		// TODO Auto-generated method stub
-		return true;
-	}
+
+
 
 	public void altaCliente(String nombre, String apellido, String telefono1,
 			String telefono2, String direccion1, String direccion2,
@@ -187,67 +174,28 @@ public class Controlador {
 
 
 	public boolean backUp(String letraDisco){
-
-//		TODO settear la letra de disco. Asegurarse que ande en el C primero, despues vemos como definir la letra.
-		String path= "'" + letraDisco + ":/Temp/";
+		//TODO ver como se puede generar el path si no existe.
+		String path= "'" + letraDisco + ":/BackUp_Estacionamiento/";
 
 		DateFormat dateFormat = new SimpleDateFormat("yyyyMMddHHmmss"); 
 		Date date = new Date(); 
 		dateFormat.format(date); 
 
 		String fileNameBackup = "backUp_"+dateFormat.format(date)+".BAK'"; 
-		
+
 		HibernateDAO.getInstancia().backUp("ESTACIONAMIENTO", path, fileNameBackup);
 
 		return true;
-		
-		//		String path = "C:/";
-		//		
-		//		if (con!=null){
-		//			String dataBaseName =  PoolConnection.getPoolConnection().getDataBaseName();
-		//			String comand ="BACKUP DATABASE " +  dataBaseName + " TO DISK = "; 
-		//			
-		//			
-		//			 File miDir = new File (".");
-		//			 try {
-		//				  path = miDir.getCanonicalPath()+"/";
-		//			} catch (IOException e1) {
-		//				e1.printStackTrace();
-		//			}
-		//			
-		//			
-		//			DateFormat dateFormat = new SimpleDateFormat("yyyyMMddHHmmss"); 
-		//			Date date = new Date(); 
-		//			dateFormat.format(date); 
-		//			
-		//			String nameBackup = dataBaseName+ "_"+dateFormat.format(date)+".BAK"; 
-		//					
-		//			String dbackup =comand + "'"+ path +nameBackup+"'";
-		//		
-		//			Statement callBackupDbase = null;
-		//			
-		//			try {
-		//				con.setAutoCommit(true);
-		//				callBackupDbase = con.createStatement();
-		//			} catch (SQLException e) {
-		//				e.printStackTrace();
-		//			}
-		//			
-		//			if(callBackupDbase != null){
-		//				try {
-		//					callBackupDbase.execute(dbackup);
-		//					return true;
-		//				}catch (SQLException e) {
-		//					e.printStackTrace();
-		//					return false;
-		//				}
-		//			}else return false;
-		//			
-		//			
-		//		}else
-		//			return false;	
-		//	}
+	}
 
+	public boolean cambiarContrasenia(String password) {
+		usuarioActual.setPassword(password);
+		return DAOUsuario.getInstance().cambiarContrasenia(usuarioActual);
+	}
+
+	public boolean probarConexion() {
+		//TODO
+		return true;
 	}
 
 }

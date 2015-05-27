@@ -2,6 +2,8 @@ package persistencia;
 
 import java.util.List;
 
+import modelo.Usuario;
+
 import org.hibernate.SQLQuery;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -86,6 +88,13 @@ public class HibernateDAO {
 		return r;
 	}
 
+	public Object getObjectWithLong(String className, String campo, long value) {
+		Session s = this.getSession();
+		Object r = s.createQuery("from " + className + " s where s." + campo + " = ?").setLong(0, value).uniqueResult();
+	s.flush();
+		return r;
+	}
+	
 	public void delete(Object obj) {
 		Session session = getSession();
 		session.beginTransaction();

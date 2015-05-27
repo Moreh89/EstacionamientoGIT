@@ -43,7 +43,7 @@ public class AgregarVehiculo extends JFrame implements ActionListener{
 	private AltaCliente altaCliente;
 	private JPanel panel;
 	private JScrollPane scrollPane;
-	private JList listVehiculos;
+	private JList vehiculosList;
 	private JButton btnEliminar;
 	private JLabel lblVehiculos;
 
@@ -214,8 +214,8 @@ public class AgregarVehiculo extends JFrame implements ActionListener{
 		    gbc_scrollPane.gridy = 0;
 		    panel.add(scrollPane, gbc_scrollPane);
 		    
-		    listVehiculos = new JList();
-		    scrollPane.setViewportView(listVehiculos);
+		    vehiculosList = new JList();
+		    scrollPane.setViewportView(vehiculosList);
 		   
 		   btnEliminar = new JButton("Eliminar");
 		   btnEliminar.setFont(new Font("Dialog", Font.PLAIN, 16));

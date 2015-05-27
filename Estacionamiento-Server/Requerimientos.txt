@@ -33,10 +33,10 @@ F9 Alta modelo
 Estado: listo
 
 8)
-agregar Operador pago de mensuales
+agregar Operador cobro de mensuales
 
 9)
-agregar Operador pago de expensas 
+agregar Operador cobro de expensas 
 
 10)
 Agrandar testos y campos en operador
@@ -72,6 +72,7 @@ Estado: Resuelto
 
 8)
 Las cocheras tienen un %del total de expensas (0,035 ej) a esto se le asigna el porcentual de expensas
+NOTA: HAY QUE CREAR UN CAMPO PARA QUE INGRESEN EL MONTO TOTAL DE EXPENSAS. SERÍA UN LIQUIDAR EXPENSAS.
 
 9)
 Alta usuario - Falta DNI y CUIL

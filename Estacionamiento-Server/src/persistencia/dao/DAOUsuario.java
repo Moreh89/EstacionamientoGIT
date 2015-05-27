@@ -25,5 +25,20 @@ public class DAOUsuario {
 		
 		return usuario;
 	}
+	
+	public boolean cambiarContrasenia(Usuario usuarioM)
+	{
+		
+//		persistencia.clases.Usuario usuarioP=Converter.convertUsuarioModeloToPersistencia(usuarioM);
+		persistencia.clases.Usuario usuarioP=(persistencia.clases.Usuario) HibernateDAO.getInstancia().getObjectWithLong("Usuario", "idUsuario", usuarioM.getIdUsuario());
+		usuarioP.setPassword(usuarioM.getPassword());
+		persistencia.clases.Usuario usuarioDevuelto=(persistencia.clases.Usuario) HibernateDAO.getInstancia().update(usuarioP);
+		if(usuarioDevuelto.getPassword().equals(usuarioM.getPassword()))
+		{
+			return true;
+		}
+		else
+			return false;
+	}
 
 }

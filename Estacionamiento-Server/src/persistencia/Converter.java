@@ -14,11 +14,10 @@ public class Converter {
 		usuarioModelo.setUserName(usuarioPersistencia.getUserName());
 		usuarioModelo.setPassword(usuarioPersistencia.getPassword());
 
-		//		TODO verificar permisos que el enum de persistencia no coincide.
 		String permisoPersistencia=usuarioPersistencia.getPermisos().toString();
-		if(permisoPersistencia=="ADMIN")
+		if(permisoPersistencia.equals("ADMIN"))
 			usuarioModelo.setPermisos(PERMISOS.ADMIN);
-		if(permisoPersistencia=="CAJA")
+		if(permisoPersistencia.equals("CAJA"))
 			usuarioModelo.setPermisos(PERMISOS.CAJA);
 
 
@@ -29,5 +28,27 @@ public class Converter {
 		return usuarioModelo;
 	}
 
+	public static persistencia.clases.Usuario convertUsuarioModeloToPersistencia(Usuario usuarioM) 
+	{
+		persistencia.clases.Usuario usuarioP=new persistencia.clases.Usuario();
+		
+		usuarioP.setIdUsuario(usuarioM.getIdUsuario());
+		usuarioP.setUserName(usuarioM.getUserName());
+		usuarioP.setPassword(usuarioM.getPassword());
 
+		String permisoModelo=usuarioM.getPermisos().toString();
+		if(permisoModelo.equals("ADMIN"))
+			usuarioP.setPermisos(persistencia.clases.Usuario.PERMISOS.ADMIN);
+		if(permisoModelo.equals("CAJA"))
+			usuarioP.setPermisos(persistencia.clases.Usuario.PERMISOS.CAJA);
+
+
+		usuarioP.setNombre(usuarioM.getNombre());
+		usuarioP.setApellido(usuarioM.getApellido());
+		usuarioP.setTipoDocumento(usuarioM.getTipoDocumento());
+		usuarioP.setNumeroDocumento(usuarioM.getNumeroDocumento());
+		
+		
+		return usuarioP;
+	}
 }
