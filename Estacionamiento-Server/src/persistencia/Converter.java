@@ -183,16 +183,16 @@ public class Converter {
 		if(estadoCliente.equals("INACTIVO"))
 			clienteP.setEstado(ESTADO.INACTIVO);
 
-//revisar porque Cliente trae Strings, no trabaja con la clase PersonaAutorizada.
-		
-//		List<persistencia.clases.PersonaAutorizada> personasAutorizadasARetirarP = new ArrayList<persistencia.clases.PersonaAutorizada>();
-//		for (modelo.PersonaAutorizada personasAutorizadasARetirarM : clienteM.getPersonasAutorizadasARetirar()) {
-//			personasAutorizadasARetirarP.add(convertPersonaAutorizadaModeloToPersistencia(personasAutorizadasARetirarM));
-//		}
-//		personasAutorizadasARetirarP.setMovimientos(personasAutorizadasARetirarP);
-		
-//TODO		
-		
+		//revisar porque Cliente trae Strings, no trabaja con la clase PersonaAutorizada.
+
+		//		List<persistencia.clases.PersonaAutorizada> personasAutorizadasARetirarP = new ArrayList<persistencia.clases.PersonaAutorizada>();
+		//		for (modelo.PersonaAutorizada personasAutorizadasARetirarM : clienteM.getPersonasAutorizadasARetirar()) {
+		//			personasAutorizadasARetirarP.add(convertPersonaAutorizadaModeloToPersistencia(personasAutorizadasARetirarM));
+		//		}
+		//		personasAutorizadasARetirarP.setMovimientos(personasAutorizadasARetirarP);
+
+		//TODO		
+
 		List<persistencia.clases.Cochera> cocherasP = new ArrayList<persistencia.clases.Cochera>();
 		for (modelo.Cochera cocheraM : clienteM.getCocheras()) {
 			cocherasP.add(convertCocheraModeloToPersistencia(cocheraM));
@@ -204,16 +204,16 @@ public class Converter {
 			vehiculosP.add(convertVehiculoModeloToPersistencia(vehiculoM));
 		}
 		clienteP.setVehiculos(vehiculosP);
-		
+
 
 		return clienteP;
 	}
 
-	
 
 
 
-	public static modelo.Cliente convertClienteModeloToPersistencia (persistencia.clases.Cliente clienteP)
+
+	public static modelo.Cliente convertClientePersistenciaToModelo (persistencia.clases.Cliente clienteP)
 	{
 		modelo.Cliente clienteM = new modelo.Cliente();
 
@@ -253,16 +253,16 @@ public class Converter {
 		if(estadoCliente.equals("INACTIVO"))
 			clienteM.setEstado(modelo.Cliente.ESTADO.INACTIVO);
 
-//revisar porque Cliente trae Strings, no trabaja con la clase PersonaAutorizada.
-		
-//		List<persistencia.clases.PersonaAutorizada> personasAutorizadasARetirarP = new ArrayList<persistencia.clases.PersonaAutorizada>();
-//		for (modelo.PersonaAutorizada personasAutorizadasARetirarM : clienteM.getPersonasAutorizadasARetirar()) {
-//			personasAutorizadasARetirarP.add(convertPersonaAutorizadaModeloToPersistencia(personasAutorizadasARetirarM));
-//		}
-//		personasAutorizadasARetirarP.setMovimientos(personasAutorizadasARetirarP);
-		
-//TODO		
-		
+		//revisar porque Cliente trae Strings, no trabaja con la clase PersonaAutorizada.
+
+		//		List<persistencia.clases.PersonaAutorizada> personasAutorizadasARetirarP = new ArrayList<persistencia.clases.PersonaAutorizada>();
+		//		for (modelo.PersonaAutorizada personasAutorizadasARetirarM : clienteM.getPersonasAutorizadasARetirar()) {
+		//			personasAutorizadasARetirarP.add(convertPersonaAutorizadaModeloToPersistencia(personasAutorizadasARetirarM));
+		//		}
+		//		personasAutorizadasARetirarP.setMovimientos(personasAutorizadasARetirarP);
+
+		//TODO		
+
 		List<modelo.Cochera> cocherasM = new ArrayList<modelo.Cochera>();
 		for (persistencia.clases.Cochera cocheraP : clienteP.getCocheras()) {
 			cocherasM.add(convertCocheraPersistenciaToModelo(cocheraP));
@@ -274,7 +274,7 @@ public class Converter {
 			vehiculosM.add(convertVehiculoPersistenciaToModelo(vehiculoP));
 		}
 		clienteM.setVehiculos(vehiculosM);
-		
+
 		return clienteM;
 	}
 
@@ -284,7 +284,7 @@ public class Converter {
 		persistencia.clases.CuentaCorriente cuentaCorrienteP = new persistencia.clases.CuentaCorriente();
 
 		cuentaCorrienteP.setIdCuentaCorriente(cuentaCorrienteM.getIdCuentaCorriente());
-		
+
 		List<persistencia.clases.MovimientoCC> movimientosCCP = new ArrayList<persistencia.clases.MovimientoCC>();
 		for (modelo.MovimientoCC movimientoCCM : cuentaCorrienteM.getMovimientos()) {
 			movimientosCCP.add(convertMovimientoCuentaCorrienteModeloToPersistencia(movimientoCCM));
@@ -305,7 +305,7 @@ public class Converter {
 			movimientosCCM.add(convertMovimientoCuentaCorrientePersistenciaToModelo(movimientoCCP));
 		}
 		cuentaCorrienteM.setMovimientos(movimientosCCM);
-		
+
 		return cuentaCorrienteM;
 	}
 
@@ -344,54 +344,157 @@ public class Converter {
 
 	private static persistencia.clases.Ticket convertTicketModeloToPersistencia(modelo.Ticket ticketM) {
 		persistencia.clases.Ticket ticketP= new persistencia.clases.Ticket();
-		//TODO		
+
+		ticketP.setCatergoriaVehiculo(convertCategoriaVehiculoModeloToPersistencia(ticketM.getCatergoriaVehiculo()));
+		ticketP.setCliente(convertClienteModeloToPersistencia(ticketM.getCliente()));
+		ticketP.setDescuento(convertDescuentoModeloToPersistencia(ticketM.getDescuento()));
+
+		String estadoTicket=ticketM.getEstado().toString();
+		if(estadoTicket.equals("ABIERTO"))
+			ticketP.setEstado(persistencia.clases.Ticket.Estado.ABIERTO);
+		if(estadoTicket.equals("PREPAGO"))
+			ticketP.setEstado(persistencia.clases.Ticket.Estado.PREPAGO);
+		if(estadoTicket.equals("CERRADO"))
+			ticketP.setEstado(persistencia.clases.Ticket.Estado.CERRADO);
+		
+		ticketP.setFechaLlegada(ticketM.getFechaLlegada());
+		ticketP.setFechaSalida(ticketM.getFechaSalida());
+		ticketP.setIdTicket(ticketM.getIdTicket());
+		ticketP.setModeloVehiculo(convertModeloVehiculoModeloToPersistencia(ticketM.getModeloVehiculo()));
+		ticketP.setMontoCobrado(ticketM.getMontoCobrado());
+		ticketP.setObservacion(ticketM.getObservacion());
+		ticketP.setPrepago(ticketM.getPrepago());
+		ticketP.setTipoIngreso(ticketM.getTipoIngreso());
+		ticketP.setUsuario(convertUsuarioModeloToPersistencia(ticketM.getUsuario()));
+		
 		return ticketP;
 	}
 
 	private static modelo.Ticket convertTicketPersistenciaToModelo(persistencia.clases.Ticket ticketP) {
 		modelo.Ticket ticketM=new modelo.Ticket();
-		// TODO Auto-generated method stub
+
+		ticketM.setCatergoriaVehiculo(convertCategoriaVehiculoPersistenciaToModelo(ticketP.getCatergoriaVehiculo()));
+		ticketM.setCliente(convertClientePersistenciaToModelo(ticketP.getCliente()));
+		ticketM.setDescuento(convertDescuentoPersistenciaToModelo(ticketP.getDescuento()));
+
+		String estadoTicket=ticketP.getEstado().toString();
+		if(estadoTicket.equals("ABIERTO"))
+			ticketM.setEstado(modelo.Ticket.Estado.ABIERTO);
+		if(estadoTicket.equals("PREPAGO"))
+			ticketM.setEstado(modelo.Ticket.Estado.PREPAGO);
+		if(estadoTicket.equals("CERRADO"))
+			ticketM.setEstado(modelo.Ticket.Estado.CERRADO);
+		
+		ticketM.setFechaLlegada(ticketP.getFechaLlegada());
+		ticketM.setFechaSalida(ticketP.getFechaSalida());
+		ticketM.setIdTicket(ticketP.getIdTicket());
+		ticketM.setModeloVehiculo(convertModeloVehiculoPersistenciaToModelo(ticketP.getModeloVehiculo()));
+		ticketM.setMontoCobrado(ticketP.getMontoCobrado());
+		ticketM.setObservacion(ticketP.getObservacion());
+		ticketM.setPrepago(ticketP.getPrepago());
+		ticketM.setTipoIngreso(ticketP.getTipoIngreso());
+		ticketM.setUsuario(convertUsuarioPersistenciaToModelo(ticketP.getUsuario()));
+
 		return ticketM;
 	}
 
 	private static persistencia.clases.Cochera convertCocheraModeloToPersistencia(modelo.Cochera cocheraM) {
 		persistencia.clases.Cochera cocheraP = new persistencia.clases.Cochera();
-		
+
 		cocheraP.setCosto(cocheraM.getCosto());
 		cocheraP.setCostoCochera(cocheraM.getCostoCochera());
 		cocheraP.setIdCochera(cocheraM.getIdCochera());
-		
+
 		String estadoCochera=cocheraM.getEstado().toString();
 		if(estadoCochera.equals("ACTIVO"))
 			cocheraP.setEstado(persistencia.clases.Cochera.ESTADO.ACTIVO);
 		if(estadoCochera.equals("INACTIVO"))
 			cocheraP.setEstado(persistencia.clases.Cochera.ESTADO.INACTIVO);
 
-//TODO - Revisar porque se vuelve ciclico
+		//TODO - Revisar porque se vuelve ciclico
 		cocheraP.setCliente(null);
-		
+
 		return cocheraP;
 	}
-	
+
 	private static modelo.Cochera convertCocheraPersistenciaToModelo(persistencia.clases.Cochera cocheraP) {
 		modelo.Cochera cocheraM = new modelo.Cochera();
-		
+
 		cocheraM.setCosto(cocheraP.getCosto());
 		cocheraM.setCostoCochera(cocheraP.getCostoCochera());
 		cocheraM.setIdCochera(cocheraP.getIdCochera());
-		
+
 		String estadoCochera=cocheraP.getEstado().toString();
 		if(estadoCochera.equals("ACTIVO"))
 			cocheraM.setEstado(modelo.Cochera.ESTADO.ACTIVO);
 		if(estadoCochera.equals("INACTIVO"))
 			cocheraM.setEstado(modelo.Cochera.ESTADO.INACTIVO);
 
-//TODO - Revisar porque se vuelve ciclico
+		//TODO - Revisar porque se vuelve ciclico
 		cocheraM.setCliente(null);
-		
+
 		return cocheraM;
 	}
 
+
+	private static persistencia.clases.Tarifa convertTarifaModeloToPersistencia(modelo.Tarifa tarifaM) {
+		persistencia.clases.Tarifa tarifaP = new persistencia.clases.Tarifa ();
+
+		tarifaP.setIdTarifa(tarifaM.getIdTarifa());
+		tarifaP.setCostoMinimo(tarifaM.getCostoMinimo());
+		tarifaP.setCostoEstadia(tarifaM.getCostoEstadia());
+		tarifaP.setCostoFraccion(tarifaM.getCostoFraccion());
+		tarifaP.setCostoHora(tarifaM.getCostoHora());
+		tarifaP.setCostoMediaEstadia(tarifaM.getCostoMediaEstadia());
+		tarifaP.setTiempoEstadia_minuto(tarifaM.getTiempoEstadia_minuto());
+		tarifaP.setTiempoFraccion(tarifaM.getTiempoFraccion());
+		tarifaP.setTiempoMediaEstadia_minuto(tarifaM.getTiempoMediaEstadia_minuto());
+		tarifaP.setTiempoMinimo(tarifaM.getTiempoMinimo());
+
+		tarifaP.setCategoria(convertCategoriaVehiculoModeloToPersistencia(tarifaM.getCategoria()));
+
+		return tarifaP;
+
+	}
+	private static modelo.Tarifa convertTarifaPersistenciaToModelo(persistencia.clases.Tarifa tarifaP) {
+
+		modelo.Tarifa tarifaM=new modelo.Tarifa();
+
+		tarifaM.setIdTarifa(tarifaP.getIdTarifa());
+		tarifaM.setCostoMinimo(tarifaP.getCostoMinimo());
+		tarifaM.setCostoEstadia(tarifaP.getCostoEstadia());
+		tarifaM.setCostoFraccion(tarifaP.getCostoFraccion());
+		tarifaM.setCostoHora(tarifaP.getCostoHora());
+		tarifaM.setCostoMediaEstadia(tarifaP.getCostoMediaEstadia());
+		tarifaM.setTiempoEstadia_minuto(tarifaP.getTiempoEstadia_minuto());
+		tarifaM.setTiempoFraccion(tarifaP.getTiempoFraccion());
+		tarifaM.setTiempoMediaEstadia_minuto(tarifaP.getTiempoMediaEstadia_minuto());
+		tarifaM.setTiempoMinimo(tarifaP.getTiempoMinimo());
+
+		tarifaM.setCategoria(convertCategoriaVehiculoPersistenciaToModelo(tarifaP.getCategoria()));
+
+		return tarifaM;
+	}
 	
-	
+	private static persistencia.clases.Descuento convertDescuentoModeloToPersistencia(modelo.Descuento descuentoM) {
+		
+		persistencia.clases.Descuento descuentoP = new persistencia.clases.Descuento();
+
+		descuentoP.setIdDescuento(descuentoM.getIdDescuento());
+		descuentoP.setDescripcion(descuentoM.getDescripcion());
+		descuentoP.setDescuento(descuentoM.getDescuento());
+		
+		return descuentoP;
+
+	}
+	private static modelo.Descuento convertDescuentoPersistenciaToModelo(persistencia.clases.Descuento descuentoP) {
+
+		modelo.Descuento descuentoM = new modelo.Descuento();
+
+		descuentoM.setIdDescuento(descuentoP.getIdDescuento());
+		descuentoM.setDescripcion(descuentoP.getDescripcion());
+		descuentoM.setDescuento(descuentoP.getDescuento());
+		
+		return descuentoM;
+	}
 }

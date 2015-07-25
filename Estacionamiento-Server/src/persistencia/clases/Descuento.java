@@ -40,6 +40,9 @@ public class Descuento {
 		this.descripcion = descripcion;
 		this.descuento = descuento;
 	}
+	public Descuento() {
+		// TODO Auto-generated constructor stub
+	}
 	
 	
 	
