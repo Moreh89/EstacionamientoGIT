@@ -33,6 +33,9 @@ public class ColorVehiculo {
 		this.idColor = idColor;
 		this.descripcion = descripcion;
 	}
+	public ColorVehiculo() {
+		// TODO Auto-generated constructor stub
+	}
 	
 	
 }

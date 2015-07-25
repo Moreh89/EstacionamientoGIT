@@ -34,6 +34,9 @@ public class CategoriaVehiculo {
 		this.idCategoria = idCategoria;
 		this.descripcion = descripcion;
 	}
+	public CategoriaVehiculo() {
+		// TODO Auto-generated constructor stub
+	}
 	
 	
 	

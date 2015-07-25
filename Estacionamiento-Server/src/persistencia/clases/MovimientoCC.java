@@ -71,6 +71,9 @@ public class MovimientoCC {
 		this.estado = estado;
 		this.ticket = ticket;
 	}
+	public MovimientoCC() {
+		// TODO Auto-generated constructor stub
+	}
 	
 	
 }

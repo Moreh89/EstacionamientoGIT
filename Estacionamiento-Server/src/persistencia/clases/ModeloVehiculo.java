@@ -32,6 +32,9 @@ public class ModeloVehiculo {
 		this.idModelo = idModelo;
 		this.descripcion = descripcion;
 	}
+	public ModeloVehiculo() {
+		// TODO Auto-generated constructor stub
+	}
 	
 	
 	

@@ -40,6 +40,11 @@ public class CuentaCorriente {
 		this.idCuentaCorriente = idCuentaCorriente;
 		this.movimientos = movimientos;
 	}
+	public CuentaCorriente() {
+		// TODO Auto-generated constructor stub
+	}
+	
+	
 	
 	
 }

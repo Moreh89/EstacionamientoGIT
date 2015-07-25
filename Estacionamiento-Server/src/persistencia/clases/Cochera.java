@@ -76,6 +76,10 @@ public class Cochera {
 		this.cliente = cliente;
 		this.estado = estado;
 	}
+
+	public Cochera() {
+		// TODO Auto-generated constructor stub
+	}
 	
 	
 	

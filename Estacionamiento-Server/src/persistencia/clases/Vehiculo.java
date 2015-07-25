@@ -66,6 +66,9 @@ public class Vehiculo {
 		this.modelo = modelo;
 		this.color = color;
 	}
+	public Vehiculo() {
+		// TODO Auto-generated constructor stub
+	}
 
 	
 	

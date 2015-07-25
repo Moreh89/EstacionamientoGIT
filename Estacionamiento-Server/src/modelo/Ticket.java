@@ -130,6 +130,9 @@ public class Ticket {
 		this.prepago = prepago;
 		this.observacion = obsevacion;
 	}
+	public Ticket() {
+		// TODO Auto-generated constructor stub
+	}
 	public double cobrar(int cantidadMinutos, Tarifa tarifa)
 	{
 		double montoCobrar=0;        

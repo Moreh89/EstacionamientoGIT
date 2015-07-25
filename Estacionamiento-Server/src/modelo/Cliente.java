@@ -22,7 +22,10 @@ public class Cliente {
 	private String correoElectronico;
 	private ESTADO estado;
 	private String cuil;
+	
+//REVISAR ES STRING NO CLASE!
 	private List <String> personasAutorizadasARetirar;
+	
 	String razonSocial;
 	private List <Cochera> cocheras; 
 	private CuentaCorriente cuentaCorriente;

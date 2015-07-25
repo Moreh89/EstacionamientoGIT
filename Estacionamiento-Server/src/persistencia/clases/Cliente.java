@@ -210,6 +210,9 @@ public class Cliente {
 		this.cuentaCorriente = cuentaCorriente;
 		this.vehiculos = vehiculos;
 	}
+	public Cliente() {
+		// TODO Auto-generated constructor stub
+	}
 	
 	
 	
