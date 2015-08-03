@@ -7,6 +7,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 
+import modelo.PersonaAutorizada;
 import modelo.Ticket;
 import modelo.Usuario;
 import modelo.Usuario.PERMISOS;
@@ -183,15 +184,13 @@ public class Converter {
 		if(estadoCliente.equals("INACTIVO"))
 			clienteP.setEstado(ESTADO.INACTIVO);
 
-		//revisar porque Cliente trae Strings, no trabaja con la clase PersonaAutorizada.
 
-		//		List<persistencia.clases.PersonaAutorizada> personasAutorizadasARetirarP = new ArrayList<persistencia.clases.PersonaAutorizada>();
-		//		for (modelo.PersonaAutorizada personasAutorizadasARetirarM : clienteM.getPersonasAutorizadasARetirar()) {
-		//			personasAutorizadasARetirarP.add(convertPersonaAutorizadaModeloToPersistencia(personasAutorizadasARetirarM));
-		//		}
-		//		personasAutorizadasARetirarP.setMovimientos(personasAutorizadasARetirarP);
+		List<persistencia.clases.PersonaAutorizada> personasAutorizadasARetirarP = new ArrayList<persistencia.clases.PersonaAutorizada>();
+		for (modelo.PersonaAutorizada personasAutorizadasARetirarM : clienteM.getPersonasAutorizadasARetirar()) {
+			personasAutorizadasARetirarP.add(convertPersonaAutorizadaModeloToPersistencia(personasAutorizadasARetirarM));
+		}
+		clienteP.setPersonasAutorizadasARetirar(personasAutorizadasARetirarP);
 
-		//TODO		
 
 		List<persistencia.clases.Cochera> cocherasP = new ArrayList<persistencia.clases.Cochera>();
 		for (modelo.Cochera cocheraM : clienteM.getCocheras()) {
@@ -253,15 +252,12 @@ public class Converter {
 		if(estadoCliente.equals("INACTIVO"))
 			clienteM.setEstado(modelo.Cliente.ESTADO.INACTIVO);
 
-		//revisar porque Cliente trae Strings, no trabaja con la clase PersonaAutorizada.
 
-		//		List<persistencia.clases.PersonaAutorizada> personasAutorizadasARetirarP = new ArrayList<persistencia.clases.PersonaAutorizada>();
-		//		for (modelo.PersonaAutorizada personasAutorizadasARetirarM : clienteM.getPersonasAutorizadasARetirar()) {
-		//			personasAutorizadasARetirarP.add(convertPersonaAutorizadaModeloToPersistencia(personasAutorizadasARetirarM));
-		//		}
-		//		personasAutorizadasARetirarP.setMovimientos(personasAutorizadasARetirarP);
-
-		//TODO		
+		List<modelo.PersonaAutorizada> personasAutorizadasARetirarM = new ArrayList<modelo.PersonaAutorizada>();
+		for (persistencia.clases.PersonaAutorizada personasAutorizadasARetirarP : clienteP.getPersonasAutorizadasARetirar()) {
+			personasAutorizadasARetirarM.add(convertPersonaAutorizadaPersistenciaToModelo(personasAutorizadasARetirarP));
+		}
+		clienteM.setPersonasAutorizadasARetirar(personasAutorizadasARetirarM);
 
 		List<modelo.Cochera> cocherasM = new ArrayList<modelo.Cochera>();
 		for (persistencia.clases.Cochera cocheraP : clienteP.getCocheras()) {
@@ -276,6 +272,23 @@ public class Converter {
 		clienteM.setVehiculos(vehiculosM);
 
 		return clienteM;
+	}
+
+
+	private static modelo.PersonaAutorizada convertPersonaAutorizadaPersistenciaToModelo(persistencia.clases.PersonaAutorizada personasAutorizadaP) {
+		modelo.PersonaAutorizada personaAutorizadaM = new modelo.PersonaAutorizada();
+		personaAutorizadaM.setIdPersonaAut(personasAutorizadaP.getIdPersonaAut());
+		personaAutorizadaM.setNombre(personasAutorizadaP.getNombre());
+
+		return personaAutorizadaM;
+	}
+
+	private static persistencia.clases.PersonaAutorizada convertPersonaAutorizadaModeloToPersistencia (modelo.PersonaAutorizada personasAutorizadaM) {
+		persistencia.clases.PersonaAutorizada personaAutorizadaP = new persistencia.clases.PersonaAutorizada();
+		personaAutorizadaP.setIdPersonaAut(personasAutorizadaM.getIdPersonaAut());
+		personaAutorizadaP.setNombre(personasAutorizadaM.getNombre());
+
+		return personaAutorizadaP;
 	}
 
 
@@ -356,7 +369,7 @@ public class Converter {
 			ticketP.setEstado(persistencia.clases.Ticket.Estado.PREPAGO);
 		if(estadoTicket.equals("CERRADO"))
 			ticketP.setEstado(persistencia.clases.Ticket.Estado.CERRADO);
-		
+
 		ticketP.setFechaLlegada(ticketM.getFechaLlegada());
 		ticketP.setFechaSalida(ticketM.getFechaSalida());
 		ticketP.setIdTicket(ticketM.getIdTicket());
@@ -366,7 +379,7 @@ public class Converter {
 		ticketP.setPrepago(ticketM.getPrepago());
 		ticketP.setTipoIngreso(ticketM.getTipoIngreso());
 		ticketP.setUsuario(convertUsuarioModeloToPersistencia(ticketM.getUsuario()));
-		
+
 		return ticketP;
 	}
 
@@ -384,7 +397,7 @@ public class Converter {
 			ticketM.setEstado(modelo.Ticket.Estado.PREPAGO);
 		if(estadoTicket.equals("CERRADO"))
 			ticketM.setEstado(modelo.Ticket.Estado.CERRADO);
-		
+
 		ticketM.setFechaLlegada(ticketP.getFechaLlegada());
 		ticketM.setFechaSalida(ticketP.getFechaSalida());
 		ticketM.setIdTicket(ticketP.getIdTicket());
@@ -475,15 +488,15 @@ public class Converter {
 
 		return tarifaM;
 	}
-	
+
 	private static persistencia.clases.Descuento convertDescuentoModeloToPersistencia(modelo.Descuento descuentoM) {
-		
+
 		persistencia.clases.Descuento descuentoP = new persistencia.clases.Descuento();
 
 		descuentoP.setIdDescuento(descuentoM.getIdDescuento());
 		descuentoP.setDescripcion(descuentoM.getDescripcion());
 		descuentoP.setDescuento(descuentoM.getDescuento());
-		
+
 		return descuentoP;
 
 	}
@@ -494,7 +507,7 @@ public class Converter {
 		descuentoM.setIdDescuento(descuentoP.getIdDescuento());
 		descuentoM.setDescripcion(descuentoP.getDescripcion());
 		descuentoM.setDescuento(descuentoP.getDescuento());
-		
+
 		return descuentoM;
 	}
 }

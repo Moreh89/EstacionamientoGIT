@@ -24,7 +24,7 @@ public class Cliente {
 	private String cuil;
 	
 //REVISAR ES STRING NO CLASE!
-	private List <String> personasAutorizadasARetirar;
+	private List <PersonaAutorizada> personasAutorizadasARetirar;
 	
 	String razonSocial;
 	private List <Cochera> cocheras; 
@@ -135,11 +135,11 @@ public class Cliente {
 	public void setEstado(ESTADO estado) {
 		this.estado = estado;
 	}
-	public List<String> getPersonasAutorizadasARetirar() {
+	public List<PersonaAutorizada> getPersonasAutorizadasARetirar() {
 		return personasAutorizadasARetirar;
 	}
 	public void setPersonasAutorizadasARetirar(
-			List<String> personasAutorizadasARetirar) {
+			List<PersonaAutorizada> personasAutorizadasARetirar) {
 		this.personasAutorizadasARetirar = personasAutorizadasARetirar;
 	}
 	public String getRazonSocial() {
@@ -170,7 +170,7 @@ public class Cliente {
 			String apellido, TIPO_DOC tipoDocumento, String numeroDocumento,
 			String telefono1, String telefono2, String direccion,
 			String direccion2, String descripcion, String correoElectronico,
-			ESTADO estado, List<String> personasAutorizadasARetirar,
+			ESTADO estado, List<PersonaAutorizada> personasAutorizadasARetirar,
 			String razonSocial, List<Cochera> cocheras,
 			CuentaCorriente cuentaCorriente, List<Vehiculo> vehiculos) {
 		super();
