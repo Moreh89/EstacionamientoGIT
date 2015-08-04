@@ -16,8 +16,10 @@ import com.mysql.jdbc.Statement;
 
 import persistencia.Converter;
 import persistencia.HibernateDAO;
+import persistencia.clases.Cliente.TIPO_DOC;
 import persistencia.dao.*;
 import modelo.*;
+import modelo.Cochera.ESTADO;
 
 public class Controlador {
 
@@ -30,7 +32,8 @@ public class Controlador {
 	private ArrayList<Descuento> descuentos;
 	private ArrayList<Descuento> cocheras;
 	private ArrayList<CategoriaVehiculo> categoriasVehiculos;
-
+	
+	public ArrayList<Cochera> cocherasActuales;
 	public ArrayList<Vehiculo> vehiculosActuales;
 	public ArrayList<PersonaAutorizada> personasAutorizadasActuales;
 
@@ -93,7 +96,7 @@ public class Controlador {
 	public void cargaInicial()
 	{
 		//TODO checkear si va la carga de categorias, creo que no.
-//		categoriasVehiculos=DAOCategoriaVehiculo.getInstance().getCategoriasVehiculos();
+		//		categoriasVehiculos=DAOCategoriaVehiculo.getInstance().getCategoriasVehiculos();
 		coloresVehiculos=DAOColorVehiculo.getInstance().getColoresVehiculos();
 		modelosVehiculos=DAOModeloVehiculo.getInstance().getModelosVehiculos();
 	}
@@ -102,7 +105,8 @@ public class Controlador {
 	public void altaCliente(String nombre, String apellido, String telefono1,
 			String telefono2, String direccion1, String direccion2,
 			String email, String razonSocial, ArrayList<String> listPersonasAutorizadas,
-			ArrayList<String> listVehiculos) {
+			ArrayList<String> listVehiculos, String tipoDoc, String numeroDoc, String tipoCliente) 
+	{
 		Cliente cliente=new Cliente();
 		cliente.setNombre(nombre);
 		cliente.setApellido(apellido);
@@ -112,11 +116,33 @@ public class Controlador {
 		cliente.setDireccion2(direccion2);
 		cliente.setCorreoElectronico(email);
 		cliente.setRazonSocial(razonSocial);
+		
+		
+		if(tipoDoc.equals("1. DNI"))
+			cliente.setTipoDocumento(modelo.Cliente.TIPO_DOC.DNI);
+		if(tipoDoc.equals("2. LU"))
+			cliente.setTipoDocumento(modelo.Cliente.TIPO_DOC.LU);
+		if(tipoDoc.equals("3. PASAPORTE"))
+			cliente.setTipoDocumento(modelo.Cliente.TIPO_DOC.PASS);
+		if(tipoDoc.equals("4. OTRO"))
+			cliente.setTipoDocumento(modelo.Cliente.TIPO_DOC.OTRO);
+		
+		cliente.setNumeroDocumento(numeroDoc);
+		
+		if(tipoCliente.equals("1. FIJO_PERSONA"))
+			cliente.setTipoCliente(modelo.Cliente.TIPO_CLIENTE.FIJO_PERSONA);
+		if(tipoCliente.equals("2. FIJO_EMPRESA"))
+			cliente.setTipoCliente(modelo.Cliente.TIPO_CLIENTE.FIJO_EMPRESA);
+		if(tipoCliente.equals("3. TEMPORAL"))
+			cliente.setTipoCliente(modelo.Cliente.TIPO_CLIENTE.TEMPORAL);
+		
+		cliente.setEstado(modelo.Cliente.ESTADO.ACTIVO);
+		
+		cliente.setCocheras(cocherasActuales);
+		cliente.setPersonasAutorizadasARetirar(personasAutorizadasActuales);
+		cliente.setVehiculos(vehiculosActuales);
 
-	
-
-		// TODO vehiculos patentes y personas autorizadas
-
+		DAOCliente.getInstance().persistir(cliente);
 	}
 
 	public void agregarVehiculo(int idCategoriaVehiculo, String patente,
@@ -136,10 +162,13 @@ public class Controlador {
 
 			vehiculo.setPatente(patente);
 
+			//TODO BUSQUEDA EN MEMORIA, ya están por carga inicial
 			modelo.ColorVehiculo colorVehiculo = DAOColorVehiculo.getInstance().getColorVehiculo(color);
 			vehiculo.setColor(colorVehiculo);
-			
-			
+
+
+			//TODO BUSQUEDA EN MEMORIA, ya están por carga inicial
+
 			ModeloVehiculo modeloVehiculo = DAOModeloVehiculo.getInstance().getModeloVehiculo(modelo);
 			vehiculo.setModelo(modeloVehiculo);
 
@@ -212,10 +241,10 @@ public class Controlador {
 	{
 		modelo.CategoriaVehiculo categoriaVehiculoM = new CategoriaVehiculo();
 		categoriaVehiculoM=DAOCategoriaVehiculo.getInstance().buscarCategoriaVehiculo(categoriaVehiculo);
-		
+
 		modelo.Tarifa tarifaM = new modelo.Tarifa(categoriaVehiculoM, costoMinimo, costoFraccion, costoHora, costoMediaEstadia, costoEstadia,
-		tiempoMinimo,tiempoFraccion, tiempoMediaEstadia_minuto, tiempoEstadia_minuto);
-		
+				tiempoMinimo,tiempoFraccion, tiempoMediaEstadia_minuto, tiempoEstadia_minuto);
+
 		DAOTarifa.getInstance().persistir(tarifaM);
 	}
 
@@ -227,7 +256,7 @@ public class Controlador {
 		}
 		return coloresActuales;
 	}
-	
+
 	public Vector getModelosActuales() {
 		Vector modelosActuales=new Vector();
 		for(ModeloVehiculo modelo:modelosVehiculos)
@@ -237,9 +266,23 @@ public class Controlador {
 		return modelosActuales;
 	}
 
-//	public ArrayList<CategoriaVehiculo> getCategoriasVehiculos() {
-//		
-//		return DAOCategoriaVehiculo.getInstance().getCategoriasVehiculos();
-//	}
+	public void agregarCochera(String ubicacion, double costoMensual, float porcentajeExpensas,String piso) 
+	{
+		modelo.Cochera cochera = new modelo.Cochera();
+		if (cocherasActuales == null) 
+		{
+			cocherasActuales = new ArrayList<Cochera>();
+		}
+		cochera.setCostoCochera(costoMensual);
+		cochera.setCosto(porcentajeExpensas);
+		cochera.setEstado(modelo.Cochera.ESTADO.ACTIVO);
+		
+		cocherasActuales.add(cochera);
+	}
+
+	//	public ArrayList<CategoriaVehiculo> getCategoriasVehiculos() {
+	//		
+	//		return DAOCategoriaVehiculo.getInstance().getCategoriasVehiculos();
+	//	}
 
 }

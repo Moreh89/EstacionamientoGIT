@@ -31,11 +31,12 @@ public class AgregarCochera extends JDialog implements ActionListener{
 	 */
 	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
-	private JTextField textFieldTelefono1;
+	private JTextField textCostoMensual;
 	private JTextField textFieldPorcentajeExpensas;
 	private JButton buttonCancelar;
 	private JTextField textFieldUbicacion;
-	private JButton buttonCrearCochera;
+	private JButton buttonAgregarCochera;
+	private JComboBox comboBoxPiso;
 	
 	/**
 	 * Launch the application.
@@ -91,7 +92,7 @@ public class AgregarCochera extends JDialog implements ActionListener{
 		gbc_labelPiso.gridy = 0;
 		panel.add(labelPiso, gbc_labelPiso);
 		
-		JComboBox comboBoxPiso = new JComboBox();
+		comboBoxPiso = new JComboBox();
 		comboBoxPiso.setModel(new DefaultComboBoxModel(new String[] {"1ro", "2do", "3ro", "4to", "5to", "6to", "7mo"}));
 		GridBagConstraints gbc_comboBoxPiso = new GridBagConstraints();
 		gbc_comboBoxPiso.fill = GridBagConstraints.BOTH;
@@ -108,14 +109,14 @@ public class AgregarCochera extends JDialog implements ActionListener{
 		gbc_labelCostoMensual.gridy = 1;
 		panel.add(labelCostoMensual, gbc_labelCostoMensual);
 		
-		textFieldTelefono1 = new JTextField();
-		textFieldTelefono1.setColumns(10);
-		GridBagConstraints gbc_textFieldTelefono1 = new GridBagConstraints();
-		gbc_textFieldTelefono1.fill = GridBagConstraints.HORIZONTAL;
-		gbc_textFieldTelefono1.insets = new Insets(0, 0, 5, 0);
-		gbc_textFieldTelefono1.gridx = 1;
-		gbc_textFieldTelefono1.gridy = 1;
-		panel.add(textFieldTelefono1, gbc_textFieldTelefono1);
+		textCostoMensual = new JTextField();
+		textCostoMensual.setColumns(10);
+		GridBagConstraints gbc_textCostoMensual = new GridBagConstraints();
+		gbc_textCostoMensual.fill = GridBagConstraints.HORIZONTAL;
+		gbc_textCostoMensual.insets = new Insets(0, 0, 5, 0);
+		gbc_textCostoMensual.gridx = 1;
+		gbc_textCostoMensual.gridy = 1;
+		panel.add(textCostoMensual, gbc_textCostoMensual);
 		
 		JLabel labelUbicacion = new JLabel("Ubicacion:");
 		GridBagConstraints gbc_labelUbicacion = new GridBagConstraints();
@@ -156,11 +157,11 @@ public class AgregarCochera extends JDialog implements ActionListener{
 		contentPane.add(buttonCancelar);
 		buttonCancelar.addActionListener(this);
 		
-		buttonCrearCochera = new JButton("Crear Tarifa");
-		buttonCrearCochera.setIcon(new ImageIcon(BuscardorCliente.class.getResource("/image/ok.png")));
-		buttonCrearCochera.setBounds(164, 146, 148, 56);
-		contentPane.add(buttonCrearCochera);
-		buttonCrearCochera.addActionListener(this);
+		buttonAgregarCochera = new JButton("Agregar Cochera");
+		buttonAgregarCochera.setIcon(new ImageIcon(BuscardorCliente.class.getResource("/image/ok.png")));
+		buttonAgregarCochera.setBounds(164, 146, 148, 56);
+		contentPane.add(buttonAgregarCochera);
+		buttonAgregarCochera.addActionListener(this);
 		
 		JSeparator separator = new JSeparator();
 		separator.setBounds(128, 133, 1, 2);
@@ -179,9 +180,10 @@ public class AgregarCochera extends JDialog implements ActionListener{
 		if(event.getSource() == buttonCancelar){
 			dispose();
 		}
-		if(event.getSource()==buttonCrearCochera)
+		if(event.getSource()==buttonAgregarCochera)
 		{
-//			TODO Controlador.getInstancia().agregarVehiculo();
+			Controlador.getInstancia().agregarCochera(textFieldUbicacion.getText(), Double.parseDouble(textCostoMensual.getText()), Float.parseFloat(textFieldPorcentajeExpensas.getText()),comboBoxPiso.getSelectedItem().toString());	
+			dispose();
 		}
 		
 	}

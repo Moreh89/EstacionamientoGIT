@@ -3,9 +3,12 @@ package modelo;
 
 public class Cochera {
 	private long idCochera;
+
+//
 	private double costoCochera;
 	private Cliente cliente;
 	private ESTADO estado;
+//Representa el porcentaje de expensas
 	private float costo;
 	
 	public enum ESTADO {
