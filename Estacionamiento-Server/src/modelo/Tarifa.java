@@ -10,16 +10,36 @@ public class Tarifa {
 	private double costoHora=33;
 	private double costoMediaEstadia=100;
 	private double costoEstadia=133;
-	
+
 	private double tiempoMinimo=60;
 	private double tiempoFraccion=5;
 	private double tiempoMediaEstadia_minuto=720;
 	private double tiempoEstadia_minuto=1440;
+
+
+	public Tarifa()
+	{
+		
+	}
 	
-	
-	
-	
-	
+	public Tarifa(CategoriaVehiculo categoria, double costoMinimo,
+			double costoFraccion, double costoHora, double costoMediaEstadia,
+			double costoEstadia, double tiempoMinimo, double tiempoFraccion,
+			double tiempoMediaEstadia_minuto, double tiempoEstadia_minuto) 
+	{
+		this.idTarifa = 0;
+		this.categoria = categoria;
+		this.costoMinimo = costoMinimo;
+		this.costoFraccion = costoFraccion;
+		this.costoHora = costoHora;
+		this.costoMediaEstadia = costoMediaEstadia;
+		this.costoEstadia = costoEstadia;
+		this.tiempoMinimo = tiempoMinimo;
+		this.tiempoFraccion = tiempoFraccion;
+		this.tiempoMediaEstadia_minuto = tiempoMediaEstadia_minuto;
+		this.tiempoEstadia_minuto = tiempoEstadia_minuto;
+	}
+
 	public long getIdTarifa() {
 		return idTarifa;
 	}
@@ -88,6 +108,6 @@ public class Tarifa {
 	}
 
 
-	
-	
+
+
 }

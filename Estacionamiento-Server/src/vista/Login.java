@@ -226,6 +226,8 @@ public class Login extends javax.swing.JDialog implements ActionListener{
 						if (validar == true){
 							
 //DIFERENCIA ENTRE USUARIO ADMIN Y OPERADOR
+							Controlador.getInstancia().cargaInicial();
+							
 							if(usuarioText.getText().equals("admin"))
 							{
 								MenuAdmin mpc = new MenuAdmin ();

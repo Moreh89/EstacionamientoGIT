@@ -12,6 +12,8 @@ import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.DefaultComboBoxModel;
 
+import controlador.Controlador;
+
 import java.awt.GridBagLayout;
 import java.awt.GridBagConstraints;
 import java.awt.Insets;
@@ -26,19 +28,20 @@ public class AltaTarifa extends JDialog implements ActionListener{
 	 */
 	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
-	private JTextField textFieldTelefono1;
-	private JTextField textFieldTelefono2;
-	private JTextField textFieldDireccion1;
-	private JTextField textFieldDireccion2;
-	private JTextField textFieldEmail;
-	private JTextField textFieldRazonSocial;
+	private JTextField textCostoMinimo;
+	private JTextField textTiempoMinimo;
+	private JTextField textCostoFraccion;
+	private JTextField textTiempoInicioMediaEstadia;
+	private JTextField textCostoHora;
+	private JTextField textTiempoInicioEstadia;
 	private JLabel labelCostoHora;
-	private JTextField textField;
-	private JTextField textField_1;
-	private JTextField textFieldFraccion;
+	private JTextField textCostoMediaEstadia;
+	private JTextField textCostoEstadia;
+	private JTextField textTiempoFraccion;
 	private JButton buttonCancelar;
-	private JTextField textFieldTiempoFinEstadia;
-	
+	private JButton buttonCrearTarifa;
+	private JTextField textTiempoFinEstadia;
+	private JComboBox comboBoxCategoria;
 	/**
 	 * Launch the application.
 	 */
@@ -92,7 +95,7 @@ public class AltaTarifa extends JDialog implements ActionListener{
 		gbc_labelCategoria.gridy = 0;
 		panel.add(labelCategoria, gbc_labelCategoria);
 		
-		JComboBox comboBoxCategoria = new JComboBox();
+		comboBoxCategoria = new JComboBox();
 		comboBoxCategoria.setModel(new DefaultComboBoxModel(new String[] {"1 Auto", "2 4X4", "3 Moto", "4 Bicicleta"}));
 		GridBagConstraints gbc_comboBoxCategoria = new GridBagConstraints();
 		gbc_comboBoxCategoria.insets = new Insets(0, 0, 5, 5);
@@ -109,14 +112,14 @@ public class AltaTarifa extends JDialog implements ActionListener{
 		gbc_labelCostoMinimo.gridy = 1;
 		panel.add(labelCostoMinimo, gbc_labelCostoMinimo);
 		
-		textFieldTelefono1 = new JTextField();
-		textFieldTelefono1.setColumns(10);
-		GridBagConstraints gbc_textFieldTelefono1 = new GridBagConstraints();
-		gbc_textFieldTelefono1.fill = GridBagConstraints.HORIZONTAL;
-		gbc_textFieldTelefono1.insets = new Insets(0, 0, 5, 5);
-		gbc_textFieldTelefono1.gridx = 1;
-		gbc_textFieldTelefono1.gridy = 1;
-		panel.add(textFieldTelefono1, gbc_textFieldTelefono1);
+		textCostoMinimo = new JTextField();
+		textCostoMinimo.setColumns(10);
+		GridBagConstraints gbc_textCostoMinimo = new GridBagConstraints();
+		gbc_textCostoMinimo.fill = GridBagConstraints.HORIZONTAL;
+		gbc_textCostoMinimo.insets = new Insets(0, 0, 5, 5);
+		gbc_textCostoMinimo.gridx = 1;
+		gbc_textCostoMinimo.gridy = 1;
+		panel.add(textCostoMinimo, gbc_textCostoMinimo);
 		
 		JLabel labelTiempoMinimo = new JLabel("Tiempo Minimo:");
 		GridBagConstraints gbc_labelTiempoMinimo = new GridBagConstraints();
@@ -126,14 +129,14 @@ public class AltaTarifa extends JDialog implements ActionListener{
 		gbc_labelTiempoMinimo.gridy = 1;
 		panel.add(labelTiempoMinimo, gbc_labelTiempoMinimo);
 		
-		textFieldTelefono2 = new JTextField();
-		textFieldTelefono2.setColumns(10);
-		GridBagConstraints gbc_textFieldTelefono2 = new GridBagConstraints();
-		gbc_textFieldTelefono2.fill = GridBagConstraints.HORIZONTAL;
-		gbc_textFieldTelefono2.insets = new Insets(0, 0, 5, 0);
-		gbc_textFieldTelefono2.gridx = 4;
-		gbc_textFieldTelefono2.gridy = 1;
-		panel.add(textFieldTelefono2, gbc_textFieldTelefono2);
+		textTiempoMinimo = new JTextField();
+		textTiempoMinimo.setColumns(10);
+		GridBagConstraints gbc_textTiempoMinimo = new GridBagConstraints();
+		gbc_textTiempoMinimo.fill = GridBagConstraints.HORIZONTAL;
+		gbc_textTiempoMinimo.insets = new Insets(0, 0, 5, 0);
+		gbc_textTiempoMinimo.gridx = 4;
+		gbc_textTiempoMinimo.gridy = 1;
+		panel.add(textTiempoMinimo, gbc_textTiempoMinimo);
 		
 		JLabel labelCostoFraccion = new JLabel("Costo Fraccion:");
 		GridBagConstraints gbc_labelCostoFraccion = new GridBagConstraints();
@@ -143,14 +146,14 @@ public class AltaTarifa extends JDialog implements ActionListener{
 		gbc_labelCostoFraccion.gridy = 2;
 		panel.add(labelCostoFraccion, gbc_labelCostoFraccion);
 		
-		textFieldDireccion1 = new JTextField();
-		textFieldDireccion1.setColumns(10);
-		GridBagConstraints gbc_textFieldDireccion1 = new GridBagConstraints();
-		gbc_textFieldDireccion1.fill = GridBagConstraints.HORIZONTAL;
-		gbc_textFieldDireccion1.insets = new Insets(0, 0, 5, 5);
-		gbc_textFieldDireccion1.gridx = 1;
-		gbc_textFieldDireccion1.gridy = 2;
-		panel.add(textFieldDireccion1, gbc_textFieldDireccion1);
+		textCostoFraccion = new JTextField();
+		textCostoFraccion.setColumns(10);
+		GridBagConstraints gbc_textCostoFraccion = new GridBagConstraints();
+		gbc_textCostoFraccion.fill = GridBagConstraints.HORIZONTAL;
+		gbc_textCostoFraccion.insets = new Insets(0, 0, 5, 5);
+		gbc_textCostoFraccion.gridx = 1;
+		gbc_textCostoFraccion.gridy = 2;
+		panel.add(textCostoFraccion, gbc_textCostoFraccion);
 		
 		JLabel labelTiempoMediaEst = new JLabel("Tiempo Inicio Media Est.:");
 		GridBagConstraints gbc_labelTiempoMediaEst = new GridBagConstraints();
@@ -160,14 +163,14 @@ public class AltaTarifa extends JDialog implements ActionListener{
 		gbc_labelTiempoMediaEst.gridy = 2;
 		panel.add(labelTiempoMediaEst, gbc_labelTiempoMediaEst);
 		
-		textFieldDireccion2 = new JTextField();
-		textFieldDireccion2.setColumns(10);
-		GridBagConstraints gbc_textFieldDireccion2 = new GridBagConstraints();
-		gbc_textFieldDireccion2.fill = GridBagConstraints.HORIZONTAL;
-		gbc_textFieldDireccion2.insets = new Insets(0, 0, 5, 0);
-		gbc_textFieldDireccion2.gridx = 4;
-		gbc_textFieldDireccion2.gridy = 2;
-		panel.add(textFieldDireccion2, gbc_textFieldDireccion2);
+		textTiempoInicioMediaEstadia = new JTextField();
+		textTiempoInicioMediaEstadia.setColumns(10);
+		GridBagConstraints gbc_textTiempoInicioMediaEstadia = new GridBagConstraints();
+		gbc_textTiempoInicioMediaEstadia.fill = GridBagConstraints.HORIZONTAL;
+		gbc_textTiempoInicioMediaEstadia.insets = new Insets(0, 0, 5, 0);
+		gbc_textTiempoInicioMediaEstadia.gridx = 4;
+		gbc_textTiempoInicioMediaEstadia.gridy = 2;
+		panel.add(textTiempoInicioMediaEstadia, gbc_textTiempoInicioMediaEstadia);
 		
 		labelCostoHora = new JLabel("Costo Hora:");
 		GridBagConstraints gbc_labelCostoHora = new GridBagConstraints();
@@ -177,14 +180,14 @@ public class AltaTarifa extends JDialog implements ActionListener{
 		gbc_labelCostoHora.gridy = 3;
 		panel.add(labelCostoHora, gbc_labelCostoHora);
 		
-		textFieldEmail = new JTextField();
-		textFieldEmail.setColumns(10);
-		GridBagConstraints gbc_textFieldEmail = new GridBagConstraints();
-		gbc_textFieldEmail.fill = GridBagConstraints.HORIZONTAL;
-		gbc_textFieldEmail.insets = new Insets(0, 0, 5, 5);
-		gbc_textFieldEmail.gridx = 1;
-		gbc_textFieldEmail.gridy = 3;
-		panel.add(textFieldEmail, gbc_textFieldEmail);
+		textCostoHora = new JTextField();
+		textCostoHora.setColumns(10);
+		GridBagConstraints gbc_textCostoHora = new GridBagConstraints();
+		gbc_textCostoHora.fill = GridBagConstraints.HORIZONTAL;
+		gbc_textCostoHora.insets = new Insets(0, 0, 5, 5);
+		gbc_textCostoHora.gridx = 1;
+		gbc_textCostoHora.gridy = 3;
+		panel.add(textCostoHora, gbc_textCostoHora);
 		
 		JLabel labelTiempoEstadia = new JLabel("Tiempo Inicio Estadia:");
 		GridBagConstraints gbc_labelTiempoEstadia = new GridBagConstraints();
@@ -194,14 +197,14 @@ public class AltaTarifa extends JDialog implements ActionListener{
 		gbc_labelTiempoEstadia.gridy = 3;
 		panel.add(labelTiempoEstadia, gbc_labelTiempoEstadia);
 		
-		textFieldRazonSocial = new JTextField();
-		textFieldRazonSocial.setColumns(10);
-		GridBagConstraints gbc_textFieldRazonSocial = new GridBagConstraints();
-		gbc_textFieldRazonSocial.insets = new Insets(0, 0, 5, 0);
-		gbc_textFieldRazonSocial.fill = GridBagConstraints.HORIZONTAL;
-		gbc_textFieldRazonSocial.gridx = 4;
-		gbc_textFieldRazonSocial.gridy = 3;
-		panel.add(textFieldRazonSocial, gbc_textFieldRazonSocial);
+		textTiempoInicioEstadia = new JTextField();
+		textTiempoInicioEstadia.setColumns(10);
+		GridBagConstraints gbc_textTiempoInicioEstadia = new GridBagConstraints();
+		gbc_textTiempoInicioEstadia.insets = new Insets(0, 0, 5, 0);
+		gbc_textTiempoInicioEstadia.fill = GridBagConstraints.HORIZONTAL;
+		gbc_textTiempoInicioEstadia.gridx = 4;
+		gbc_textTiempoInicioEstadia.gridy = 3;
+		panel.add(textTiempoInicioEstadia, gbc_textTiempoInicioEstadia);
 		
 		JLabel lblCostoMediaEstadia = new JLabel("Costo Media Estadia:");
 		GridBagConstraints gbc_lblCostoMediaEstadia = new GridBagConstraints();
@@ -211,14 +214,14 @@ public class AltaTarifa extends JDialog implements ActionListener{
 		gbc_lblCostoMediaEstadia.gridy = 4;
 		panel.add(lblCostoMediaEstadia, gbc_lblCostoMediaEstadia);
 		
-		textField = new JTextField();
-		textField.setColumns(10);
-		GridBagConstraints gbc_textField = new GridBagConstraints();
-		gbc_textField.insets = new Insets(0, 0, 5, 5);
-		gbc_textField.fill = GridBagConstraints.HORIZONTAL;
-		gbc_textField.gridx = 1;
-		gbc_textField.gridy = 4;
-		panel.add(textField, gbc_textField);
+		textCostoMediaEstadia = new JTextField();
+		textCostoMediaEstadia.setColumns(10);
+		GridBagConstraints gbc_textCostoMediaEstadia = new GridBagConstraints();
+		gbc_textCostoMediaEstadia.insets = new Insets(0, 0, 5, 5);
+		gbc_textCostoMediaEstadia.fill = GridBagConstraints.HORIZONTAL;
+		gbc_textCostoMediaEstadia.gridx = 1;
+		gbc_textCostoMediaEstadia.gridy = 4;
+		panel.add(textCostoMediaEstadia, gbc_textCostoMediaEstadia);
 		
 		JLabel lblTiempoFinEstadia = new JLabel("Tiempo Fin Estadia:");
 		GridBagConstraints gbc_lblTiempoFinEstadia = new GridBagConstraints();
@@ -228,14 +231,14 @@ public class AltaTarifa extends JDialog implements ActionListener{
 		gbc_lblTiempoFinEstadia.gridy = 4;
 		panel.add(lblTiempoFinEstadia, gbc_lblTiempoFinEstadia);
 		
-		textFieldTiempoFinEstadia = new JTextField();
-		textFieldTiempoFinEstadia.setColumns(10);
-		GridBagConstraints gbc_textFieldTiempoFinEstadia = new GridBagConstraints();
-		gbc_textFieldTiempoFinEstadia.insets = new Insets(0, 0, 5, 0);
-		gbc_textFieldTiempoFinEstadia.fill = GridBagConstraints.HORIZONTAL;
-		gbc_textFieldTiempoFinEstadia.gridx = 4;
-		gbc_textFieldTiempoFinEstadia.gridy = 4;
-		panel.add(textFieldTiempoFinEstadia, gbc_textFieldTiempoFinEstadia);
+		textTiempoFinEstadia = new JTextField();
+		textTiempoFinEstadia.setColumns(10);
+		GridBagConstraints gbc_textTiempoFinEstadia = new GridBagConstraints();
+		gbc_textTiempoFinEstadia.insets = new Insets(0, 0, 5, 0);
+		gbc_textTiempoFinEstadia.fill = GridBagConstraints.HORIZONTAL;
+		gbc_textTiempoFinEstadia.gridx = 4;
+		gbc_textTiempoFinEstadia.gridy = 4;
+		panel.add(textTiempoFinEstadia, gbc_textTiempoFinEstadia);
 		
 		JLabel lblCostoEstadia = new JLabel("Costo Estadia:");
 		GridBagConstraints gbc_lblCostoEstadia = new GridBagConstraints();
@@ -245,14 +248,14 @@ public class AltaTarifa extends JDialog implements ActionListener{
 		gbc_lblCostoEstadia.gridy = 5;
 		panel.add(lblCostoEstadia, gbc_lblCostoEstadia);
 		
-		textField_1 = new JTextField();
-		textField_1.setColumns(10);
-		GridBagConstraints gbc_textField_1 = new GridBagConstraints();
-		gbc_textField_1.insets = new Insets(0, 0, 0, 5);
-		gbc_textField_1.fill = GridBagConstraints.HORIZONTAL;
-		gbc_textField_1.gridx = 1;
-		gbc_textField_1.gridy = 5;
-		panel.add(textField_1, gbc_textField_1);
+		textCostoEstadia = new JTextField();
+		textCostoEstadia.setColumns(10);
+		GridBagConstraints gbc_textCostoEstadia = new GridBagConstraints();
+		gbc_textCostoEstadia.insets = new Insets(0, 0, 0, 5);
+		gbc_textCostoEstadia.fill = GridBagConstraints.HORIZONTAL;
+		gbc_textCostoEstadia.gridx = 1;
+		gbc_textCostoEstadia.gridy = 5;
+		panel.add(textCostoEstadia, gbc_textCostoEstadia);
 		
 		JLabel lblTiempoFraccion = new JLabel("Tiempo Fraccion:");
 		GridBagConstraints gbc_lblTiempoFraccion = new GridBagConstraints();
@@ -262,13 +265,13 @@ public class AltaTarifa extends JDialog implements ActionListener{
 		gbc_lblTiempoFraccion.gridy = 5;
 		panel.add(lblTiempoFraccion, gbc_lblTiempoFraccion);
 		
-		textFieldFraccion = new JTextField();
-		textFieldFraccion.setColumns(10);
-		GridBagConstraints gbc_textFieldFraccion = new GridBagConstraints();
-		gbc_textFieldFraccion.fill = GridBagConstraints.HORIZONTAL;
-		gbc_textFieldFraccion.gridx = 4;
-		gbc_textFieldFraccion.gridy = 5;
-		panel.add(textFieldFraccion, gbc_textFieldFraccion);
+		textTiempoFraccion = new JTextField();
+		textTiempoFraccion.setColumns(10);
+		GridBagConstraints gbc_textTiempoFraccion = new GridBagConstraints();
+		gbc_textTiempoFraccion.fill = GridBagConstraints.HORIZONTAL;
+		gbc_textTiempoFraccion.gridx = 4;
+		gbc_textTiempoFraccion.gridy = 5;
+		panel.add(textTiempoFraccion, gbc_textTiempoFraccion);
 		
 		buttonCancelar = new JButton("Cancelar");
 		buttonCancelar.setIcon(new ImageIcon(BuscardorCliente.class.getResource("/image/cancel.png")));
@@ -276,10 +279,11 @@ public class AltaTarifa extends JDialog implements ActionListener{
 		contentPane.add(buttonCancelar);
 		buttonCancelar.addActionListener(this);
 		
-		JButton buttonCrearTarifa = new JButton("Crear Tarifa");
+		buttonCrearTarifa = new JButton("Crear Tarifa");
 		buttonCrearTarifa.setIcon(new ImageIcon(BuscardorCliente.class.getResource("/image/ok.png")));
 		buttonCrearTarifa.setBounds(332, 237, 148, 56);
 		contentPane.add(buttonCrearTarifa);
+		buttonCrearTarifa.addActionListener(this);
 		
 		this.setLocationRelativeTo(null);
 
@@ -290,6 +294,24 @@ public class AltaTarifa extends JDialog implements ActionListener{
 		if(event.getSource() == buttonCancelar){
 			dispose();
 		}
+		if(event.getSource() == buttonCrearTarifa)
+		{
+			String categoriaVehiculo= (String) comboBoxCategoria.getSelectedItem();
+			double costoMinimo=Double.parseDouble(textCostoMinimo.getText()); 
+			double costoFraccion=Double.parseDouble(textCostoFraccion.getText()); 
+			double costoHora=Double.parseDouble(textCostoHora.getText());
+			double costoMediaEstadia=Double.parseDouble(textCostoMediaEstadia.getText()); 
+			double costoEstadia=Double.parseDouble(textCostoEstadia.getText());
+			double tiempoMinimo=Double.parseDouble(textTiempoMinimo.getText());
+			double tiempoFraccion=Double.parseDouble(textTiempoFraccion.getText());
+			double tiempoMediaEstadia_minuto=Double.parseDouble(textTiempoInicioMediaEstadia.getText());
+			double tiempoEstadia_minuto=Double.parseDouble(textTiempoInicioMediaEstadia.getText());
+//TODO NO SE USA EL TIEMPO_ESTADIA FIN	
+			Controlador.getInstancia().altaTarifa(categoriaVehiculo, costoMinimo, costoFraccion, costoHora, costoMediaEstadia, costoEstadia,
+					tiempoMinimo, tiempoFraccion, tiempoMediaEstadia_minuto, tiempoEstadia_minuto);
+			dispose();
+		}
+		
 		
 	}
 	

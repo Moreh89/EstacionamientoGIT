@@ -8,11 +8,13 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.Vector;
 
 import javax.swing.JPasswordField;
 
 import com.mysql.jdbc.Statement;
 
+import persistencia.Converter;
 import persistencia.HibernateDAO;
 import persistencia.dao.*;
 import modelo.*;
@@ -27,6 +29,7 @@ public class Controlador {
 	private ArrayList<ModeloVehiculo> modelosVehiculos;
 	private ArrayList<Descuento> descuentos;
 	private ArrayList<Descuento> cocheras;
+	private ArrayList<CategoriaVehiculo> categoriasVehiculos;
 
 	public ArrayList<Vehiculo> vehiculosActuales;
 	public ArrayList<PersonaAutorizada> personasAutorizadasActuales;
@@ -87,7 +90,13 @@ public class Controlador {
 	}
 
 
-
+	public void cargaInicial()
+	{
+		//TODO checkear si va la carga de categorias, creo que no.
+//		categoriasVehiculos=DAOCategoriaVehiculo.getInstance().getCategoriasVehiculos();
+		coloresVehiculos=DAOColorVehiculo.getInstance().getColoresVehiculos();
+		modelosVehiculos=DAOModeloVehiculo.getInstance().getModelosVehiculos();
+	}
 
 
 	public void altaCliente(String nombre, String apellido, String telefono1,
@@ -104,33 +113,34 @@ public class Controlador {
 		cliente.setCorreoElectronico(email);
 		cliente.setRazonSocial(razonSocial);
 
+	
 
 		// TODO vehiculos patentes y personas autorizadas
 
 	}
 
 	public void agregarVehiculo(int idCategoriaVehiculo, String patente,
-			int idColor, int idModeloVehiculo, String observacion) {
+			String color, String modelo, String observacion) {
 
 		if (clienteActual == null) {
-			if (vehiculosActuales == null) {
+			if (vehiculosActuales == null) 
+			{
 				vehiculosActuales = new ArrayList<Vehiculo>();
 			}
 
 			Vehiculo vehiculo = new Vehiculo();
 
-			CategoriaVehiculo categoriaVehiculo = new CategoriaVehiculo();
+			modelo.CategoriaVehiculo categoriaVehiculo = new modelo.CategoriaVehiculo();
 			categoriaVehiculo.setIdCategoria(idCategoriaVehiculo);
 			vehiculo.setCategoria(categoriaVehiculo);
 
 			vehiculo.setPatente(patente);
 
-			ColorVehiculo colorVehiculo = new ColorVehiculo();
-			colorVehiculo.setIdColor(idColor);
+			modelo.ColorVehiculo colorVehiculo = DAOColorVehiculo.getInstance().getColorVehiculo(color);
 			vehiculo.setColor(colorVehiculo);
-
-			ModeloVehiculo modeloVehiculo = new ModeloVehiculo();
-			modeloVehiculo.setIdModelo(idModeloVehiculo);
+			
+			
+			ModeloVehiculo modeloVehiculo = DAOModeloVehiculo.getInstance().getModeloVehiculo(modelo);
 			vehiculo.setModelo(modeloVehiculo);
 
 			vehiculosActuales.add(vehiculo);
@@ -197,5 +207,39 @@ public class Controlador {
 		//TODO
 		return true;
 	}
+
+	public void altaTarifa(String categoriaVehiculo,double costoMinimo, double costoFraccion, double costoHora, double costoMediaEstadia, double costoEstadia,double tiempoMinimo,double tiempoFraccion, double tiempoMediaEstadia_minuto, double tiempoEstadia_minuto) 
+	{
+		modelo.CategoriaVehiculo categoriaVehiculoM = new CategoriaVehiculo();
+		categoriaVehiculoM=DAOCategoriaVehiculo.getInstance().buscarCategoriaVehiculo(categoriaVehiculo);
+		
+		modelo.Tarifa tarifaM = new modelo.Tarifa(categoriaVehiculoM, costoMinimo, costoFraccion, costoHora, costoMediaEstadia, costoEstadia,
+		tiempoMinimo,tiempoFraccion, tiempoMediaEstadia_minuto, tiempoEstadia_minuto);
+		
+		DAOTarifa.getInstance().persistir(tarifaM);
+	}
+
+	public Vector getColoresActuales() {
+		Vector coloresActuales=new Vector();
+		for(ColorVehiculo color:coloresVehiculos)
+		{
+			coloresActuales.add(color.getDescripcion());
+		}
+		return coloresActuales;
+	}
+	
+	public Vector getModelosActuales() {
+		Vector modelosActuales=new Vector();
+		for(ModeloVehiculo modelo:modelosVehiculos)
+		{
+			modelosActuales.add(modelo.getDescripcion());
+		}
+		return modelosActuales;
+	}
+
+//	public ArrayList<CategoriaVehiculo> getCategoriasVehiculos() {
+//		
+//		return DAOCategoriaVehiculo.getInstance().getCategoriasVehiculos();
+//	}
 
 }

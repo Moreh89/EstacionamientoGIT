@@ -7,6 +7,9 @@ import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 
+import modelo.CategoriaVehiculo;
+import modelo.ColorVehiculo;
+import modelo.ModeloVehiculo;
 import modelo.PersonaAutorizada;
 import modelo.Ticket;
 import modelo.Usuario;
@@ -275,7 +278,7 @@ public class Converter {
 	}
 
 
-	private static modelo.PersonaAutorizada convertPersonaAutorizadaPersistenciaToModelo(persistencia.clases.PersonaAutorizada personasAutorizadaP) {
+	public  static modelo.PersonaAutorizada convertPersonaAutorizadaPersistenciaToModelo(persistencia.clases.PersonaAutorizada personasAutorizadaP) {
 		modelo.PersonaAutorizada personaAutorizadaM = new modelo.PersonaAutorizada();
 		personaAutorizadaM.setIdPersonaAut(personasAutorizadaP.getIdPersonaAut());
 		personaAutorizadaM.setNombre(personasAutorizadaP.getNombre());
@@ -283,7 +286,7 @@ public class Converter {
 		return personaAutorizadaM;
 	}
 
-	private static persistencia.clases.PersonaAutorizada convertPersonaAutorizadaModeloToPersistencia (modelo.PersonaAutorizada personasAutorizadaM) {
+	public static persistencia.clases.PersonaAutorizada convertPersonaAutorizadaModeloToPersistencia (modelo.PersonaAutorizada personasAutorizadaM) {
 		persistencia.clases.PersonaAutorizada personaAutorizadaP = new persistencia.clases.PersonaAutorizada();
 		personaAutorizadaP.setIdPersonaAut(personasAutorizadaM.getIdPersonaAut());
 		personaAutorizadaP.setNombre(personasAutorizadaM.getNombre());
@@ -355,7 +358,7 @@ public class Converter {
 
 
 
-	private static persistencia.clases.Ticket convertTicketModeloToPersistencia(modelo.Ticket ticketM) {
+	public  static persistencia.clases.Ticket convertTicketModeloToPersistencia(modelo.Ticket ticketM) {
 		persistencia.clases.Ticket ticketP= new persistencia.clases.Ticket();
 
 		ticketP.setCatergoriaVehiculo(convertCategoriaVehiculoModeloToPersistencia(ticketM.getCatergoriaVehiculo()));
@@ -383,7 +386,7 @@ public class Converter {
 		return ticketP;
 	}
 
-	private static modelo.Ticket convertTicketPersistenciaToModelo(persistencia.clases.Ticket ticketP) {
+	public static modelo.Ticket convertTicketPersistenciaToModelo(persistencia.clases.Ticket ticketP) {
 		modelo.Ticket ticketM=new modelo.Ticket();
 
 		ticketM.setCatergoriaVehiculo(convertCategoriaVehiculoPersistenciaToModelo(ticketP.getCatergoriaVehiculo()));
@@ -411,7 +414,7 @@ public class Converter {
 		return ticketM;
 	}
 
-	private static persistencia.clases.Cochera convertCocheraModeloToPersistencia(modelo.Cochera cocheraM) {
+	public static persistencia.clases.Cochera convertCocheraModeloToPersistencia(modelo.Cochera cocheraM) {
 		persistencia.clases.Cochera cocheraP = new persistencia.clases.Cochera();
 
 		cocheraP.setCosto(cocheraM.getCosto());
@@ -430,7 +433,7 @@ public class Converter {
 		return cocheraP;
 	}
 
-	private static modelo.Cochera convertCocheraPersistenciaToModelo(persistencia.clases.Cochera cocheraP) {
+	public static modelo.Cochera convertCocheraPersistenciaToModelo(persistencia.clases.Cochera cocheraP) {
 		modelo.Cochera cocheraM = new modelo.Cochera();
 
 		cocheraM.setCosto(cocheraP.getCosto());
@@ -450,7 +453,7 @@ public class Converter {
 	}
 
 
-	private static persistencia.clases.Tarifa convertTarifaModeloToPersistencia(modelo.Tarifa tarifaM) {
+	public static persistencia.clases.Tarifa convertTarifaModeloToPersistencia(modelo.Tarifa tarifaM) {
 		persistencia.clases.Tarifa tarifaP = new persistencia.clases.Tarifa ();
 
 		tarifaP.setIdTarifa(tarifaM.getIdTarifa());
@@ -469,7 +472,7 @@ public class Converter {
 		return tarifaP;
 
 	}
-	private static modelo.Tarifa convertTarifaPersistenciaToModelo(persistencia.clases.Tarifa tarifaP) {
+	public static modelo.Tarifa convertTarifaPersistenciaToModelo(persistencia.clases.Tarifa tarifaP) {
 
 		modelo.Tarifa tarifaM=new modelo.Tarifa();
 
@@ -489,7 +492,7 @@ public class Converter {
 		return tarifaM;
 	}
 
-	private static persistencia.clases.Descuento convertDescuentoModeloToPersistencia(modelo.Descuento descuentoM) {
+	public static persistencia.clases.Descuento convertDescuentoModeloToPersistencia(modelo.Descuento descuentoM) {
 
 		persistencia.clases.Descuento descuentoP = new persistencia.clases.Descuento();
 
@@ -500,7 +503,7 @@ public class Converter {
 		return descuentoP;
 
 	}
-	private static modelo.Descuento convertDescuentoPersistenciaToModelo(persistencia.clases.Descuento descuentoP) {
+	public static modelo.Descuento convertDescuentoPersistenciaToModelo(persistencia.clases.Descuento descuentoP) {
 
 		modelo.Descuento descuentoM = new modelo.Descuento();
 
@@ -510,4 +513,36 @@ public class Converter {
 
 		return descuentoM;
 	}
+
+	public static ArrayList<ColorVehiculo> convertColoresVehiculosPersistenciaToModelo(
+			ArrayList<persistencia.clases.ColorVehiculo> coloresVehiculosP) {
+		
+		ArrayList<modelo.ColorVehiculo> coloresVehiculosM = new ArrayList<modelo.ColorVehiculo>();
+		for(persistencia.clases.ColorVehiculo colorVehiculoP : coloresVehiculosP)
+		{
+			coloresVehiculosM.add(convertColorPersistenciaToModelo(colorVehiculoP));
+		}
+		return coloresVehiculosM;
+	}
+
+	public static ArrayList<ModeloVehiculo> convertModelosVehiculosPersistenciaToModelo(
+			ArrayList<persistencia.clases.ModeloVehiculo> modelosVehiculosP) {
+		
+		ArrayList<modelo.ModeloVehiculo> modelosVehiculosM = new ArrayList<modelo.ModeloVehiculo>();
+		for(persistencia.clases.ModeloVehiculo modeloVehiculoP : modelosVehiculosP)
+		{
+			modelosVehiculosM.add(convertModeloVehiculoPersistenciaToModelo(modeloVehiculoP));
+		}
+		return modelosVehiculosM;
+	}
+
+	//	public static ArrayList<CategoriaVehiculo> convertCategoriasVehiculosPersistenciaToModelo(
+	//			ArrayList<persistencia.clases.CategoriaVehiculo> categoriasVehiculosP) {
+	//		ArrayList<modelo.CategoriaVehiculo> categoriasVehiculosM = new ArrayList<modelo.CategoriaVehiculo>();
+	//		for(persistencia.clases.CategoriaVehiculo categoriaVehiculoP : categoriasVehiculosP)
+	//		{
+	//			categoriasVehiculosM.add(convertCategoriaVehiculoPersistenciaToModelo(categoriaVehiculoP));
+	//		}
+	//		return categoriasVehiculosM;
+	//	}
 }
