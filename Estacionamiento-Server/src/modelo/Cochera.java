@@ -10,6 +10,7 @@ public class Cochera {
 	private ESTADO estado;
 //Representa el porcentaje de expensas
 	private float costo;
+	private String ubicacion;
 	
 	public enum ESTADO {
 		ACTIVO,
@@ -54,6 +55,14 @@ public class Cochera {
 
 	public void setCosto(float costo) {
 		this.costo = costo;
+	}
+
+	public String getUbicacion() {
+		return ubicacion;
+	}
+
+	public void setUbicacion(String ubicacion) {
+		this.ubicacion = ubicacion;
 	}
 	
 	

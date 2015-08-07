@@ -17,7 +17,8 @@ public class DAOCliente {
 		persistencia.clases.Cliente clienteP = new persistencia.clases.Cliente();
 		clienteP=Converter.convertClienteModeloToPersistencia(clienteM);
 		HibernateDAO.getInstancia().save(clienteP);
-		return 0;
+		clienteM.setIdCliente(clienteP.getIdCliente());
+		return clienteP.getIdCliente();
 	}
 
 }

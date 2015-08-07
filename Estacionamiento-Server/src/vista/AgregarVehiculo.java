@@ -109,7 +109,11 @@ public class AgregarVehiculo extends JFrame implements ActionListener{
 		contentPane.add(lblCategoria, gbc_lblCategoria);
 
 		comboBoxCategoriaVehiculo = new JComboBox();
-		comboBoxCategoriaVehiculo.setModel(new DefaultComboBoxModel(new String[] {"1 Auto", "2 4X4", "3 Moto", "4 Bicicleta"}));
+		
+		//comboBoxCategoriaVehiculo.setModel(new DefaultComboBoxModel(new String[] {"1 Auto", "2 4X4", "3 Moto", "4 Bicicleta"}));
+		Vector comboBoxCategoriasItems=Controlador.getInstancia().getCategoriasVehiculosActuales();
+		comboBoxCategoriaVehiculo.setModel(new DefaultComboBoxModel(comboBoxCategoriasItems));
+		
 		GridBagConstraints gbc_comboBoxCategoriaVehiculo = new GridBagConstraints();
 		gbc_comboBoxCategoriaVehiculo.fill = GridBagConstraints.HORIZONTAL;
 		gbc_comboBoxCategoriaVehiculo.insets = new Insets(0, 0, 5, 5);
@@ -279,8 +283,8 @@ public class AgregarVehiculo extends JFrame implements ActionListener{
 		}
 		if(event.getSource()==btnCrearVehiculo)
 		{
-			Controlador.getInstancia().agregarVehiculo(comboBoxCategoriaVehiculo.getSelectedIndex(), textFieldPatente.getText(),
-					(String)comboBoxColor.getSelectedItem(), (String)comboBoxModelo.getSelectedItem(),textFieldObservacion.getText());
+			Controlador.getInstancia().agregarVehiculo((String)comboBoxCategoriaVehiculo.getSelectedItem(), textFieldPatente.getText(),
+					(String)comboBoxColor.getSelectedItem(), (String)comboBoxModelo.getSelectedItem(),textFieldObservacion.getText(), textFieldObservacion.getText());
 			limpiarCampos();
 		}
 		if(event.getSource()==btnFinalizarAlta)

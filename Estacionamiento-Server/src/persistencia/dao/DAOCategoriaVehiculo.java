@@ -29,6 +29,13 @@ public class DAOCategoriaVehiculo {
 		return categoriaVehiculoM;
 	}
 
+	public ArrayList<modelo.CategoriaVehiculo> getCategoriasVehiculos() {
+		ArrayList<persistencia.clases.CategoriaVehiculo> categoriasVehiculosP=(ArrayList<persistencia.clases.CategoriaVehiculo>) HibernateDAO.getInstancia().getList("CategoriaVehiculo");
+		ArrayList<modelo.CategoriaVehiculo> categoriasVehiculosM = Converter.convertCategoriasVehiculosPersistenciaToModelo(categoriasVehiculosP);
+		return categoriasVehiculosM;
+
+	}
+
 //	public ArrayList<modelo.CategoriaVehiculo> getCategoriasVehiculos() {
 //		ArrayList<persistencia.clases.CategoriaVehiculo> categoriasVehiculosP=(ArrayList<persistencia.clases.CategoriaVehiculo>) HibernateDAO.getInstancia().getList("CategoriaVehiculo");
 //		ArrayList<modelo.CategoriaVehiculo> categoriasVehiculosM = Converter.convertCategoriasVehiculosPersistenciaToModelo(categoriasVehiculosP);

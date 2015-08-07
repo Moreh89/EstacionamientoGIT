@@ -2,6 +2,7 @@ package persistencia.clases;
 
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -33,17 +34,17 @@ public class Cliente {
 	private String correoElectronico;
 	private ESTADO estado;
 	private String cuil;
-	@OneToMany
+	@OneToMany(cascade=CascadeType.ALL)
 	@JoinColumn(name="Cliente")
 	private List<PersonaAutorizada> personasAutorizadasARetirar;
 	private String razonSocial;
-	@OneToMany
+	@OneToMany(cascade=CascadeType.ALL)
 	@JoinColumn(name="Cliente")
 	private List<Cochera> cocheras; 
-	@OneToOne
+	@OneToOne(cascade=CascadeType.ALL)
 	@JoinColumn(name="CuentaCorriente")
 	private CuentaCorriente cuentaCorriente;
-	@OneToMany
+	@OneToMany(cascade=CascadeType.ALL)
 	@JoinColumn(name="Cliente")
 	private List<Vehiculo> vehiculos;
 	

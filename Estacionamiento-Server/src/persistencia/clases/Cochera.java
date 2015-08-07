@@ -21,6 +21,7 @@ public class Cochera {
 	private Cliente cliente;
 	private ESTADO estado;
 	private float costo;
+	private String ubicacion;
 	
 	public enum ESTADO {
 		ACTIVO,
@@ -69,16 +70,25 @@ public class Cochera {
 	}
 
 	public Cochera(long idCochera, double costoCochera, Cliente cliente,
-			ESTADO estado) {
+			ESTADO estado, String ubicacion) {
 		super();
 		this.idCochera = idCochera;
 		this.costoCochera = costoCochera;
 		this.cliente = cliente;
 		this.estado = estado;
+		this.ubicacion=ubicacion;
 	}
 
 	public Cochera() {
 		// TODO Auto-generated constructor stub
+	}
+
+	public String getUbicacion() {
+		return ubicacion;
+	}
+
+	public void setUbicacion(String ubicacion) {
+		this.ubicacion = ubicacion;
 	}
 	
 	

@@ -76,7 +76,7 @@ public class Converter {
 		vehiculoP.setCategoria(convertCategoriaVehiculoModeloToPersistencia(vehiculoM.getCategoria()));
 		vehiculoP.setModelo(convertModeloVehiculoModeloToPersistencia(vehiculoM.getModelo()));
 		vehiculoP.setColor(convertColorModeloToPersistencia(vehiculoM.getColor()));;
-
+		vehiculoP.setComentario(vehiculoM.getComentario());
 		return vehiculoP;
 	}
 
@@ -88,7 +88,7 @@ public class Converter {
 		vehiculoM.setCategoria(convertCategoriaVehiculoPersistenciaToModelo(vehiculoP.getCategoria()));
 		vehiculoM.setModelo(convertModeloVehiculoPersistenciaToModelo(vehiculoP.getModelo()));
 		vehiculoM.setColor(convertColorPersistenciaToModelo(vehiculoP.getColor()));
-
+		vehiculoM.setComentario(vehiculoP.getComentario());
 		return vehiculoM;
 	}
 
@@ -162,6 +162,7 @@ public class Converter {
 		clienteP.setDireccion2(clienteM.getDireccion2());
 		clienteP.setTelefono1(clienteM.getTelefono1());
 		clienteP.setTelefono2(clienteM.getTelefono2());
+		clienteP.setRazonSocial(clienteM.getRazonSocial());
 
 		String tipoDoc=clienteM.getTipoDocumento().toString();
 		if(tipoDoc.equals("DNI"))
@@ -189,11 +190,13 @@ public class Converter {
 
 
 		List<persistencia.clases.PersonaAutorizada> personasAutorizadasARetirarP = new ArrayList<persistencia.clases.PersonaAutorizada>();
-		for (modelo.PersonaAutorizada personasAutorizadasARetirarM : clienteM.getPersonasAutorizadasARetirar()) {
-			personasAutorizadasARetirarP.add(convertPersonaAutorizadaModeloToPersistencia(personasAutorizadasARetirarM));
+		if(clienteM.getPersonasAutorizadasARetirar()!=null)
+		{
+			for (modelo.PersonaAutorizada personasAutorizadasARetirarM : clienteM.getPersonasAutorizadasARetirar()) {
+				personasAutorizadasARetirarP.add(convertPersonaAutorizadaModeloToPersistencia(personasAutorizadasARetirarM));
+			}
+			clienteP.setPersonasAutorizadasARetirar(personasAutorizadasARetirarP);
 		}
-		clienteP.setPersonasAutorizadasARetirar(personasAutorizadasARetirarP);
-
 
 		List<persistencia.clases.Cochera> cocherasP = new ArrayList<persistencia.clases.Cochera>();
 		for (modelo.Cochera cocheraM : clienteM.getCocheras()) {
@@ -230,6 +233,7 @@ public class Converter {
 		clienteM.setDireccion2(clienteP.getDireccion2());
 		clienteM.setTelefono1(clienteP.getTelefono1());
 		clienteM.setTelefono2(clienteP.getTelefono2());
+		clienteM.setRazonSocial(clienteP.getRazonSocial());
 
 		String tipoDoc=clienteP.getTipoDocumento().toString();
 		if(tipoDoc.equals("DNI"))
@@ -420,7 +424,7 @@ public class Converter {
 		cocheraP.setCosto(cocheraM.getCosto());
 		cocheraP.setCostoCochera(cocheraM.getCostoCochera());
 		cocheraP.setIdCochera(cocheraM.getIdCochera());
-
+		cocheraP.setUbicacion(cocheraM.getUbicacion());
 		String estadoCochera=cocheraM.getEstado().toString();
 		if(estadoCochera.equals("ACTIVO"))
 			cocheraP.setEstado(persistencia.clases.Cochera.ESTADO.ACTIVO);
@@ -439,7 +443,7 @@ public class Converter {
 		cocheraM.setCosto(cocheraP.getCosto());
 		cocheraM.setCostoCochera(cocheraP.getCostoCochera());
 		cocheraM.setIdCochera(cocheraP.getIdCochera());
-
+		cocheraM.setUbicacion(cocheraP.getUbicacion());
 		String estadoCochera=cocheraP.getEstado().toString();
 		if(estadoCochera.equals("ACTIVO"))
 			cocheraM.setEstado(modelo.Cochera.ESTADO.ACTIVO);
@@ -516,7 +520,7 @@ public class Converter {
 
 	public static ArrayList<ColorVehiculo> convertColoresVehiculosPersistenciaToModelo(
 			ArrayList<persistencia.clases.ColorVehiculo> coloresVehiculosP) {
-		
+
 		ArrayList<modelo.ColorVehiculo> coloresVehiculosM = new ArrayList<modelo.ColorVehiculo>();
 		for(persistencia.clases.ColorVehiculo colorVehiculoP : coloresVehiculosP)
 		{
@@ -527,13 +531,23 @@ public class Converter {
 
 	public static ArrayList<ModeloVehiculo> convertModelosVehiculosPersistenciaToModelo(
 			ArrayList<persistencia.clases.ModeloVehiculo> modelosVehiculosP) {
-		
+
 		ArrayList<modelo.ModeloVehiculo> modelosVehiculosM = new ArrayList<modelo.ModeloVehiculo>();
 		for(persistencia.clases.ModeloVehiculo modeloVehiculoP : modelosVehiculosP)
 		{
 			modelosVehiculosM.add(convertModeloVehiculoPersistenciaToModelo(modeloVehiculoP));
 		}
 		return modelosVehiculosM;
+	}
+
+	public static ArrayList<CategoriaVehiculo> convertCategoriasVehiculosPersistenciaToModelo(ArrayList<persistencia.clases.CategoriaVehiculo> categoriasVehiculosP) 
+	{
+		ArrayList<modelo.CategoriaVehiculo> categoriasVehiculosM = new ArrayList<modelo.CategoriaVehiculo>();
+		for(persistencia.clases.CategoriaVehiculo categoriaVehiculoP : categoriasVehiculosP)
+		{
+			categoriasVehiculosM.add(convertCategoriaVehiculoPersistenciaToModelo(categoriaVehiculoP));
+		}
+		return categoriasVehiculosM;
 	}
 
 	//	public static ArrayList<CategoriaVehiculo> convertCategoriasVehiculosPersistenciaToModelo(

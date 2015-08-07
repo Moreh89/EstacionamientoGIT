@@ -8,6 +8,15 @@ public class Vehiculo
 	private CategoriaVehiculo categoria;
 	private ModeloVehiculo modelo;
 	private ColorVehiculo color;
+	private String comentario;
+	
+	
+	public String getComentario() {
+		return comentario;
+	}
+	public void setComentario(String comentario) {
+		this.comentario = comentario;
+	}
 	public long getIdVehiculo() {
 		return idVehiculo;
 	}

@@ -27,10 +27,12 @@ public class Controlador {
 	private Cliente clienteActual = null;
 	private Ticket ticket;
 	private Usuario usuarioActual;
-	private ArrayList<ColorVehiculo> coloresVehiculos;
-	private ArrayList<ModeloVehiculo> modelosVehiculos;
 	private ArrayList<Descuento> descuentos;
 	private ArrayList<Descuento> cocheras;
+	
+	//carga inicial
+	private ArrayList<ColorVehiculo> coloresVehiculos;
+	private ArrayList<ModeloVehiculo> modelosVehiculos;
 	private ArrayList<CategoriaVehiculo> categoriasVehiculos;
 	
 	public ArrayList<Cochera> cocherasActuales;
@@ -99,13 +101,14 @@ public class Controlador {
 		//		categoriasVehiculos=DAOCategoriaVehiculo.getInstance().getCategoriasVehiculos();
 		coloresVehiculos=DAOColorVehiculo.getInstance().getColoresVehiculos();
 		modelosVehiculos=DAOModeloVehiculo.getInstance().getModelosVehiculos();
+		categoriasVehiculos=DAOCategoriaVehiculo.getInstance().getCategoriasVehiculos();
 	}
 
 
 	public void altaCliente(String nombre, String apellido, String telefono1,
 			String telefono2, String direccion1, String direccion2,
 			String email, String razonSocial, ArrayList<String> listPersonasAutorizadas,
-			ArrayList<String> listVehiculos, String tipoDoc, String numeroDoc, String tipoCliente) 
+			ArrayList<String> listVehiculos, String tipoDoc, String numeroDoc, String tipoCliente, String cuil) 
 	{
 		Cliente cliente=new Cliente();
 		cliente.setNombre(nombre);
@@ -116,6 +119,7 @@ public class Controlador {
 		cliente.setDireccion2(direccion2);
 		cliente.setCorreoElectronico(email);
 		cliente.setRazonSocial(razonSocial);
+		cliente.setCuil(cuil);
 		
 		
 		if(tipoDoc.equals("1. DNI"))
@@ -141,12 +145,12 @@ public class Controlador {
 		cliente.setCocheras(cocherasActuales);
 		cliente.setPersonasAutorizadasARetirar(personasAutorizadasActuales);
 		cliente.setVehiculos(vehiculosActuales);
-
+		
 		DAOCliente.getInstance().persistir(cliente);
 	}
 
-	public void agregarVehiculo(int idCategoriaVehiculo, String patente,
-			String color, String modelo, String observacion) {
+	public void agregarVehiculo(String categoriaVehiculo, String patente,
+			String color, String modelo, String observacion, String comentario) {
 
 		if (clienteActual == null) {
 			if (vehiculosActuales == null) 
@@ -156,24 +160,43 @@ public class Controlador {
 
 			Vehiculo vehiculo = new Vehiculo();
 
-			modelo.CategoriaVehiculo categoriaVehiculo = new modelo.CategoriaVehiculo();
-			categoriaVehiculo.setIdCategoria(idCategoriaVehiculo);
-			vehiculo.setCategoria(categoriaVehiculo);
+//			modelo.CategoriaVehiculo categoriaVehiculo = new modelo.CategoriaVehiculo();
+			for(modelo.CategoriaVehiculo categoriaVehiculoM : categoriasVehiculos)
+			{
+				if(categoriaVehiculo.equals(categoriaVehiculoM.getDescripcion()))
+				{
+					vehiculo.setCategoria(categoriaVehiculoM);
+					break;
+				}
+			}
 
 			vehiculo.setPatente(patente);
-
+			vehiculo.setComentario(comentario);
 			//TODO BUSQUEDA EN MEMORIA, ya están por carga inicial
-			modelo.ColorVehiculo colorVehiculo = DAOColorVehiculo.getInstance().getColorVehiculo(color);
-			vehiculo.setColor(colorVehiculo);
+			
+			for(modelo.ColorVehiculo colorVehiculo : coloresVehiculos)
+			{
+				if(color.equals(colorVehiculo.getDescripcion()))
+				{
+					vehiculo.setColor(colorVehiculo);
+					break;
+				}
+			}
+//			modelo.ColorVehiculo colorVehiculo = DAOColorVehiculo.getInstance().getColorVehiculo(color);
 
 
-			//TODO BUSQUEDA EN MEMORIA, ya están por carga inicial
-
-			ModeloVehiculo modeloVehiculo = DAOModeloVehiculo.getInstance().getModeloVehiculo(modelo);
-			vehiculo.setModelo(modeloVehiculo);
-
+//			ModeloVehiculo modeloVehiculo = DAOModeloVehiculo.getInstance().getModeloVehiculo(modelo);
+	
+			for(ModeloVehiculo modeloVehiculo : modelosVehiculos)
+			{
+				if(modelo.equals(modeloVehiculo.getDescripcion()))
+				{
+					vehiculo.setModelo(modeloVehiculo);
+					break;
+				}
+			}
 			vehiculosActuales.add(vehiculo);
-			// PENDIENTE AGREGAR OBSERVACION
+			// TODO PENDIENTE AGREGAR OBSERVACION
 
 		}
 	}
@@ -266,6 +289,16 @@ public class Controlador {
 		return modelosActuales;
 	}
 
+	public Vector getCategoriasVehiculosActuales()
+	{
+		Vector categoriasVehiculosActuales = new Vector();
+		for(modelo.CategoriaVehiculo categoriaVehiculo : categoriasVehiculos)
+		{
+			categoriasVehiculosActuales.add(categoriaVehiculo.getDescripcion());
+		}
+		return categoriasVehiculosActuales;
+	}
+	
 	public void agregarCochera(String ubicacion, double costoMensual, float porcentajeExpensas,String piso) 
 	{
 		modelo.Cochera cochera = new modelo.Cochera();
@@ -276,6 +309,8 @@ public class Controlador {
 		cochera.setCostoCochera(costoMensual);
 		cochera.setCosto(porcentajeExpensas);
 		cochera.setEstado(modelo.Cochera.ESTADO.ACTIVO);
+		cochera.setUbicacion(ubicacion);
+		cochera.setCliente(null);
 		
 		cocherasActuales.add(cochera);
 	}
