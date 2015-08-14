@@ -366,8 +366,8 @@ public class Converter {
 		persistencia.clases.Ticket ticketP= new persistencia.clases.Ticket();
 
 		ticketP.setCatergoriaVehiculo(convertCategoriaVehiculoModeloToPersistencia(ticketM.getCatergoriaVehiculo()));
-		ticketP.setCliente(convertClienteModeloToPersistencia(ticketM.getCliente()));
-		ticketP.setDescuento(convertDescuentoModeloToPersistencia(ticketM.getDescuento()));
+		if(ticketM.getCliente() != null) ticketP.setCliente(convertClienteModeloToPersistencia(ticketM.getCliente()));
+		if(ticketM.getDescuento() != null) ticketP.setDescuento(convertDescuentoModeloToPersistencia(ticketM.getDescuento()));
 
 		String estadoTicket=ticketM.getEstado().toString();
 		if(estadoTicket.equals("ABIERTO"))

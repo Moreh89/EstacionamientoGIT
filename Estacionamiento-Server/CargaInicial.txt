@@ -1,0 +1,19 @@
+insert into CategoriaVehiculo  (descripcion) VALUES  ('1 Auto');
+insert into CategoriaVehiculo  (descripcion) VALUES  ('2 4X4');
+insert into CategoriaVehiculo  (descripcion) VALUES  ('3 Moto');
+insert into CategoriaVehiculo  (descripcion) VALUES  ('4 Bicicleta');
+
+insert into ColorVehiculo  (descripcion) VALUES  ('1 Rojo');
+insert into ColorVehiculo  (descripcion) VALUES  ('2 Azul');
+insert into ColorVehiculo  (descripcion) VALUES  ('3 Verde');
+insert into ColorVehiculo  (descripcion) VALUES  ('4 Negro');
+insert into ColorVehiculo  (descripcion) VALUES  ('4 Blanco');
+
+insert into ModeloVehiculo  (descripcion) VALUES  ('1 BMW 328i');
+insert into ModeloVehiculo  (descripcion) VALUES  ('2 VW Gol');
+insert into ModeloVehiculo  (descripcion) VALUES  ('3 Peugeot 207');
+insert into ModeloVehiculo  (descripcion) VALUES  ('4 Audi a3');
+insert into ModeloVehiculo  (descripcion) VALUES  ('4 Posche 911');
+
+INSERT INTO Usuario (userName, password, permisos, nombre, apellido, tipoDocumento, numeroDocumento)  VALUES ('admin', 'admin', 0, 'admin', 'admin', 'dni', 9999);
+INSERT INTO Usuario (userName, password, permisos, nombre, apellido, tipoDocumento, numeroDocumento)  VALUES ('operador', 'operador', 1, 'operador', 'operador', 'dni', 8888);

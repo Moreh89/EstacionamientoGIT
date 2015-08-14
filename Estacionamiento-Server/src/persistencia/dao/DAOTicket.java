@@ -1,5 +1,6 @@
 package persistencia.dao;
 
+import persistencia.Converter;
 import persistencia.HibernateDAO;
 import modelo.Ticket;
 
@@ -15,21 +16,7 @@ public class DAOTicket {
 
 	public long persistir(Ticket tck) {
 
-		persistencia.clases.Ticket tckDao = new persistencia.clases.Ticket();
-	
-//TODO
-		
-//		tckDao.setCatergoriaVehiculo(catVPer);
-//		tckDao.setCliente(clientePer);
-//		tckDao.setDescuento(descuentoPer);
-//		tckDao.setEstado(estadoPer);
-//		tckDao.setFechaLlegada(fechaLlegadaPer);
-//		tckDao.setModeloVehiculo(modeloVehiculoPer);
-//		tckDao.setMontoCobrado(montoCobradoPer);
-//		tckDao.setObservacion(observacionPer);
-//		tckDao.setPrepago(prepagoPer);
-//		tckDao.setUsuario(usuarioPer);
-		
+		persistencia.clases.Ticket tckDao = Converter.convertTicketModeloToPersistencia(tck);
 		
 		HibernateDAO.getInstancia().save(tckDao);
 		

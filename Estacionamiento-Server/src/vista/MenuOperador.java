@@ -229,8 +229,10 @@ public class MenuOperador extends JFrame implements ActionListener {
 
 		comboBoxTipoVehiculo = new JComboBox();
 		comboBoxTipoVehiculo.setFont(new Font("Tahoma", Font.PLAIN, 30));
-		comboBoxTipoVehiculo.setModel(new DefaultComboBoxModel(new String[] {
-				"1 Auto", "2 4X4", "3 Moto", "4 Bicicleta" }));
+		comboBoxTipoVehiculo.setModel(new DefaultComboBoxModel());
+		for (String catString : Controlador.getInstancia().getCategoriasVehiculosActuales()) {
+			comboBoxTipoVehiculo.addItem(catString);
+		}
 		GridBagConstraints gbc_comboBoxTipoVehiculo = new GridBagConstraints();
 		gbc_comboBoxTipoVehiculo.gridwidth = 2;
 		gbc_comboBoxTipoVehiculo.insets = new Insets(0, 0, 5, 5);
@@ -269,8 +271,11 @@ public class MenuOperador extends JFrame implements ActionListener {
 
 		comboBoxColor = new JComboBox();
 		comboBoxColor.setFont(new Font("Tahoma", Font.PLAIN, 30));
-		comboBoxColor.setModel(new DefaultComboBoxModel(new String[] {
-				"1 Rojo", "2 Azul", "3 Verde", "4 Negro", "5 Blanco" }));
+		comboBoxColor.setModel(new DefaultComboBoxModel());
+		for (String colString : Controlador.getInstancia().getColoresActuales()) {
+			comboBoxColor.addItem(colString);
+		}
+		
 		GridBagConstraints gbc_comboBoxColor = new GridBagConstraints();
 		gbc_comboBoxColor.gridwidth = 2;
 		gbc_comboBoxColor.insets = new Insets(0, 0, 5, 5);
@@ -290,8 +295,11 @@ public class MenuOperador extends JFrame implements ActionListener {
 
 		comboBoxModelo = new JComboBox();
 		comboBoxModelo.setFont(new Font("Tahoma", Font.PLAIN, 30));
-		comboBoxModelo.setModel(new DefaultComboBoxModel(new String[] {
-				"1 Mercedes", "2 Fiat Palio", "3 Chevrolet Aveo" }));
+		comboBoxModelo.setModel(new DefaultComboBoxModel());
+		for (String modString : Controlador.getInstancia().getModelosActuales()) {
+			comboBoxModelo.addItem(modString);
+		}
+		
 		GridBagConstraints gbc_comboBoxModelo = new GridBagConstraints();
 		gbc_comboBoxModelo.fill = GridBagConstraints.BOTH;
 		gbc_comboBoxModelo.insets = new Insets(0, 0, 5, 0);
@@ -312,6 +320,10 @@ public class MenuOperador extends JFrame implements ActionListener {
 		comboBoxDescuento.setFont(new Font("Tahoma", Font.PLAIN, 30));
 		comboBoxDescuento.setModel(new DefaultComboBoxModel(new String[] {
 				"0 N/A", "1 Farmacia 10%", "2 Socio 20%" }));
+//		TODO getDescuentosActuales
+//		for (String descString : Controlador.getInstancia().getDescuentosActuales()) {
+//			comboBoxDescuento.addItem(modString);
+//		}
 		GridBagConstraints gbc_comboBoxDescuento = new GridBagConstraints();
 		gbc_comboBoxDescuento.gridwidth = 2;
 		gbc_comboBoxDescuento.insets = new Insets(0, 0, 5, 5);
@@ -445,6 +457,7 @@ public class MenuOperador extends JFrame implements ActionListener {
 		gbc_btnTicketF.gridx = 4;
 		gbc_btnTicketF.gridy = 7;
 		contentPane.add(btnTicketF, gbc_btnTicketF);
+		btnTicketF.addActionListener(this);
 
 		lblTotalAPagar = new JLabel("Total a Pagar:");
 		lblTotalAPagar.setForeground(Color.BLUE);
@@ -485,7 +498,8 @@ public class MenuOperador extends JFrame implements ActionListener {
 		gbc_btnCobrarF.gridx = 4;
 		gbc_btnCobrarF.gridy = 9;
 		contentPane.add(btnCobrarF, gbc_btnCobrarF);
-
+		btnCobrarF.addActionListener(this);
+		
 		panel = new JPanel();
 		GridBagConstraints gbc_panel = new GridBagConstraints();
 		gbc_panel.gridwidth = 5;
@@ -571,6 +585,9 @@ public class MenuOperador extends JFrame implements ActionListener {
 	public void actionPerformed(ActionEvent event) {
 
 		if (event.getSource() == btnCobrarF) {
+		}
+		
+		if (event.getSource() == btnTicketF) {
 
 
 			String numeroTicket= Controlador.getInstancia()
@@ -586,6 +603,8 @@ public class MenuOperador extends JFrame implements ActionListener {
 							labelUsuario.getText());
 			textFieldNumeroTicket.setText(numeroTicket);
 
+			this.textFieldNumeroTicket.setText(numeroTicket);
+			
 			//TODO bloquear botones y demas hasta que elija nuevo
 		}
 
@@ -593,6 +612,7 @@ public class MenuOperador extends JFrame implements ActionListener {
 			new Login().setVisible(true);
 			dispose();			
 		}
+		
 		if (event.getSource() == mntmArqueoDeCaja){
 			new ArqueoDeCaja().setVisible(true);
 		}	

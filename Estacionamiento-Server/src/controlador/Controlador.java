@@ -1,26 +1,17 @@
 package controlador;
 
 
-import java.io.File;
-import java.io.IOException;
-import java.sql.SQLException;
+
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.Vector;
-
-import javax.swing.JPasswordField;
-
-import com.mysql.jdbc.Statement;
-
-import persistencia.Converter;
 import persistencia.HibernateDAO;
-import persistencia.clases.Cliente.TIPO_DOC;
 import persistencia.dao.*;
 import modelo.*;
-import modelo.Cochera.ESTADO;
 
+@SuppressWarnings("unused")
 public class Controlador {
 
 	private ArrayList<Tarifa> tarifas;
@@ -218,12 +209,13 @@ public class Controlador {
 			String color, String descuento, String patente,
 			String cliente, String prepago, String obsevacion, String usuario) {
 
-		CategoriaVehiculo catve= new CategoriaVehiculo();
-		ModeloVehiculo modve = new ModeloVehiculo();
-		Cliente cl = new Cliente();
-		Descuento des = new Descuento();
-
-		//TODO buscar categoriaVe, modeloVe, cliente, descuento
+		CategoriaVehiculo catve= buscarCategoriaVehiulo(tipoVehiculo);
+		
+		ModeloVehiculo modve = buscarModeloVehiulo(modelo);
+		
+		Cliente cl = buscarCliente(cliente);
+		
+		Descuento des = buscarDescuento(descuento);
 
 		Ticket tck = new Ticket( catve, modve, cl, des, usuarioActual, Double.valueOf(prepago), obsevacion);
 		this.ticket = tck;
@@ -234,6 +226,36 @@ public class Controlador {
 
 	}
 
+
+	private Descuento buscarDescuento(String descuento) {
+		// TODO Auto-generated method stub
+		if(descuento !=null){
+			
+		}
+		return null;
+	}
+
+	private Cliente buscarCliente(String cliente) {
+		// TODO Auto-generated method stub
+		if(cliente !=null){
+			
+		}
+		return null;
+	}
+
+	private ModeloVehiculo buscarModeloVehiulo(String modelo) {
+		for (ModeloVehiculo modeloV : modelosVehiculos) {
+			if(modeloV.getDescripcion().equals(modelo)) return modeloV;
+		}
+		return null;
+	}
+
+	private CategoriaVehiculo buscarCategoriaVehiulo(String tipoVehiculo) {
+		for (modelo.CategoriaVehiculo categoria : categoriasVehiculos) {
+			if(categoria.getDescripcion().equals(tipoVehiculo)) return categoria;
+		}
+		return null;
+	}
 
 	public boolean backUp(String letraDisco){
 		//TODO ver como se puede generar el path si no existe.
@@ -271,8 +293,8 @@ public class Controlador {
 		DAOTarifa.getInstance().persistir(tarifaM);
 	}
 
-	public Vector getColoresActuales() {
-		Vector coloresActuales=new Vector();
+	public Vector<String> getColoresActuales() {
+		Vector<String> coloresActuales=new Vector<String>();
 		for(ColorVehiculo color:coloresVehiculos)
 		{
 			coloresActuales.add(color.getDescripcion());
@@ -280,8 +302,8 @@ public class Controlador {
 		return coloresActuales;
 	}
 
-	public Vector getModelosActuales() {
-		Vector modelosActuales=new Vector();
+	public Vector<String> getModelosActuales() {
+		Vector<String> modelosActuales=new Vector<String>();
 		for(ModeloVehiculo modelo:modelosVehiculos)
 		{
 			modelosActuales.add(modelo.getDescripcion());
@@ -289,9 +311,9 @@ public class Controlador {
 		return modelosActuales;
 	}
 
-	public Vector getCategoriasVehiculosActuales()
+	public Vector<String> getCategoriasVehiculosActuales()
 	{
-		Vector categoriasVehiculosActuales = new Vector();
+		Vector<String> categoriasVehiculosActuales = new Vector<String>();
 		for(modelo.CategoriaVehiculo categoriaVehiculo : categoriasVehiculos)
 		{
 			categoriasVehiculosActuales.add(categoriaVehiculo.getDescripcion());
