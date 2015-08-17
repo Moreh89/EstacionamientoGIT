@@ -528,6 +528,8 @@ public class Converter {
 		}
 		return coloresVehiculosM;
 	}
+	
+	
 
 	public static ArrayList<ModeloVehiculo> convertModelosVehiculosPersistenciaToModelo(
 			ArrayList<persistencia.clases.ModeloVehiculo> modelosVehiculosP) {
@@ -550,6 +552,17 @@ public class Converter {
 		return categoriasVehiculosM;
 	}
 
+	public static ArrayList<modelo.Descuento> convertDescuentosPersistenciaToModelo(
+			ArrayList<persistencia.clases.Descuento> descuentosP) {
+
+		ArrayList<modelo.Descuento> descuentosM = new ArrayList<modelo.Descuento>();
+		for(persistencia.clases.Descuento descuentoP : descuentosP)
+		{
+			descuentosM.add(convertDescuentoPersistenciaToModelo(descuentoP));
+		}
+		return descuentosM;
+	}
+	
 	//	public static ArrayList<CategoriaVehiculo> convertCategoriasVehiculosPersistenciaToModelo(
 	//			ArrayList<persistencia.clases.CategoriaVehiculo> categoriasVehiculosP) {
 	//		ArrayList<modelo.CategoriaVehiculo> categoriasVehiculosM = new ArrayList<modelo.CategoriaVehiculo>();

@@ -320,6 +320,10 @@ public class MenuAdmin extends JFrame implements ActionListener {
 			new Login().setVisible(true);
 			dispose();
 		}
+		if(event.getSource() == mntmAltaDescuento)
+		{
+			new AltaDescuento().setVisible(true);
+		}
 		
 		
 	}

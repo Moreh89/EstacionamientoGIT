@@ -132,6 +132,15 @@ ESTADO: HECHO para adminsitrador
 Poder borrar tickets de >x fecha de antigueadad desde admin
 
 
+24) CONSULTA DE DAMIAN
+	DESCUENTOS MANEJAN PORCENTAJE? MONTO FIJO A DESCONTAR O SETTEAN VALOR FIJO.
+	Ej1: -20%
+	Ej2: 6hs UADE 35$ 
+	Ej3: abono efectivo, descuenta 50$ (debería ser % este caso)
+
+25) CONSULTA DE DAMIAN
+	TASA INTERES DEBERIA ESTAR EN LA DB PARA QUE LA PUEDAN MODIFICAR, HOY ES UN DOUBLE EN CONTROLADOR.
+
 Otros:
 Misma computadora imprime en 2 impresoras, el sistema tiene que poder imprimir en distintas impresoras 
 

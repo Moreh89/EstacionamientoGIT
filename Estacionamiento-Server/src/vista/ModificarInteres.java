@@ -12,12 +12,12 @@ import javax.swing.border.EmptyBorder;
 import java.awt.Font;
 import javax.swing.JTextField;
 
-public class ModificarInteres extends JDialog {
+public class ModificarInteres extends JDialog implements ActionListener{
 
 	/**
 	 * 
 	 */
-	private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = 1L; 
 	private final JPanel contentPanel = new JPanel();
 	private JButton aceptarButton;
 	private JButton cancelarButton;
@@ -64,16 +64,14 @@ public class ModificarInteres extends JDialog {
 		aceptarButton.setIcon(new ImageIcon(ModificarInteres.class.getResource("/image/ok.png")));
 		aceptarButton.setBounds(29, 104, 116, 32);
 		contentPanel.add(aceptarButton);
+		aceptarButton.addActionListener(this);
 		
 		cancelarButton = new JButton("Cancelar");
-		cancelarButton.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-				dispose();
-			}
-		});
 		cancelarButton.setIcon(new ImageIcon(GestorUsuario.class.getResource("/image/cancel.png")));
 		cancelarButton.setBounds(155, 104, 116, 32);
 		contentPanel.add(cancelarButton);
+		cancelarButton.addActionListener(this);
+
 		
 		textFieldInteres = new JTextField();
 		textFieldInteres.setText("10%");
@@ -89,7 +87,31 @@ public class ModificarInteres extends JDialog {
 		
 		this.setLocationRelativeTo(null);
 		setModal(true);
-		
+	}
+	
+		@SuppressWarnings("deprecation")
+		public void actionPerformed(ActionEvent event) {
+			if(event.getSource()==cancelarButton)
+			{
+				dispose();
+			}
+			if(event.getSource()==aceptarButton)
+			{
+//				long codigoReturn;
+//				if(!descripcionTextField.getText().isEmpty() && !montoDescuentoTextField.getText().isEmpty())
+//				{
+//					codigoReturn=Controlador.getInstancia().altaDescuento(descripcionTextField.getText(), Double.parseDouble(montoDescuentoTextField.getText()));
+//					if(codigoReturn == -1)
+//					{
+//						JOptionPane.showMessageDialog(null, "Descuento Duplicado", "Existe otro Descuento con la misma descripcion", JOptionPane.INFORMATION_MESSAGE);
+//					}
+//					if(codigoReturn >= 0)
+//					{
+//						JOptionPane.showMessageDialog(null, "Alta Descuento exitosa", "Se generó correctamente el alta del descuento", JOptionPane.INFORMATION_MESSAGE);
+//					}
+//				}
+
+		}
 		
 	}
 }

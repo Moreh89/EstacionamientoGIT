@@ -18,19 +18,20 @@ public class Controlador {
 	private Cliente clienteActual = null;
 	private Ticket ticket;
 	private Usuario usuarioActual;
-	private ArrayList<Descuento> descuentos;
-	private ArrayList<Descuento> cocheras;
+	private ArrayList<Cochera> cocheras;
 	
 	//carga inicial
 	private ArrayList<ColorVehiculo> coloresVehiculos;
 	private ArrayList<ModeloVehiculo> modelosVehiculos;
 	private ArrayList<CategoriaVehiculo> categoriasVehiculos;
+	private ArrayList<Descuento> descuentos;
+	private double tasaInteres;
+
 	
 	public ArrayList<Cochera> cocherasActuales;
 	public ArrayList<Vehiculo> vehiculosActuales;
 	public ArrayList<PersonaAutorizada> personasAutorizadasActuales;
 
-	private double tasaInteres;
 
 	private static Controlador instancia;
 
@@ -88,11 +89,12 @@ public class Controlador {
 
 	public void cargaInicial()
 	{
-		//TODO checkear si va la carga de categorias, creo que no.
-		//		categoriasVehiculos=DAOCategoriaVehiculo.getInstance().getCategoriasVehiculos();
 		coloresVehiculos=DAOColorVehiculo.getInstance().getColoresVehiculos();
 		modelosVehiculos=DAOModeloVehiculo.getInstance().getModelosVehiculos();
 		categoriasVehiculos=DAOCategoriaVehiculo.getInstance().getCategoriasVehiculos();
+		descuentos=DAODescuento.getInstance().getDescuentos();
+	//tasaInteres=DAOTasaInteres.getInstance.getTasaInteres();
+	//TODO REVISAR CON RODRI LA TASA DE INTERES DEBERIA ESTAR EN LA BASE.
 	}
 
 
@@ -337,6 +339,30 @@ public class Controlador {
 		cocherasActuales.add(cochera);
 	}
 
+	public long altaDescuento(String descripcion,double montoDescuento)	
+	{
+		for(modelo.Descuento descuentoM : descuentos)
+		{
+			if(descuentoM.getDescripcion().equalsIgnoreCase(descripcion))
+			{
+				return -1;
+			}
+		}
+		modelo.Descuento descuentoM = new Descuento();
+		descuentoM.setDescripcion(descripcion);
+		descuentoM.setDescuento(montoDescuento);
+		descuentoM.setIdDescuento(0);
+		
+		return DAODescuento.getInstance().persistir(descuentoM);
+		
+		
+	}
+	
+	public double getTasaInteres()
+	{
+		return tasaInteres;
+	}
+	
 	//	public ArrayList<CategoriaVehiculo> getCategoriasVehiculos() {
 	//		
 	//		return DAOCategoriaVehiculo.getInstance().getCategoriasVehiculos();
