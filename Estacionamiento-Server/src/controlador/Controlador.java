@@ -25,7 +25,7 @@ public class Controlador {
 	private ArrayList<ModeloVehiculo> modelosVehiculos;
 	private ArrayList<CategoriaVehiculo> categoriasVehiculos;
 	private ArrayList<Descuento> descuentos;
-	private double tasaInteres;
+	private modelo.TasaInteres tasaInteres;
 
 	
 	public ArrayList<Cochera> cocherasActuales;
@@ -93,8 +93,8 @@ public class Controlador {
 		modelosVehiculos=DAOModeloVehiculo.getInstance().getModelosVehiculos();
 		categoriasVehiculos=DAOCategoriaVehiculo.getInstance().getCategoriasVehiculos();
 		descuentos=DAODescuento.getInstance().getDescuentos();
-	//tasaInteres=DAOTasaInteres.getInstance.getTasaInteres();
-	//TODO REVISAR CON RODRI LA TASA DE INTERES DEBERIA ESTAR EN LA BASE.
+		tasaInteres=DAOTasaInteres.getInstance().getTasaInteresActual();
+		
 	}
 
 
@@ -360,7 +360,28 @@ public class Controlador {
 	
 	public double getTasaInteres()
 	{
-		return tasaInteres;
+		return tasaInteres.getMontoDescuento();
+	}
+	
+	public long modificarTasaInteres(double montoTasaInteresNuevo)
+	{
+		modelo.TasaInteres tasaInteresNueva = new modelo.TasaInteres();
+		tasaInteres.setEstado(modelo.TasaInteres.ESTADO.INACTIVO);
+		long codigoReturn=DAOTasaInteres.getInstance().update(tasaInteres);
+		if(codigoReturn!=-1)
+		{
+			tasaInteresNueva.setEstado(modelo.TasaInteres.ESTADO.ACTIVO);
+			tasaInteresNueva.setMontoDescuento(montoTasaInteresNuevo);
+			tasaInteresNueva.setIdTasaInteres(0);
+			codigoReturn=DAOTasaInteres.getInstance().persistir(tasaInteresNueva);
+			
+			if(codigoReturn != -1)
+			{
+				tasaInteresNueva.setIdTasaInteres(codigoReturn);
+				tasaInteres=tasaInteresNueva;
+			}
+		}
+		return codigoReturn;
 	}
 	
 	//	public ArrayList<CategoriaVehiculo> getCategoriasVehiculos() {

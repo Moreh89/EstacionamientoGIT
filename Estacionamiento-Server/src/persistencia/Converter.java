@@ -563,6 +563,39 @@ public class Converter {
 		return descuentosM;
 	}
 	
+	public static persistencia.clases.TasaInteres convertTasaInteresModeloToPersistencia(modelo.TasaInteres tasaInteresM) {
+
+		persistencia.clases.TasaInteres tasaInteresP = new persistencia.clases.TasaInteres();
+
+		tasaInteresP.setIdTasaInteres(tasaInteresM.getIdTasaInteres());
+		tasaInteresP.setMontoDescuento(tasaInteresM.getMontoDescuento());
+		String estadoTasaInteres = tasaInteresM.getEstado().toString();
+		
+		if(estadoTasaInteres.equals("ACTIVO"))
+			tasaInteresP.setEstado(persistencia.clases.TasaInteres.ESTADO.ACTIVO);
+		if(estadoTasaInteres.equals("INACTIVO"))
+			tasaInteresP.setEstado(persistencia.clases.TasaInteres.ESTADO.ACTIVO);
+
+
+		return tasaInteresP;
+
+	}
+	public static modelo.TasaInteres convertTasaInteresPersistenciaToModelo(persistencia.clases.TasaInteres tasaInteresP) {
+
+		modelo.TasaInteres tasaInteresM = new modelo.TasaInteres();
+		tasaInteresM.setIdTasaInteres(tasaInteresP.getIdTasaInteres());
+		tasaInteresM.setMontoDescuento(tasaInteresP.getMontoDescuento());
+		
+		String estadoTasaInteres = tasaInteresP.getEstado().toString();
+
+		if(estadoTasaInteres.equals("ACTIVO"))
+			tasaInteresM.setEstado(modelo.TasaInteres.ESTADO.ACTIVO);
+		if(estadoTasaInteres.equals("INACTIVO"))
+			tasaInteresM.setEstado(modelo.TasaInteres.ESTADO.ACTIVO);
+		
+		return tasaInteresM;
+	}
+	
 	//	public static ArrayList<CategoriaVehiculo> convertCategoriasVehiculosPersistenciaToModelo(
 	//			ArrayList<persistencia.clases.CategoriaVehiculo> categoriasVehiculosP) {
 	//		ArrayList<modelo.CategoriaVehiculo> categoriasVehiculosM = new ArrayList<modelo.CategoriaVehiculo>();

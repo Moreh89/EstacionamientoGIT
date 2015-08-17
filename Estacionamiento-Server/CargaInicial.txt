@@ -17,3 +17,6 @@ insert into ModeloVehiculo  (descripcion) VALUES  ('4 Posche 911');
 
 INSERT INTO Usuario (userName, password, permisos, nombre, apellido, tipoDocumento, numeroDocumento)  VALUES ('admin', 'admin', 0, 'admin', 'admin', 'dni', 9999);
 INSERT INTO Usuario (userName, password, permisos, nombre, apellido, tipoDocumento, numeroDocumento)  VALUES ('operador', 'operador', 1, 'operador', 'operador', 'dni', 8888);
+
+
+insert into TasaInteres (montoDescuento, estado) VALUES (3.0, 1);

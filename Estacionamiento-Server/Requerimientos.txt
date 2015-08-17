@@ -140,6 +140,8 @@ Poder borrar tickets de >x fecha de antigueadad desde admin
 
 25) CONSULTA DE DAMIAN
 	TASA INTERES DEBERIA ESTAR EN LA DB PARA QUE LA PUEDAN MODIFICAR, HOY ES UN DOUBLE EN CONTROLADOR.
+	
+	ESTADO: HECHO
 
 Otros:
 Misma computadora imprime en 2 impresoras, el sistema tiene que poder imprimir en distintas impresoras 

@@ -3,14 +3,20 @@ package vista;
 import java.awt.BorderLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JDialog;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+
 import java.awt.Font;
+
 import javax.swing.JTextField;
+
+import controlador.Controlador;
 
 public class ModificarInteres extends JDialog implements ActionListener{
 
@@ -23,6 +29,7 @@ public class ModificarInteres extends JDialog implements ActionListener{
 	private JButton cancelarButton;
 	private JTextField textFieldInteres;
 	private JTextField textFieldnuevoInteres;
+	private JLabel label;
 
 	/**
 	 * Launch the application.
@@ -74,16 +81,26 @@ public class ModificarInteres extends JDialog implements ActionListener{
 
 		
 		textFieldInteres = new JTextField();
-		textFieldInteres.setText("10%");
 		textFieldInteres.setEditable(false);
-		textFieldInteres.setBounds(137, 28, 134, 28);
+		textFieldInteres.setBounds(137, 28, 45, 28);
 		contentPanel.add(textFieldInteres);
 		textFieldInteres.setColumns(10);
+		textFieldInteres.setText(String.valueOf(Controlador.getInstancia().getTasaInteres()));
 		
 		textFieldnuevoInteres = new JTextField();
 		textFieldnuevoInteres.setColumns(10);
-		textFieldnuevoInteres.setBounds(137, 67, 134, 28);
+		textFieldnuevoInteres.setBounds(137, 67, 45, 28);
 		contentPanel.add(textFieldnuevoInteres);
+		
+		JLabel porcentaje = new JLabel("%");
+		porcentaje.setFont(new Font("Tahoma", Font.BOLD, 11));
+		porcentaje.setBounds(192, 33, 20, 20);
+		contentPanel.add(porcentaje);
+		
+		label = new JLabel("%");
+		label.setFont(new Font("Tahoma", Font.BOLD, 11));
+		label.setBounds(192, 72, 20, 20);
+		contentPanel.add(label);
 		
 		this.setLocationRelativeTo(null);
 		setModal(true);
@@ -97,20 +114,20 @@ public class ModificarInteres extends JDialog implements ActionListener{
 			}
 			if(event.getSource()==aceptarButton)
 			{
-//				long codigoReturn;
-//				if(!descripcionTextField.getText().isEmpty() && !montoDescuentoTextField.getText().isEmpty())
-//				{
-//					codigoReturn=Controlador.getInstancia().altaDescuento(descripcionTextField.getText(), Double.parseDouble(montoDescuentoTextField.getText()));
-//					if(codigoReturn == -1)
-//					{
-//						JOptionPane.showMessageDialog(null, "Descuento Duplicado", "Existe otro Descuento con la misma descripcion", JOptionPane.INFORMATION_MESSAGE);
-//					}
-//					if(codigoReturn >= 0)
-//					{
-//						JOptionPane.showMessageDialog(null, "Alta Descuento exitosa", "Se generó correctamente el alta del descuento", JOptionPane.INFORMATION_MESSAGE);
-//					}
-//				}
-
+				long codigoReturn=-1;
+				if(!textFieldnuevoInteres.getText().isEmpty())
+				{
+					codigoReturn=Controlador.getInstancia().modificarTasaInteres(Double.parseDouble(textFieldnuevoInteres.getText()));
+					if(codigoReturn == -1)
+						{
+							JOptionPane.showMessageDialog(null, "ERROR - Tasa Interes", "Se produjo un error. Vuelva a intentar en unos instantes. En caso de presentarse nuevamente el error, comunicarse con el desarrollador del sistema", JOptionPane.INFORMATION_MESSAGE);
+						}
+						if(codigoReturn >= 0)
+						{
+							JOptionPane.showMessageDialog(null, "Tasa Interes exitosa", "Se actualizó correctamente la tasa de interés", JOptionPane.INFORMATION_MESSAGE);
+						}
+				
+				}
 		}
 		
 	}
