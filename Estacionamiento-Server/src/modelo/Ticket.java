@@ -1,6 +1,6 @@
 package modelo;
 
-import java.sql.Date;
+import java.util.Date;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
 
@@ -115,12 +115,11 @@ public class Ticket {
 		super();
 		
 		new GregorianCalendar();
-		//TODO DATE CONVERTIDO
-		java.util.Calendar cal = Calendar.getInstance();
-		java.util.Date utilDate = new java.util.Date(); //  util date
-		cal.setTime(utilDate);  
-		java.sql.Date sqlDate = new java.sql.Date(cal.getTime().getTime()); // sql date
-		this.fechaLlegada = sqlDate;
+		//TODO DATE 
+		this.fechaLlegada = Calendar.getInstance().getTime();
+		
+//		this.fechaLlegada = new java.sql.Date(Calendar.getInstance().getTime().getTime());
+		
 		this.fechaSalida = null;
 		
 		if(prepago == 0)	this.estado = Ticket.Estado.ABIERTO;
@@ -137,7 +136,6 @@ public class Ticket {
 		this.observacion = obsevacion;
 	}
 	public Ticket() {
-		// TODO Auto-generated constructor stub
 	}
 	public double cobrar(int cantidadMinutos, Tarifa tarifa)
 	{

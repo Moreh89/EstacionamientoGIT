@@ -221,7 +221,12 @@ public class Controlador {
 		
 		Descuento des = buscarDescuento(descuento);
 
-		Ticket tck = new Ticket( catve, modve, cl, des, usuarioActual, Double.valueOf(prepago), obsevacion);
+		double prepT = 0;
+		if (!prepago.equals("")){
+			prepT = Double.valueOf(prepago);
+			}
+		
+		Ticket tck = new Ticket( catve, modve, cl, des, usuarioActual, prepT, obsevacion);
 		this.ticket = tck;
 
 		long numeroTck = DAOTicket.getInstance().persistir(tck);
@@ -232,9 +237,10 @@ public class Controlador {
 
 
 	private Descuento buscarDescuento(String descuento) {
-		// TODO Auto-generated method stub
 		if(descuento !=null){
-			
+			for (Descuento desc : this.descuentos) {
+				if(desc.getDescripcion().equals(descuento)) return desc;
+			}
 		}
 		return null;
 	}
