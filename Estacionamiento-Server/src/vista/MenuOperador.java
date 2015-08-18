@@ -25,16 +25,20 @@ import javax.swing.JButton;
 import javax.swing.ImageIcon;
 import javax.swing.SwingConstants;
 
+import modelo.Ticket;
+
 import controlador.Controlador;
 
 import java.awt.Font;
 import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 import java.awt.Toolkit;
 
 @SuppressWarnings("rawtypes")
-public class MenuOperador extends JFrame implements ActionListener {
+public class MenuOperador extends JFrame implements ActionListener, KeyListener {
 
 	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
@@ -207,8 +211,9 @@ public class MenuOperador extends JFrame implements ActionListener {
 		gbc_textFieldNumeroTicket.gridx = 1;
 		gbc_textFieldNumeroTicket.gridy = 0;
 		contentPane.add(textFieldNumeroTicket, gbc_textFieldNumeroTicket);
-
-		labelUsuario = new JLabel("Admin");
+		textFieldNumeroTicket.addKeyListener(this);
+		
+		labelUsuario = new JLabel();
 		labelUsuario.setHorizontalAlignment(SwingConstants.CENTER);
 		labelUsuario.setForeground(Color.BLUE);
 		labelUsuario.setFont(new Font("Dialog", Font.BOLD, 30));
@@ -217,6 +222,7 @@ public class MenuOperador extends JFrame implements ActionListener {
 		gbc_labelUsuario.gridx = 4;
 		gbc_labelUsuario.gridy = 0;
 		contentPane.add(labelUsuario, gbc_labelUsuario);
+		labelUsuario.setText(Controlador.getInstancia().getUsuarioActual().getNombre() + " " + Controlador.getInstancia().getUsuarioActual().getApellido());
 
 		lblCategoria = new JLabel("Categoria:");
 		lblCategoria.setFont(new Font("Tahoma", Font.PLAIN, 30));
@@ -318,12 +324,10 @@ public class MenuOperador extends JFrame implements ActionListener {
 
 		comboBoxDescuento = new JComboBox();
 		comboBoxDescuento.setFont(new Font("Tahoma", Font.PLAIN, 30));
-		comboBoxDescuento.setModel(new DefaultComboBoxModel(new String[] {
-				"0 N/A", "1 Farmacia 10%", "2 Socio 20%" }));
-//		TODO getDescuentosActuales
-//		for (String descString : Controlador.getInstancia().getDescuentosActuales()) {
-//			comboBoxDescuento.addItem(modString);
-//		}
+		comboBoxDescuento.setModel(new DefaultComboBoxModel());
+		for (String descString : Controlador.getInstancia().getDescuentosActuales()) {
+			comboBoxDescuento.addItem(descString);
+		}
 		GridBagConstraints gbc_comboBoxDescuento = new GridBagConstraints();
 		gbc_comboBoxDescuento.gridwidth = 2;
 		gbc_comboBoxDescuento.insets = new Insets(0, 0, 5, 5);
@@ -414,6 +418,7 @@ public class MenuOperador extends JFrame implements ActionListener {
 		contentPane.add(lblObservacion, gbc_lblObservacion);
 
 		textFieldObsevacion = new JTextField();
+		textFieldObsevacion.setFont(new Font("Tahoma", Font.PLAIN, 30));
 		GridBagConstraints gbc_textField = new GridBagConstraints();
 		gbc_textField.gridheight = 2;
 		gbc_textField.insets = new Insets(0, 0, 5, 0);
@@ -579,6 +584,7 @@ public class MenuOperador extends JFrame implements ActionListener {
 		gbc_textField_2.gridx = 5;
 		gbc_textField_2.gridy = 0;
 		panel.add(textField_2, gbc_textField_2);
+		
 	}
 
 	@Override
@@ -589,7 +595,8 @@ public class MenuOperador extends JFrame implements ActionListener {
 		
 		if (event.getSource() == btnTicketF) {
 
-
+			//TODO Validar que la patente tenga valor escrito
+			
 			String numeroTicket= Controlador.getInstancia()
 					.generarTicket(
 							(String) comboBoxTipoVehiculo.getSelectedItem(),
@@ -629,4 +636,62 @@ public class MenuOperador extends JFrame implements ActionListener {
 
 
 	}
+
+	@Override
+	public void keyPressed(KeyEvent event) {
+		
+		
+		//INTRO
+		if (event.getKeyCode()== KeyEvent.VK_ENTER && this.textFieldNumeroTicket.isFocusOwner()){
+			//TODO q onda si el ticket no esta // Completar campos y calcular precio a cobrar
+			if(isNumeric(textFieldNumeroTicket.getText())){
+			Ticket tck = Controlador.getInstancia().buscarTicket(textFieldNumeroTicket.getText());
+			textFieldNumeroTicket.setBackground(new Color(Color.WHITE.getRGB()));
+
+			}else{
+				textFieldNumeroTicket.setBackground(new Color(Color.PINK.getRGB()));
+			}
+		}
+		if (event.getKeyCode()== KeyEvent.VK_F2 ){
+			this.btnGuardarF.doClick();
+		}
+		if (event.getKeyCode()== KeyEvent.VK_F4 ){
+			this.btnCanelarF.doClick();
+		}
+		if (event.getKeyCode()== KeyEvent.VK_F5 ){
+			this.btnTicketF.doClick();
+		}
+		if (event.getKeyCode()== KeyEvent.VK_F7 ){
+			this.btnCanelarF.doClick();
+		}
+		
+	}
+
+	@Override
+	public void keyReleased(KeyEvent event) {
+		
+	}
+
+	@Override
+	public void keyTyped(KeyEvent event) {
+		
+		
+		
+	}
+	
+	@SuppressWarnings("unused")
+	public static boolean isNumeric(String str)  
+	{  
+	  try  
+	  {  
+	    double d = Double.parseDouble(str);  
+	  }  
+	  catch(NumberFormatException nfe)  
+	  {  
+	    return false;  
+	  }  
+	  return true;  
+	}
+	
+	
 }

@@ -1,6 +1,7 @@
 package vista;
 import java.awt.event.ActionEvent;
 import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 
 
 
@@ -22,6 +23,8 @@ import controlador.Controlador;
 
 import javax.swing.JPasswordField;
 
+import modelo.Usuario;
+
 import java.awt.Font;
 import java.awt.Color;
 import java.awt.Graphics;
@@ -34,7 +37,7 @@ import java.awt.event.KeyAdapter;
 
 
 
-public class Login extends javax.swing.JDialog implements ActionListener{
+public class Login extends javax.swing.JDialog implements ActionListener, KeyListener{
 
 
 	private static final long serialVersionUID = 1L;
@@ -124,7 +127,7 @@ public class Login extends javax.swing.JDialog implements ActionListener{
 					
 					usuarioText.setMargin(new Insets(0, image.getWidth(), 0, 0));
 					getContentPane().add(usuarioText);
-				
+					usuarioText.addKeyListener(this);
 				
 					image1 = ImageIO.read(Test.class.getClassLoader().getResource("image/key_16.png"));
 					passwordText = new JPasswordField(){
@@ -145,7 +148,7 @@ public class Login extends javax.swing.JDialog implements ActionListener{
 					});
 					passwordText.setMargin(new Insets(0, image1.getWidth(), 0, 0));
 					getContentPane().add(passwordText);
-				
+					passwordText.addKeyListener(this);
 				
 					cancelButton = new JButton();
 					cancelButton.setBounds(226, 246, 118, 32);
@@ -215,7 +218,7 @@ public class Login extends javax.swing.JDialog implements ActionListener{
 					JOptionPane.showMessageDialog(null, "Debe Ingresar una contraseña", "Login", JOptionPane.INFORMATION_MESSAGE);
 				}else{
 					
-					boolean con = Controlador.getInstancia().probarConexion();
+					boolean con = Controlador.getInstancia().cargaInicial();
 					
 					if (con == false){
 						JOptionPane.showMessageDialog(null, "No se pudo establecer conexion con la Base de Datos, consulte con el Administrador del Sistema", "Login", JOptionPane.ERROR_MESSAGE);
@@ -225,16 +228,15 @@ public class Login extends javax.swing.JDialog implements ActionListener{
 						
 						if (validar == true){
 							
-//DIFERENCIA ENTRE USUARIO ADMIN Y OPERADOR
-							Controlador.getInstancia().cargaInicial();
-							
-							if(usuarioText.getText().equals("admin"))
+							//DIFERENCIA ENTRE USUARIO ADMIN Y OPERADOR
+
+							if(Controlador.getInstancia().getUsuarioActual().getPermisos().equals(Usuario.PERMISOS.ADMIN))
 							{
 								MenuAdmin mpc = new MenuAdmin ();
 								mpc.setVisible(true);
 								dispose();
 							}
-							if(usuarioText.getText().equals("operador"))
+							if(Controlador.getInstancia().getUsuarioActual().getPermisos().equals(Usuario.PERMISOS.CAJA))
 							{
 								MenuOperador mop = new MenuOperador ();
 								mop.setVisible(true);
@@ -256,6 +258,28 @@ public class Login extends javax.swing.JDialog implements ActionListener{
 		}
 		
 		
+		
+	}
+
+	@SuppressWarnings("deprecation")
+	@Override
+	public void keyPressed(KeyEvent event) {
+		
+		
+		//INTRO
+		if (event.getKeyCode()== KeyEvent.VK_ENTER && !usuarioText.getText().equalsIgnoreCase("") && !passwordText.getText().equalsIgnoreCase("")){
+			this.aceptarButton.doClick();
+		}
+		
+	}
+
+	@Override
+	public void keyReleased(KeyEvent event) {
+		
+	}
+
+	@Override
+	public void keyTyped(KeyEvent event) {
 		
 	}
 		

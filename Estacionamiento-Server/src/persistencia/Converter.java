@@ -222,7 +222,7 @@ public class Converter {
 	{
 		modelo.Cliente clienteM = new modelo.Cliente();
 
-		clienteM.setCorreoElectronico(clienteP.getCorreoElectronico());
+		if (clienteP.getCorreoElectronico() != null )clienteM.setCorreoElectronico(clienteP.getCorreoElectronico());
 		clienteM.setCuil(clienteP.getCuil());
 		clienteM.setIdCliente(clienteP.getIdCliente());
 		clienteM.setNombre(clienteP.getNombre());
@@ -394,8 +394,8 @@ public class Converter {
 		modelo.Ticket ticketM=new modelo.Ticket();
 
 		ticketM.setCatergoriaVehiculo(convertCategoriaVehiculoPersistenciaToModelo(ticketP.getCatergoriaVehiculo()));
-		ticketM.setCliente(convertClientePersistenciaToModelo(ticketP.getCliente()));
-		ticketM.setDescuento(convertDescuentoPersistenciaToModelo(ticketP.getDescuento()));
+		if (ticketP.getCliente() != null) ticketM.setCliente(convertClientePersistenciaToModelo(ticketP.getCliente()));
+		if (ticketP.getDescuento() != null) ticketM.setDescuento(convertDescuentoPersistenciaToModelo(ticketP.getDescuento()));
 
 		String estadoTicket=ticketP.getEstado().toString();
 		if(estadoTicket.equals("ABIERTO"))
@@ -406,13 +406,13 @@ public class Converter {
 			ticketM.setEstado(modelo.Ticket.Estado.CERRADO);
 
 		ticketM.setFechaLlegada(ticketP.getFechaLlegada());
-		ticketM.setFechaSalida(ticketP.getFechaSalida());
+		if (ticketP.getFechaSalida() != null) ticketM.setFechaSalida(ticketP.getFechaSalida());
 		ticketM.setIdTicket(ticketP.getIdTicket());
 		ticketM.setModeloVehiculo(convertModeloVehiculoPersistenciaToModelo(ticketP.getModeloVehiculo()));
 		ticketM.setMontoCobrado(ticketP.getMontoCobrado());
-		ticketM.setObservacion(ticketP.getObservacion());
+		if (ticketP.getObservacion()!= null) ticketM.setObservacion(ticketP.getObservacion());
 		ticketM.setPrepago(ticketP.getPrepago());
-		ticketM.setTipoIngreso(ticketP.getTipoIngreso());
+		if(ticketP.getTipoIngreso() != null)ticketM.setTipoIngreso(ticketP.getTipoIngreso());
 		ticketM.setUsuario(convertUsuarioPersistenciaToModelo(ticketP.getUsuario()));
 
 		return ticketM;

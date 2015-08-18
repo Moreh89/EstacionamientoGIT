@@ -87,13 +87,15 @@ public class Controlador {
 	}
 
 
-	public void cargaInicial()
+	public boolean cargaInicial()
 	{
 		coloresVehiculos=DAOColorVehiculo.getInstance().getColoresVehiculos();
 		modelosVehiculos=DAOModeloVehiculo.getInstance().getModelosVehiculos();
 		categoriasVehiculos=DAOCategoriaVehiculo.getInstance().getCategoriasVehiculos();
 		descuentos=DAODescuento.getInstance().getDescuentos();
 		tasaInteres=DAOTasaInteres.getInstance().getTasaInteresActual();
+		
+		return true;
 		
 	}
 
@@ -303,7 +305,18 @@ public class Controlador {
 		}
 		return coloresActuales;
 	}
-
+	
+	public Vector<String> getDescuentosActuales() {
+		Vector<String> descuentosActuales=new Vector<String>();
+		for(Descuento descuento:descuentos)
+		{
+			descuentosActuales.add(descuento.getDescripcion());
+		}
+		return descuentosActuales;
+	}
+	
+	
+	
 	public Vector<String> getModelosActuales() {
 		Vector<String> modelosActuales=new Vector<String>();
 		for(ModeloVehiculo modelo:modelosVehiculos)
@@ -389,6 +402,18 @@ public class Controlador {
 	{
 		return null;
 	}
+
+	public Ticket buscarTicket(String numeroTicket) {
+		// TODO que pasa si no encuentro ticket
+		
+		Ticket tck = new Ticket();
+		tck.setIdTicket(0);
+		tck = DAOTicket.getInstance().getTicket(Long.parseLong(numeroTicket));
+		
+		return tck;
+	}
+
+
 	
 	//	public ArrayList<CategoriaVehiculo> getCategoriasVehiculos() {
 	//		

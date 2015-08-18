@@ -135,6 +135,26 @@ public class HibernateDAO {
 		return obj;
 	}
 	
+	@SuppressWarnings("rawtypes")
+	public Object get(Object clase, double id) {
+		Session session = getSession();
+		session.beginTransaction();
+		Object obj = session.get((Class) clase, id);
+		session.getTransaction().commit();
+		session.flush();
+		return obj;
+	}
+	@SuppressWarnings("rawtypes")
+	public Object get(Object clase, long id) {
+		Session session = getSession();
+		session.beginTransaction();
+		Object obj = session.get((Class) clase, id);
+		session.getTransaction().commit();
+		session.flush();
+		return obj;
+	}
+	
+	
 	public boolean backUp(String databaseName, String path,String fileNameBackup)
 	{
 		Session session = getSession();
