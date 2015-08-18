@@ -2,7 +2,6 @@ package vista;
 
 import java.awt.EventQueue;
 import java.util.ArrayList;
-
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import javax.swing.table.DefaultTableModel;
@@ -18,19 +17,15 @@ import javax.swing.JSeparator;
 import javax.swing.JComboBox;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.RowFilter;
-
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import java.awt.GridBagLayout;
 import java.awt.GridBagConstraints;
 import java.awt.Insets;
-
 import javax.swing.JScrollPane;
 import javax.swing.ScrollPaneConstants;
 import javax.swing.JList;
-
 import controlador.Controlador;
-import modelo.Cliente;
 
 
 
@@ -493,6 +488,7 @@ public class BuscardorCliente extends JDialog {
 		setModal(true);
 	}
 
+	@SuppressWarnings("unused")
 	private void buscar(String campoIdentificador, String tipoIdentificado) 
 	{
 		modelo.Cliente clienteM = new modelo.Cliente();

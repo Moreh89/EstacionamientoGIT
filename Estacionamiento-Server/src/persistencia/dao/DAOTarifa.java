@@ -1,5 +1,4 @@
 package persistencia.dao;
-import modelo.Usuario;
 import persistencia.Converter;
 import persistencia.HibernateDAO;
 

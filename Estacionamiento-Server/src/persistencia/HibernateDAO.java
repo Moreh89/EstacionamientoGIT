@@ -1,9 +1,6 @@
 package persistencia;
 
 import java.util.List;
-
-import modelo.Usuario;
-
 import org.hibernate.SQLQuery;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;

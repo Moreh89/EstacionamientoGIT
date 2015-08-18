@@ -13,14 +13,8 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
 
-
-
-
-
 //import reportes.ReporteEjemplo;
 import java.awt.Font;
-
-import javax.swing.JPasswordField;
 
 import controlador.Controlador;
 
@@ -100,7 +94,6 @@ public class AltaLiquidarExpensas extends JDialog implements ActionListener{
 
 	}
 
-	@SuppressWarnings("deprecation")
 	@Override
 	public void actionPerformed(ActionEvent event) {
 		if(event.getSource()==cancelarButton)

@@ -1,28 +1,27 @@
 package vista;
 
 import java.awt.EventQueue;
-
 import javax.swing.JDialog;
-import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import javax.swing.JButton;
-
 import controlador.Controlador;
-
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import java.awt.GridBagLayout;
 import java.awt.GridBagConstraints;
 import java.awt.Insets;
-
 import javax.swing.JTextField;
 import javax.swing.JLabel;
-import javax.swing.JSeparator;
+
 
 public class BackupBD extends JDialog implements ActionListener {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private static JPanel contentPane;
 	private JPanel panelBackUp;
 	private JLabel labelLetraDisco;

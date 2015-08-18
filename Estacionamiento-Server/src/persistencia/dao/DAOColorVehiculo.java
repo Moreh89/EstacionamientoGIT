@@ -1,11 +1,8 @@
 package persistencia.dao;
 import java.util.ArrayList;
-
-import modelo.CategoriaVehiculo;
-import modelo.Usuario;
 import persistencia.Converter;
 import persistencia.HibernateDAO;
-import persistencia.clases.ColorVehiculo;
+
 
 public class DAOColorVehiculo {
 
@@ -22,6 +19,7 @@ public class DAOColorVehiculo {
 		return 0;
 	}
 
+	@SuppressWarnings("unchecked")
 	public ArrayList<modelo.ColorVehiculo> getColoresVehiculos() {
 		ArrayList<persistencia.clases.ColorVehiculo> coloresVehiculosP=(ArrayList<persistencia.clases.ColorVehiculo>) HibernateDAO.getInstancia().getList("ColorVehiculo");
 		ArrayList<modelo.ColorVehiculo> coloresVehiculosM = Converter.convertColoresVehiculosPersistenciaToModelo(coloresVehiculosP);

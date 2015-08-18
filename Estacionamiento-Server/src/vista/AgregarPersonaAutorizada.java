@@ -2,30 +2,20 @@ package vista;
 
 
 import java.awt.EventQueue;
-
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
-
 import java.awt.GridBagLayout;
-
 import javax.swing.JLabel;
-
 import java.awt.GridBagConstraints;
 import java.awt.Insets;
-
-import javax.swing.DefaultListModel;
-import javax.swing.JTextArea;
 import javax.swing.JTextField;
 import javax.swing.JButton;
 import javax.swing.ImageIcon;
-
 import controlador.Controlador;
-
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-
 import javax.swing.JScrollPane;
 import javax.swing.ScrollPaneConstants;
 import javax.swing.JList;
@@ -45,12 +35,11 @@ public class AgregarPersonaAutorizada extends JFrame implements ActionListener
 	private AltaCliente altaCliente;
 	private JPanel panel;
 	private JScrollPane scrollPane;
-	@SuppressWarnings("rawtypes")
-	
 	private JButton btnModificar;
 	private JButton btnEliminar;
 	private JLabel lblPersonasAuth;
 	
+	@SuppressWarnings("rawtypes")
 	private JList listPersonas;
 	
 	

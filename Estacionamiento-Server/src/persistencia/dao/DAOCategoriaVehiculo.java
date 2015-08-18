@@ -1,8 +1,5 @@
 package persistencia.dao;
 import java.util.ArrayList;
-
-import modelo.CategoriaVehiculo;
-import modelo.Usuario;
 import persistencia.Converter;
 import persistencia.HibernateDAO;
 
@@ -29,6 +26,7 @@ public class DAOCategoriaVehiculo {
 		return categoriaVehiculoM;
 	}
 
+	@SuppressWarnings("unchecked")
 	public ArrayList<modelo.CategoriaVehiculo> getCategoriasVehiculos() {
 		ArrayList<persistencia.clases.CategoriaVehiculo> categoriasVehiculosP=(ArrayList<persistencia.clases.CategoriaVehiculo>) HibernateDAO.getInstancia().getList("CategoriaVehiculo");
 		ArrayList<modelo.CategoriaVehiculo> categoriasVehiculosM = Converter.convertCategoriasVehiculosPersistenciaToModelo(categoriasVehiculosP);

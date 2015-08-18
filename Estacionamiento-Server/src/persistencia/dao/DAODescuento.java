@@ -1,7 +1,5 @@
 package persistencia.dao;
 import java.util.ArrayList;
-
-import modelo.Usuario;
 import persistencia.Converter;
 import persistencia.HibernateDAO;
 
@@ -15,6 +13,7 @@ public class DAODescuento {
 		return ins;
 	}
 
+	@SuppressWarnings("unchecked")
 	public ArrayList<modelo.Descuento> getDescuentos() {
 		ArrayList<persistencia.clases.Descuento> descuentosP=(ArrayList<persistencia.clases.Descuento>) HibernateDAO.getInstancia().getList("Descuento");
 		ArrayList<modelo.Descuento> descuentosM = Converter.convertDescuentosPersistenciaToModelo(descuentosP);

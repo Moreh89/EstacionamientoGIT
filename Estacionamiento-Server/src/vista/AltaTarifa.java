@@ -41,6 +41,7 @@ public class AltaTarifa extends JDialog implements ActionListener{
 	private JButton buttonCancelar;
 	private JButton buttonCrearTarifa;
 	private JTextField textTiempoFinEstadia;
+	@SuppressWarnings("rawtypes")
 	private JComboBox comboBoxCategoria;
 	/**
 	 * Launch the application.

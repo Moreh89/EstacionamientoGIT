@@ -2,20 +2,12 @@ package persistencia;
 
 import java.util.ArrayList;
 import java.util.List;
-
-import javax.persistence.JoinColumn;
-import javax.persistence.OneToMany;
-import javax.persistence.OneToOne;
-
 import modelo.CategoriaVehiculo;
 import modelo.ColorVehiculo;
 import modelo.ModeloVehiculo;
-import modelo.PersonaAutorizada;
-import modelo.Ticket;
 import modelo.Usuario;
 import modelo.Usuario.PERMISOS;
 import modelo.Vehiculo;
-import persistencia.clases.*;
 import persistencia.clases.Cliente.ESTADO;
 import persistencia.clases.Cliente.TIPO_CLIENTE;
 import persistencia.clases.Cliente.TIPO_DOC;

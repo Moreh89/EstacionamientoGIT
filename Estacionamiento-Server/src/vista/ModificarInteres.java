@@ -106,7 +106,6 @@ public class ModificarInteres extends JDialog implements ActionListener{
 		setModal(true);
 	}
 	
-		@SuppressWarnings("deprecation")
 		public void actionPerformed(ActionEvent event) {
 			if(event.getSource()==cancelarButton)
 			{

@@ -74,8 +74,10 @@ public class AltaCliente extends JDialog implements ActionListener{
 	private JLabel Tipo_Doc;
 	private JLabel label_2;
 	private JTextField textFieldRazonSocial;
+	@SuppressWarnings("rawtypes")
 	private JComboBox comboBoxTipoDoc;
 	private JLabel labelTipoCliente;
+	@SuppressWarnings("rawtypes")
 	private JComboBox comboBoxTipoCliente;
 
 
@@ -103,6 +105,7 @@ public class AltaCliente extends JDialog implements ActionListener{
 	}
 
 
+	@SuppressWarnings({ "rawtypes", "unchecked" })
 	public void initGUI(){
 		setTitle("Alta Cliente");
 		setResizable(false);
