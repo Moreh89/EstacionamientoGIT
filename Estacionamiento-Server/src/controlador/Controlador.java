@@ -384,6 +384,12 @@ public class Controlador {
 		return codigoReturn;
 	}
 	
+	public modelo.Cliente getCliente(String campoIdentificador, String tipoIdentificado)
+
+	{
+		return null;
+	}
+	
 	//	public ArrayList<CategoriaVehiculo> getCategoriasVehiculos() {
 	//		
 	//		return DAOCategoriaVehiculo.getInstance().getCategoriasVehiculos();

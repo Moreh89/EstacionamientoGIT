@@ -75,14 +75,14 @@ Las cocheras tienen un %del total de expensas (0,035 ej) a esto se le asigna el 
 NOTA: HAY QUE CREAR UN CAMPO PARA QUE INGRESEN EL MONTO TOTAL DE EXPENSAS. SERÍA UN LIQUIDAR EXPENSAS.
 
 9)
-Alta usuario - Falta DNI y CUIL
+Alta usuario - Falta DNI y CUIL	(SUPONGO QUE ES ALTA CLIENTE)
 Persona, agragar obsevacion, DNI y CUIL/CUIT por separado
-Estado: Cuil agregado a cliente
+Estado: Cuil agregado a cliente -- SI ES ALTA CLIENTE ESTA HECHO.
 
 10)
 Cliente tiene cocheras, cochera tiene un costo mensual y la expensa
 La cochera puede o no pagar expensas
-Estado: El cliente tiene cocheras, hay que agregarlo a alta cliente
+Estado: HECHO
 
 11)
 Ver historial de cuenta corriente del cliente en Usuario (Admin y Operador)

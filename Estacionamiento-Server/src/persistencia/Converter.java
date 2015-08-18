@@ -189,27 +189,35 @@ public class Converter {
 			clienteP.setEstado(ESTADO.INACTIVO);
 
 
-		List<persistencia.clases.PersonaAutorizada> personasAutorizadasARetirarP = new ArrayList<persistencia.clases.PersonaAutorizada>();
 		if(clienteM.getPersonasAutorizadasARetirar()!=null)
+
 		{
+			List<persistencia.clases.PersonaAutorizada> personasAutorizadasARetirarP = new ArrayList<persistencia.clases.PersonaAutorizada>();
+
 			for (modelo.PersonaAutorizada personasAutorizadasARetirarM : clienteM.getPersonasAutorizadasARetirar()) {
 				personasAutorizadasARetirarP.add(convertPersonaAutorizadaModeloToPersistencia(personasAutorizadasARetirarM));
 			}
 			clienteP.setPersonasAutorizadasARetirar(personasAutorizadasARetirarP);
 		}
 
-		List<persistencia.clases.Cochera> cocherasP = new ArrayList<persistencia.clases.Cochera>();
-		for (modelo.Cochera cocheraM : clienteM.getCocheras()) {
-			cocherasP.add(convertCocheraModeloToPersistencia(cocheraM));
-		}
-		clienteP.setCocheras(cocherasP);
+		if(clienteM.getCocheras()!=null)
+		{
+			List<persistencia.clases.Cochera> cocherasP = new ArrayList<persistencia.clases.Cochera>();
 
-		List<persistencia.clases.Vehiculo> vehiculosP = new ArrayList<persistencia.clases.Vehiculo>();
-		for (modelo.Vehiculo vehiculoM : clienteM.getVehiculos()) {
-			vehiculosP.add(convertVehiculoModeloToPersistencia(vehiculoM));
+			for (modelo.Cochera cocheraM : clienteM.getCocheras()) {
+				cocherasP.add(convertCocheraModeloToPersistencia(cocheraM));
+			}
+			clienteP.setCocheras(cocherasP);
 		}
-		clienteP.setVehiculos(vehiculosP);
 
+		if(clienteM.getVehiculos()!=null)
+		{
+			List<persistencia.clases.Vehiculo> vehiculosP = new ArrayList<persistencia.clases.Vehiculo>();
+			for (modelo.Vehiculo vehiculoM : clienteM.getVehiculos()) {
+				vehiculosP.add(convertVehiculoModeloToPersistencia(vehiculoM));
+			}
+			clienteP.setVehiculos(vehiculosP);
+		}
 
 		return clienteP;
 	}
@@ -528,8 +536,8 @@ public class Converter {
 		}
 		return coloresVehiculosM;
 	}
-	
-	
+
+
 
 	public static ArrayList<ModeloVehiculo> convertModelosVehiculosPersistenciaToModelo(
 			ArrayList<persistencia.clases.ModeloVehiculo> modelosVehiculosP) {
@@ -562,7 +570,7 @@ public class Converter {
 		}
 		return descuentosM;
 	}
-	
+
 	public static persistencia.clases.TasaInteres convertTasaInteresModeloToPersistencia(modelo.TasaInteres tasaInteresM) {
 
 		persistencia.clases.TasaInteres tasaInteresP = new persistencia.clases.TasaInteres();
@@ -570,7 +578,7 @@ public class Converter {
 		tasaInteresP.setIdTasaInteres(tasaInteresM.getIdTasaInteres());
 		tasaInteresP.setMontoDescuento(tasaInteresM.getMontoDescuento());
 		String estadoTasaInteres = tasaInteresM.getEstado().toString();
-		
+
 		if(estadoTasaInteres.equals("ACTIVO"))
 			tasaInteresP.setEstado(persistencia.clases.TasaInteres.ESTADO.ACTIVO);
 		if(estadoTasaInteres.equals("INACTIVO"))
@@ -585,17 +593,17 @@ public class Converter {
 		modelo.TasaInteres tasaInteresM = new modelo.TasaInteres();
 		tasaInteresM.setIdTasaInteres(tasaInteresP.getIdTasaInteres());
 		tasaInteresM.setMontoDescuento(tasaInteresP.getMontoDescuento());
-		
+
 		String estadoTasaInteres = tasaInteresP.getEstado().toString();
 
 		if(estadoTasaInteres.equals("ACTIVO"))
 			tasaInteresM.setEstado(modelo.TasaInteres.ESTADO.ACTIVO);
 		if(estadoTasaInteres.equals("INACTIVO"))
 			tasaInteresM.setEstado(modelo.TasaInteres.ESTADO.ACTIVO);
-		
+
 		return tasaInteresM;
 	}
-	
+
 	//	public static ArrayList<CategoriaVehiculo> convertCategoriasVehiculosPersistenciaToModelo(
 	//			ArrayList<persistencia.clases.CategoriaVehiculo> categoriasVehiculosP) {
 	//		ArrayList<modelo.CategoriaVehiculo> categoriasVehiculosM = new ArrayList<modelo.CategoriaVehiculo>();

@@ -67,6 +67,7 @@ public class MenuAdmin extends JFrame implements ActionListener {
 	private JMenuItem mntmSalir;
 	private JMenu menuSistema;
 	private JMenuItem menuItemBackUp;
+	private JMenuItem mntmLiquidarExpensas;
 
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
@@ -238,6 +239,9 @@ public class MenuAdmin extends JFrame implements ActionListener {
 		mntmCantidadAutos = new JMenuItem("Cantidad Autos");
 		mnConsultas.add(mntmCantidadAutos);
 		mntmCantidadAutos.addActionListener(this);
+		
+		mntmLiquidarExpensas = new JMenuItem("Liquidar Expensas");
+		mnConsultas.add(mntmLiquidarExpensas);
 		
 		mntmDeudores = new JMenuItem("Deudores");
 		mnConsultas.add(mntmDeudores);
