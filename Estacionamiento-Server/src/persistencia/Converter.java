@@ -384,9 +384,10 @@ public class Converter {
 		ticketP.setMontoCobrado(ticketM.getMontoCobrado());
 		ticketP.setObservacion(ticketM.getObservacion());
 		ticketP.setPrepago(ticketM.getPrepago());
-		ticketP.setTipoIngreso(ticketM.getTipoIngreso());
+		ticketP.setPatente(ticketM.getPatente());
 		ticketP.setUsuario(convertUsuarioModeloToPersistencia(ticketM.getUsuario()));
-
+		ticketP.setColor(convertColorModeloToPersistencia(ticketM.getColor()));
+		
 		return ticketP;
 	}
 
@@ -412,9 +413,9 @@ public class Converter {
 		ticketM.setMontoCobrado(ticketP.getMontoCobrado());
 		if (ticketP.getObservacion()!= null) ticketM.setObservacion(ticketP.getObservacion());
 		ticketM.setPrepago(ticketP.getPrepago());
-		if(ticketP.getTipoIngreso() != null)ticketM.setTipoIngreso(ticketP.getTipoIngreso());
+		ticketM.setPatente(ticketP.getPatente());
 		ticketM.setUsuario(convertUsuarioPersistenciaToModelo(ticketP.getUsuario()));
-
+		ticketM.setColor(convertColorPersistenciaToModelo(ticketP.getColor()));
 		return ticketM;
 	}
 

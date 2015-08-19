@@ -23,10 +23,13 @@ public class DAOTicket {
 		return tckDao.getIdTicket();
 	}
 
-	public Ticket getTicket(long ticketNumber) {
+	public persistencia.clases.Ticket getTicket(long ticketNumber) {
 
-		persistencia.clases.Ticket tck = (persistencia.clases.Ticket) HibernateDAO.getInstancia().get(persistencia.clases.Ticket.class, ticketNumber);
-		return Converter.convertTicketPersistenciaToModelo(tck);
+		persistencia.clases.Ticket tck = new persistencia.clases.Ticket();
+		
+		tck = (persistencia.clases.Ticket) HibernateDAO.getInstancia().get(persistencia.clases.Ticket.class, ticketNumber);
+		
+		return tck;
 	}
 	
 

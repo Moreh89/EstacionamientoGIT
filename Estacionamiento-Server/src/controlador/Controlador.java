@@ -7,6 +7,8 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.Vector;
+
+import persistencia.Converter;
 import persistencia.HibernateDAO;
 import persistencia.dao.*;
 import modelo.*;
@@ -211,7 +213,7 @@ public class Controlador {
 
 	public String generarTicket(String tipoVehiculo, String modelo,
 			String color, String descuento, String patente,
-			String cliente, String prepago, String obsevacion, String usuario) {
+			String cliente, String prepago, String obsevacion) {
 
 		CategoriaVehiculo catve= buscarCategoriaVehiulo(tipoVehiculo);
 		
@@ -220,13 +222,15 @@ public class Controlador {
 		Cliente cl = buscarCliente(cliente);
 		
 		Descuento des = buscarDescuento(descuento);
+		
+		ColorVehiculo col = buscarColor(color);
 
 		double prepT = 0;
 		if (!prepago.equals("")){
 			prepT = Double.valueOf(prepago);
 			}
 		
-		Ticket tck = new Ticket( catve, modve, cl, des, usuarioActual, prepT, obsevacion);
+		Ticket tck = new Ticket( catve, modve, cl, des, col,usuarioActual, prepT, obsevacion, patente);
 		this.ticket = tck;
 
 		long numeroTck = DAOTicket.getInstance().persistir(tck);
@@ -235,6 +239,15 @@ public class Controlador {
 
 	}
 
+
+	private ColorVehiculo buscarColor(String color) {
+		if(color !=null){
+			for (ColorVehiculo col : this.coloresVehiculos) {
+				if(col.getDescripcion().equals(color)) return col;
+			}
+		}
+		return null;
+	}
 
 	private Descuento buscarDescuento(String descuento) {
 		if(descuento !=null){
@@ -410,13 +423,13 @@ public class Controlador {
 	}
 
 	public Ticket buscarTicket(String numeroTicket) {
-		// TODO que pasa si no encuentro ticket
+		// Si no lo encuentra devuelve null
 		
-		Ticket tck = new Ticket();
-		tck.setIdTicket(0);
-		tck = DAOTicket.getInstance().getTicket(Long.parseLong(numeroTicket));
+		persistencia.clases.Ticket tckM = DAOTicket.getInstance().getTicket(Long.parseLong(numeroTicket));
 		
-		return tck;
+		if (tckM != null) return Converter.convertTicketPersistenciaToModelo(tckM);
+		
+		return null;
 	}
 
 

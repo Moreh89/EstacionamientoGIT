@@ -19,10 +19,10 @@ public class Ticket {
 	private Cliente cliente;
 	private Descuento descuento;
 	private Usuario usuario; //usuario del sistema (util para arqueo caja)
-	//TODO Esto hay que sacarlo
-	private String tipoIngreso; //si hay que cobrar por hora o por estadia.
 	private double prepago; //Si ya pago algo
 	private String observacion;
+	private ColorVehiculo color;
+	private String patente;
 	
 	public enum Estado {
 		ABIERTO,
@@ -85,12 +85,6 @@ public class Ticket {
 	public void setUsuario(Usuario usuario) {
 		this.usuario = usuario;
 	}
-	public String getTipoIngreso() {
-		return tipoIngreso;
-	}
-	public void setTipoIngreso(String tipoIngreso) {
-		this.tipoIngreso = tipoIngreso;
-	}
 	public String getObservacion() {
 		return observacion;
 	}
@@ -110,8 +104,8 @@ public class Ticket {
 		this.modeloVehiculo = modeloVehiculo;
 	}
 	public Ticket(CategoriaVehiculo catvehiculo,ModeloVehiculo modVehiculo, Cliente cliente,
-			Descuento descuento, Usuario usuario,
-			double prepago, String obsevacion) {
+			Descuento descuento, ColorVehiculo col, Usuario usuario,
+			double prepago, String obsevacion, String patente) {
 		super();
 		
 		new GregorianCalendar();
@@ -131,9 +125,10 @@ public class Ticket {
 		this.cliente = cliente;
 		this.descuento = descuento;
 		this.usuario = usuario;
-		this.tipoIngreso = null;
 		this.prepago = prepago;
 		this.observacion = obsevacion;
+		this.color = col;
+		this.setPatente(patente);
 	}
 	public Ticket() {
 	}
@@ -141,14 +136,9 @@ public class Ticket {
 	{
 		double montoCobrar=0;        
 
-		if(tipoIngreso.equals("porHora"))
-		{
+			//TODO
 			montoCobrar=cobroPorHora(cantidadMinutos, tarifa);
-		}
-		else if(tipoIngreso.equals("porEstadia"))
-		{
-			montoCobrar=cobroPorEstadia(cantidadMinutos, tarifa);
-		}
+
 		return montoCobrar;
 	}
 
@@ -204,6 +194,18 @@ public class Ticket {
 
 
 		return montoCobrar;
+	}
+	public void setColor(ColorVehiculo color) {
+		this.color = color;
+	}
+	public ColorVehiculo getColor() {
+		return color;
+	}
+	public void setPatente(String patente) {
+		this.patente = patente;
+	}
+	public String getPatente() {
+		return patente;
 	}
 
 

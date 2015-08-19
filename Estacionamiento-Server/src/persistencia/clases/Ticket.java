@@ -11,6 +11,7 @@ import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
+import persistencia.clases.ColorVehiculo;
 import persistencia.clases.CategoriaVehiculo;
 import persistencia.clases.ModeloVehiculo;
 
@@ -46,10 +47,13 @@ public class Ticket {
 	@JoinColumn(name="Usuario")
 	private Usuario usuario; //usuario del sistema (util para arqueo caja)
 	
-	private String tipoIngreso; //si hay que cobrar por hora o por estadia.
 	
 	private double prepago; //Si ya pago algo
 	private String observacion;
+	@OneToOne
+	@JoinColumn(name="Color")
+	private ColorVehiculo color;
+	private String patente;
 	
 	public enum Estado {
 		ABIERTO,
@@ -111,13 +115,6 @@ public class Ticket {
 	public void setUsuario(Usuario usuario) {
 		this.usuario = usuario;
 	}
-	public String getTipoIngreso() {
-		return tipoIngreso;
-	}
-	public void setTipoIngreso(String tipoIngreso) {
-		this.tipoIngreso = tipoIngreso;
-	}
-	
 	public String getObservacion() {
 		return observacion;
 	}
@@ -136,7 +133,21 @@ public class Ticket {
 	public void setModeloVehiculo(ModeloVehiculo modeloVehiculo) {
 		this.modeloVehiculo = modeloVehiculo;
 	}
+	public void setColor(ColorVehiculo colorVehiculo) {
+		this.color = colorVehiculo;
+	}
+	public ColorVehiculo getColor() {
+		return color;
+	}
 	public Ticket() {}
+	public void setPatente(String patente) {
+		this.patente = patente;
+	}
+	public String getPatente() {
+		return patente;
+	}
+	
+
 
 
 

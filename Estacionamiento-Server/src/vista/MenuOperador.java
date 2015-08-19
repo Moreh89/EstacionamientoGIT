@@ -48,7 +48,7 @@ public class MenuOperador extends JFrame implements ActionListener, KeyListener 
 	private JTextField textFieldTotalAPagar;
 	private JTextField textFieldIngreso;
 	private JTextField textFieldEgreso;
-	private JTextField textField_2;
+	private JTextField textFieldTiempoEstadia;
 	private JTextField textFieldNumeroTicket;
 	private JMenuBar menuBar;
 	private JMenu mnAltas;
@@ -265,6 +265,7 @@ public class MenuOperador extends JFrame implements ActionListener, KeyListener 
 		gbc_textFieldPatente.gridy = 1;
 		contentPane.add(textFieldPatente, gbc_textFieldPatente);
 		textFieldPatente.setColumns(10);
+		textFieldPatente.addKeyListener(this);
 
 		lblColor = new JLabel("Color:");
 		lblColor.setFont(new Font("Tahoma", Font.PLAIN, 30));
@@ -354,7 +355,8 @@ public class MenuOperador extends JFrame implements ActionListener, KeyListener 
 		gbc_textFieldPrepado.gridx = 4;
 		gbc_textFieldPrepado.gridy = 3;
 		contentPane.add(textFieldPrepago, gbc_textFieldPrepado);
-
+		textFieldPrepago.addKeyListener(this);
+		
 		lblCliente = new JLabel("Cliente:");
 		lblCliente.setFont(new Font("Tahoma", Font.PLAIN, 30));
 		GridBagConstraints gbc_lblCliente = new GridBagConstraints();
@@ -396,6 +398,7 @@ public class MenuOperador extends JFrame implements ActionListener, KeyListener 
 		gbc_lblPerdidaTicket.gridy = 4;
 		contentPane.add(lblPerdidaTicket, gbc_lblPerdidaTicket);
 
+		//TODO no hace nada
 		comboBoxPerdidaTicket = new JComboBox();
 		comboBoxPerdidaTicket.setFont(new Font("Tahoma", Font.PLAIN, 30));
 		comboBoxPerdidaTicket.setModel(new DefaultComboBoxModel<Object>(
@@ -428,6 +431,7 @@ public class MenuOperador extends JFrame implements ActionListener, KeyListener 
 		gbc_textField.gridy = 5;
 		contentPane.add(textFieldObsevacion, gbc_textField);
 		textFieldObsevacion.setColumns(10);
+		textFieldObsevacion.addKeyListener(this);
 
 		btnCanelarF = new JButton("Canelar F4");
 		btnCanelarF.setFont(new Font("Tahoma", Font.PLAIN, 20));
@@ -477,7 +481,6 @@ public class MenuOperador extends JFrame implements ActionListener, KeyListener 
 		contentPane.add(lblTotalAPagar, gbc_lblTotalAPagar);
 
 		textFieldTotalAPagar = new JTextField();
-		textFieldTotalAPagar.setText("250");
 		textFieldTotalAPagar.setEditable(false);
 		textFieldTotalAPagar.setHorizontalAlignment(SwingConstants.CENTER);
 		textFieldTotalAPagar.setFont(new Font("Dialog", Font.BOLD, 40));
@@ -530,8 +533,7 @@ public class MenuOperador extends JFrame implements ActionListener, KeyListener 
 		panel.add(lblIngreso, gbc_lblIngreso);
 
 		textFieldIngreso = new JTextField();
-		textFieldIngreso.setFont(new Font("Tahoma", Font.BOLD, 20));
-		textFieldIngreso.setText("10/01/2015 10:20");
+		textFieldIngreso.setFont(new Font("Tahoma", Font.BOLD, 10));
 		textFieldIngreso.setEnabled(false);
 		textFieldIngreso.setEditable(false);
 		GridBagConstraints gbc_textFieldIngreso = new GridBagConstraints();
@@ -552,8 +554,7 @@ public class MenuOperador extends JFrame implements ActionListener, KeyListener 
 		panel.add(lblEgreso, gbc_lblEgreso);
 
 		textFieldEgreso = new JTextField();
-		textFieldEgreso.setFont(new Font("Tahoma", Font.BOLD, 20));
-		textFieldEgreso.setText("10/01/2015 10:25");
+		textFieldEgreso.setFont(new Font("Tahoma", Font.BOLD, 10));
 		textFieldEgreso.setEnabled(false);
 		textFieldEgreso.setEditable(false);
 		GridBagConstraints gbc_textFieldEgreso = new GridBagConstraints();
@@ -573,17 +574,16 @@ public class MenuOperador extends JFrame implements ActionListener, KeyListener 
 		gbc_lblEstadia_1.gridy = 0;
 		panel.add(lblEstadia_1, gbc_lblEstadia_1);
 
-		textField_2 = new JTextField();
-		textField_2.setFont(new Font("Tahoma", Font.BOLD, 20));
-		textField_2.setText("00:05");
-		textField_2.setEnabled(false);
-		textField_2.setEditable(false);
-		textField_2.setColumns(10);
+		textFieldTiempoEstadia = new JTextField();
+		textFieldTiempoEstadia.setFont(new Font("Tahoma", Font.BOLD, 20));
+		textFieldTiempoEstadia.setEnabled(false);
+		textFieldTiempoEstadia.setEditable(false);
+		textFieldTiempoEstadia.setColumns(10);
 		GridBagConstraints gbc_textField_2 = new GridBagConstraints();
 		gbc_textField_2.fill = GridBagConstraints.BOTH;
 		gbc_textField_2.gridx = 5;
 		gbc_textField_2.gridy = 0;
-		panel.add(textField_2, gbc_textField_2);
+		panel.add(textFieldTiempoEstadia, gbc_textField_2);
 		
 	}
 
@@ -594,8 +594,8 @@ public class MenuOperador extends JFrame implements ActionListener, KeyListener 
 		}
 		
 		if (event.getSource() == btnTicketF) {
-
-			//TODO Validar que la patente tenga valor escrito
+			
+			if(!this.textFieldPatente.getText().equals("")) {
 			
 			String numeroTicket= Controlador.getInstancia()
 					.generarTicket(
@@ -606,13 +606,17 @@ public class MenuOperador extends JFrame implements ActionListener, KeyListener 
 							textFieldPatente.getText(),
 							textFieldCliente.getText(),
 							textFieldPrepago.getText(),
-							textFieldObsevacion.getText(),
-							labelUsuario.getText());
+							textFieldObsevacion.getText());
 			textFieldNumeroTicket.setText(numeroTicket);
 
 			this.textFieldNumeroTicket.setText(numeroTicket);
-			
+			this.textFieldNumeroTicket.setBackground(new Color(Color.WHITE.getRGB()));
+			this.textFieldPatente.setBackground(new Color(Color.WHITE.getRGB()));
 			//TODO bloquear botones y demas hasta que elija nuevo
+			}else{
+				this.textFieldPatente.setBackground(new Color(Color.PINK.getRGB()));
+			}
+
 		}
 
 		if (event.getSource() == mntmCerrarSesion){
@@ -624,10 +628,10 @@ public class MenuOperador extends JFrame implements ActionListener, KeyListener 
 			new ArqueoDeCaja().setVisible(true);
 		}	
 		if (event.getSource() == mntmModelo){
-//		TODO	ALTA COLOR new GestionColor().setVisible(true);
+			new GestionColor().setVisible(true);
 		}
 		if (event.getSource() == mntmColor){
-//		TODO ALTA MODELO 	new GestionModelo().setVisible(true);
+			new GestionModelo().setVisible(true);
 		}
 		if (event.getSource() == mntmCambiarContrasea){
 			new CambioContrasenia().setVisible(true);
@@ -640,16 +644,33 @@ public class MenuOperador extends JFrame implements ActionListener, KeyListener 
 	@Override
 	public void keyPressed(KeyEvent event) {
 		
-		
-		//INTRO
 		if (event.getKeyCode()== KeyEvent.VK_ENTER && this.textFieldNumeroTicket.isFocusOwner()){
-			//TODO q onda si el ticket no esta // Completar campos y calcular precio a cobrar
-			if(isNumeric(textFieldNumeroTicket.getText())){
+			//TODO Completar campos y calcular precio a cobrar
+			if(isNumeric(textFieldNumeroTicket.getText()) && (textFieldPrepago.getText().equals("")||isNumeric(textFieldPrepago.getText()))){
 			Ticket tck = Controlador.getInstancia().buscarTicket(textFieldNumeroTicket.getText());
-			textFieldNumeroTicket.setBackground(new Color(Color.WHITE.getRGB()));
-
+				if (tck!=null){
+					this.textFieldNumeroTicket.setBackground(new Color(Color.WHITE.getRGB()));
+					textFieldPrepago.setBackground(new Color(Color.WHITE.getRGB()));
+					this.textFieldIngreso.setText(tck.getFechaLlegada().toString());
+					this.comboBoxTipoVehiculo.setSelectedItem(tck.getCatergoriaVehiculo().getDescripcion());
+					this.comboBoxColor.setSelectedItem(tck.getColor().getDescripcion());
+					this.comboBoxModelo.setSelectedItem(tck.getModeloVehiculo().getDescripcion());
+					this.comboBoxDescuento.setSelectedItem(tck.getDescuento().getDescripcion());
+					this.textFieldPatente.setText(tck.getPatente());
+					if (tck.getFechaSalida() != null) this.textFieldEgreso.setText(tck.getFechaSalida().toString());
+					this.textFieldObsevacion.setText(tck.getObservacion());
+					this.textFieldPrepago.setText(String.valueOf(tck.getPrepago()));
+					this.textFieldPrepago.setEditable(false);
+					this.textFieldTiempoEstadia.setText("TODO");
+					this.textFieldTotalAPagar.setText("TODO");
+					if (tck.getCliente() != null) this.textFieldCliente.setText(tck.getCliente().getApellido() + " " +tck.getCliente().getNombre());
+				}else{
+					textFieldNumeroTicket.setBackground(new Color(Color.ORANGE.getRGB()));
+				}
 			}else{
+				if(!isNumeric(textFieldNumeroTicket.getText()))
 				textFieldNumeroTicket.setBackground(new Color(Color.PINK.getRGB()));
+				if(textFieldPrepago.getText().equals("")||isNumeric(textFieldPrepago.getText())) textFieldPrepago.setBackground(new Color(Color.PINK.getRGB()));
 			}
 		}
 		if (event.getKeyCode()== KeyEvent.VK_F2 ){
