@@ -40,7 +40,7 @@ public class DAOTicket {
 		if(!tckP.getCatergoriaVehiculo().getDescripcion().equals(tckM.getCatergoriaVehiculo().getDescripcion())){
 			tckP.setCatergoriaVehiculo(DAOCategoriaVehiculo.getInstance().getCategoria(tckM.getCatergoriaVehiculo().getIdCategoria()));
 		}
-		if(tckP.getCliente().getIdCliente()!=tckM.getCliente().getIdCliente()){
+		if(tckM.getCliente()!=null && tckP.getCliente().getIdCliente()!=tckM.getCliente().getIdCliente()){
 			tckP.setCliente(DAOCliente.getInstance().getCliente(tckM.getCliente().getIdCliente()));
 		}
 		if(!tckP.getColor().getDescripcion().equals(tckM.getColor().getDescripcion())){
