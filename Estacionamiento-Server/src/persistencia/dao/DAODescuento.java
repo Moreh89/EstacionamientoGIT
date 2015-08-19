@@ -2,6 +2,7 @@ package persistencia.dao;
 import java.util.ArrayList;
 import persistencia.Converter;
 import persistencia.HibernateDAO;
+import persistencia.clases.Descuento;
 
 public class DAODescuento {
 
@@ -26,6 +27,12 @@ public class DAODescuento {
 		HibernateDAO.getInstancia().save(descuentoP);
 		descuentoM.setIdDescuento(descuentoP.getIdDescuento());
 		return descuentoP.getIdDescuento();
+	}
+
+	public Descuento getDescuento(long idDescuento) {
+			persistencia.clases.Descuento des = new persistencia.clases.Descuento();
+			des = (persistencia.clases.Descuento) HibernateDAO.getInstancia().get(persistencia.clases.Descuento.class, idDescuento);
+			return des;
 	}
 
 

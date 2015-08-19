@@ -2,6 +2,7 @@ package persistencia.dao;
 import java.util.ArrayList;
 import persistencia.Converter;
 import persistencia.HibernateDAO;
+import persistencia.clases.ColorVehiculo;
 
 
 public class DAOColorVehiculo {
@@ -30,5 +31,11 @@ public class DAOColorVehiculo {
 	{
 		modelo.ColorVehiculo colorVehiculoM=Converter.convertColorPersistenciaToModelo((persistencia.clases.ColorVehiculo) HibernateDAO.getInstancia().getObjectWithString("ColorVehiculo", "descripcion", descripcion));
 		return colorVehiculoM;
+	}
+
+	public ColorVehiculo getColorVehiculoPorID(long idColor) {
+		persistencia.clases.ColorVehiculo col = new persistencia.clases.ColorVehiculo();
+		col = (persistencia.clases.ColorVehiculo) HibernateDAO.getInstancia().get(persistencia.clases.ColorVehiculo.class, idColor);
+		return col;
 	}
 }

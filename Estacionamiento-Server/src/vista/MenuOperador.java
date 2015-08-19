@@ -591,7 +591,9 @@ public class MenuOperador extends JFrame implements ActionListener, KeyListener 
 	public void actionPerformed(ActionEvent event) {
 
 		if (event.getSource() == btnCobrarF) {
-			Controlador.getInstancia().cobrarTicket(textFieldNumeroTicket.getText());
+			if(!Controlador.getInstancia().cobrarTicket()){
+				//TODO Imprimir error, ticket ya cobrado
+			}
 			
 		}
 		
@@ -625,7 +627,6 @@ public class MenuOperador extends JFrame implements ActionListener, KeyListener 
 			new Login().setVisible(true);
 			dispose();			
 		}
-		
 		if (event.getSource() == mntmArqueoDeCaja){
 			new ArqueoDeCaja().setVisible(true);
 		}	
@@ -647,7 +648,7 @@ public class MenuOperador extends JFrame implements ActionListener, KeyListener 
 	public void keyPressed(KeyEvent event) {
 		
 		if (event.getKeyCode()== KeyEvent.VK_ENTER && this.textFieldNumeroTicket.isFocusOwner()){
-			//TODO Completar campos y calcular precio a cobrar
+			//TODO Completar campos y bloquear resto de cosas
 			if(isNumeric(textFieldNumeroTicket.getText()) && (textFieldPrepago.getText().equals("")||isNumeric(textFieldPrepago.getText()))){
 			Ticket tck = Controlador.getInstancia().buscarTicket(textFieldNumeroTicket.getText());
 				if (tck!=null){
@@ -664,7 +665,7 @@ public class MenuOperador extends JFrame implements ActionListener, KeyListener 
 					this.textFieldPrepago.setText(String.valueOf(tck.getPrepago()));
 					this.textFieldPrepago.setEditable(false);
 					this.textFieldTiempoEstadia.setText("TODO");
-					this.textFieldTotalAPagar.setText("TODO");
+					this.textFieldTotalAPagar.setText(String.valueOf(tck.getMontoCobrado()));
 					if (tck.getCliente() != null) this.textFieldCliente.setText(tck.getCliente().getApellido() + " " +tck.getCliente().getNombre());
 				}else{
 					textFieldNumeroTicket.setBackground(new Color(Color.ORANGE.getRGB()));

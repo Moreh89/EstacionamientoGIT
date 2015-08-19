@@ -2,6 +2,7 @@ package persistencia.dao;
 import java.util.ArrayList;
 import persistencia.Converter;
 import persistencia.HibernateDAO;
+import persistencia.clases.ModeloVehiculo;
 
 
 public class DAOModeloVehiculo {
@@ -30,5 +31,11 @@ public class DAOModeloVehiculo {
 	{
 		modelo.ModeloVehiculo modeloVehiculoM=Converter.convertModeloVehiculoPersistenciaToModelo((persistencia.clases.ModeloVehiculo) HibernateDAO.getInstancia().getObjectWithString("ModeloVehiculo", "descripcion", descripcion));
 		return modeloVehiculoM;
+	}
+
+	public ModeloVehiculo getModeloVehiculoPorId(long idModelo) {
+		persistencia.clases.ModeloVehiculo mod = new persistencia.clases.ModeloVehiculo();
+		mod = (persistencia.clases.ModeloVehiculo) HibernateDAO.getInstancia().get(persistencia.clases.ModeloVehiculo.class, idModelo);
+		return mod;
 	}
 }

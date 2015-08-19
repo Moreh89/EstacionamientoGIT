@@ -2,8 +2,6 @@ package modelo;
 
 import java.util.Date;
 import java.util.Calendar;
-import java.util.GregorianCalendar;
-
 import controlador.Controlador;
 
 public class Ticket {
@@ -130,81 +128,87 @@ public class Ticket {
 	public Ticket() {
 	}
 	
-	public double cobrar()
+	public double calcularMontoACobrar()
 	{
 		
-		Date horaInicio = this.fechaLlegada;
+		Date horaLlegada = this.fechaLlegada;
 		Date horaSalida = Calendar.getInstance().getTime();
-		//TODO assignar fecha salida al ticket
+		this.fechaSalida = horaSalida;
 		Tarifa tarifaUsada = null;
 		
 		for (Tarifa tarifaTemp : Controlador.getInstancia().getTarifas()) {
-			if(tarifaTemp.getCategoria().getDescripcion().equals(this.catergoriaVehiculo.getClass())){
+			if(tarifaTemp.getCategoria().getDescripcion().equals(this.catergoriaVehiculo.getDescripcion())){
 				tarifaUsada = tarifaTemp;
 				break;
 			}
 		} 
-		double montoCobrar=0;        
-
-			//TODO
-//			montoCobrar=cobroPorHora(cantidadMinutos, tarifa);
-
-		return montoCobrar;
+		double montoCobrar = (this.prepago * -1);      
+		
+		long diff = horaSalida.getTime() - horaLlegada.getTime();
+		
+		long diffMinutes = diff / (60 * 1000);
+//		long diffMinutes = diff / (60 * 1000) % 60;
+//		long diffHours = diff / (60 * 60 * 1000) % 24;
+//		long diffDays = diff / (24 * 60 * 60 * 1000);
+		
+		//Me quede menos del tiempo minimo
+		if(tarifaUsada.getTiempoMinimo() >= diffMinutes ){
+			
+			montoCobrar = montoCobrar + tarifaUsada.getCostoMinimo();
+			this.montoCobrado = montoCobrar;
+			return montoCobrar;
+		}
+			//Si me quede mas de una estadia
+			else if(tarifaUsada.getTiempoEstadia_minuto() <= diffMinutes ){
+				
+				double restoEstadias = diffMinutes % tarifaUsada.getTiempoEstadia_minuto();
+				double estadias = (diffMinutes - restoEstadias)/tarifaUsada.getTiempoEstadia_minuto();
+				
+				double restoMediaEst = restoEstadias % tarifaUsada.getTiempoMediaEstadia_minuto();
+				double mediaEst = (restoEstadias - restoMediaEst)/tarifaUsada.getTiempoMediaEstadia_minuto();
+				
+				double restoHoras = restoMediaEst % 60;
+				double horas = (restoMediaEst - restoHoras)/60;
+				
+				double restoFrac = restoHoras % tarifaUsada.getTiempoFraccion();
+				double fracs = (restoHoras - restoFrac) / tarifaUsada.getTiempoFraccion();
+				
+				montoCobrar = montoCobrar + estadias * tarifaUsada.getCostoEstadia() + mediaEst * tarifaUsada.getCostoMediaEstadia() + horas * tarifaUsada.getCostoHora() + fracs * tarifaUsada.getCostoFraccion();
+				this.montoCobrado = montoCobrar;
+				return montoCobrar;
+			}
+				//Si me quede mas de media estadia pero menos de una estadia entera
+				else if(tarifaUsada.getCostoMediaEstadia() <= diffMinutes){
+				
+					double restoMediaEst = diffMinutes % tarifaUsada.getTiempoMediaEstadia_minuto();
+					double mediaEst = (diffMinutes - restoMediaEst)/tarifaUsada.getTiempoMediaEstadia_minuto();
+					
+					double restoHoras = restoMediaEst % 60;
+					double horas = (restoMediaEst - restoHoras)/60;
+					
+					double restoFrac = restoHoras % tarifaUsada.getTiempoFraccion();
+					double fracs = (restoHoras - restoFrac) / tarifaUsada.getTiempoFraccion();
+					
+					montoCobrar = montoCobrar + mediaEst * tarifaUsada.getCostoMediaEstadia() + horas * tarifaUsada.getCostoHora() + fracs * tarifaUsada.getCostoFraccion();
+					this.montoCobrado = montoCobrar;
+					return montoCobrar;
+					
+				}
+					//Si me quede mas del minimo pero menos de media estadia
+					else {
+						
+						double restoHoras = diffMinutes % 60;
+						double horas = (diffMinutes - restoHoras)/60;
+						
+						double restoFrac = restoHoras % tarifaUsada.getTiempoFraccion();
+						double fracs = (restoHoras - restoFrac) / tarifaUsada.getTiempoFraccion();
+						
+						montoCobrar = montoCobrar + horas * tarifaUsada.getCostoHora() + fracs * tarifaUsada.getCostoFraccion();
+						this.montoCobrado = montoCobrar;
+						return montoCobrar;
+					}
 	}
 
-
-
-	private static double cobroPorHora(double cantidadMinutos, Tarifa tarifa)
-	{
-		double montoCobrar=0;
-		if(cantidadMinutos<60)
-		{
-			montoCobrar=tarifa.getCostoMinimo();
-		}
-		else
-		{
-			//Calculo Multiplo comun maximo -> puede que haya function.
-			double countHs=(int)(cantidadMinutos/60);
-			montoCobrar=montoCobrar+tarifa.getCostoHora()*countHs;
-			cantidadMinutos=cantidadMinutos-countHs*60;
-			//con el Math.ceil redondeo al techo.
-			double countFracciones=(int)Math.ceil((cantidadMinutos)/tarifa.getTiempoFraccion());
-			montoCobrar=montoCobrar+tarifa.getCostoFraccion()*countFracciones;
-		}
-		return montoCobrar;
-	}
-
-	private static double cobroPorEstadia(double cantidadMinutos, Tarifa tarifa)
-	{
-		double montoCobrar=0;
-
-		if(cantidadMinutos<=tarifa.getTiempoMediaEstadia_minuto())
-		{
-			montoCobrar=tarifa.getCostoMediaEstadia();
-		}
-		else if(cantidadMinutos<=tarifa.getTiempoEstadia_minuto())
-		{
-			montoCobrar=tarifa.getCostoEstadia();
-		}
-		else
-		{
-			double cantidadHsEstadia=(int)(cantidadMinutos/tarifa.getTiempoEstadia_minuto());
-			montoCobrar=montoCobrar+tarifa.getCostoEstadia()*cantidadHsEstadia;
-			cantidadMinutos=cantidadMinutos-cantidadHsEstadia*tarifa.getTiempoEstadia_minuto();			
-			double cantidadHsMediaEstadia=(int)(cantidadMinutos/tarifa.getTiempoMediaEstadia_minuto());
-			if(cantidadHsMediaEstadia>=0)
-			{
-				montoCobrar=montoCobrar+tarifa.getCostoMediaEstadia()*cantidadHsMediaEstadia;
-				cantidadMinutos=cantidadMinutos-cantidadHsMediaEstadia*tarifa.getTiempoMediaEstadia_minuto();
-			}			
-			//con el Math.ceil redondeo al techo.
-			double countFracciones=(int)Math.ceil((cantidadMinutos)/tarifa.getTiempoFraccion());
-			montoCobrar=montoCobrar+tarifa.getCostoFraccion()*countFracciones;
-		}
-
-
-		return montoCobrar;
-	}
 	public void setColor(ColorVehiculo color) {
 		this.color = color;
 	}

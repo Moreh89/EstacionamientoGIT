@@ -56,7 +56,7 @@ public class HibernateDAO {
 	{
 		Session session=getSession();
 		List<?> list = session.createQuery("from "+className + " s where s. "+ columna + " =?").setInteger(0, value).list();
-
+		session.flush();
 		return list;
 	}
 	
@@ -64,7 +64,7 @@ public class HibernateDAO {
 	{
 		Session session=getSession();
 		List<?> list = session.createQuery("from "+className + " s where s. "+ columna + " =?").setString(0, value).list();
-
+		session.flush();
 		return list;
 	}
 
@@ -81,14 +81,14 @@ public class HibernateDAO {
 	public Object getObjectWithInt(String className, String campo, int value) {
 		Session s = this.getSession();
 		Object r = s.createQuery("from " + className + " s where s." + campo + " = ?").setInteger(0, value).uniqueResult();
-	s.flush();
+		s.flush();
 		return r;
 	}
 
 	public Object getObjectWithLong(String className, String campo, long value) {
 		Session s = this.getSession();
 		Object r = s.createQuery("from " + className + " s where s." + campo + " = ?").setLong(0, value).uniqueResult();
-	s.flush();
+		s.flush();
 		return r;
 	}
 	
@@ -121,7 +121,7 @@ public class HibernateDAO {
 	{
 		Session session=getSession();
 		List<?> list = session.createQuery("from "+className).list();
-
+		session.flush();
 		return list;
 	}
 	

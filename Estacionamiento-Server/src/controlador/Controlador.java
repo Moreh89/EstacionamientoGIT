@@ -96,7 +96,7 @@ public class Controlador {
 		categoriasVehiculos=DAOCategoriaVehiculo.getInstance().getCategoriasVehiculos();
 		descuentos=DAODescuento.getInstance().getDescuentos();
 		tasaInteres=DAOTasaInteres.getInstance().getTasaInteresActual();
-		
+		tarifas=DAOTarifa.getInstance().getTarifas();
 		return true;
 		
 	}
@@ -235,6 +235,7 @@ public class Controlador {
 
 		long numeroTck = DAOTicket.getInstance().persistir(tck);
 
+		//TODO IMPRIMIR TICKET
 		return String.valueOf(numeroTck);
 
 	}
@@ -423,35 +424,32 @@ public class Controlador {
 	}
 
 	public Ticket buscarTicket(String numeroTicket) {
-		// Si no lo encuentra devuelve null
-		
-		persistencia.clases.Ticket tckM = DAOTicket.getInstance().getTicket(Long.parseLong(numeroTicket));
-		
-		if (tckM != null) return Converter.convertTicketPersistenciaToModelo(tckM);
-		
-		return null;
-	}
-
-	public void cobrarTicket(String numeroTicket) {
 		persistencia.clases.Ticket tckP = DAOTicket.getInstance().getTicket(Long.parseLong(numeroTicket));
 		
 		if (tckP != null) {
-			modelo.Ticket tickM = Converter.convertTicketPersistenciaToModelo(tckP);
-			tickM.cobrar();
-			//TODO
+			 modelo.Ticket tckM = Converter.convertTicketPersistenciaToModelo(tckP);
+			 	if(tckM.getEstado()!= Ticket.Estado.CERRADO) tckM.calcularMontoACobrar();
+			 
+			 this.ticket = tckM;
+			 return tckM;
 		}
-		
+		this.ticket = null;
+		return null;
+	}
+
+	public boolean cobrarTicket() {
+
+		if(this.ticket.getEstado() != Ticket.Estado.CERRADO){
+			this.ticket.setEstado(Ticket.Estado.CERRADO);
+			this.ticket.setUsuario(usuarioActual);
+			DAOTicket.getInstance().actualizar(this.ticket);
+			return true;
+		}
+		return false;
 	}
 
 	public ArrayList<Tarifa> getTarifas() {
 		return tarifas;
 	}
-
-
-	
-	//	public ArrayList<CategoriaVehiculo> getCategoriasVehiculos() {
-	//		
-	//		return DAOCategoriaVehiculo.getInstance().getCategoriasVehiculos();
-	//	}
 
 }

@@ -1,6 +1,7 @@
 package persistencia.dao;
 import persistencia.Converter;
 import persistencia.HibernateDAO;
+import persistencia.clases.Cliente;
 
 public class DAOCliente {
 
@@ -18,6 +19,12 @@ public class DAOCliente {
 		HibernateDAO.getInstancia().save(clienteP);
 		clienteM.setIdCliente(clienteP.getIdCliente());
 		return clienteP.getIdCliente();
+	}
+
+	public Cliente getCliente(long idCliente) {
+		persistencia.clases.Cliente cli = new persistencia.clases.Cliente();
+		cli = (persistencia.clases.Cliente) HibernateDAO.getInstancia().get(persistencia.clases.Cliente.class, idCliente);
+		return cli;
 	}
 
 }

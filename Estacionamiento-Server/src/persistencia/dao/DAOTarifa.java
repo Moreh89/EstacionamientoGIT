@@ -1,6 +1,10 @@
 package persistencia.dao;
+import java.util.ArrayList;
+import java.util.List;
+
 import persistencia.Converter;
 import persistencia.HibernateDAO;
+import persistencia.clases.Tarifa;
 
 public class DAOTarifa {
 
@@ -17,6 +21,16 @@ public class DAOTarifa {
 		tarifaP=Converter.convertTarifaModeloToPersistencia(tarifaM);
 		HibernateDAO.getInstancia().save(tarifaP);
 		return 0;
+	}
+	
+	@SuppressWarnings("unchecked")
+	public ArrayList<modelo.Tarifa> getTarifas(){
+		List<Tarifa> tarifasP = (List<Tarifa>) HibernateDAO.getInstancia().getList("Tarifa");
+		ArrayList<modelo.Tarifa> tarifasM = new ArrayList<modelo.Tarifa>();
+		for (Tarifa tarifaTemp : tarifasP) {
+			tarifasM.add(Converter.convertTarifaPersistenciaToModelo(tarifaTemp));
+		}
+		return tarifasM;
 	}
 
 }
