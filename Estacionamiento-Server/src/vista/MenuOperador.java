@@ -591,6 +591,8 @@ public class MenuOperador extends JFrame implements ActionListener, KeyListener 
 	public void actionPerformed(ActionEvent event) {
 
 		if (event.getSource() == btnCobrarF) {
+			Controlador.getInstancia().cobrarTicket(textFieldNumeroTicket.getText());
+			
 		}
 		
 		if (event.getSource() == btnTicketF) {

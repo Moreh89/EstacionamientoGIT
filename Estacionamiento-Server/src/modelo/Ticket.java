@@ -4,6 +4,8 @@ import java.util.Date;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
 
+import controlador.Controlador;
+
 public class Ticket {
 	
 
@@ -108,12 +110,7 @@ public class Ticket {
 			double prepago, String obsevacion, String patente) {
 		super();
 		
-		new GregorianCalendar();
-		//TODO DATE 
 		this.fechaLlegada = Calendar.getInstance().getTime();
-		
-//		this.fechaLlegada = new java.sql.Date(Calendar.getInstance().getTime().getTime());
-		
 		this.fechaSalida = null;
 		
 		if(prepago == 0)	this.estado = Ticket.Estado.ABIERTO;
@@ -132,12 +129,25 @@ public class Ticket {
 	}
 	public Ticket() {
 	}
-	public double cobrar(int cantidadMinutos, Tarifa tarifa)
+	
+	public double cobrar()
 	{
+		
+		Date horaInicio = this.fechaLlegada;
+		Date horaSalida = Calendar.getInstance().getTime();
+		//TODO assignar fecha salida al ticket
+		Tarifa tarifaUsada = null;
+		
+		for (Tarifa tarifaTemp : Controlador.getInstancia().getTarifas()) {
+			if(tarifaTemp.getCategoria().getDescripcion().equals(this.catergoriaVehiculo.getClass())){
+				tarifaUsada = tarifaTemp;
+				break;
+			}
+		} 
 		double montoCobrar=0;        
 
 			//TODO
-			montoCobrar=cobroPorHora(cantidadMinutos, tarifa);
+//			montoCobrar=cobroPorHora(cantidadMinutos, tarifa);
 
 		return montoCobrar;
 	}

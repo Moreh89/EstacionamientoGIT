@@ -6,6 +6,7 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 import java.util.Vector;
 
 import persistencia.Converter;
@@ -28,7 +29,6 @@ public class Controlador {
 	private ArrayList<CategoriaVehiculo> categoriasVehiculos;
 	private ArrayList<Descuento> descuentos;
 	private modelo.TasaInteres tasaInteres;
-
 	
 	public ArrayList<Cochera> cocherasActuales;
 	public ArrayList<Vehiculo> vehiculosActuales;
@@ -430,6 +430,21 @@ public class Controlador {
 		if (tckM != null) return Converter.convertTicketPersistenciaToModelo(tckM);
 		
 		return null;
+	}
+
+	public void cobrarTicket(String numeroTicket) {
+		persistencia.clases.Ticket tckP = DAOTicket.getInstance().getTicket(Long.parseLong(numeroTicket));
+		
+		if (tckP != null) {
+			modelo.Ticket tickM = Converter.convertTicketPersistenciaToModelo(tckP);
+			tickM.cobrar();
+			//TODO
+		}
+		
+	}
+
+	public ArrayList<Tarifa> getTarifas() {
+		return tarifas;
 	}
 
 

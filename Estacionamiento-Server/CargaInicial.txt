@@ -25,3 +25,10 @@ INSERT INTO Descuento (descripcion, descuento) VALUES ('1 20%', 20)
 
 
 insert into TasaInteres (montoDescuento, estado) VALUES (3, 1);
+
+INSERT into Tarifa (costoMinimo,costoFraccion,costoHora,costoMediaEstadia, costoEstadia,tiempoMinimo,tiempoFraccion,tiempoMediaEstadia_minuto,tiempoEstadia_minuto,Categoria) VALUES (5,5,60,30, 100,15,5,300,600,1);
+INSERT into Tarifa (costoMinimo,costoFraccion,costoHora,costoMediaEstadia, costoEstadia,tiempoMinimo,tiempoFraccion,tiempoMediaEstadia_minuto,tiempoEstadia_minuto,Categoria) VALUES (5,5,60,30, 100,15,5,300,600,2);
+INSERT into Tarifa (costoMinimo,costoFraccion,costoHora,costoMediaEstadia, costoEstadia,tiempoMinimo,tiempoFraccion,tiempoMediaEstadia_minuto,tiempoEstadia_minuto,Categoria) VALUES (5,5,60,30, 100,15,5,300,600,3);
+INSERT into Tarifa (costoMinimo,costoFraccion,costoHora,costoMediaEstadia, costoEstadia,tiempoMinimo,tiempoFraccion,tiempoMediaEstadia_minuto,tiempoEstadia_minuto,Categoria) VALUES (5,5,60,30, 100,15,5,300,600,4);
+
+INSERT INTO Cliente (apellido, correoElectronico,cuil,descripcion,direccion,estado,nombre,numeroDocumento,telefono1,tipoCliente,tipoDocumento) VALUES ('Lopez', 'lopez@me.com','2213','Description','Alba 123',1,'Luis','334567','123465',1,1);
