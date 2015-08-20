@@ -211,7 +211,7 @@ public class Controlador {
 	}
 
 
-	public String generarTicket(String tipoVehiculo, String modelo,
+	public Ticket generarTicket(String tipoVehiculo, String modelo,
 			String color, String descuento, String patente,
 			String cliente, String prepago, String obsevacion) {
 
@@ -234,9 +234,9 @@ public class Controlador {
 		this.ticket = tck;
 
 		long numeroTck = DAOTicket.getInstance().persistir(tck);
-
+		tck.setIdTicket(numeroTck);
 		//TODO IMPRIMIR TICKET
-		return String.valueOf(numeroTck);
+		return tck;
 
 	}
 
@@ -450,6 +450,43 @@ public class Controlador {
 
 	public ArrayList<Tarifa> getTarifas() {
 		return tarifas;
+	}
+
+	public boolean cancelarTicket(Ticket tck) {
+		return DAOTicket.getInstance().borrar(tck);
+	}
+
+	public void actualizarTicket(String tipoVehiculo, String modelo,
+			String color, String descuento, String patente,
+			String cliente, String prepago, String obsevacion) {
+		
+		CategoriaVehiculo catve= buscarCategoriaVehiulo(tipoVehiculo);
+		
+		ModeloVehiculo modve = buscarModeloVehiulo(modelo);
+		
+		Cliente cl = buscarCliente(cliente);
+		
+		Descuento des = buscarDescuento(descuento);
+		
+		ColorVehiculo col = buscarColor(color);
+
+		double prepT = 0;
+		if (!prepago.equals("")){
+			prepT = Double.valueOf(prepago);
+			}
+		
+		this.ticket.setCatergoriaVehiculo(catve);
+		this.ticket.setModeloVehiculo(modve);
+		this.ticket.setCliente(cl);
+		this.ticket.setDescuento(des);
+		this.ticket.setColor(col);
+		this.ticket.setUsuario(usuarioActual);
+		this.ticket.setPrepago(prepT);
+		this.ticket.setObservacion(obsevacion);
+		this.ticket.setPatente(patente);
+
+		DAOTicket.getInstance().actualizar(this.ticket);
+
 	}
 
 }

@@ -67,6 +67,13 @@ public class DAOTicket {
 		HibernateDAO.getInstancia().update(tckP);
 		
 	}
+
+	public boolean borrar(Ticket tckM) {
+		persistencia.clases.Ticket tckP = new persistencia.clases.Ticket();
+		tckP = (persistencia.clases.Ticket) HibernateDAO.getInstancia().get(persistencia.clases.Ticket.class, tckM.getIdTicket());
+		HibernateDAO.getInstancia().delete(tckP);
+		return true;
+	}
 	
 
 }
