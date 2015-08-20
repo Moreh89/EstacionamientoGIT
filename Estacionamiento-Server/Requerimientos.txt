@@ -34,9 +34,11 @@ Estado: listo
 
 8)
 agregar Operador cobro de mensuales
+cobrar expensas y alquier de cochera se tiene que hacer despues de buscar al Cliente. Es un botón
 
 9)
 agregar Operador cobro de expensas 
+cobrar expensas y alquier de cochera se tiene que hacer despues de buscar al Cliente. Es un botón
 
 10)
 Agrandar testos y campos en operador
@@ -134,7 +136,7 @@ Poder borrar tickets de >x fecha de antigueadad desde admin
 
 24) CONSULTA DE DAMIAN
 	DESCUENTOS MANEJAN PORCENTAJE? MONTO FIJO A DESCONTAR O SETTEAN VALOR FIJO.
-	Ej1: -20%
+	Ej1: -10% por pago efvo
 	Ej2: 6hs UADE 35$ 
 	Ej3: abono efectivo, descuenta 50$ (debería ser % este caso)
 
@@ -142,6 +144,12 @@ Poder borrar tickets de >x fecha de antigueadad desde admin
 	TASA INTERES DEBERIA ESTAR EN LA DB PARA QUE LA PUEDAN MODIFICAR, HOY ES UN DOUBLE EN CONTROLADOR.
 	
 	ESTADO: HECHO
+
+26) CUando cobras un ticket que posee un Cliente, desplegar POPUP preguntando si se abona en efvo o si queda a cuenta.
+	ticket con usuario, fecha y estado ceraddo y que no este a cuenta
+	ticket con usuario, fecha y estado prepago
+	movimientosCC sin ticket y fecha
+	cobro expensas
 
 Otros:
 Misma computadora imprime en 2 impresoras, el sistema tiene que poder imprimir en distintas impresoras 
