@@ -2,13 +2,16 @@ package controlador;
 
 
 
+import java.sql.Time;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 import java.util.Vector;
 
+import net.sf.jasperreports.engine.virtualization.SqlDateSerializer;
 import persistencia.Converter;
 import persistencia.HibernateDAO;
 import persistencia.dao.*;
@@ -29,7 +32,7 @@ public class Controlador {
 	private ArrayList<CategoriaVehiculo> categoriasVehiculos;
 	private ArrayList<Descuento> descuentos;
 	private modelo.TasaInteres tasaInteres;
-	
+	//fin carga inicial
 	public ArrayList<Cochera> cocherasActuales;
 	public ArrayList<Vehiculo> vehiculosActuales;
 	public ArrayList<PersonaAutorizada> personasAutorizadasActuales;
@@ -487,6 +490,21 @@ public class Controlador {
 
 		DAOTicket.getInstance().actualizar(this.ticket);
 
+	}
+
+	public long generarCobroExtraordinario(String tipoCobro, double monto,
+			modelo.Cliente cliente) {
+		modelo.MovimientoCC movimientoM = new MovimientoCC();
+		movimientoM.setTicket(null);
+		movimientoM.setDescripcion(tipoCobro.substring(2));
+		movimientoM.setEstado("pagado");
+		movimientoM.setFecha(new java.sql.Date(Calendar.getInstance().getTime().getTime()));
+		movimientoM.setIdMovimiento(0);
+		movimientoM.setMontoCobrado(monto);
+		
+		DAOMovimientoCC.getInstance().persistir(movimientoM);
+		
+		return 0;
 	}
 
 }

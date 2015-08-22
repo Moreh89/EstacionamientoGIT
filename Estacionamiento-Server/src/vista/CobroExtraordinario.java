@@ -12,11 +12,20 @@ import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JDialog;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
 
 
+
+
+
+
+
+
+import controlador.Controlador;
+import modelo.Cliente;
 
 
 
@@ -34,7 +43,9 @@ public class CobroExtraordinario extends JDialog implements ActionListener{
 	private JButton limpiarCamposButton;
 	private JTextField montoCobradoTextField;
 	private JComboBox comboBoxTipoCobro;
-
+	private modelo.Cliente cliente=new Cliente();
+	private JTextField clienteTextField;
+	private JButton btnBuscarCliente;
 	
 	
 	/**
@@ -57,7 +68,7 @@ public class CobroExtraordinario extends JDialog implements ActionListener{
 	{
 		setResizable(false);
 		setTitle("Cobro Extraordinario");
-		setBounds(100, 100, 329, 173);
+		setBounds(100, 100, 329, 210);
 		getContentPane().setLayout(new BorderLayout());
 		contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
 		getContentPane().add(contentPanel, BorderLayout.CENTER);
@@ -67,67 +78,94 @@ public class CobroExtraordinario extends JDialog implements ActionListener{
 		JLabel lblNuevaCon = new JLabel("Tipo Cobro:");
 		lblNuevaCon.setFont(new Font("Tahoma", Font.BOLD, 11));
 
-		lblNuevaCon.setBounds(10, 36, 144, 14);
+		lblNuevaCon.setBounds(10, 60, 70, 25);
 		contentPanel.add(lblNuevaCon);
 
 		JLabel lblNuevaCon2 = new JLabel("Monto:");
 		lblNuevaCon2.setFont(new Font("Tahoma", Font.BOLD, 11));
-		lblNuevaCon2.setBounds(10, 74, 144, 14);
+		lblNuevaCon2.setBounds(10, 90, 70, 25);
 		contentPanel.add(lblNuevaCon2);
 
 		aceptarButton = new JButton("Aceptar");
 		aceptarButton.setIcon(new ImageIcon(CambioContrasenia.class.getResource("/image/ok.png")));
-		aceptarButton.setBounds(195, 102, 116, 32);
+		aceptarButton.setBounds(184, 130, 116, 32);
 		contentPanel.add(aceptarButton);
 		aceptarButton.addActionListener(this);
 
 		cancelarButton = new JButton("Cancelar");
 		cancelarButton.setIcon(new ImageIcon(GestorUsuario.class.getResource("/image/cancel.png")));
-		cancelarButton.setBounds(10, 102, 116, 32);
+		cancelarButton.setBounds(10, 130, 116, 32);
 		contentPanel.add(cancelarButton);
 		cancelarButton.addActionListener(this);
 
 		
 		comboBoxTipoCobro = new JComboBox();
 		comboBoxTipoCobro .setModel(new DefaultComboBoxModel(new String[] {"1. Expensas", "2. Alquiler"}));
-		comboBoxTipoCobro.setBounds(166, 33, 145, 22);
+		comboBoxTipoCobro.setBounds(80, 60, 145, 25);
 		GridBagConstraints gbc_comboBoxTipoCobro  = new GridBagConstraints();
 		contentPanel.add(comboBoxTipoCobro, gbc_comboBoxTipoCobro);
 
 		montoCobradoTextField = new JTextField();
-		montoCobradoTextField.setBounds(166, 70, 145, 22);
+		montoCobradoTextField.setBounds(80, 90, 145, 25);
 		contentPanel.add(montoCobradoTextField);
+		
+		JLabel clienteLabel = new JLabel("Cliente:");
+		clienteLabel.setFont(new Font("Tahoma", Font.BOLD, 11));
+		clienteLabel.setBounds(10, 30, 70, 25);
+		contentPanel.add(clienteLabel);
+		
+		clienteTextField = new JTextField();
+		clienteTextField.setBounds(80, 30, 145, 25);
+		contentPanel.add(clienteTextField);
+		clienteTextField.setEnabled(false);
+		
+		btnBuscarCliente = new JButton("");
+		btnBuscarCliente.setIcon(new ImageIcon(CobroExtraordinario.class.getResource("/image/search.png")));
+		btnBuscarCliente.setBounds(250, 30, 50, 25);
+		contentPanel.add(btnBuscarCliente);
+		btnBuscarCliente.addActionListener(this);
 		
 		;
 
 		this.setLocationRelativeTo(null);
 		setModal(true);
-
-
-
-
 	}
 
+	public void cobroExtraOrdinarioSetCliente(modelo.Cliente cliente)
+	{
+		this.cliente=cliente;
+	}
+	
 	@Override
 	public void actionPerformed(ActionEvent event) {
 		if(event.getSource()==cancelarButton)
 		{
 			dispose();
 		}
+		
+		if(event.getSource()==btnBuscarCliente)
+		{
+			new BuscadorCliente().setVisible(true);
+			if(cliente!=null)
+			{
+				clienteTextField.setText(cliente.getNombre()+cliente.getApellido());
+			}
+		}
 		if(event.getSource()==aceptarButton)
 		{
+			
 			long codigoReturn;
-			if(!montoCobradoTextField.getText().isEmpty())
+			if(cliente!=null && !montoCobradoTextField.getText().isEmpty() && cliente.getCuentaCorriente()!=null)
 			{
-//				codigoReturn=Controlador.getInstancia().altaDescuento(comboBoxTipoCobro.getSelectedItem().toString(), Double.parseDouble(montoDescuentoTextField.getText()));
-//				if(codigoReturn == -1)
-//				{
-//					JOptionPane.showMessageDialog(null, "Descuento Duplicado", "Existe otro Descuento con la misma descripcion", JOptionPane.INFORMATION_MESSAGE);
-//				}
-//				if(codigoReturn >= 0)
-//				{
-//					JOptionPane.showMessageDialog(null, "Alta Descuento exitosa", "Se generó correctamente el alta del descuento", JOptionPane.INFORMATION_MESSAGE);
-//				}
+				codigoReturn=Controlador.getInstancia().generarCobroExtraordinario(comboBoxTipoCobro.getSelectedItem().toString(), Double.parseDouble(montoCobradoTextField.getText()),cliente);
+				if(codigoReturn == -1)
+				{
+					JOptionPane.showMessageDialog(null, "Cobro no realizado", "No se pudo realizar el cobro.", JOptionPane.INFORMATION_MESSAGE);
+				}
+				if(codigoReturn >= 0)
+				{
+					JOptionPane.showMessageDialog(null, "Cobro realizado exitosamente", "Se generó correctamente el cobro del pago de" + comboBoxTipoCobro.getSelectedItem().toString(), JOptionPane.INFORMATION_MESSAGE);
+				}
 			}
 		}
 		if(event.getSource()==limpiarCamposButton)

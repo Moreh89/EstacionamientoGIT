@@ -148,13 +148,13 @@ public class AgregarCochera extends JDialog implements ActionListener{
 		panel.add(textFieldPorcentajeExpensas, gbc_textFieldPorcentajeExpensas);
 		
 		buttonCancelar = new JButton("Cancelar");
-		buttonCancelar.setIcon(new ImageIcon(BuscardorCliente.class.getResource("/image/cancel.png")));
+		buttonCancelar.setIcon(new ImageIcon(BuscadorCliente.class.getResource("/image/cancel.png")));
 		buttonCancelar.setBounds(6, 146, 148, 56);
 		contentPane.add(buttonCancelar);
 		buttonCancelar.addActionListener(this);
 		
 		buttonAgregarCochera = new JButton("Agregar Cochera");
-		buttonAgregarCochera.setIcon(new ImageIcon(BuscardorCliente.class.getResource("/image/ok.png")));
+		buttonAgregarCochera.setIcon(new ImageIcon(BuscadorCliente.class.getResource("/image/ok.png")));
 		buttonAgregarCochera.setBounds(164, 146, 148, 56);
 		contentPane.add(buttonAgregarCochera);
 		buttonAgregarCochera.addActionListener(this);

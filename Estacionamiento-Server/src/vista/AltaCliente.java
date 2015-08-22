@@ -453,7 +453,7 @@ public class AltaCliente extends JDialog implements ActionListener{
 		gbc_buttonCancelar.gridx = 1;
 		gbc_buttonCancelar.gridy = 9;
 		panelAltaCliente.add(buttonCancelar, gbc_buttonCancelar);
-		buttonCancelar.setIcon(new ImageIcon(BuscardorCliente.class.getResource("/image/cancel.png")));
+		buttonCancelar.setIcon(new ImageIcon(BuscadorCliente.class.getResource("/image/cancel.png")));
 		buttonCancelar.addActionListener(this);
 
 		buttonCrearCliente = new JButton("Crear Cliente");
@@ -466,7 +466,7 @@ public class AltaCliente extends JDialog implements ActionListener{
 			public void actionPerformed(ActionEvent arg0) {
 			}
 		});
-		buttonCrearCliente.setIcon(new ImageIcon(BuscardorCliente.class.getResource("/image/ok.png")));
+		buttonCrearCliente.setIcon(new ImageIcon(BuscadorCliente.class.getResource("/image/ok.png")));
 		buttonCrearCliente.addActionListener(this);
 		buttonAgregarPersonaAutorizada.addActionListener(this);
 

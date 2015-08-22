@@ -30,7 +30,7 @@ import controlador.Controlador;
 
 
 @SuppressWarnings("rawtypes")
-public class BuscardorCliente extends JDialog {
+public class BuscadorCliente extends JDialog {
 
 
 	private static final long serialVersionUID = 1L;
@@ -39,6 +39,7 @@ public class BuscardorCliente extends JDialog {
 	private DefaultTableModel model;
 	private JComboBox tipoComboBox;
 
+	private CobroExtraordinario cobroExtraordinario;
 
 	private TableRowSorter<TableModel> sorter;
 	private JTextField textFieldNombre;
@@ -66,14 +67,17 @@ public class BuscardorCliente extends JDialog {
 	private JTextField textFieldDNILU;
 	private JTextField textFieldCUIT;
 
+	private modelo.Cliente cliente = null;
+	
 	/**
 	 * Launch the application.
 	 */
+	
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					BuscardorCliente frame = new BuscardorCliente();
+					BuscadorCliente frame = new BuscadorCliente();
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -85,10 +89,18 @@ public class BuscardorCliente extends JDialog {
 	/**
 	 * Create the frame.
 	 */
-	public BuscardorCliente() {
+	
+	public BuscadorCliente() {
 		initGUI();
 	}
 
+	public BuscadorCliente(CobroExtraordinario cobroExtraordinario) {
+		this.cobroExtraordinario=cobroExtraordinario;
+		initGUI();
+//TODO HAY QUE SETTEAR AL CLIENTE ELEGIDO
+		cobroExtraordinario.cobroExtraOrdinarioSetCliente(cliente);
+	}
+	
 
 	@SuppressWarnings("unchecked")
 	public void initGUI(){
@@ -139,7 +151,7 @@ public class BuscardorCliente extends JDialog {
 		});
 		buscarButton.setBounds(404, 7, 116, 32);
 		contentPane.add(buscarButton);
-		buscarButton.setIcon(new ImageIcon(BuscardorCliente.class.getResource("/image/search.png")));
+		buscarButton.setIcon(new ImageIcon(BuscadorCliente.class.getResource("/image/search.png")));
 
 		JSeparator separator = new JSeparator();
 		separator.setBounds(10, 47, 510, 6);
@@ -453,12 +465,12 @@ public class BuscardorCliente extends JDialog {
 		scrollPane_2.setViewportView(textAreaCocheras);
 
 		JButton buttonCancelar = new JButton("Cancelar");
-		buttonCancelar.setIcon(new ImageIcon(BuscardorCliente.class.getResource("/image/cancel.png")));
+		buttonCancelar.setIcon(new ImageIcon(BuscadorCliente.class.getResource("/image/cancel.png")));
 		buttonCancelar.setBounds(84, 665, 116, 61);
 		contentPane.add(buttonCancelar);
 
 		JButton buttonAceptar = new JButton("Aceptar");
-		buttonAceptar.setIcon(new ImageIcon(BuscardorCliente.class.getResource("/image/ok.png")));
+		buttonAceptar.setIcon(new ImageIcon(BuscadorCliente.class.getResource("/image/ok.png")));
 		buttonAceptar.setBounds(340, 665, 116, 61);
 		contentPane.add(buttonAceptar);
 
