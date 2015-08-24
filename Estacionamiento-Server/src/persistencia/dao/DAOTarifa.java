@@ -19,8 +19,8 @@ public class DAOTarifa {
 	public long persistir(modelo.Tarifa tarifaM) {
 		persistencia.clases.Tarifa tarifaP = new persistencia.clases.Tarifa();
 		tarifaP=Converter.convertTarifaModeloToPersistencia(tarifaM);
-		HibernateDAO.getInstancia().save(tarifaP);
-		return 0;
+		tarifaP = (Tarifa) HibernateDAO.getInstancia().save(tarifaP);
+		return tarifaP.getIdTarifa();
 	}
 	
 	@SuppressWarnings("unchecked")

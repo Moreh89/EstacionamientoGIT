@@ -309,15 +309,16 @@ public class Controlador {
 		return true;
 	}
 
-	public void altaTarifa(String categoriaVehiculo,double costoMinimo, double costoFraccion, double costoHora, double costoMediaEstadia, double costoEstadia,double tiempoMinimo,double tiempoFraccion, double tiempoMediaEstadia_minuto, double tiempoEstadia_minuto) 
+	public long altaTarifa(String categoriaVehiculo,double costoMinimo, double costoFraccion, double costoHora, double costoMediaEstadia, double costoEstadia,double tiempoMinimo,double tiempoFraccion, double tiempoMediaEstadia_minuto, double tiempoEstadia_minuto) 
 	{
+
 		modelo.CategoriaVehiculo categoriaVehiculoM = new CategoriaVehiculo();
 		categoriaVehiculoM=DAOCategoriaVehiculo.getInstance().buscarCategoriaVehiculo(categoriaVehiculo);
 
 		modelo.Tarifa tarifaM = new modelo.Tarifa(categoriaVehiculoM, costoMinimo, costoFraccion, costoHora, costoMediaEstadia, costoEstadia,
 				tiempoMinimo,tiempoFraccion, tiempoMediaEstadia_minuto, tiempoEstadia_minuto);
 
-		DAOTarifa.getInstance().persistir(tarifaM);
+		return DAOTarifa.getInstance().persistir(tarifaM);
 	}
 
 	public Vector<String> getColoresActuales() {

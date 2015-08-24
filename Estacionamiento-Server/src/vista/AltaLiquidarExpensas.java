@@ -115,6 +115,7 @@ public class AltaLiquidarExpensas extends JDialog implements ActionListener{
 					JOptionPane.showMessageDialog(null, "Alta Descuento exitosa", "Se generó correctamente el alta del descuento", JOptionPane.INFORMATION_MESSAGE);
 				}
 			}
+			dispose();
 		}
 		if(event.getSource()==limpiarCamposButton)
 		{

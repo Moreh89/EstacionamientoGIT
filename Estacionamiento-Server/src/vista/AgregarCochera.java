@@ -1,21 +1,26 @@
 package vista;
 
 import java.awt.EventQueue;
+
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import javax.swing.ImageIcon;
 import javax.swing.JDialog;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.DefaultComboBoxModel;
+
 import java.awt.GridBagLayout;
 import java.awt.GridBagConstraints;
 import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+
 import javax.swing.JSeparator;
+
 import controlador.Controlador;
 
 
@@ -33,7 +38,7 @@ public class AgregarCochera extends JDialog implements ActionListener{
 	private JButton buttonAgregarCochera;
 	@SuppressWarnings("rawtypes")
 	private JComboBox comboBoxPiso;
-	
+
 	/**
 	 * Launch the application.
 	 */
@@ -58,8 +63,8 @@ public class AgregarCochera extends JDialog implements ActionListener{
 		setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
 		initGUI();
 	}
-	
-	
+
+
 	@SuppressWarnings({ "rawtypes", "unchecked" })
 	public void initGUI(){
 		setTitle("Alta Cochera");
@@ -69,7 +74,7 @@ public class AgregarCochera extends JDialog implements ActionListener{
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
-		
+
 		JPanel panel = new JPanel();
 		panel.setBounds(6, 6, 306, 116);
 		contentPane.add(panel);
@@ -79,7 +84,7 @@ public class AgregarCochera extends JDialog implements ActionListener{
 		gbl_panel.columnWeights = new double[]{0.0, 0.0, Double.MIN_VALUE};
 		gbl_panel.rowWeights = new double[]{0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
 		panel.setLayout(gbl_panel);
-		
+
 		JLabel labelPiso = new JLabel("Piso:");
 		GridBagConstraints gbc_labelPiso = new GridBagConstraints();
 		gbc_labelPiso.anchor = GridBagConstraints.WEST;
@@ -87,7 +92,7 @@ public class AgregarCochera extends JDialog implements ActionListener{
 		gbc_labelPiso.gridx = 0;
 		gbc_labelPiso.gridy = 0;
 		panel.add(labelPiso, gbc_labelPiso);
-		
+
 		comboBoxPiso = new JComboBox();
 		comboBoxPiso.setModel(new DefaultComboBoxModel(new String[] {"1ro", "2do", "3ro", "4to", "5to", "6to", "7mo"}));
 		GridBagConstraints gbc_comboBoxPiso = new GridBagConstraints();
@@ -96,7 +101,7 @@ public class AgregarCochera extends JDialog implements ActionListener{
 		gbc_comboBoxPiso.gridx = 1;
 		gbc_comboBoxPiso.gridy = 0;
 		panel.add(comboBoxPiso, gbc_comboBoxPiso);
-		
+
 		JLabel labelCostoMensual = new JLabel("Costo Mensual:");
 		GridBagConstraints gbc_labelCostoMensual = new GridBagConstraints();
 		gbc_labelCostoMensual.anchor = GridBagConstraints.WEST;
@@ -104,7 +109,7 @@ public class AgregarCochera extends JDialog implements ActionListener{
 		gbc_labelCostoMensual.gridx = 0;
 		gbc_labelCostoMensual.gridy = 1;
 		panel.add(labelCostoMensual, gbc_labelCostoMensual);
-		
+
 		textCostoMensual = new JTextField();
 		textCostoMensual.setColumns(10);
 		GridBagConstraints gbc_textCostoMensual = new GridBagConstraints();
@@ -113,7 +118,7 @@ public class AgregarCochera extends JDialog implements ActionListener{
 		gbc_textCostoMensual.gridx = 1;
 		gbc_textCostoMensual.gridy = 1;
 		panel.add(textCostoMensual, gbc_textCostoMensual);
-		
+
 		JLabel labelUbicacion = new JLabel("Ubicacion:");
 		GridBagConstraints gbc_labelUbicacion = new GridBagConstraints();
 		gbc_labelUbicacion.anchor = GridBagConstraints.WEST;
@@ -121,7 +126,7 @@ public class AgregarCochera extends JDialog implements ActionListener{
 		gbc_labelUbicacion.gridx = 0;
 		gbc_labelUbicacion.gridy = 2;
 		panel.add(labelUbicacion, gbc_labelUbicacion);
-		
+
 		textFieldUbicacion = new JTextField();
 		textFieldUbicacion.setColumns(10);
 		GridBagConstraints gbc_textFieldUbicacion = new GridBagConstraints();
@@ -130,7 +135,7 @@ public class AgregarCochera extends JDialog implements ActionListener{
 		gbc_textFieldUbicacion.gridx = 1;
 		gbc_textFieldUbicacion.gridy = 2;
 		panel.add(textFieldUbicacion, gbc_textFieldUbicacion);
-		
+
 		JLabel labelPorcentajeExpensas = new JLabel("Porcentaje Expensas:");
 		GridBagConstraints gbc_labelPorcentajeExpensas = new GridBagConstraints();
 		gbc_labelPorcentajeExpensas.anchor = GridBagConstraints.WEST;
@@ -138,7 +143,7 @@ public class AgregarCochera extends JDialog implements ActionListener{
 		gbc_labelPorcentajeExpensas.gridx = 0;
 		gbc_labelPorcentajeExpensas.gridy = 3;
 		panel.add(labelPorcentajeExpensas, gbc_labelPorcentajeExpensas);
-		
+
 		textFieldPorcentajeExpensas = new JTextField();
 		textFieldPorcentajeExpensas.setColumns(10);
 		GridBagConstraints gbc_textFieldPorcentajeExpensas = new GridBagConstraints();
@@ -146,27 +151,27 @@ public class AgregarCochera extends JDialog implements ActionListener{
 		gbc_textFieldPorcentajeExpensas.gridx = 1;
 		gbc_textFieldPorcentajeExpensas.gridy = 3;
 		panel.add(textFieldPorcentajeExpensas, gbc_textFieldPorcentajeExpensas);
-		
+
 		buttonCancelar = new JButton("Cancelar");
 		buttonCancelar.setIcon(new ImageIcon(BuscadorCliente.class.getResource("/image/cancel.png")));
 		buttonCancelar.setBounds(6, 146, 148, 56);
 		contentPane.add(buttonCancelar);
 		buttonCancelar.addActionListener(this);
-		
+
 		buttonAgregarCochera = new JButton("Agregar Cochera");
 		buttonAgregarCochera.setIcon(new ImageIcon(BuscadorCliente.class.getResource("/image/ok.png")));
 		buttonAgregarCochera.setBounds(164, 146, 148, 56);
 		contentPane.add(buttonAgregarCochera);
 		buttonAgregarCochera.addActionListener(this);
-		
+
 		JSeparator separator = new JSeparator();
 		separator.setBounds(128, 133, 1, 2);
 		contentPane.add(separator);
-		
+
 		JSeparator separator_1 = new JSeparator();
 		separator_1.setBounds(6, 133, 306, 2);
 		contentPane.add(separator_1);
-		
+
 		this.setLocationRelativeTo(null);
 
 	}
@@ -178,10 +183,30 @@ public class AgregarCochera extends JDialog implements ActionListener{
 		}
 		if(event.getSource()==buttonAgregarCochera)
 		{
-			Controlador.getInstancia().agregarCochera(textFieldUbicacion.getText(), Double.parseDouble(textCostoMensual.getText()), Float.parseFloat(textFieldPorcentajeExpensas.getText()),comboBoxPiso.getSelectedItem().toString());	
-			dispose();
+			long codigoReturn;
+			if(isNumeric(textCostoMensual.getText().toString()) && isNumeric(textFieldPorcentajeExpensas.getText().toString()))
+			{
+				Controlador.getInstancia().agregarCochera(textFieldUbicacion.getText(), Double.parseDouble(textCostoMensual.getText()), Float.parseFloat(textFieldPorcentajeExpensas.getText()),comboBoxPiso.getSelectedItem().toString());	
+			}
+			else
+			{
+				JOptionPane.showMessageDialog(null, "Error Validación Datos.", "Alguno/s de los campos ingresados no son válidos", JOptionPane.INFORMATION_MESSAGE);
+			}
 		}
-		
+
+	}
+
+	public static boolean isNumeric(String str)  
+	{  
+		try  
+		{  
+			double d = Double.parseDouble(str);  
+		}  
+		catch(NumberFormatException nfe)  
+		{  
+			return false;  
+		}  
+		return true;  
 	}
 }
 

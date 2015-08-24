@@ -167,6 +167,7 @@ public class CobroExtraordinario extends JDialog implements ActionListener{
 					JOptionPane.showMessageDialog(null, "Cobro realizado exitosamente", "Se generó correctamente el cobro del pago de" + comboBoxTipoCobro.getSelectedItem().toString(), JOptionPane.INFORMATION_MESSAGE);
 				}
 			}
+			dispose();
 		}
 		if(event.getSource()==limpiarCamposButton)
 		{

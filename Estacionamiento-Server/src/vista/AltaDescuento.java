@@ -104,7 +104,7 @@ public class AltaDescuento extends JDialog implements ActionListener{
 		if(event.getSource()==aceptarButton)
 		{
 			long codigoReturn;
-			if(!descripcionTextField.getText().isEmpty() && !montoDescuentoTextField.getText().isEmpty())
+			if(!descripcionTextField.getText().isEmpty() && !montoDescuentoTextField.getText().isEmpty() && isNumeric(montoDescuentoTextField.getText()))
 			{
 				codigoReturn=Controlador.getInstancia().altaDescuento(descripcionTextField.getText(), Double.parseDouble(montoDescuentoTextField.getText()));
 				if(codigoReturn == -1)
@@ -122,5 +122,17 @@ public class AltaDescuento extends JDialog implements ActionListener{
 			descripcionTextField.setText("");
 			montoDescuentoTextField.setText("");
 		}
+	}
+	private static boolean isNumeric(String str)  
+	{  
+	  try  
+	  {  
+	    double d = Double.parseDouble(str);  
+	  }  
+	  catch(NumberFormatException nfe)  
+	  {  
+	    return false;  
+	  }  
+	  return true;  
 	}
 }

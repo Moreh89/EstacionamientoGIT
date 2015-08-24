@@ -8,6 +8,7 @@ import javax.swing.DefaultComboBoxModel;
 import javax.swing.ImageIcon;
 import javax.swing.JDialog;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 import javax.swing.JButton;
 
@@ -69,7 +70,7 @@ public class AltaCliente extends JDialog implements ActionListener{
 
 	private ArrayList<String> ListPersonasAutorizadas=new ArrayList<String>();
 	private ArrayList<String> ListPatentesVehiculos=new ArrayList<String>();
-	private JLabel label;
+	private JLabel lblNroDocumentacion;
 	private JTextField textFieldNumeroDoc;
 	private JLabel Tipo_Doc;
 	private JLabel label_2;
@@ -162,7 +163,7 @@ public class AltaCliente extends JDialog implements ActionListener{
 		gbc_textFieldApellido.gridx = 4;
 		gbc_textFieldApellido.gridy = 0;
 		panelAltaCliente.add(textFieldApellido, gbc_textFieldApellido);
-		
+
 		Tipo_Doc = new JLabel("Tipo Documentacion:");
 		GridBagConstraints gbc_Tipo_Doc = new GridBagConstraints();
 		gbc_Tipo_Doc.anchor = GridBagConstraints.WEST;
@@ -170,7 +171,7 @@ public class AltaCliente extends JDialog implements ActionListener{
 		gbc_Tipo_Doc.gridx = 0;
 		gbc_Tipo_Doc.gridy = 1;
 		panelAltaCliente.add(Tipo_Doc, gbc_Tipo_Doc);
-		
+
 		comboBoxTipoDoc = new JComboBox();
 		comboBoxTipoDoc.setModel(new DefaultComboBoxModel(new String[] {"1. DNI", "2. LU", "3. PASAPORTE", "4. OTRO"}));
 
@@ -180,15 +181,15 @@ public class AltaCliente extends JDialog implements ActionListener{
 		gbc_comboBoxTipoDoc.gridx = 1;
 		gbc_comboBoxTipoDoc.gridy = 1;
 		panelAltaCliente.add(comboBoxTipoDoc, gbc_comboBoxTipoDoc);
-		
-		label = new JLabel("DNI/LU:");
-		GridBagConstraints gbc_label = new GridBagConstraints();
-		gbc_label.anchor = GridBagConstraints.WEST;
-		gbc_label.insets = new Insets(0, 0, 5, 5);
-		gbc_label.gridx = 3;
-		gbc_label.gridy = 1;
-		panelAltaCliente.add(label, gbc_label);
-		
+
+		lblNroDocumentacion = new JLabel("Nro. Doc:");
+		GridBagConstraints gbc_lblNroDocumentacion = new GridBagConstraints();
+		gbc_lblNroDocumentacion.anchor = GridBagConstraints.WEST;
+		gbc_lblNroDocumentacion.insets = new Insets(0, 0, 5, 5);
+		gbc_lblNroDocumentacion.gridx = 3;
+		gbc_lblNroDocumentacion.gridy = 1;
+		panelAltaCliente.add(lblNroDocumentacion, gbc_lblNroDocumentacion);
+
 		textFieldNumeroDoc = new JTextField();
 		textFieldNumeroDoc.setColumns(10);
 		GridBagConstraints gbc_textFieldNumeroDoc = new GridBagConstraints();
@@ -197,7 +198,7 @@ public class AltaCliente extends JDialog implements ActionListener{
 		gbc_textFieldNumeroDoc.gridx = 4;
 		gbc_textFieldNumeroDoc.gridy = 1;
 		panelAltaCliente.add(textFieldNumeroDoc, gbc_textFieldNumeroDoc);
-		
+
 		labelTipoCliente = new JLabel("Tipo Cliente:");
 		GridBagConstraints gbc_labelTipoCliente = new GridBagConstraints();
 		gbc_labelTipoCliente.anchor = GridBagConstraints.WEST;
@@ -205,7 +206,7 @@ public class AltaCliente extends JDialog implements ActionListener{
 		gbc_labelTipoCliente.gridx = 0;
 		gbc_labelTipoCliente.gridy = 2;
 		panelAltaCliente.add(labelTipoCliente, gbc_labelTipoCliente);
-		
+
 		comboBoxTipoCliente = new JComboBox();
 		comboBoxTipoCliente.setModel(new DefaultComboBoxModel(new String[] {"1. FIJO_PERSONA", "2. FIJO_EMPRESA", "3. TEMPORAL"}));
 		GridBagConstraints gbc_comboBoxTipoCliente = new GridBagConstraints();
@@ -321,7 +322,7 @@ public class AltaCliente extends JDialog implements ActionListener{
 		gbc_textFieldEmail.gridx = 1;
 		gbc_textFieldEmail.gridy = 5;
 		panelAltaCliente.add(textFieldEmail, gbc_textFieldEmail);
-		
+
 		label_2 = new JLabel("Razon Social:");
 		GridBagConstraints gbc_label_2 = new GridBagConstraints();
 		gbc_label_2.anchor = GridBagConstraints.WEST;
@@ -329,7 +330,7 @@ public class AltaCliente extends JDialog implements ActionListener{
 		gbc_label_2.gridx = 3;
 		gbc_label_2.gridy = 5;
 		panelAltaCliente.add(label_2, gbc_label_2);
-		
+
 		textFieldRazonSocial = new JTextField();
 		textFieldRazonSocial.setColumns(10);
 		GridBagConstraints gbc_textFieldRazonSocial = new GridBagConstraints();
@@ -418,7 +419,7 @@ public class AltaCliente extends JDialog implements ActionListener{
 		gbc_lblCocheras.gridy = 8;
 		panelAltaCliente.add(lblCocheras, gbc_lblCocheras);
 
-		
+
 		scrollPane_2 = new JScrollPane();
 		scrollPane_2.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
 		GridBagConstraints gbc_scrollPane_2 = new GridBagConstraints();
@@ -445,7 +446,7 @@ public class AltaCliente extends JDialog implements ActionListener{
 		panelAltaCliente.add(buttonAgregarCocheras, gbc_buttonAgregarCocheras);
 		buttonAgregarCocheras.addActionListener(this);
 
-		
+
 		buttonCancelar = new JButton("Cancelar");
 		GridBagConstraints gbc_buttonCancelar = new GridBagConstraints();
 		gbc_buttonCancelar.fill = GridBagConstraints.HORIZONTAL;
@@ -495,18 +496,23 @@ public class AltaCliente extends JDialog implements ActionListener{
 			AgregarCochera altaCochera=new AgregarCochera(this);
 			altaCochera.setVisible(true);
 		}
-		
+
 		if(event.getSource()==buttonCancelar)
 		{
 			dispose();
 		}
 		if(event.getSource()==buttonCrearCliente)
 		{
-			Controlador.getInstancia().altaCliente(textFieldNombre.getText(), textFieldApellido.getText(), textFieldTelefono1.getText(), textFieldTelefono2.getText(),
-					textFieldDireccion1.getText(), textFieldDireccion2.getText(), textFieldEmail.getText(), textFieldRazonSocial.getText()
-					,ListPersonasAutorizadas, ListPatentesVehiculos, comboBoxTipoDoc.getSelectedItem().toString(), textFieldNumeroDoc.getText(), comboBoxTipoCliente.getSelectedItem().toString(), textFieldCUIT.getText());
-			dispose();
-
+			if(textFieldCUIT.getText().length()!=11)
+			{
+				JOptionPane.showMessageDialog(null, "Error Validación Datos.", "El CUIT debe estár compuesto por 11 campos numéricos.", JOptionPane.INFORMATION_MESSAGE);
+			}
+			else{
+				Controlador.getInstancia().altaCliente(textFieldNombre.getText(), textFieldApellido.getText(), textFieldTelefono1.getText(), textFieldTelefono2.getText(),
+						textFieldDireccion1.getText(), textFieldDireccion2.getText(), textFieldEmail.getText(), textFieldRazonSocial.getText()
+						,ListPersonasAutorizadas, ListPatentesVehiculos, comboBoxTipoDoc.getSelectedItem().toString(), textFieldNumeroDoc.getText(), comboBoxTipoCliente.getSelectedItem().toString(), textFieldCUIT.getText());
+				dispose();
+			}
 		}
 	}
 
