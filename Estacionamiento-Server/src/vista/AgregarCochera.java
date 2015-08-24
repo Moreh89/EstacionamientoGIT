@@ -183,7 +183,7 @@ public class AgregarCochera extends JDialog implements ActionListener{
 		}
 		if(event.getSource()==buttonAgregarCochera)
 		{
-			long codigoReturn;
+
 			if(isNumeric(textCostoMensual.getText().toString()) && isNumeric(textFieldPorcentajeExpensas.getText().toString()))
 			{
 				Controlador.getInstancia().agregarCochera(textFieldUbicacion.getText(), Double.parseDouble(textCostoMensual.getText()), Float.parseFloat(textFieldPorcentajeExpensas.getText()),comboBoxPiso.getSelectedItem().toString());	
@@ -196,6 +196,7 @@ public class AgregarCochera extends JDialog implements ActionListener{
 
 	}
 
+	@SuppressWarnings("unused")
 	public static boolean isNumeric(String str)  
 	{  
 		try  

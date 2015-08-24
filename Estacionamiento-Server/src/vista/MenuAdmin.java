@@ -294,7 +294,7 @@ public class MenuAdmin extends JFrame implements ActionListener {
 			//new AltaVehiculo().setVisible(true);
 		}
 		if (event.getSource() == mntmBuscarCliente){
-			 new BuscardorCliente().setVisible(true);
+			 new BuscadorCliente().setVisible(true);
 		}
 		if (event.getSource() == mntmModificacionUsuario){
 			 new GestorUsuario().setVisible(true);

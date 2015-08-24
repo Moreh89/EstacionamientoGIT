@@ -337,7 +337,7 @@ public class AltaTarifa extends JDialog implements ActionListener{
 
 
 	}
-
+    @SuppressWarnings("unused")
 	public static boolean isNumeric(String str)  
 	{  
 		try  

@@ -13,9 +13,9 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
 
+
 //import reportes.ReporteEjemplo;
 import java.awt.Font;
-
 
 import controlador.Controlador;
 
@@ -127,7 +127,8 @@ public class AltaDescuento extends JDialog implements ActionListener{
 	{  
 	  try  
 	  {  
-	    double d = Double.parseDouble(str);  
+	    @SuppressWarnings("unused")
+		double d = Double.parseDouble(str);  
 	  }  
 	  catch(NumberFormatException nfe)  
 	  {  
