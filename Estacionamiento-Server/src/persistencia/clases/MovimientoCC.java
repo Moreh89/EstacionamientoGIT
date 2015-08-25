@@ -1,6 +1,6 @@
 package persistencia.clases;
 
-import java.sql.Date;
+import java.util.Date;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -9,6 +9,8 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
 @Entity
 @Table(name = "MovimientoCC")
@@ -17,6 +19,7 @@ public class MovimientoCC {
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	private long idMovimiento;
+	@Temporal(TemporalType.TIMESTAMP) 
 	private Date fecha;
 	private String descripcion;
 	private double montoCobrado;

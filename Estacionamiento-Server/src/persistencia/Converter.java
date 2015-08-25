@@ -180,6 +180,12 @@ public class Converter {
 		if(estadoCliente.equals("INACTIVO"))
 			clienteP.setEstado(ESTADO.INACTIVO);
 
+		if(clienteM.getCuentaCorriente()!=null)
+		{
+			persistencia.clases.CuentaCorriente cCP = new persistencia.clases.CuentaCorriente();
+			cCP = convertCuentaCorrienteModeloToPersistencia(clienteM.getCuentaCorriente());
+			clienteP.setCuentaCorriente(cCP);
+		}
 
 		if(clienteM.getPersonasAutorizadasARetirar()!=null)
 
@@ -259,6 +265,12 @@ public class Converter {
 		if(estadoCliente.equals("INACTIVO"))
 			clienteM.setEstado(modelo.Cliente.ESTADO.INACTIVO);
 
+		if(clienteP.getCuentaCorriente()!=null)
+		{
+			modelo.CuentaCorriente cCM = new modelo.CuentaCorriente();
+			cCM = convertCuentaCorrientePersistenciaToModelo(clienteP.getCuentaCorriente());
+			clienteM.setCuentaCorriente(cCM);
+		}
 
 		List<modelo.PersonaAutorizada> personasAutorizadasARetirarM = new ArrayList<modelo.PersonaAutorizada>();
 		for (persistencia.clases.PersonaAutorizada personasAutorizadasARetirarP : clienteP.getPersonasAutorizadasARetirar()) {
@@ -306,11 +318,13 @@ public class Converter {
 		cuentaCorrienteP.setIdCuentaCorriente(cuentaCorrienteM.getIdCuentaCorriente());
 
 		List<persistencia.clases.MovimientoCC> movimientosCCP = new ArrayList<persistencia.clases.MovimientoCC>();
-		for (modelo.MovimientoCC movimientoCCM : cuentaCorrienteM.getMovimientos()) {
-			movimientosCCP.add(convertMovimientoCuentaCorrienteModeloToPersistencia(movimientoCCM));
+		if(cuentaCorrienteM.getMovimientos()!=null)
+		{
+			for (modelo.MovimientoCC movimientoCCM : cuentaCorrienteM.getMovimientos()) {
+				movimientosCCP.add(convertMovimientoCuentaCorrienteModeloToPersistencia(movimientoCCM));
+			}
+			cuentaCorrienteP.setMovimientos(movimientosCCP);
 		}
-		cuentaCorrienteP.setMovimientos(movimientosCCP);
-
 		return cuentaCorrienteP;
 
 	}
@@ -321,6 +335,7 @@ public class Converter {
 
 		cuentaCorrienteM.setIdCuentaCorriente(cuentaCorrienteP.getIdCuentaCorriente());
 		List<modelo.MovimientoCC> movimientosCCM = new ArrayList<modelo.MovimientoCC>();
+
 		for (persistencia.clases.MovimientoCC movimientoCCP : cuentaCorrienteP.getMovimientos()) {
 			movimientosCCM.add(convertMovimientoCuentaCorrientePersistenciaToModelo(movimientoCCP));
 		}
@@ -338,8 +353,10 @@ public class Converter {
 		movimientoCCP.setDescripcion(movimientoCCM.getDescripcion());
 		movimientoCCP.setMontoCobrado(movimientoCCM.getMontoCobrado());
 		movimientoCCP.setEstado(movimientoCCM.getEstado());
-		movimientoCCP.setTicket(convertTicketModeloToPersistencia(movimientoCCM.getTicket()));
-
+		if(movimientoCCM.getTicket()!=null)
+		{
+			movimientoCCP.setTicket(convertTicketModeloToPersistencia(movimientoCCM.getTicket()));
+		}
 
 		return movimientoCCP;
 	}
@@ -387,7 +404,7 @@ public class Converter {
 		ticketP.setPatente(ticketM.getPatente());
 		ticketP.setUsuario(convertUsuarioModeloToPersistencia(ticketM.getUsuario()));
 		ticketP.setColor(convertColorModeloToPersistencia(ticketM.getColor()));
-		
+
 		return ticketP;
 	}
 
@@ -422,7 +439,7 @@ public class Converter {
 	public static persistencia.clases.Cochera convertCocheraModeloToPersistencia(modelo.Cochera cocheraM) {
 		persistencia.clases.Cochera cocheraP = new persistencia.clases.Cochera();
 
-		cocheraP.setCosto(cocheraM.getCosto());
+		cocheraP.setPorcentajeExpensas(cocheraM.getPorcentajeExpensas());
 		cocheraP.setCostoCochera(cocheraM.getCostoCochera());
 		cocheraP.setIdCochera(cocheraM.getIdCochera());
 		cocheraP.setUbicacion(cocheraM.getUbicacion());
@@ -441,7 +458,7 @@ public class Converter {
 	public static modelo.Cochera convertCocheraPersistenciaToModelo(persistencia.clases.Cochera cocheraP) {
 		modelo.Cochera cocheraM = new modelo.Cochera();
 
-		cocheraM.setCosto(cocheraP.getCosto());
+		cocheraM.setPorcentajeExpensas(cocheraP.getPorcentajeExpensas());
 		cocheraM.setCostoCochera(cocheraP.getCostoCochera());
 		cocheraM.setIdCochera(cocheraP.getIdCochera());
 		cocheraM.setUbicacion(cocheraP.getUbicacion());
@@ -596,6 +613,39 @@ public class Converter {
 
 		return tasaInteresM;
 	}
+
+	public static ArrayList<modelo.Cliente> convertClientesPersistenciaToModelo(
+			ArrayList<persistencia.clases.Cliente> clientesP) {
+
+		ArrayList<modelo.Cliente> clientesM = new ArrayList<modelo.Cliente>();
+		for(persistencia.clases.Cliente clienteP : clientesP)
+		{
+			clientesM.add(convertClientePersistenciaToModelo(clienteP));
+		}
+		return clientesM;
+	}
+	public static ArrayList<persistencia.clases.Cliente> convertClientesModeloToPersistencia(
+			ArrayList<modelo.Cliente> clientesM) {
+
+		ArrayList<persistencia.clases.Cliente> clientesP = new ArrayList<persistencia.clases.Cliente>();
+		for(modelo.Cliente clienteM : clientesM)
+		{
+			clientesP.add(convertClienteModeloToPersistencia(clienteM));
+		}
+		return clientesP;
+	}
+
+	public static ArrayList<persistencia.clases.MovimientoCC> convertMovimientosCuentaCorrienteModeloToPersistencia(
+			ArrayList<modelo.MovimientoCC> movimientosCCM) {
+
+		ArrayList<persistencia.clases.MovimientoCC> movimientosCCP = new ArrayList<persistencia.clases.MovimientoCC>();
+		for(modelo.MovimientoCC movimientoCCM: movimientosCCM)
+		{
+			movimientosCCP.add(convertMovimientoCuentaCorrienteModeloToPersistencia(movimientoCCM));
+		}
+		return movimientosCCP;
+	}
+
 
 	//	public static ArrayList<CategoriaVehiculo> convertCategoriasVehiculosPersistenciaToModelo(
 	//			ArrayList<persistencia.clases.CategoriaVehiculo> categoriasVehiculosP) {

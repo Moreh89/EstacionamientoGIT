@@ -1,9 +1,14 @@
 package persistencia;
 
+import java.util.ArrayList;
 import java.util.List;
+
 import org.hibernate.SQLQuery;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+
+import persistencia.clases.Cliente;
+import persistencia.clases.CuentaCorriente;
 
 
 
@@ -117,6 +122,7 @@ public class HibernateDAO {
 		session.flush();
 		return obj;
 	}
+	
 	public List<?> getList(String className)
 	{
 		Session session=getSession();
@@ -165,5 +171,6 @@ public class HibernateDAO {
 		session.flush();
 		return true;
 	}
+
 	
 }

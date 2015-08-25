@@ -13,10 +13,18 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
 
+
+
 //import reportes.ReporteEjemplo;
 import java.awt.Font;
 
 import controlador.Controlador;
+
+import java.awt.GridBagLayout;
+import java.awt.GridBagConstraints;
+import java.awt.Insets;
+import java.text.SimpleDateFormat;
+import java.util.GregorianCalendar;
 
 public class AltaLiquidarExpensas extends JDialog implements ActionListener{
 	/**
@@ -28,14 +36,15 @@ public class AltaLiquidarExpensas extends JDialog implements ActionListener{
 	private JButton cancelarButton;
 	private JButton limpiarCamposButton;
 	private JTextField descripcionTextField;
-	private JTextField montoDescuentoTextField;
+	private JTextField textFieldImporteLiquidar;
+	private JTextField textFieldPeriodoLiquidar;
 
 	/**
 	 * Launch the application.
 	 */
 	public static void main(String[] args) {
 		try {
-			AltaDescuento dialog = new AltaDescuento();
+			AltaLiquidarExpensas dialog = new AltaLiquidarExpensas();
 			dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
 			dialog.setVisible(true);
 		} catch (Exception e) {
@@ -49,47 +58,96 @@ public class AltaLiquidarExpensas extends JDialog implements ActionListener{
 	public AltaLiquidarExpensas() {
 		setResizable(false);
 		setTitle("Alta Liquidación Expensas");
-		setBounds(100, 100, 329, 173);
+		setBounds(100, 100, 329, 200);
 		getContentPane().setLayout(new BorderLayout());
 		contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
 		getContentPane().add(contentPanel, BorderLayout.CENTER);
-		contentPanel.setLayout(null);
+		GridBagLayout gbl_contentPanel = new GridBagLayout();
+		gbl_contentPanel.columnWidths = new int[]{144, 159, 0};
+		gbl_contentPanel.rowHeights = new int[]{20, 22, 22, 22, 43, 0};
+		gbl_contentPanel.columnWeights = new double[]{0.0, 0.0, Double.MIN_VALUE};
+		gbl_contentPanel.rowWeights = new double[]{0.0, 0.0, 0.0, 0.0, 1.0, Double.MIN_VALUE};
+		contentPanel.setLayout(gbl_contentPanel);
 
+		JLabel lblPeriodoALiquidar = new JLabel("Periodo a Liquidar:");
+		lblPeriodoALiquidar.setFont(new Font("Tahoma", Font.BOLD, 11));
+		GridBagConstraints gbc_lblPeriodoALiquidar = new GridBagConstraints();
+		gbc_lblPeriodoALiquidar.anchor = GridBagConstraints.NORTH;
+		gbc_lblPeriodoALiquidar.fill = GridBagConstraints.HORIZONTAL;
+		gbc_lblPeriodoALiquidar.insets = new Insets(0, 0, 5, 5);
+		gbc_lblPeriodoALiquidar.gridx = 0;
+		gbc_lblPeriodoALiquidar.gridy = 1;
+		contentPanel.add(lblPeriodoALiquidar, gbc_lblPeriodoALiquidar);
+
+		textFieldPeriodoLiquidar = new JTextField();
+		GridBagConstraints gbc_textFieldPeriodoLiquidar = new GridBagConstraints();
+		gbc_textFieldPeriodoLiquidar.fill = GridBagConstraints.BOTH;
+		gbc_textFieldPeriodoLiquidar.insets = new Insets(0, 0, 5, 0);
+		gbc_textFieldPeriodoLiquidar.gridx = 1;
+		gbc_textFieldPeriodoLiquidar.gridy = 1;
+		contentPanel.add(textFieldPeriodoLiquidar, gbc_textFieldPeriodoLiquidar);
+		textFieldPeriodoLiquidar.setEditable(false);
+		textFieldPeriodoLiquidar.setText(new SimpleDateFormat("MM-dd-yyyy").format(GregorianCalendar.getInstance().getTime()));
+		
 		JLabel lblNuevaCon = new JLabel("Descripcion:");
 		lblNuevaCon.setFont(new Font("Tahoma", Font.BOLD, 11));
+		GridBagConstraints gbc_lblNuevaCon = new GridBagConstraints();
+		gbc_lblNuevaCon.anchor = GridBagConstraints.NORTH;
+		gbc_lblNuevaCon.fill = GridBagConstraints.HORIZONTAL;
+		gbc_lblNuevaCon.insets = new Insets(0, 0, 5, 5);
+		gbc_lblNuevaCon.gridx = 0;
+		gbc_lblNuevaCon.gridy = 2;
+		contentPanel.add(lblNuevaCon, gbc_lblNuevaCon);
 
-		lblNuevaCon.setBounds(10, 36, 144, 14);
-		contentPanel.add(lblNuevaCon);
+		descripcionTextField = new JTextField();
+		GridBagConstraints gbc_descripcionTextField = new GridBagConstraints();
+		gbc_descripcionTextField.fill = GridBagConstraints.BOTH;
+		gbc_descripcionTextField.insets = new Insets(0, 0, 5, 0);
+		gbc_descripcionTextField.gridx = 1;
+		gbc_descripcionTextField.gridy = 2;
+		contentPanel.add(descripcionTextField, gbc_descripcionTextField);
 
-		JLabel lblNuevaCon2 = new JLabel("Monto Descuento:");
+		JLabel lblNuevaCon2 = new JLabel("Importe Total a Liquidar:");
 		lblNuevaCon2.setFont(new Font("Tahoma", Font.BOLD, 11));
-		lblNuevaCon2.setBounds(10, 74, 144, 14);
-		contentPanel.add(lblNuevaCon2);
+		GridBagConstraints gbc_lblNuevaCon2 = new GridBagConstraints();
+		gbc_lblNuevaCon2.anchor = GridBagConstraints.NORTH;
+		gbc_lblNuevaCon2.fill = GridBagConstraints.HORIZONTAL;
+		gbc_lblNuevaCon2.insets = new Insets(0, 0, 5, 5);
+		gbc_lblNuevaCon2.gridx = 0;
+		gbc_lblNuevaCon2.gridy = 3;
+		contentPanel.add(lblNuevaCon2, gbc_lblNuevaCon2);
 
-		aceptarButton = new JButton("Aceptar");
-		aceptarButton.setIcon(new ImageIcon(CambioContrasenia.class.getResource("/image/ok.png")));
-		aceptarButton.setBounds(195, 102, 116, 32);
-		contentPanel.add(aceptarButton);
-		aceptarButton.addActionListener(this);
+		textFieldImporteLiquidar = new JTextField();
+		GridBagConstraints gbc_textFieldImporteLiquidar = new GridBagConstraints();
+		gbc_textFieldImporteLiquidar.fill = GridBagConstraints.BOTH;
+		gbc_textFieldImporteLiquidar.insets = new Insets(0, 0, 5, 0);
+		gbc_textFieldImporteLiquidar.gridx = 1;
+		gbc_textFieldImporteLiquidar.gridy = 3;
+		contentPanel.add(textFieldImporteLiquidar, gbc_textFieldImporteLiquidar);
 
 		cancelarButton = new JButton("Cancelar");
 		cancelarButton.setIcon(new ImageIcon(GestorUsuario.class.getResource("/image/cancel.png")));
-		cancelarButton.setBounds(10, 102, 116, 32);
-		contentPanel.add(cancelarButton);
+		GridBagConstraints gbc_cancelarButton = new GridBagConstraints();
+		gbc_cancelarButton.anchor = GridBagConstraints.WEST;
+		gbc_cancelarButton.insets = new Insets(0, 0, 0, 5);
+		gbc_cancelarButton.gridx = 0;
+		gbc_cancelarButton.gridy = 4;
+		contentPanel.add(cancelarButton, gbc_cancelarButton);
 		cancelarButton.addActionListener(this);
 
-		descripcionTextField = new JTextField();
-		descripcionTextField.setBounds(166, 31, 145, 22);
-		contentPanel.add(descripcionTextField);
-
-		montoDescuentoTextField = new JTextField();
-		montoDescuentoTextField.setBounds(166, 70, 145, 22);
-		contentPanel.add(montoDescuentoTextField);
+		aceptarButton = new JButton("Aceptar");
+		aceptarButton.setIcon(new ImageIcon(CambioContrasenia.class.getResource("/image/ok.png")));
+		GridBagConstraints gbc_aceptarButton = new GridBagConstraints();
+		gbc_aceptarButton.anchor = GridBagConstraints.EAST;
+		gbc_aceptarButton.gridx = 1;
+		gbc_aceptarButton.gridy = 4;
+		contentPanel.add(aceptarButton, gbc_aceptarButton);
+		aceptarButton.addActionListener(this);
 
 		this.setLocationRelativeTo(null);
 		setModal(true);
 
-
+		
 
 
 	}
@@ -102,25 +160,25 @@ public class AltaLiquidarExpensas extends JDialog implements ActionListener{
 		}
 		if(event.getSource()==aceptarButton)
 		{
-			long codigoReturn;
-			if(!descripcionTextField.getText().isEmpty() && !montoDescuentoTextField.getText().isEmpty())
+			if(!textFieldImporteLiquidar.getText().isEmpty() && isNumeric(textFieldImporteLiquidar.getText()))
 			{
-				codigoReturn=Controlador.getInstancia().altaDescuento(descripcionTextField.getText(), Double.parseDouble(montoDescuentoTextField.getText()));
-				if(codigoReturn == -1)
-				{
-					JOptionPane.showMessageDialog(null, "Descuento Duplicado", "Existe otro Descuento con la misma descripcion", JOptionPane.INFORMATION_MESSAGE);
-				}
-				if(codigoReturn >= 0)
-				{
-					JOptionPane.showMessageDialog(null, "Alta Descuento exitosa", "Se generó correctamente el alta del descuento", JOptionPane.INFORMATION_MESSAGE);
-				}
+				Controlador.getInstancia().liquidarExpensas(Double.parseDouble(textFieldImporteLiquidar.getText()), textFieldPeriodoLiquidar.getText(), descripcionTextField.getText());
 			}
 			dispose();
 		}
-		if(event.getSource()==limpiarCamposButton)
-		{
-			descripcionTextField.setText("");
-			montoDescuentoTextField.setText("");
-		}
+
 	}
+	public static boolean isNumeric(String str)  
+	{  
+		try  
+		{  
+			double d = Double.parseDouble(str);  
+		}  
+		catch(NumberFormatException nfe)  
+		{  
+			return false;  
+		}  
+		return true;  
+	}
+
 }

@@ -8,6 +8,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.GregorianCalendar;
 import java.util.List;
 import java.util.Vector;
 
@@ -25,7 +26,7 @@ public class Controlador {
 	private Ticket ticket;
 	private Usuario usuarioActual;
 	private ArrayList<Cochera> cocheras;
-	
+
 	//carga inicial
 	private ArrayList<ColorVehiculo> coloresVehiculos;
 	private ArrayList<ModeloVehiculo> modelosVehiculos;
@@ -101,7 +102,7 @@ public class Controlador {
 		tasaInteres=DAOTasaInteres.getInstance().getTasaInteresActual();
 		tarifas=DAOTarifa.getInstance().getTarifas();
 		return true;
-		
+
 	}
 
 
@@ -120,8 +121,8 @@ public class Controlador {
 		cliente.setCorreoElectronico(email);
 		cliente.setRazonSocial(razonSocial);
 		cliente.setCuil(cuil);
-		
-		
+
+
 		if(tipoDoc.equals("1. DNI"))
 			cliente.setTipoDocumento(modelo.Cliente.TIPO_DOC.DNI);
 		if(tipoDoc.equals("2. LU"))
@@ -130,22 +131,24 @@ public class Controlador {
 			cliente.setTipoDocumento(modelo.Cliente.TIPO_DOC.PASS);
 		if(tipoDoc.equals("4. OTRO"))
 			cliente.setTipoDocumento(modelo.Cliente.TIPO_DOC.OTRO);
-		
+
 		cliente.setNumeroDocumento(numeroDoc);
-		
+
 		if(tipoCliente.equals("1. FIJO_PERSONA"))
 			cliente.setTipoCliente(modelo.Cliente.TIPO_CLIENTE.FIJO_PERSONA);
 		if(tipoCliente.equals("2. FIJO_EMPRESA"))
 			cliente.setTipoCliente(modelo.Cliente.TIPO_CLIENTE.FIJO_EMPRESA);
 		if(tipoCliente.equals("3. TEMPORAL"))
 			cliente.setTipoCliente(modelo.Cliente.TIPO_CLIENTE.TEMPORAL);
-		
+
 		cliente.setEstado(modelo.Cliente.ESTADO.ACTIVO);
-		
+
 		cliente.setCocheras(cocherasActuales);
 		cliente.setPersonasAutorizadasARetirar(personasAutorizadasActuales);
 		cliente.setVehiculos(vehiculosActuales);
-		
+
+		cliente.setCuentaCorriente(new modelo.CuentaCorriente());
+
 		DAOCliente.getInstance().persistir(cliente);
 	}
 
@@ -160,7 +163,7 @@ public class Controlador {
 
 			Vehiculo vehiculo = new Vehiculo();
 
-//			modelo.CategoriaVehiculo categoriaVehiculo = new modelo.CategoriaVehiculo();
+			//			modelo.CategoriaVehiculo categoriaVehiculo = new modelo.CategoriaVehiculo();
 			for(modelo.CategoriaVehiculo categoriaVehiculoM : categoriasVehiculos)
 			{
 				if(categoriaVehiculo.equals(categoriaVehiculoM.getDescripcion()))
@@ -173,7 +176,7 @@ public class Controlador {
 			vehiculo.setPatente(patente);
 			vehiculo.setComentario(comentario);
 			//TODO BUSQUEDA EN MEMORIA, ya están por carga inicial
-			
+
 			for(modelo.ColorVehiculo colorVehiculo : coloresVehiculos)
 			{
 				if(color.equals(colorVehiculo.getDescripcion()))
@@ -182,11 +185,11 @@ public class Controlador {
 					break;
 				}
 			}
-//			modelo.ColorVehiculo colorVehiculo = DAOColorVehiculo.getInstance().getColorVehiculo(color);
+			//			modelo.ColorVehiculo colorVehiculo = DAOColorVehiculo.getInstance().getColorVehiculo(color);
 
 
-//			ModeloVehiculo modeloVehiculo = DAOModeloVehiculo.getInstance().getModeloVehiculo(modelo);
-	
+			//			ModeloVehiculo modeloVehiculo = DAOModeloVehiculo.getInstance().getModeloVehiculo(modelo);
+
 			for(ModeloVehiculo modeloVehiculo : modelosVehiculos)
 			{
 				if(modelo.equals(modeloVehiculo.getDescripcion()))
@@ -219,20 +222,20 @@ public class Controlador {
 			String cliente, String prepago, String obsevacion) {
 
 		CategoriaVehiculo catve= buscarCategoriaVehiulo(tipoVehiculo);
-		
+
 		ModeloVehiculo modve = buscarModeloVehiulo(modelo);
-		
+
 		Cliente cl = buscarCliente(cliente);
-		
+
 		Descuento des = buscarDescuento(descuento);
-		
+
 		ColorVehiculo col = buscarColor(color);
 
 		double prepT = 0;
 		if (!prepago.equals("")){
 			prepT = Double.valueOf(prepago);
-			}
-		
+		}
+
 		Ticket tck = new Ticket( catve, modve, cl, des, col,usuarioActual, prepT, obsevacion, patente);
 		this.ticket = tck;
 
@@ -265,7 +268,7 @@ public class Controlador {
 	private Cliente buscarCliente(String cliente) {
 		// TODO Auto-generated method stub
 		if(cliente !=null){
-			
+
 		}
 		return null;
 	}
@@ -329,7 +332,7 @@ public class Controlador {
 		}
 		return coloresActuales;
 	}
-	
+
 	public Vector<String> getDescuentosActuales() {
 		Vector<String> descuentosActuales=new Vector<String>();
 		for(Descuento descuento:descuentos)
@@ -338,9 +341,9 @@ public class Controlador {
 		}
 		return descuentosActuales;
 	}
-	
-	
-	
+
+
+
 	public Vector<String> getModelosActuales() {
 		Vector<String> modelosActuales=new Vector<String>();
 		for(ModeloVehiculo modelo:modelosVehiculos)
@@ -359,7 +362,7 @@ public class Controlador {
 		}
 		return categoriasVehiculosActuales;
 	}
-	
+
 	public void agregarCochera(String ubicacion, double costoMensual, float porcentajeExpensas,String piso) 
 	{
 		modelo.Cochera cochera = new modelo.Cochera();
@@ -368,11 +371,11 @@ public class Controlador {
 			cocherasActuales = new ArrayList<Cochera>();
 		}
 		cochera.setCostoCochera(costoMensual);
-		cochera.setCosto(porcentajeExpensas);
+		cochera.setPorcentajeExpensas(porcentajeExpensas);
 		cochera.setEstado(modelo.Cochera.ESTADO.ACTIVO);
 		cochera.setUbicacion(ubicacion);
 		cochera.setCliente(null);
-		
+
 		cocherasActuales.add(cochera);
 	}
 
@@ -389,17 +392,17 @@ public class Controlador {
 		descuentoM.setDescripcion(descripcion);
 		descuentoM.setDescuento(montoDescuento);
 		descuentoM.setIdDescuento(0);
-		
+
 		return DAODescuento.getInstance().persistir(descuentoM);
-		
-		
+
+
 	}
-	
+
 	public double getTasaInteres()
 	{
 		return tasaInteres.getMontoDescuento();
 	}
-	
+
 	public long modificarTasaInteres(double montoTasaInteresNuevo)
 	{
 		modelo.TasaInteres tasaInteresNueva = new modelo.TasaInteres();
@@ -411,7 +414,7 @@ public class Controlador {
 			tasaInteresNueva.setMontoDescuento(montoTasaInteresNuevo);
 			tasaInteresNueva.setIdTasaInteres(0);
 			codigoReturn=DAOTasaInteres.getInstance().persistir(tasaInteresNueva);
-			
+
 			if(codigoReturn != -1)
 			{
 				tasaInteresNueva.setIdTasaInteres(codigoReturn);
@@ -420,7 +423,7 @@ public class Controlador {
 		}
 		return codigoReturn;
 	}
-	
+
 	public modelo.Cliente getCliente(String campoIdentificador, String tipoIdentificado)
 
 	{
@@ -429,13 +432,13 @@ public class Controlador {
 
 	public Ticket buscarTicket(String numeroTicket) {
 		persistencia.clases.Ticket tckP = DAOTicket.getInstance().getTicket(Long.parseLong(numeroTicket));
-		
+
 		if (tckP != null) {
-			 modelo.Ticket tckM = Converter.convertTicketPersistenciaToModelo(tckP);
-			 	if(tckM.getEstado()!= Ticket.Estado.CERRADO) tckM.calcularMontoACobrar();
-			 
-			 this.ticket = tckM;
-			 return tckM;
+			modelo.Ticket tckM = Converter.convertTicketPersistenciaToModelo(tckP);
+			if(tckM.getEstado()!= Ticket.Estado.CERRADO) tckM.calcularMontoACobrar();
+
+			this.ticket = tckM;
+			return tckM;
 		}
 		this.ticket = null;
 		return null;
@@ -463,22 +466,22 @@ public class Controlador {
 	public void actualizarTicket(String tipoVehiculo, String modelo,
 			String color, String descuento, String patente,
 			String cliente, String prepago, String obsevacion) {
-		
+
 		CategoriaVehiculo catve= buscarCategoriaVehiulo(tipoVehiculo);
-		
+
 		ModeloVehiculo modve = buscarModeloVehiulo(modelo);
-		
+
 		Cliente cl = buscarCliente(cliente);
-		
+
 		Descuento des = buscarDescuento(descuento);
-		
+
 		ColorVehiculo col = buscarColor(color);
 
 		double prepT = 0;
 		if (!prepago.equals("")){
 			prepT = Double.valueOf(prepago);
-			}
-		
+		}
+
 		this.ticket.setCatergoriaVehiculo(catve);
 		this.ticket.setModeloVehiculo(modve);
 		this.ticket.setCliente(cl);
@@ -502,9 +505,54 @@ public class Controlador {
 		movimientoM.setFecha(new java.sql.Date(Calendar.getInstance().getTime().getTime()));
 		movimientoM.setIdMovimiento(0);
 		movimientoM.setMontoCobrado(monto);
-		
+
 		DAOMovimientoCC.getInstance().persistir(movimientoM);
-		
+
+		return 0;
+	}
+
+	public long liquidarExpensas(double importeLiquidar, String periodoLiquidar, String descripcion) 
+	{
+		ArrayList<modelo.Cliente> clientesConCocheraALiquidar = new ArrayList<modelo.Cliente>();
+		clientesConCocheraALiquidar=DAOCliente.getInstance().getClientes();
+
+		ArrayList<String> expensasImprimir = new ArrayList<String>();
+		expensasImprimir.add("Periodo_Liquidar Nombre Apellido Monto");
+
+		for(modelo.Cliente clienteM : clientesConCocheraALiquidar)
+		{
+			if(clienteM.getCuentaCorriente()!=null)
+			{
+				double montoCobrar = 0;
+				for(modelo.Cochera cocheraActual : clienteM.getCocheras())
+				{
+					montoCobrar = montoCobrar + (cocheraActual.getPorcentajeExpensas() * importeLiquidar / 100); 
+				}
+				modelo.MovimientoCC movimientoNuevo= new modelo.MovimientoCC();
+				movimientoNuevo.setIdMovimiento(0);
+
+				new GregorianCalendar();
+				Date fecha= GregorianCalendar.getInstance().getTime();
+
+				movimientoNuevo.setFecha(fecha);
+				movimientoNuevo.setDescripcion(descripcion);
+				movimientoNuevo.setEstado("Liquidado");
+				movimientoNuevo.setTicket(null);
+				movimientoNuevo.setMontoCobrado((-1)*montoCobrar);
+
+				if(clienteM.getCuentaCorriente().getMovimientos()==null)	
+				{
+					ArrayList<modelo.MovimientoCC>movimientos=new ArrayList<modelo.MovimientoCC>();
+					clienteM.getCuentaCorriente().addMovimiento(movimientoNuevo);
+				}
+				else{
+					clienteM.getCuentaCorriente().addMovimiento(movimientoNuevo);
+				}
+				DAOCliente.getInstance().update(clienteM);
+
+				expensasImprimir.add(periodoLiquidar +" "+ clienteM.getNombre()+" "+clienteM.getApellido()+" "+ montoCobrar);
+			}
+		}
 		return 0;
 	}
 

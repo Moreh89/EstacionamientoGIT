@@ -9,7 +9,7 @@ public class Cochera {
 	private Cliente cliente;
 	private ESTADO estado;
 //Representa el porcentaje de expensas
-	private float costo;
+	private float porcentajeExpensas;
 	private String ubicacion;
 	
 	public enum ESTADO {
@@ -49,12 +49,12 @@ public class Cochera {
 		this.estado = estado;
 	}
 
-	public float getCosto() {
-		return costo;
+	public float getPorcentajeExpensas() {
+		return porcentajeExpensas;
 	}
 
-	public void setCosto(float costo) {
-		this.costo = costo;
+	public void setPorcentajeExpensas(float costo) {
+		this.porcentajeExpensas = costo;
 	}
 
 	public String getUbicacion() {

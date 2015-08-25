@@ -19,5 +19,10 @@ public class CuentaCorriente {
 		this.movimientos = movimientos;
 	}
 	
+	public void addMovimiento(modelo.MovimientoCC movimiento)
+	{
+		this.movimientos.add(movimiento);
+	}
+	
 	
 }

@@ -20,7 +20,7 @@ public class Cochera {
 	@JoinColumn(name="Cliente")
 	private Cliente cliente;
 	private ESTADO estado;
-	private float costo;
+	private float porcentajeExpensas;
 	private String ubicacion;
 	
 	public enum ESTADO {
@@ -61,12 +61,12 @@ public class Cochera {
 	}
 	
 
-	public float getCosto() {
-		return costo;
+	public float getPorcentajeExpensas() {
+		return porcentajeExpensas;
 	}
 
-	public void setCosto(float costo) {
-		this.costo = costo;
+	public void setPorcentajeExpensas(float costo) {
+		this.porcentajeExpensas = costo;
 	}
 
 	public Cochera(long idCochera, double costoCochera, Cliente cliente,

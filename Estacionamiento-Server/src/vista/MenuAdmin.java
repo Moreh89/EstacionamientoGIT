@@ -242,6 +242,7 @@ public class MenuAdmin extends JFrame implements ActionListener {
 		
 		mntmLiquidarExpensas = new JMenuItem("Liquidar Expensas");
 		mnConsultas.add(mntmLiquidarExpensas);
+		mntmLiquidarExpensas.addActionListener(this);
 		
 		mntmDeudores = new JMenuItem("Deudores");
 		mnConsultas.add(mntmDeudores);
@@ -328,6 +329,11 @@ public class MenuAdmin extends JFrame implements ActionListener {
 		{
 			new AltaDescuento().setVisible(true);
 		}
+		if(event.getSource() == mntmLiquidarExpensas)
+		{
+			new AltaLiquidarExpensas().setVisible(true);
+		}
+		
 		
 		
 	}
