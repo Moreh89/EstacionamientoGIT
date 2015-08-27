@@ -659,12 +659,13 @@ public class MenuOperador extends JFrame implements ActionListener, KeyListener 
 			//TODO
 		}
 		if (event.getSource() == btnLimpiarCampos) {
+			Controlador.getInstancia().setClienteActual(null);
 			this.textFieldNumeroTicket.setBackground(new Color(Color.WHITE.getRGB()));
 			this.textFieldPrepago.setBackground(new Color(Color.WHITE.getRGB()));
 			this.textFieldPatente.setBackground(new Color(Color.WHITE.getRGB()));
 			this.textFieldIngreso.setText("");
 			this.comboBoxTipoVehiculo.setSelectedIndex(0);
-			this.comboBoxTipoVehiculo.setEditable(true);
+			this.comboBoxTipoVehiculo.setEnabled(true);
 			this.comboBoxColor.setSelectedIndex(0);
 			this.comboBoxModelo.setSelectedIndex(0);
 			this.comboBoxDescuento.setSelectedIndex(0);
@@ -749,6 +750,7 @@ public class MenuOperador extends JFrame implements ActionListener, KeyListener 
 			if(isNumeric(textFieldNumeroTicket.getText()) && (textFieldPrepago.getText().equals("")||isNumeric(textFieldPrepago.getText()))){
 			Ticket tck = Controlador.getInstancia().buscarTicket(textFieldNumeroTicket.getText());
 				if (tck!=null){
+					Controlador.getInstancia().setClienteActual(null);
 					this.textFieldNumeroTicket.setBackground(new Color(Color.WHITE.getRGB()));
 					this.textFieldPrepago.setBackground(new Color(Color.WHITE.getRGB()));
 					this.textFieldPatente.setBackground(new Color(Color.WHITE.getRGB()));
@@ -773,7 +775,9 @@ public class MenuOperador extends JFrame implements ActionListener, KeyListener 
 					}else if (tck.getEstado() == Ticket.Estado.PREPAGO){
 						this.textFieldTotalAPagar.setText("Pregago " + String.valueOf(tck.getPrepago()) + " restan: "+ String.valueOf(tck.getMontoCobrado()));
 					} else this.textFieldTotalAPagar.setText(String.valueOf(tck.getMontoCobrado()));
-					if (tck.getCliente() != null) this.textFieldCliente.setText(tck.getCliente().getApellido() + " " +tck.getCliente().getNombre());
+					if (tck.getCliente() != null){
+						this.textFieldCliente.setText(tck.getCliente().toString());
+					}else {this.textFieldCliente.setText("");}
 				}else{
 					String numeroTck = textFieldNumeroTicket.getText();
 					while (numeroTck.length() < 10) {

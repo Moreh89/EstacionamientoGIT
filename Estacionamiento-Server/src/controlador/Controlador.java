@@ -229,7 +229,7 @@ public class Controlador {
 
 		ModeloVehiculo modve = buscarModeloVehiulo(modelo);
 
-		Cliente cl = buscarCliente(cliente);
+		Cliente cl = this.clienteActual;
 
 		Descuento des = buscarDescuento(descuento);
 
@@ -269,10 +269,11 @@ public class Controlador {
 		return null;
 	}
 
-	private Cliente buscarCliente(String cliente) {
-		// TODO Auto-generated method stub
+	private modelo.Cliente buscarCliente(String cliente) {
 		if(cliente !=null){
-
+			for (Cliente clienteTemp : this.clientes) {
+				if(clienteTemp.toString().equals(cliente)) return clienteTemp;
+			}
 		}
 		return null;
 	}

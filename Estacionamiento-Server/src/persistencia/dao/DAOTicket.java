@@ -40,7 +40,7 @@ public class DAOTicket {
 		if(!tckP.getCatergoriaVehiculo().getDescripcion().equals(tckM.getCatergoriaVehiculo().getDescripcion())){
 			tckP.setCatergoriaVehiculo(DAOCategoriaVehiculo.getInstance().getCategoria(tckM.getCatergoriaVehiculo().getIdCategoria()));
 		}
-		if(tckM.getCliente()!=null && tckP.getCliente().getIdCliente()!=tckM.getCliente().getIdCliente()){
+		if((tckM.getCliente()!=null && tckP.getCliente()==null)||(tckM.getCliente()!=null && tckP.getCliente().getIdCliente()!=tckM.getCliente().getIdCliente())){
 			tckP.setCliente(DAOCliente.getInstance().getCliente(tckM.getCliente().getIdCliente()));
 		}
 		if(!tckP.getColor().getDescripcion().equals(tckM.getColor().getDescripcion())){
@@ -53,7 +53,7 @@ public class DAOTicket {
 		if(tckM.getEstado() == modelo.Ticket.Estado.CERRADO) tckP.setEstado(persistencia.clases.Ticket.Estado.CERRADO);
 		if(tckM.getEstado() == modelo.Ticket.Estado.PREPAGO) tckP.setEstado(persistencia.clases.Ticket.Estado.PREPAGO);
 		tckP.setFechaLlegada(tckM.getFechaLlegada());
-		tckP.setFechaSalida(tckM.getFechaSalida());
+		if(tckM.getEstado() != modelo.Ticket.Estado.ABIERTO && tckM.getEstado() != modelo.Ticket.Estado.PREPAGO) tckP.setFechaSalida(tckM.getFechaSalida());
 		if(!tckP.getModeloVehiculo().getDescripcion().equals(tckM.getModeloVehiculo().getDescripcion())){
 			tckP.setModeloVehiculo(DAOModeloVehiculo.getInstance().getModeloVehiculoPorId(tckM.getModeloVehiculo().getIdModelo()));
 		}
