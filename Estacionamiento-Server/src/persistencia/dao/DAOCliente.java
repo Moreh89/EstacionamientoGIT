@@ -40,17 +40,21 @@ public class DAOCliente {
 		return clientesReturn;
 	}
 	
-	public long update(modelo.Cliente clienteM)
+	public long agregarMovimientoCC(long idCliente, modelo.MovimientoCC movimientoNuevoM)
 	{
 		persistencia.clases.Cliente clienteP = new persistencia.clases.Cliente();
 		long codigoReturn = -1;
-		clienteP=(persistencia.clases.Cliente) HibernateDAO.getInstancia().getObjectWithLong("Cliente", "idCliente", clienteM.getIdCliente());
-		clienteP.getCuentaCorriente().setMovimientos(Converter.convertMovimientosCuentaCorrienteModeloToPersistencia((ArrayList<MovimientoCC>) clienteM.getCuentaCorriente().getMovimientos()));
-	//TODO se queda del MovimientoCC qwue no existe... pero estoy haciendo SaveOrUpdate...
-		clienteP = (persistencia.clases.Cliente) HibernateDAO.getInstancia().update(clienteP);
-		codigoReturn = clienteP.getIdCliente();
+		persistencia.clases.MovimientoCC movimientoNuevoP = new persistencia.clases.MovimientoCC();
+		movimientoNuevoP = Converter.convertMovimientoCuentaCorrienteModeloToPersistencia(movimientoNuevoM);
+		
+		clienteP=(persistencia.clases.Cliente) HibernateDAO.getInstancia().get(persistencia.clases.Cliente.class, idCliente);
+		
+		clienteP.getCuentaCorriente().addMovimientoCC(movimientoNuevoP);
+		
+		clienteP=(Cliente) HibernateDAO.getInstancia().update(clienteP);
+		
+		codigoReturn=clienteP.getIdCliente();		
 		return codigoReturn;
 	}
-
 
 }

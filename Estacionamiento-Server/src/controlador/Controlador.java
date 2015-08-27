@@ -515,10 +515,9 @@ public class Controlador {
 	{
 		ArrayList<modelo.Cliente> clientesConCocheraALiquidar = new ArrayList<modelo.Cliente>();
 		clientesConCocheraALiquidar=DAOCliente.getInstance().getClientes();
-
 		ArrayList<String> expensasImprimir = new ArrayList<String>();
-		expensasImprimir.add("Periodo_Liquidar Nombre Apellido Monto");
-
+		expensasImprimir.add("Cochera;Periodo a Liquidar;Nombre;Apellido;Monto");
+		long codigoReturn=-1;
 		for(modelo.Cliente clienteM : clientesConCocheraALiquidar)
 		{
 			if(clienteM.getCuentaCorriente()!=null)
@@ -540,20 +539,13 @@ public class Controlador {
 				movimientoNuevo.setTicket(null);
 				movimientoNuevo.setMontoCobrado((-1)*montoCobrar);
 
-				if(clienteM.getCuentaCorriente().getMovimientos()==null)	
-				{
-					ArrayList<modelo.MovimientoCC>movimientos=new ArrayList<modelo.MovimientoCC>();
-					clienteM.getCuentaCorriente().addMovimiento(movimientoNuevo);
-				}
-				else{
-					clienteM.getCuentaCorriente().addMovimiento(movimientoNuevo);
-				}
-				DAOCliente.getInstance().update(clienteM);
+				codigoReturn=DAOCliente.getInstance().agregarMovimientoCC(clienteM.getIdCliente(), movimientoNuevo);
 
-				expensasImprimir.add(periodoLiquidar +" "+ clienteM.getNombre()+" "+clienteM.getApellido()+" "+ montoCobrar);
+				expensasImprimir.add(periodoLiquidar +";"+ clienteM.getNombre()+";"+clienteM.getApellido()+";"+ montoCobrar);
 			}
 		}
-		return 0;
+
+		return codigoReturn;
 	}
 
 }

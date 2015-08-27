@@ -109,11 +109,11 @@ public class AltaDescuento extends JDialog implements ActionListener{
 				codigoReturn=Controlador.getInstancia().altaDescuento(descripcionTextField.getText(), Double.parseDouble(montoDescuentoTextField.getText()));
 				if(codigoReturn == -1)
 				{
-					JOptionPane.showMessageDialog(null, "Descuento Duplicado", "Existe otro Descuento con la misma descripcion", JOptionPane.INFORMATION_MESSAGE);
+					JOptionPane.showMessageDialog(null,  "Existe otro Descuento con la misma descripcion", "Descuento Duplicado",JOptionPane.INFORMATION_MESSAGE);
 				}
 				if(codigoReturn >= 0)
 				{
-					JOptionPane.showMessageDialog(null, "Alta Descuento exitosa", "Se generó correctamente el alta del descuento", JOptionPane.INFORMATION_MESSAGE);
+					JOptionPane.showMessageDialog(null, "Se generó correctamente el alta del descuento", "Alta Descuento exitosa", JOptionPane.INFORMATION_MESSAGE);
 				}
 			}
 		}

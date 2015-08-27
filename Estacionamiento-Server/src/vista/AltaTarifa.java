@@ -321,17 +321,17 @@ public class AltaTarifa extends JDialog implements ActionListener{
 						tiempoMinimo, tiempoFraccion, tiempoMediaEstadia_minuto, tiempoEstadia_minuto);
 				if(codigoReturn == -1)
 				{
-					JOptionPane.showMessageDialog(null, "Alta de Tarifa no realizada", "No se pudo realizar el alta de tarifa.", JOptionPane.INFORMATION_MESSAGE);
+					JOptionPane.showMessageDialog(null, "No se pudo realizar el alta de tarifa.", "Alta de Tarifa", JOptionPane.INFORMATION_MESSAGE);
 				}
 				if(codigoReturn >= 0)
 				{
-					JOptionPane.showMessageDialog(null, "Alta de Tarifa exitosa", "Se generó correctamente el alta de tarifa", JOptionPane.INFORMATION_MESSAGE);
+					JOptionPane.showMessageDialog(null, "Se generó correctamente el alta de tarifa.", "Alta de Tarifa", JOptionPane.INFORMATION_MESSAGE);
 				}
 				dispose();
 			}
 
 			else{
-				JOptionPane.showMessageDialog(null, "Error Validación Datos.", "Alguno/s de los campos ingresados no son válidos", JOptionPane.INFORMATION_MESSAGE);
+				JOptionPane.showMessageDialog(null, "Alguno/s de los campos ingresados no son válidos.","Error Validación Datos",  JOptionPane.INFORMATION_MESSAGE);
 			}
 		}
 

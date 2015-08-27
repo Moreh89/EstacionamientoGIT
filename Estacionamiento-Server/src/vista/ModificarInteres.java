@@ -119,11 +119,11 @@ public class ModificarInteres extends JDialog implements ActionListener{
 					codigoReturn=Controlador.getInstancia().modificarTasaInteres(Double.parseDouble(textFieldnuevoInteres.getText()));
 					if(codigoReturn == -1)
 						{
-							JOptionPane.showMessageDialog(null, "ERROR - Tasa Interes", "Se produjo un error. Vuelva a intentar en unos instantes. En caso de presentarse nuevamente el error, comunicarse con el desarrollador del sistema", JOptionPane.INFORMATION_MESSAGE);
+							JOptionPane.showMessageDialog(null, "Tasa Interes", "Se produjo un error. Vuelva a intentar en unos instantes. En caso de presentarse nuevamente el error, comunicarse con el desarrollador del sistema", JOptionPane.INFORMATION_MESSAGE);
 						}
 						if(codigoReturn >= 0)
 						{
-							JOptionPane.showMessageDialog(null, "Tasa Interes exitosa", "Se actualizó correctamente la tasa de interés", JOptionPane.INFORMATION_MESSAGE);
+							JOptionPane.showMessageDialog(null, "Tasa Interes", "Se actualizó correctamente la tasa de interés", JOptionPane.INFORMATION_MESSAGE);
 						}
 				
 				}

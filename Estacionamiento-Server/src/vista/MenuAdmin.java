@@ -331,7 +331,7 @@ public class MenuAdmin extends JFrame implements ActionListener {
 		}
 		if(event.getSource() == mntmLiquidarExpensas)
 		{
-			new AltaLiquidarExpensas().setVisible(true);
+			new LiquidarExpensas().setVisible(true);
 		}
 		
 		

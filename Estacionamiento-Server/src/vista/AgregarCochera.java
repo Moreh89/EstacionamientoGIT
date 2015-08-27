@@ -183,14 +183,26 @@ public class AgregarCochera extends JDialog implements ActionListener{
 		}
 		if(event.getSource()==buttonAgregarCochera)
 		{
-
-			if(isNumeric(textCostoMensual.getText().toString()) && isNumeric(textFieldPorcentajeExpensas.getText().toString()))
+			if(!textCostoMensual.getText().isEmpty() 
+					&& !textFieldPorcentajeExpensas.getText().isEmpty() 
+					&& !textFieldUbicacion.getText().isEmpty() 
+					&& !textFieldPorcentajeExpensas.getText().toString().isEmpty() 
+					&& isNumeric(textFieldPorcentajeExpensas.getText().toString()))
 			{
-				Controlador.getInstancia().agregarCochera(textFieldUbicacion.getText(), Double.parseDouble(textCostoMensual.getText()), Float.parseFloat(textFieldPorcentajeExpensas.getText()),comboBoxPiso.getSelectedItem().toString());	
+				double porcentajeExp=Double.parseDouble(textFieldPorcentajeExpensas.getText().toString());
+				if((porcentajeExp<=100 || porcentajeExp>0))
+				{
+					Controlador.getInstancia().agregarCochera(textFieldUbicacion.getText(), Double.parseDouble(textCostoMensual.getText()), Float.parseFloat(textFieldPorcentajeExpensas.getText()),comboBoxPiso.getSelectedItem().toString());	
+				}
+				else
+				{
+					JOptionPane.showMessageDialog(null,"Porcentaje Expensas debe ser un valor entre 0 y 100.", "Validación Datos",  JOptionPane.INFORMATION_MESSAGE);
+				}
+
 			}
 			else
 			{
-				JOptionPane.showMessageDialog(null, "Error Validación Datos.", "Alguno/s de los campos ingresados no son válidos", JOptionPane.INFORMATION_MESSAGE);
+				JOptionPane.showMessageDialog(null,"Alguno/s de los campos ingresados no son válidos.", "Validación Datos",  JOptionPane.INFORMATION_MESSAGE);
 			}
 		}
 

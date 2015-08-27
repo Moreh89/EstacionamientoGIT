@@ -2,6 +2,7 @@ package persistencia.clases;
 
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -17,7 +18,7 @@ public class CuentaCorriente {
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	private long idCuentaCorriente;
-	@OneToMany
+	@OneToMany(cascade=CascadeType.ALL)
 	@JoinColumn(name="CuentaCorriente")
 	private List<MovimientoCC> movimientos;
 	
@@ -44,6 +45,10 @@ public class CuentaCorriente {
 		// TODO Auto-generated constructor stub
 	}
 	
+	public void addMovimientoCC(persistencia.clases.MovimientoCC movimientoCC)
+	{
+		this.movimientos.add(movimientoCC);
+	}
 	
 	
 	

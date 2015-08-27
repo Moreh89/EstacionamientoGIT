@@ -505,7 +505,7 @@ public class AltaCliente extends JDialog implements ActionListener{
 		{
 			if(textFieldCUIT.getText().length()!=11)
 			{
-				JOptionPane.showMessageDialog(null, "Error Validación Datos.", "El CUIT debe estár compuesto por 11 campos numéricos.", JOptionPane.INFORMATION_MESSAGE);
+				JOptionPane.showMessageDialog(null, "El CUIT debe estár compuesto por 11 campos numéricos.", "Error Validación Datos.", JOptionPane.INFORMATION_MESSAGE);
 			}
 			else{
 				Controlador.getInstancia().altaCliente(textFieldNombre.getText(), textFieldApellido.getText(), textFieldTelefono1.getText(), textFieldTelefono2.getText(),

@@ -372,8 +372,10 @@ public class Converter {
 		movimientoCCM.setFecha(movimientoCCP.getFecha());
 		movimientoCCM.setIdMovimiento(movimientoCCP.getIdMovimiento());
 		movimientoCCM.setMontoCobrado(movimientoCCP.getMontoCobrado());
-		movimientoCCM.setTicket(convertTicketPersistenciaToModelo (movimientoCCP.getTicket()));
-
+		if(movimientoCCP.getTicket()!=null)
+		{
+			movimientoCCM.setTicket(convertTicketPersistenciaToModelo (movimientoCCP.getTicket()));
+		}
 		return movimientoCCM;
 	}
 
