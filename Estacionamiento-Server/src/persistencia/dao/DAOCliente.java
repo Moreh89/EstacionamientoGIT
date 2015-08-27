@@ -1,11 +1,8 @@
 package persistencia.dao;
 import java.util.ArrayList;
-
-import modelo.MovimientoCC;
 import persistencia.Converter;
 import persistencia.HibernateDAO;
 import persistencia.clases.Cliente;
-import persistencia.clases.TasaInteres;
 
 public class DAOCliente {
 

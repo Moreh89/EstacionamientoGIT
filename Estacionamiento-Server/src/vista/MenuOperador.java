@@ -649,7 +649,11 @@ public class MenuOperador extends JFrame implements ActionListener, KeyListener 
 		
 		if (event.getSource() == btnButtonBuscarCliente) {
 			new BuscadorCliente().setVisible(true);
-			//TODO
+			if(Controlador.getInstancia().getClienteActual() != null){
+			this.textFieldCliente.setText(Controlador.getInstancia().getClienteActual().toString());
+			}else{
+				this.textFieldCliente.setText("");
+			}
 		}
 		if (event.getSource() == btnBuscarPorTicketAbierto) {
 			//TODO

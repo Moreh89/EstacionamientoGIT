@@ -33,4 +33,4 @@ INSERT into Tarifa (costoMinimo,costoFraccion,costoHora,costoMediaEstadia, costo
 
 INSERT INTO Cliente (apellido, correoElectronico,cuil,descripcion,direccion,estado,nombre,numeroDocumento,telefono1,tipoCliente,tipoDocumento) VALUES ('Lopez', 'lopez@me.com','2213','Description','Alba 123',1,'Luis','334567','123465',1,1);
 
-INSERT INTO Cochera	(costoCochera, estado, porcentajeExpensas, ubicacion, Cliente) values (200, 0, 3, '4J', 7)
+INSERT INTO Cochera	(costoCochera, estado, porcentajeExpensas, ubicacion, Cliente) values (200, 0, 3, '4J', 1)

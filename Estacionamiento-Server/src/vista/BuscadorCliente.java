@@ -4,9 +4,10 @@ import java.awt.EventQueue;
 import java.util.ArrayList;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+import javax.swing.event.ListSelectionEvent;
+import javax.swing.event.ListSelectionListener;
 import javax.swing.table.DefaultTableModel;
-import javax.swing.table.TableModel;
-import javax.swing.table.TableRowSorter;
+import javax.swing.DefaultListModel;
 import javax.swing.ImageIcon;
 import javax.swing.JDialog;
 import javax.swing.JLabel;
@@ -16,21 +17,24 @@ import javax.swing.JButton;
 import javax.swing.JSeparator;
 import javax.swing.JComboBox;
 import javax.swing.DefaultComboBoxModel;
-import javax.swing.RowFilter;
+import javax.swing.ListSelectionModel;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 import java.awt.GridBagLayout;
 import java.awt.GridBagConstraints;
 import java.awt.Insets;
 import javax.swing.JScrollPane;
 import javax.swing.ScrollPaneConstants;
 import javax.swing.JList;
+import modelo.Cliente;
 import controlador.Controlador;
 
 
 
 @SuppressWarnings("rawtypes")
-public class BuscadorCliente extends JDialog {
+public class BuscadorCliente extends JDialog implements ActionListener, KeyListener, ListSelectionListener {
 
 
 	private static final long serialVersionUID = 1L;
@@ -38,10 +42,8 @@ public class BuscadorCliente extends JDialog {
 	private JTextField buscarTextField;
 	private DefaultTableModel model;
 	private JComboBox tipoComboBox;
-
+	@SuppressWarnings("unused")
 	private CobroExtraordinario cobroExtraordinario;
-
-	private TableRowSorter<TableModel> sorter;
 	private JTextField textFieldNombre;
 	private JTextField textFieldApellido;
 	private JTextField textFieldTelefono1;
@@ -68,6 +70,22 @@ public class BuscadorCliente extends JDialog {
 	private JTextField textFieldCUIT;
 
 	private modelo.Cliente cliente = null;
+	private JButton buscarButton;
+	private JPanel panelClientes;
+	private JScrollPane scrollPaneClientes;
+	private JList listClientes;
+	private DefaultListModel<Cliente> listModel;
+	private JButton buttonCancelar;
+	private JButton buttonAceptar;
+	private JLabel labelEstadoCuentaCorriente;
+	private JLabel labelRazonSocial;
+	private JLabel labelDireccion2;
+	private JLabel labelDireccion1;
+	private JLabel labelTelefono2;
+	private JLabel labelTelefono1;
+	private JLabel labelApellido;
+	private JLabel labelNombre;
+	private JPanel panelAtributos;
 	
 	/**
 	 * Launch the application.
@@ -107,7 +125,7 @@ public class BuscadorCliente extends JDialog {
 		setTitle("Buscar Clientes");
 		setResizable(false);
 		//setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 531, 772);
+		setBounds(100, 100, 531, 787);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
@@ -139,16 +157,8 @@ public class BuscadorCliente extends JDialog {
 		model.addColumn("Numero");
 
 
-		JButton buscarButton = new JButton("Buscar");
-		buscarButton.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				//				filtrar();
-				if(!buscarTextField.getText().isEmpty())
-				{
-					buscar(buscarTextField.getText(), tipoComboBox.getSelectedItem().toString());
-				}
-			}
-		});
+		buscarButton = new JButton("Buscar");
+		buscarButton.addActionListener(this);
 		buscarButton.setBounds(404, 7, 116, 32);
 		contentPane.add(buscarButton);
 		buscarButton.setIcon(new ImageIcon(BuscadorCliente.class.getResource("/image/search.png")));
@@ -162,23 +172,23 @@ public class BuscadorCliente extends JDialog {
 		tipoComboBox.setBounds(280, 14, 114, 25);
 		contentPane.add(tipoComboBox);
 
-		JPanel panel = new JPanel();
-		panel.setBounds(10, 140, 503, 512);
-		contentPane.add(panel);
-		GridBagLayout gbl_panel = new GridBagLayout();
-		gbl_panel.columnWidths = new int[]{0, 0, 0};
-		gbl_panel.rowHeights = new int[]{0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 60, 60, 61, 0};
-		gbl_panel.columnWeights = new double[]{0.0, 1.0, Double.MIN_VALUE};
-		gbl_panel.rowWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
-		panel.setLayout(gbl_panel);
+		panelAtributos = new JPanel();
+		panelAtributos.setBounds(10, 140, 503, 554);
+		contentPane.add(panelAtributos);
+		GridBagLayout gbl_panelAtributos = new GridBagLayout();
+		gbl_panelAtributos.columnWidths = new int[]{0, 0, 0};
+		gbl_panelAtributos.rowHeights = new int[]{0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 60, 60, 61, 0};
+		gbl_panelAtributos.columnWeights = new double[]{0.0, 1.0, Double.MIN_VALUE};
+		gbl_panelAtributos.rowWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
+		panelAtributos.setLayout(gbl_panelAtributos);
 
-		JLabel labelNombre = new JLabel("Nombre:");
+		labelNombre = new JLabel("Nombre:");
 		GridBagConstraints gbc_labelNombre = new GridBagConstraints();
 		gbc_labelNombre.insets = new Insets(0, 0, 5, 5);
 		gbc_labelNombre.anchor = GridBagConstraints.EAST;
 		gbc_labelNombre.gridx = 0;
 		gbc_labelNombre.gridy = 0;
-		panel.add(labelNombre, gbc_labelNombre);
+		panelAtributos.add(labelNombre, gbc_labelNombre);
 
 		textFieldNombre = new JTextField();
 		textFieldNombre.setEditable(false);
@@ -188,16 +198,16 @@ public class BuscadorCliente extends JDialog {
 		gbc_textFieldNombre.fill = GridBagConstraints.HORIZONTAL;
 		gbc_textFieldNombre.gridx = 1;
 		gbc_textFieldNombre.gridy = 0;
-		panel.add(textFieldNombre, gbc_textFieldNombre);
+		panelAtributos.add(textFieldNombre, gbc_textFieldNombre);
 		textFieldNombre.setColumns(10);
 
-		JLabel labelApellido = new JLabel("Apellido:");
+		labelApellido = new JLabel("Apellido:");
 		GridBagConstraints gbc_labelApellido = new GridBagConstraints();
 		gbc_labelApellido.anchor = GridBagConstraints.EAST;
 		gbc_labelApellido.insets = new Insets(0, 0, 5, 5);
 		gbc_labelApellido.gridx = 0;
 		gbc_labelApellido.gridy = 1;
-		panel.add(labelApellido, gbc_labelApellido);
+		panelAtributos.add(labelApellido, gbc_labelApellido);
 
 		textFieldApellido = new JTextField();
 		textFieldApellido.setEnabled(false);
@@ -208,7 +218,7 @@ public class BuscadorCliente extends JDialog {
 		gbc_textFieldApellido.fill = GridBagConstraints.HORIZONTAL;
 		gbc_textFieldApellido.gridx = 1;
 		gbc_textFieldApellido.gridy = 1;
-		panel.add(textFieldApellido, gbc_textFieldApellido);
+		panelAtributos.add(textFieldApellido, gbc_textFieldApellido);
 
 		lblDnilu = new JLabel("DNI/LU:");
 		GridBagConstraints gbc_lblDnilu = new GridBagConstraints();
@@ -217,7 +227,7 @@ public class BuscadorCliente extends JDialog {
 		gbc_lblDnilu.insets = new Insets(0, 0, 5, 5);
 		gbc_lblDnilu.gridx = 0;
 		gbc_lblDnilu.gridy = 2;
-		panel.add(lblDnilu, gbc_lblDnilu);
+		panelAtributos.add(lblDnilu, gbc_lblDnilu);
 
 		textFieldDNILU = new JTextField();
 		textFieldDNILU.setEnabled(false);
@@ -228,7 +238,7 @@ public class BuscadorCliente extends JDialog {
 		gbc_textFieldDNILU.fill = GridBagConstraints.HORIZONTAL;
 		gbc_textFieldDNILU.gridx = 1;
 		gbc_textFieldDNILU.gridy = 2;
-		panel.add(textFieldDNILU, gbc_textFieldDNILU);
+		panelAtributos.add(textFieldDNILU, gbc_textFieldDNILU);
 
 		lblCuit = new JLabel("CUIT:");
 		GridBagConstraints gbc_lblCuit = new GridBagConstraints();
@@ -236,7 +246,7 @@ public class BuscadorCliente extends JDialog {
 		gbc_lblCuit.insets = new Insets(0, 0, 5, 5);
 		gbc_lblCuit.gridx = 0;
 		gbc_lblCuit.gridy = 3;
-		panel.add(lblCuit, gbc_lblCuit);
+		panelAtributos.add(lblCuit, gbc_lblCuit);
 
 		textFieldCUIT = new JTextField();
 		textFieldCUIT.setEnabled(false);
@@ -247,15 +257,15 @@ public class BuscadorCliente extends JDialog {
 		gbc_textFieldCUIT.fill = GridBagConstraints.HORIZONTAL;
 		gbc_textFieldCUIT.gridx = 1;
 		gbc_textFieldCUIT.gridy = 3;
-		panel.add(textFieldCUIT, gbc_textFieldCUIT);
+		panelAtributos.add(textFieldCUIT, gbc_textFieldCUIT);
 
-		JLabel labelTelefono1 = new JLabel("Telefono 1:");
+		labelTelefono1 = new JLabel("Telefono 1:");
 		GridBagConstraints gbc_labelTelefono1 = new GridBagConstraints();
 		gbc_labelTelefono1.anchor = GridBagConstraints.EAST;
 		gbc_labelTelefono1.insets = new Insets(0, 0, 5, 5);
 		gbc_labelTelefono1.gridx = 0;
 		gbc_labelTelefono1.gridy = 4;
-		panel.add(labelTelefono1, gbc_labelTelefono1);
+		panelAtributos.add(labelTelefono1, gbc_labelTelefono1);
 
 		textFieldTelefono1 = new JTextField();
 		textFieldTelefono1.setEnabled(false);
@@ -266,15 +276,15 @@ public class BuscadorCliente extends JDialog {
 		gbc_textFieldTelefono1.fill = GridBagConstraints.HORIZONTAL;
 		gbc_textFieldTelefono1.gridx = 1;
 		gbc_textFieldTelefono1.gridy = 4;
-		panel.add(textFieldTelefono1, gbc_textFieldTelefono1);
+		panelAtributos.add(textFieldTelefono1, gbc_textFieldTelefono1);
 
-		JLabel labelTelefono2 = new JLabel("Telefono 2:");
+		labelTelefono2 = new JLabel("Telefono 2:");
 		GridBagConstraints gbc_labelTelefono2 = new GridBagConstraints();
 		gbc_labelTelefono2.anchor = GridBagConstraints.EAST;
 		gbc_labelTelefono2.insets = new Insets(0, 0, 5, 5);
 		gbc_labelTelefono2.gridx = 0;
 		gbc_labelTelefono2.gridy = 5;
-		panel.add(labelTelefono2, gbc_labelTelefono2);
+		panelAtributos.add(labelTelefono2, gbc_labelTelefono2);
 
 		textFieldTelefono2 = new JTextField();
 		textFieldTelefono2.setEnabled(false);
@@ -285,15 +295,15 @@ public class BuscadorCliente extends JDialog {
 		gbc_textFieldTelefono2.fill = GridBagConstraints.HORIZONTAL;
 		gbc_textFieldTelefono2.gridx = 1;
 		gbc_textFieldTelefono2.gridy = 5;
-		panel.add(textFieldTelefono2, gbc_textFieldTelefono2);
+		panelAtributos.add(textFieldTelefono2, gbc_textFieldTelefono2);
 
-		JLabel labelDireccion1 = new JLabel("Direccion 1:");
+		labelDireccion1 = new JLabel("Direccion 1:");
 		GridBagConstraints gbc_labelDireccion1 = new GridBagConstraints();
 		gbc_labelDireccion1.anchor = GridBagConstraints.EAST;
 		gbc_labelDireccion1.insets = new Insets(0, 0, 5, 5);
 		gbc_labelDireccion1.gridx = 0;
 		gbc_labelDireccion1.gridy = 6;
-		panel.add(labelDireccion1, gbc_labelDireccion1);
+		panelAtributos.add(labelDireccion1, gbc_labelDireccion1);
 
 		textFieldDireccion1 = new JTextField();
 		textFieldDireccion1.setEnabled(false);
@@ -304,15 +314,15 @@ public class BuscadorCliente extends JDialog {
 		gbc_textFieldDireccion1.fill = GridBagConstraints.HORIZONTAL;
 		gbc_textFieldDireccion1.gridx = 1;
 		gbc_textFieldDireccion1.gridy = 6;
-		panel.add(textFieldDireccion1, gbc_textFieldDireccion1);
+		panelAtributos.add(textFieldDireccion1, gbc_textFieldDireccion1);
 
-		JLabel labelDireccion2 = new JLabel("Direccion 2:");
+		labelDireccion2 = new JLabel("Direccion 2:");
 		GridBagConstraints gbc_labelDireccion2 = new GridBagConstraints();
 		gbc_labelDireccion2.anchor = GridBagConstraints.EAST;
 		gbc_labelDireccion2.insets = new Insets(0, 0, 5, 5);
 		gbc_labelDireccion2.gridx = 0;
 		gbc_labelDireccion2.gridy = 7;
-		panel.add(labelDireccion2, gbc_labelDireccion2);
+		panelAtributos.add(labelDireccion2, gbc_labelDireccion2);
 
 		textFieldDireccion2 = new JTextField();
 		textFieldDireccion2.setEnabled(false);
@@ -323,7 +333,7 @@ public class BuscadorCliente extends JDialog {
 		gbc_textFieldDireccion2.fill = GridBagConstraints.HORIZONTAL;
 		gbc_textFieldDireccion2.gridx = 1;
 		gbc_textFieldDireccion2.gridy = 7;
-		panel.add(textFieldDireccion2, gbc_textFieldDireccion2);
+		panelAtributos.add(textFieldDireccion2, gbc_textFieldDireccion2);
 
 		labelEmail = new JLabel("Email:");
 		GridBagConstraints gbc_labelEmail = new GridBagConstraints();
@@ -331,7 +341,7 @@ public class BuscadorCliente extends JDialog {
 		gbc_labelEmail.insets = new Insets(0, 0, 5, 5);
 		gbc_labelEmail.gridx = 0;
 		gbc_labelEmail.gridy = 8;
-		panel.add(labelEmail, gbc_labelEmail);
+		panelAtributos.add(labelEmail, gbc_labelEmail);
 
 		textFieldEmail = new JTextField();
 		textFieldEmail.setEnabled(false);
@@ -342,15 +352,15 @@ public class BuscadorCliente extends JDialog {
 		gbc_textFieldEmail.fill = GridBagConstraints.HORIZONTAL;
 		gbc_textFieldEmail.gridx = 1;
 		gbc_textFieldEmail.gridy = 8;
-		panel.add(textFieldEmail, gbc_textFieldEmail);
+		panelAtributos.add(textFieldEmail, gbc_textFieldEmail);
 
-		JLabel labelRazonSocial = new JLabel("Razon Social:");
+		labelRazonSocial = new JLabel("Razon Social:");
 		GridBagConstraints gbc_labelRazonSocial = new GridBagConstraints();
 		gbc_labelRazonSocial.anchor = GridBagConstraints.EAST;
 		gbc_labelRazonSocial.insets = new Insets(0, 0, 5, 5);
 		gbc_labelRazonSocial.gridx = 0;
 		gbc_labelRazonSocial.gridy = 9;
-		panel.add(labelRazonSocial, gbc_labelRazonSocial);
+		panelAtributos.add(labelRazonSocial, gbc_labelRazonSocial);
 
 		textFieldRazonSocial = new JTextField();
 		textFieldRazonSocial.setEnabled(false);
@@ -361,15 +371,15 @@ public class BuscadorCliente extends JDialog {
 		gbc_textFieldRazonSocial.fill = GridBagConstraints.HORIZONTAL;
 		gbc_textFieldRazonSocial.gridx = 1;
 		gbc_textFieldRazonSocial.gridy = 9;
-		panel.add(textFieldRazonSocial, gbc_textFieldRazonSocial);
+		panelAtributos.add(textFieldRazonSocial, gbc_textFieldRazonSocial);
 
-		JLabel labelEstadoCuentaCorriente = new JLabel("Estado Cuenta:");
+		labelEstadoCuentaCorriente = new JLabel("Estado Cuenta:");
 		GridBagConstraints gbc_labelEstadoCuentaCorriente = new GridBagConstraints();
 		gbc_labelEstadoCuentaCorriente.anchor = GridBagConstraints.EAST;
 		gbc_labelEstadoCuentaCorriente.insets = new Insets(0, 0, 5, 5);
 		gbc_labelEstadoCuentaCorriente.gridx = 0;
 		gbc_labelEstadoCuentaCorriente.gridy = 10;
-		panel.add(labelEstadoCuentaCorriente, gbc_labelEstadoCuentaCorriente);
+		panelAtributos.add(labelEstadoCuentaCorriente, gbc_labelEstadoCuentaCorriente);
 
 		textFieldEstadoCuentaCorriente = new JTextField();
 		textFieldEstadoCuentaCorriente.setEnabled(false);
@@ -380,7 +390,7 @@ public class BuscadorCliente extends JDialog {
 		gbc_textFieldEstadoCuentaCorriente.fill = GridBagConstraints.HORIZONTAL;
 		gbc_textFieldEstadoCuentaCorriente.gridx = 1;
 		gbc_textFieldEstadoCuentaCorriente.gridy = 10;
-		panel.add(textFieldEstadoCuentaCorriente, gbc_textFieldEstadoCuentaCorriente);
+		panelAtributos.add(textFieldEstadoCuentaCorriente, gbc_textFieldEstadoCuentaCorriente);
 
 		labelEstadoCliente = new JLabel("Estado Cliente:");
 		GridBagConstraints gbc_labelEstadoCliente = new GridBagConstraints();
@@ -388,7 +398,7 @@ public class BuscadorCliente extends JDialog {
 		gbc_labelEstadoCliente.anchor = GridBagConstraints.EAST;
 		gbc_labelEstadoCliente.gridx = 0;
 		gbc_labelEstadoCliente.gridy = 11;
-		panel.add(labelEstadoCliente, gbc_labelEstadoCliente);
+		panelAtributos.add(labelEstadoCliente, gbc_labelEstadoCliente);
 
 		textFieldEstadoCliente = new JTextField();
 		textFieldEstadoCliente.setEnabled(false);
@@ -399,7 +409,7 @@ public class BuscadorCliente extends JDialog {
 		gbc_textFieldEstadoCliente.fill = GridBagConstraints.HORIZONTAL;
 		gbc_textFieldEstadoCliente.gridx = 1;
 		gbc_textFieldEstadoCliente.gridy = 11;
-		panel.add(textFieldEstadoCliente, gbc_textFieldEstadoCliente);
+		panelAtributos.add(textFieldEstadoCliente, gbc_textFieldEstadoCliente);
 
 		labelPersonasAutorizadas = new JLabel("Personas Autorizadas:");
 		GridBagConstraints gbc_labelPersonasAutorizadas = new GridBagConstraints();
@@ -407,7 +417,7 @@ public class BuscadorCliente extends JDialog {
 		gbc_labelPersonasAutorizadas.insets = new Insets(0, 0, 5, 5);
 		gbc_labelPersonasAutorizadas.gridx = 0;
 		gbc_labelPersonasAutorizadas.gridy = 12;
-		panel.add(labelPersonasAutorizadas, gbc_labelPersonasAutorizadas);
+		panelAtributos.add(labelPersonasAutorizadas, gbc_labelPersonasAutorizadas);
 
 		scrollPane = new JScrollPane();
 		scrollPane.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
@@ -416,7 +426,7 @@ public class BuscadorCliente extends JDialog {
 		gbc_scrollPane.fill = GridBagConstraints.BOTH;
 		gbc_scrollPane.gridx = 1;
 		gbc_scrollPane.gridy = 12;
-		panel.add(scrollPane, gbc_scrollPane);
+		panelAtributos.add(scrollPane, gbc_scrollPane);
 
 		JTextArea textAreaPersonasAutorizadas = new JTextArea();
 		scrollPane.setViewportView(textAreaPersonasAutorizadas);
@@ -428,7 +438,7 @@ public class BuscadorCliente extends JDialog {
 		gbc_lblVehiculos.insets = new Insets(0, 0, 5, 5);
 		gbc_lblVehiculos.gridx = 0;
 		gbc_lblVehiculos.gridy = 13;
-		panel.add(lblVehiculos, gbc_lblVehiculos);
+		panelAtributos.add(lblVehiculos, gbc_lblVehiculos);
 
 		scrollPane_1 = new JScrollPane();
 		scrollPane_1.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
@@ -437,7 +447,7 @@ public class BuscadorCliente extends JDialog {
 		gbc_scrollPane_1.fill = GridBagConstraints.BOTH;
 		gbc_scrollPane_1.gridx = 1;
 		gbc_scrollPane_1.gridy = 13;
-		panel.add(scrollPane_1, gbc_scrollPane_1);
+		panelAtributos.add(scrollPane_1, gbc_scrollPane_1);
 
 		textAreaVehiculos = new JTextArea();
 		textAreaVehiculos.setEnabled(false);
@@ -449,7 +459,7 @@ public class BuscadorCliente extends JDialog {
 		gbc_lblCocheras.insets = new Insets(0, 0, 0, 5);
 		gbc_lblCocheras.gridx = 0;
 		gbc_lblCocheras.gridy = 14;
-		panel.add(lblCocheras, gbc_lblCocheras);
+		panelAtributos.add(lblCocheras, gbc_lblCocheras);
 
 		scrollPane_2 = new JScrollPane();
 		scrollPane_2.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
@@ -457,79 +467,149 @@ public class BuscadorCliente extends JDialog {
 		gbc_scrollPane_2.fill = GridBagConstraints.BOTH;
 		gbc_scrollPane_2.gridx = 1;
 		gbc_scrollPane_2.gridy = 14;
-		panel.add(scrollPane_2, gbc_scrollPane_2);
+		panelAtributos.add(scrollPane_2, gbc_scrollPane_2);
 
 		textAreaCocheras = new JTextArea();
 		textAreaCocheras.setEnabled(false);
 		textAreaCocheras.setEditable(false);
 		scrollPane_2.setViewportView(textAreaCocheras);
 
-		JButton buttonCancelar = new JButton("Cancelar");
+		buttonCancelar = new JButton("Cancelar");
 		buttonCancelar.setIcon(new ImageIcon(BuscadorCliente.class.getResource("/image/cancel.png")));
-		buttonCancelar.setBounds(84, 665, 116, 61);
+		buttonCancelar.setBounds(84, 692, 116, 42);
 		contentPane.add(buttonCancelar);
+		buttonCancelar.addActionListener(this);
 
-		JButton buttonAceptar = new JButton("Aceptar");
+		buttonAceptar = new JButton("Aceptar");
 		buttonAceptar.setIcon(new ImageIcon(BuscadorCliente.class.getResource("/image/ok.png")));
-		buttonAceptar.setBounds(340, 665, 116, 61);
+		buttonAceptar.setBounds(340, 692, 116, 42);
 		contentPane.add(buttonAceptar);
+		buttonAceptar.addActionListener(this);
+		
+		panelClientes = new JPanel();
+		panelClientes.setBounds(10, 46, 503, 88);
+		contentPane.add(panelClientes);
+		GridBagLayout gbl_panelClientes = new GridBagLayout();
+		gbl_panelClientes.columnWidths = new int[]{240, 0};
+		gbl_panelClientes.rowHeights = new int[]{2, 0};
+		gbl_panelClientes.columnWeights = new double[]{1.0, Double.MIN_VALUE};
+		gbl_panelClientes.rowWeights = new double[]{1.0, Double.MIN_VALUE};
+		panelClientes.setLayout(gbl_panelClientes);
 
-		JPanel panel_1 = new JPanel();
-		panel_1.setBounds(10, 46, 503, 88);
-		contentPane.add(panel_1);
-		GridBagLayout gbl_panel_1 = new GridBagLayout();
-		gbl_panel_1.columnWidths = new int[]{240, 0};
-		gbl_panel_1.rowHeights = new int[]{2, 0};
-		gbl_panel_1.columnWeights = new double[]{1.0, Double.MIN_VALUE};
-		gbl_panel_1.rowWeights = new double[]{1.0, Double.MIN_VALUE};
-		panel_1.setLayout(gbl_panel_1);
+		scrollPaneClientes = new JScrollPane();
+		scrollPaneClientes.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
+		GridBagConstraints gbc_scrollPaneClientes = new GridBagConstraints();
+		gbc_scrollPaneClientes.fill = GridBagConstraints.BOTH;
+		gbc_scrollPaneClientes.gridx = 0;
+		gbc_scrollPaneClientes.gridy = 0;
+		panelClientes.add(scrollPaneClientes, gbc_scrollPaneClientes);
 
-		JScrollPane scrollPane_3 = new JScrollPane();
-		scrollPane_3.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
-		GridBagConstraints gbc_scrollPane_3 = new GridBagConstraints();
-		gbc_scrollPane_3.fill = GridBagConstraints.BOTH;
-		gbc_scrollPane_3.gridx = 0;
-		gbc_scrollPane_3.gridy = 0;
-		panel_1.add(scrollPane_3, gbc_scrollPane_3);
-
-		JList list = new JList();
-		scrollPane_3.setViewportView(list);
+		listModel = new DefaultListModel<Cliente>();
+		for (Cliente clienteTemp : Controlador.getInstancia().getClientes()) {
+			listModel.addElement(clienteTemp);
+		} 
+		listClientes = new JList(listModel);
+		listClientes.setSelectionMode(ListSelectionModel.SINGLE_INTERVAL_SELECTION);
+		scrollPaneClientes.setViewportView(listClientes);
+		listClientes.addListSelectionListener(this);
 
 		this.setLocationRelativeTo(null);
-		//setAlwaysOnTop(true);
 		setModal(true);
 	}
 
-	@SuppressWarnings("unused")
-	private void buscar(String campoIdentificador, String tipoIdentificado) 
-	{
-		modelo.Cliente clienteM = new modelo.Cliente();
-		clienteM=Controlador.getInstancia().getCliente(campoIdentificador, tipoIdentificado);
+
+	
+	@Override
+	public void actionPerformed(ActionEvent e) {
+		
+		if(e.getSource() == this.buscarButton){
+			listModel.clear();
+			for (Cliente clienteTemp : Controlador.getInstancia().getClientes()) {
+				listModel.addElement(clienteTemp);
+			} 
+			if(!buscarTextField.getText().isEmpty())
+			{
+				ArrayList<Cliente> listaABorrar = new ArrayList<Cliente>();
+				if(tipoComboBox.getSelectedItem().toString().equals("DNI/LU")){
+					for (int i = 0; i < listModel.getSize(); i++) {
+						Cliente clienteTemp = listModel.getElementAt(i);
+						if(!clienteTemp.getNumeroDocumento().contains(this.buscarTextField.getText())){
+							listaABorrar.add(clienteTemp);
+						}
+					}
+				}
+				if(tipoComboBox.getSelectedItem().toString().equals("CUIT")){
+					for (int i = 0; i < listModel.getSize(); i++) {
+						Cliente clienteTemp = listModel.getElementAt(i);
+						if(!clienteTemp.getCuil().contains(this.buscarTextField.getText())){
+							listaABorrar.add(clienteTemp);
+						}
+					}
+				}
+				if(tipoComboBox.getSelectedItem().toString().equals("NOMBRE")){
+					for (int i = 0; i < listModel.getSize(); i++) {
+						Cliente clienteTemp = listModel.getElementAt(i);
+						if(!clienteTemp.getNombre().toLowerCase().contains(this.buscarTextField.getText().toLowerCase())){
+							listaABorrar.add(clienteTemp);
+						}
+					}
+				}
+				if(tipoComboBox.getSelectedItem().toString().equals("APELLIDO")){
+					for (int i = 0; i < listModel.getSize(); i++) {
+						Cliente clienteTemp = listModel.getElementAt(i);
+						if(!clienteTemp.getApellido().toLowerCase().contains(this.buscarTextField.getText().toLowerCase())){
+							listaABorrar.add(clienteTemp);
+							
+						}
+					}
+				}
+				for (Cliente clienteABorrar : listaABorrar) {
+					listModel.removeElement(clienteABorrar);
+				}
+			}
+		}
+		if(e.getSource() == this.buttonAceptar){
+			Controlador.getInstancia().setClienteActual((Cliente) listClientes.getSelectedValue());
+			dispose();
+		}
+		if(e.getSource() == this.buttonCancelar){
+			Controlador.getInstancia().setClienteActual(null);
+			dispose();
+		}
 	}
 
-	//TODO CHECKEAR ESTO, NO SE POR QUE ESTA.
-	@SuppressWarnings("unused")
-	private void filtrar() {
-		ArrayList<RowFilter<Object, Object>> rfs = new ArrayList<RowFilter<Object,Object>>();
-		RowFilter<TableModel, Object> rf = null;
-		int indiceColumnaTabla = 2;
-		switch (tipoComboBox.getSelectedIndex()) {
-		case 0: indiceColumnaTabla = 3;break;//DNI
-		case 1: indiceColumnaTabla = 4;break;//Apellido
-		case 2: indiceColumnaTabla = 2;break;//Nombre
-		}
-		try {
-			String text = buscarTextField.getText();
-			String[] textArray = text.split(" ");
+	@Override
+	public void keyPressed(KeyEvent arg0) {
+		// TODO Auto-generated method stub
+		
+	}
 
-			for (int i = 0; i < textArray.length; i++) {
-				rfs.add(RowFilter.regexFilter("(?i)" + textArray[i], 0, 1, 2, 4));
-			}	
+	@Override
+	public void keyReleased(KeyEvent arg0) {
+		
+	}
 
-			rf = RowFilter.andFilter(rfs);	
-		} catch (java.util.regex.PatternSyntaxException e) {
+	@Override
+	public void keyTyped(KeyEvent arg0) {
+		
+	}
+
+	@Override
+	public void valueChanged(ListSelectionEvent e) {
+		if(e.getSource() == this.listClientes){
+			Cliente clienteSeleccionado = (Cliente) this.listClientes.getSelectedValue();
+			this.textFieldApellido.setText(clienteSeleccionado.getApellido());
+			this.textFieldCUIT.setText(clienteSeleccionado.getCuil());
+			this.textFieldDireccion1.setText(clienteSeleccionado.getDescripcion());
+			this.textFieldDireccion2.setText(clienteSeleccionado.getDireccion2());
+			this.textFieldDNILU.setText(clienteSeleccionado.getNumeroDocumento());
+			this.textFieldEmail.setText(clienteSeleccionado.getCorreoElectronico());
+			this.textFieldNombre.setText(clienteSeleccionado.getNombre());
+			this.textFieldRazonSocial.setText(clienteSeleccionado.getRazonSocial());
+			this.textFieldTelefono1.setText(clienteSeleccionado.getTelefono1());
+			this.textFieldTelefono2.setText(clienteSeleccionado.getTelefono2());
 		}
-		sorter.setRowFilter(rf);
+		
 	}
 }
 

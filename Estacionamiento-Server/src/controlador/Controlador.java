@@ -33,10 +33,13 @@ public class Controlador {
 	private ArrayList<CategoriaVehiculo> categoriasVehiculos;
 	private ArrayList<Descuento> descuentos;
 	private modelo.TasaInteres tasaInteres;
+	private ArrayList<Cliente> clientes;
+	
 	//fin carga inicial
 	public ArrayList<Cochera> cocherasActuales;
 	public ArrayList<Vehiculo> vehiculosActuales;
 	public ArrayList<PersonaAutorizada> personasAutorizadasActuales;
+	
 
 
 	private static Controlador instancia;
@@ -101,6 +104,7 @@ public class Controlador {
 		descuentos=DAODescuento.getInstance().getDescuentos();
 		tasaInteres=DAOTasaInteres.getInstance().getTasaInteresActual();
 		tarifas=DAOTarifa.getInstance().getTarifas();
+		clientes=DAOCliente.getInstance().getClientes();
 		return true;
 
 	}
@@ -424,10 +428,35 @@ public class Controlador {
 		return codigoReturn;
 	}
 
-	public modelo.Cliente getCliente(String campoIdentificador, String tipoIdentificado)
+	public ArrayList<modelo.Cliente> getCliente(String campoIdentificador, String tipoIdentificado)
 
 	{
-		return null;
+		ArrayList<Cliente> listaClietnes = new ArrayList<Cliente>();
+		for (Cliente clienteTemp : clientes) {
+			if (tipoIdentificado.equals("DNI/LU")){
+				if (clienteTemp.getNumeroDocumento().contains(campoIdentificador)) {
+					listaClietnes.add(clienteTemp);
+				}
+			}
+			if (tipoIdentificado.equals("CUIT")){
+				if (clienteTemp.getCuil().contains(campoIdentificador)) {
+					listaClietnes.add(clienteTemp);
+				}
+				
+			}
+			if (tipoIdentificado.equals("NOMBRE")){
+				if (clienteTemp.getNombre().toLowerCase().contains(campoIdentificador.toLowerCase())) {
+					listaClietnes.add(clienteTemp);
+				}
+			}
+			if (tipoIdentificado.equals("APELLIDO")){
+				if (clienteTemp.getApellido().toLowerCase().contains(campoIdentificador.toLowerCase())) {
+					listaClietnes.add(clienteTemp);
+				}
+			}
+			
+		}
+		return listaClietnes;
 	}
 
 	public Ticket buscarTicket(String numeroTicket) {
@@ -546,6 +575,20 @@ public class Controlador {
 		}
 
 		return codigoReturn;
+	}
+
+	public ArrayList<Cliente> getClientes() {
+		return this.clientes;
+	}
+
+	public void setClienteActual(Cliente cliente) {
+		this.clienteActual = cliente;
+		
+	}
+
+	public Cliente getClienteActual() {
+		return this.clienteActual;
+		
 	}
 
 }
