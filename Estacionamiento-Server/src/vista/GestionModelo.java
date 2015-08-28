@@ -9,15 +9,23 @@ import javax.swing.JButton;
 import javax.swing.JDialog;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+import javax.swing.event.ListSelectionEvent;
+import javax.swing.event.ListSelectionListener;
+import javax.swing.DefaultListModel;
+import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 import javax.swing.JList;
 import javax.swing.AbstractListModel;
 import javax.swing.JScrollPane;
+import javax.swing.ListSelectionModel;
 import javax.swing.ScrollPaneConstants;
 import javax.swing.JComboBox;
 import javax.swing.DefaultComboBoxModel;
 
-public class GestionModelo extends JDialog {
+import modelo.ModeloVehiculo;
+import controlador.Controlador;
+
+public class GestionModelo extends JDialog implements ActionListener, ListSelectionListener {
 
 	/**
 	 * 
@@ -26,11 +34,12 @@ public class GestionModelo extends JDialog {
 	private final JPanel contentPanel = new JPanel();
 	private JButton aceptarButton;
 	private JButton cancelarButton;
-	private JTextField textFieldAgregarColor;
-	private JButton btnAgregarColor;
-	private JTextField textField;
-	private JButton btnModificarColor;
-
+	private JTextField textFieldAgregarModelo;
+	private JButton btnAgregarModelo;
+	private JTextField textFieldModeloActual;
+	private JButton btnModificarModelo;
+	private DefaultListModel<modelo.ModeloVehiculo> listModel;
+	private JList listModelos;
 	/**
 	 * Launch the application.
 	 */
@@ -77,46 +86,93 @@ public class GestionModelo extends JDialog {
 		scrollPane.setBounds(6, 49, 307, 260);
 		contentPanel.add(scrollPane);
 		
-		JList list = new JList();
-		list.setModel(new AbstractListModel() {
-			String[] values = new String[] {"1 Chevrolet Aveo", "2 Mercedes", "3 Fiat Palio"};
-			public int getSize() {
-				return values.length;
-			}
-			public Object getElementAt(int index) {
-				return values[index];
-			}
-		});
-		scrollPane.setViewportView(list);
+
+
+		listModel = new DefaultListModel<modelo.ModeloVehiculo>();
+		for (modelo.ModeloVehiculo modeloTemp : Controlador.getInstancia().getModelosActuales()) {
+			listModel.addElement(modeloTemp);
+		} 
+		listModelos= new JList(listModel);
+		listModelos.setSelectionMode(ListSelectionModel.SINGLE_INTERVAL_SELECTION);
+		scrollPane.setViewportView(listModelos);
+		listModelos.addListSelectionListener(this);
 		
-		textFieldAgregarColor = new JTextField();
-		textFieldAgregarColor.setBounds(325, 82, 203, 32);
-		contentPanel.add(textFieldAgregarColor);
-		textFieldAgregarColor.setColumns(10);
+		textFieldAgregarModelo = new JTextField();
+		textFieldAgregarModelo.setBounds(325, 82, 203, 32);
+		contentPanel.add(textFieldAgregarModelo);
+		textFieldAgregarModelo.setColumns(10);
 		
-		btnAgregarColor = new JButton("Agregar Modelo");
-		btnAgregarColor.setIcon(new ImageIcon(GestionModelo.class.getResource("/image/plus.png")));
-		btnAgregarColor.setBounds(325, 125, 203, 29);
-		contentPanel.add(btnAgregarColor);
+		btnAgregarModelo = new JButton("Agregar Modelo");
+		btnAgregarModelo.setIcon(new ImageIcon(GestionModelo.class.getResource("/image/plus.png")));
+		btnAgregarModelo.setBounds(325, 125, 203, 29);
+		contentPanel.add(btnAgregarModelo);
+		btnAgregarModelo.addActionListener(this);
 		
-		textField = new JTextField();
-		textField.setBounds(325, 206, 203, 32);
-		contentPanel.add(textField);
-		textField.setColumns(10);
+		textFieldModeloActual = new JTextField();
+		textFieldModeloActual.setBounds(325, 206, 203, 32);
+		contentPanel.add(textFieldModeloActual);
+		textFieldModeloActual.setColumns(10);
 		
-		btnModificarColor = new JButton("Modificar Modelo");
-		btnModificarColor.setIcon(new ImageIcon(GestionModelo.class.getResource("/image/modificar.png")));
-		btnModificarColor.setBounds(325, 246, 203, 29);
-		contentPanel.add(btnModificarColor);
-		
-		JComboBox comboBox = new JComboBox();
-		comboBox.setModel(new DefaultComboBoxModel(new String[] {"1 Auto", "2 4X4", "3 Moto", "4 Bicicleta"}));
-		comboBox.setBounds(6, 11, 307, 32);
-		contentPanel.add(comboBox);
+		btnModificarModelo = new JButton("Modificar Modelo");
+		btnModificarModelo.setIcon(new ImageIcon(GestionModelo.class.getResource("/image/modificar.png")));
+		btnModificarModelo.setBounds(325, 246, 203, 29);
+		contentPanel.add(btnModificarModelo);
+		btnModificarModelo.addActionListener(this);
 		
 		this.setLocationRelativeTo(null);
 		setModal(true);
 		
 		
+	}
+	
+	@Override
+	public void actionPerformed(ActionEvent event) {
+		if(event.getSource()==cancelarButton)
+		{
+			dispose();
+		}
+		if(event.getSource()==btnAgregarModelo)
+		{
+			long codigoReturn=-1;
+			codigoReturn= Controlador.getInstancia().altaModelo(textFieldAgregarModelo.getText().toString());
+			if(codigoReturn == -1)
+			{
+				JOptionPane.showMessageDialog(null,  "Se produjo un error, intente nuevamente.", "Gestion Modelo",JOptionPane.INFORMATION_MESSAGE);
+			}
+			if(codigoReturn >= 0)
+			{
+				JOptionPane.showMessageDialog(null, "Modelo generado correctamente", "Gestion Modelo", JOptionPane.INFORMATION_MESSAGE);
+			}
+			dispose();
+		}
+		if(event.getSource()==btnModificarModelo)
+		{
+			if(!textFieldModeloActual.getText().toString().isEmpty())
+			{
+				long codigoReturn=-1;
+				modelo.ModeloVehiculo modeloAct=(ModeloVehiculo) listModelos.getSelectedValue();
+				modeloAct.setDescripcion(textFieldModeloActual.getText().toString());
+				codigoReturn= Controlador.getInstancia().modificarModelo(modeloAct);
+				
+				if(codigoReturn == -1)
+				{
+					JOptionPane.showMessageDialog(null,  "Se produjo un error, intente nuevamente.", "Gestion Modelo",JOptionPane.INFORMATION_MESSAGE);
+				}
+				if(codigoReturn >= 0)
+				{
+					JOptionPane.showMessageDialog(null, "Modelo actualizado correctamente", "Gestion Modelo", JOptionPane.INFORMATION_MESSAGE);
+				}
+				dispose();
+			}
+		}
+	}
+
+
+	@Override
+	public void valueChanged(ListSelectionEvent e) {
+		if(e.getSource() == this.listModelos){
+			modelo.ModeloVehiculo modeloSeleccionado = (ModeloVehiculo) this.listModelos.getSelectedValue();
+			textFieldModeloActual.setText(modeloSeleccionado.getDescripcion());
+		}			
 	}
 }

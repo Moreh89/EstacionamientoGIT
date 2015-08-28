@@ -198,6 +198,7 @@ public class Cliente {
 	public Cliente() {}
 	
 	public String toString(){
+
 		return this.apellido+ " " + this.nombre; 
 	}
 	

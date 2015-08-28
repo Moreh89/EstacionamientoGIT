@@ -307,7 +307,7 @@ public class MenuOperador extends JFrame implements ActionListener, KeyListener 
 		comboBoxModelo = new JComboBox();
 		comboBoxModelo.setFont(new Font("Tahoma", Font.PLAIN, 30));
 		comboBoxModelo.setModel(new DefaultComboBoxModel());
-		for (String modString : Controlador.getInstancia().getModelosActuales()) {
+		for (String modString : Controlador.getInstancia().getModelosActualesString()) {
 			comboBoxModelo.addItem(modString);
 		}
 		

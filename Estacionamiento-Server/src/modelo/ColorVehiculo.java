@@ -18,5 +18,7 @@ public class ColorVehiculo {
 		this.descripcion = descripcion;
 	}
 	
-	
+	public String toString(){
+		return this.descripcion;
+	}
 }

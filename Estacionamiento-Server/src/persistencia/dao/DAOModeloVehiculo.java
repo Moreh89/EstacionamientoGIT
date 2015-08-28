@@ -38,4 +38,23 @@ public class DAOModeloVehiculo {
 		mod = (persistencia.clases.ModeloVehiculo) HibernateDAO.getInstancia().get(persistencia.clases.ModeloVehiculo.class, idModelo);
 		return mod;
 	}
+
+	public long modificarModelo(modelo.ModeloVehiculo modeloM) 
+	{
+		persistencia.clases.ModeloVehiculo modeloP = (persistencia.clases.ModeloVehiculo) HibernateDAO.getInstancia().getObjectWithLong("ModeloVehiculo", "idModelo",modeloM.getIdModelo());
+		modeloP.setDescripcion(modeloM.getDescripcion());
+		modeloP=(ModeloVehiculo) HibernateDAO.getInstancia().update(modeloP);
+		return modeloP.getIdModelo();
+	}
+	
+	public long persistir(modelo.ModeloVehiculo modeloM)
+	{
+		persistencia.clases.ModeloVehiculo modeloP = new persistencia.clases.ModeloVehiculo();
+		modeloP=Converter.convertModeloVehiculoModeloToPersistencia(modeloM);
+		modeloP=(ModeloVehiculo) HibernateDAO.getInstancia().save(modeloP);
+		
+		return modeloP.getIdModelo();
+	}
+	
+	
 }

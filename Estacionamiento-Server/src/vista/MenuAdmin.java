@@ -23,7 +23,6 @@ public class MenuAdmin extends JFrame implements ActionListener {
 	private JPanel contentPane;
 	private JTextField txtEstacionamiento;
 	private JMenuBar menuBar;
-	private JMenu mnABM;
 	private JMenu mnCliente;
 	private JMenuItem mntmAltaCliente;
 	private JMenuItem mntmModificacionCliente;
@@ -32,14 +31,6 @@ public class MenuAdmin extends JFrame implements ActionListener {
 	private JMenuItem mntmAltaUsuario;
 	private JMenuItem mntmModificacionUsuario;
 	private JMenuItem mntmBajaUsuario;
-	private JMenu mnVehiculo;
-	private JMenuItem mntmAltaVehiculo;
-	private JMenuItem mntmModificacionVehiculo;
-	private JMenuItem mntmBajaVehiculo;
-	private JMenu mnGestionClientes;
-	private JMenuItem mntmAsociacionCocheras;
-	private JMenuItem mntmCuentaCorriente;
-	private JMenuItem mntmPersonasAutorizadas;
 	private JMenu mnGestionEstacionamiento;
 	private JMenu mnCocheras;
 	private JMenuItem mntmAltaCochera;
@@ -68,6 +59,8 @@ public class MenuAdmin extends JFrame implements ActionListener {
 	private JMenu menuSistema;
 	private JMenuItem menuItemBackUp;
 	private JMenuItem mntmLiquidarExpensas;
+	private JMenu mnExpensas;
+	private JMenuItem mntmCancelarExpensas;
 
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
@@ -93,29 +86,9 @@ public class MenuAdmin extends JFrame implements ActionListener {
 		menuBar = new JMenuBar();
 		setJMenuBar(menuBar);
 		
-		mnABM = new JMenu("ABM");
-		mnABM.setIcon(new ImageIcon(MenuAdmin.class.getResource("/image/plus.png")));
-		menuBar.add(mnABM);
-		
-		mnCliente = new JMenu("Cliente");
-		mnCliente.setIcon(new ImageIcon(MenuAdmin.class.getResource("/image/paciente.png")));
-		mnABM.add(mnCliente);
-		
-		mntmAltaCliente = new JMenuItem("Alta");
-		mnCliente.add(mntmAltaCliente);
-		mntmAltaCliente.addActionListener(this);
-		
-		mntmModificacionCliente = new JMenuItem("Modificacion");
-		mnCliente.add(mntmModificacionCliente);
-		mntmModificacionCliente.addActionListener(this);
-		
-		mntmBajaCliente = new JMenuItem("Baja");
-		mnCliente.add(mntmBajaCliente);
-		mntmBajaCliente.addActionListener(this);
-		
 		mnUsuario = new JMenu("Usuario");
+		menuBar.add(mnUsuario);
 		mnUsuario.setIcon(new ImageIcon(MenuAdmin.class.getResource("/image/users.png")));
-		mnABM.add(mnUsuario);
 		
 		mntmAltaUsuario = new JMenuItem("Alta");
 		mnUsuario.add(mntmAltaUsuario);
@@ -129,37 +102,21 @@ public class MenuAdmin extends JFrame implements ActionListener {
 		mnUsuario.add(mntmBajaUsuario);
 		mntmBajaUsuario.addActionListener(this);
 		
-		mnVehiculo = new JMenu("Vehiculo");
-		mnVehiculo.setIcon(new ImageIcon(MenuAdmin.class.getResource("/image/alquilar.png")));
-		mnABM.add(mnVehiculo);
+		mnCliente = new JMenu("Cliente");
+		menuBar.add(mnCliente);
+		mnCliente.setIcon(new ImageIcon(MenuAdmin.class.getResource("/image/paciente.png")));
 		
-		mntmAltaVehiculo = new JMenuItem("Alta");
-		mnVehiculo.add(mntmAltaVehiculo);
-		mntmAltaVehiculo.addActionListener(this);
+		mntmAltaCliente = new JMenuItem("Alta");
+		mnCliente.add(mntmAltaCliente);
+		mntmAltaCliente.addActionListener(this);
 		
-		mntmModificacionVehiculo = new JMenuItem("Modificacion");
-		mnVehiculo.add(mntmModificacionVehiculo);
-		mntmModificacionVehiculo.addActionListener(this);
+		mntmModificacionCliente = new JMenuItem("Modificacion");
+		mnCliente.add(mntmModificacionCliente);
+		mntmModificacionCliente.addActionListener(this);
 		
-		mntmBajaVehiculo = new JMenuItem("Baja");
-		mnVehiculo.add(mntmBajaVehiculo);
-		mntmBajaVehiculo.addActionListener(this);
-		
-		mnGestionClientes = new JMenu("Gestion Clientes");
-		mnGestionClientes.setIcon(new ImageIcon(MenuAdmin.class.getResource("/image/paciente.png")));
-		menuBar.add(mnGestionClientes);
-		
-		mntmAsociacionCocheras = new JMenuItem("Asociacion Cocheras");
-		mnGestionClientes.add(mntmAsociacionCocheras);
-		mntmAsociacionCocheras.addActionListener(this);
-		
-		mntmCuentaCorriente = new JMenuItem("Cuenta Corriente");
-		mnGestionClientes.add(mntmCuentaCorriente);
-		mntmCuentaCorriente.addActionListener(this);
-		
-		mntmPersonasAutorizadas = new JMenuItem("Personas Autorizadas");
-		mnGestionClientes.add(mntmPersonasAutorizadas);
-		mntmPersonasAutorizadas.addActionListener(this);
+		mntmBajaCliente = new JMenuItem("Baja");
+		mnCliente.add(mntmBajaCliente);
+		mntmBajaCliente.addActionListener(this);
 		
 		mnGestionEstacionamiento = new JMenu("Gestion Estacionamiento");
 		mnGestionEstacionamiento.setIcon(new ImageIcon(MenuAdmin.class.getResource("/image/modificar.png")));
@@ -222,6 +179,16 @@ public class MenuAdmin extends JFrame implements ActionListener {
 		
 		mntmModificacionTasaInteres = new JMenuItem("Modificacion");
 		mnTasaInteres.add(mntmModificacionTasaInteres);
+		
+		mnExpensas = new JMenu("Expensas");
+		mnGestionEstacionamiento.add(mnExpensas);
+		
+		mntmLiquidarExpensas = new JMenuItem("Liquidar");
+		mnExpensas.add(mntmLiquidarExpensas);
+		
+		mntmCancelarExpensas = new JMenuItem("Cancelar");
+		mnExpensas.add(mntmCancelarExpensas);
+		mntmLiquidarExpensas.addActionListener(this);
 		mntmModificacionTasaInteres.addActionListener(this);
 		
 		mnConsultas = new JMenu("Consultas");
@@ -239,10 +206,6 @@ public class MenuAdmin extends JFrame implements ActionListener {
 		mntmCantidadAutos = new JMenuItem("Cantidad Autos");
 		mnConsultas.add(mntmCantidadAutos);
 		mntmCantidadAutos.addActionListener(this);
-		
-		mntmLiquidarExpensas = new JMenuItem("Liquidar Expensas");
-		mnConsultas.add(mntmLiquidarExpensas);
-		mntmLiquidarExpensas.addActionListener(this);
 		
 		mntmDeudores = new JMenuItem("Deudores");
 		mnConsultas.add(mntmDeudores);
@@ -290,9 +253,6 @@ public class MenuAdmin extends JFrame implements ActionListener {
 	public void actionPerformed(ActionEvent event){
 		if (event.getSource() == mntmAltaCliente){
 			new AltaCliente().setVisible(true);
-		}
-		if (event.getSource() == mntmAltaVehiculo){
-			//new AltaVehiculo().setVisible(true);
 		}
 		if (event.getSource() == mntmBuscarCliente){
 			 new BuscadorCliente().setVisible(true);

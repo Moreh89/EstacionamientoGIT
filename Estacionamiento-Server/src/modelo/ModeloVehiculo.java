@@ -1,7 +1,7 @@
 package modelo;
 
 public class ModeloVehiculo {
-	
+
 	private long idModelo;
 	private String descripcion;
 	public long getIdModelo() {
@@ -16,6 +16,10 @@ public class ModeloVehiculo {
 	public void setDescripcion(String descripcion) {
 		this.descripcion = descripcion;
 	}
-	
-	
+
+	public String toString(){
+
+		return this.getDescripcion();
+	}
+
 }

@@ -355,7 +355,7 @@ public class Controlador {
 
 
 
-	public Vector<String> getModelosActuales() {
+	public Vector<String> getModelosActualesString() {
 		Vector<String> modelosActuales=new Vector<String>();
 		for(ModeloVehiculo modelo:modelosVehiculos)
 		{
@@ -363,6 +363,12 @@ public class Controlador {
 		}
 		return modelosActuales;
 	}
+
+
+	public ArrayList<modelo.ModeloVehiculo> getModelosActuales() {
+		return modelosVehiculos;
+	}
+
 
 	public Vector<String> getCategoriasVehiculosActuales()
 	{
@@ -618,7 +624,10 @@ public class Controlador {
 	public long modificarColor(modelo.ColorVehiculo colorSeleccionado) {
 		long codigoReturn=-1;
 		codigoReturn=DAOColorVehiculo.getInstance().modificarColor(colorSeleccionado);
-		coloresVehiculos=DAOColorVehiculo.getInstance().getColoresVehiculos();
+		if(codigoReturn!=-1)
+		{
+			coloresVehiculos=DAOColorVehiculo.getInstance().getColoresVehiculos();
+		}
 		return codigoReturn;
 	}
 
@@ -633,6 +642,31 @@ public class Controlador {
 			colorNuevo.setIdColor(codigoReturn);
 			coloresVehiculos.add(colorNuevo);
 		}
+		return codigoReturn;
+	}
+
+	public long altaModelo(String descripcion) {
+		long codigoReturn = -1;
+		modelo.ModeloVehiculo modeloNuevo = new ModeloVehiculo();
+		modeloNuevo.setIdModelo(0);
+		modeloNuevo.setDescripcion(descripcion);
+		codigoReturn= DAOModeloVehiculo.getInstance().persistir(modeloNuevo);
+		if(codigoReturn!=-1)
+		{
+			modeloNuevo.setIdModelo(codigoReturn);
+			modelosVehiculos.add(modeloNuevo);
+		}
+		return codigoReturn;
+	}
+
+	public long modificarModelo(ModeloVehiculo modeloAct) {
+		long codigoReturn = -1;
+		codigoReturn= DAOModeloVehiculo.getInstance().modificarModelo(modeloAct);
+		if(codigoReturn!=-1)
+		{
+			modelosVehiculos=DAOModeloVehiculo.getInstance().getModelosVehiculos();
+		}
+
 		return codigoReturn;
 	}
 

@@ -151,6 +151,8 @@ Poder borrar tickets de >x fecha de antigueadad desde admin
 	movimientosCC sin ticket y fecha
 	cobro expensas
 
+27) Crear JAR para probar ticketera
+
 Otros:
 Misma computadora imprime en 2 impresoras, el sistema tiene que poder imprimir en distintas impresoras 
 

@@ -155,7 +155,7 @@ public class AgregarVehiculo extends JFrame implements ActionListener{
 		contentPane.add(lblModelo, gbc_lblModelo);
 
 		comboBoxModelo = new JComboBox();
-		Vector comboBoxModeloItems=Controlador.getInstancia().getModelosActuales();
+		Vector comboBoxModeloItems=Controlador.getInstancia().getModelosActualesString();
 		comboBoxModelo.setModel(new DefaultComboBoxModel(comboBoxModeloItems));
 
 		//		comboBoxModelo.setModel(new DefaultComboBoxModel(new String[] {"1 Mercedes", "2 Fiat Palio", "3 Chevrolet Aveo"}));
