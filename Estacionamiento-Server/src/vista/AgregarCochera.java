@@ -94,7 +94,7 @@ public class AgregarCochera extends JDialog implements ActionListener{
 		panel.add(labelPiso, gbc_labelPiso);
 
 		comboBoxPiso = new JComboBox();
-		comboBoxPiso.setModel(new DefaultComboBoxModel(new String[] {"1ro", "2do", "3ro", "4to", "5to", "6to", "7mo"}));
+		comboBoxPiso.setModel(new DefaultComboBoxModel(new String[] {"1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12"}));
 		GridBagConstraints gbc_comboBoxPiso = new GridBagConstraints();
 		gbc_comboBoxPiso.fill = GridBagConstraints.BOTH;
 		gbc_comboBoxPiso.insets = new Insets(0, 0, 5, 0);

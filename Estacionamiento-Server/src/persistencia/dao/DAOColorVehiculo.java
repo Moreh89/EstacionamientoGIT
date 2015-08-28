@@ -15,9 +15,11 @@ public class DAOColorVehiculo {
 		return ins;
 	}
 
-	public long persistir(DAOColorVehiculo colorVehiculo) {
-		// TODO Auto-generated method stub
-		return 0;
+	public long persistir(modelo.ColorVehiculo colorM) {
+		persistencia.clases.ColorVehiculo colorP = new ColorVehiculo();
+		colorP=Converter.convertColorModeloToPersistencia(colorM);
+		colorP=(ColorVehiculo) HibernateDAO.getInstancia().save(colorP);
+		return colorP.getIdColor();
 	}
 
 	@SuppressWarnings("unchecked")
@@ -37,5 +39,13 @@ public class DAOColorVehiculo {
 		persistencia.clases.ColorVehiculo col = new persistencia.clases.ColorVehiculo();
 		col = (persistencia.clases.ColorVehiculo) HibernateDAO.getInstancia().get(persistencia.clases.ColorVehiculo.class, idColor);
 		return col;
+	}
+
+	public long modificarColor(modelo.ColorVehiculo colorSeleccionado) {
+		persistencia.clases.ColorVehiculo colorP=new ColorVehiculo();
+		colorP=(ColorVehiculo) HibernateDAO.getInstancia().getObjectWithLong("ColorVehiculo", "idColor", colorSeleccionado.getIdColor());
+		colorP.setDescripcion(colorSeleccionado.getDescripcion());
+		HibernateDAO.getInstancia().update(colorP);
+		return colorP.getIdColor();
 	}
 }

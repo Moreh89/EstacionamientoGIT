@@ -283,7 +283,7 @@ public class MenuOperador extends JFrame implements ActionListener, KeyListener 
 		comboBoxColor = new JComboBox();
 		comboBoxColor.setFont(new Font("Tahoma", Font.PLAIN, 30));
 		comboBoxColor.setModel(new DefaultComboBoxModel());
-		for (String colString : Controlador.getInstancia().getColoresActuales()) {
+		for (String colString : Controlador.getInstancia().getColoresActualesString()) {
 			comboBoxColor.addItem(colString);
 		}
 		

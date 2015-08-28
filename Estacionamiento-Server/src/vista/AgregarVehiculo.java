@@ -136,8 +136,7 @@ public class AgregarVehiculo extends JFrame implements ActionListener{
 
 		comboBoxColor = new JComboBox();
 
-		//		comboBoxColor.setModel(new DefaultComboBoxModel(new String[] {"1 Rojo", "2 Azul", "3 Verde", "4 Negro", "5 Blanco"}));
-		Vector comboBoxColorItems=Controlador.getInstancia().getColoresActuales();
+		Vector comboBoxColorItems=Controlador.getInstancia().getColoresActualesString();
 		comboBoxColor.setModel(new DefaultComboBoxModel(comboBoxColorItems));
 
 		GridBagConstraints gbc_comboBoxColor = new GridBagConstraints();

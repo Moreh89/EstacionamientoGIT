@@ -2,6 +2,7 @@ package controlador;
 
 
 
+import java.io.IOException;
 import java.sql.Time;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
@@ -12,6 +13,7 @@ import java.util.GregorianCalendar;
 import java.util.List;
 import java.util.Vector;
 
+import jxl.write.WriteException;
 import net.sf.jasperreports.engine.virtualization.SqlDateSerializer;
 import persistencia.Converter;
 import persistencia.HibernateDAO;
@@ -34,12 +36,12 @@ public class Controlador {
 	private ArrayList<Descuento> descuentos;
 	private modelo.TasaInteres tasaInteres;
 	private ArrayList<Cliente> clientes;
-	
+
 	//fin carga inicial
 	public ArrayList<Cochera> cocherasActuales;
 	public ArrayList<Vehiculo> vehiculosActuales;
 	public ArrayList<PersonaAutorizada> personasAutorizadasActuales;
-	
+
 
 
 	private static Controlador instancia;
@@ -329,13 +331,17 @@ public class Controlador {
 		return DAOTarifa.getInstance().persistir(tarifaM);
 	}
 
-	public Vector<String> getColoresActuales() {
+	public Vector<String> getColoresActualesString() {
 		Vector<String> coloresActuales=new Vector<String>();
 		for(ColorVehiculo color:coloresVehiculos)
 		{
 			coloresActuales.add(color.getDescripcion());
 		}
 		return coloresActuales;
+	}
+
+	public ArrayList<modelo.ColorVehiculo> getColoresActuales() {
+		return coloresVehiculos;
 	}
 
 	public Vector<String> getDescuentosActuales() {
@@ -443,7 +449,7 @@ public class Controlador {
 				if (clienteTemp.getCuil().contains(campoIdentificador)) {
 					listaClietnes.add(clienteTemp);
 				}
-				
+
 			}
 			if (tipoIdentificado.equals("NOMBRE")){
 				if (clienteTemp.getNombre().toLowerCase().contains(campoIdentificador.toLowerCase())) {
@@ -455,7 +461,7 @@ public class Controlador {
 					listaClietnes.add(clienteTemp);
 				}
 			}
-			
+
 		}
 		return listaClietnes;
 	}
@@ -546,36 +552,53 @@ public class Controlador {
 		ArrayList<modelo.Cliente> clientesConCocheraALiquidar = new ArrayList<modelo.Cliente>();
 		clientesConCocheraALiquidar=DAOCliente.getInstance().getClientes();
 		ArrayList<String> expensasImprimir = new ArrayList<String>();
-		expensasImprimir.add("Cochera;Periodo a Liquidar;Nombre;Apellido;Monto");
-		long codigoReturn=-1;
+		expensasImprimir.add("Cochera;Periodo a Liquidar;Nombre;Apellido;Porcentaje;Monto");
+		long porcentajeTotalCobrado=0;
+		new GregorianCalendar();
+		Date fecha= GregorianCalendar.getInstance().getTime();
 		for(modelo.Cliente clienteM : clientesConCocheraALiquidar)
 		{
-			if(clienteM.getCuentaCorriente()!=null)
+			if(!clienteM.getCocheras().isEmpty())
 			{
-				double montoCobrar = 0;
-				for(modelo.Cochera cocheraActual : clienteM.getCocheras())
+				if(clienteM.getCuentaCorriente()!=null)
 				{
-					montoCobrar = montoCobrar + (cocheraActual.getPorcentajeExpensas() * importeLiquidar / 100); 
+					double montoCobrar = 0;
+					for(modelo.Cochera cocheraActual : clienteM.getCocheras())
+					{
+						montoCobrar = montoCobrar + (cocheraActual.getPorcentajeExpensas() * importeLiquidar / 100); 
+						porcentajeTotalCobrado=(long) (porcentajeTotalCobrado+cocheraActual.getPorcentajeExpensas());
+
+						modelo.MovimientoCC movimientoNuevo= new modelo.MovimientoCC();
+						movimientoNuevo.setIdMovimiento(0);
+
+						movimientoNuevo.setFecha(fecha);
+						movimientoNuevo.setDescripcion(descripcion);
+						movimientoNuevo.setEstado("Liquidado");
+						movimientoNuevo.setTicket(null);
+						movimientoNuevo.setMontoCobrado((-1)*montoCobrar);
+
+						DAOCliente.getInstance().agregarMovimientoCC(clienteM.getIdCliente(), movimientoNuevo);
+
+						expensasImprimir.add(cocheraActual.getUbicacion()+";"+periodoLiquidar +";"+ clienteM.getNombre()+";"+clienteM.getApellido()+";"+cocheraActual.getPorcentajeExpensas() +";"+ montoCobrar);
+					}
+
 				}
-				modelo.MovimientoCC movimientoNuevo= new modelo.MovimientoCC();
-				movimientoNuevo.setIdMovimiento(0);
-
-				new GregorianCalendar();
-				Date fecha= GregorianCalendar.getInstance().getTime();
-
-				movimientoNuevo.setFecha(fecha);
-				movimientoNuevo.setDescripcion(descripcion);
-				movimientoNuevo.setEstado("Liquidado");
-				movimientoNuevo.setTicket(null);
-				movimientoNuevo.setMontoCobrado((-1)*montoCobrar);
-
-				codigoReturn=DAOCliente.getInstance().agregarMovimientoCC(clienteM.getIdCliente(), movimientoNuevo);
-
-				expensasImprimir.add(periodoLiquidar +";"+ clienteM.getNombre()+";"+clienteM.getApellido()+";"+ montoCobrar);
 			}
 		}
 
-		return codigoReturn;
+		Excel excel = new Excel();
+		//TODO GUARDA CON UN MES MENOR AL ACTUAL
+		excel.setOutputFile("c:/temp/"+new SimpleDateFormat("yyyy_mm_dd_hh_mm").format(fecha)+".xls");
+
+		try {
+			excel.writeList(expensasImprimir);
+		} catch (WriteException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+
+		return porcentajeTotalCobrado;
 	}
 
 	public ArrayList<Cliente> getClientes() {
@@ -584,12 +607,34 @@ public class Controlador {
 
 	public void setClienteActual(Cliente cliente) {
 		this.clienteActual = cliente;
-		
+
 	}
 
 	public Cliente getClienteActual() {
 		return this.clienteActual;
-		
+
 	}
+
+	public long modificarColor(modelo.ColorVehiculo colorSeleccionado) {
+		long codigoReturn=-1;
+		codigoReturn=DAOColorVehiculo.getInstance().modificarColor(colorSeleccionado);
+		coloresVehiculos=DAOColorVehiculo.getInstance().getColoresVehiculos();
+		return codigoReturn;
+	}
+
+	public long altaColor(String descripcion) {
+		long codigoReturn = -1;
+		modelo.ColorVehiculo colorNuevo = new ColorVehiculo();
+		colorNuevo.setIdColor(0);
+		colorNuevo.setDescripcion(descripcion);
+		codigoReturn= DAOColorVehiculo.getInstance().persistir(colorNuevo);
+		if(codigoReturn!=-1)
+		{
+			colorNuevo.setIdColor(codigoReturn);
+			coloresVehiculos.add(colorNuevo);
+		}
+		return codigoReturn;
+	}
+
 
 }
