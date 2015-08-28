@@ -123,6 +123,7 @@ public class BackupBD extends JDialog implements ActionListener {
 				}else{
 					JOptionPane.showMessageDialog(null, "No se pudo realizar el Resguardo de la Base de Datos", "Resguardo de Base de datos", JOptionPane.INFORMATION_MESSAGE);
 				}
+				dispose();
 			}
 		}
 		if(event.getSource()==buttonCancelar)
