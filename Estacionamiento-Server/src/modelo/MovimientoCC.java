@@ -10,9 +10,11 @@ public class MovimientoCC
 	private double montoCobrado;
 	private String estado;
 	private Ticket ticket;
+	private LiquidacionExpensas liquidacionExpensas;
 	public long getIdMovimiento() {
 		return idMovimiento;
 	}
+
 	public void setIdMovimiento(long idMovimiento) {
 		this.idMovimiento = idMovimiento;
 	}
@@ -45,6 +47,14 @@ public class MovimientoCC
 	}
 	public void setTicket(Ticket ticket) {
 		this.ticket = ticket;
+	}
+
+	public LiquidacionExpensas getLiquidacionExpensas() {
+		return liquidacionExpensas;
+	}
+
+	public void setLiquidacionExpensas(LiquidacionExpensas liquidacionExpensas) {
+		this.liquidacionExpensas = liquidacionExpensas;
 	}
 	
 	

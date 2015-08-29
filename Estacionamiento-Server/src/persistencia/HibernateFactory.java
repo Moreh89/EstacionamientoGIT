@@ -28,6 +28,7 @@ public class HibernateFactory
         	 config.addAnnotatedClass(Vehiculo.class);
         	 config.addAnnotatedClass(PersonaAutorizada.class);
         	 config.addAnnotatedClass(TasaInteres.class);
+        	 config.addAnnotatedClass(LiquidacionExpensas.class);
            	 sessionFactory = config.buildSessionFactory();
         }
         catch (Throwable ex)

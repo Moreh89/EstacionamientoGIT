@@ -28,6 +28,10 @@ public class MovimientoCC {
 	@JoinColumn(name="Ticket")
 	private Ticket ticket;
 	
+	@OneToOne
+	@JoinColumn(name="LiquidacionExpensas")
+	private LiquidacionExpensas liquidacionExpensas;
+	
 	public long getIdMovimiento() {
 		return idMovimiento;
 	}
@@ -65,7 +69,7 @@ public class MovimientoCC {
 		this.ticket = ticket;
 	}
 	public MovimientoCC(long idMovimiento, Date fecha, String descripcion,
-			double montoCobrado, String estado, Ticket ticket) {
+			double montoCobrado, String estado, Ticket ticket, LiquidacionExpensas liquidacion) {
 		super();
 		this.idMovimiento = idMovimiento;
 		this.fecha = fecha;
@@ -73,10 +77,19 @@ public class MovimientoCC {
 		this.montoCobrado = montoCobrado;
 		this.estado = estado;
 		this.ticket = ticket;
+		this.liquidacionExpensas=liquidacion;
 	}
 	public MovimientoCC() {
 		// TODO Auto-generated constructor stub
 	}
+	
+	public LiquidacionExpensas getLiquidacionExpensas() {
+		return liquidacionExpensas;
+	}
+	public void setLiquidacionExpensas(LiquidacionExpensas liquidacionExpensas) {
+		this.liquidacionExpensas = liquidacionExpensas;
+	}
+	
 	
 	
 }

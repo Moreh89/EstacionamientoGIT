@@ -574,17 +574,25 @@ public class Controlador {
 						montoCobrar = montoCobrar + (cocheraActual.getPorcentajeExpensas() * importeLiquidar / 100); 
 						porcentajeTotalCobrado=(long) (porcentajeTotalCobrado+cocheraActual.getPorcentajeExpensas());
 
+						modelo.LiquidacionExpensas liquidacionExpensas = new LiquidacionExpensas();
+						liquidacionExpensas.setIdLiquidacionExpensas(0);
+						liquidacionExpensas.setEstado(modelo.LiquidacionExpensas.Estado.LIQUIDADO);
+						liquidacionExpensas.setFechaSalida(new java.sql.Date(Calendar.getInstance().getTime().getTime()));
+						
+						
 						modelo.MovimientoCC movimientoNuevo= new modelo.MovimientoCC();
 						movimientoNuevo.setIdMovimiento(0);
-
 						movimientoNuevo.setFecha(fecha);
 						movimientoNuevo.setDescripcion(descripcion);
 						movimientoNuevo.setEstado("Liquidado");
 						movimientoNuevo.setTicket(null);
 						movimientoNuevo.setMontoCobrado((-1)*montoCobrar);
-
+						movimientoNuevo.setLiquidacionExpensas(liquidacionExpensas);
+						
+						
+						
 						DAOCliente.getInstance().agregarMovimientoCC(clienteM.getIdCliente(), movimientoNuevo);
-
+						
 						expensasImprimir.add(cocheraActual.getUbicacion()+";"+periodoLiquidar +";"+ clienteM.getNombre()+";"+clienteM.getApellido()+";"+cocheraActual.getPorcentajeExpensas() +";"+ montoCobrar);
 					}
 

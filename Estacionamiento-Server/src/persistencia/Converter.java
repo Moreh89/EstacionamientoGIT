@@ -357,7 +357,11 @@ public class Converter {
 		{
 			movimientoCCP.setTicket(convertTicketModeloToPersistencia(movimientoCCM.getTicket()));
 		}
-
+		if(movimientoCCM.getLiquidacionExpensas()!=null)
+		{
+			movimientoCCP.setLiquidacionExpensas((convertLiquidacionExpensasModeloToPersistencia(movimientoCCM.getLiquidacionExpensas())));
+		}
+			
 		return movimientoCCP;
 	}
 
@@ -375,6 +379,10 @@ public class Converter {
 		if(movimientoCCP.getTicket()!=null)
 		{
 			movimientoCCM.setTicket(convertTicketPersistenciaToModelo (movimientoCCP.getTicket()));
+		}
+		if(movimientoCCP.getLiquidacionExpensas()!=null)
+		{
+			movimientoCCM.setLiquidacionExpensas(convertLiquidacionExpensasPersistenciaToModelo (movimientoCCP.getLiquidacionExpensas()));
 		}
 		return movimientoCCM;
 	}
@@ -647,15 +655,32 @@ public class Converter {
 		}
 		return movimientosCCP;
 	}
-
-
-	//	public static ArrayList<CategoriaVehiculo> convertCategoriasVehiculosPersistenciaToModelo(
-	//			ArrayList<persistencia.clases.CategoriaVehiculo> categoriasVehiculosP) {
-	//		ArrayList<modelo.CategoriaVehiculo> categoriasVehiculosM = new ArrayList<modelo.CategoriaVehiculo>();
-	//		for(persistencia.clases.CategoriaVehiculo categoriaVehiculoP : categoriasVehiculosP)
-	//		{
-	//			categoriasVehiculosM.add(convertCategoriaVehiculoPersistenciaToModelo(categoriaVehiculoP));
-	//		}
-	//		return categoriasVehiculosM;
-	//	}
+	
+	public  static modelo.LiquidacionExpensas convertLiquidacionExpensasPersistenciaToModelo(persistencia.clases.LiquidacionExpensas liquidacionP)
+	{
+		modelo.LiquidacionExpensas liquidacionM = new modelo.LiquidacionExpensas();
+		liquidacionM.setIdLiquidacionExpensas(liquidacionP.getIdLiquidacionExpensas());
+		liquidacionM.setFechaSalida(liquidacionP.getFechaSalida());
+		String estadoLiquidacion = liquidacionP.getEstado().toString();
+		if(estadoLiquidacion.equals("LIQUIDADO"))
+			liquidacionM.setEstado(modelo.LiquidacionExpensas.Estado.LIQUIDADO
+					);
+		if(estadoLiquidacion.equals("CANCELADO"))
+			liquidacionM.setEstado(modelo.LiquidacionExpensas.Estado.CANCELADO);
+		return liquidacionM;
+	}
+	
+	public  static persistencia.clases.LiquidacionExpensas convertLiquidacionExpensasModeloToPersistencia(modelo.LiquidacionExpensas liquidacionM)
+	{
+		persistencia.clases.LiquidacionExpensas liquidacionP = new persistencia.clases.LiquidacionExpensas();
+		liquidacionP.setIdLiquidacionExpensas(liquidacionM.getIdLiquidacionExpensas());
+		liquidacionP.setFechaSalida(liquidacionM.getFechaSalida());
+		String estadoLiquidacion = liquidacionM.getEstado().toString();
+		if(estadoLiquidacion.equals("LIQUIDADO"))
+			liquidacionP.setEstado(persistencia.clases.LiquidacionExpensas.Estado.LIQUIDADO
+					);
+		if(estadoLiquidacion.equals("CANCELADO"))
+			liquidacionP.setEstado(persistencia.clases.LiquidacionExpensas.Estado.CANCELADO);
+		return liquidacionP;
+	}
 }
