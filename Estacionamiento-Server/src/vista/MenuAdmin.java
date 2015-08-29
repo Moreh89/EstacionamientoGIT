@@ -183,10 +183,10 @@ public class MenuAdmin extends JFrame implements ActionListener {
 		mnExpensas = new JMenu("Expensas");
 		mnGestionEstacionamiento.add(mnExpensas);
 		
-		mntmLiquidarExpensas = new JMenuItem("Liquidar");
+		mntmLiquidarExpensas = new JMenuItem("Emitir Liquidaci\u00F3n");
 		mnExpensas.add(mntmLiquidarExpensas);
 		
-		mntmCancelarExpensas = new JMenuItem("Cancelar");
+		mntmCancelarExpensas = new JMenuItem("Cancelar Liquidaci\u00F3n");
 		mnExpensas.add(mntmCancelarExpensas);
 		mntmLiquidarExpensas.addActionListener(this);
 		mntmModificacionTasaInteres.addActionListener(this);

@@ -62,7 +62,7 @@ public class AltaDescuento extends JDialog implements ActionListener{
 		lblNuevaCon.setBounds(10, 36, 144, 14);
 		contentPanel.add(lblNuevaCon);
 
-		JLabel lblNuevaCon2 = new JLabel("Monto Descuento:");
+		JLabel lblNuevaCon2 = new JLabel("Porcentaje Descuento:");
 		lblNuevaCon2.setFont(new Font("Tahoma", Font.BOLD, 11));
 		lblNuevaCon2.setBounds(10, 74, 144, 14);
 		contentPanel.add(lblNuevaCon2);
