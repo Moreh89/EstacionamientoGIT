@@ -24,4 +24,16 @@ public class DAOLiquidacionExpensas {
 		return liquidacionP.getIdLiquidacionExpensas();
 	}
 
+	@SuppressWarnings("unchecked")
+	public ArrayList<modelo.LiquidacionExpensas> getLiquidacionesRecientes() {
+		//cantDias = Reciente
+		int cantDias = 30;
+		ArrayList<modelo.LiquidacionExpensas> liquidacionesRecientesM;
+		ArrayList<persistencia.clases.LiquidacionExpensas> liquidacionesRecientesP = new ArrayList<persistencia.clases.LiquidacionExpensas>();
+		liquidacionesRecientesP=(ArrayList<persistencia.clases.LiquidacionExpensas>) HibernateDAO.getInstancia().getListLiquidacionesDatediff("LiquidacionExpensas", "fechaEmision", cantDias);
+		liquidacionesRecientesM = Converter.convertLiquidacionesExpensasPersistenciaToNegocio(liquidacionesRecientesP);
+		
+		return liquidacionesRecientesM;
+	}
+
 }

@@ -172,5 +172,12 @@ public class HibernateDAO {
 		return true;
 	}
 
+	public List<?> getListLiquidacionesDatediff(String className, String columna,int value)
+	{
+		Session session=getSession();
+		List<?> list = session.createQuery("from "+className + " s where DATEDIFF(DAY," +columna+",CURRENT_TIMESTAMP)<"+ "?").setInteger(0, value).list();
+		session.flush();
+		return list;
+	}
 	
 }

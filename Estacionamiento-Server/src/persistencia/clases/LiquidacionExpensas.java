@@ -22,7 +22,7 @@ public class LiquidacionExpensas {
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	private long idLiquidacionExpensas;
 	@Temporal(TemporalType.TIMESTAMP) 
-	private Date fechaSalida;
+	private Date fechaEmision;
 	private double montoTotalLiquidado;
 	private Estado estado;
 	
@@ -38,11 +38,11 @@ public class LiquidacionExpensas {
 	public void setIdLiquidacionExpensas(long idLiquidacionExpensas) {
 		this.idLiquidacionExpensas = idLiquidacionExpensas;
 	}
-	public Date getFechaSalida() {
-		return fechaSalida;
+	public Date getFechaEmision() {
+		return fechaEmision;
 	}
-	public void setFechaSalida(Date fechaSalida) {
-		this.fechaSalida = fechaSalida;
+	public void setFechaEmision(Date fechaEmision) {
+		this.fechaEmision = fechaEmision;
 	}
 
 	public Estado getEstado() {
@@ -50,6 +50,12 @@ public class LiquidacionExpensas {
 	}
 	public void setEstado(Estado estado) {
 		this.estado = estado;
+	}
+	public double getMontoTotalLiquidado() {
+		return montoTotalLiquidado;
+	}
+	public void setMontoTotalLiquidado(double montoTotalLiquidado) {
+		this.montoTotalLiquidado = montoTotalLiquidado;
 	}
 	
 }

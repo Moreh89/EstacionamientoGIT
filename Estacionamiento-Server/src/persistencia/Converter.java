@@ -660,7 +660,8 @@ public class Converter {
 	{
 		modelo.LiquidacionExpensas liquidacionM = new modelo.LiquidacionExpensas();
 		liquidacionM.setIdLiquidacionExpensas(liquidacionP.getIdLiquidacionExpensas());
-		liquidacionM.setFechaSalida(liquidacionP.getFechaSalida());
+		liquidacionM.setFechaEmision(liquidacionP.getFechaEmision());
+		liquidacionM.setMontoTotalLiquidado(liquidacionP.getMontoTotalLiquidado());
 		String estadoLiquidacion = liquidacionP.getEstado().toString();
 		if(estadoLiquidacion.equals("LIQUIDADO"))
 			liquidacionM.setEstado(modelo.LiquidacionExpensas.Estado.LIQUIDADO
@@ -674,7 +675,8 @@ public class Converter {
 	{
 		persistencia.clases.LiquidacionExpensas liquidacionP = new persistencia.clases.LiquidacionExpensas();
 		liquidacionP.setIdLiquidacionExpensas(liquidacionM.getIdLiquidacionExpensas());
-		liquidacionP.setFechaSalida(liquidacionM.getFechaSalida());
+		liquidacionP.setFechaEmision(liquidacionM.getFechaEmision());
+		liquidacionP.setMontoTotalLiquidado(liquidacionM.getMontoTotalLiquidado());
 		String estadoLiquidacion = liquidacionM.getEstado().toString();
 		if(estadoLiquidacion.equals("LIQUIDADO"))
 			liquidacionP.setEstado(persistencia.clases.LiquidacionExpensas.Estado.LIQUIDADO
@@ -682,5 +684,15 @@ public class Converter {
 		if(estadoLiquidacion.equals("CANCELADO"))
 			liquidacionP.setEstado(persistencia.clases.LiquidacionExpensas.Estado.CANCELADO);
 		return liquidacionP;
+	}
+
+	public static ArrayList<modelo.LiquidacionExpensas> convertLiquidacionesExpensasPersistenciaToNegocio(ArrayList<persistencia.clases.LiquidacionExpensas> liquidacionesRecientesP) {
+		ArrayList<modelo.LiquidacionExpensas> liquidacionesExpensasM = new ArrayList<modelo.LiquidacionExpensas>();
+		for(persistencia.clases.LiquidacionExpensas liquidacionP : liquidacionesRecientesP)
+		{
+			liquidacionesExpensasM.add(convertLiquidacionExpensasPersistenciaToModelo(liquidacionP));
+		}
+		return liquidacionesExpensasM;
+
 	}
 }

@@ -26,7 +26,7 @@ import java.awt.Insets;
 import java.text.SimpleDateFormat;
 import java.util.GregorianCalendar;
 
-public class LiquidarExpensas extends JDialog implements ActionListener{
+public class EmitirLiquidacionExpensas extends JDialog implements ActionListener{
 	/**
 	 * 
 	 */
@@ -44,7 +44,7 @@ public class LiquidarExpensas extends JDialog implements ActionListener{
 	 */
 	public static void main(String[] args) {
 		try {
-			LiquidarExpensas dialog = new LiquidarExpensas();
+			EmitirLiquidacionExpensas dialog = new EmitirLiquidacionExpensas();
 			dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
 			dialog.setVisible(true);
 		} catch (Exception e) {
@@ -55,7 +55,7 @@ public class LiquidarExpensas extends JDialog implements ActionListener{
 	/**
 	 * Create the dialog.
 	 */
-	public LiquidarExpensas() {
+	public EmitirLiquidacionExpensas() {
 		setResizable(false);
 		setTitle("Alta Liquidación Expensas");
 		setBounds(100, 100, 329, 200);
@@ -171,8 +171,12 @@ public class LiquidarExpensas extends JDialog implements ActionListener{
 				{
 					JOptionPane.showMessageDialog(null, "Expensas parcialmente liquidadas. Se liquidó el "+codigoReturn +"% de las expensas. \n La sumatoria de porcentajes asignado a las cochera no alcanza o lo supera el 100% .", "Liquidación de Expensas",  JOptionPane.INFORMATION_MESSAGE);
 				}
+				dispose();
 			}
-			dispose();
+			else
+			{
+				JOptionPane.showMessageDialog(null, "El campo Importe a Liquidar no es válido.","Liquidación de Expensas",  JOptionPane.INFORMATION_MESSAGE);
+			}
 		}
 
 	}

@@ -300,8 +300,6 @@ public class Controlador {
 
 		DateFormat dateFormat = new SimpleDateFormat("yyyyMMddHHmmss"); 
 		Date date = new Date(); 
-		dateFormat.format(date); 
-
 		String fileNameBackup = "backUp_"+dateFormat.format(date)+".BAK'"; 
 
 		HibernateDAO.getInstancia().backUp("ESTACIONAMIENTO", path, fileNameBackup);
@@ -562,6 +560,14 @@ public class Controlador {
 		long porcentajeTotalCobrado=0;
 		new GregorianCalendar();
 		Date fecha= GregorianCalendar.getInstance().getTime();
+		
+		modelo.LiquidacionExpensas liquidacionExpensas = new LiquidacionExpensas();
+		liquidacionExpensas.setIdLiquidacionExpensas(0);
+		liquidacionExpensas.setEstado(modelo.LiquidacionExpensas.Estado.LIQUIDADO);
+//		liquidacionExpensas.setFechaSalida(new java.sql.Date(Calendar.getInstance().getTime().getTime()));
+		liquidacionExpensas.setFechaEmision(fecha);
+		liquidacionExpensas.setMontoTotalLiquidado(importeLiquidar);
+		
 		for(modelo.Cliente clienteM : clientesConCocheraALiquidar)
 		{
 			if(!clienteM.getCocheras().isEmpty())
@@ -574,11 +580,6 @@ public class Controlador {
 						montoCobrar = montoCobrar + (cocheraActual.getPorcentajeExpensas() * importeLiquidar / 100); 
 						porcentajeTotalCobrado=(long) (porcentajeTotalCobrado+cocheraActual.getPorcentajeExpensas());
 
-						modelo.LiquidacionExpensas liquidacionExpensas = new LiquidacionExpensas();
-						liquidacionExpensas.setIdLiquidacionExpensas(0);
-						liquidacionExpensas.setEstado(modelo.LiquidacionExpensas.Estado.LIQUIDADO);
-						liquidacionExpensas.setFechaSalida(new java.sql.Date(Calendar.getInstance().getTime().getTime()));
-						
 						
 						modelo.MovimientoCC movimientoNuevo= new modelo.MovimientoCC();
 						movimientoNuevo.setIdMovimiento(0);
@@ -588,8 +589,6 @@ public class Controlador {
 						movimientoNuevo.setTicket(null);
 						movimientoNuevo.setMontoCobrado((-1)*montoCobrar);
 						movimientoNuevo.setLiquidacionExpensas(liquidacionExpensas);
-						
-						
 						
 						DAOCliente.getInstance().agregarMovimientoCC(clienteM.getIdCliente(), movimientoNuevo);
 						
@@ -602,7 +601,8 @@ public class Controlador {
 
 		Excel excel = new Excel();
 		//TODO GUARDA CON UN MES MENOR AL ACTUAL
-		excel.setOutputFile("c:/temp/"+new SimpleDateFormat("yyyy_mm_dd_hh_mm").format(fecha)+".xls");
+
+		excel.setOutputFile("c:/temp/"+new SimpleDateFormat("yyyy_MM_dd_HH_mm").format(fecha)+".xls");
 
 		try {
 			excel.writeList(expensasImprimir);
@@ -676,6 +676,12 @@ public class Controlador {
 		}
 
 		return codigoReturn;
+	}
+
+	public ArrayList<modelo.LiquidacionExpensas> getLiquidacionesRecientes() 
+	{
+		//Liquidaciones generadas en los últimos 30 días.
+		return DAOLiquidacionExpensas.getInstance().getLiquidacionesRecientes();
 	}
 
 

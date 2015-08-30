@@ -60,7 +60,7 @@ public class MenuAdmin extends JFrame implements ActionListener {
 	private JMenuItem menuItemBackUp;
 	private JMenuItem mntmLiquidarExpensas;
 	private JMenu mnExpensas;
-	private JMenuItem mntmCancelarExpensas;
+	private JMenuItem mntmAnularExpensas;
 
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
@@ -179,17 +179,20 @@ public class MenuAdmin extends JFrame implements ActionListener {
 		
 		mntmModificacionTasaInteres = new JMenuItem("Modificacion");
 		mnTasaInteres.add(mntmModificacionTasaInteres);
-		
+		mntmModificacionTasaInteres.addActionListener(this);
+
 		mnExpensas = new JMenu("Expensas");
 		mnGestionEstacionamiento.add(mnExpensas);
 		
 		mntmLiquidarExpensas = new JMenuItem("Emitir Liquidaci\u00F3n");
 		mnExpensas.add(mntmLiquidarExpensas);
-		
-		mntmCancelarExpensas = new JMenuItem("Cancelar Liquidaci\u00F3n");
-		mnExpensas.add(mntmCancelarExpensas);
 		mntmLiquidarExpensas.addActionListener(this);
-		mntmModificacionTasaInteres.addActionListener(this);
+
+		mntmAnularExpensas = new JMenuItem("Anular Liquidaci\u00F3n");
+		mnExpensas.add(mntmAnularExpensas);
+		mntmAnularExpensas.addActionListener(this);
+		
+		
 		
 		mnConsultas = new JMenu("Consultas");
 		mnConsultas.setIcon(new ImageIcon(MenuAdmin.class.getResource("/image/buscar.png")));
@@ -291,9 +294,13 @@ public class MenuAdmin extends JFrame implements ActionListener {
 		}
 		if(event.getSource() == mntmLiquidarExpensas)
 		{
-			new LiquidarExpensas().setVisible(true);
+			new EmitirLiquidacionExpensas().setVisible(true);
 		}
 		
+		if(event.getSource()==mntmAnularExpensas)
+		{
+			new AnularLiquidacionExpensas().setVisible(true);
+		}
 		
 		
 	}

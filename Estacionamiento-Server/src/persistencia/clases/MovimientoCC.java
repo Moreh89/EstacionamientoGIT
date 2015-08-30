@@ -11,6 +11,7 @@ import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.persistence.CascadeType;
 
 @Entity
 @Table(name = "MovimientoCC")
@@ -28,7 +29,7 @@ public class MovimientoCC {
 	@JoinColumn(name="Ticket")
 	private Ticket ticket;
 	
-	@OneToOne
+	@OneToOne(cascade=CascadeType.ALL)
 	@JoinColumn(name="LiquidacionExpensas")
 	private LiquidacionExpensas liquidacionExpensas;
 	
