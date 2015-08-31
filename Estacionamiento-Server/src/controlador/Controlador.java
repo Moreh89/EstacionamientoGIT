@@ -368,7 +368,7 @@ public class Controlador {
 	}
 
 
-	public Vector<String> getCategoriasVehiculosActuales()
+	public Vector<String> getCategoriasVehiculosActualesString()
 	{
 		Vector<String> categoriasVehiculosActuales = new Vector<String>();
 		for(modelo.CategoriaVehiculo categoriaVehiculo : categoriasVehiculos)
@@ -725,6 +725,21 @@ public class Controlador {
 		}
 
 
+		return codigoReturn;
+	}
+
+	public long modificarTarifa(Tarifa tarifaSeleccionada, double costoMinimo,
+			double costoFraccion, double costoHora, double costoMediaEstadia,
+			double costoEstadia, double tiempoMinimo, double tiempoFraccion,
+			double tiempoMediaEstadia_minuto, double tiempoEstadia_minuto) {
+
+
+		long codigoReturn = -1;		
+		codigoReturn=DAOTarifa.getInstance().modificarTarifa(tarifaSeleccionada.getIdTarifa(), costoMinimo,
+				costoFraccion, costoHora, costoMediaEstadia,
+				costoEstadia, tiempoMinimo, tiempoFraccion,
+				tiempoMediaEstadia_minuto, tiempoEstadia_minuto);
+		
 		return codigoReturn;
 	}
 

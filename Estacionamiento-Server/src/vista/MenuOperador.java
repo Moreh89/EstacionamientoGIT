@@ -240,7 +240,7 @@ public class MenuOperador extends JFrame implements ActionListener, KeyListener 
 		comboBoxTipoVehiculo = new JComboBox();
 		comboBoxTipoVehiculo.setFont(new Font("Tahoma", Font.PLAIN, 30));
 		comboBoxTipoVehiculo.setModel(new DefaultComboBoxModel());
-		for (String catString : Controlador.getInstancia().getCategoriasVehiculosActuales()) {
+		for (String catString : Controlador.getInstancia().getCategoriasVehiculosActualesString()) {
 			comboBoxTipoVehiculo.addItem(catString);
 		}
 		GridBagConstraints gbc_comboBoxTipoVehiculo = new GridBagConstraints();

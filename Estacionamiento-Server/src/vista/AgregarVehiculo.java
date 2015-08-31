@@ -99,7 +99,7 @@ public class AgregarVehiculo extends JFrame implements ActionListener{
 		comboBoxCategoriaVehiculo = new JComboBox();
 		
 		//comboBoxCategoriaVehiculo.setModel(new DefaultComboBoxModel(new String[] {"1 Auto", "2 4X4", "3 Moto", "4 Bicicleta"}));
-		Vector comboBoxCategoriasItems=Controlador.getInstancia().getCategoriasVehiculosActuales();
+		Vector comboBoxCategoriasItems=Controlador.getInstancia().getCategoriasVehiculosActualesString();
 		comboBoxCategoriaVehiculo.setModel(new DefaultComboBoxModel(comboBoxCategoriasItems));
 		
 		GridBagConstraints gbc_comboBoxCategoriaVehiculo = new GridBagConstraints();

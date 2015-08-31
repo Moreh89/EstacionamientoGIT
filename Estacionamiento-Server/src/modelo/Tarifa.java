@@ -108,6 +108,9 @@ public class Tarifa {
 	}
 
 
-
+	public String toString()
+	{
+		return this.categoria.getDescripcion();
+	}
 
 }

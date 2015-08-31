@@ -33,6 +33,7 @@ import java.awt.Insets;
 import junit.framework.Test;
 
 import java.awt.event.KeyAdapter;
+import javax.swing.SwingConstants;
 
 
 
@@ -95,11 +96,11 @@ public class Login extends javax.swing.JDialog implements ActionListener, KeyLis
 				
 				
 					jLabel_Usuario = new JLabel();
-					jLabel_Usuario.setBounds(25, 89, 82, 14);
+					jLabel_Usuario.setBounds(25, 95, 82, 14);
 					jLabel_Usuario.setForeground(Color.WHITE);
 					jLabel_Usuario.setFont(new Font("Tahoma", Font.BOLD, 11));
 					getContentPane().add(jLabel_Usuario);
-					jLabel_Usuario.setText("Usuario");
+					jLabel_Usuario.setText("Usuario:");
 				
 				
 					jLabel_contrasenia = new JLabel();
@@ -107,7 +108,7 @@ public class Login extends javax.swing.JDialog implements ActionListener, KeyLis
 					jLabel_contrasenia.setForeground(Color.WHITE);
 					jLabel_contrasenia.setFont(new Font("Tahoma", Font.BOLD, 11));
 					getContentPane().add(jLabel_contrasenia);
-					jLabel_contrasenia.setText("Contrase\u00F1a");
+					jLabel_contrasenia.setText("Contrase\u00F1a:");
 				
 				
 
@@ -176,28 +177,30 @@ public class Login extends javax.swing.JDialog implements ActionListener, KeyLis
 				
 			
 			
-					lblNewLabel = new JLabel("Sistema de Estacionamiento");
-					lblNewLabel.setBounds(97, 303, 218, 14);
+					lblNewLabel = new JLabel("Sistema Integral de Gesti\u00F3n de Estacionamiento");
+					lblNewLabel.setHorizontalAlignment(SwingConstants.CENTER);
+					lblNewLabel.setBounds(0, 58, 413, 14);
 					lblNewLabel.setForeground(Color.WHITE);
-					lblNewLabel.setFont(new Font("Tahoma", Font.BOLD, 13));
+					lblNewLabel.setFont(new Font("Tahoma", Font.BOLD | Font.ITALIC, 13));
 					getContentPane().add(lblNewLabel);
 
-					lblEstacionamiento = new JLabel("Estacionamiento");
-					lblEstacionamiento.setBounds(50, 11, 350, 67);
-					lblEstacionamiento.setForeground(new Color(255, 255, 255));
+					lblEstacionamiento = new JLabel("S.I.G.E.");
+					lblEstacionamiento.setHorizontalAlignment(SwingConstants.CENTER);
+					lblEstacionamiento.setBounds(0, 0, 413, 56);
+					lblEstacionamiento.setForeground(Color.WHITE);
 					lblEstacionamiento.setFont(new Font("Tahoma", Font.BOLD, 40));
 					getContentPane().add(lblEstacionamiento);
 			
 	
 					jLabel5 = new JLabel();
-					jLabel5.setBounds(0, 0, 420, 385);
+					jLabel5.setBounds(0, 0, 430, 385);
 					getContentPane().add(jLabel5);
 					jLabel5.setIcon(new ImageIcon(Login.class.getResource("/image/blue-energy.jpg")));
 
 		
 			
 					this.setTitle("Login");
-					this.setSize(419, 366);
+					this.setSize(419, 336);
 					this.setLocationRelativeTo(null);
 
 		} catch (Exception e) {

@@ -33,4 +33,23 @@ public class DAOTarifa {
 		return tarifasM;
 	}
 
+	public long modificarTarifa(long idTarifa, double costoMinimo, double costoFraccion, double costoHora, double costoMediaEstadia, double costoEstadia, double tiempoMinimo, double tiempoFraccion, double tiempoMediaEstadia_minuto, double tiempoEstadia_minuto) {
+		persistencia.clases.Tarifa tarifaP = new Tarifa();
+		tarifaP=(Tarifa) HibernateDAO.getInstancia().getObjectWithLong("Tarifa", "idTarifa", idTarifa);
+		
+		tarifaP.setCostoEstadia(costoEstadia);
+		tarifaP.setCostoFraccion(costoFraccion);
+		tarifaP.setCostoHora(costoHora);
+		tarifaP.setCostoMediaEstadia(costoMediaEstadia);
+		tarifaP.setCostoMinimo(costoMinimo);
+		tarifaP.setTiempoEstadia_minuto(tiempoEstadia_minuto);
+		tarifaP.setTiempoFraccion(tiempoFraccion);
+		tarifaP.setTiempoMediaEstadia_minuto(tiempoMediaEstadia_minuto);
+		tarifaP.setTiempoMinimo(tiempoMinimo);
+		
+		HibernateDAO.getInstancia().update(tarifaP);
+		
+		return tarifaP.getIdTarifa();
+	}
+
 }

@@ -32,9 +32,6 @@ public class MenuAdmin extends JFrame implements ActionListener {
 	private JMenuItem mntmModificacionUsuario;
 	private JMenuItem mntmBajaUsuario;
 	private JMenu mnGestionEstacionamiento;
-	private JMenu mnCocheras;
-	private JMenuItem mntmAltaCochera;
-	private JMenuItem mntmModificacionCochera;
 	private JMenu mnColor;
 	private JMenuItem mntmGestionColor;
 	private JMenu mnDescuentos;
@@ -44,10 +41,9 @@ public class MenuAdmin extends JFrame implements ActionListener {
 	private JMenu mnModelo;
 	private JMenuItem mntmGestionModelo;
 	private JMenu mnTarifas;
-	private JMenuItem mntmAltaTarifa;
-	private JMenuItem mntmModificacionTarifa;
+	private JMenuItem mntmGestionTarifa;
 	private JMenu mnTasaInteres;
-	private JMenuItem mntmModificacionTasaInteres;
+	private JMenuItem mntmGestionTasaInteres;
 	private JMenu mnConsultas;
 	private JMenuItem mntmArqueoDeCaja;
 	private JMenuItem mntmBuscarCliente;
@@ -122,17 +118,6 @@ public class MenuAdmin extends JFrame implements ActionListener {
 		mnGestionEstacionamiento.setIcon(new ImageIcon(MenuAdmin.class.getResource("/image/modificar.png")));
 		menuBar.add(mnGestionEstacionamiento);
 		
-		mnCocheras = new JMenu("Cocheras");
-		mnGestionEstacionamiento.add(mnCocheras);
-		
-		mntmAltaCochera = new JMenuItem("Alta");
-		mnCocheras.add(mntmAltaCochera);
-		mntmAltaCochera.addActionListener(this);
-		
-		mntmModificacionCochera = new JMenuItem("Modificacion");
-		mnCocheras.add(mntmModificacionCochera);
-		mntmModificacionCochera.addActionListener(this);
-		
 		mnColor = new JMenu("Color");
 		mnGestionEstacionamiento.add(mnColor);
 		
@@ -159,27 +144,23 @@ public class MenuAdmin extends JFrame implements ActionListener {
 		mnModelo = new JMenu("Modelo");
 		mnGestionEstacionamiento.add(mnModelo);
 		
-		mntmGestionModelo = new JMenuItem("Gestionar");
+		mntmGestionModelo = new JMenuItem("Gestion");
 		mnModelo.add(mntmGestionModelo);
 		mntmGestionModelo.addActionListener(this);
 		
 		mnTarifas = new JMenu("Tarifas");
 		mnGestionEstacionamiento.add(mnTarifas);
 		
-		mntmAltaTarifa = new JMenuItem("Alta");
-		mnTarifas.add(mntmAltaTarifa);
-		mntmAltaTarifa.addActionListener(this);
-		
-		mntmModificacionTarifa = new JMenuItem("Modificacion");
-		mnTarifas.add(mntmModificacionTarifa);
-		mntmAltaTarifa.addActionListener(this);
+		mntmGestionTarifa = new JMenuItem("Gestion");
+		mnTarifas.add(mntmGestionTarifa);
+		mntmGestionTarifa.addActionListener(this);
 		
 		mnTasaInteres = new JMenu("Tasa Interes");
 		mnGestionEstacionamiento.add(mnTasaInteres);
 		
-		mntmModificacionTasaInteres = new JMenuItem("Modificacion");
-		mnTasaInteres.add(mntmModificacionTasaInteres);
-		mntmModificacionTasaInteres.addActionListener(this);
+		mntmGestionTasaInteres = new JMenuItem("Gestion");
+		mnTasaInteres.add(mntmGestionTasaInteres);
+		mntmGestionTasaInteres.addActionListener(this);
 
 		mnExpensas = new JMenu("Expensas");
 		mnGestionEstacionamiento.add(mnExpensas);
@@ -275,11 +256,8 @@ public class MenuAdmin extends JFrame implements ActionListener {
 		if (event.getSource() == mntmGestionModelo){
 			new GestionModelo().setVisible(true);
 		}
-		if (event.getSource() == mntmModificacionTasaInteres){
+		if (event.getSource() == mntmGestionTasaInteres){
 			new ModificarInteres().setVisible(true);
-		}
-		if (event.getSource() == mntmAltaTarifa){
-			new AltaTarifa().setVisible(true);
 		}
 		if (event.getSource() == menuItemBackUp){
 			new BackupBD().setVisible(true);
@@ -302,6 +280,10 @@ public class MenuAdmin extends JFrame implements ActionListener {
 			new AnularLiquidacionExpensas().setVisible(true);
 		}
 		
+		if(event.getSource()==mntmGestionTarifa)
+		{
+			new GestionTarifa().setVisible(true);
+		}
 		
 	}
 
