@@ -79,6 +79,7 @@ public class EmitirLiquidacionExpensas extends JDialog implements ActionListener
 								contentPanel.add(lblPeriodoALiquidar, gbc_lblPeriodoALiquidar);
 				
 						textFieldPeriodoLiquidar = new JTextField();
+						textFieldPeriodoLiquidar.setEnabled(false);
 						GridBagConstraints gbc_textFieldPeriodoLiquidar = new GridBagConstraints();
 						gbc_textFieldPeriodoLiquidar.fill = GridBagConstraints.BOTH;
 						gbc_textFieldPeriodoLiquidar.insets = new Insets(0, 0, 5, 0);

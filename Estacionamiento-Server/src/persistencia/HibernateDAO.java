@@ -175,7 +175,7 @@ public class HibernateDAO {
 	public List<?> getListLiquidacionesDatediff(String className, String columna,int value)
 	{
 		Session session=getSession();
-		List<?> list = session.createQuery("from "+className + " s where DATEDIFF(DAY," +columna+",CURRENT_TIMESTAMP)<"+ "?").setInteger(0, value).list();
+		List<?> list = session.createQuery("from "+className + " s where s.estado=0 AND DATEDIFF(DAY," +columna+",CURRENT_TIMESTAMP)<"+ "?").setInteger(0, value).list();
 		session.flush();
 		return list;
 	}

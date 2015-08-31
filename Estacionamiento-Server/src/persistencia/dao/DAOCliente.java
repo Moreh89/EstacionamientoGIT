@@ -46,6 +46,7 @@ public class DAOCliente {
 		
 		clienteP=(persistencia.clases.Cliente) HibernateDAO.getInstancia().get(persistencia.clases.Cliente.class, idCliente);
 		
+		
 		clienteP.getCuentaCorriente().addMovimientoCC(movimientoNuevoP);
 		
 		clienteP=(Cliente) HibernateDAO.getInstancia().update(clienteP);

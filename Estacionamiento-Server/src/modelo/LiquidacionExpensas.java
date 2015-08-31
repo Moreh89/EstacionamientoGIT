@@ -11,7 +11,7 @@ public class LiquidacionExpensas {
 	
 	public enum Estado {
 		LIQUIDADO,
-		CANCELADO;
+		ANULADO;
 	}
 	
 	
@@ -45,4 +45,7 @@ public class LiquidacionExpensas {
 	{
 		return this.fechaEmision.toString();
 	}
+
+	
+	
 }

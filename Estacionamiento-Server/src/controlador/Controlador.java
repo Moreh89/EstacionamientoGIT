@@ -553,22 +553,21 @@ public class Controlador {
 
 	public long liquidarExpensas(double importeLiquidar, String periodoLiquidar, String descripcion) 
 	{
-		ArrayList<modelo.Cliente> clientesConCocheraALiquidar = new ArrayList<modelo.Cliente>();
-		clientesConCocheraALiquidar=DAOCliente.getInstance().getClientes();
+		ArrayList<modelo.Cliente> clientes = new ArrayList<modelo.Cliente>();
+		clientes=DAOCliente.getInstance().getClientes();
 		ArrayList<String> expensasImprimir = new ArrayList<String>();
 		expensasImprimir.add("Cochera;Periodo a Liquidar;Nombre;Apellido;Porcentaje;Monto");
 		long porcentajeTotalCobrado=0;
 		new GregorianCalendar();
 		Date fecha= GregorianCalendar.getInstance().getTime();
-		
+
 		modelo.LiquidacionExpensas liquidacionExpensas = new LiquidacionExpensas();
 		liquidacionExpensas.setIdLiquidacionExpensas(0);
 		liquidacionExpensas.setEstado(modelo.LiquidacionExpensas.Estado.LIQUIDADO);
-//		liquidacionExpensas.setFechaSalida(new java.sql.Date(Calendar.getInstance().getTime().getTime()));
 		liquidacionExpensas.setFechaEmision(fecha);
 		liquidacionExpensas.setMontoTotalLiquidado(importeLiquidar);
-		
-		for(modelo.Cliente clienteM : clientesConCocheraALiquidar)
+
+		for(modelo.Cliente clienteM : clientes)
 		{
 			if(!clienteM.getCocheras().isEmpty())
 			{
@@ -580,7 +579,7 @@ public class Controlador {
 						montoCobrar = montoCobrar + (cocheraActual.getPorcentajeExpensas() * importeLiquidar / 100); 
 						porcentajeTotalCobrado=(long) (porcentajeTotalCobrado+cocheraActual.getPorcentajeExpensas());
 
-						
+
 						modelo.MovimientoCC movimientoNuevo= new modelo.MovimientoCC();
 						movimientoNuevo.setIdMovimiento(0);
 						movimientoNuevo.setFecha(fecha);
@@ -588,10 +587,12 @@ public class Controlador {
 						movimientoNuevo.setEstado("Liquidado");
 						movimientoNuevo.setTicket(null);
 						movimientoNuevo.setMontoCobrado((-1)*montoCobrar);
+						liquidacionExpensas.setIdLiquidacionExpensas(0);
 						movimientoNuevo.setLiquidacionExpensas(liquidacionExpensas);
-						
+
+
 						DAOCliente.getInstance().agregarMovimientoCC(clienteM.getIdCliente(), movimientoNuevo);
-						
+
 						expensasImprimir.add(cocheraActual.getUbicacion()+";"+periodoLiquidar +";"+ clienteM.getNombre()+";"+clienteM.getApellido()+";"+cocheraActual.getPorcentajeExpensas() +";"+ montoCobrar);
 					}
 
@@ -682,6 +683,48 @@ public class Controlador {
 	{
 		//Liquidaciones generadas en los últimos 30 días.
 		return DAOLiquidacionExpensas.getInstance().getLiquidacionesRecientes();
+	}
+
+	public long anularLiquidacionExpensas(LiquidacionExpensas liquidacionSeleccionado) {
+
+		long codigoReturn=-1;
+
+		liquidacionSeleccionado.setEstado(modelo.LiquidacionExpensas.Estado.ANULADO);
+		//		DAOLiquidacionExpensas.getInstance().anularLiquidacion(liquidacionSeleccionado);
+
+		ArrayList<modelo.Cliente> clientes = new ArrayList<modelo.Cliente>();
+		clientes=DAOCliente.getInstance().getClientes();
+
+		new GregorianCalendar();
+		Date fecha= GregorianCalendar.getInstance().getTime();
+
+		for(modelo.Cliente clienteM : clientes)
+		{
+			if(!clienteM.getCocheras().isEmpty() && clienteM.getCuentaCorriente()!=null && clienteM.getCuentaCorriente().getMovimientos()!=null )
+			{
+				for(modelo.MovimientoCC movimientoActual : clienteM.getCuentaCorriente().getMovimientos())
+				{
+					if(movimientoActual.getLiquidacionExpensas().getIdLiquidacionExpensas()==liquidacionSeleccionado.getIdLiquidacionExpensas())
+					{
+
+						modelo.MovimientoCC movimientoNuevo= new modelo.MovimientoCC();
+						movimientoNuevo.setIdMovimiento(0);
+						movimientoNuevo.setFecha(fecha);
+						movimientoNuevo.setDescripcion("ANULADO - "+movimientoActual.getDescripcion());
+						movimientoNuevo.setEstado("Anulado");
+						movimientoNuevo.setTicket(null);
+						movimientoNuevo.setMontoCobrado((-1)*movimientoActual.getMontoCobrado());
+						movimientoNuevo.setLiquidacionExpensas(liquidacionSeleccionado);
+
+						DAOCliente.getInstance().agregarMovimientoCC(clienteM.getIdCliente(), movimientoNuevo);
+						codigoReturn=movimientoNuevo.getIdMovimiento();
+					}
+				}
+			}
+		}
+
+
+		return codigoReturn;
 	}
 
 

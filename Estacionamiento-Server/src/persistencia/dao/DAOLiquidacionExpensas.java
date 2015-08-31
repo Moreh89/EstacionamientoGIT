@@ -36,4 +36,14 @@ public class DAOLiquidacionExpensas {
 		return liquidacionesRecientesM;
 	}
 
+	public long anularLiquidacion(modelo.LiquidacionExpensas liquidacionSeleccionado) {
+		long codigoReturn=-1;
+		persistencia.clases.LiquidacionExpensas liquidacionP = new persistencia.clases.LiquidacionExpensas();
+		liquidacionP= (LiquidacionExpensas) HibernateDAO.getInstancia().getObjectWithLong("LiquidacionExpensas", "idLiquidacionExpensas", liquidacionSeleccionado.getIdLiquidacionExpensas());
+		liquidacionP.setEstado(persistencia.clases.LiquidacionExpensas.Estado.ANULADO);
+		liquidacionP=(LiquidacionExpensas) HibernateDAO.getInstancia().update(liquidacionP);
+		codigoReturn=liquidacionP.getIdLiquidacionExpensas();
+		return codigoReturn;
+	}
+
 }

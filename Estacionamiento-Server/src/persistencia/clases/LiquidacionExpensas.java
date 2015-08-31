@@ -6,13 +6,9 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
-
-import persistencia.clases.Ticket.Estado;
 
 @Entity
 @Table(name = "LiquidacionExpensas")
@@ -28,7 +24,7 @@ public class LiquidacionExpensas {
 	
 	public enum Estado {
 		LIQUIDADO,
-		CANCELADO;
+		ANULADO;
 	}
 	
 	
@@ -57,5 +53,6 @@ public class LiquidacionExpensas {
 	public void setMontoTotalLiquidado(double montoTotalLiquidado) {
 		this.montoTotalLiquidado = montoTotalLiquidado;
 	}
+
 	
 }

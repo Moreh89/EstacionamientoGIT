@@ -376,6 +376,7 @@ public class Converter {
 		movimientoCCM.setFecha(movimientoCCP.getFecha());
 		movimientoCCM.setIdMovimiento(movimientoCCP.getIdMovimiento());
 		movimientoCCM.setMontoCobrado(movimientoCCP.getMontoCobrado());
+		movimientoCCM.setDescripcion(movimientoCCP.getDescripcion());
 		if(movimientoCCP.getTicket()!=null)
 		{
 			movimientoCCM.setTicket(convertTicketPersistenciaToModelo (movimientoCCP.getTicket()));
@@ -666,8 +667,8 @@ public class Converter {
 		if(estadoLiquidacion.equals("LIQUIDADO"))
 			liquidacionM.setEstado(modelo.LiquidacionExpensas.Estado.LIQUIDADO
 					);
-		if(estadoLiquidacion.equals("CANCELADO"))
-			liquidacionM.setEstado(modelo.LiquidacionExpensas.Estado.CANCELADO);
+		if(estadoLiquidacion.equals("ANULADO"))
+			liquidacionM.setEstado(modelo.LiquidacionExpensas.Estado.ANULADO);
 		return liquidacionM;
 	}
 	
@@ -681,8 +682,8 @@ public class Converter {
 		if(estadoLiquidacion.equals("LIQUIDADO"))
 			liquidacionP.setEstado(persistencia.clases.LiquidacionExpensas.Estado.LIQUIDADO
 					);
-		if(estadoLiquidacion.equals("CANCELADO"))
-			liquidacionP.setEstado(persistencia.clases.LiquidacionExpensas.Estado.CANCELADO);
+		if(estadoLiquidacion.equals("ANULADO"))
+			liquidacionP.setEstado(persistencia.clases.LiquidacionExpensas.Estado.ANULADO);
 		return liquidacionP;
 	}
 
