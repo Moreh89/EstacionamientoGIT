@@ -690,7 +690,7 @@ public class Controlador {
 		long codigoReturn=-1;
 
 		liquidacionSeleccionado.setEstado(modelo.LiquidacionExpensas.Estado.ANULADO);
-		//		DAOLiquidacionExpensas.getInstance().anularLiquidacion(liquidacionSeleccionado);
+		DAOLiquidacionExpensas.getInstance().anularLiquidacion(liquidacionSeleccionado);
 
 		ArrayList<modelo.Cliente> clientes = new ArrayList<modelo.Cliente>();
 		clientes=DAOCliente.getInstance().getClientes();
@@ -707,17 +707,18 @@ public class Controlador {
 					if(movimientoActual.getLiquidacionExpensas().getIdLiquidacionExpensas()==liquidacionSeleccionado.getIdLiquidacionExpensas())
 					{
 
-						modelo.MovimientoCC movimientoNuevo= new modelo.MovimientoCC();
-						movimientoNuevo.setIdMovimiento(0);
-						movimientoNuevo.setFecha(fecha);
-						movimientoNuevo.setDescripcion("ANULADO - "+movimientoActual.getDescripcion());
-						movimientoNuevo.setEstado("Anulado");
-						movimientoNuevo.setTicket(null);
-						movimientoNuevo.setMontoCobrado((-1)*movimientoActual.getMontoCobrado());
-						movimientoNuevo.setLiquidacionExpensas(liquidacionSeleccionado);
+												modelo.MovimientoCC movimientoNuevo= new modelo.MovimientoCC();
+												movimientoNuevo.setIdMovimiento(0);
+												movimientoNuevo.setFecha(fecha);
+												movimientoNuevo.setDescripcion("ANULADO - "+movimientoActual.getDescripcion());
+												movimientoNuevo.setEstado("Anulado");
+												movimientoNuevo.setTicket(null);
+												movimientoNuevo.setMontoCobrado((-1)*movimientoActual.getMontoCobrado());
+												movimientoNuevo.setLiquidacionExpensas(null);
+						
+												DAOCliente.getInstance().agregarMovimientoCC(clienteM.getIdCliente(), movimientoNuevo);
+												codigoReturn=movimientoNuevo.getIdMovimiento();
 
-						DAOCliente.getInstance().agregarMovimientoCC(clienteM.getIdCliente(), movimientoNuevo);
-						codigoReturn=movimientoNuevo.getIdMovimiento();
 					}
 				}
 			}

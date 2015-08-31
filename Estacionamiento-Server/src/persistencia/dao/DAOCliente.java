@@ -1,5 +1,7 @@
 package persistencia.dao;
 import java.util.ArrayList;
+
+import modelo.MovimientoCC;
 import persistencia.Converter;
 import persistencia.HibernateDAO;
 import persistencia.clases.Cliente;
@@ -53,6 +55,23 @@ public class DAOCliente {
 		
 		codigoReturn=clienteP.getIdCliente();		
 		return codigoReturn;
+	}
+
+	public long removerMovimientoCC(long idCliente,
+			MovimientoCC movimientoActual) {
+		persistencia.clases.Cliente clienteP = new persistencia.clases.Cliente();
+		long codigoReturn = -1;
+		persistencia.clases.MovimientoCC movimientoP = new persistencia.clases.MovimientoCC();
+		movimientoP = Converter.convertMovimientoCuentaCorrienteModeloToPersistencia(movimientoActual);
+		
+		clienteP=(persistencia.clases.Cliente) HibernateDAO.getInstancia().get(persistencia.clases.Cliente.class, idCliente);
+
+		clienteP.getCuentaCorriente().removeMovimientoCC(movimientoP);
+		
+		clienteP=(Cliente) HibernateDAO.getInstancia().update(clienteP);
+		
+		codigoReturn=clienteP.getIdCliente();		
+		return codigoReturn;		
 	}
 	
 

@@ -49,6 +49,10 @@ public class CuentaCorriente {
 	{
 		this.movimientos.add(movimientoCC);
 	}
+	public void removeMovimientoCC(persistencia.clases.MovimientoCC movimientoCC)
+	{
+		this.movimientos.remove(movimientoCC);
+	}
 	
 	
 	
