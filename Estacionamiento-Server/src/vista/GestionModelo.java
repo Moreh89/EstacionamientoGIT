@@ -15,13 +15,9 @@ import javax.swing.DefaultListModel;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 import javax.swing.JList;
-import javax.swing.AbstractListModel;
 import javax.swing.JScrollPane;
 import javax.swing.ListSelectionModel;
 import javax.swing.ScrollPaneConstants;
-import javax.swing.JComboBox;
-import javax.swing.DefaultComboBoxModel;
-
 import modelo.ModeloVehiculo;
 import controlador.Controlador;
 
@@ -39,7 +35,7 @@ public class GestionModelo extends JDialog implements ActionListener, ListSelect
 	private JTextField textFieldModeloActual;
 	private JButton btnModificarModelo;
 	private DefaultListModel<modelo.ModeloVehiculo> listModel;
-	private JList listModelos;
+	private JList<ModeloVehiculo> listModelos;
 	/**
 	 * Launch the application.
 	 */
@@ -56,7 +52,7 @@ public class GestionModelo extends JDialog implements ActionListener, ListSelect
 	/**
 	 * Create the dialog.
 	 */
-	@SuppressWarnings({ "rawtypes", "serial", "unchecked" })
+	@SuppressWarnings({ "rawtypes", "unchecked" })
 	public GestionModelo() {
 		setResizable(false);
 		setTitle("Gestion Modelo");

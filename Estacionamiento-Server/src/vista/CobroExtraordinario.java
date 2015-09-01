@@ -41,7 +41,7 @@ public class CobroExtraordinario extends JDialog implements ActionListener{
 	private JButton cancelarButton;
 	private JButton limpiarCamposButton;
 	private JTextField montoCobradoTextField;
-	private JComboBox comboBoxTipoCobro;
+	private JComboBox<String> comboBoxTipoCobro;
 	private modelo.Cliente cliente=new Cliente();
 	private JTextField clienteTextField;
 	private JButton btnBuscarCliente;
@@ -98,8 +98,8 @@ public class CobroExtraordinario extends JDialog implements ActionListener{
 		cancelarButton.addActionListener(this);
 
 		
-		comboBoxTipoCobro = new JComboBox();
-		comboBoxTipoCobro .setModel(new DefaultComboBoxModel(new String[] {"1. Expensas", "2. Alquiler"}));
+		comboBoxTipoCobro = new JComboBox<String>();
+		comboBoxTipoCobro .setModel(new DefaultComboBoxModel<String>(new String[] {"1. Expensas", "2. Alquiler"}));
 		comboBoxTipoCobro.setBounds(80, 60, 145, 25);
 		GridBagConstraints gbc_comboBoxTipoCobro  = new GridBagConstraints();
 		contentPanel.add(comboBoxTipoCobro, gbc_comboBoxTipoCobro);

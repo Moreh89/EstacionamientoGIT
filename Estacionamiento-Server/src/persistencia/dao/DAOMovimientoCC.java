@@ -1,7 +1,6 @@
 package persistencia.dao;
 import persistencia.Converter;
 import persistencia.HibernateDAO;
-import persistencia.clases.Cliente;
 
 public class DAOMovimientoCC {
 

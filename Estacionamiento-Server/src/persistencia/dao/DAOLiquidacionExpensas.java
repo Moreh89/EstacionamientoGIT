@@ -1,11 +1,8 @@
 package persistencia.dao;
 import java.util.ArrayList;
-import java.util.List;
-
 import persistencia.Converter;
 import persistencia.HibernateDAO;
 import persistencia.clases.LiquidacionExpensas;
-import persistencia.clases.Tarifa;
 
 public class DAOLiquidacionExpensas {
 

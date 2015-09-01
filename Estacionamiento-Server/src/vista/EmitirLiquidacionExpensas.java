@@ -34,6 +34,7 @@ public class EmitirLiquidacionExpensas extends JDialog implements ActionListener
 	private final JPanel contentPanel = new JPanel();
 	private JButton aceptarButton;
 	private JButton cancelarButton;
+	@SuppressWarnings("unused")
 	private JButton limpiarCamposButton;
 	private JTextField descripcionTextField;
 	private JTextField textFieldImporteLiquidar;
@@ -181,6 +182,7 @@ public class EmitirLiquidacionExpensas extends JDialog implements ActionListener
 		}
 
 	}
+	@SuppressWarnings("unused")
 	public static boolean isNumeric(String str)  
 	{  
 		try  

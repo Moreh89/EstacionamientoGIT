@@ -13,10 +13,8 @@ import javax.swing.border.EmptyBorder;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 import javax.swing.DefaultListModel;
-import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 import javax.swing.JList;
-import javax.swing.AbstractListModel;
 import javax.swing.JScrollPane;
 import javax.swing.ListSelectionModel;
 import javax.swing.ScrollPaneConstants;
@@ -38,7 +36,7 @@ public class AnularLiquidacionExpensas extends JDialog implements ActionListener
 	private JButton anularButton;
 	private JButton cancelarButton;
 	private DefaultListModel<LiquidacionExpensas> listModel;
-	private JList listLiquidaciones;
+	private JList<LiquidacionExpensas> listLiquidaciones;
 	private JLabel lblFechaEmisionLiquidacion;
 	private JLabel lblMontoTotalLiquidado;
 	private JTextField textFieldFechaEmisionLiquidacion;
@@ -62,7 +60,7 @@ public class AnularLiquidacionExpensas extends JDialog implements ActionListener
 	/**
 	 * Create the dialog.
 	 */
-	@SuppressWarnings({ "rawtypes", "serial", "unchecked" })
+	@SuppressWarnings({ "rawtypes", "unchecked" })
 	public AnularLiquidacionExpensas() {
 		setResizable(false);
 		setTitle("Anular Liquidacion de Expensas");

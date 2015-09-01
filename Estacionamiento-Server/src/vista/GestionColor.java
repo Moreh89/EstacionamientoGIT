@@ -15,7 +15,6 @@ import javax.swing.DefaultListModel;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 import javax.swing.JList;
-import javax.swing.AbstractListModel;
 import javax.swing.JScrollPane;
 import javax.swing.ListSelectionModel;
 import javax.swing.ScrollPaneConstants;
@@ -37,7 +36,7 @@ public class GestionColor extends JDialog implements ActionListener, ListSelecti
 	private JTextField textFieldColorActual;
 	private JButton btnModificarColor;
 	private DefaultListModel<modelo.ColorVehiculo> listModel;
-	private JList listColores;
+	private JList<ColorVehiculo> listColores;
 
 
 
@@ -57,7 +56,7 @@ public class GestionColor extends JDialog implements ActionListener, ListSelecti
 	/**
 	 * Create the dialog.
 	 */
-	@SuppressWarnings({ "rawtypes", "serial", "unchecked" })
+	@SuppressWarnings({ "rawtypes", "unchecked" })
 	public GestionColor() {
 		setResizable(false);
 		setTitle("Gestion Color");

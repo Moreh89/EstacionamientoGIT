@@ -3,24 +3,16 @@ package vista;
 import java.awt.EventQueue;
 
 import javax.swing.JDialog;
-import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
-import javax.swing.filechooser.FileFilter;
-import javax.swing.filechooser.FileNameExtensionFilter;
 import javax.swing.JButton;
-
 import controlador.Controlador;
-
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import java.awt.GridBagLayout;
 import java.awt.GridBagConstraints;
 import java.awt.Insets;
-import java.io.File;
-
-import javax.swing.JTextField;
 import javax.swing.JLabel;
 import javax.swing.ImageIcon;
 
@@ -36,7 +28,7 @@ public class BackupBD extends JDialog implements ActionListener {
 	private JLabel labelValidacion;
 	private JButton buttonCancelar;
 	private JButton buttonBackUp;
-	private String path;
+
 	/**
 	 * Launch the application.
 	 */

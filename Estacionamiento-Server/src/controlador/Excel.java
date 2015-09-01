@@ -12,7 +12,6 @@ import jxl.CellView;
 import jxl.Workbook;
 import jxl.WorkbookSettings;
 import jxl.format.UnderlineStyle;
-import jxl.write.Formula;
 import jxl.write.Label;
 import jxl.write.Number;
 import jxl.write.WritableCellFormat;
@@ -85,6 +84,7 @@ public class Excel {
 	}
 
 
+	@SuppressWarnings("unused")
 	private void addCaption(WritableSheet sheet, int column, int row, String s)
 			throws RowsExceededException, WriteException {
 		Label label;
@@ -92,6 +92,7 @@ public class Excel {
 		sheet.addCell(label);
 	}
 
+	@SuppressWarnings("unused")
 	private void addNumber(WritableSheet sheet, int column, int row,
 			Integer integer) throws WriteException, RowsExceededException {
 		Number number;
