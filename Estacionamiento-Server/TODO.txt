@@ -2,7 +2,7 @@ Rodri:
 Cliente ABM
 Cliente completar búsqueda
 Arqueo Caja
-Cant Autos- tickets abiertos
+Cant Autos- tickets abiertos - Listo
 
 
 Damian:

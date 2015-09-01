@@ -766,5 +766,20 @@ public class Controlador {
 		return codigoReturn;
 	}
 
+	public ArrayList<Ticket> obtenerTicketsAbiertos (){
+		ArrayList<Ticket> tickets = new ArrayList<Ticket>();
+			for (persistencia.clases.Ticket ticketTemp : DAOTicket.getInstance().getTicketsAbiertos()) {
+				tickets.add(Converter.convertTicketPersistenciaToModelo(ticketTemp));
+			} ;
+		return tickets;
+	}
+
+	public void setTicket(Ticket ticket) {
+		this.ticket = ticket;
+	}
+
+	public Ticket getTicket() {
+		return this.ticket;
+	}
 
 }

@@ -656,7 +656,12 @@ public class MenuOperador extends JFrame implements ActionListener, KeyListener 
 			}
 		}
 		if (event.getSource() == btnBuscarPorTicketAbierto) {
-			//TODO
+			new TicketsAbiertos().setVisible(true);
+			if (Controlador.getInstancia().getTicket()!=null){
+				this.textFieldNumeroTicket.setText(String.valueOf(Controlador.getInstancia().getTicket().getIdTicket()));
+				buscarTicket();
+			}
+			
 		}
 		if (event.getSource() == btnLimpiarCampos) {
 			Controlador.getInstancia().setClienteActual(null);
@@ -736,76 +741,83 @@ public class MenuOperador extends JFrame implements ActionListener, KeyListener 
 		}
 		if (event.getSource() == mntmCambiarContrasea){
 			new CambioContrasenia().setVisible(true);
-		}	
+		}
+		if (event.getSource() == mntmTicketsAbiertos){
+			new TicketsAbiertos().setVisible(true);
+		}
 		
 
 
+	}
+	
+	private void buscarTicket(){
+		//TODO Bloquear resto de cosas
+		if(isNumeric(textFieldNumeroTicket.getText()) && (textFieldPrepago.getText().equals("")||isNumeric(textFieldPrepago.getText()))){
+		Ticket tck = Controlador.getInstancia().buscarTicket(textFieldNumeroTicket.getText());
+			if (tck!=null){
+				Controlador.getInstancia().setClienteActual(null);
+				this.textFieldNumeroTicket.setBackground(new Color(Color.WHITE.getRGB()));
+				this.textFieldPrepago.setBackground(new Color(Color.WHITE.getRGB()));
+				this.textFieldPatente.setBackground(new Color(Color.WHITE.getRGB()));
+				String numeroTck = String.valueOf(tck.getIdTicket());
+				while (numeroTck.length() < 10) {
+					numeroTck = "0"+numeroTck; 
+				}
+				this.textFieldNumeroTicket.setText(numeroTck);
+				this.textFieldIngreso.setText(new SimpleDateFormat("MM-dd-yyyy hh:mm:ss").format(tck.getFechaLlegada()));
+				this.comboBoxTipoVehiculo.setSelectedItem(tck.getCatergoriaVehiculo().getDescripcion());
+				this.comboBoxColor.setSelectedItem(tck.getColor().getDescripcion());
+				this.comboBoxModelo.setSelectedItem(tck.getModeloVehiculo().getDescripcion());
+				this.comboBoxDescuento.setSelectedItem(tck.getDescuento().getDescripcion());
+				this.textFieldPatente.setText(tck.getPatente());
+				if (tck.getFechaSalida() != null) this.textFieldEgreso.setText(new SimpleDateFormat("MM-dd-yyyy hh:mm:ss").format(tck.getFechaSalida()));
+				this.textFieldObsevacion.setText(tck.getObservacion());
+				this.textFieldPrepago.setText(String.valueOf(tck.getPrepago()));
+				this.textFieldPrepago.setEditable(false);
+				this.textFieldTiempoEstadia.setText(tck.getTiempoEstadia());
+				if(tck.getEstado() == Ticket.Estado.CERRADO){
+					this.textFieldTotalAPagar.setText("(PAGADO) " + String.valueOf(tck.getMontoCobrado()));
+				}else if (tck.getEstado() == Ticket.Estado.PREPAGO){
+					this.textFieldTotalAPagar.setText("Prepago " + String.valueOf(tck.getPrepago()) + " restan: "+ String.valueOf(tck.getMontoCobrado()));
+				} else this.textFieldTotalAPagar.setText(String.valueOf(tck.getMontoCobrado()));
+				if (tck.getCliente() != null){
+					this.textFieldCliente.setText(tck.getCliente().toString());
+				}else {this.textFieldCliente.setText("");}
+			}else{
+				String numeroTck = textFieldNumeroTicket.getText();
+				while (numeroTck.length() < 10) {
+					numeroTck = "0"+numeroTck; 
+				}
+				this.textFieldNumeroTicket.setText(numeroTck);
+				this.textFieldNumeroTicket.setBackground(new Color(Color.ORANGE.getRGB()));
+				this.textFieldPrepago.setBackground(new Color(Color.WHITE.getRGB()));
+				this.textFieldPatente.setBackground(new Color(Color.WHITE.getRGB()));
+				this.textFieldIngreso.setText("");
+				this.comboBoxTipoVehiculo.setSelectedIndex(0);
+				this.comboBoxColor.setSelectedIndex(0);
+				this.comboBoxModelo.setSelectedIndex(0);
+				this.comboBoxDescuento.setSelectedIndex(0);
+				this.textFieldPatente.setText("");
+				this.textFieldEgreso.setText("");
+				this.textFieldObsevacion.setText("");
+				this.textFieldPrepago.setText("");
+				this.textFieldPrepago.setEditable(true);
+				this.textFieldTiempoEstadia.setText("");
+				this.textFieldTotalAPagar.setText("");
+				this.textFieldCliente.setText("");
+			}
+		}else{
+			if(!isNumeric(textFieldNumeroTicket.getText()))
+			textFieldNumeroTicket.setBackground(new Color(Color.PINK.getRGB()));
+			if(textFieldPrepago.getText().equals("")||isNumeric(textFieldPrepago.getText())) textFieldPrepago.setBackground(new Color(Color.PINK.getRGB()));
+		}
 	}
 
 	@Override
 	public void keyPressed(KeyEvent event) {
 		
 		if (event.getKeyCode()== KeyEvent.VK_ENTER && this.textFieldNumeroTicket.isFocusOwner()){
-			//TODO Bloquear resto de cosas
-			if(isNumeric(textFieldNumeroTicket.getText()) && (textFieldPrepago.getText().equals("")||isNumeric(textFieldPrepago.getText()))){
-			Ticket tck = Controlador.getInstancia().buscarTicket(textFieldNumeroTicket.getText());
-				if (tck!=null){
-					Controlador.getInstancia().setClienteActual(null);
-					this.textFieldNumeroTicket.setBackground(new Color(Color.WHITE.getRGB()));
-					this.textFieldPrepago.setBackground(new Color(Color.WHITE.getRGB()));
-					this.textFieldPatente.setBackground(new Color(Color.WHITE.getRGB()));
-					String numeroTck = String.valueOf(tck.getIdTicket());
-					while (numeroTck.length() < 10) {
-						numeroTck = "0"+numeroTck; 
-					}
-					this.textFieldNumeroTicket.setText(numeroTck);
-					this.textFieldIngreso.setText(new SimpleDateFormat("MM-dd-yyyy hh:mm:ss").format(tck.getFechaLlegada()));
-					this.comboBoxTipoVehiculo.setSelectedItem(tck.getCatergoriaVehiculo().getDescripcion());
-					this.comboBoxColor.setSelectedItem(tck.getColor().getDescripcion());
-					this.comboBoxModelo.setSelectedItem(tck.getModeloVehiculo().getDescripcion());
-					this.comboBoxDescuento.setSelectedItem(tck.getDescuento().getDescripcion());
-					this.textFieldPatente.setText(tck.getPatente());
-					if (tck.getFechaSalida() != null) this.textFieldEgreso.setText(new SimpleDateFormat("MM-dd-yyyy hh:mm:ss").format(tck.getFechaSalida()));
-					this.textFieldObsevacion.setText(tck.getObservacion());
-					this.textFieldPrepago.setText(String.valueOf(tck.getPrepago()));
-					this.textFieldPrepago.setEditable(false);
-					this.textFieldTiempoEstadia.setText(tck.getTiempoEstadia());
-					if(tck.getEstado() == Ticket.Estado.CERRADO){
-						this.textFieldTotalAPagar.setText("(PAGADO) " + String.valueOf(tck.getMontoCobrado()));
-					}else if (tck.getEstado() == Ticket.Estado.PREPAGO){
-						this.textFieldTotalAPagar.setText("Pregago " + String.valueOf(tck.getPrepago()) + " restan: "+ String.valueOf(tck.getMontoCobrado()));
-					} else this.textFieldTotalAPagar.setText(String.valueOf(tck.getMontoCobrado()));
-					if (tck.getCliente() != null){
-						this.textFieldCliente.setText(tck.getCliente().toString());
-					}else {this.textFieldCliente.setText("");}
-				}else{
-					String numeroTck = textFieldNumeroTicket.getText();
-					while (numeroTck.length() < 10) {
-						numeroTck = "0"+numeroTck; 
-					}
-					this.textFieldNumeroTicket.setText(numeroTck);
-					this.textFieldNumeroTicket.setBackground(new Color(Color.ORANGE.getRGB()));
-					this.textFieldPrepago.setBackground(new Color(Color.WHITE.getRGB()));
-					this.textFieldPatente.setBackground(new Color(Color.WHITE.getRGB()));
-					this.textFieldIngreso.setText("");
-					this.comboBoxTipoVehiculo.setSelectedIndex(0);
-					this.comboBoxColor.setSelectedIndex(0);
-					this.comboBoxModelo.setSelectedIndex(0);
-					this.comboBoxDescuento.setSelectedIndex(0);
-					this.textFieldPatente.setText("");
-					this.textFieldEgreso.setText("");
-					this.textFieldObsevacion.setText("");
-					this.textFieldPrepago.setText("");
-					this.textFieldPrepago.setEditable(true);
-					this.textFieldTiempoEstadia.setText("");
-					this.textFieldTotalAPagar.setText("");
-					this.textFieldCliente.setText("");
-				}
-			}else{
-				if(!isNumeric(textFieldNumeroTicket.getText()))
-				textFieldNumeroTicket.setBackground(new Color(Color.PINK.getRGB()));
-				if(textFieldPrepago.getText().equals("")||isNumeric(textFieldPrepago.getText())) textFieldPrepago.setBackground(new Color(Color.PINK.getRGB()));
-			}
+			buscarTicket();
 		}
 		if (event.getKeyCode()== KeyEvent.VK_F2 ){
 			this.btnGuardarF.doClick();

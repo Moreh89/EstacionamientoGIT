@@ -1,5 +1,7 @@
 package persistencia.dao;
 
+import java.util.List;
+
 import persistencia.Converter;
 import persistencia.HibernateDAO;
 import modelo.Ticket;
@@ -31,6 +33,15 @@ public class DAOTicket {
 		return tck;
 	}
 
+	@SuppressWarnings("unchecked")
+	public List<persistencia.clases.Ticket> getTicketsAbiertos() {
+
+		 List<persistencia.clases.Ticket> listaTickets = (List<persistencia.clases.Ticket>) HibernateDAO.getInstancia().getListString("Ticket", "estado", "0");
+		listaTickets.addAll((List<persistencia.clases.Ticket>) HibernateDAO.getInstancia().getListString("Ticket", "estado", "1"));
+		
+		return listaTickets;
+	}
+	
 	public void actualizar(Ticket tckM) {
 		
 		//Obtengo el ticket de memoria y actualizo lo que sea necesario

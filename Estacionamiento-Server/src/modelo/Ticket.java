@@ -301,5 +301,8 @@ public class Ticket {
 		
 	}
 
+	public String toString(){
+		return this.patente;
+	}
 
 }
