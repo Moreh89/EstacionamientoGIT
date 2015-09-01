@@ -29,6 +29,10 @@ public class HibernateFactory
         	 config.addAnnotatedClass(PersonaAutorizada.class);
         	 config.addAnnotatedClass(TasaInteres.class);
         	 config.addAnnotatedClass(LiquidacionExpensas.class);
+        	 //Para cambiar atributos sin el archivo
+//        	 config.setProperty("hibernate.connection.url", "jdbc:mysql://"+hostname+"/"+database);
+//        	 config.setProperty("hibernate.connection.username", username);
+//        	 config.setProperty("hibernate.connection.password", password);
            	 sessionFactory = config.buildSessionFactory();
         }
         catch (Throwable ex)
