@@ -1,0 +1,11 @@
+Rodri:
+Cliente ABM
+Cliente completar búsqueda
+Arqueo Caja
+Cant Autos- tickets abiertos
+
+
+Damian:
+usuario gestion
+Deudores
+Automatizar funcion que aplique interés mensual a deudores

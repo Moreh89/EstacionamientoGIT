@@ -242,7 +242,7 @@ public class MenuAdmin extends JFrame implements ActionListener {
 			 new BuscadorCliente().setVisible(true);
 		}
 		if (event.getSource() == mntmModificacionUsuario){
-			 new GestorUsuario().setVisible(true);
+			 new GestionUsuario().setVisible(true);
 		}
 		if (event.getSource() == mntmArqueoDeCaja){
 			new ArqueoDeCaja().setVisible(true);

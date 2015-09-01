@@ -124,7 +124,7 @@ public class EmitirLiquidacionExpensas extends JDialog implements ActionListener
 						contentPanel.add(textFieldImporteLiquidar, gbc_textFieldImporteLiquidar);
 		
 				cancelarButton = new JButton("Cancelar");
-				cancelarButton.setIcon(new ImageIcon(GestorUsuario.class.getResource("/image/cancel.png")));
+				cancelarButton.setIcon(new ImageIcon(GestionUsuario.class.getResource("/image/cancel.png")));
 				GridBagConstraints gbc_cancelarButton = new GridBagConstraints();
 				gbc_cancelarButton.insets = new Insets(0, 0, 0, 5);
 				gbc_cancelarButton.gridx = 0;

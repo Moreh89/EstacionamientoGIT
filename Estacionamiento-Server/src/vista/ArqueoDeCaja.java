@@ -125,14 +125,14 @@ public class ArqueoDeCaja extends JDialog {
 		});
 		
 		exportarButton = new JButton("Generar");
-		exportarButton.setIcon(new ImageIcon(GestorUsuario.class.getResource("/image/pdf.png")));
+		exportarButton.setIcon(new ImageIcon(GestionUsuario.class.getResource("/image/pdf.png")));
 		GridBagConstraints gbc_exportarButton = new GridBagConstraints();
 		gbc_exportarButton.fill = GridBagConstraints.HORIZONTAL;
 		gbc_exportarButton.insets = new Insets(0, 0, 0, 5);
 		gbc_exportarButton.gridx = 0;
 		gbc_exportarButton.gridy = 3;
 		contentPanel.add(exportarButton, gbc_exportarButton);
-		cancelarButton.setIcon(new ImageIcon(GestorUsuario.class.getResource("/image/cancel.png")));
+		cancelarButton.setIcon(new ImageIcon(GestionUsuario.class.getResource("/image/cancel.png")));
 		GridBagConstraints gbc_cancelarButton = new GridBagConstraints();
 		gbc_cancelarButton.fill = GridBagConstraints.HORIZONTAL;
 		gbc_cancelarButton.gridx = 2;

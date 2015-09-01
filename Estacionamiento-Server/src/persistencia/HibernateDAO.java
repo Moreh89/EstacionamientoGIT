@@ -161,16 +161,16 @@ public class HibernateDAO {
 	}
 	
 	
-	public boolean backUp(String databaseName, String path,String fileNameBackup)
+	public String backUp(String databaseName, String path,String fileNameBackup)
 	{
 		Session session = getSession();
 		session.beginTransaction();
-//TODO CREAR EL QUERY, NO EJECUTA PARECE. La línea ya está.
 		SQLQuery query=session.createSQLQuery("BACKUP DATABASE " + databaseName + " TO DISK = " + path +fileNameBackup);
 		query.executeUpdate();
 		session.flush();
-		return true;
+		return path+fileNameBackup;
 	}
+
 
 	public List<?> getListLiquidacionesDatediff(String className, String columna,int value)
 	{

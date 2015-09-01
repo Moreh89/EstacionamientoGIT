@@ -2,6 +2,7 @@ package controlador;
 
 
 
+import java.io.File;
 import java.io.IOException;
 import java.sql.Time;
 import java.text.DateFormat;
@@ -12,6 +13,8 @@ import java.util.Date;
 import java.util.GregorianCalendar;
 import java.util.List;
 import java.util.Vector;
+
+import javax.swing.JOptionPane;
 
 import jxl.write.WriteException;
 import net.sf.jasperreports.engine.virtualization.SqlDateSerializer;
@@ -294,17 +297,31 @@ public class Controlador {
 		return null;
 	}
 
-	public boolean backUp(String letraDisco){
-		//TODO ver como se puede generar el path si no existe.
-		String path= "'" + letraDisco + ":/BackUp_Estacionamiento/";
+	public String backUp(){
+		File theDir = new File("C:\\SIGE\\BackUp\\");
+		
+		String stringReturn="";
+		try{   
+			if (!theDir.exists())
+			{ 
+				boolean result = theDir.mkdirs();    
+				if(result==false){  
+					return "";
+				}  
+			}
+			String path= "'"+theDir.getPath()+"\\";
+			DateFormat dateFormat = new SimpleDateFormat("yyyyMMddHHmmss"); 
+			Date date = new Date(); 
+			String fileNameBackup = "backUp_"+dateFormat.format(date)+".BAK'"; 
+			stringReturn=HibernateDAO.getInstancia().backUp("ESTACIONAMIENTO", path, fileNameBackup);
+	
+		}catch(Exception e){  
+			
+			return "";
+		}  
+	
+		return stringReturn;
 
-		DateFormat dateFormat = new SimpleDateFormat("yyyyMMddHHmmss"); 
-		Date date = new Date(); 
-		String fileNameBackup = "backUp_"+dateFormat.format(date)+".BAK'"; 
-
-		HibernateDAO.getInstancia().backUp("ESTACIONAMIENTO", path, fileNameBackup);
-
-		return true;
 	}
 
 	public boolean cambiarContrasenia(String password) {
@@ -707,17 +724,17 @@ public class Controlador {
 					if(movimientoActual.getLiquidacionExpensas().getIdLiquidacionExpensas()==liquidacionSeleccionado.getIdLiquidacionExpensas())
 					{
 
-												modelo.MovimientoCC movimientoNuevo= new modelo.MovimientoCC();
-												movimientoNuevo.setIdMovimiento(0);
-												movimientoNuevo.setFecha(fecha);
-												movimientoNuevo.setDescripcion("ANULADO - "+movimientoActual.getDescripcion());
-												movimientoNuevo.setEstado("Anulado");
-												movimientoNuevo.setTicket(null);
-												movimientoNuevo.setMontoCobrado((-1)*movimientoActual.getMontoCobrado());
-												movimientoNuevo.setLiquidacionExpensas(null);
-						
-												DAOCliente.getInstance().agregarMovimientoCC(clienteM.getIdCliente(), movimientoNuevo);
-												codigoReturn=movimientoNuevo.getIdMovimiento();
+						modelo.MovimientoCC movimientoNuevo= new modelo.MovimientoCC();
+						movimientoNuevo.setIdMovimiento(0);
+						movimientoNuevo.setFecha(fecha);
+						movimientoNuevo.setDescripcion("ANULADO - "+movimientoActual.getDescripcion());
+						movimientoNuevo.setEstado("Anulado");
+						movimientoNuevo.setTicket(null);
+						movimientoNuevo.setMontoCobrado((-1)*movimientoActual.getMontoCobrado());
+						movimientoNuevo.setLiquidacionExpensas(null);
+
+						DAOCliente.getInstance().agregarMovimientoCC(clienteM.getIdCliente(), movimientoNuevo);
+						codigoReturn=movimientoNuevo.getIdMovimiento();
 
 					}
 				}
@@ -739,7 +756,13 @@ public class Controlador {
 				costoFraccion, costoHora, costoMediaEstadia,
 				costoEstadia, tiempoMinimo, tiempoFraccion,
 				tiempoMediaEstadia_minuto, tiempoEstadia_minuto);
-		
+
+		if(codigoReturn!=-1)
+		{
+			tarifas=DAOTarifa.getInstance().getTarifas();
+
+		}
+
 		return codigoReturn;
 	}
 

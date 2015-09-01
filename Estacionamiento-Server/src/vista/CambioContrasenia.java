@@ -77,7 +77,7 @@ public class CambioContrasenia extends JDialog implements ActionListener{
 		aceptarButton.addActionListener(this);
 
 		cancelarButton = new JButton("Cancelar");
-		cancelarButton.setIcon(new ImageIcon(GestorUsuario.class.getResource("/image/cancel.png")));
+		cancelarButton.setIcon(new ImageIcon(GestionUsuario.class.getResource("/image/cancel.png")));
 		cancelarButton.setBounds(10, 102, 116, 32);
 		contentPanel.add(cancelarButton);
 		cancelarButton.addActionListener(this);

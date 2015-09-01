@@ -146,7 +146,7 @@ public class AnularLiquidacionExpensas extends JDialog implements ActionListener
 		anularButton.addActionListener(this);
 
 		cancelarButton = new JButton("Cancelar");
-		cancelarButton.setIcon(new ImageIcon(GestorUsuario.class.getResource("/image/cancel.png")));
+		cancelarButton.setIcon(new ImageIcon(GestionUsuario.class.getResource("/image/cancel.png")));
 		GridBagConstraints gbc_cancelarButton = new GridBagConstraints();
 		gbc_cancelarButton.insets = new Insets(0, 0, 5, 5);
 		gbc_cancelarButton.fill = GridBagConstraints.BOTH;

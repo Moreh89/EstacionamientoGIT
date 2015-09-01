@@ -74,7 +74,7 @@ public class ModificarInteres extends JDialog implements ActionListener{
 		aceptarButton.addActionListener(this);
 		
 		cancelarButton = new JButton("Cancelar");
-		cancelarButton.setIcon(new ImageIcon(GestorUsuario.class.getResource("/image/cancel.png")));
+		cancelarButton.setIcon(new ImageIcon(GestionUsuario.class.getResource("/image/cancel.png")));
 		cancelarButton.setBounds(155, 104, 116, 32);
 		contentPanel.add(cancelarButton);
 		cancelarButton.addActionListener(this);

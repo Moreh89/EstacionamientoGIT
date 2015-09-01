@@ -177,7 +177,7 @@ public class Login extends javax.swing.JDialog implements ActionListener, KeyLis
 				
 			
 			
-					lblNewLabel = new JLabel("Sistema Integral de Gesti\u00F3n de Estacionamiento");
+					lblNewLabel = new JLabel("Sistema Integral para Gesti\u00F3n de Estacionamientos");
 					lblNewLabel.setHorizontalAlignment(SwingConstants.CENTER);
 					lblNewLabel.setBounds(0, 58, 413, 14);
 					lblNewLabel.setForeground(Color.WHITE);

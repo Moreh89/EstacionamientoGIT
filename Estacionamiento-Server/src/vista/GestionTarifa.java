@@ -308,7 +308,7 @@ public class GestionTarifa extends JDialog implements ActionListener, ItemListen
 					isNumeric(textCostoMediaEstadia.getText())&& isNumeric(textCostoEstadia.getText())&& 
 					isNumeric(textCostoFraccion.getText())&& isNumeric(textCostoFraccion.getText())&& 
 					isNumeric(textCostoFraccion.getText())&& isNumeric(textTiempoFraccion.getText())&& 
-					isNumeric(textTiempoInicioMediaEstadia.getText())&& isNumeric(textTiempoInicioMediaEstadia.getText()))
+					isNumeric(textTiempoInicioMediaEstadia.getText())&& isNumeric(textTiempoInicioEstadia.getText()))
 			{
 				long codigoReturn;
 				modelo.Tarifa tarifaSeleccionada = (Tarifa) comboBoxCategoria.getSelectedItem();
@@ -320,7 +320,7 @@ public class GestionTarifa extends JDialog implements ActionListener, ItemListen
 				double tiempoMinimo=Double.parseDouble(textTiempoMinimo.getText());
 				double tiempoFraccion=Double.parseDouble(textTiempoFraccion.getText());
 				double tiempoMediaEstadia_minuto=Double.parseDouble(textTiempoInicioMediaEstadia.getText());
-				double tiempoEstadia_minuto=Double.parseDouble(textTiempoInicioMediaEstadia.getText());
+				double tiempoEstadia_minuto=Double.parseDouble(textTiempoInicioEstadia.getText());
 
 				codigoReturn=Controlador.getInstancia().modificarTarifa(tarifaSeleccionada, costoMinimo, costoFraccion, costoHora, costoMediaEstadia, costoEstadia,
 						tiempoMinimo, tiempoFraccion, tiempoMediaEstadia_minuto, tiempoEstadia_minuto);
@@ -336,7 +336,7 @@ public class GestionTarifa extends JDialog implements ActionListener, ItemListen
 			}
 
 			else{
-				JOptionPane.showMessageDialog(null, "Alguno/s de los campos ingresados no son válidos.","Error Validación Datos",  JOptionPane.INFORMATION_MESSAGE);
+				JOptionPane.showMessageDialog(null, "Alguno/s de los campos ingresados no son válidos.","Gestión de Tarifa",  JOptionPane.INFORMATION_MESSAGE);
 			}
 		}
 

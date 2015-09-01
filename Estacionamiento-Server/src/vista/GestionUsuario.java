@@ -22,21 +22,21 @@ import javax.swing.ScrollPaneConstants;
 import javax.swing.JList;
 
 @SuppressWarnings("rawtypes")
-public class GestorUsuario extends JDialog {
+public class GestionUsuario extends JDialog {
 
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
-	private JTextField buscarTextField;
+	private JTextField textFieldUserName;
 	private DefaultTableModel model;
 	private JScrollPane scrollPane;
 	
 	
 	private TableRowSorter<TableModel> sorter;
 	
-	public GestorUsuario() {
+	public GestionUsuario() {
 		setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
 		initGUI();
 	}
@@ -44,7 +44,7 @@ public class GestorUsuario extends JDialog {
 	
 
 	public void initGUI(){
-		setTitle("Gestor Usuarios");
+		setTitle("Gestión Usuarios");
 		setResizable(false);
 		setBounds(100, 100, 699, 324);
 		contentPane = new JPanel();
@@ -52,15 +52,15 @@ public class GestorUsuario extends JDialog {
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 		
-		JLabel lblBuscar = new JLabel("ID:");
-		lblBuscar.setFont(new Font("Tahoma", Font.BOLD, 11));
-		lblBuscar.setBounds(10, 19, 46, 14);
-		contentPane.add(lblBuscar);
+		JLabel lblNombreUsuario = new JLabel("Nombre Usuario:");
+		lblNombreUsuario.setFont(new Font("Tahoma", Font.BOLD, 11));
+		lblNombreUsuario.setBounds(10, 19, 122, 14);
+		contentPane.add(lblNombreUsuario);
 		
-		buscarTextField = new JTextField();
-		buscarTextField.setBounds(53, 14, 339, 25);
-		contentPane.add(buscarTextField);
-		buscarTextField.setColumns(10);
+		textFieldUserName = new JTextField();
+		textFieldUserName.setBounds(113, 14, 279, 25);
+		contentPane.add(textFieldUserName);
+		textFieldUserName.setColumns(10);
 		model = new DefaultTableModel(){
 			/**
 			 * 
@@ -96,7 +96,7 @@ public class GestorUsuario extends JDialog {
 		});
 		buscarButton.setBounds(404, 7, 116, 32);
 		contentPane.add(buscarButton);
-		buscarButton.setIcon(new ImageIcon(GestorUsuario.class.getResource("/image/search.png")));
+		buscarButton.setIcon(new ImageIcon(GestionUsuario.class.getResource("/image/search.png")));
 		
 		JSeparator separator = new JSeparator();
 		separator.setBounds(10, 47, 510, 6);
@@ -108,21 +108,21 @@ public class GestorUsuario extends JDialog {
 		contentPane.add(panel);
 		panel.setLayout(null);
 		
-		JButton nuevoAdministrativoButton = new JButton("<html>Usuario <br>Administrativo</br></html>");
-		nuevoAdministrativoButton.setBounds(10, 23, 140, 40);
-		panel.add(nuevoAdministrativoButton);
-		nuevoAdministrativoButton.addActionListener(new ActionListener() {
+		JButton btnNuevoAdministrativo = new JButton("<html>Usuario <br>Administrativo</br></html>");
+		btnNuevoAdministrativo.setBounds(10, 23, 140, 40);
+		panel.add(btnNuevoAdministrativo);
+		btnNuevoAdministrativo.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				dispose();
 				
 			}
 		});
-		nuevoAdministrativoButton.setIcon(new ImageIcon(GestorUsuario.class.getResource("/image/plus.png")));
+		btnNuevoAdministrativo.setIcon(new ImageIcon(GestionUsuario.class.getResource("/image/plus.png")));
 		
-		JButton modificarButton = new JButton("Modificar");
-		modificarButton.setBounds(10, 130, 140, 32);
-		panel.add(modificarButton);
-		modificarButton.setIcon(new ImageIcon(GestorUsuario.class.getResource("/image/modificar.png")));
+		JButton btnModificarButton = new JButton("Modificar");
+		btnModificarButton.setBounds(10, 130, 140, 32);
+		panel.add(btnModificarButton);
+		btnModificarButton.setIcon(new ImageIcon(GestionUsuario.class.getResource("/image/modificar.png")));
 		
 		JButton cancelarButton = new JButton("Cancelar");
 		cancelarButton.setBounds(10, 265, 140, 32);
@@ -132,20 +132,25 @@ public class GestorUsuario extends JDialog {
 				dispose();
 			}
 		});
-		cancelarButton.setIcon(new ImageIcon(GestorUsuario.class.getResource("/image/cancel.png")));
+		cancelarButton.setIcon(new ImageIcon(GestionUsuario.class.getResource("/image/cancel.png")));
 		
-		JButton nuevoOperadorbutton = new JButton("<html>Usuario <br>Operador</br></html>");
-		nuevoOperadorbutton.addActionListener(new ActionListener() {
+		JButton btnNuevoOperador = new JButton("<html>Usuario <br>Operador</br></html>");
+		btnNuevoOperador.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				
 				dispose();
 
 			}
 		});
-		nuevoOperadorbutton.setIcon(new ImageIcon(GestorUsuario.class.getResource("/image/plus.png")));
-		nuevoOperadorbutton.setBounds(10, 74, 140, 40);
-		panel.add(nuevoOperadorbutton);
-		modificarButton.addActionListener(new ActionListener() {
+		btnNuevoOperador.setIcon(new ImageIcon(GestionUsuario.class.getResource("/image/plus.png")));
+		btnNuevoOperador.setBounds(10, 74, 140, 40);
+		panel.add(btnNuevoOperador);
+		
+		JButton btnDeshabilitar = new JButton("Deshabilitar");
+		btnDeshabilitar.setIcon(new ImageIcon(GestionUsuario.class.getResource("/image/menos.png")));
+		btnDeshabilitar.setBounds(10, 179, 140, 32);
+		panel.add(btnDeshabilitar);
+		btnModificarButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				
 				
@@ -166,7 +171,7 @@ public class GestorUsuario extends JDialog {
 
 		
 		try {
-			String text = buscarTextField.getText();
+			String text = textFieldUserName.getText();
 		    String[] textArray = text.split(" ");
 
 		    for (int i = 0; i < textArray.length; i++) {
@@ -181,8 +186,5 @@ public class GestorUsuario extends JDialog {
 		
 		sorter.setRowFilter(rf);
 		}
-	
-	
-
 }
 

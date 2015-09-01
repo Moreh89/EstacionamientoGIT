@@ -73,7 +73,7 @@ public class GestionColor extends JDialog implements ActionListener, ListSelecti
 		contentPanel.add(aceptarButton);
 		
 		cancelarButton = new JButton("Cancelar");
-		cancelarButton.setIcon(new ImageIcon(GestorUsuario.class.getResource("/image/cancel.png")));
+		cancelarButton.setIcon(new ImageIcon(GestionUsuario.class.getResource("/image/cancel.png")));
 		cancelarButton.setBounds(283, 320, 116, 32);
 		contentPanel.add(cancelarButton);
 		cancelarButton.addActionListener(this);
