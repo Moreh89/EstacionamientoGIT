@@ -15,8 +15,8 @@ insert into ModeloVehiculo  (descripcion) VALUES  ('3 Peugeot 207');
 insert into ModeloVehiculo  (descripcion) VALUES  ('4 Audi a3');
 insert into ModeloVehiculo  (descripcion) VALUES  ('4 Posche 911');
 
-INSERT INTO Usuario (userName, password, permisos, nombre, apellido, tipoDocumento, numeroDocumento)  VALUES ('admin', 'admin', 0, 'admin', 'admin', 'dni', 9999);
-INSERT INTO Usuario (userName, password, permisos, nombre, apellido, tipoDocumento, numeroDocumento)  VALUES ('operador', 'operador', 1, 'operador', 'operador', 'dni', 8888);
+INSERT INTO Usuario (userName, password, permisos, nombre, apellido, tipoDocumento, numeroDocumento)  VALUES ('admin', 'admin', 0, 'admin', 'admin', 'DNI', 9999);
+INSERT INTO Usuario (userName, password, permisos, nombre, apellido, tipoDocumento, numeroDocumento)  VALUES ('operador', 'operador', 1, 'operador', 'operador', 'DNI', 8888);
 
 
 INSERT INTO Descuento (descripcion, descuento) VALUES ('0 N/A', 0)

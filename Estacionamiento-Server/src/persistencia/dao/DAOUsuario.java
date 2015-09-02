@@ -1,7 +1,10 @@
 package persistencia.dao;
+import java.util.ArrayList;
+
 import modelo.Usuario;
 import persistencia.Converter;
 import persistencia.HibernateDAO;
+import persistencia.clases.Cliente;
 
 public class DAOUsuario {
 
@@ -44,6 +47,36 @@ public class DAOUsuario {
 		persistencia.clases.Usuario usu = new persistencia.clases.Usuario();
 		usu = (persistencia.clases.Usuario) HibernateDAO.getInstancia().get(persistencia.clases.Usuario.class, idUsuario);
 		return usu;
+	}
+	
+	public ArrayList<modelo.Usuario> getUsuarios()
+	{
+		ArrayList<modelo.Usuario> usuariosReturn;
+		ArrayList<persistencia.clases.Usuario> usuariosP = new ArrayList<persistencia.clases.Usuario>();
+		usuariosP=(ArrayList<persistencia.clases.Usuario>) HibernateDAO.getInstancia().getList("Usuario");
+		usuariosReturn = Converter.convertUsuariosPersistenciaToModelo(usuariosP);
+		return usuariosReturn;
+	}
+
+	public long modificarUsuario(Usuario usuarioM) {
+		persistencia.clases.Usuario usuarioP = new persistencia.clases.Usuario();
+		usuarioP = (persistencia.clases.Usuario) HibernateDAO.getInstancia().get(persistencia.clases.Usuario.class, usuarioM.getIdUsuario());
+		usuarioP.setApellido(usuarioM.getApellido());
+		usuarioP.setNombre(usuarioM.getNombre());
+		usuarioP.setNumeroDocumento(usuarioM.getNumeroDocumento());
+		usuarioP.setTipoDocumento(usuarioM.getTipoDocumento());
+		if(usuarioM.getPermisos().toString().equals("CAJA"))
+		{
+			usuarioP.setPermisos(persistencia.clases.Usuario.PERMISOS.CAJA);
+		}
+		if(usuarioM.getPermisos().toString().equals("ADMIN"))
+		{
+			usuarioP.setPermisos(persistencia.clases.Usuario.PERMISOS.ADMIN);
+		}
+		
+		usuarioP=(persistencia.clases.Usuario) HibernateDAO.getInstancia().update(usuarioP);
+		
+		return usuarioP.getIdUsuario();
 	}
 
 }

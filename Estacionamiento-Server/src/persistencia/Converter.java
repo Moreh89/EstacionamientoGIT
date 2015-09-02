@@ -696,4 +696,15 @@ public class Converter {
 		return liquidacionesExpensasM;
 
 	}
+
+	public static ArrayList<Usuario> convertUsuariosPersistenciaToModelo(
+			ArrayList<persistencia.clases.Usuario> usuariosP) {
+
+		ArrayList<modelo.Usuario> usuariosM = new ArrayList<Usuario>();
+		for(persistencia.clases.Usuario usuarioP : usuariosP)
+		{
+			usuariosM.add(convertUsuarioPersistenciaToModelo(usuarioP));
+		}
+		return usuariosM;
+	}
 }

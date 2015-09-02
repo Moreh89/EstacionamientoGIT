@@ -782,4 +782,29 @@ public class Controlador {
 		return this.ticket;
 	}
 
+	public ArrayList<modelo.Usuario> getUsuarios() {
+		return DAOUsuario.getInstance().getUsuarios();
+	}
+
+	public long modificarUsuario(String apellido, String dni, String nombre, String tipoDoc, String tipoUsuario, modelo.Usuario usuarioM) {
+		long codigoReturn=-1;
+		usuarioM.setApellido(apellido);
+		usuarioM.setNombre(nombre);
+		usuarioM.setNumeroDocumento(dni);
+		usuarioM.setTipoDocumento(tipoDoc);
+		if(tipoUsuario.equals("ADMIN"))
+		{
+			usuarioM.setPermisos(Usuario.PERMISOS.ADMIN);
+		}
+		if(tipoUsuario.equals("CAJA"))
+		{
+			usuarioM.setPermisos(Usuario.PERMISOS.CAJA);
+		}
+		
+		codigoReturn=DAOUsuario.getInstance().modificarUsuario(usuarioM);
+		
+		return codigoReturn;
+		
+	}
+
 }

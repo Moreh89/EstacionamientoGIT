@@ -66,4 +66,9 @@ public class Usuario
 	}
 	
 	public Usuario(){}
+	
+	public String toString()
+	{
+		return this.nombre+" "+this.apellido;
+	}
 }
