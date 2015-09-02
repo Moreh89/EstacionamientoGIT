@@ -388,9 +388,11 @@ public class GestionUsuario extends JDialog implements ActionListener, KeyListen
 			if(!textFieldApellido.getText().isEmpty() && !textFieldDNILU.getText().isEmpty() && !textFieldNombre.getText().isEmpty()
 					&& !textFieldUserName.getText().isEmpty())
 			{
+				long codigoReturn=-1;
 				modelo.Usuario usuarioSeleccionado = (Usuario) this.listUsuarios.getSelectedValue();
-				Controlador.getInstancia().modificarUsuario(textFieldApellido.getText(),textFieldDNILU.getText(),textFieldNombre.getText()
+				codigoReturn=Controlador.getInstancia().modificarUsuario(textFieldApellido.getText(),textFieldDNILU.getText(),textFieldNombre.getText()
 						,comboBoxTipoDoc.getSelectedItem().toString(), comboBoxTipoUsuario.getSelectedItem().toString(), usuarioSeleccionado);
+				
 				dispose();
 			}
 		}

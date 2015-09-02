@@ -299,7 +299,7 @@ public class Controlador {
 
 	public String backUp(){
 		File theDir = new File("C:\\SIGE\\BackUp\\");
-		
+
 		String stringReturn="";
 		try{   
 			if (!theDir.exists())
@@ -314,12 +314,12 @@ public class Controlador {
 			Date date = new Date(); 
 			String fileNameBackup = "backUp_"+dateFormat.format(date)+".BAK'"; 
 			stringReturn=HibernateDAO.getInstancia().backUp("ESTACIONAMIENTO", path, fileNameBackup);
-	
+
 		}catch(Exception e){  
-			
+
 			return "";
 		}  
-	
+
 		return stringReturn;
 
 	}
@@ -618,9 +618,15 @@ public class Controlador {
 		}
 
 		Excel excel = new Excel();
-		//TODO GUARDA CON UN MES MENOR AL ACTUAL
-
-		excel.setOutputFile("c:/temp/"+new SimpleDateFormat("yyyy_MM_dd_HH_mm").format(fecha)+".xls");
+		File theDir = new File("C:\\SIGE\\Liquidaciones\\");
+		if (!theDir.exists())
+		{ 
+			boolean result = theDir.mkdirs();    
+		}
+		String path= "'"+theDir.getPath()+"\\";
+		DateFormat dateFormat = new SimpleDateFormat("yyyyMMddHHmmss"); 
+		Date date = new Date(); 
+		excel.setOutputFile(theDir+"\\Liquidacion_"+new SimpleDateFormat("yyyy_MM_dd_HH_mm").format(fecha)+".xls");
 
 		try {
 			excel.writeList(expensasImprimir);
@@ -768,9 +774,9 @@ public class Controlador {
 
 	public ArrayList<Ticket> obtenerTicketsAbiertos (){
 		ArrayList<Ticket> tickets = new ArrayList<Ticket>();
-			for (persistencia.clases.Ticket ticketTemp : DAOTicket.getInstance().getTicketsAbiertos()) {
-				tickets.add(Converter.convertTicketPersistenciaToModelo(ticketTemp));
-			} ;
+		for (persistencia.clases.Ticket ticketTemp : DAOTicket.getInstance().getTicketsAbiertos()) {
+			tickets.add(Converter.convertTicketPersistenciaToModelo(ticketTemp));
+		} ;
 		return tickets;
 	}
 
@@ -800,11 +806,11 @@ public class Controlador {
 		{
 			usuarioM.setPermisos(Usuario.PERMISOS.CAJA);
 		}
-		
+
 		codigoReturn=DAOUsuario.getInstance().modificarUsuario(usuarioM);
-		
+
 		return codigoReturn;
-		
+
 	}
 
 }
