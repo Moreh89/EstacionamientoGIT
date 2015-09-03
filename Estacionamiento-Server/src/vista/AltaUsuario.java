@@ -11,8 +11,10 @@ import javax.swing.JDialog;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
+
 
 
 
@@ -111,7 +113,7 @@ public class AltaUsuario extends JDialog implements ActionListener{
 		gbc_lblPassword1.gridy = 1;
 		contentPanel.add(lblPassword1, gbc_lblPassword1);
 
-		textFieldPassword1 = new JTextField();
+		textFieldPassword1 = new JPasswordField();
 		GridBagConstraints gbc_textFieldPassword1 = new GridBagConstraints();
 		gbc_textFieldPassword1.insets = new Insets(0, 0, 5, 0);
 		gbc_textFieldPassword1.fill = GridBagConstraints.HORIZONTAL;
@@ -128,7 +130,7 @@ public class AltaUsuario extends JDialog implements ActionListener{
 		gbc_lblPassword2.gridy = 2;
 		contentPanel.add(lblPassword2, gbc_lblPassword2);
 
-		textFieldPassword2 = new JTextField();
+		textFieldPassword2 = new JPasswordField();
 		GridBagConstraints gbc_textFieldPassword2 = new GridBagConstraints();
 		gbc_textFieldPassword2.insets = new Insets(0, 0, 5, 0);
 		gbc_textFieldPassword2.fill = GridBagConstraints.HORIZONTAL;
