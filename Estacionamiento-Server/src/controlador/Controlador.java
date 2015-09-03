@@ -492,7 +492,7 @@ public class Controlador {
 
 		if (tckP != null) {
 			modelo.Ticket tckM = Converter.convertTicketPersistenciaToModelo(tckP);
-			if(tckM.getEstado()!= Ticket.Estado.CERRADO) tckM.calcularMontoACobrar();
+			if(tckM.getEstado()!= Ticket.Estado.CERRADO && tckM.getEstado()!= Ticket.Estado.CREDITO) tckM.calcularMontoACobrar();
 
 			this.ticket = tckM;
 			return tckM;
@@ -501,12 +501,25 @@ public class Controlador {
 		return null;
 	}
 
-	public boolean cobrarTicket() {
+	public boolean cobrarTicket(Ticket.Estado estado) {
 
-		if(this.ticket.getEstado() != Ticket.Estado.CERRADO){
-			this.ticket.setEstado(Ticket.Estado.CERRADO);
+		if(this.ticket.getEstado() != estado){
+			this.ticket.setEstado(estado);
 			this.ticket.setUsuario(usuarioActual);
+			this.ticket.setFechaSalida(GregorianCalendar.getInstance().getTime());
 			DAOTicket.getInstance().actualizar(this.ticket);
+			
+			if(estado==modelo.Ticket.Estado.CREDITO){
+				MovimientoCC movCC = new MovimientoCC();
+				movCC.setDescripcion("Ticket");
+				//TODO Que hace el estado??
+				movCC.setEstado("");
+				movCC.setFecha(GregorianCalendar.getInstance().getTime());
+				movCC.setIdMovimiento(0);
+				movCC.setMontoCobrado(ticket.getMontoCobrado());
+				movCC.setTicket(this.ticket);
+				DAOCliente.getInstance().agregarMovimientoCC(ticket.getCliente().getIdCliente(), movCC);
+			}			
 			return true;
 		}
 		return false;
@@ -835,6 +848,18 @@ public class Controlador {
 		
 		codigoReturn=DAOUsuario.getInstance().persistir(usuarioM);
 		return codigoReturn;
+	}
+
+	public ArrayList<Ticket> obtenerTicketsCobrados(Usuario usuario, Date fechaInicio, Date fechaFin) {
+		ArrayList<Ticket> listaTicketsM = new ArrayList<Ticket>();
+		
+		ArrayList<persistencia.clases.Ticket> listaTicketsP = DAOTicket.getInstance().getTicketsCobrados(usuario, fechaInicio,fechaFin);
+		
+		for (persistencia.clases.Ticket ticketP : listaTicketsP) {
+			listaTicketsM.add(Converter.convertTicketPersistenciaToModelo(ticketP));
+		}
+		
+		return listaTicketsM;
 	}
 
 }

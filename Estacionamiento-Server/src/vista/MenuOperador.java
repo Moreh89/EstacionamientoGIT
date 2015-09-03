@@ -13,6 +13,7 @@ import java.awt.GridBagConstraints;
 import javax.swing.JComboBox;
 import java.awt.Insets;
 import javax.swing.DefaultComboBoxModel;
+import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 import javax.swing.JButton;
 import javax.swing.ImageIcon;
@@ -596,11 +597,24 @@ public class MenuOperador extends JFrame implements ActionListener, KeyListener 
 	public void actionPerformed(ActionEvent event) {
 
 		if (event.getSource() == btnCobrarF) {
-			if(!Controlador.getInstancia().cobrarTicket()){
+			if (Controlador.getInstancia().getTicket().getEstado() != Ticket.Estado.CERRADO
+					   && Controlador.getInstancia().getTicket().getEstado() != Ticket.Estado.CREDITO){
+				if(Controlador.getInstancia().getTicket().getCliente() !=null){
+					int resultado = JOptionPane.showConfirmDialog (null, "El ticket posee un Cliente, desea mover a Cuenta corriente?");
+					if (resultado == JOptionPane.OK_OPTION){
+						Controlador.getInstancia().cobrarTicket(Ticket.Estado.CREDITO);
+					} else {
+						Controlador.getInstancia().cobrarTicket(Ticket.Estado.CERRADO);
+					}
+				} else {
+					Controlador.getInstancia().cobrarTicket(Ticket.Estado.CERRADO);
+				}
+			
+			}else{
 				//TODO Imprimir error, ticket ya cobrado
 			}
-			
 		}
+			
 		if (event.getSource() == btnGuardarF) {
 			
 			//TODO si pasaron 5 min desde q se creo bloquear los campos correspondientes
@@ -687,39 +701,39 @@ public class MenuOperador extends JFrame implements ActionListener, KeyListener 
 		if (event.getSource() == btnTicketF) {
 			
 			if(!this.textFieldPatente.getText().equals("")) {
-			
-			Ticket tck= Controlador.getInstancia()
-					.generarTicket(
-							(String) comboBoxTipoVehiculo.getSelectedItem(),
-							(String) comboBoxModelo.getSelectedItem(),
-							(String) comboBoxColor.getSelectedItem(),
-							(String) comboBoxDescuento.getSelectedItem(),
-							textFieldPatente.getText(),
-							textFieldCliente.getText(),
-							textFieldPrepago.getText(),
-							textFieldObsevacion.getText());
-
-			this.textFieldNumeroTicket.setBackground(new Color(Color.WHITE.getRGB()));
-			this.textFieldPatente.setBackground(new Color(Color.WHITE.getRGB()));
-			this.textFieldPatente.setBackground(new Color(Color.WHITE.getRGB()));
-			String numeroTck = String.valueOf(tck.getIdTicket());
-			while (numeroTck.length() < 10) {
-				numeroTck = "0"+numeroTck; 
-			}
-			this.textFieldNumeroTicket.setText(numeroTck);
-			this.textFieldIngreso.setText(new SimpleDateFormat("MM-dd-yyyy hh:mm:ss").format(tck.getFechaLlegada()));
-			this.comboBoxTipoVehiculo.setSelectedItem(tck.getCatergoriaVehiculo().getDescripcion());
-			this.comboBoxColor.setSelectedItem(tck.getColor().getDescripcion());
-			this.comboBoxModelo.setSelectedItem(tck.getModeloVehiculo().getDescripcion());
-			this.comboBoxDescuento.setSelectedItem(tck.getDescuento().getDescripcion());
-			this.textFieldPatente.setText(tck.getPatente());
-			if (tck.getFechaSalida() != null) this.textFieldEgreso.setText(new SimpleDateFormat("MM-dd-yyyy hh:mm:ss").format(tck.getFechaSalida()));
-			this.textFieldObsevacion.setText(tck.getObservacion());
-			this.textFieldPrepago.setText(String.valueOf(tck.getPrepago()));
-			this.textFieldPrepago.setEditable(true);
-			this.textFieldTiempoEstadia.setText(tck.getTiempoEstadia());
-			
-			//TODO bloquear botones y demas hasta que elija nuevo
+				
+				Ticket tck= Controlador.getInstancia()
+						.generarTicket(
+								(String) comboBoxTipoVehiculo.getSelectedItem(),
+								(String) comboBoxModelo.getSelectedItem(),
+								(String) comboBoxColor.getSelectedItem(),
+								(String) comboBoxDescuento.getSelectedItem(),
+								textFieldPatente.getText(),
+								textFieldCliente.getText(),
+								textFieldPrepago.getText(),
+								textFieldObsevacion.getText());
+	
+				this.textFieldNumeroTicket.setBackground(new Color(Color.WHITE.getRGB()));
+				this.textFieldPatente.setBackground(new Color(Color.WHITE.getRGB()));
+				this.textFieldPatente.setBackground(new Color(Color.WHITE.getRGB()));
+				String numeroTck = String.valueOf(tck.getIdTicket());
+				while (numeroTck.length() < 10) {
+					numeroTck = "0"+numeroTck; 
+				}
+				this.textFieldNumeroTicket.setText(numeroTck);
+				this.textFieldIngreso.setText(new SimpleDateFormat("MM-dd-yyyy hh:mm:ss").format(tck.getFechaLlegada()));
+				this.comboBoxTipoVehiculo.setSelectedItem(tck.getCatergoriaVehiculo().getDescripcion());
+				this.comboBoxColor.setSelectedItem(tck.getColor().getDescripcion());
+				this.comboBoxModelo.setSelectedItem(tck.getModeloVehiculo().getDescripcion());
+				this.comboBoxDescuento.setSelectedItem(tck.getDescuento().getDescripcion());
+				this.textFieldPatente.setText(tck.getPatente());
+				if (tck.getFechaSalida() != null) this.textFieldEgreso.setText(new SimpleDateFormat("MM-dd-yyyy hh:mm:ss").format(tck.getFechaSalida()));
+				this.textFieldObsevacion.setText(tck.getObservacion());
+				this.textFieldPrepago.setText(String.valueOf(tck.getPrepago()));
+				this.textFieldPrepago.setEditable(true);
+				this.textFieldTiempoEstadia.setText(tck.getTiempoEstadia());
+				
+				//TODO bloquear botones y demas hasta que elija nuevo
 			}else{
 				this.textFieldPatente.setBackground(new Color(Color.PINK.getRGB()));
 			}
@@ -775,11 +789,14 @@ public class MenuOperador extends JFrame implements ActionListener, KeyListener 
 				this.textFieldPrepago.setText(String.valueOf(tck.getPrepago()));
 				this.textFieldPrepago.setEditable(false);
 				this.textFieldTiempoEstadia.setText(tck.getTiempoEstadia());
-				if(tck.getEstado() == Ticket.Estado.CERRADO){
+				if(tck.getEstado() == Ticket.Estado.CREDITO){
+					this.textFieldTotalAPagar.setText("(PAGADO A CUENTA) " + String.valueOf(tck.getMontoCobrado()));
+				}else if(tck.getEstado() == Ticket.Estado.CERRADO){
 					this.textFieldTotalAPagar.setText("(PAGADO) " + String.valueOf(tck.getMontoCobrado()));
 				}else if (tck.getEstado() == Ticket.Estado.PREPAGO){
 					this.textFieldTotalAPagar.setText("Prepago " + String.valueOf(tck.getPrepago()) + " restan: "+ String.valueOf(tck.getMontoCobrado()));
-				} else this.textFieldTotalAPagar.setText(String.valueOf(tck.getMontoCobrado()));
+				} else 
+					this.textFieldTotalAPagar.setText(String.valueOf(tck.getMontoCobrado()));
 				if (tck.getCliente() != null){
 					this.textFieldCliente.setText(tck.getCliente().toString());
 				}else {this.textFieldCliente.setText("");}

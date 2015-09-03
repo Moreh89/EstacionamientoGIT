@@ -377,10 +377,10 @@ public class Converter {
 		movimientoCCM.setIdMovimiento(movimientoCCP.getIdMovimiento());
 		movimientoCCM.setMontoCobrado(movimientoCCP.getMontoCobrado());
 		movimientoCCM.setDescripcion(movimientoCCP.getDescripcion());
-		if(movimientoCCP.getTicket()!=null)
-		{
-			movimientoCCM.setTicket(convertTicketPersistenciaToModelo (movimientoCCP.getTicket()));
-		}
+//		if(movimientoCCP.getTicket()!=null)
+//		{
+//			movimientoCCM.setTicket(convertTicketPersistenciaToModelo (movimientoCCP.getTicket()));
+//		}
 		if(movimientoCCP.getLiquidacionExpensas()!=null)
 		{
 			movimientoCCM.setLiquidacionExpensas(convertLiquidacionExpensasPersistenciaToModelo (movimientoCCP.getLiquidacionExpensas()));
@@ -404,6 +404,8 @@ public class Converter {
 			ticketP.setEstado(persistencia.clases.Ticket.Estado.PREPAGO);
 		if(estadoTicket.equals("CERRADO"))
 			ticketP.setEstado(persistencia.clases.Ticket.Estado.CERRADO);
+		if(estadoTicket.equals("CREDITO"))
+			ticketP.setEstado(persistencia.clases.Ticket.Estado.CREDITO);
 
 		ticketP.setFechaLlegada(ticketM.getFechaLlegada());
 		ticketP.setFechaSalida(ticketM.getFechaSalida());
@@ -433,6 +435,8 @@ public class Converter {
 			ticketM.setEstado(modelo.Ticket.Estado.PREPAGO);
 		if(estadoTicket.equals("CERRADO"))
 			ticketM.setEstado(modelo.Ticket.Estado.CERRADO);
+		if(estadoTicket.equals("CREDITO"))
+			ticketM.setEstado(modelo.Ticket.Estado.CREDITO);
 
 		ticketM.setFechaLlegada(ticketP.getFechaLlegada());
 		if (ticketP.getFechaSalida() != null) ticketM.setFechaSalida(ticketP.getFechaSalida());

@@ -1,5 +1,6 @@
 package persistencia;
 
+import java.util.Date;
 import java.util.List;
 import org.hibernate.SQLQuery;
 import org.hibernate.Session;
@@ -67,7 +68,23 @@ public class HibernateDAO {
 		session.flush();
 		return list;
 	}
+	
+	public List<?> getListbetweenDates(String className, String columnaFiltro,String valorFiltro, String columnaFechaIni, String fehaInicio, String columanFechaFin, String fechaFin)
+	{
+		Session session=getSession();
+		List<?> list = session.createQuery("from "+className + " s where s. "+ columnaFiltro + " =?" + " and " + columnaFechaIni + ">=?" + " and " +  columanFechaFin + "<=?").setString(0, valorFiltro).setString(1, fehaInicio).setString(2, fechaFin).list();
+		session.flush();
+		return list;
+	}
 
+	public List<?> getListAfterDates(String className, String columnaFiltro,String valorFiltro, String columnaFechaIni, Date fehaInicio)
+	{
+		Session session=getSession();
+		List<?> list = session.createQuery("from "+className + " s where s. "+ columnaFiltro + " =?" + " and " + columnaFechaIni + ">=?" ).setString(0, valorFiltro).setDate(1, fehaInicio).list();
+		session.flush();
+		return list;
+	}
+	
 
 	// Devuelve un objeto, en className recibe el nombre de la clase, campo es la columna y valor es el filtro.
 	public Object getObjectWithString(String className, String campo, String value) {

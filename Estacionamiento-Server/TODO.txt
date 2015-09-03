@@ -1,7 +1,7 @@
 Rodri:
 Cliente ABM
 Cliente completar búsqueda
-Arqueo Caja
+Arqueo Caja - Listo a medias, faltan lo cobros extraordinarios que no estan linqueados al usuario
 Cant Autos- tickets abiertos - Listo
 
 
@@ -10,3 +10,18 @@ usuario gestion	// HECHO
 Deudores
 Automatizar funcion que aplique interés mensual a deudores
 
+MovimientoCC tiene que terner el usuario que lo carga,
+si es un pago para hacer el cierro necesito saber quien lo cargo
+
+Se me creo un supoer ciclo en el Converter en este orden:
+convertClientePersistenciaToModelo LLAMA A
+convertCuentaCorrientePersistenciaToModelo LLAMA A
+convertMovimientoCuentaCorrientePersistenciaToModelo LLAMA A
+convertTicketPersistenciaToModelo LLAMA A
+convertClientePersistenciaToModelo Y EMPIEZA DE NUEVO
+
+Lo Arregle sacando del convertMovimientoCuentaCorrientePersistenciaToModelo el ticket.
+Si se llega a necesitar vamos a tener q ver como lo hacemos.
+
+Agregue un estado al Ticket q es CREDITO, significa que se metio en la cuenta a credito y no se pago
+Lo necesito para el arqueo de caja.

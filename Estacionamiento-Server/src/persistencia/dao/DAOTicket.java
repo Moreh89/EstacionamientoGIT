@@ -1,10 +1,14 @@
 package persistencia.dao;
 
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import persistencia.Converter;
 import persistencia.HibernateDAO;
 import modelo.Ticket;
+import modelo.Usuario;
 
 public class DAOTicket {
 	
@@ -63,6 +67,7 @@ public class DAOTicket {
 		if(tckM.getEstado() == modelo.Ticket.Estado.ABIERTO) tckP.setEstado(persistencia.clases.Ticket.Estado.ABIERTO);
 		if(tckM.getEstado() == modelo.Ticket.Estado.CERRADO) tckP.setEstado(persistencia.clases.Ticket.Estado.CERRADO);
 		if(tckM.getEstado() == modelo.Ticket.Estado.PREPAGO) tckP.setEstado(persistencia.clases.Ticket.Estado.PREPAGO);
+		if(tckM.getEstado() == modelo.Ticket.Estado.CREDITO) tckP.setEstado(persistencia.clases.Ticket.Estado.CREDITO);
 		tckP.setFechaLlegada(tckM.getFechaLlegada());
 		if(tckM.getEstado() != modelo.Ticket.Estado.ABIERTO && tckM.getEstado() != modelo.Ticket.Estado.PREPAGO) tckP.setFechaSalida(tckM.getFechaSalida());
 		if(!tckP.getModeloVehiculo().getDescripcion().equals(tckM.getModeloVehiculo().getDescripcion())){
@@ -84,6 +89,26 @@ public class DAOTicket {
 		tckP = (persistencia.clases.Ticket) HibernateDAO.getInstancia().get(persistencia.clases.Ticket.class, tckM.getIdTicket());
 		HibernateDAO.getInstancia().delete(tckP);
 		return true;
+	}
+	@SuppressWarnings({ "unchecked" })
+	public ArrayList<persistencia.clases.Ticket> getTicketsCobrados(Usuario usuario, Date fechaInicio, Date fechaFin) {
+
+		String fechaL = new SimpleDateFormat("MM-dd-yyyy").format(fechaInicio);
+		fechaL = fechaL + " 00:00:00";
+		String fechaS = new SimpleDateFormat("MM-dd-yyyy").format(fechaFin);
+		fechaS = fechaS + " 23:59:59";
+		List<persistencia.clases.Ticket> listaTickets = (List<persistencia.clases.Ticket>) HibernateDAO.getInstancia().getListbetweenDates("Ticket", "estado", "1","fechaLlegada", fechaL, "fechaLlegada", fechaS);
+		listaTickets.addAll((List<persistencia.clases.Ticket>) HibernateDAO.getInstancia().getListbetweenDates("Ticket", "estado", "2","fechaSalida", fechaL, "fechaSalida", fechaS));
+		
+		ArrayList<persistencia.clases.Ticket> listaPorUsuario = new ArrayList<persistencia.clases.Ticket>();
+		for (persistencia.clases.Ticket ticketTemp : listaTickets) {
+			if(ticketTemp.getUsuario().getIdUsuario() == usuario.getIdUsuario()){
+				listaPorUsuario.add(ticketTemp);
+			}
+		}
+		
+		return listaPorUsuario;
+		
 	}
 	
 

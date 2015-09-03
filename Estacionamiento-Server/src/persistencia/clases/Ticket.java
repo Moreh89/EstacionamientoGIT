@@ -58,7 +58,8 @@ public class Ticket {
 	public enum Estado {
 		ABIERTO,
 		PREPAGO,
-		CERRADO;
+		CERRADO,
+		CREDITO;
 	}
 	
 	public double getPrepago() {

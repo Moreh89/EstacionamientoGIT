@@ -13,7 +13,11 @@ import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
 
+import modelo.Usuario;
+
 import org.jdesktop.swingx.JXDatePicker;
+
+import controlador.Controlador;
 
 //import reportes.ReporteEjemplo;
 import java.awt.Font;
@@ -23,7 +27,7 @@ import java.awt.Insets;
 import javax.swing.JComboBox;
 import javax.swing.DefaultComboBoxModel;
 
-public class ArqueoDeCaja extends JDialog {
+public class ArqueoDeCaja extends JDialog implements ActionListener{
 
 	/**
 	 * 
@@ -32,7 +36,7 @@ public class ArqueoDeCaja extends JDialog {
 	private final JPanel contentPanel = new JPanel();
 	private JXDatePicker fechaHasta;
 	private JXDatePicker fechaDesde;
-	private JButton exportarButton;
+	private JButton generarButton;
 	private JButton cancelarButton;
 	@SuppressWarnings("rawtypes")
 	private JComboBox comboBox;
@@ -55,7 +59,7 @@ public class ArqueoDeCaja extends JDialog {
 	 */
 	@SuppressWarnings({ "rawtypes", "unchecked" })
 	public ArqueoDeCaja() {
-		setTitle("Cierre Facturaci\u00F3n");
+		setTitle("Arqueo de Caja");
 		setBounds(100, 100, 290, 212);
 		getContentPane().setLayout(new BorderLayout());
 		contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -68,7 +72,10 @@ public class ArqueoDeCaja extends JDialog {
 		contentPanel.setLayout(gbl_contentPanel);
 		
 		comboBox = new JComboBox();
-		comboBox.setModel(new DefaultComboBoxModel(new String[] {"Todos", "Admin", "Operador"}));
+		comboBox.setModel(new DefaultComboBoxModel());
+		for (Usuario usuarioTemp : Controlador.getInstancia().getUsuarios()) {
+			comboBox.addItem(usuarioTemp);
+		}
 		GridBagConstraints gbc_comboBox = new GridBagConstraints();
 		gbc_comboBox.gridwidth = 3;
 		gbc_comboBox.insets = new Insets(0, 0, 5, 5);
@@ -118,31 +125,38 @@ public class ArqueoDeCaja extends JDialog {
 		contentPanel.add(fechaHasta, gbc_fechaHasta);
 		
 		cancelarButton = new JButton("Cancelar");
-		cancelarButton.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-				dispose();
-			}
-		});
+		cancelarButton.addActionListener(this);
 		
-		exportarButton = new JButton("Generar");
-		exportarButton.setIcon(new ImageIcon(GestionUsuario.class.getResource("/image/pdf.png")));
-		GridBagConstraints gbc_exportarButton = new GridBagConstraints();
-		gbc_exportarButton.fill = GridBagConstraints.HORIZONTAL;
-		gbc_exportarButton.insets = new Insets(0, 0, 0, 5);
-		gbc_exportarButton.gridx = 0;
-		gbc_exportarButton.gridy = 3;
-		contentPanel.add(exportarButton, gbc_exportarButton);
+		generarButton = new JButton("Generar");
+		generarButton.setIcon(new ImageIcon(ArqueoDeCaja.class.getResource("/image/ok.png")));
+		GridBagConstraints gbc_generarButton = new GridBagConstraints();
+		gbc_generarButton.fill = GridBagConstraints.HORIZONTAL;
+		gbc_generarButton.insets = new Insets(0, 0, 0, 5);
+		gbc_generarButton.gridx = 0;
+		gbc_generarButton.gridy = 3;
+		contentPanel.add(generarButton, gbc_generarButton);
 		cancelarButton.setIcon(new ImageIcon(GestionUsuario.class.getResource("/image/cancel.png")));
 		GridBagConstraints gbc_cancelarButton = new GridBagConstraints();
 		gbc_cancelarButton.fill = GridBagConstraints.HORIZONTAL;
 		gbc_cancelarButton.gridx = 2;
 		gbc_cancelarButton.gridy = 3;
 		contentPanel.add(cancelarButton, gbc_cancelarButton);
-		
+		generarButton.addActionListener(this);
 		this.setLocationRelativeTo(null);
 		setModal(true);
 		
 		
+	}
+
+	@Override
+	public void actionPerformed(ActionEvent e) {
+		if(e.getSource()==this.cancelarButton){
+			dispose();
+		}
+		if(e.getSource()==this.generarButton){
+			new ItemsCobrados((Usuario) this.comboBox.getSelectedItem(),this.fechaDesde.getDate(),this.fechaHasta.getDate()).setVisible(true);
+			dispose();
+		}
 	}
 	
 }
