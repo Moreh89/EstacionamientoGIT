@@ -33,6 +33,10 @@ public class MovimientoCC {
 	@JoinColumn(name="LiquidacionExpensas")
 	private LiquidacionExpensas liquidacionExpensas;
 	
+	@OneToOne(cascade=CascadeType.ALL)
+	@JoinColumn(name="Interes")
+	private Interes interes;
+	
 	public long getIdMovimiento() {
 		return idMovimiento;
 	}
@@ -89,6 +93,12 @@ public class MovimientoCC {
 	}
 	public void setLiquidacionExpensas(LiquidacionExpensas liquidacionExpensas) {
 		this.liquidacionExpensas = liquidacionExpensas;
+	}
+	public Interes getInteres() {
+		return interes;
+	}
+	public void setInteres(Interes interes) {
+		this.interes = interes;
 	}
 	
 	

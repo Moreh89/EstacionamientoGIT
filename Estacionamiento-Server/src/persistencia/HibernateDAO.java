@@ -192,4 +192,5 @@ public class HibernateDAO {
 		return list;
 	}
 	
+	
 }

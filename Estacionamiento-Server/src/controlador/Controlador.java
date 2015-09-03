@@ -110,6 +110,7 @@ public class Controlador {
 		tasaInteres=DAOTasaInteres.getInstance().getTasaInteresActual();
 		tarifas=DAOTarifa.getInstance().getTarifas();
 		clientes=DAOCliente.getInstance().getClientes();
+		this.aplicarInteres();
 		return true;
 
 	}
@@ -432,7 +433,7 @@ public class Controlador {
 
 	public double getTasaInteres()
 	{
-		return tasaInteres.getMontoDescuento();
+		return tasaInteres.getMonto();
 	}
 
 	public long modificarTasaInteres(double montoTasaInteresNuevo)
@@ -443,7 +444,7 @@ public class Controlador {
 		if(codigoReturn!=-1)
 		{
 			tasaInteresNueva.setEstado(modelo.TasaInteres.ESTADO.ACTIVO);
-			tasaInteresNueva.setMontoDescuento(montoTasaInteresNuevo);
+			tasaInteresNueva.setMonto(montoTasaInteresNuevo);
 			tasaInteresNueva.setIdTasaInteres(0);
 			codigoReturn=DAOTasaInteres.getInstance().persistir(tasaInteresNueva);
 
@@ -508,7 +509,7 @@ public class Controlador {
 			this.ticket.setUsuario(usuarioActual);
 			this.ticket.setFechaSalida(GregorianCalendar.getInstance().getTime());
 			DAOTicket.getInstance().actualizar(this.ticket);
-			
+
 			if(estado==modelo.Ticket.Estado.CREDITO){
 				MovimientoCC movCC = new MovimientoCC();
 				movCC.setDescripcion("Ticket");
@@ -845,21 +846,78 @@ public class Controlador {
 		{
 			usuarioM.setPermisos(Usuario.PERMISOS.CAJA);
 		}
-		
+
 		codigoReturn=DAOUsuario.getInstance().persistir(usuarioM);
 		return codigoReturn;
 	}
 
 	public ArrayList<Ticket> obtenerTicketsCobrados(Usuario usuario, Date fechaInicio, Date fechaFin) {
 		ArrayList<Ticket> listaTicketsM = new ArrayList<Ticket>();
-		
+
 		ArrayList<persistencia.clases.Ticket> listaTicketsP = DAOTicket.getInstance().getTicketsCobrados(usuario, fechaInicio,fechaFin);
-		
+
 		for (persistencia.clases.Ticket ticketP : listaTicketsP) {
 			listaTicketsM.add(Converter.convertTicketPersistenciaToModelo(ticketP));
 		}
-		
+
 		return listaTicketsM;
 	}
 
+
+	@SuppressWarnings("deprecation")
+	private long aplicarInteres()
+	{
+		//APLICA EL 15 de cada mes
+		int fechaVencimiento =3;
+		java.util.Date fechaActual= Calendar.getInstance().getTime();;
+		DateFormat dateFormatDay = new SimpleDateFormat("dd"); 
+
+		if(Integer.parseInt(dateFormatDay.format(fechaActual))==fechaVencimiento)
+		{
+			ArrayList<modelo.Interes> intereses = new ArrayList<modelo.Interes>();
+			intereses=DAOInteres.getInstance().getIntereses();
+			int existe=-1;
+			for(modelo.Interes interesM : intereses)
+			{
+				DateFormat dateFormatValidacion = new SimpleDateFormat("dd-MM-yyyy"); 
+				System.out.println(dateFormatValidacion.format(interesM.getFechaAplicado())+" - "+dateFormatValidacion.format(fechaActual));
+				if(dateFormatValidacion.format(interesM.getFechaAplicado()).equals(dateFormatValidacion.format(fechaActual)))
+				{
+					return -1;
+				}
+			}
+
+			ArrayList<modelo.Cliente> clientes = new ArrayList<modelo.Cliente>();
+			
+			clientes=DAOCliente.getInstance().getClientes();
+			modelo.Interes interesM= new Interes();
+			interesM.setIdInteres(0);
+			interesM.setFechaAplicado(fechaActual);
+			
+			for(modelo.Cliente clienteM : clientes)
+			{
+				if(clienteM.getCuentaCorriente()!=null && clienteM.getCuentaCorriente().getMovimientos()!=null )
+				{
+//TODO GET DEUDA
+					double deuda=-100;
+
+					
+					modelo.MovimientoCC movimientoNuevo= new modelo.MovimientoCC();
+					movimientoNuevo.setIdMovimiento(0);
+					movimientoNuevo.setFecha(fechaActual);
+					movimientoNuevo.setDescripcion("INTERES "+tasaInteres.getMonto()+"% - Deuda "+deuda);
+					movimientoNuevo.setEstado("Liquidado");
+					movimientoNuevo.setTicket(null);
+					movimientoNuevo.setMontoCobrado((tasaInteres.getMonto()/100*deuda));
+					movimientoNuevo.setLiquidacionExpensas(null);
+					movimientoNuevo.setInteres(interesM);
+
+					DAOCliente.getInstance().agregarMovimientoCC(clienteM.getIdCliente(), movimientoNuevo);
+				}
+
+			}
+		}
+		return 0;
+
+	}
 }

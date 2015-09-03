@@ -2,8 +2,10 @@ package persistencia;
 
 import java.util.ArrayList;
 import java.util.List;
+
 import modelo.CategoriaVehiculo;
 import modelo.ColorVehiculo;
+import modelo.Interes;
 import modelo.ModeloVehiculo;
 import modelo.Usuario;
 import modelo.Usuario.PERMISOS;
@@ -361,6 +363,10 @@ public class Converter {
 		{
 			movimientoCCP.setLiquidacionExpensas((convertLiquidacionExpensasModeloToPersistencia(movimientoCCM.getLiquidacionExpensas())));
 		}
+		if(movimientoCCM.getInteres()!=null)
+		{
+			movimientoCCP.setInteres(convertInteresModeloToPersistencia(movimientoCCM.getInteres()));
+		}
 			
 		return movimientoCCP;
 	}
@@ -384,6 +390,10 @@ public class Converter {
 		if(movimientoCCP.getLiquidacionExpensas()!=null)
 		{
 			movimientoCCM.setLiquidacionExpensas(convertLiquidacionExpensasPersistenciaToModelo (movimientoCCP.getLiquidacionExpensas()));
+		}
+		if(movimientoCCP.getInteres()!=null)
+		{
+			movimientoCCM.setInteres(convertInteresPersistenciaToModelo(movimientoCCP.getInteres()));
 		}
 		return movimientoCCM;
 	}
@@ -601,7 +611,7 @@ public class Converter {
 		persistencia.clases.TasaInteres tasaInteresP = new persistencia.clases.TasaInteres();
 
 		tasaInteresP.setIdTasaInteres(tasaInteresM.getIdTasaInteres());
-		tasaInteresP.setMontoDescuento(tasaInteresM.getMontoDescuento());
+		tasaInteresP.setMonto(tasaInteresM.getMonto());
 		String estadoTasaInteres = tasaInteresM.getEstado().toString();
 
 		if(estadoTasaInteres.equals("ACTIVO"))
@@ -617,7 +627,7 @@ public class Converter {
 
 		modelo.TasaInteres tasaInteresM = new modelo.TasaInteres();
 		tasaInteresM.setIdTasaInteres(tasaInteresP.getIdTasaInteres());
-		tasaInteresM.setMontoDescuento(tasaInteresP.getMontoDescuento());
+		tasaInteresM.setMonto(tasaInteresP.getMonto());
 
 		String estadoTasaInteres = tasaInteresP.getEstado().toString();
 
@@ -710,5 +720,38 @@ public class Converter {
 			usuariosM.add(convertUsuarioPersistenciaToModelo(usuarioP));
 		}
 		return usuariosM;
+	}
+	
+
+	public static modelo.Interes convertInteresPersistenciaToModelo(persistencia.clases.Interes interesP)
+	{
+		modelo.Interes interesM= new modelo.Interes();
+		interesM.setIdInteres(interesP.getIdInteres());
+		interesM.setFechaAplicado(interesP.getFechaAplicado());
+		
+		return interesM;
+	}
+	
+
+	private static persistencia.clases.Interes convertInteresModeloToPersistencia(
+			Interes interesM) {
+		persistencia.clases.Interes interesP = new persistencia.clases.Interes();
+		interesP.setIdInteres(interesM.getIdInteres());
+		interesP.setFechaAplicado(interesM.getFechaAplicado());
+		
+		return interesP;
+	}
+
+
+	public static ArrayList<modelo.Interes> convertInteresesPersistenciaToModelo(
+			ArrayList<persistencia.clases.Interes> interesesP) {
+		ArrayList<modelo.Interes> interesesM = new ArrayList<modelo.Interes>();
+
+		for(persistencia.clases.Interes interesP : interesesP)
+		{
+			interesesM.add(convertInteresPersistenciaToModelo(interesP));
+		}
+
+		return interesesM;
 	}
 }

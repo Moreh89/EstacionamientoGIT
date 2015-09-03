@@ -29,6 +29,7 @@ public class HibernateFactory
         	 config.addAnnotatedClass(PersonaAutorizada.class);
         	 config.addAnnotatedClass(TasaInteres.class);
         	 config.addAnnotatedClass(LiquidacionExpensas.class);
+        	 config.addAnnotatedClass(Interes.class);
         	 //Para cambiar atributos sin el archivo
 //        	 config.setProperty("hibernate.connection.url", "jdbc:mysql://"+hostname+"/"+database);
 //        	 config.setProperty("hibernate.connection.username", username);
