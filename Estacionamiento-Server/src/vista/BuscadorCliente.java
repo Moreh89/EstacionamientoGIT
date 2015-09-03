@@ -86,6 +86,7 @@ public class BuscadorCliente extends JDialog implements ActionListener, KeyListe
 	private JLabel labelApellido;
 	private JLabel labelNombre;
 	private JPanel panelAtributos;
+	private JButton btnVercuentacorriente;
 	
 	/**
 	 * Launch the application.
@@ -125,7 +126,7 @@ public class BuscadorCliente extends JDialog implements ActionListener, KeyListe
 		setTitle("Buscar Clientes");
 		setResizable(false);
 		//setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 531, 787);
+		setBounds(100, 100, 1059, 727);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
@@ -173,13 +174,13 @@ public class BuscadorCliente extends JDialog implements ActionListener, KeyListe
 		contentPane.add(tipoComboBox);
 
 		panelAtributos = new JPanel();
-		panelAtributos.setBounds(10, 140, 503, 554);
+		panelAtributos.setBounds(518, 52, 503, 554);
 		contentPane.add(panelAtributos);
 		GridBagLayout gbl_panelAtributos = new GridBagLayout();
 		gbl_panelAtributos.columnWidths = new int[]{0, 0, 0};
-		gbl_panelAtributos.rowHeights = new int[]{0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 60, 60, 61, 0};
+		gbl_panelAtributos.rowHeights = new int[]{0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 60, 60, 61, 43, 0};
 		gbl_panelAtributos.columnWeights = new double[]{0.0, 1.0, Double.MIN_VALUE};
-		gbl_panelAtributos.rowWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
+		gbl_panelAtributos.rowWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
 		panelAtributos.setLayout(gbl_panelAtributos);
 
 		labelNombre = new JLabel("Nombre:");
@@ -456,7 +457,7 @@ public class BuscadorCliente extends JDialog implements ActionListener, KeyListe
 
 		lblCocheras = new JLabel("Cocheras:");
 		GridBagConstraints gbc_lblCocheras = new GridBagConstraints();
-		gbc_lblCocheras.insets = new Insets(0, 0, 0, 5);
+		gbc_lblCocheras.insets = new Insets(0, 0, 5, 5);
 		gbc_lblCocheras.gridx = 0;
 		gbc_lblCocheras.gridy = 14;
 		panelAtributos.add(lblCocheras, gbc_lblCocheras);
@@ -464,6 +465,7 @@ public class BuscadorCliente extends JDialog implements ActionListener, KeyListe
 		scrollPane_2 = new JScrollPane();
 		scrollPane_2.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
 		GridBagConstraints gbc_scrollPane_2 = new GridBagConstraints();
+		gbc_scrollPane_2.insets = new Insets(0, 0, 5, 0);
 		gbc_scrollPane_2.fill = GridBagConstraints.BOTH;
 		gbc_scrollPane_2.gridx = 1;
 		gbc_scrollPane_2.gridy = 14;
@@ -473,21 +475,28 @@ public class BuscadorCliente extends JDialog implements ActionListener, KeyListe
 		textAreaCocheras.setEnabled(false);
 		textAreaCocheras.setEditable(false);
 		scrollPane_2.setViewportView(textAreaCocheras);
+		
+		btnVercuentacorriente = new JButton("Ver Cuenta Corriente");
+		GridBagConstraints gbc_btnVercuentacorriente = new GridBagConstraints();
+		gbc_btnVercuentacorriente.fill = GridBagConstraints.VERTICAL;
+		gbc_btnVercuentacorriente.gridx = 1;
+		gbc_btnVercuentacorriente.gridy = 15;
+		panelAtributos.add(btnVercuentacorriente, gbc_btnVercuentacorriente);
 
 		buttonCancelar = new JButton("Cancelar");
 		buttonCancelar.setIcon(new ImageIcon(BuscadorCliente.class.getResource("/image/cancel.png")));
-		buttonCancelar.setBounds(84, 692, 116, 42);
+		buttonCancelar.setBounds(226, 637, 116, 42);
 		contentPane.add(buttonCancelar);
 		buttonCancelar.addActionListener(this);
 
 		buttonAceptar = new JButton("Aceptar");
 		buttonAceptar.setIcon(new ImageIcon(BuscadorCliente.class.getResource("/image/ok.png")));
-		buttonAceptar.setBounds(340, 692, 116, 42);
+		buttonAceptar.setBounds(596, 637, 116, 42);
 		contentPane.add(buttonAceptar);
 		buttonAceptar.addActionListener(this);
 		
 		panelClientes = new JPanel();
-		panelClientes.setBounds(10, 46, 503, 88);
+		panelClientes.setBounds(10, 46, 503, 560);
 		contentPane.add(panelClientes);
 		GridBagLayout gbl_panelClientes = new GridBagLayout();
 		gbl_panelClientes.columnWidths = new int[]{240, 0};
