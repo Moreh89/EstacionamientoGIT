@@ -10,6 +10,7 @@ import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 import javax.swing.JMenu;
 import javax.swing.ImageIcon;
+import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 
@@ -256,23 +257,31 @@ public class MenuAdmin extends JFrame implements ActionListener {
 			new Login().setVisible(true);
 			dispose();
 		}
-		if(event.getSource() == mntmAltaDescuento)
-		{
+		if(event.getSource() == mntmAltaDescuento){
 			new AltaDescuento().setVisible(true);
 		}
-		if(event.getSource() == mntmLiquidarExpensas)
-		{
+		if(event.getSource() == mntmLiquidarExpensas){
 			new EmitirLiquidacionExpensas().setVisible(true);
 		}
 		
-		if(event.getSource()==mntmAnularExpensas)
-		{
+		if(event.getSource()==mntmAnularExpensas){
 			new AnularLiquidacionExpensas().setVisible(true);
 		}
 		
-		if(event.getSource()==mntmGestionTarifa)
-		{
+		if(event.getSource()==mntmGestionTarifa){
 			new GestionTarifa().setVisible(true);
+		}
+		if(event.getSource()==mntmBajaCliente){
+			new BuscadorCliente().setVisible(true);
+			//TODO actualizar el cliente seleccionado
+			int resultado = JOptionPane.showConfirmDialog(null, "Desea borrar el cliente seleccionado?");
+			if (resultado== JOptionPane.YES_OPTION){
+				
+			}
+		}
+		if(event.getSource()==mntmModificacionCliente){
+			//TODO enviar el cliente seleccionado o obtenerlo del controlador
+			new ModificarCliente().setVisible(true);
 		}
 		
 	}
