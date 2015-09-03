@@ -16,9 +16,12 @@ public class DAOUsuario {
 		return ins;
 	}
 
-	public long persistir(Usuario usuario) {
-		// TODO Auto-generated method stub
-		return 0;
+	public long persistir(Usuario usuarioM) {
+		persistencia.clases.Usuario usuarioP=new persistencia.clases.Usuario();
+		usuarioP=Converter.convertUsuarioModeloToPersistencia(usuarioM);
+		usuarioP=(persistencia.clases.Usuario) HibernateDAO.getInstancia().save(usuarioP);
+		
+		return usuarioP.getIdUsuario();
 	}
 
 	public Usuario buscarUsuario(String userName) {

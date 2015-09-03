@@ -377,11 +377,15 @@ public class GestionUsuario extends JDialog implements ActionListener, KeyListen
 
 		if(e.getSource()==btnCrearUsuarioAdministrador)
 		{
-
+			AltaUsuario aU = new AltaUsuario("ADMIN");
+			aU.setVisible(true);
+			dispose();
 		}
 		if(e.getSource()==btnCrearUsuarioOperador)
 		{
-
+			AltaUsuario aU = new AltaUsuario("CAJA");
+			aU.setVisible(true);
+			dispose();
 		}
 		if(e.getSource()==btnModificar)
 		{
@@ -406,7 +410,6 @@ public class GestionUsuario extends JDialog implements ActionListener, KeyListen
 
 	@Override
 	public void keyReleased(KeyEvent arg0) {
-
 	}
 
 	@Override

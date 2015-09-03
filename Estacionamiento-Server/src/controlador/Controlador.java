@@ -813,4 +813,28 @@ public class Controlador {
 
 	}
 
+	public long altaUsuario(String apellido, String nombre, String nroDoc,
+			String password, String tipoUsuario, String userName, String tipoDoc) {
+		long codigoReturn=-1;
+		modelo.Usuario usuarioM=new modelo.Usuario();
+		usuarioM.setApellido(apellido);
+		usuarioM.setNombre(nombre);
+		usuarioM.setNumeroDocumento(nroDoc);
+		usuarioM.setTipoDocumento(tipoDoc);
+		usuarioM.setPassword(password);
+		usuarioM.setUserName(userName);
+		usuarioM.setIdUsuario(0);
+		if(tipoUsuario.equals("ADMIN"))
+		{
+			usuarioM.setPermisos(Usuario.PERMISOS.ADMIN);
+		}
+		if(tipoUsuario.equals("CAJA"))
+		{
+			usuarioM.setPermisos(Usuario.PERMISOS.CAJA);
+		}
+		
+		codigoReturn=DAOUsuario.getInstance().persistir(usuarioM);
+		return codigoReturn;
+	}
+
 }
