@@ -28,9 +28,7 @@ public class MenuAdmin extends JFrame implements ActionListener {
 	private JMenuItem mntmModificacionCliente;
 	private JMenuItem mntmBajaCliente;
 	private JMenu mnUsuario;
-	private JMenuItem mntmAltaUsuario;
 	private JMenuItem mntmModificacionUsuario;
-	private JMenuItem mntmBajaUsuario;
 	private JMenu mnGestionEstacionamiento;
 	private JMenu mnColor;
 	private JMenuItem mntmGestionColor;
@@ -86,17 +84,9 @@ public class MenuAdmin extends JFrame implements ActionListener {
 		menuBar.add(mnUsuario);
 		mnUsuario.setIcon(new ImageIcon(MenuAdmin.class.getResource("/image/users.png")));
 		
-		mntmAltaUsuario = new JMenuItem("Alta");
-		mnUsuario.add(mntmAltaUsuario);
-		mntmAltaUsuario.addActionListener(this);
-		
-		mntmModificacionUsuario = new JMenuItem("Modificacion");
+		mntmModificacionUsuario = new JMenuItem("Gestionar");
 		mnUsuario.add(mntmModificacionUsuario);
 		mntmModificacionUsuario.addActionListener(this);
-		
-		mntmBajaUsuario = new JMenuItem("Baja");
-		mnUsuario.add(mntmBajaUsuario);
-		mntmBajaUsuario.addActionListener(this);
 		
 		mnCliente = new JMenu("Cliente");
 		menuBar.add(mnCliente);
@@ -141,24 +131,24 @@ public class MenuAdmin extends JFrame implements ActionListener {
 		mnDescuentos.add(mntmBajaModificacion);
 		mntmBajaModificacion.addActionListener(this);
 		
-		mnModelo = new JMenu("Modelo");
+		mnModelo = new JMenu("Modelos");
 		mnGestionEstacionamiento.add(mnModelo);
 		
-		mntmGestionModelo = new JMenuItem("Gestion");
+		mntmGestionModelo = new JMenuItem("Gestionar");
 		mnModelo.add(mntmGestionModelo);
 		mntmGestionModelo.addActionListener(this);
 		
 		mnTarifas = new JMenu("Tarifas");
 		mnGestionEstacionamiento.add(mnTarifas);
 		
-		mntmGestionTarifa = new JMenuItem("Gestion");
+		mntmGestionTarifa = new JMenuItem("Gestionar");
 		mnTarifas.add(mntmGestionTarifa);
 		mntmGestionTarifa.addActionListener(this);
 		
 		mnTasaInteres = new JMenu("Tasa Interes");
 		mnGestionEstacionamiento.add(mnTasaInteres);
 		
-		mntmGestionTasaInteres = new JMenuItem("Gestion");
+		mntmGestionTasaInteres = new JMenuItem("Gestionar");
 		mnTasaInteres.add(mntmGestionTasaInteres);
 		mntmGestionTasaInteres.addActionListener(this);
 

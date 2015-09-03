@@ -6,6 +6,6 @@ Cant Autos- tickets abiertos - Listo
 
 
 Damian:
-usuario gestion
+usuario gestion	// HECHO
 Deudores
 Automatizar funcion que aplique interés mensual a deudores
