@@ -14,7 +14,7 @@ public class TasaInteres {
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	private long idTasaInteres;
-	private double montoDescuento;
+	private double monto;
 	private ESTADO estado;
 
 	
@@ -28,11 +28,11 @@ public class TasaInteres {
 	public void setIdTasaInteres(long idTasaInteres) {
 		this.idTasaInteres = idTasaInteres;
 	}
-	public double getMontoDescuento() {
-		return montoDescuento;
+	public double getMonto() {
+		return monto;
 	}
-	public void setMontoDescuento(double montoDescuento) {
-		this.montoDescuento = montoDescuento;
+	public void setMonto(double monto) {
+		this.monto = monto;
 	}
 	public ESTADO getEstado() {
 		return estado;
@@ -44,7 +44,7 @@ public class TasaInteres {
 	public TasaInteres(long idTI, double montoDescuento, ESTADO estado)
 	{
 		this.idTasaInteres=idTI;
-		this.montoDescuento=montoDescuento;
+		this.monto=montoDescuento;
 		this.estado=estado;
 	}
 	
