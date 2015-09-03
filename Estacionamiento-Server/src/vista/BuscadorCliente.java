@@ -30,6 +30,7 @@ import javax.swing.ScrollPaneConstants;
 import javax.swing.JList;
 import modelo.Cliente;
 import controlador.Controlador;
+import java.awt.Font;
 
 
 
@@ -133,11 +134,12 @@ public class BuscadorCliente extends JDialog implements ActionListener, KeyListe
 		contentPane.setLayout(null);
 
 		JLabel lblBuscar = new JLabel("Buscar");
-		lblBuscar.setBounds(10, 19, 46, 14);
+		lblBuscar.setFont(new Font("Tahoma", Font.BOLD, 16));
+		lblBuscar.setBounds(10, 19, 105, 14);
 		contentPane.add(lblBuscar);
 
 		buscarTextField = new JTextField();
-		buscarTextField.setBounds(55, 14, 217, 25);
+		buscarTextField.setBounds(78, 15, 302, 25);
 		contentPane.add(buscarTextField);
 		buscarTextField.setColumns(10);
 		model = new DefaultTableModel(){
@@ -159,8 +161,9 @@ public class BuscadorCliente extends JDialog implements ActionListener, KeyListe
 
 
 		buscarButton = new JButton("Buscar");
+		buscarButton.setFont(new Font("Tahoma", Font.BOLD, 16));
 		buscarButton.addActionListener(this);
-		buscarButton.setBounds(404, 7, 116, 32);
+		buscarButton.setBounds(518, 11, 116, 32);
 		contentPane.add(buscarButton);
 		buscarButton.setIcon(new ImageIcon(BuscadorCliente.class.getResource("/image/search.png")));
 
@@ -169,8 +172,9 @@ public class BuscadorCliente extends JDialog implements ActionListener, KeyListe
 		contentPane.add(separator);
 
 		tipoComboBox = new JComboBox();
+		tipoComboBox.setFont(new Font("Tahoma", Font.BOLD, 16));
 		tipoComboBox.setModel(new DefaultComboBoxModel(new String[] {"DNI/LU", "CUIT", "NOMBRE", "APELLIDO"}));
-		tipoComboBox.setBounds(280, 14, 114, 25);
+		tipoComboBox.setBounds(392, 14, 114, 25);
 		contentPane.add(tipoComboBox);
 
 		panelAtributos = new JPanel();
@@ -178,12 +182,13 @@ public class BuscadorCliente extends JDialog implements ActionListener, KeyListe
 		contentPane.add(panelAtributos);
 		GridBagLayout gbl_panelAtributos = new GridBagLayout();
 		gbl_panelAtributos.columnWidths = new int[]{0, 0, 0};
-		gbl_panelAtributos.rowHeights = new int[]{0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 60, 60, 61, 43, 0};
+		gbl_panelAtributos.rowHeights = new int[]{0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 60, 60, 61, 0};
 		gbl_panelAtributos.columnWeights = new double[]{0.0, 1.0, Double.MIN_VALUE};
-		gbl_panelAtributos.rowWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
+		gbl_panelAtributos.rowWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
 		panelAtributos.setLayout(gbl_panelAtributos);
 
 		labelNombre = new JLabel("Nombre:");
+		labelNombre.setFont(new Font("Tahoma", Font.BOLD, 15));
 		GridBagConstraints gbc_labelNombre = new GridBagConstraints();
 		gbc_labelNombre.insets = new Insets(0, 0, 5, 5);
 		gbc_labelNombre.anchor = GridBagConstraints.EAST;
@@ -192,6 +197,7 @@ public class BuscadorCliente extends JDialog implements ActionListener, KeyListe
 		panelAtributos.add(labelNombre, gbc_labelNombre);
 
 		textFieldNombre = new JTextField();
+		textFieldNombre.setFont(new Font("Tahoma", Font.BOLD, 16));
 		textFieldNombre.setEditable(false);
 		textFieldNombre.setEnabled(false);
 		GridBagConstraints gbc_textFieldNombre = new GridBagConstraints();
@@ -203,6 +209,7 @@ public class BuscadorCliente extends JDialog implements ActionListener, KeyListe
 		textFieldNombre.setColumns(10);
 
 		labelApellido = new JLabel("Apellido:");
+		labelApellido.setFont(new Font("Tahoma", Font.BOLD, 15));
 		GridBagConstraints gbc_labelApellido = new GridBagConstraints();
 		gbc_labelApellido.anchor = GridBagConstraints.EAST;
 		gbc_labelApellido.insets = new Insets(0, 0, 5, 5);
@@ -211,6 +218,7 @@ public class BuscadorCliente extends JDialog implements ActionListener, KeyListe
 		panelAtributos.add(labelApellido, gbc_labelApellido);
 
 		textFieldApellido = new JTextField();
+		textFieldApellido.setFont(new Font("Tahoma", Font.BOLD, 16));
 		textFieldApellido.setEnabled(false);
 		textFieldApellido.setEditable(false);
 		textFieldApellido.setColumns(10);
@@ -222,6 +230,7 @@ public class BuscadorCliente extends JDialog implements ActionListener, KeyListe
 		panelAtributos.add(textFieldApellido, gbc_textFieldApellido);
 
 		lblDnilu = new JLabel("DNI/LU:");
+		lblDnilu.setFont(new Font("Tahoma", Font.BOLD, 15));
 		GridBagConstraints gbc_lblDnilu = new GridBagConstraints();
 		gbc_lblDnilu.fill = GridBagConstraints.VERTICAL;
 		gbc_lblDnilu.anchor = GridBagConstraints.EAST;
@@ -231,6 +240,7 @@ public class BuscadorCliente extends JDialog implements ActionListener, KeyListe
 		panelAtributos.add(lblDnilu, gbc_lblDnilu);
 
 		textFieldDNILU = new JTextField();
+		textFieldDNILU.setFont(new Font("Tahoma", Font.BOLD, 16));
 		textFieldDNILU.setEnabled(false);
 		textFieldDNILU.setEditable(false);
 		textFieldDNILU.setColumns(10);
@@ -242,6 +252,7 @@ public class BuscadorCliente extends JDialog implements ActionListener, KeyListe
 		panelAtributos.add(textFieldDNILU, gbc_textFieldDNILU);
 
 		lblCuit = new JLabel("CUIT:");
+		lblCuit.setFont(new Font("Tahoma", Font.BOLD, 15));
 		GridBagConstraints gbc_lblCuit = new GridBagConstraints();
 		gbc_lblCuit.anchor = GridBagConstraints.EAST;
 		gbc_lblCuit.insets = new Insets(0, 0, 5, 5);
@@ -250,6 +261,7 @@ public class BuscadorCliente extends JDialog implements ActionListener, KeyListe
 		panelAtributos.add(lblCuit, gbc_lblCuit);
 
 		textFieldCUIT = new JTextField();
+		textFieldCUIT.setFont(new Font("Tahoma", Font.BOLD, 16));
 		textFieldCUIT.setEnabled(false);
 		textFieldCUIT.setEditable(false);
 		textFieldCUIT.setColumns(10);
@@ -261,6 +273,7 @@ public class BuscadorCliente extends JDialog implements ActionListener, KeyListe
 		panelAtributos.add(textFieldCUIT, gbc_textFieldCUIT);
 
 		labelTelefono1 = new JLabel("Telefono 1:");
+		labelTelefono1.setFont(new Font("Tahoma", Font.BOLD, 15));
 		GridBagConstraints gbc_labelTelefono1 = new GridBagConstraints();
 		gbc_labelTelefono1.anchor = GridBagConstraints.EAST;
 		gbc_labelTelefono1.insets = new Insets(0, 0, 5, 5);
@@ -269,6 +282,7 @@ public class BuscadorCliente extends JDialog implements ActionListener, KeyListe
 		panelAtributos.add(labelTelefono1, gbc_labelTelefono1);
 
 		textFieldTelefono1 = new JTextField();
+		textFieldTelefono1.setFont(new Font("Tahoma", Font.BOLD, 16));
 		textFieldTelefono1.setEnabled(false);
 		textFieldTelefono1.setEditable(false);
 		textFieldTelefono1.setColumns(10);
@@ -280,6 +294,7 @@ public class BuscadorCliente extends JDialog implements ActionListener, KeyListe
 		panelAtributos.add(textFieldTelefono1, gbc_textFieldTelefono1);
 
 		labelTelefono2 = new JLabel("Telefono 2:");
+		labelTelefono2.setFont(new Font("Tahoma", Font.BOLD, 15));
 		GridBagConstraints gbc_labelTelefono2 = new GridBagConstraints();
 		gbc_labelTelefono2.anchor = GridBagConstraints.EAST;
 		gbc_labelTelefono2.insets = new Insets(0, 0, 5, 5);
@@ -288,6 +303,7 @@ public class BuscadorCliente extends JDialog implements ActionListener, KeyListe
 		panelAtributos.add(labelTelefono2, gbc_labelTelefono2);
 
 		textFieldTelefono2 = new JTextField();
+		textFieldTelefono2.setFont(new Font("Tahoma", Font.BOLD, 16));
 		textFieldTelefono2.setEnabled(false);
 		textFieldTelefono2.setEditable(false);
 		textFieldTelefono2.setColumns(10);
@@ -299,6 +315,7 @@ public class BuscadorCliente extends JDialog implements ActionListener, KeyListe
 		panelAtributos.add(textFieldTelefono2, gbc_textFieldTelefono2);
 
 		labelDireccion1 = new JLabel("Direccion 1:");
+		labelDireccion1.setFont(new Font("Tahoma", Font.BOLD, 15));
 		GridBagConstraints gbc_labelDireccion1 = new GridBagConstraints();
 		gbc_labelDireccion1.anchor = GridBagConstraints.EAST;
 		gbc_labelDireccion1.insets = new Insets(0, 0, 5, 5);
@@ -307,6 +324,7 @@ public class BuscadorCliente extends JDialog implements ActionListener, KeyListe
 		panelAtributos.add(labelDireccion1, gbc_labelDireccion1);
 
 		textFieldDireccion1 = new JTextField();
+		textFieldDireccion1.setFont(new Font("Tahoma", Font.BOLD, 16));
 		textFieldDireccion1.setEnabled(false);
 		textFieldDireccion1.setEditable(false);
 		textFieldDireccion1.setColumns(10);
@@ -318,6 +336,7 @@ public class BuscadorCliente extends JDialog implements ActionListener, KeyListe
 		panelAtributos.add(textFieldDireccion1, gbc_textFieldDireccion1);
 
 		labelDireccion2 = new JLabel("Direccion 2:");
+		labelDireccion2.setFont(new Font("Tahoma", Font.BOLD, 15));
 		GridBagConstraints gbc_labelDireccion2 = new GridBagConstraints();
 		gbc_labelDireccion2.anchor = GridBagConstraints.EAST;
 		gbc_labelDireccion2.insets = new Insets(0, 0, 5, 5);
@@ -326,6 +345,7 @@ public class BuscadorCliente extends JDialog implements ActionListener, KeyListe
 		panelAtributos.add(labelDireccion2, gbc_labelDireccion2);
 
 		textFieldDireccion2 = new JTextField();
+		textFieldDireccion2.setFont(new Font("Tahoma", Font.BOLD, 16));
 		textFieldDireccion2.setEnabled(false);
 		textFieldDireccion2.setEditable(false);
 		textFieldDireccion2.setColumns(10);
@@ -337,6 +357,7 @@ public class BuscadorCliente extends JDialog implements ActionListener, KeyListe
 		panelAtributos.add(textFieldDireccion2, gbc_textFieldDireccion2);
 
 		labelEmail = new JLabel("Email:");
+		labelEmail.setFont(new Font("Tahoma", Font.BOLD, 15));
 		GridBagConstraints gbc_labelEmail = new GridBagConstraints();
 		gbc_labelEmail.anchor = GridBagConstraints.EAST;
 		gbc_labelEmail.insets = new Insets(0, 0, 5, 5);
@@ -345,6 +366,7 @@ public class BuscadorCliente extends JDialog implements ActionListener, KeyListe
 		panelAtributos.add(labelEmail, gbc_labelEmail);
 
 		textFieldEmail = new JTextField();
+		textFieldEmail.setFont(new Font("Tahoma", Font.BOLD, 16));
 		textFieldEmail.setEnabled(false);
 		textFieldEmail.setEditable(false);
 		textFieldEmail.setColumns(10);
@@ -356,6 +378,7 @@ public class BuscadorCliente extends JDialog implements ActionListener, KeyListe
 		panelAtributos.add(textFieldEmail, gbc_textFieldEmail);
 
 		labelRazonSocial = new JLabel("Razon Social:");
+		labelRazonSocial.setFont(new Font("Tahoma", Font.BOLD, 15));
 		GridBagConstraints gbc_labelRazonSocial = new GridBagConstraints();
 		gbc_labelRazonSocial.anchor = GridBagConstraints.EAST;
 		gbc_labelRazonSocial.insets = new Insets(0, 0, 5, 5);
@@ -364,6 +387,7 @@ public class BuscadorCliente extends JDialog implements ActionListener, KeyListe
 		panelAtributos.add(labelRazonSocial, gbc_labelRazonSocial);
 
 		textFieldRazonSocial = new JTextField();
+		textFieldRazonSocial.setFont(new Font("Tahoma", Font.BOLD, 16));
 		textFieldRazonSocial.setEnabled(false);
 		textFieldRazonSocial.setEditable(false);
 		textFieldRazonSocial.setColumns(10);
@@ -375,6 +399,7 @@ public class BuscadorCliente extends JDialog implements ActionListener, KeyListe
 		panelAtributos.add(textFieldRazonSocial, gbc_textFieldRazonSocial);
 
 		labelEstadoCuentaCorriente = new JLabel("Estado Cuenta:");
+		labelEstadoCuentaCorriente.setFont(new Font("Tahoma", Font.BOLD, 15));
 		GridBagConstraints gbc_labelEstadoCuentaCorriente = new GridBagConstraints();
 		gbc_labelEstadoCuentaCorriente.anchor = GridBagConstraints.EAST;
 		gbc_labelEstadoCuentaCorriente.insets = new Insets(0, 0, 5, 5);
@@ -383,6 +408,7 @@ public class BuscadorCliente extends JDialog implements ActionListener, KeyListe
 		panelAtributos.add(labelEstadoCuentaCorriente, gbc_labelEstadoCuentaCorriente);
 
 		textFieldEstadoCuentaCorriente = new JTextField();
+		textFieldEstadoCuentaCorriente.setFont(new Font("Tahoma", Font.BOLD, 16));
 		textFieldEstadoCuentaCorriente.setEnabled(false);
 		textFieldEstadoCuentaCorriente.setEditable(false);
 		textFieldEstadoCuentaCorriente.setColumns(10);
@@ -394,6 +420,7 @@ public class BuscadorCliente extends JDialog implements ActionListener, KeyListe
 		panelAtributos.add(textFieldEstadoCuentaCorriente, gbc_textFieldEstadoCuentaCorriente);
 
 		labelEstadoCliente = new JLabel("Estado Cliente:");
+		labelEstadoCliente.setFont(new Font("Tahoma", Font.BOLD, 15));
 		GridBagConstraints gbc_labelEstadoCliente = new GridBagConstraints();
 		gbc_labelEstadoCliente.insets = new Insets(0, 0, 5, 5);
 		gbc_labelEstadoCliente.anchor = GridBagConstraints.EAST;
@@ -402,6 +429,7 @@ public class BuscadorCliente extends JDialog implements ActionListener, KeyListe
 		panelAtributos.add(labelEstadoCliente, gbc_labelEstadoCliente);
 
 		textFieldEstadoCliente = new JTextField();
+		textFieldEstadoCliente.setFont(new Font("Tahoma", Font.BOLD, 16));
 		textFieldEstadoCliente.setEnabled(false);
 		textFieldEstadoCliente.setEditable(false);
 		textFieldEstadoCliente.setColumns(10);
@@ -413,6 +441,7 @@ public class BuscadorCliente extends JDialog implements ActionListener, KeyListe
 		panelAtributos.add(textFieldEstadoCliente, gbc_textFieldEstadoCliente);
 
 		labelPersonasAutorizadas = new JLabel("Personas Autorizadas:");
+		labelPersonasAutorizadas.setFont(new Font("Tahoma", Font.BOLD, 15));
 		GridBagConstraints gbc_labelPersonasAutorizadas = new GridBagConstraints();
 		gbc_labelPersonasAutorizadas.anchor = GridBagConstraints.EAST;
 		gbc_labelPersonasAutorizadas.insets = new Insets(0, 0, 5, 5);
@@ -435,6 +464,7 @@ public class BuscadorCliente extends JDialog implements ActionListener, KeyListe
 		textAreaPersonasAutorizadas.setEditable(false);
 
 		lblVehiculos = new JLabel("Vehiculos:");
+		lblVehiculos.setFont(new Font("Tahoma", Font.BOLD, 16));
 		GridBagConstraints gbc_lblVehiculos = new GridBagConstraints();
 		gbc_lblVehiculos.insets = new Insets(0, 0, 5, 5);
 		gbc_lblVehiculos.gridx = 0;
@@ -456,8 +486,9 @@ public class BuscadorCliente extends JDialog implements ActionListener, KeyListe
 		scrollPane_1.setViewportView(textAreaVehiculos);
 
 		lblCocheras = new JLabel("Cocheras:");
+		lblCocheras.setFont(new Font("Tahoma", Font.BOLD, 16));
 		GridBagConstraints gbc_lblCocheras = new GridBagConstraints();
-		gbc_lblCocheras.insets = new Insets(0, 0, 5, 5);
+		gbc_lblCocheras.insets = new Insets(0, 0, 0, 5);
 		gbc_lblCocheras.gridx = 0;
 		gbc_lblCocheras.gridy = 14;
 		panelAtributos.add(lblCocheras, gbc_lblCocheras);
@@ -465,7 +496,6 @@ public class BuscadorCliente extends JDialog implements ActionListener, KeyListe
 		scrollPane_2 = new JScrollPane();
 		scrollPane_2.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
 		GridBagConstraints gbc_scrollPane_2 = new GridBagConstraints();
-		gbc_scrollPane_2.insets = new Insets(0, 0, 5, 0);
 		gbc_scrollPane_2.fill = GridBagConstraints.BOTH;
 		gbc_scrollPane_2.gridx = 1;
 		gbc_scrollPane_2.gridy = 14;
@@ -475,23 +505,18 @@ public class BuscadorCliente extends JDialog implements ActionListener, KeyListe
 		textAreaCocheras.setEnabled(false);
 		textAreaCocheras.setEditable(false);
 		scrollPane_2.setViewportView(textAreaCocheras);
-		
-		btnVercuentacorriente = new JButton("Ver Cuenta Corriente");
-		GridBagConstraints gbc_btnVercuentacorriente = new GridBagConstraints();
-		gbc_btnVercuentacorriente.fill = GridBagConstraints.VERTICAL;
-		gbc_btnVercuentacorriente.gridx = 1;
-		gbc_btnVercuentacorriente.gridy = 15;
-		panelAtributos.add(btnVercuentacorriente, gbc_btnVercuentacorriente);
 
 		buttonCancelar = new JButton("Cancelar");
+		buttonCancelar.setFont(new Font("Tahoma", Font.BOLD, 16));
 		buttonCancelar.setIcon(new ImageIcon(BuscadorCliente.class.getResource("/image/cancel.png")));
-		buttonCancelar.setBounds(226, 637, 116, 42);
+		buttonCancelar.setBounds(103, 637, 159, 42);
 		contentPane.add(buttonCancelar);
 		buttonCancelar.addActionListener(this);
 
 		buttonAceptar = new JButton("Aceptar");
+		buttonAceptar.setFont(new Font("Tahoma", Font.BOLD, 16));
 		buttonAceptar.setIcon(new ImageIcon(BuscadorCliente.class.getResource("/image/ok.png")));
-		buttonAceptar.setBounds(596, 637, 116, 42);
+		buttonAceptar.setBounds(307, 637, 166, 42);
 		contentPane.add(buttonAceptar);
 		buttonAceptar.addActionListener(this);
 		
@@ -520,6 +545,11 @@ public class BuscadorCliente extends JDialog implements ActionListener, KeyListe
 		listClientes = new JList(listModel);
 		listClientes.setSelectionMode(ListSelectionModel.SINGLE_INTERVAL_SELECTION);
 		scrollPaneClientes.setViewportView(listClientes);
+		
+		btnVercuentacorriente = new JButton("Ver Cuenta Corriente");
+		btnVercuentacorriente.setFont(new Font("Tahoma", Font.BOLD, 16));
+		btnVercuentacorriente.setBounds(800, 637, 221, 43);
+		contentPane.add(btnVercuentacorriente);
 		listClientes.addListSelectionListener(this);
 
 		this.setLocationRelativeTo(null);
