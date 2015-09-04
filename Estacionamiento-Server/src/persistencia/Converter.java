@@ -367,6 +367,10 @@ public class Converter {
 		{
 			movimientoCCP.setInteres(convertInteresModeloToPersistencia(movimientoCCM.getInteres()));
 		}
+		if(movimientoCCM.getUsuario()!=null)
+		{
+			movimientoCCP.setUsuario(convertUsuarioModeloToPersistencia(movimientoCCM.getUsuario()));
+		}
 			
 		return movimientoCCP;
 	}
@@ -395,6 +399,11 @@ public class Converter {
 		{
 			movimientoCCM.setInteres(convertInteresPersistenciaToModelo(movimientoCCP.getInteres()));
 		}
+		if(movimientoCCP.getUsuario()!= null)
+		{
+			movimientoCCM.setUsuario(convertUsuarioPersistenciaToModelo(movimientoCCP.getUsuario()));
+		}
+		
 		return movimientoCCM;
 	}
 

@@ -12,6 +12,7 @@ public class MovimientoCC
 	private Ticket ticket;
 	private LiquidacionExpensas liquidacionExpensas;
 	private Interes interes;
+	private Usuario usuario;
 	public long getIdMovimiento() {
 		return idMovimiento;
 	}
@@ -64,6 +65,14 @@ public class MovimientoCC
 
 	public void setInteres(Interes interes) {
 		this.interes = interes;
+	}
+
+	public Usuario getUsuario() {
+		return usuario;
+	}
+
+	public void setUsuario(Usuario usuario) {
+		this.usuario = usuario;
 	}
 	
 	

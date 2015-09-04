@@ -37,6 +37,10 @@ public class MovimientoCC {
 	@JoinColumn(name="Interes")
 	private Interes interes;
 	
+	@OneToOne(cascade=CascadeType.ALL)
+	@JoinColumn(name="Interes")
+	private Usuario usuario;
+	
 	public long getIdMovimiento() {
 		return idMovimiento;
 	}
@@ -99,6 +103,12 @@ public class MovimientoCC {
 	}
 	public void setInteres(Interes interes) {
 		this.interes = interes;
+	}
+	public Usuario getUsuario() {
+		return usuario;
+	}
+	public void setUsuario(Usuario usuario) {
+		this.usuario = usuario;
 	}
 	
 	
