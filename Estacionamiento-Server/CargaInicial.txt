@@ -46,6 +46,7 @@ INSERT INTO Cliente (apellido, correoElectronico,cuil,descripcion,direccion,esta
 INSERT INTO Cliente (apellido, correoElectronico,cuil,descripcion,direccion,estado,nombre,numeroDocumento,telefono1,tipoCliente,tipoDocumento, CuentaCorriente) VALUES ('Pera', 'rodrigo@me.com','23335678902','Description','Lima 1200',1,'RO','33567890','42545566',1,1,2);
 INSERT INTO Cliente (apellido, correoElectronico,cuil,descripcion,direccion,estado,nombre,numeroDocumento,telefono1,tipoCliente,tipoDocumento, CuentaCorriente) VALUES ('More', 'more@me.com','23346660009','Description','Chile 1200',1,'DM','23346660009','115049633',1,1,3);
 
-INSERT INTO Cliente (apellido, correoElectronico,cuil,descripcion,direccion,estado,nombre,numeroDocumento,telefono1,tipoCliente,tipoDocumento, CuentaCorriente) VALUES ('Lopez', 'lopez@me.com','2213','Description','Alba 123',1,'Luis','334567','123465',1,1,1);
-
 INSERT INTO Cochera	(costoCochera, estado, porcentajeExpensas, ubicacion, Cliente) values (200, 0, 3, '4J', 1)
+INSERT INTO Cochera	(costoCochera, estado, porcentajeExpensas, ubicacion, Cliente) values (300, 0, 97, '3H', 2)
+
+

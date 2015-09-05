@@ -371,7 +371,7 @@ public class Converter {
 		{
 			movimientoCCP.setUsuario(convertUsuarioModeloToPersistencia(movimientoCCM.getUsuario()));
 		}
-			
+
 		return movimientoCCP;
 	}
 
@@ -387,10 +387,10 @@ public class Converter {
 		movimientoCCM.setIdMovimiento(movimientoCCP.getIdMovimiento());
 		movimientoCCM.setMontoCobrado(movimientoCCP.getMontoCobrado());
 		movimientoCCM.setDescripcion(movimientoCCP.getDescripcion());
-//		if(movimientoCCP.getTicket()!=null)
-//		{
-//			movimientoCCM.setTicket(convertTicketPersistenciaToModelo (movimientoCCP.getTicket()));
-//		}
+		//		if(movimientoCCP.getTicket()!=null)
+		//		{
+		//			movimientoCCM.setTicket(convertTicketPersistenciaToModelo (movimientoCCP.getTicket()));
+		//		}
 		if(movimientoCCP.getLiquidacionExpensas()!=null)
 		{
 			movimientoCCM.setLiquidacionExpensas(convertLiquidacionExpensasPersistenciaToModelo (movimientoCCP.getLiquidacionExpensas()));
@@ -403,7 +403,7 @@ public class Converter {
 		{
 			movimientoCCM.setUsuario(convertUsuarioPersistenciaToModelo(movimientoCCP.getUsuario()));
 		}
-		
+
 		return movimientoCCM;
 	}
 
@@ -679,7 +679,7 @@ public class Converter {
 		}
 		return movimientosCCP;
 	}
-	
+
 	public  static modelo.LiquidacionExpensas convertLiquidacionExpensasPersistenciaToModelo(persistencia.clases.LiquidacionExpensas liquidacionP)
 	{
 		modelo.LiquidacionExpensas liquidacionM = new modelo.LiquidacionExpensas();
@@ -694,7 +694,7 @@ public class Converter {
 			liquidacionM.setEstado(modelo.LiquidacionExpensas.Estado.ANULADO);
 		return liquidacionM;
 	}
-	
+
 	public  static persistencia.clases.LiquidacionExpensas convertLiquidacionExpensasModeloToPersistencia(modelo.LiquidacionExpensas liquidacionM)
 	{
 		persistencia.clases.LiquidacionExpensas liquidacionP = new persistencia.clases.LiquidacionExpensas();
@@ -717,7 +717,6 @@ public class Converter {
 			liquidacionesExpensasM.add(convertLiquidacionExpensasPersistenciaToModelo(liquidacionP));
 		}
 		return liquidacionesExpensasM;
-
 	}
 
 	public static ArrayList<Usuario> convertUsuariosPersistenciaToModelo(
@@ -730,24 +729,23 @@ public class Converter {
 		}
 		return usuariosM;
 	}
-	
+
 
 	public static modelo.Interes convertInteresPersistenciaToModelo(persistencia.clases.Interes interesP)
 	{
 		modelo.Interes interesM= new modelo.Interes();
 		interesM.setIdInteres(interesP.getIdInteres());
 		interesM.setFechaAplicado(interesP.getFechaAplicado());
-		
 		return interesM;
 	}
-	
+
 
 	private static persistencia.clases.Interes convertInteresModeloToPersistencia(
 			Interes interesM) {
 		persistencia.clases.Interes interesP = new persistencia.clases.Interes();
 		interesP.setIdInteres(interesM.getIdInteres());
 		interesP.setFechaAplicado(interesM.getFechaAplicado());
-		
+
 		return interesP;
 	}
 

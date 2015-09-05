@@ -145,6 +145,7 @@ public class CobroExtraordinario extends JDialog implements ActionListener{
 		if(event.getSource()==btnBuscarCliente)
 		{
 			new BuscadorCliente().setVisible(true);
+			this.cliente=Controlador.getInstancia().getClienteActual();
 			if(cliente!=null)
 			{
 				clienteTextField.setText(cliente.getNombre()+cliente.getApellido());

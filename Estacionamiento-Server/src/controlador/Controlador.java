@@ -576,8 +576,8 @@ public class Controlador {
 		movimientoM.setFecha(new java.sql.Date(Calendar.getInstance().getTime().getTime()));
 		movimientoM.setIdMovimiento(0);
 		movimientoM.setMontoCobrado(monto);
-
-		DAOMovimientoCC.getInstance().persistir(movimientoM);
+		DAOCliente.getInstance().agregarMovimientoCC(cliente.getIdCliente(), movimientoM);
+//		DAOMovimientoCC.getInstance().persistir(movimientoM);
 
 		return 0;
 	}
@@ -618,11 +618,10 @@ public class Controlador {
 						movimientoNuevo.setEstado("Liquidado");
 						movimientoNuevo.setTicket(null);
 						movimientoNuevo.setMontoCobrado((-1)*montoCobrar);
-						liquidacionExpensas.setIdLiquidacionExpensas(0);
 						movimientoNuevo.setLiquidacionExpensas(liquidacionExpensas);
 
 
-						DAOCliente.getInstance().agregarMovimientoCC(clienteM.getIdCliente(), movimientoNuevo);
+						liquidacionExpensas.setIdLiquidacionExpensas(DAOCliente.getInstance().agregarMovimientoCC_Expensas(clienteM.getIdCliente(), movimientoNuevo));
 
 						expensasImprimir.add(cocheraActual.getUbicacion()+";"+periodoLiquidar +";"+ clienteM.getNombre()+";"+clienteM.getApellido()+";"+cocheraActual.getPorcentajeExpensas() +";"+ montoCobrar);
 					}
@@ -868,7 +867,7 @@ public class Controlador {
 	private long aplicarInteres()
 	{
 		//APLICA EL 15 de cada mes
-		int fechaVencimiento =3;
+		int fechaVencimiento =4;
 		java.util.Date fechaActual= Calendar.getInstance().getTime();;
 		DateFormat dateFormatDay = new SimpleDateFormat("dd"); 
 
@@ -880,7 +879,6 @@ public class Controlador {
 			for(modelo.Interes interesM : intereses)
 			{
 				DateFormat dateFormatValidacion = new SimpleDateFormat("dd-MM-yyyy"); 
-				System.out.println(dateFormatValidacion.format(interesM.getFechaAplicado())+" - "+dateFormatValidacion.format(fechaActual));
 				if(dateFormatValidacion.format(interesM.getFechaAplicado()).equals(dateFormatValidacion.format(fechaActual)))
 				{
 					return -1;
@@ -901,7 +899,6 @@ public class Controlador {
 //TODO GET DEUDA
 					double deuda=-100;
 
-					
 					modelo.MovimientoCC movimientoNuevo= new modelo.MovimientoCC();
 					movimientoNuevo.setIdMovimiento(0);
 					movimientoNuevo.setFecha(fechaActual);
@@ -912,7 +909,7 @@ public class Controlador {
 					movimientoNuevo.setLiquidacionExpensas(null);
 					movimientoNuevo.setInteres(interesM);
 
-					DAOCliente.getInstance().agregarMovimientoCC(clienteM.getIdCliente(), movimientoNuevo);
+					interesM.setIdInteres(DAOCliente.getInstance().agregarMovimientoCC_Interes(clienteM.getIdCliente(), movimientoNuevo));
 				}
 
 			}

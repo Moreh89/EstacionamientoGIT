@@ -45,7 +45,7 @@ public class MenuOperador extends JFrame implements ActionListener, KeyListener 
 	private JTextField textFieldTiempoEstadia;
 	private JTextField textFieldNumeroTicket;
 	private JMenuBar menuBar;
-	private JMenu mnAltas;
+	private JMenu mnCliente;
 	private JMenuItem mntmModelo;
 	private JMenuItem mntmColor;
 	private JMenu mnConsultas;
@@ -82,6 +82,10 @@ public class MenuOperador extends JFrame implements ActionListener, KeyListener 
 	private JMenuItem mntmCerrarSesion;
 	private JButton btnBuscarPorTicketAbierto;
 	private JButton btnLimpiarCampos;
+	private JMenuItem mntmAltaCliente;
+	private JMenu mnGestionEstacionamiento;
+	private JMenuItem mntmCobroExtraordinario;
+	private JMenuItem mntmModificacionCliente;
 
 	/**
 	 * Launch the application.
@@ -116,23 +120,39 @@ public class MenuOperador extends JFrame implements ActionListener, KeyListener 
 		menuBar.setFont(new Font("Segoe UI", Font.PLAIN, 20));
 		setJMenuBar(menuBar);
 
-		mnAltas = new JMenu("Altas");
-		mnAltas.setFont(new Font("Segoe UI", Font.BOLD, 20));
-		mnAltas.setIcon(new ImageIcon(MenuOperador.class
-				.getResource("/image/plus.png")));
-		menuBar.add(mnAltas);
+		mnCliente = new JMenu("Cliente");
+		mnCliente.setFont(new Font("Segoe UI", Font.BOLD, 20));
+		mnCliente.setIcon(new ImageIcon(MenuOperador.class.getResource("/image/paciente.png")));
+		menuBar.add(mnCliente);
+
+		mntmAltaCliente = new JMenuItem("Alta");
+		mntmAltaCliente.setFont(new Font("Segoe UI", Font.PLAIN, 20));
+		mnCliente.add(mntmAltaCliente);
+
+		mntmModificacionCliente = new JMenuItem("Modificaci\u00F3n");
+		mntmModificacionCliente.setFont(new Font("Segoe UI", Font.PLAIN, 20));
+		mnCliente.add(mntmModificacionCliente);
+
+		mnGestionEstacionamiento = new JMenu("Gestion Estacionamiento");
+		mnGestionEstacionamiento.setIcon(new ImageIcon(MenuOperador.class.getResource("/image/modificar.png")));
+		mnGestionEstacionamiento.setFont(new Font("Segoe UI", Font.BOLD, 20));
+		menuBar.add(mnGestionEstacionamiento);
 
 		mntmModelo = new JMenuItem("Modelo F8");
+		mnGestionEstacionamiento.add(mntmModelo);
 		mntmModelo.setFont(new Font("Segoe UI", Font.PLAIN, 20));
-		mnAltas.add(mntmModelo);
 		mntmModelo.addActionListener(this);
 
 
 		mntmColor = new JMenuItem("Color F9");
+		mnGestionEstacionamiento.add(mntmColor);
 		mntmColor.setFont(new Font("Segoe UI", Font.PLAIN, 20));
-		mnAltas.add(mntmColor);
 		mntmColor.addActionListener(this);
 
+		mntmCobroExtraordinario = new JMenuItem("Cobro Extraordinario");
+		mntmCobroExtraordinario.setFont(new Font("Segoe UI", Font.PLAIN, 20));
+		mnGestionEstacionamiento.add(mntmCobroExtraordinario);
+		mnGestionEstacionamiento.addActionListener(this);
 
 		mnConsultas = new JMenu("Consultas");
 		mnConsultas.setFont(new Font("Segoe UI", Font.BOLD, 20));
@@ -207,7 +227,7 @@ public class MenuOperador extends JFrame implements ActionListener, KeyListener 
 		gbc_textFieldNumeroTicket.gridy = 0;
 		contentPane.add(textFieldNumeroTicket, gbc_textFieldNumeroTicket);
 		textFieldNumeroTicket.addKeyListener(this);
-		
+
 		btnLimpiarCampos = new JButton("Limpiar Campos F6");
 		btnLimpiarCampos.setFont(new Font("Dialog", Font.PLAIN, 30));
 		GridBagConstraints gbc_btnLimpiarCampos = new GridBagConstraints();
@@ -217,7 +237,7 @@ public class MenuOperador extends JFrame implements ActionListener, KeyListener 
 		gbc_btnLimpiarCampos.gridy = 0;
 		contentPane.add(btnLimpiarCampos, gbc_btnLimpiarCampos);
 		btnLimpiarCampos.addActionListener(this);
-		
+
 		labelUsuario = new JLabel();
 		labelUsuario.setHorizontalAlignment(SwingConstants.CENTER);
 		labelUsuario.setForeground(Color.BLUE);
@@ -287,7 +307,7 @@ public class MenuOperador extends JFrame implements ActionListener, KeyListener 
 		for (String colString : Controlador.getInstancia().getColoresActualesString()) {
 			comboBoxColor.addItem(colString);
 		}
-		
+
 		GridBagConstraints gbc_comboBoxColor = new GridBagConstraints();
 		gbc_comboBoxColor.gridwidth = 2;
 		gbc_comboBoxColor.insets = new Insets(0, 0, 5, 5);
@@ -311,7 +331,7 @@ public class MenuOperador extends JFrame implements ActionListener, KeyListener 
 		for (String modString : Controlador.getInstancia().getModelosActualesString()) {
 			comboBoxModelo.addItem(modString);
 		}
-		
+
 		GridBagConstraints gbc_comboBoxModelo = new GridBagConstraints();
 		gbc_comboBoxModelo.fill = GridBagConstraints.BOTH;
 		gbc_comboBoxModelo.insets = new Insets(0, 0, 5, 0);
@@ -361,7 +381,7 @@ public class MenuOperador extends JFrame implements ActionListener, KeyListener 
 		gbc_textFieldPrepado.gridy = 3;
 		contentPane.add(textFieldPrepago, gbc_textFieldPrepado);
 		textFieldPrepago.addKeyListener(this);
-		
+
 		lblCliente = new JLabel("Cliente:");
 		lblCliente.setFont(new Font("Tahoma", Font.PLAIN, 30));
 		GridBagConstraints gbc_lblCliente = new GridBagConstraints();
@@ -394,7 +414,7 @@ public class MenuOperador extends JFrame implements ActionListener, KeyListener 
 		gbc_btnButtonBuscarCliente.gridy = 4;
 		contentPane.add(btnButtonBuscarCliente, gbc_btnButtonBuscarCliente);
 		btnButtonBuscarCliente.addActionListener(this);
-		
+
 		lblPerdidaTicket = new JLabel("Perdida Ticket:");
 		lblPerdidaTicket.setFont(new Font("Tahoma", Font.PLAIN, 30));
 		GridBagConstraints gbc_lblPerdidaTicket = new GridBagConstraints();
@@ -403,7 +423,7 @@ public class MenuOperador extends JFrame implements ActionListener, KeyListener 
 		gbc_lblPerdidaTicket.gridx = 3;
 		gbc_lblPerdidaTicket.gridy = 4;
 		contentPane.add(lblPerdidaTicket, gbc_lblPerdidaTicket);
-		
+
 		btnBuscarPorTicketAbierto = new JButton("Buscar Ticket");
 		btnBuscarPorTicketAbierto.setFont(new Font("Dialog", Font.PLAIN, 30));
 		btnBuscarPorTicketAbierto.setIcon(new ImageIcon(MenuOperador.class.getResource("/image/search.png")));
@@ -414,7 +434,7 @@ public class MenuOperador extends JFrame implements ActionListener, KeyListener 
 		gbc_buttonBuscarPorTicketAbierto.gridy = 4;
 		contentPane.add(btnBuscarPorTicketAbierto, gbc_buttonBuscarPorTicketAbierto);
 		btnBuscarPorTicketAbierto.addActionListener(this);
-		
+
 		lblObservacion = new JLabel("Observacion:");
 		lblObservacion.setFont(new Font("Tahoma", Font.PLAIN, 30));
 		GridBagConstraints gbc_lblObservacion = new GridBagConstraints();
@@ -513,7 +533,7 @@ public class MenuOperador extends JFrame implements ActionListener, KeyListener 
 		gbc_btnCobrarF.gridy = 9;
 		contentPane.add(btnCobrarF, gbc_btnCobrarF);
 		btnCobrarF.addActionListener(this);
-		
+
 		panel = new JPanel();
 		GridBagConstraints gbc_panel = new GridBagConstraints();
 		gbc_panel.gridwidth = 5;
@@ -590,7 +610,7 @@ public class MenuOperador extends JFrame implements ActionListener, KeyListener 
 		gbc_textField_2.gridx = 5;
 		gbc_textField_2.gridy = 0;
 		panel.add(textFieldTiempoEstadia, gbc_textField_2);
-		
+
 	}
 
 	@Override
@@ -598,7 +618,7 @@ public class MenuOperador extends JFrame implements ActionListener, KeyListener 
 
 		if (event.getSource() == btnCobrarF) {
 			if (Controlador.getInstancia().getTicket().getEstado() != Ticket.Estado.CERRADO
-					   && Controlador.getInstancia().getTicket().getEstado() != Ticket.Estado.CREDITO){
+					&& Controlador.getInstancia().getTicket().getEstado() != Ticket.Estado.CREDITO){
 				if(Controlador.getInstancia().getTicket().getCliente() !=null){
 					int resultado = JOptionPane.showConfirmDialog (null, "El ticket posee un Cliente, desea mover a Cuenta corriente?");
 					if (resultado == JOptionPane.OK_OPTION){
@@ -609,14 +629,14 @@ public class MenuOperador extends JFrame implements ActionListener, KeyListener 
 				} else {
 					Controlador.getInstancia().cobrarTicket(Ticket.Estado.CERRADO);
 				}
-			
+
 			}else{
 				//TODO Imprimir error, ticket ya cobrado
 			}
 		}
-			
+
 		if (event.getSource() == btnGuardarF) {
-			
+
 			//TODO si pasaron 5 min desde q se creo bloquear los campos correspondientes
 			Controlador.getInstancia()
 			.actualizarTicket(
@@ -629,42 +649,42 @@ public class MenuOperador extends JFrame implements ActionListener, KeyListener 
 					textFieldPrepago.getText(),
 					textFieldObsevacion.getText());
 		}
-		
+
 		if (event.getSource() == btnCanelarF) {
 			if(isNumeric(textFieldNumeroTicket.getText()) && (textFieldPrepago.getText().equals("")||isNumeric(textFieldPrepago.getText()))){
 				Ticket tck = Controlador.getInstancia().buscarTicket(textFieldNumeroTicket.getText());
-					if (tck!=null){
-						this.textFieldNumeroTicket.setBackground(new Color(Color.WHITE.getRGB()));
-						textFieldPrepago.setBackground(new Color(Color.WHITE.getRGB()));
-						
-						Date horaCreado = tck.getFechaLlegada();
-						Date horaActual = Calendar.getInstance().getTime();
-						long diff  = horaActual.getTime() - horaCreado.getTime();
-						long diffMinutes = diff / (60 * 1000);
-						//Solo acepto 5 min de tiempo para cancelar
-						if(diffMinutes <= 5){
-							if(!Controlador.getInstancia().cancelarTicket(tck)){
-								//TODO Cartel error
-							}
-						}else{
+				if (tck!=null){
+					this.textFieldNumeroTicket.setBackground(new Color(Color.WHITE.getRGB()));
+					textFieldPrepago.setBackground(new Color(Color.WHITE.getRGB()));
+
+					Date horaCreado = tck.getFechaLlegada();
+					Date horaActual = Calendar.getInstance().getTime();
+					long diff  = horaActual.getTime() - horaCreado.getTime();
+					long diffMinutes = diff / (60 * 1000);
+					//Solo acepto 5 min de tiempo para cancelar
+					if(diffMinutes <= 5){
+						if(!Controlador.getInstancia().cancelarTicket(tck)){
 							//TODO Cartel error
 						}
-						
-						
 					}else{
-						textFieldNumeroTicket.setBackground(new Color(Color.ORANGE.getRGB()));
+						//TODO Cartel error
 					}
+
+
 				}else{
-					if(!isNumeric(textFieldNumeroTicket.getText()))
-					textFieldNumeroTicket.setBackground(new Color(Color.PINK.getRGB()));
-					if(textFieldPrepago.getText().equals("")||isNumeric(textFieldPrepago.getText())) textFieldPrepago.setBackground(new Color(Color.PINK.getRGB()));
+					textFieldNumeroTicket.setBackground(new Color(Color.ORANGE.getRGB()));
 				}
+			}else{
+				if(!isNumeric(textFieldNumeroTicket.getText()))
+					textFieldNumeroTicket.setBackground(new Color(Color.PINK.getRGB()));
+				if(textFieldPrepago.getText().equals("")||isNumeric(textFieldPrepago.getText())) textFieldPrepago.setBackground(new Color(Color.PINK.getRGB()));
+			}
 		}	
-		
+
 		if (event.getSource() == btnButtonBuscarCliente) {
 			new BuscadorCliente().setVisible(true);
 			if(Controlador.getInstancia().getClienteActual() != null){
-			this.textFieldCliente.setText(Controlador.getInstancia().getClienteActual().toString());
+				this.textFieldCliente.setText(Controlador.getInstancia().getClienteActual().toString());
 			}else{
 				this.textFieldCliente.setText("");
 			}
@@ -675,7 +695,7 @@ public class MenuOperador extends JFrame implements ActionListener, KeyListener 
 				this.textFieldNumeroTicket.setText(String.valueOf(Controlador.getInstancia().getTicket().getIdTicket()));
 				buscarTicket();
 			}
-			
+
 		}
 		if (event.getSource() == btnLimpiarCampos) {
 			Controlador.getInstancia().setClienteActual(null);
@@ -699,9 +719,9 @@ public class MenuOperador extends JFrame implements ActionListener, KeyListener 
 			this.textFieldNumeroTicket.setText("");
 		}
 		if (event.getSource() == btnTicketF) {
-			
+
 			if(!this.textFieldPatente.getText().equals("")) {
-				
+
 				Ticket tck= Controlador.getInstancia()
 						.generarTicket(
 								(String) comboBoxTipoVehiculo.getSelectedItem(),
@@ -712,7 +732,7 @@ public class MenuOperador extends JFrame implements ActionListener, KeyListener 
 								textFieldCliente.getText(),
 								textFieldPrepago.getText(),
 								textFieldObsevacion.getText());
-	
+
 				this.textFieldNumeroTicket.setBackground(new Color(Color.WHITE.getRGB()));
 				this.textFieldPatente.setBackground(new Color(Color.WHITE.getRGB()));
 				this.textFieldPatente.setBackground(new Color(Color.WHITE.getRGB()));
@@ -732,7 +752,7 @@ public class MenuOperador extends JFrame implements ActionListener, KeyListener 
 				this.textFieldPrepago.setText(String.valueOf(tck.getPrepago()));
 				this.textFieldPrepago.setEditable(true);
 				this.textFieldTiempoEstadia.setText(tck.getTiempoEstadia());
-				
+
 				//TODO bloquear botones y demas hasta que elija nuevo
 			}else{
 				this.textFieldPatente.setBackground(new Color(Color.PINK.getRGB()));
@@ -759,15 +779,17 @@ public class MenuOperador extends JFrame implements ActionListener, KeyListener 
 		if (event.getSource() == mntmTicketsAbiertos){
 			new TicketsAbiertos().setVisible(true);
 		}
-		
+		if (event.getSource() == mntmCobroExtraordinario){
+			new CobroExtraordinario().setVisible(true);
+		}
 
 
 	}
-	
+
 	private void buscarTicket(){
 		//TODO Bloquear resto de cosas
 		if(isNumeric(textFieldNumeroTicket.getText()) && (textFieldPrepago.getText().equals("")||isNumeric(textFieldPrepago.getText()))){
-		Ticket tck = Controlador.getInstancia().buscarTicket(textFieldNumeroTicket.getText());
+			Ticket tck = Controlador.getInstancia().buscarTicket(textFieldNumeroTicket.getText());
 			if (tck!=null){
 				Controlador.getInstancia().setClienteActual(null);
 				this.textFieldNumeroTicket.setBackground(new Color(Color.WHITE.getRGB()));
@@ -825,14 +847,14 @@ public class MenuOperador extends JFrame implements ActionListener, KeyListener 
 			}
 		}else{
 			if(!isNumeric(textFieldNumeroTicket.getText()))
-			textFieldNumeroTicket.setBackground(new Color(Color.PINK.getRGB()));
+				textFieldNumeroTicket.setBackground(new Color(Color.PINK.getRGB()));
 			if(textFieldPrepago.getText().equals("")||isNumeric(textFieldPrepago.getText())) textFieldPrepago.setBackground(new Color(Color.PINK.getRGB()));
 		}
 	}
 
 	@Override
 	public void keyPressed(KeyEvent event) {
-		
+
 		if (event.getKeyCode()== KeyEvent.VK_ENTER && this.textFieldNumeroTicket.isFocusOwner()){
 			buscarTicket();
 		}
@@ -851,34 +873,34 @@ public class MenuOperador extends JFrame implements ActionListener, KeyListener 
 		if (event.getKeyCode()== KeyEvent.VK_F6 ){
 			this.btnLimpiarCampos.doClick();
 		}
-		
+
 	}
 
 	@Override
 	public void keyReleased(KeyEvent event) {
-		
+
 	}
 
 	@Override
 	public void keyTyped(KeyEvent event) {
-		
-		
-		
+
+
+
 	}
-	
+
 	@SuppressWarnings("unused")
 	public static boolean isNumeric(String str)  
 	{  
-	  try  
-	  {  
-	    double d = Double.parseDouble(str);  
-	  }  
-	  catch(NumberFormatException nfe)  
-	  {  
-	    return false;  
-	  }  
-	  return true;  
+		try  
+		{  
+			double d = Double.parseDouble(str);  
+		}  
+		catch(NumberFormatException nfe)  
+		{  
+			return false;  
+		}  
+		return true;  
 	}
-	
-	
+
+
 }

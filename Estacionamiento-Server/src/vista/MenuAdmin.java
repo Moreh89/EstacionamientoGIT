@@ -56,6 +56,7 @@ public class MenuAdmin extends JFrame implements ActionListener {
 	private JMenuItem mntmLiquidarExpensas;
 	private JMenu mnExpensas;
 	private JMenuItem mntmAnularExpensas;
+	private JMenuItem mntmCobroExtraordinario;
 
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
@@ -163,7 +164,10 @@ public class MenuAdmin extends JFrame implements ActionListener {
 		mntmAnularExpensas = new JMenuItem("Anular Liquidaci\u00F3n");
 		mnExpensas.add(mntmAnularExpensas);
 		mntmAnularExpensas.addActionListener(this);
-		
+
+		mntmCobroExtraordinario = new JMenuItem("Cobro Extraordinario");
+		mnGestionEstacionamiento.add(mntmCobroExtraordinario);
+		mntmCobroExtraordinario.addActionListener(this);
 		
 		
 		mnConsultas = new JMenu("Consultas");
@@ -282,6 +286,9 @@ public class MenuAdmin extends JFrame implements ActionListener {
 		if(event.getSource()==mntmModificacionCliente){
 			//TODO enviar el cliente seleccionado o obtenerlo del controlador
 			new ModificarCliente().setVisible(true);
+		}
+		if(event.getSource()==mntmCobroExtraordinario){
+			new CobroExtraordinario().setVisible(true);
 		}
 		
 	}

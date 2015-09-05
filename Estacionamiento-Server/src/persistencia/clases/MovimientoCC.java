@@ -38,7 +38,7 @@ public class MovimientoCC {
 	private Interes interes;
 	
 	@OneToOne(cascade=CascadeType.ALL)
-	@JoinColumn(name="Interes")
+	@JoinColumn(name="Usuario")
 	private Usuario usuario;
 	
 	public long getIdMovimiento() {
