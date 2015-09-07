@@ -128,10 +128,12 @@ public class MenuOperador extends JFrame implements ActionListener, KeyListener 
 		mntmAltaCliente = new JMenuItem("Alta");
 		mntmAltaCliente.setFont(new Font("Segoe UI", Font.PLAIN, 20));
 		mnCliente.add(mntmAltaCliente);
+		mntmAltaCliente.addActionListener(this);
 
 		mntmModificacionCliente = new JMenuItem("Modificaci\u00F3n");
 		mntmModificacionCliente.setFont(new Font("Segoe UI", Font.PLAIN, 20));
 		mnCliente.add(mntmModificacionCliente);
+		mntmModificacionCliente.addActionListener(this);
 
 		mnGestionEstacionamiento = new JMenu("Gestion Estacionamiento");
 		mnGestionEstacionamiento.setIcon(new ImageIcon(MenuOperador.class.getResource("/image/modificar.png")));
@@ -152,7 +154,7 @@ public class MenuOperador extends JFrame implements ActionListener, KeyListener 
 		mntmCobroExtraordinario = new JMenuItem("Cobro Extraordinario");
 		mntmCobroExtraordinario.setFont(new Font("Segoe UI", Font.PLAIN, 20));
 		mnGestionEstacionamiento.add(mntmCobroExtraordinario);
-		mnGestionEstacionamiento.addActionListener(this);
+		mntmCobroExtraordinario.addActionListener(this);
 
 		mnConsultas = new JMenu("Consultas");
 		mnConsultas.setFont(new Font("Segoe UI", Font.BOLD, 20));
@@ -768,10 +770,10 @@ public class MenuOperador extends JFrame implements ActionListener, KeyListener 
 			new ArqueoDeCaja().setVisible(true);
 		}	
 		if (event.getSource() == mntmModelo){
-			new GestionColor().setVisible(true);
+			new GestionModelo().setVisible(true);
 		}
 		if (event.getSource() == mntmColor){
-			new GestionModelo().setVisible(true);
+			new GestionColor().setVisible(true);
 		}
 		if (event.getSource() == mntmCambiarContrasea){
 			new CambioContrasenia().setVisible(true);
@@ -782,8 +784,13 @@ public class MenuOperador extends JFrame implements ActionListener, KeyListener 
 		if (event.getSource() == mntmCobroExtraordinario){
 			new CobroExtraordinario().setVisible(true);
 		}
-
-
+		if (event.getSource() == mntmAltaCliente){
+			new AltaCliente().setVisible(true);
+		}
+		if(event.getSource()==mntmModificacionCliente){
+			//TODO enviar el cliente seleccionado o obtenerlo del controlador
+			new ModificarCliente().setVisible(true);
+		}
 	}
 
 	private void buscarTicket(){
