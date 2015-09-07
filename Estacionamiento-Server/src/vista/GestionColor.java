@@ -79,7 +79,7 @@ public class GestionColor extends JDialog implements ActionListener, ListSelecti
 
 		JScrollPane scrollPane = new JScrollPane();
 		scrollPane.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
-		scrollPane.setBounds(6, 6, 307, 303);
+		scrollPane.setBounds(6, 13, 307, 296);
 		contentPanel.add(scrollPane);
 		
 
@@ -93,24 +93,24 @@ public class GestionColor extends JDialog implements ActionListener, ListSelecti
 		listColores.addListSelectionListener(this);
 		
 		textFieldAgregarColor = new JTextField();
-		textFieldAgregarColor.setBounds(325, 6, 203, 32);
+		textFieldAgregarColor.setBounds(325, 13, 203, 32);
 		contentPanel.add(textFieldAgregarColor);
 		textFieldAgregarColor.setColumns(10);
 		
 		btnAgregarColor = new JButton("Agregar Color");
 		btnAgregarColor.setIcon(new ImageIcon(GestionColor.class.getResource("/image/plus.png")));
-		btnAgregarColor.setBounds(325, 49, 203, 29);
+		btnAgregarColor.setBounds(325, 56, 203, 29);
 		contentPanel.add(btnAgregarColor);
 		btnAgregarColor.addActionListener(this);
 		
 		textFieldColorActual = new JTextField();
-		textFieldColorActual.setBounds(325, 130, 203, 32);
+		textFieldColorActual.setBounds(325, 137, 203, 32);
 		contentPanel.add(textFieldColorActual);
 		textFieldColorActual.setColumns(10);
 		
 		btnModificarColor = new JButton("Modificar Color");
-		btnModificarColor.setIcon(new ImageIcon(GestionColor.class.getResource("/image/plus.png")));
-		btnModificarColor.setBounds(325, 170, 203, 29);
+		btnModificarColor.setIcon(new ImageIcon(GestionColor.class.getResource("/image/modificar.png")));
+		btnModificarColor.setBounds(325, 177, 203, 29);
 		contentPanel.add(btnModificarColor);
 		btnModificarColor.addActionListener(this);
 		

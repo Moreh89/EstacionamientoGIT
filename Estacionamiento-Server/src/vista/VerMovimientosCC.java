@@ -108,7 +108,7 @@ public class VerMovimientosCC extends JDialog implements ActionListener, KeyList
 		setTitle("Movimientos Cuenta Corriente");
 		setResizable(false);
 		//setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 531, 614);
+		setBounds(100, 100, 572, 613);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
@@ -127,11 +127,11 @@ public class VerMovimientosCC extends JDialog implements ActionListener, KeyList
 
 
 		JSeparator separator = new JSeparator();
-		separator.setBounds(10, 64, 510, 6);
+		separator.setBounds(10, 64, 546, 6);
 		contentPane.add(separator);
 
 		panelAtributos = new JPanel();
-		panelAtributos.setBounds(17, 259, 503, 275);
+		panelAtributos.setBounds(17, 259, 539, 268);
 		contentPane.add(panelAtributos);
 		GridBagLayout gbl_panelAtributos = new GridBagLayout();
 		gbl_panelAtributos.columnWidths = new int[]{0, 0, 0};
@@ -218,13 +218,14 @@ public class VerMovimientosCC extends JDialog implements ActionListener, KeyList
 
 		lblTicket = new JLabel("Ticket:");
 		GridBagConstraints gbc_lblTicket = new GridBagConstraints();
+		gbc_lblTicket.anchor = GridBagConstraints.EAST;
 		gbc_lblTicket.insets = new Insets(0, 0, 5, 5);
 		gbc_lblTicket.gridx = 0;
 		gbc_lblTicket.gridy = 4;
 		panelAtributos.add(lblTicket, gbc_lblTicket);
 		
 		panelClientes = new JPanel();
-		panelClientes.setBounds(10, 96, 503, 135);
+		panelClientes.setBounds(10, 96, 546, 135);
 		contentPane.add(panelClientes);
 		GridBagLayout gbl_panelClientes = new GridBagLayout();
 		gbl_panelClientes.columnWidths = new int[]{240, 0};
@@ -257,7 +258,7 @@ public class VerMovimientosCC extends JDialog implements ActionListener, KeyList
 		contentPane.add(btnCancelar);
 
 		Panel panel = new Panel();
-		panel.setBounds(10, 0, 505, 46);
+		panel.setBounds(10, 0, 546, 46);
 		contentPane.add(panel);
 		GridBagLayout gbl_panel = new GridBagLayout();
 		gbl_panel.columnWidths = new int[]{100, 80, 100, 80, 93, 0};
@@ -296,6 +297,7 @@ public class VerMovimientosCC extends JDialog implements ActionListener, KeyList
 		gbc_lblFechaHasta.gridy = 0;
 		panel.add(lblFechaHasta, gbc_lblFechaHasta);
 
+
 		fechaHasta = new JXDatePicker();
 		GridBagConstraints gbc_fechaHasta = new GridBagConstraints();
 		gbc_fechaHasta.fill = GridBagConstraints.HORIZONTAL;
@@ -303,6 +305,8 @@ public class VerMovimientosCC extends JDialog implements ActionListener, KeyList
 		gbc_fechaHasta.gridx = 3;
 		gbc_fechaHasta.gridy = 0;
 		panel.add(fechaHasta, gbc_fechaHasta);
+		fechaHasta.setDate(Calendar.getInstance().getTime());
+		fechaHasta.setFormats(new SimpleDateFormat("dd/MM/yyyy"));
 
 
 		buscarButton = new JButton("Buscar");
@@ -315,7 +319,7 @@ public class VerMovimientosCC extends JDialog implements ActionListener, KeyList
 		buscarButton.setIcon(new ImageIcon(VerMovimientosCC.class.getResource("/image/search.png")));
 
 		JSeparator separator_1 = new JSeparator();
-		separator_1.setBounds(10, 242, 510, 6);
+		separator_1.setBounds(10, 242, 546, 6);
 		contentPane.add(separator_1);
 		listMovimientos.addListSelectionListener(this);
 

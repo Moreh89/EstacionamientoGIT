@@ -50,41 +50,45 @@ public class AltaDescuento extends JDialog implements ActionListener{
 	public AltaDescuento() {
 		setResizable(false);
 		setTitle("Alta Descuento");
-		setBounds(100, 100, 329, 173);
+		setBounds(100, 100, 363, 178);
 		getContentPane().setLayout(new BorderLayout());
 		contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
 		getContentPane().add(contentPanel, BorderLayout.CENTER);
 		contentPanel.setLayout(null);
 
 		JLabel lblNuevaCon = new JLabel("Descripcion:");
-		lblNuevaCon.setFont(new Font("Tahoma", Font.BOLD, 11));
+		lblNuevaCon.setFont(new Font("Tahoma", Font.BOLD, 16));
 
-		lblNuevaCon.setBounds(10, 36, 144, 14);
+		lblNuevaCon.setBounds(5, 16, 144, 14);
 		contentPanel.add(lblNuevaCon);
 
 		JLabel lblNuevaCon2 = new JLabel("Porcentaje Descuento:");
-		lblNuevaCon2.setFont(new Font("Tahoma", Font.BOLD, 11));
-		lblNuevaCon2.setBounds(10, 74, 144, 14);
+		lblNuevaCon2.setFont(new Font("Tahoma", Font.BOLD, 16));
+		lblNuevaCon2.setBounds(5, 54, 190, 14);
 		contentPanel.add(lblNuevaCon2);
 
 		aceptarButton = new JButton("Aceptar");
+		aceptarButton.setFont(new Font("Tahoma", Font.PLAIN, 16));
 		aceptarButton.setIcon(new ImageIcon(CambioContrasenia.class.getResource("/image/ok.png")));
-		aceptarButton.setBounds(195, 102, 116, 32);
+		aceptarButton.setBounds(206, 102, 139, 32);
 		contentPanel.add(aceptarButton);
 		aceptarButton.addActionListener(this);
 
 		cancelarButton = new JButton("Cancelar");
+		cancelarButton.setFont(new Font("Tahoma", Font.PLAIN, 16));
 		cancelarButton.setIcon(new ImageIcon(GestionUsuario.class.getResource("/image/cancel.png")));
-		cancelarButton.setBounds(10, 102, 116, 32);
+		cancelarButton.setBounds(10, 102, 139, 32);
 		contentPanel.add(cancelarButton);
 		cancelarButton.addActionListener(this);
 
 		descripcionTextField = new JTextField();
-		descripcionTextField.setBounds(166, 31, 145, 22);
+		descripcionTextField.setFont(new Font("Tahoma", Font.PLAIN, 16));
+		descripcionTextField.setBounds(200, 13, 145, 22);
 		contentPanel.add(descripcionTextField);
 
 		montoDescuentoTextField = new JTextField();
-		montoDescuentoTextField.setBounds(166, 70, 145, 22);
+		montoDescuentoTextField.setFont(new Font("Tahoma", Font.PLAIN, 16));
+		montoDescuentoTextField.setBounds(200, 51, 145, 22);
 		contentPanel.add(montoDescuentoTextField);
 
 		this.setLocationRelativeTo(null);

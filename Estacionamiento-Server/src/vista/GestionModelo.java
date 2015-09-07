@@ -79,7 +79,7 @@ public class GestionModelo extends JDialog implements ActionListener, ListSelect
 		
 		JScrollPane scrollPane = new JScrollPane();
 		scrollPane.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
-		scrollPane.setBounds(6, 49, 307, 260);
+		scrollPane.setBounds(6, 13, 307, 296);
 		contentPanel.add(scrollPane);
 		
 
@@ -94,24 +94,24 @@ public class GestionModelo extends JDialog implements ActionListener, ListSelect
 		listModelos.addListSelectionListener(this);
 		
 		textFieldAgregarModelo = new JTextField();
-		textFieldAgregarModelo.setBounds(325, 82, 203, 32);
+		textFieldAgregarModelo.setBounds(325, 13, 203, 32);
 		contentPanel.add(textFieldAgregarModelo);
 		textFieldAgregarModelo.setColumns(10);
 		
 		btnAgregarModelo = new JButton("Agregar Modelo");
 		btnAgregarModelo.setIcon(new ImageIcon(GestionModelo.class.getResource("/image/plus.png")));
-		btnAgregarModelo.setBounds(325, 125, 203, 29);
+		btnAgregarModelo.setBounds(325, 56, 203, 29);
 		contentPanel.add(btnAgregarModelo);
 		btnAgregarModelo.addActionListener(this);
 		
 		textFieldModeloActual = new JTextField();
-		textFieldModeloActual.setBounds(325, 206, 203, 32);
+		textFieldModeloActual.setBounds(325, 137, 203, 32);
 		contentPanel.add(textFieldModeloActual);
 		textFieldModeloActual.setColumns(10);
 		
 		btnModificarModelo = new JButton("Modificar Modelo");
 		btnModificarModelo.setIcon(new ImageIcon(GestionModelo.class.getResource("/image/modificar.png")));
-		btnModificarModelo.setBounds(325, 246, 203, 29);
+		btnModificarModelo.setBounds(325, 177, 203, 29);
 		contentPanel.add(btnModificarModelo);
 		btnModificarModelo.addActionListener(this);
 		

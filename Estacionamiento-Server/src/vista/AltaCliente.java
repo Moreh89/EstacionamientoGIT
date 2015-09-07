@@ -111,7 +111,7 @@ public class AltaCliente extends JDialog implements ActionListener{
 		setTitle("Alta Cliente");
 		setResizable(false);
 		//setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 754, 465);
+		setBounds(100, 100, 764, 472);
 		contentPaneAltaCliente = new JPanel();
 		contentPaneAltaCliente.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPaneAltaCliente);
@@ -119,7 +119,7 @@ public class AltaCliente extends JDialog implements ActionListener{
 
 
 		panelAltaCliente = new JPanel();
-		panelAltaCliente.setBounds(61, 0, 730, 419);
+		panelAltaCliente.setBounds(12, 13, 730, 419);
 		contentPaneAltaCliente.add(panelAltaCliente);
 		GridBagLayout gbl_panelAltaCliente = new GridBagLayout();
 		gbl_panelAltaCliente.columnWidths = new int[]{124, 227, 0, 0, 253, 0};

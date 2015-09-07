@@ -519,6 +519,7 @@ public class Controlador {
 				movCC.setIdMovimiento(0);
 				movCC.setMontoCobrado(ticket.getMontoCobrado() * -1);
 				movCC.setTicket(this.ticket);
+				movCC.setUsuario(usuarioActual);
 				DAOCliente.getInstance().agregarMovimientoCC(ticket.getCliente().getIdCliente(), movCC);
 			}			
 			return true;
