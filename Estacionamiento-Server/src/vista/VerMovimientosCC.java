@@ -222,10 +222,7 @@ public class VerMovimientosCC extends JDialog implements ActionListener, KeyList
 		gbc_lblTicket.gridx = 0;
 		gbc_lblTicket.gridy = 4;
 		panelAtributos.add(lblTicket, gbc_lblTicket);
-		Vector comboBoxTipoUsuarioItems=new Vector<String>();
-		comboBoxTipoUsuarioItems.add(modelo.Usuario.PERMISOS.ADMIN.toString());
-		comboBoxTipoUsuarioItems.add(modelo.Usuario.PERMISOS.CAJA.toString());
-
+		
 		panelClientes = new JPanel();
 		panelClientes.setBounds(10, 96, 503, 135);
 		contentPane.add(panelClientes);

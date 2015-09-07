@@ -937,5 +937,20 @@ public class Controlador {
 		return movimientos;
 	}
 
+	public ArrayList<Cliente> getClientesConDeuda() {
+		ArrayList<modelo.Cliente> clientes = new ArrayList<Cliente>();
+		ArrayList<modelo.Cliente> clientesConDeuda = new ArrayList<Cliente>();
+		clientes=DAOCliente.getInstance().getClientes();
+		
+		for(modelo.Cliente cliente : clientes)
+		{
+			if(cliente.getEstadoCrediticio(cliente)<0)
+			{
+				clientesConDeuda.add(cliente);
+			}
+		}
+		return clientesConDeuda;
+	}
+
 
 }

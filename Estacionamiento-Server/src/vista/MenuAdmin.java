@@ -290,6 +290,9 @@ public class MenuAdmin extends JFrame implements ActionListener {
 		if(event.getSource()==mntmCobroExtraordinario){
 			new CobroExtraordinario().setVisible(true);
 		}
+		if(event.getSource()==mntmDeudores){
+			new VerDeudores().setVisible(true);
+		}
 		
 	}
 
