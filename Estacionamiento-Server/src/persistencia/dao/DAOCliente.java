@@ -85,11 +85,13 @@ public class DAOCliente {
 		movimientoNuevoP = Converter.convertMovimientoCuentaCorrienteModeloToPersistencia(movimientoNuevoM);
 		
 		clienteP=(persistencia.clases.Cliente) HibernateDAO.getInstancia().get(persistencia.clases.Cliente.class, idCliente);
+		
 		if(movimientoNuevoM.getInteres().getIdInteres()!=0)
 		{
 			movimientoNuevoP.setInteres((Interes) HibernateDAO.getInstancia().getObjectWithLong("Interes", "idInteres", movimientoNuevoM.getInteres().getIdInteres()));
 		}
-		
+		movimientoNuevoP.setUsuario((persistencia.clases.Usuario) HibernateDAO.getInstancia().getObjectWithLong("Usuario", "idUsuario", movimientoNuevoM.getUsuario().getIdUsuario()));
+
 		clienteP.getCuentaCorriente().addMovimientoCC(movimientoNuevoP);
 		
 		clienteP=(Cliente) HibernateDAO.getInstancia().update(clienteP);
@@ -106,12 +108,12 @@ public class DAOCliente {
 		movimientoNuevoP = Converter.convertMovimientoCuentaCorrienteModeloToPersistencia(movimientoNuevoM);
 		
 		clienteP=(persistencia.clases.Cliente) HibernateDAO.getInstancia().get(persistencia.clases.Cliente.class, idCliente);
-		
 		if(movimientoNuevoM.getLiquidacionExpensas().getIdLiquidacionExpensas()!=0)
 		{
 			movimientoNuevoP.setLiquidacionExpensas((LiquidacionExpensas) HibernateDAO.getInstancia().getObjectWithLong("LiquidacionExpensas", "idLiquidacionExpensas", movimientoNuevoM.getLiquidacionExpensas().getIdLiquidacionExpensas()));
 		}
-		
+		movimientoNuevoP.setUsuario((persistencia.clases.Usuario) HibernateDAO.getInstancia().getObjectWithLong("Usuario", "idUsuario", movimientoNuevoM.getUsuario().getIdUsuario()));
+
 		
 		clienteP.getCuentaCorriente().addMovimientoCC(movimientoNuevoP);
 		
@@ -119,6 +121,12 @@ public class DAOCliente {
 		codigoReturn=clienteP.getCuentaCorriente().getMovimientos().get(clienteP.getCuentaCorriente().getMovimientos().size()-1).getLiquidacionExpensas().getIdLiquidacionExpensas();
 		
 		return codigoReturn;
+	}
+
+	public double getEstadoCrediticio(modelo.Cliente clienteM) {
+		double deuda=0;
+		deuda=HibernateDAO.getInstancia().getEstadoCrediticio(clienteM.getCuentaCorriente().getIdCuentaCorriente());
+		return deuda;
 	}
 	
 

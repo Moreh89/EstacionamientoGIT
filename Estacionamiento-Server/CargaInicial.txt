@@ -49,4 +49,7 @@ INSERT INTO Cliente (apellido, correoElectronico,cuil,descripcion,direccion,esta
 INSERT INTO Cochera	(costoCochera, estado, porcentajeExpensas, ubicacion, Cliente) values (200, 0, 3, '4J', 1)
 INSERT INTO Cochera	(costoCochera, estado, porcentajeExpensas, ubicacion, Cliente) values (300, 0, 97, '3H', 2)
 
+insert into LiquidacionExpensas (fechaEmision, montoTotalLiquidado,estado) values (CURRENT_TIMESTAMP, 250, 0)
 
+
+insert into MovimientoCC (fecha, descripcion, montoCobrado, estado, Usuario, LiquidacionExpensas, CuentaCorriente) values (CURRENT_TIMESTAMP, 'Cobro cochera', -150, 0, 1, 1,1)

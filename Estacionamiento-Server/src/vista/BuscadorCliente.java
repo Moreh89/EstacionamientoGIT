@@ -87,7 +87,7 @@ public class BuscadorCliente extends JDialog implements ActionListener, KeyListe
 	private JLabel labelApellido;
 	private JLabel labelNombre;
 	private JPanel panelAtributos;
-	private JButton btnVercuentacorriente;
+	private JButton btnVerCuentaCorriente;
 	
 	/**
 	 * Launch the application.
@@ -545,12 +545,13 @@ public class BuscadorCliente extends JDialog implements ActionListener, KeyListe
 		listClientes = new JList(listModel);
 		listClientes.setSelectionMode(ListSelectionModel.SINGLE_INTERVAL_SELECTION);
 		scrollPaneClientes.setViewportView(listClientes);
-		
-		btnVercuentacorriente = new JButton("Ver Cuenta Corriente");
-		btnVercuentacorriente.setFont(new Font("Tahoma", Font.BOLD, 16));
-		btnVercuentacorriente.setBounds(800, 637, 221, 43);
-		contentPane.add(btnVercuentacorriente);
 		listClientes.addListSelectionListener(this);
+
+		btnVerCuentaCorriente = new JButton("Ver Cuenta Corriente");
+		btnVerCuentaCorriente.setFont(new Font("Tahoma", Font.BOLD, 16));
+		btnVerCuentaCorriente.setBounds(800, 637, 221, 43);
+		contentPane.add(btnVerCuentaCorriente);
+		btnVerCuentaCorriente.addActionListener(this);
 
 		this.setLocationRelativeTo(null);
 		setModal(true);
@@ -613,6 +614,13 @@ public class BuscadorCliente extends JDialog implements ActionListener, KeyListe
 		}
 		if(e.getSource() == this.buttonCancelar){
 			Controlador.getInstancia().setClienteActual(null);
+			dispose();
+		}
+		if(e.getSource()==this.btnVerCuentaCorriente)
+		{
+			Controlador.getInstancia().setClienteActual((Cliente) listClientes.getSelectedValue());
+			VerMovimientosCC verMovimientoCC = new VerMovimientosCC();
+			verMovimientoCC.setVisible(true);
 			dispose();
 		}
 	}

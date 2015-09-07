@@ -577,7 +577,7 @@ public class Controlador {
 		movimientoM.setIdMovimiento(0);
 		movimientoM.setMontoCobrado(monto);
 		DAOCliente.getInstance().agregarMovimientoCC(cliente.getIdCliente(), movimientoM);
-//		DAOMovimientoCC.getInstance().persistir(movimientoM);
+		//		DAOMovimientoCC.getInstance().persistir(movimientoM);
 
 		return 0;
 	}
@@ -619,6 +619,7 @@ public class Controlador {
 						movimientoNuevo.setTicket(null);
 						movimientoNuevo.setMontoCobrado((-1)*montoCobrar);
 						movimientoNuevo.setLiquidacionExpensas(liquidacionExpensas);
+						movimientoNuevo.setUsuario(usuarioActual);
 
 
 						liquidacionExpensas.setIdLiquidacionExpensas(DAOCliente.getInstance().agregarMovimientoCC_Expensas(clienteM.getIdCliente(), movimientoNuevo));
@@ -736,7 +737,7 @@ public class Controlador {
 
 		for(modelo.Cliente clienteM : clientes)
 		{
-			if(!clienteM.getCocheras().isEmpty() && clienteM.getCuentaCorriente()!=null && clienteM.getCuentaCorriente().getMovimientos()!=null )
+			if(!clienteM.getCocheras().isEmpty() && clienteM.getCuentaCorriente()!=null && !clienteM.getCuentaCorriente().getMovimientos().isEmpty() )
 			{
 				for(modelo.MovimientoCC movimientoActual : clienteM.getCuentaCorriente().getMovimientos())
 				{
@@ -751,6 +752,7 @@ public class Controlador {
 						movimientoNuevo.setTicket(null);
 						movimientoNuevo.setMontoCobrado((-1)*movimientoActual.getMontoCobrado());
 						movimientoNuevo.setLiquidacionExpensas(null);
+						movimientoNuevo.setUsuario(usuarioActual);
 
 						DAOCliente.getInstance().agregarMovimientoCC(clienteM.getIdCliente(), movimientoNuevo);
 						codigoReturn=movimientoNuevo.getIdMovimiento();
@@ -867,7 +869,7 @@ public class Controlador {
 	private long aplicarInteres()
 	{
 		//APLICA EL 15 de cada mes
-		int fechaVencimiento =4;
+		int fechaVencimiento =5;
 		java.util.Date fechaActual= Calendar.getInstance().getTime();;
 		DateFormat dateFormatDay = new SimpleDateFormat("dd"); 
 
@@ -875,7 +877,6 @@ public class Controlador {
 		{
 			ArrayList<modelo.Interes> intereses = new ArrayList<modelo.Interes>();
 			intereses=DAOInteres.getInstance().getIntereses();
-			int existe=-1;
 			for(modelo.Interes interesM : intereses)
 			{
 				DateFormat dateFormatValidacion = new SimpleDateFormat("dd-MM-yyyy"); 
@@ -886,30 +887,33 @@ public class Controlador {
 			}
 
 			ArrayList<modelo.Cliente> clientes = new ArrayList<modelo.Cliente>();
-			
+
 			clientes=DAOCliente.getInstance().getClientes();
 			modelo.Interes interesM= new Interes();
 			interesM.setIdInteres(0);
 			interesM.setFechaAplicado(fechaActual);
-			
+
 			for(modelo.Cliente clienteM : clientes)
 			{
-				if(clienteM.getCuentaCorriente()!=null && clienteM.getCuentaCorriente().getMovimientos()!=null )
+				if(clienteM.getCuentaCorriente()!=null && !clienteM.getCuentaCorriente().getMovimientos().isEmpty() )
 				{
-//TODO GET DEUDA
-					double deuda=-100;
+					double estadoCrediticioCliente=-100;
+					estadoCrediticioCliente= clienteM.getEstadoCrediticio(clienteM);
+					if(estadoCrediticioCliente<0)
+					{
+						modelo.MovimientoCC movimientoNuevo= new modelo.MovimientoCC();
+						movimientoNuevo.setIdMovimiento(0);
+						movimientoNuevo.setFecha(fechaActual);
+						movimientoNuevo.setDescripcion("INTERES "+tasaInteres.getMonto()+"% - Deuda "+estadoCrediticioCliente);
+						movimientoNuevo.setEstado("Liquidado");
+						movimientoNuevo.setTicket(null);
+						movimientoNuevo.setMontoCobrado((tasaInteres.getMonto()/100*estadoCrediticioCliente));
+						movimientoNuevo.setLiquidacionExpensas(null);
+						movimientoNuevo.setInteres(interesM);
+						movimientoNuevo.setUsuario(usuarioActual);
 
-					modelo.MovimientoCC movimientoNuevo= new modelo.MovimientoCC();
-					movimientoNuevo.setIdMovimiento(0);
-					movimientoNuevo.setFecha(fechaActual);
-					movimientoNuevo.setDescripcion("INTERES "+tasaInteres.getMonto()+"% - Deuda "+deuda);
-					movimientoNuevo.setEstado("Liquidado");
-					movimientoNuevo.setTicket(null);
-					movimientoNuevo.setMontoCobrado((tasaInteres.getMonto()/100*deuda));
-					movimientoNuevo.setLiquidacionExpensas(null);
-					movimientoNuevo.setInteres(interesM);
-
-					interesM.setIdInteres(DAOCliente.getInstance().agregarMovimientoCC_Interes(clienteM.getIdCliente(), movimientoNuevo));
+						interesM.setIdInteres(DAOCliente.getInstance().agregarMovimientoCC_Interes(clienteM.getIdCliente(), movimientoNuevo));
+					}
 				}
 
 			}
@@ -917,4 +921,21 @@ public class Controlador {
 		return 0;
 
 	}
+
+	public ArrayList<MovimientoCC> getMovimientosCliente(Date fechaDesde, Date fechaHasta) {
+		ArrayList<MovimientoCC> movimientos= new ArrayList<MovimientoCC>();
+		if(clienteActual!=null)
+		{
+			for(MovimientoCC movimientoAct : clienteActual.getCuentaCorriente().getMovimientos())
+			{
+				if(fechaDesde.compareTo(movimientoAct.getFecha())<0&& fechaHasta.compareTo(movimientoAct.getFecha())>0)
+				{
+					movimientos.add(movimientoAct);
+				}
+			}
+		}
+		return movimientos;
+	}
+
+
 }

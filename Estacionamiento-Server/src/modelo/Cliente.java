@@ -2,6 +2,8 @@ package modelo;
 
 import java.util.List;
 
+import persistencia.dao.DAOCliente;
+
 
 public class Cliente {
 	
@@ -200,6 +202,18 @@ public class Cliente {
 	public String toString(){
 
 		return this.apellido+ " " + this.nombre; 
+	}
+	public double getEstadoCrediticio(modelo.Cliente clienteM) {
+		
+//NO ANDA
+//		return DAOCliente.getInstance().getEstadoCrediticio(clienteM);
+		double estadoCrediticio=0;
+		for(MovimientoCC movimientoM : clienteM.getCuentaCorriente().getMovimientos())
+		{
+			estadoCrediticio=estadoCrediticio+movimientoM.getMontoCobrado();
+		}
+		
+		return estadoCrediticio;
 	}
 	
 	

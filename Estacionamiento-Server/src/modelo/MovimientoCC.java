@@ -75,6 +75,10 @@ public class MovimientoCC
 		this.usuario = usuario;
 	}
 	
+	public String toString()
+	{
+		return this.fecha + "  //  " + this.montoCobrado + "  //  " + this.descripcion;
+	}
 	
 	
 }

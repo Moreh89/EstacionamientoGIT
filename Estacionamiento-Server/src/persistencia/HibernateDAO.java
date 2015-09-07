@@ -2,6 +2,7 @@ package persistencia;
 
 import java.util.Date;
 import java.util.List;
+
 import org.hibernate.SQLQuery;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -190,6 +191,15 @@ public class HibernateDAO {
 		List<?> list = session.createQuery("from "+className + " s where s.estado=0 AND DATEDIFF(DAY," +columna+",CURRENT_TIMESTAMP)<"+ "?").setInteger(0, value).list();
 		session.flush();
 		return list;
+	}
+
+	public double getEstadoCrediticio(long idCuentaCorriente) {
+		double estadoCrediticio=0;
+//TODO NO ANDA
+//		Session s = this.getSession();
+//		estadoCrediticio = (Double) s.createQuery("SUM(m.montoCobrado)as suma from MovimientoCC m where m.CuentaCorriente= ?").setLong(0, idCuentaCorriente).uniqueResult();
+//		s.flush();		
+		return estadoCrediticio;
 	}
 	
 	
