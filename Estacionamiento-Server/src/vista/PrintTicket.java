@@ -1,6 +1,5 @@
 package vista;
 
-import java.awt.EventQueue;
 import java.awt.Graphics2D;
 import javax.print.PrintService;
 import javax.print.PrintServiceLookup;
@@ -8,6 +7,8 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import java.awt.GridBagLayout;
+
+import modelo.Ticket;
 import net.sourceforge.barbecue.Barcode;
 import net.sourceforge.barbecue.BarcodeException;
 import net.sourceforge.barbecue.BarcodeFactory;
@@ -21,6 +22,7 @@ import java.awt.print.PrinterException;
 import java.awt.print.PrinterJob;
 import java.io.File;
 import java.io.IOException;
+import java.text.SimpleDateFormat;
 import java.awt.Graphics;
 import java.awt.Insets;
 import javax.swing.JTextPane;
@@ -35,34 +37,10 @@ public class PrintTicket extends JFrame {
 	private JTextPane txtpnfechaIng;
 	private JPanel panel;
 	private Barcode barcode;
-
-	/**
-	 * Launch the application.
-	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					PrintTicket frame = new PrintTicket();
-					frame.setVisible(true);
+	private static String impersora;
 
 
-					// para imprimir lo que se ve en la ventana seleccionando printer
-					 printWork(frame);
-					
-
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-
-			}
-		});
-	}
-
-	/**
-	 * Create the frame.
-	 */
-	public PrintTicket() {
+	public PrintTicket (Ticket ticket, String printerName) {
 		setIconImage(Toolkit.getDefaultToolkit().getImage(
 				PrintTicket.class.getResource("/image/printer.png")));
 		setResizable(false);
@@ -72,6 +50,8 @@ public class PrintTicket extends JFrame {
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 
+		impersora = printerName;
+		
 		try {
 			GridBagLayout gbl_contentPane = new GridBagLayout();
 			gbl_contentPane.columnWidths = new int[] { 168, 0 };
@@ -99,10 +79,10 @@ public class PrintTicket extends JFrame {
 			panelAttributes.setLayout(gbl_panelAttributes);
 
 			txtpnfechaIng = new JTextPane();
-			txtpnfechaIng.setFont(new Font("Tahoma", Font.PLAIN, 16));
+			txtpnfechaIng.setFont(new Font("Tahoma", Font.PLAIN, 12));
 			txtpnfechaIng.setContentType("text/html");
 			txtpnfechaIng
-					.setText("<html><b>Fecha Ing:<br>10/01/2015 10:30<br>Vehiculo: Auto<br>Modelo:<br>Chevrolet Aveo<br>Patente:<br>343</b><br></html>");
+					.setText("<html><b>Fecha Ing:<br>"+new SimpleDateFormat("MM-dd-yyyy hh:mm:ss").format(ticket.getFechaLlegada())+"<br>Vehiculo:<br>"+ ticket.getCatergoriaVehiculo().getDescripcion()+"<br>Modelo:<br>"+ticket.getModeloVehiculo().getDescripcion()+"<br>Patente:<br>"+ticket.getPatente().toUpperCase()+"</b><br></html>");
 			GridBagConstraints gbc_txtpnfechaIng = new GridBagConstraints();
 			gbc_txtpnfechaIng.fill = GridBagConstraints.BOTH;
 			gbc_txtpnfechaIng.gridx = 0;
@@ -117,12 +97,18 @@ public class PrintTicket extends JFrame {
 			contentPane.add(panel, gbc_panel);
 
 			// Always get a Barcode from the BarcodeFactory
-			barcode = BarcodeFactory.create2of7("0123456789");
+			String numeroTck = String.valueOf(ticket.getIdTicket());
+			while (numeroTck.length() < 10) {
+				numeroTck = "0" + numeroTck;
+			}
+			barcode = BarcodeFactory.create2of7(numeroTck);
 			barcode.setBarHeight(30);
 			barcode.setBarWidth(1);
 
 			panel.add(barcode);
-
+			this.setVisible(true);
+			printWork(this);
+			this.dispose();
 		} catch (BarcodeException e) {
 			e.printStackTrace();
 		}
@@ -130,7 +116,8 @@ public class PrintTicket extends JFrame {
 	}
 
 
-//Otros ejemplos de creacion de barras
+
+	//Otros ejemplos de creacion de barras
 	public static void drawingBarcodeDirectToGraphics()
 			throws BarcodeException, OutputException {
 		// Always get a Barcode from the BarcodeFactory
@@ -201,8 +188,7 @@ public class PrintTicket extends JFrame {
 // aca iria el atributo con el nombre de la impresora
 			for (PrintService printer : printServices) {
 				if (printer.getName().equalsIgnoreCase(
-//				"Microsoft XPS Document Writer")) {
-					"\\\\ABBDAT05\\ABB-FL6-SC645-HP5550")) {
+						impersora)) {
 					printerTouse = printer;
 				}
 			}
@@ -215,7 +201,6 @@ public class PrintTicket extends JFrame {
 			pj.print();
 			
 //Elegir printer end			
-			
 
 		} catch (PrinterException xcp) {
 			xcp.printStackTrace(System.err);

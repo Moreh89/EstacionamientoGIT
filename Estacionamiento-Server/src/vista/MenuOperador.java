@@ -1,6 +1,9 @@
 package vista;
 
 import java.awt.EventQueue;
+
+import javax.print.PrintService;
+import javax.print.PrintServiceLookup;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
@@ -86,6 +89,7 @@ public class MenuOperador extends JFrame implements ActionListener, KeyListener 
 	private JMenu mnGestionEstacionamiento;
 	private JMenuItem mntmCobroExtraordinario;
 	private JMenuItem mntmModificacionCliente;
+	private JComboBox comboBoxImpresoras;
 
 	/**
 	 * Launch the application.
@@ -201,7 +205,7 @@ public class MenuOperador extends JFrame implements ActionListener, KeyListener 
 		gbl_contentPane.columnWidths = new int[] { 200, 250, 67, 200, 0, 0 };
 		gbl_contentPane.rowHeights = new int[] { 70, 69, 70, 70, 70, 70, 0, 0,
 				60, 70, 0, 50, 0 };
-		gbl_contentPane.columnWeights = new double[] { 0.0, 0.0, 0.0, 0.0, 1.0,
+		gbl_contentPane.columnWeights = new double[] { 0.0, 0.0, 0.0, 1.0, 1.0,
 				Double.MIN_VALUE };
 		gbl_contentPane.rowWeights = new double[] { 0.0, 0.0, 0.0, 0.0, 0.0,
 				0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE };
@@ -482,6 +486,23 @@ public class MenuOperador extends JFrame implements ActionListener, KeyListener 
 		gbc_btnGuardarF.gridy = 7;
 		contentPane.add(btnGuardarF, gbc_btnGuardarF);
 		btnGuardarF.addActionListener(this);
+		
+		comboBoxImpresoras = new JComboBox();
+		GridBagConstraints gbc_comboBoxImpresoras = new GridBagConstraints();
+		gbc_comboBoxImpresoras.insets = new Insets(0, 0, 5, 5);
+		gbc_comboBoxImpresoras.fill = GridBagConstraints.BOTH;
+		gbc_comboBoxImpresoras.gridx = 3;
+		gbc_comboBoxImpresoras.gridy = 7;
+		contentPane.add(comboBoxImpresoras, gbc_comboBoxImpresoras);
+		comboBoxImpresoras.addItem("NO IMPRIMIR");
+		
+		PrintService[] printServices = PrintServiceLookup.lookupPrintServices(
+				null, null);
+		//Para saber el nombre de tus impresoras
+		for (PrintService printer : printServices) {
+			comboBoxImpresoras.addItem(printer.getName());
+		}
+		
 
 		btnTicketF = new JButton("Ticket F5");
 		btnTicketF.setFont(new Font("Dialog", Font.PLAIN, 30));
@@ -756,6 +777,8 @@ public class MenuOperador extends JFrame implements ActionListener, KeyListener 
 				this.textFieldTiempoEstadia.setText(tck.getTiempoEstadia());
 
 				//TODO bloquear botones y demas hasta que elija nuevo
+				new PrintTicket(tck, (String) this.comboBoxImpresoras.getSelectedItem());
+				
 			}else{
 				this.textFieldPatente.setBackground(new Color(Color.PINK.getRGB()));
 			}

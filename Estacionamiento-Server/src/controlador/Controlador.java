@@ -572,10 +572,11 @@ public class Controlador {
 		modelo.MovimientoCC movimientoM = new MovimientoCC();
 		movimientoM.setTicket(null);
 		movimientoM.setDescripcion(tipoCobro.substring(2));
-		movimientoM.setEstado("pagado");
+		movimientoM.setEstado("PAGADO");
 		movimientoM.setFecha(new java.sql.Date(Calendar.getInstance().getTime().getTime()));
 		movimientoM.setIdMovimiento(0);
 		movimientoM.setMontoCobrado(monto);
+		movimientoM.setUsuario(usuarioActual);
 		DAOCliente.getInstance().agregarMovimientoCC(cliente.getIdCliente(), movimientoM);
 		//		DAOMovimientoCC.getInstance().persistir(movimientoM);
 

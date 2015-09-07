@@ -47,12 +47,11 @@ public class DAOCliente {
 		long codigoReturn = -1;
 		persistencia.clases.MovimientoCC movimientoNuevoP = new persistencia.clases.MovimientoCC();
 		movimientoNuevoP = Converter.convertMovimientoCuentaCorrienteModeloToPersistencia(movimientoNuevoM);
+		persistencia.clases.Usuario usuTemp = DAOUsuario.getInstance().getUsuario(movimientoNuevoM.getUsuario().getIdUsuario());
+		movimientoNuevoP.setUsuario(usuTemp);
 		
 		clienteP=(persistencia.clases.Cliente) HibernateDAO.getInstancia().get(persistencia.clases.Cliente.class, idCliente);
-		
-		
 		clienteP.getCuentaCorriente().addMovimientoCC(movimientoNuevoP);
-		
 		clienteP=(Cliente) HibernateDAO.getInstancia().update(clienteP);
 		
 		codigoReturn=clienteP.getIdCliente();		
