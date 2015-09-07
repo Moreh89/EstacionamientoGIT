@@ -65,7 +65,7 @@ public class HibernateDAO {
 	public List<?> getListString(String className, String columna,String value)
 	{
 		Session session=getSession();
-		List<?> list = session.createQuery("from "+className + " s where s. "+ columna + " =?").setString(0, value).list();
+		List<?> list = session.createQuery("from "+className + " s where s."+ columna + " =?").setString(0, value).list();
 		session.flush();
 		return list;
 	}
@@ -73,15 +73,24 @@ public class HibernateDAO {
 	public List<?> getListbetweenDates(String className, String columnaFiltro,String valorFiltro, String columnaFechaIni, String fehaInicio, String columanFechaFin, String fechaFin)
 	{
 		Session session=getSession();
-		List<?> list = session.createQuery("from "+className + " s where s. "+ columnaFiltro + " =?" + " and " + columnaFechaIni + ">=?" + " and " +  columanFechaFin + "<=?").setString(0, valorFiltro).setString(1, fehaInicio).setString(2, fechaFin).list();
+		List<?> list = session.createQuery("from "+className + " s where s."+ columnaFiltro + " =?" + " and " + columnaFechaIni + ">=?" + " and " +  columanFechaFin + "<=?").setString(0, valorFiltro).setString(1, fehaInicio).setString(2, fechaFin).list();
+		session.flush();
+		return list;
+	}
+	
+	public List<?> getListbetweenDates(String className, String columnaFiltro,long valorFiltro, String columnaFechaIni, String fehaInicio, String columanFechaFin, String fechaFin)
+	{
+		Session session=getSession();
+		List<?> list = session.createQuery("from "+className + " s where s."+ columnaFiltro + " =?" + " and " + columnaFechaIni + ">=?" + " and " +  columanFechaFin + "<=?").setLong(0, valorFiltro).setString(1, fehaInicio).setString(2, fechaFin).list();
 		session.flush();
 		return list;
 	}
 
+
 	public List<?> getListAfterDates(String className, String columnaFiltro,String valorFiltro, String columnaFechaIni, Date fehaInicio)
 	{
 		Session session=getSession();
-		List<?> list = session.createQuery("from "+className + " s where s. "+ columnaFiltro + " =?" + " and " + columnaFechaIni + ">=?" ).setString(0, valorFiltro).setDate(1, fehaInicio).list();
+		List<?> list = session.createQuery("from "+className + " s where s."+ columnaFiltro + " =?" + " and " + columnaFechaIni + ">=?" ).setString(0, valorFiltro).setDate(1, fehaInicio).list();
 		session.flush();
 		return list;
 	}

@@ -15,6 +15,8 @@ import javax.swing.JList;
 import javax.swing.JScrollPane;
 import javax.swing.ListSelectionModel;
 import javax.swing.ScrollPaneConstants;
+
+import modelo.MovimientoCC;
 import modelo.Ticket;
 import modelo.Usuario;
 import controlador.Controlador;
@@ -104,6 +106,12 @@ public class ItemsCobrados extends JDialog implements ActionListener, ListSelect
 			}
 			
 		} 
+		for (MovimientoCC movimientoCCTemp : Controlador.getInstancia().obtenetMovimientosCobrados(usuario, fechaInicio,fechaFin)){
+			total = total + movimientoCCTemp.getMontoCobrado();
+			listModel.addElement("PAGO EXTRAORDINARIO CONCEPTO: " + movimientoCCTemp.getDescripcion() + " MONTO: " + movimientoCCTemp.getMontoCobrado());
+		}
+		
+		
 		listElementos= new JList(listModel);
 		listElementos.setFont(new Font("Tahoma", Font.PLAIN, 16));
 		listElementos.setSelectionMode(ListSelectionModel.SINGLE_INTERVAL_SELECTION);

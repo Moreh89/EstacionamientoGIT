@@ -1,8 +1,8 @@
 Rodri:
 Cliente ABM
 Cliente completar búsqueda
-Arqueo Caja - Listo a medias, faltan lo cobros extraordinarios que no estan linqueados al usuario
-Cant Autos- tickets abiertos - Listo
+Arqueo Caja //HECHO
+Cant Autos- tickets abiertos //HECHO
 
 
 Damian:

@@ -181,9 +181,9 @@ public class BuscadorCliente extends JDialog implements ActionListener, KeyListe
 		panelAtributos.setBounds(518, 52, 503, 554);
 		contentPane.add(panelAtributos);
 		GridBagLayout gbl_panelAtributos = new GridBagLayout();
-		gbl_panelAtributos.columnWidths = new int[]{0, 0, 0};
-		gbl_panelAtributos.rowHeights = new int[]{0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 60, 60, 61, 0};
-		gbl_panelAtributos.columnWeights = new double[]{0.0, 1.0, Double.MIN_VALUE};
+		gbl_panelAtributos.columnWidths = new int[]{0, 327, 0};
+		gbl_panelAtributos.rowHeights = new int[]{0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 40, 40, 40, 0};
+		gbl_panelAtributos.columnWeights = new double[]{0.0, 0.0, Double.MIN_VALUE};
 		gbl_panelAtributos.rowWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
 		panelAtributos.setLayout(gbl_panelAtributos);
 
@@ -201,8 +201,8 @@ public class BuscadorCliente extends JDialog implements ActionListener, KeyListe
 		textFieldNombre.setEditable(false);
 		textFieldNombre.setEnabled(false);
 		GridBagConstraints gbc_textFieldNombre = new GridBagConstraints();
-		gbc_textFieldNombre.insets = new Insets(0, 0, 5, 0);
 		gbc_textFieldNombre.fill = GridBagConstraints.HORIZONTAL;
+		gbc_textFieldNombre.insets = new Insets(0, 0, 5, 0);
 		gbc_textFieldNombre.gridx = 1;
 		gbc_textFieldNombre.gridy = 0;
 		panelAtributos.add(textFieldNombre, gbc_textFieldNombre);
@@ -223,8 +223,8 @@ public class BuscadorCliente extends JDialog implements ActionListener, KeyListe
 		textFieldApellido.setEditable(false);
 		textFieldApellido.setColumns(10);
 		GridBagConstraints gbc_textFieldApellido = new GridBagConstraints();
-		gbc_textFieldApellido.insets = new Insets(0, 0, 5, 0);
 		gbc_textFieldApellido.fill = GridBagConstraints.HORIZONTAL;
+		gbc_textFieldApellido.insets = new Insets(0, 0, 5, 0);
 		gbc_textFieldApellido.gridx = 1;
 		gbc_textFieldApellido.gridy = 1;
 		panelAtributos.add(textFieldApellido, gbc_textFieldApellido);
@@ -245,8 +245,8 @@ public class BuscadorCliente extends JDialog implements ActionListener, KeyListe
 		textFieldDNILU.setEditable(false);
 		textFieldDNILU.setColumns(10);
 		GridBagConstraints gbc_textFieldDNILU = new GridBagConstraints();
-		gbc_textFieldDNILU.insets = new Insets(0, 0, 5, 0);
 		gbc_textFieldDNILU.fill = GridBagConstraints.HORIZONTAL;
+		gbc_textFieldDNILU.insets = new Insets(0, 0, 5, 0);
 		gbc_textFieldDNILU.gridx = 1;
 		gbc_textFieldDNILU.gridy = 2;
 		panelAtributos.add(textFieldDNILU, gbc_textFieldDNILU);
@@ -266,8 +266,8 @@ public class BuscadorCliente extends JDialog implements ActionListener, KeyListe
 		textFieldCUIT.setEditable(false);
 		textFieldCUIT.setColumns(10);
 		GridBagConstraints gbc_textFieldCUIT = new GridBagConstraints();
-		gbc_textFieldCUIT.insets = new Insets(0, 0, 5, 0);
 		gbc_textFieldCUIT.fill = GridBagConstraints.HORIZONTAL;
+		gbc_textFieldCUIT.insets = new Insets(0, 0, 5, 0);
 		gbc_textFieldCUIT.gridx = 1;
 		gbc_textFieldCUIT.gridy = 3;
 		panelAtributos.add(textFieldCUIT, gbc_textFieldCUIT);
@@ -287,8 +287,8 @@ public class BuscadorCliente extends JDialog implements ActionListener, KeyListe
 		textFieldTelefono1.setEditable(false);
 		textFieldTelefono1.setColumns(10);
 		GridBagConstraints gbc_textFieldTelefono1 = new GridBagConstraints();
-		gbc_textFieldTelefono1.insets = new Insets(0, 0, 5, 0);
 		gbc_textFieldTelefono1.fill = GridBagConstraints.HORIZONTAL;
+		gbc_textFieldTelefono1.insets = new Insets(0, 0, 5, 0);
 		gbc_textFieldTelefono1.gridx = 1;
 		gbc_textFieldTelefono1.gridy = 4;
 		panelAtributos.add(textFieldTelefono1, gbc_textFieldTelefono1);
@@ -308,8 +308,8 @@ public class BuscadorCliente extends JDialog implements ActionListener, KeyListe
 		textFieldTelefono2.setEditable(false);
 		textFieldTelefono2.setColumns(10);
 		GridBagConstraints gbc_textFieldTelefono2 = new GridBagConstraints();
-		gbc_textFieldTelefono2.insets = new Insets(0, 0, 5, 0);
 		gbc_textFieldTelefono2.fill = GridBagConstraints.HORIZONTAL;
+		gbc_textFieldTelefono2.insets = new Insets(0, 0, 5, 0);
 		gbc_textFieldTelefono2.gridx = 1;
 		gbc_textFieldTelefono2.gridy = 5;
 		panelAtributos.add(textFieldTelefono2, gbc_textFieldTelefono2);
@@ -329,8 +329,8 @@ public class BuscadorCliente extends JDialog implements ActionListener, KeyListe
 		textFieldDireccion1.setEditable(false);
 		textFieldDireccion1.setColumns(10);
 		GridBagConstraints gbc_textFieldDireccion1 = new GridBagConstraints();
-		gbc_textFieldDireccion1.insets = new Insets(0, 0, 5, 0);
 		gbc_textFieldDireccion1.fill = GridBagConstraints.HORIZONTAL;
+		gbc_textFieldDireccion1.insets = new Insets(0, 0, 5, 0);
 		gbc_textFieldDireccion1.gridx = 1;
 		gbc_textFieldDireccion1.gridy = 6;
 		panelAtributos.add(textFieldDireccion1, gbc_textFieldDireccion1);
@@ -350,8 +350,8 @@ public class BuscadorCliente extends JDialog implements ActionListener, KeyListe
 		textFieldDireccion2.setEditable(false);
 		textFieldDireccion2.setColumns(10);
 		GridBagConstraints gbc_textFieldDireccion2 = new GridBagConstraints();
-		gbc_textFieldDireccion2.insets = new Insets(0, 0, 5, 0);
 		gbc_textFieldDireccion2.fill = GridBagConstraints.HORIZONTAL;
+		gbc_textFieldDireccion2.insets = new Insets(0, 0, 5, 0);
 		gbc_textFieldDireccion2.gridx = 1;
 		gbc_textFieldDireccion2.gridy = 7;
 		panelAtributos.add(textFieldDireccion2, gbc_textFieldDireccion2);
@@ -371,8 +371,8 @@ public class BuscadorCliente extends JDialog implements ActionListener, KeyListe
 		textFieldEmail.setEditable(false);
 		textFieldEmail.setColumns(10);
 		GridBagConstraints gbc_textFieldEmail = new GridBagConstraints();
-		gbc_textFieldEmail.insets = new Insets(0, 0, 5, 0);
 		gbc_textFieldEmail.fill = GridBagConstraints.HORIZONTAL;
+		gbc_textFieldEmail.insets = new Insets(0, 0, 5, 0);
 		gbc_textFieldEmail.gridx = 1;
 		gbc_textFieldEmail.gridy = 8;
 		panelAtributos.add(textFieldEmail, gbc_textFieldEmail);
@@ -392,8 +392,8 @@ public class BuscadorCliente extends JDialog implements ActionListener, KeyListe
 		textFieldRazonSocial.setEditable(false);
 		textFieldRazonSocial.setColumns(10);
 		GridBagConstraints gbc_textFieldRazonSocial = new GridBagConstraints();
-		gbc_textFieldRazonSocial.insets = new Insets(0, 0, 5, 0);
 		gbc_textFieldRazonSocial.fill = GridBagConstraints.HORIZONTAL;
+		gbc_textFieldRazonSocial.insets = new Insets(0, 0, 5, 0);
 		gbc_textFieldRazonSocial.gridx = 1;
 		gbc_textFieldRazonSocial.gridy = 9;
 		panelAtributos.add(textFieldRazonSocial, gbc_textFieldRazonSocial);
@@ -413,8 +413,8 @@ public class BuscadorCliente extends JDialog implements ActionListener, KeyListe
 		textFieldEstadoCuentaCorriente.setEditable(false);
 		textFieldEstadoCuentaCorriente.setColumns(10);
 		GridBagConstraints gbc_textFieldEstadoCuentaCorriente = new GridBagConstraints();
-		gbc_textFieldEstadoCuentaCorriente.insets = new Insets(0, 0, 5, 0);
 		gbc_textFieldEstadoCuentaCorriente.fill = GridBagConstraints.HORIZONTAL;
+		gbc_textFieldEstadoCuentaCorriente.insets = new Insets(0, 0, 5, 0);
 		gbc_textFieldEstadoCuentaCorriente.gridx = 1;
 		gbc_textFieldEstadoCuentaCorriente.gridy = 10;
 		panelAtributos.add(textFieldEstadoCuentaCorriente, gbc_textFieldEstadoCuentaCorriente);
@@ -434,8 +434,8 @@ public class BuscadorCliente extends JDialog implements ActionListener, KeyListe
 		textFieldEstadoCliente.setEditable(false);
 		textFieldEstadoCliente.setColumns(10);
 		GridBagConstraints gbc_textFieldEstadoCliente = new GridBagConstraints();
-		gbc_textFieldEstadoCliente.insets = new Insets(0, 0, 5, 0);
 		gbc_textFieldEstadoCliente.fill = GridBagConstraints.HORIZONTAL;
+		gbc_textFieldEstadoCliente.insets = new Insets(0, 0, 5, 0);
 		gbc_textFieldEstadoCliente.gridx = 1;
 		gbc_textFieldEstadoCliente.gridy = 11;
 		panelAtributos.add(textFieldEstadoCliente, gbc_textFieldEstadoCliente);
@@ -443,6 +443,7 @@ public class BuscadorCliente extends JDialog implements ActionListener, KeyListe
 		labelPersonasAutorizadas = new JLabel("Personas Autorizadas:");
 		labelPersonasAutorizadas.setFont(new Font("Tahoma", Font.BOLD, 15));
 		GridBagConstraints gbc_labelPersonasAutorizadas = new GridBagConstraints();
+		gbc_labelPersonasAutorizadas.fill = GridBagConstraints.VERTICAL;
 		gbc_labelPersonasAutorizadas.anchor = GridBagConstraints.EAST;
 		gbc_labelPersonasAutorizadas.insets = new Insets(0, 0, 5, 5);
 		gbc_labelPersonasAutorizadas.gridx = 0;
@@ -466,6 +467,8 @@ public class BuscadorCliente extends JDialog implements ActionListener, KeyListe
 		lblVehiculos = new JLabel("Vehiculos:");
 		lblVehiculos.setFont(new Font("Tahoma", Font.BOLD, 16));
 		GridBagConstraints gbc_lblVehiculos = new GridBagConstraints();
+		gbc_lblVehiculos.fill = GridBagConstraints.VERTICAL;
+		gbc_lblVehiculos.anchor = GridBagConstraints.EAST;
 		gbc_lblVehiculos.insets = new Insets(0, 0, 5, 5);
 		gbc_lblVehiculos.gridx = 0;
 		gbc_lblVehiculos.gridy = 13;
@@ -488,6 +491,8 @@ public class BuscadorCliente extends JDialog implements ActionListener, KeyListe
 		lblCocheras = new JLabel("Cocheras:");
 		lblCocheras.setFont(new Font("Tahoma", Font.BOLD, 16));
 		GridBagConstraints gbc_lblCocheras = new GridBagConstraints();
+		gbc_lblCocheras.fill = GridBagConstraints.VERTICAL;
+		gbc_lblCocheras.anchor = GridBagConstraints.EAST;
 		gbc_lblCocheras.insets = new Insets(0, 0, 0, 5);
 		gbc_lblCocheras.gridx = 0;
 		gbc_lblCocheras.gridy = 14;

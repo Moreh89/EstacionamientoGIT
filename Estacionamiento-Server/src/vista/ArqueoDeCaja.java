@@ -73,9 +73,14 @@ public class ArqueoDeCaja extends JDialog implements ActionListener{
 		
 		comboBox = new JComboBox();
 		comboBox.setModel(new DefaultComboBoxModel());
-		for (Usuario usuarioTemp : Controlador.getInstancia().getUsuarios()) {
-			comboBox.addItem(usuarioTemp);
+		if(Controlador.getInstancia().getUsuarioActual().getPermisos() == Usuario.PERMISOS.ADMIN){
+			for (Usuario usuarioTemp : Controlador.getInstancia().getUsuarios()) {
+				comboBox.addItem(usuarioTemp);
+			}
+		}else{
+			comboBox.addItem(Controlador.getInstancia().getUsuarioActual());
 		}
+
 		GridBagConstraints gbc_comboBox = new GridBagConstraints();
 		gbc_comboBox.gridwidth = 3;
 		gbc_comboBox.insets = new Insets(0, 0, 5, 5);

@@ -514,10 +514,10 @@ public class Controlador {
 				MovimientoCC movCC = new MovimientoCC();
 				movCC.setDescripcion("Ticket");
 				//TODO Que hace el estado??
-				movCC.setEstado("");
+				movCC.setEstado("CREDITO");
 				movCC.setFecha(GregorianCalendar.getInstance().getTime());
 				movCC.setIdMovimiento(0);
-				movCC.setMontoCobrado(ticket.getMontoCobrado());
+				movCC.setMontoCobrado(ticket.getMontoCobrado() * -1);
 				movCC.setTicket(this.ticket);
 				DAOCliente.getInstance().agregarMovimientoCC(ticket.getCliente().getIdCliente(), movCC);
 			}			
@@ -865,7 +865,6 @@ public class Controlador {
 	}
 
 
-	@SuppressWarnings("deprecation")
 	private long aplicarInteres()
 	{
 		//APLICA EL 15 de cada mes
@@ -950,6 +949,20 @@ public class Controlador {
 			}
 		}
 		return clientesConDeuda;
+	}
+
+	public ArrayList<MovimientoCC> obtenetMovimientosCobrados(Usuario usuario, Date fechaInicio,
+			Date fechaFin) {
+		ArrayList<MovimientoCC> movimientosM = new ArrayList<MovimientoCC>();
+		
+		ArrayList<persistencia.clases.MovimientoCC> movimientosP =  DAOMovimientoCC.getInstance().getMovimientosCobrados(usuario, fechaInicio, fechaFin);
+		for (persistencia.clases.MovimientoCC movimientoCCTemp : movimientosP) {
+			movimientosM.add(Converter.convertMovimientoCuentaCorrientePersistenciaToModelo(movimientoCCTemp));
+		}
+		
+		return movimientosM;
+		
+		
 	}
 
 
