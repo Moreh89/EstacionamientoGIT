@@ -630,15 +630,23 @@ public class MenuOperador extends JFrame implements ActionListener, KeyListener 
 					int resultado = JOptionPane.showConfirmDialog (null, "El ticket posee un Cliente, desea mover a Cuenta corriente?");
 					if (resultado == JOptionPane.OK_OPTION){
 						Controlador.getInstancia().cobrarTicket(Ticket.Estado.CREDITO);
+						JOptionPane.showMessageDialog(null, "El Ticket seleccionado fue movido a cuenta corriente", "Operacion Exitosa", JOptionPane.INFORMATION_MESSAGE);
 					} else {
 						Controlador.getInstancia().cobrarTicket(Ticket.Estado.CERRADO);
+						JOptionPane.showMessageDialog(null, "El Ticket seleccionado fue cobrado", "Operacion Exitosa", JOptionPane.INFORMATION_MESSAGE);
 					}
+					
+					buscarTicket();
+					this.btnCobrarF.setEnabled(false);
 				} else {
 					Controlador.getInstancia().cobrarTicket(Ticket.Estado.CERRADO);
+					JOptionPane.showMessageDialog(null, "El Ticket seleccionado fue cobrado", "Operacion Exitosa", JOptionPane.INFORMATION_MESSAGE);
+					buscarTicket();
+					this.btnCobrarF.setEnabled(false);
 				}
 
 			}else{
-				JOptionPane.showMessageDialog(null, "Operacion fallida", "El Ticket seleccionado ya fue cobrado", JOptionPane.ERROR_MESSAGE);
+				JOptionPane.showMessageDialog(null, "El Ticket seleccionado ya fue cobrado", "Operacion fallida", JOptionPane.ERROR_MESSAGE);
 			}
 		}
 
@@ -670,13 +678,13 @@ public class MenuOperador extends JFrame implements ActionListener, KeyListener 
 					//Solo acepto 5 min de tiempo para cancelar
 					if(diffMinutes <= 5){
 						if(!Controlador.getInstancia().cancelarTicket(tck)){
-							JOptionPane.showMessageDialog(null, "Operacion fallida", "El Ticket seleccionado no cancelado. Tiempo maximo permitido exedido", JOptionPane.ERROR_MESSAGE);
+							JOptionPane.showMessageDialog(null, "El Ticket seleccionado no cancelado. Tiempo maximo permitido exedido", "Operacion fallida", JOptionPane.ERROR_MESSAGE);
 						}else{
 							this.btnLimpiarCampos.doClick();
-							JOptionPane.showMessageDialog(null, "Operacion exitosa", "El Ticket seleccionado fue cancelado", JOptionPane.INFORMATION_MESSAGE);	
+							JOptionPane.showMessageDialog(null, "El Ticket seleccionado fue cancelado", "Operacion exitosa", JOptionPane.INFORMATION_MESSAGE);	
 						}
 					}else{
-						JOptionPane.showMessageDialog(null, "Operacion fallida", "El Ticket seleccionado no cancelado. Tiempo maximo permitido exedido", JOptionPane.ERROR_MESSAGE);
+						JOptionPane.showMessageDialog(null, "El Ticket seleccionado no cancelado. Tiempo maximo permitido exedido", "Operacion fallida", JOptionPane.ERROR_MESSAGE);
 					}
 
 
@@ -843,15 +851,18 @@ public class MenuOperador extends JFrame implements ActionListener, KeyListener 
 				this.textFieldPrepago.setText(String.valueOf(tck.getPrepago()));
 				this.textFieldPrepago.setEditable(false);
 				this.textFieldTiempoEstadia.setText(tck.getTiempoEstadia());
+				this.btnCobrarF.setEnabled(false);
 				if(tck.getEstado() == Ticket.Estado.CREDITO){
 					this.textFieldTotalAPagar.setText("(PAGADO A CUENTA) " + String.valueOf(tck.getMontoCobrado()));
 				}else if(tck.getEstado() == Ticket.Estado.CERRADO){
 					this.textFieldTotalAPagar.setText("(PAGADO) " + String.valueOf(tck.getMontoCobrado()));
 				}else if (tck.getEstado() == Ticket.Estado.PREPAGO){
 					this.textFieldTotalAPagar.setText("Prepago " + String.valueOf(tck.getPrepago()) + " restan: "+ String.valueOf(tck.getMontoCobrado()));
-				} else 
+				} else {
 					this.textFieldTotalAPagar.setText(String.valueOf(tck.getMontoCobrado()));
+				}
 				if (tck.getCliente() != null){
+					this.btnCobrarF.setEnabled(true);
 					this.textFieldCliente.setText(tck.getCliente().toString());
 				}else {this.textFieldCliente.setText("");}
 				

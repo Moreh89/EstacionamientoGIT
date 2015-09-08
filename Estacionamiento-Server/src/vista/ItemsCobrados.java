@@ -27,13 +27,10 @@ import java.util.Date;
 
 public class ItemsCobrados extends JDialog implements ActionListener, ListSelectionListener {
 
-	/**
-	 * 
-	 */
+
 	private static final long serialVersionUID = 1L;
 	private final JPanel contentPanel = new JPanel();
 	private JButton aceptarButton;
-	private JButton cancelarButton;
 	private DefaultListModel<String> listModel;
 	private JList<String> listElementos;
 	private JLabel lblTicketsAbiertos;
@@ -41,25 +38,6 @@ public class ItemsCobrados extends JDialog implements ActionListener, ListSelect
 	private double total = 0;
 
 
-	/**
-	 * Launch the application.
-	 */
-	public static void main(String[] args) {
-		try {
-			GestionColor dialog = new GestionColor();
-			dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
-			dialog.setVisible(true);
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-	}
-
-	/**
-	 * Create the dialog.
-	 * @param fechaFin 
-	 * @param fechaInicio 
-	 * @param usuario 
-	 */
 	@SuppressWarnings({ "rawtypes", "unchecked" })
 	public ItemsCobrados(Usuario usuario, Date fechaInicio, Date fechaFin) {
 		setResizable(false);
@@ -71,16 +49,11 @@ public class ItemsCobrados extends JDialog implements ActionListener, ListSelect
 		contentPanel.setLayout(null);
 		
 		aceptarButton = new JButton("Aceptar");
+		aceptarButton.setFont(new Font("Tahoma", Font.BOLD, 16));
 		aceptarButton.setIcon(new ImageIcon(GestionColor.class.getResource("/image/ok.png")));
-		aceptarButton.setBounds(191, 450, 116, 32);
+		aceptarButton.setBounds(316, 450, 149, 32);
 		contentPanel.add(aceptarButton);
 		aceptarButton.addActionListener(this);
-		
-		cancelarButton = new JButton("Cancelar");
-		cancelarButton.setIcon(new ImageIcon(GestionUsuario.class.getResource("/image/cancel.png")));
-		cancelarButton.setBounds(358, 450, 116, 32);
-		contentPanel.add(cancelarButton);
-		cancelarButton.addActionListener(this);
 
 		JScrollPane scrollPane = new JScrollPane();
 		scrollPane.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
@@ -118,15 +91,15 @@ public class ItemsCobrados extends JDialog implements ActionListener, ListSelect
 		scrollPane.setViewportView(listElementos);
 		
 		lblTicketsAbiertos = new JLabel("Total Cobrado:");
-		lblTicketsAbiertos.setBounds(191, 342, 133, 37);
+		lblTicketsAbiertos.setBounds(201, 344, 201, 37);
 		contentPanel.add(lblTicketsAbiertos);
-		lblTicketsAbiertos.setFont(new Font("Tahoma", Font.BOLD, 13));
+		lblTicketsAbiertos.setFont(new Font("Tahoma", Font.BOLD, 20));
 		
 		lblTotalCobrado = new JLabel("");
-		lblTotalCobrado.setBounds(358, 329, 107, 71);
+		lblTotalCobrado.setBounds(453, 329, 312, 71);
 		contentPanel.add(lblTotalCobrado);
 		lblTotalCobrado.setForeground(Color.RED);
-		lblTotalCobrado.setFont(new Font("Tahoma", Font.BOLD, 16));
+		lblTotalCobrado.setFont(new Font("Tahoma", Font.BOLD, 20));
 		lblTotalCobrado.setText(String.valueOf(total));
 		listElementos.addListSelectionListener(this);
 		
@@ -139,10 +112,6 @@ public class ItemsCobrados extends JDialog implements ActionListener, ListSelect
 
 	@Override
 	public void actionPerformed(ActionEvent event) {
-		if(event.getSource()==cancelarButton)
-		{
-			dispose();
-		}
 		if(event.getSource()==aceptarButton)
 		{
 	
