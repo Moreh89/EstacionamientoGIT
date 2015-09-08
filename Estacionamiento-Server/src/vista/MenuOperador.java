@@ -124,13 +124,13 @@ public class MenuOperador extends JFrame implements ActionListener, KeyListener 
 		mnGestionEstacionamiento.setFont(new Font("Segoe UI", Font.BOLD, 20));
 		menuBar.add(mnGestionEstacionamiento);
 
-		mntmModelo = new JMenuItem("Modelo F8");
+		mntmModelo = new JMenuItem("Modelo");
 		mnGestionEstacionamiento.add(mntmModelo);
 		mntmModelo.setFont(new Font("Segoe UI", Font.PLAIN, 20));
 		mntmModelo.addActionListener(this);
 
 
-		mntmColor = new JMenuItem("Color F9");
+		mntmColor = new JMenuItem("Color");
 		mnGestionEstacionamiento.add(mntmColor);
 		mntmColor.setFont(new Font("Segoe UI", Font.PLAIN, 20));
 		mntmColor.addActionListener(this);
@@ -365,6 +365,7 @@ public class MenuOperador extends JFrame implements ActionListener, KeyListener 
 		gbc_textFieldPrepado.gridx = 4;
 		gbc_textFieldPrepado.gridy = 3;
 		contentPane.add(textFieldPrepago, gbc_textFieldPrepado);
+		textFieldPrepago.setText("0");
 		textFieldPrepago.addKeyListener(this);
 
 		lblCliente = new JLabel("Cliente:");
@@ -613,6 +614,10 @@ public class MenuOperador extends JFrame implements ActionListener, KeyListener 
 		gbc_textField_2.gridy = 0;
 		panel.add(textFieldTiempoEstadia, gbc_textField_2);
 
+		btnCobrarF.setEnabled(false);
+		btnCanelarF.setEnabled(false);
+		btnGuardarF.setEnabled(false);
+		
 	}
 
 	@Override
@@ -727,12 +732,15 @@ public class MenuOperador extends JFrame implements ActionListener, KeyListener 
 			this.btnTicketF.setEnabled(true);
 			this.btnBuscarPorTicketAbierto.setEnabled(true);
 			this.btnCobrarF.setEnabled(false);
+			this.btnCanelarF.setEnabled(false);
+			this.btnGuardarF.setEnabled(false);
+			this.textFieldPrepago.setText("0");
 			this.textFieldNumeroTicket.requestFocus();
 		}
 		if (event.getSource() == btnTicketF) {
 
 			if(!this.textFieldPatente.getText().equals("") && isNumeric(this.textFieldPrepago.getText())) {
-
+				this.textFieldObsevacion.requestFocus();
 				Ticket tck= Controlador.getInstancia()
 						.generarTicket(
 								(String) comboBoxTipoVehiculo.getSelectedItem(),
@@ -763,14 +771,12 @@ public class MenuOperador extends JFrame implements ActionListener, KeyListener 
 				this.textFieldPrepago.setText(String.valueOf(tck.getPrepago()));
 				this.textFieldPrepago.setEditable(true);
 				this.textFieldTiempoEstadia.setText(tck.getTiempoEstadia());
-
-				new PrintTicket(tck, (String) this.comboBoxImpresoras.getSelectedItem());
-				
 				this.textFieldNumeroTicket.setEnabled(false);
 				this.btnTicketF.setEnabled(false);
 				this.btnBuscarPorTicketAbierto.setEnabled(false);
 				this.btnCobrarF.setEnabled(false);
-				this.textFieldObsevacion.requestFocus();
+
+				new PrintTicket(tck, (String) this.comboBoxImpresoras.getSelectedItem());
 				
 			}else{
 				if(!isNumeric(this.textFieldPrepago.getText()))this.textFieldPrepago.setBackground(new Color(Color.PINK.getRGB()));
@@ -849,14 +855,17 @@ public class MenuOperador extends JFrame implements ActionListener, KeyListener 
 					this.textFieldCliente.setText(tck.getCliente().toString());
 				}else {this.textFieldCliente.setText("");}
 				
+				this.btnCanelarF.setEnabled(false);
+				this.btnGuardarF.setEnabled(false);
+				
 				Date horaCreado = tck.getFechaLlegada();
 				Date horaActual = Calendar.getInstance().getTime();
 				long diff  = horaActual.getTime() - horaCreado.getTime();
 				long diffMinutes = diff / (60 * 1000);
 				//Solo acepto 5 min de tiempo para cancelar o modificar
-				if(diffMinutes>5){
-					this.btnCanelarF.setEnabled(false);
-					this.btnGuardarF.setEnabled(false);
+				if(diffMinutes<=5){
+					this.btnCanelarF.setEnabled(true);
+					this.btnGuardarF.setEnabled(true);
 				}
 					this.textFieldNumeroTicket.setEnabled(false);
 					this.btnTicketF.setEnabled(false);

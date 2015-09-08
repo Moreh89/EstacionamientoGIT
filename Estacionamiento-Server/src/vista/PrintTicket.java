@@ -106,7 +106,6 @@ public class PrintTicket extends JFrame {
 			barcode.setBarWidth(1);
 
 			panel.add(barcode);
-			this.setVisible(true);
 			printWork(this);
 			this.dispose();
 		} catch (BarcodeException e) {
