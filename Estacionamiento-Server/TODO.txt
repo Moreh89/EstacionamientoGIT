@@ -7,8 +7,8 @@ Cant Autos- tickets abiertos //HECHO
 
 Damian:
 usuario gestion	// HECHO
-Deudores
-Automatizar funcion que aplique interés mensual a deudores
+Deudores	// A MEDIAS, FALTA EXPORT
+Automatizar funcion que aplique interés mensual a deudores // HECHA
 
 MovimientoCC tiene que terner el usuario que lo carga,
 si es un pago para hacer el cierro necesito saber quien lo cargo
