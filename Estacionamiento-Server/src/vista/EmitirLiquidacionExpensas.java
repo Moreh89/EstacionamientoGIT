@@ -157,7 +157,7 @@ public class EmitirLiquidacionExpensas extends JDialog implements ActionListener
 		}
 		if(event.getSource()==aceptarButton)
 		{
-			long codigoReturn=-1;
+			double codigoReturn=-1;
 			if(!textFieldImporteLiquidar.getText().isEmpty() && isNumeric(textFieldImporteLiquidar.getText()))
 			{
 				codigoReturn=Controlador.getInstancia().liquidarExpensas(Double.parseDouble(textFieldImporteLiquidar.getText()), textFieldPeriodoLiquidar.getText(), descripcionTextField.getText());
@@ -169,7 +169,7 @@ public class EmitirLiquidacionExpensas extends JDialog implements ActionListener
 				{
 					JOptionPane.showMessageDialog(null, "Se liquidaron correctamente el 100% de las expensas.", "Liquidación de Expensas",  JOptionPane.INFORMATION_MESSAGE);
 				}
-				if(codigoReturn > 0)
+				else
 				{
 					JOptionPane.showMessageDialog(null, "Expensas parcialmente liquidadas. Se liquidó el "+codigoReturn +"% de las expensas. \n La sumatoria de porcentajes asignado a las cochera no alcanza o lo supera el 100% .", "Liquidación de Expensas",  JOptionPane.INFORMATION_MESSAGE);
 				}

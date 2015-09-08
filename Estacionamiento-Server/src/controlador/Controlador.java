@@ -584,13 +584,13 @@ public class Controlador {
 		return 0;
 	}
 
-	public long liquidarExpensas(double importeLiquidar, String periodoLiquidar, String descripcion) 
+	public double liquidarExpensas(double importeLiquidar, String periodoLiquidar, String descripcion) 
 	{
 		ArrayList<modelo.Cliente> clientes = new ArrayList<modelo.Cliente>();
 		clientes=DAOCliente.getInstance().getClientes();
 		ArrayList<String> expensasImprimir = new ArrayList<String>();
 		expensasImprimir.add("Cochera;Periodo a Liquidar;Nombre;Apellido;Porcentaje;Monto");
-		long porcentajeTotalCobrado=0;
+		double porcentajeTotalCobrado=0;
 		new GregorianCalendar();
 		Date fecha= GregorianCalendar.getInstance().getTime();
 
@@ -609,8 +609,9 @@ public class Controlador {
 					double montoCobrar = 0;
 					for(modelo.Cochera cocheraActual : clienteM.getCocheras())
 					{
-						montoCobrar = montoCobrar + (cocheraActual.getPorcentajeExpensas() * importeLiquidar / 100); 
-						porcentajeTotalCobrado=(long) (porcentajeTotalCobrado+cocheraActual.getPorcentajeExpensas());
+						double montoMovimiento=cocheraActual.getPorcentajeExpensas() * importeLiquidar / 100;
+						montoCobrar = montoCobrar + montoMovimiento; 
+						porcentajeTotalCobrado=porcentajeTotalCobrado+cocheraActual.getPorcentajeExpensas();
 
 
 						modelo.MovimientoCC movimientoNuevo= new modelo.MovimientoCC();
@@ -619,14 +620,14 @@ public class Controlador {
 						movimientoNuevo.setDescripcion(descripcion);
 						movimientoNuevo.setEstado("Liquidado");
 						movimientoNuevo.setTicket(null);
-						movimientoNuevo.setMontoCobrado((-1)*montoCobrar);
+						movimientoNuevo.setMontoCobrado((-1)*montoMovimiento);
 						movimientoNuevo.setLiquidacionExpensas(liquidacionExpensas);
 						movimientoNuevo.setUsuario(usuarioActual);
 
 
 						liquidacionExpensas.setIdLiquidacionExpensas(DAOCliente.getInstance().agregarMovimientoCC_Expensas(clienteM.getIdCliente(), movimientoNuevo));
 
-						expensasImprimir.add(cocheraActual.getUbicacion()+";"+periodoLiquidar +";"+ clienteM.getNombre()+";"+clienteM.getApellido()+";"+cocheraActual.getPorcentajeExpensas() +";"+ montoCobrar);
+						expensasImprimir.add(cocheraActual.getUbicacion()+";"+periodoLiquidar +";"+ clienteM.getNombre()+";"+clienteM.getApellido()+";"+cocheraActual.getPorcentajeExpensas() +";"+ montoMovimiento);
 					}
 
 				}
