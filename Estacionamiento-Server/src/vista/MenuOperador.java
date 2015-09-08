@@ -1,7 +1,5 @@
 package vista;
 
-import java.awt.EventQueue;
-
 import javax.print.PrintService;
 import javax.print.PrintServiceLookup;
 import javax.swing.JFrame;
@@ -91,25 +89,7 @@ public class MenuOperador extends JFrame implements ActionListener, KeyListener 
 	private JMenuItem mntmModificacionCliente;
 	private JComboBox comboBoxImpresoras;
 
-	/**
-	 * Launch the application.
-	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					MenuOperador frame = new MenuOperador();
-					frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
 
-	/**
-	 * Create the frame.
-	 */
 	@SuppressWarnings("unchecked")
 	public MenuOperador() {
 		setFont(new Font("Dialog", Font.BOLD, 20));
@@ -210,7 +190,6 @@ public class MenuOperador extends JFrame implements ActionListener, KeyListener 
 		gbl_contentPane.rowWeights = new double[] { 0.0, 0.0, 0.0, 0.0, 0.0,
 				0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE };
 		contentPane.setLayout(gbl_contentPane);
-
 
 
 		lblCodigoTicket = new JLabel("Codigo Ticket:");
@@ -654,13 +633,12 @@ public class MenuOperador extends JFrame implements ActionListener, KeyListener 
 				}
 
 			}else{
-				//TODO Imprimir error, ticket ya cobrado
+				JOptionPane.showMessageDialog(null, "Operacion fallida", "El Ticket seleccionado ya fue cobrado", JOptionPane.ERROR_MESSAGE);
 			}
 		}
 
 		if (event.getSource() == btnGuardarF) {
 
-			//TODO si pasaron 5 min desde q se creo bloquear los campos correspondientes
 			Controlador.getInstancia()
 			.actualizarTicket(
 					(String) comboBoxTipoVehiculo.getSelectedItem(),
@@ -687,10 +665,13 @@ public class MenuOperador extends JFrame implements ActionListener, KeyListener 
 					//Solo acepto 5 min de tiempo para cancelar
 					if(diffMinutes <= 5){
 						if(!Controlador.getInstancia().cancelarTicket(tck)){
-							//TODO Cartel error
+							JOptionPane.showMessageDialog(null, "Operacion fallida", "El Ticket seleccionado no cancelado. Tiempo maximo permitido exedido", JOptionPane.ERROR_MESSAGE);
+						}else{
+							this.btnLimpiarCampos.doClick();
+							JOptionPane.showMessageDialog(null, "Operacion exitosa", "El Ticket seleccionado fue cancelado", JOptionPane.INFORMATION_MESSAGE);	
 						}
 					}else{
-						//TODO Cartel error
+						JOptionPane.showMessageDialog(null, "Operacion fallida", "El Ticket seleccionado no cancelado. Tiempo maximo permitido exedido", JOptionPane.ERROR_MESSAGE);
 					}
 
 
@@ -740,10 +721,17 @@ public class MenuOperador extends JFrame implements ActionListener, KeyListener 
 			this.textFieldTotalAPagar.setText("");
 			this.textFieldCliente.setText("");
 			this.textFieldNumeroTicket.setText("");
+			this.btnCanelarF.setEnabled(true);
+			this.btnGuardarF.setEnabled(true);
+			this.textFieldNumeroTicket.setEnabled(true);
+			this.btnTicketF.setEnabled(true);
+			this.btnBuscarPorTicketAbierto.setEnabled(true);
+			this.btnCobrarF.setEnabled(false);
+			this.textFieldNumeroTicket.requestFocus();
 		}
 		if (event.getSource() == btnTicketF) {
 
-			if(!this.textFieldPatente.getText().equals("")) {
+			if(!this.textFieldPatente.getText().equals("") && isNumeric(this.textFieldPrepago.getText())) {
 
 				Ticket tck= Controlador.getInstancia()
 						.generarTicket(
@@ -758,29 +746,36 @@ public class MenuOperador extends JFrame implements ActionListener, KeyListener 
 
 				this.textFieldNumeroTicket.setBackground(new Color(Color.WHITE.getRGB()));
 				this.textFieldPatente.setBackground(new Color(Color.WHITE.getRGB()));
-				this.textFieldPatente.setBackground(new Color(Color.WHITE.getRGB()));
+				this.textFieldPrepago.setBackground(new Color(Color.WHITE.getRGB()));
 				String numeroTck = String.valueOf(tck.getIdTicket());
 				while (numeroTck.length() < 10) {
 					numeroTck = "0"+numeroTck; 
 				}
 				this.textFieldNumeroTicket.setText(numeroTck);
-				this.textFieldIngreso.setText(new SimpleDateFormat("MM-dd-yyyy hh:mm:ss").format(tck.getFechaLlegada()));
+				this.textFieldIngreso.setText(new SimpleDateFormat("dd-MM-yyyy hh:mm:ss").format(tck.getFechaLlegada()));
 				this.comboBoxTipoVehiculo.setSelectedItem(tck.getCatergoriaVehiculo().getDescripcion());
 				this.comboBoxColor.setSelectedItem(tck.getColor().getDescripcion());
 				this.comboBoxModelo.setSelectedItem(tck.getModeloVehiculo().getDescripcion());
 				this.comboBoxDescuento.setSelectedItem(tck.getDescuento().getDescripcion());
 				this.textFieldPatente.setText(tck.getPatente());
-				if (tck.getFechaSalida() != null) this.textFieldEgreso.setText(new SimpleDateFormat("MM-dd-yyyy hh:mm:ss").format(tck.getFechaSalida()));
+				if (tck.getFechaSalida() != null) this.textFieldEgreso.setText(new SimpleDateFormat("dd-MM-yyyy hh:mm:ss").format(tck.getFechaSalida()));
 				this.textFieldObsevacion.setText(tck.getObservacion());
 				this.textFieldPrepago.setText(String.valueOf(tck.getPrepago()));
 				this.textFieldPrepago.setEditable(true);
 				this.textFieldTiempoEstadia.setText(tck.getTiempoEstadia());
 
-				//TODO bloquear botones y demas hasta que elija nuevo
 				new PrintTicket(tck, (String) this.comboBoxImpresoras.getSelectedItem());
 				
+				this.textFieldNumeroTicket.setEnabled(false);
+				this.btnTicketF.setEnabled(false);
+				this.btnBuscarPorTicketAbierto.setEnabled(false);
+				this.btnCobrarF.setEnabled(false);
+				this.textFieldObsevacion.requestFocus();
+				
 			}else{
-				this.textFieldPatente.setBackground(new Color(Color.PINK.getRGB()));
+				if(!isNumeric(this.textFieldPrepago.getText()))this.textFieldPrepago.setBackground(new Color(Color.PINK.getRGB()));
+				if(this.textFieldPatente.getText().equals(""))this.textFieldPatente.setBackground(new Color(Color.PINK.getRGB()));
+				this.textFieldNumeroTicket.requestFocus();
 			}
 
 		}
@@ -811,13 +806,13 @@ public class MenuOperador extends JFrame implements ActionListener, KeyListener 
 			new AltaCliente().setVisible(true);
 		}
 		if(event.getSource()==mntmModificacionCliente){
-			//TODO enviar el cliente seleccionado o obtenerlo del controlador
-			new ModificarCliente().setVisible(true);
+			new BuscadorCliente().setVisible(true);
+			if(Controlador.getInstancia().getClienteActual()!=null)
+			new ModificarCliente(Controlador.getInstancia().getClienteActual()).setVisible(true);
 		}
 	}
 
 	private void buscarTicket(){
-		//TODO Bloquear resto de cosas
 		if(isNumeric(textFieldNumeroTicket.getText()) && (textFieldPrepago.getText().equals("")||isNumeric(textFieldPrepago.getText()))){
 			Ticket tck = Controlador.getInstancia().buscarTicket(textFieldNumeroTicket.getText());
 			if (tck!=null){
@@ -825,18 +820,19 @@ public class MenuOperador extends JFrame implements ActionListener, KeyListener 
 				this.textFieldNumeroTicket.setBackground(new Color(Color.WHITE.getRGB()));
 				this.textFieldPrepago.setBackground(new Color(Color.WHITE.getRGB()));
 				this.textFieldPatente.setBackground(new Color(Color.WHITE.getRGB()));
+				this.textFieldPrepago.setBackground(new Color(Color.WHITE.getRGB()));
 				String numeroTck = String.valueOf(tck.getIdTicket());
 				while (numeroTck.length() < 10) {
 					numeroTck = "0"+numeroTck; 
 				}
 				this.textFieldNumeroTicket.setText(numeroTck);
-				this.textFieldIngreso.setText(new SimpleDateFormat("MM-dd-yyyy hh:mm:ss").format(tck.getFechaLlegada()));
+				this.textFieldIngreso.setText(new SimpleDateFormat("dd-MM-yyyy hh:mm:ss").format(tck.getFechaLlegada()));
 				this.comboBoxTipoVehiculo.setSelectedItem(tck.getCatergoriaVehiculo().getDescripcion());
 				this.comboBoxColor.setSelectedItem(tck.getColor().getDescripcion());
 				this.comboBoxModelo.setSelectedItem(tck.getModeloVehiculo().getDescripcion());
 				this.comboBoxDescuento.setSelectedItem(tck.getDescuento().getDescripcion());
 				this.textFieldPatente.setText(tck.getPatente());
-				if (tck.getFechaSalida() != null) this.textFieldEgreso.setText(new SimpleDateFormat("MM-dd-yyyy hh:mm:ss").format(tck.getFechaSalida()));
+				if (tck.getFechaSalida() != null) this.textFieldEgreso.setText(new SimpleDateFormat("dd-MM-yyyy hh:mm:ss").format(tck.getFechaSalida()));
 				this.textFieldObsevacion.setText(tck.getObservacion());
 				this.textFieldPrepago.setText(String.valueOf(tck.getPrepago()));
 				this.textFieldPrepago.setEditable(false);
@@ -852,6 +848,22 @@ public class MenuOperador extends JFrame implements ActionListener, KeyListener 
 				if (tck.getCliente() != null){
 					this.textFieldCliente.setText(tck.getCliente().toString());
 				}else {this.textFieldCliente.setText("");}
+				
+				Date horaCreado = tck.getFechaLlegada();
+				Date horaActual = Calendar.getInstance().getTime();
+				long diff  = horaActual.getTime() - horaCreado.getTime();
+				long diffMinutes = diff / (60 * 1000);
+				//Solo acepto 5 min de tiempo para cancelar o modificar
+				if(diffMinutes>5){
+					this.btnCanelarF.setEnabled(false);
+					this.btnGuardarF.setEnabled(false);
+				}
+					this.textFieldNumeroTicket.setEnabled(false);
+					this.btnTicketF.setEnabled(false);
+					this.btnBuscarPorTicketAbierto.setEnabled(false);
+					this.btnCobrarF.setEnabled(true);
+					this.textFieldObsevacion.requestFocus();
+				
 			}else{
 				String numeroTck = textFieldNumeroTicket.getText();
 				while (numeroTck.length() < 10) {
@@ -874,8 +886,22 @@ public class MenuOperador extends JFrame implements ActionListener, KeyListener 
 				this.textFieldTiempoEstadia.setText("");
 				this.textFieldTotalAPagar.setText("");
 				this.textFieldCliente.setText("");
+				this.btnCanelarF.setEnabled(true);
+				this.btnGuardarF.setEnabled(true);
+				this.textFieldNumeroTicket.setEnabled(true);
+				this.btnTicketF.setEnabled(true);
+				this.btnBuscarPorTicketAbierto.setEnabled(true);
+				this.btnCobrarF.setEnabled(false);
+				this.textFieldNumeroTicket.requestFocus();
 			}
 		}else{
+			this.btnCanelarF.setEnabled(true);
+			this.btnGuardarF.setEnabled(true);
+			this.textFieldNumeroTicket.setEnabled(true);
+			this.btnTicketF.setEnabled(true);
+			this.btnBuscarPorTicketAbierto.setEnabled(true);
+			this.btnCobrarF.setEnabled(false);
+			this.textFieldNumeroTicket.requestFocus();
 			if(!isNumeric(textFieldNumeroTicket.getText()))
 				textFieldNumeroTicket.setBackground(new Color(Color.PINK.getRGB()));
 			if(textFieldPrepago.getText().equals("")||isNumeric(textFieldPrepago.getText())) textFieldPrepago.setBackground(new Color(Color.PINK.getRGB()));

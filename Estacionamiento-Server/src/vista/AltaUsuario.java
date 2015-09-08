@@ -3,7 +3,6 @@ package vista;
 import java.awt.BorderLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -14,25 +13,12 @@ import javax.swing.JPanel;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
-
-
-
-
-
-
-//import reportes.ReporteEjemplo;
 import java.awt.Font;
-
 import controlador.Controlador;
-
 import java.awt.GridBagLayout;
 import java.awt.GridBagConstraints;
 import java.awt.Insets;
-import java.util.ArrayList;
-
 import javax.swing.JComboBox;
-
-import modelo.Usuario;
 
 public class AltaUsuario extends JDialog implements ActionListener{
 	/**
@@ -54,6 +40,7 @@ public class AltaUsuario extends JDialog implements ActionListener{
 	private JTextField textFieldApellido;
 	private JTextField textFieldNroDoc;
 	private JTextField textFieldTipoUsuario;
+	@SuppressWarnings("rawtypes")
 	private JComboBox comboBoxTipoDoc;
 
 	/**
@@ -72,6 +59,7 @@ public class AltaUsuario extends JDialog implements ActionListener{
 	/**
 	 * Create the dialog.
 	 */
+	@SuppressWarnings({ "rawtypes", "unchecked" })
 	public AltaUsuario(String tipoUsuario) {
 		setResizable(false);
 		setTitle("Alta Usuario");

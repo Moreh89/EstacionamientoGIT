@@ -13,14 +13,12 @@ import javax.swing.DefaultListModel;
 import javax.swing.ImageIcon;
 import javax.swing.JDialog;
 import javax.swing.JLabel;
-import javax.swing.JTextArea;
 import javax.swing.JTextField;
 import javax.swing.JButton;
 import javax.swing.JSeparator;
 import javax.swing.JComboBox;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.ListSelectionModel;
-
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import java.awt.event.KeyEvent;
@@ -28,12 +26,9 @@ import java.awt.event.KeyListener;
 import java.awt.GridBagLayout;
 import java.awt.GridBagConstraints;
 import java.awt.Insets;
-
 import javax.swing.JScrollPane;
 import javax.swing.ScrollPaneConstants;
 import javax.swing.JList;
-
-import modelo.Cliente;
 import modelo.Usuario;
 import controlador.Controlador;
 
@@ -392,6 +387,9 @@ public class GestionUsuario extends JDialog implements ActionListener, KeyListen
 			if(!textFieldApellido.getText().isEmpty() && !textFieldDNILU.getText().isEmpty() && !textFieldNombre.getText().isEmpty()
 					&& !textFieldUserName.getText().isEmpty())
 			{
+				//TODO codigoReturn no se usa
+				
+				@SuppressWarnings("unused")
 				long codigoReturn=-1;
 				modelo.Usuario usuarioSeleccionado = (Usuario) this.listUsuarios.getSelectedValue();
 				codigoReturn=Controlador.getInstancia().modificarUsuario(textFieldApellido.getText(),textFieldDNILU.getText(),textFieldNombre.getText()

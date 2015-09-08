@@ -1,10 +1,9 @@
 package persistencia.dao;
-import java.util.ArrayList;
 
+import java.util.ArrayList;
 import modelo.Usuario;
 import persistencia.Converter;
 import persistencia.HibernateDAO;
-import persistencia.clases.Cliente;
 
 public class DAOUsuario {
 
@@ -52,6 +51,7 @@ public class DAOUsuario {
 		return usu;
 	}
 	
+	@SuppressWarnings("unchecked")
 	public ArrayList<modelo.Usuario> getUsuarios()
 	{
 		ArrayList<modelo.Usuario> usuariosReturn;

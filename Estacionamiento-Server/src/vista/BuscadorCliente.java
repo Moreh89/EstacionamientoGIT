@@ -1,6 +1,5 @@
 package vista;
 
-import java.awt.EventQueue;
 import java.util.ArrayList;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
@@ -88,28 +87,7 @@ public class BuscadorCliente extends JDialog implements ActionListener, KeyListe
 	private JLabel labelNombre;
 	private JPanel panelAtributos;
 	private JButton btnVerCuentaCorriente;
-	
-	/**
-	 * Launch the application.
-	 */
-	
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					BuscadorCliente frame = new BuscadorCliente();
-					frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
-
-	/**
-	 * Create the frame.
-	 */
-	
+		
 	public BuscadorCliente() {
 		initGUI();
 	}
@@ -659,6 +637,7 @@ public class BuscadorCliente extends JDialog implements ActionListener, KeyListe
 			this.textFieldRazonSocial.setText(clienteSeleccionado.getRazonSocial());
 			this.textFieldTelefono1.setText(clienteSeleccionado.getTelefono1());
 			this.textFieldTelefono2.setText(clienteSeleccionado.getTelefono2());
+			//TODO completar listas
 		}
 		
 	}

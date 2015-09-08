@@ -1,7 +1,5 @@
 package vista;
 
-import java.awt.EventQueue;
-
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import javax.swing.DefaultComboBoxModel;
@@ -21,6 +19,7 @@ import java.util.ArrayList;
 
 import javax.swing.JTextArea;
 
+import modelo.Cliente;
 import modelo.PersonaAutorizada;
 import modelo.Vehiculo;
 import controlador.Controlador;
@@ -82,29 +81,25 @@ public class ModificarCliente extends JDialog implements ActionListener{
 	private JComboBox comboBoxTipoCliente;
 
 
-	/**
-	 * Launch the application.
-	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					AltaCliente frame = new AltaCliente();
-					frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
 
-	/**
-	 * Create the frame.
-	 */
 	public ModificarCliente() {
 		initGUI();
 	}
 
+
+	public ModificarCliente(Cliente clienteSeleccionado) {
+		initGUI();
+		this.textFieldApellido.setText(clienteSeleccionado.getApellido());
+		this.textFieldCUIT.setText(clienteSeleccionado.getCuil());
+		this.textFieldDireccion1.setText(clienteSeleccionado.getDescripcion());
+		this.textFieldDireccion2.setText(clienteSeleccionado.getDireccion2());
+		this.textFieldNumeroDoc.setText(clienteSeleccionado.getNumeroDocumento());
+		this.textFieldEmail.setText(clienteSeleccionado.getCorreoElectronico());
+		this.textFieldNombre.setText(clienteSeleccionado.getNombre());
+		this.textFieldRazonSocial.setText(clienteSeleccionado.getRazonSocial());
+		this.textFieldTelefono1.setText(clienteSeleccionado.getTelefono1());
+		this.textFieldTelefono2.setText(clienteSeleccionado.getTelefono2());
+	}
 
 	@SuppressWarnings({ "rawtypes", "unchecked" })
 	public void initGUI(){

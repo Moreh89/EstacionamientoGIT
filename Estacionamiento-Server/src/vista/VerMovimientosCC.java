@@ -1,11 +1,8 @@
 package vista;
 
-import java.awt.EventQueue;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.Vector;
-
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import javax.swing.event.ListSelectionEvent;
@@ -15,31 +12,22 @@ import javax.swing.DefaultListModel;
 import javax.swing.ImageIcon;
 import javax.swing.JDialog;
 import javax.swing.JLabel;
-import javax.swing.JTextArea;
 import javax.swing.JTextField;
 import javax.swing.JButton;
 import javax.swing.JSeparator;
-import javax.swing.JComboBox;
-import javax.swing.DefaultComboBoxModel;
 import javax.swing.ListSelectionModel;
-
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
-import java.awt.Font;
 import java.awt.GridBagLayout;
 import java.awt.GridBagConstraints;
 import java.awt.Insets;
-
 import javax.swing.JScrollPane;
 import javax.swing.ScrollPaneConstants;
 import javax.swing.JList;
-
 import org.jdesktop.swingx.JXDatePicker;
-
 import modelo.MovimientoCC;
-import modelo.Usuario;
 import controlador.Controlador;
 import java.awt.Panel;
 
@@ -51,6 +39,7 @@ public class VerMovimientosCC extends JDialog implements ActionListener, KeyList
 
 	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
+	@SuppressWarnings("unused")
 	private DefaultTableModel model;
 	@SuppressWarnings("unused")
 	private CobroExtraordinario cobroExtraordinario;
@@ -76,26 +65,6 @@ public class VerMovimientosCC extends JDialog implements ActionListener, KeyList
 	private JTextField textFieldMonto;
 	private JTextField textFieldUsuario;
 
-	/**
-	 * Launch the application.
-	 */
-
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					VerMovimientosCC frame = new VerMovimientosCC();
-					frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
-
-	/**
-	 * Create the frame.
-	 */
 
 	public VerMovimientosCC() {
 		initGUI();

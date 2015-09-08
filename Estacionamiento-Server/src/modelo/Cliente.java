@@ -2,7 +2,6 @@ package modelo;
 
 import java.util.List;
 
-import persistencia.dao.DAOCliente;
 
 
 public class Cliente {
