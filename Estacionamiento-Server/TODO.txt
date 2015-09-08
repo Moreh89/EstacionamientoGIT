@@ -25,3 +25,10 @@ Si se llega a necesitar vamos a tener q ver como lo hacemos.
 
 Agregue un estado al Ticket q es CREDITO, significa que se metio en la cuenta a credito y no se pago
 Lo necesito para el arqueo de caja.
+
+
+
+Cobro Extraordinario, tiene que validar datos antes de aceptar. ESTA HECHO. 
+EL TEMA ES QUE CLIENTEACTUAL QUEDA EN MEMORIA
+
+Checkear ticket prepago no incluido en arqueo

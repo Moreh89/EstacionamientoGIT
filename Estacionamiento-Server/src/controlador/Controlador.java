@@ -743,9 +743,8 @@ public class Controlador {
 			{
 				for(modelo.MovimientoCC movimientoActual : clienteM.getCuentaCorriente().getMovimientos())
 				{
-					if(movimientoActual.getLiquidacionExpensas().getIdLiquidacionExpensas()==liquidacionSeleccionado.getIdLiquidacionExpensas())
+					if(movimientoActual.getLiquidacionExpensas()!=null && movimientoActual.getLiquidacionExpensas().getIdLiquidacionExpensas()==liquidacionSeleccionado.getIdLiquidacionExpensas())
 					{
-
 						modelo.MovimientoCC movimientoNuevo= new modelo.MovimientoCC();
 						movimientoNuevo.setIdMovimiento(0);
 						movimientoNuevo.setFecha(fecha);
@@ -925,11 +924,18 @@ public class Controlador {
 
 	public ArrayList<MovimientoCC> getMovimientosCliente(Date fechaDesde, Date fechaHasta) {
 		ArrayList<MovimientoCC> movimientos= new ArrayList<MovimientoCC>();
-		if(clienteActual!=null)
+		modelo.Cliente cteAct=DAOCliente.getInstance().getClienteModelo(clienteActual.getIdCliente());
+		if(cteAct!=null)
 		{
-			for(MovimientoCC movimientoAct : clienteActual.getCuentaCorriente().getMovimientos())
+			fechaDesde.setHours(0);
+			fechaDesde.setMinutes(0);
+			fechaDesde.setSeconds(0);
+			fechaHasta.setHours(23);
+			fechaHasta.setMinutes(59);
+			fechaHasta.setSeconds(59);
+			for(MovimientoCC movimientoAct : cteAct.getCuentaCorriente().getMovimientos())
 			{
-				if(fechaDesde.compareTo(movimientoAct.getFecha())<0&& fechaHasta.compareTo(movimientoAct.getFecha())>0)
+				if(fechaDesde.compareTo(movimientoAct.getFecha())<=0&& fechaHasta.compareTo(movimientoAct.getFecha())>=0)
 				{
 					movimientos.add(movimientoAct);
 				}

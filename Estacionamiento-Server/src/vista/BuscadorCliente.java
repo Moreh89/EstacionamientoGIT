@@ -626,7 +626,6 @@ public class BuscadorCliente extends JDialog implements ActionListener, KeyListe
 			Controlador.getInstancia().setClienteActual((Cliente) listClientes.getSelectedValue());
 			VerMovimientosCC verMovimientoCC = new VerMovimientosCC();
 			verMovimientoCC.setVisible(true);
-			dispose();
 		}
 	}
 

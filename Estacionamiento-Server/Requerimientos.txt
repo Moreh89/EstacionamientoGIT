@@ -126,8 +126,7 @@ Tarifa puede ser auto (30% moto de auto, 10% bici de auto) 4x4 libre
 21)
 CANOPUS S.A. Logo E
 
-22)
-Poder exportar la informacion (backups).
+22)Poder exportar la informacion (backups).
 ESTADO: HECHO para adminsitrador
 
 23)
@@ -140,8 +139,7 @@ Poder borrar tickets de >x fecha de antigueadad desde admin
 	Ej2: 6hs UADE 35$ 
 	Ej3: abono efectivo, descuenta 50$ (debería ser % este caso)
 
-25) CONSULTA DE DAMIAN
-	TASA INTERES DEBERIA ESTAR EN LA DB PARA QUE LA PUEDAN MODIFICAR, HOY ES UN DOUBLE EN CONTROLADOR.
+25)TASA INTERES DEBERIA ESTAR EN LA DB PARA QUE LA PUEDAN MODIFICAR, HOY ES UN DOUBLE EN CONTROLADOR.
 	
 	ESTADO: HECHO
 

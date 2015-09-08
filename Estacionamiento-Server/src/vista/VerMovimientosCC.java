@@ -336,7 +336,7 @@ public class VerMovimientosCC extends JDialog implements ActionListener, KeyList
 			listModel.clear();
 
 
-			if(fechaHasta.getDate().compareTo(fechaDesde.getDate())>0)
+			if(fechaHasta.getDate().compareTo(fechaDesde.getDate())>=0)
 			{
 				//Fecha hasta mayor a Desde
 				ArrayList<MovimientoCC> movimientos= Controlador.getInstancia().getMovimientosCliente(fechaDesde.getDate(), fechaHasta.getDate());

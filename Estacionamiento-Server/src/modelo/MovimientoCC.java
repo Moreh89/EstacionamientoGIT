@@ -1,5 +1,7 @@
 package modelo;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 public class MovimientoCC 
@@ -77,7 +79,8 @@ public class MovimientoCC
 	
 	public String toString()
 	{
-		return this.fecha + "  //  " + this.montoCobrado + "  //  " + this.descripcion;
+		DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd-HH:mm"); 
+		return dateFormat.format(this.fecha) + "  //  " + this.montoCobrado + "  //  " + this.descripcion;
 	}
 	
 	
