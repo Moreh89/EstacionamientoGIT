@@ -148,6 +148,7 @@ public class VerDeudores extends JDialog implements ActionListener, KeyListener 
 		
 		if(e.getSource()==btnExportarAExcel)
 		{
+			//TODO
 			dispose();
 		}
 	}
