@@ -103,7 +103,7 @@ public class GestionUsuario extends JDialog implements ActionListener, KeyListen
 		setTitle("Gestión Usuarios");
 		setResizable(false);
 		//setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 531, 500);
+		setBounds(100, 100, 600, 500);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
@@ -114,7 +114,7 @@ public class GestionUsuario extends JDialog implements ActionListener, KeyListen
 		contentPane.add(lblBuscar);
 
 		buscarTextField = new JTextField();
-		buscarTextField.setBounds(55, 14, 217, 25);
+		buscarTextField.setBounds(55, 14, 279, 25);
 		contentPane.add(buscarTextField);
 		buscarTextField.setColumns(10);
 		model = new DefaultTableModel(){
@@ -137,7 +137,7 @@ public class GestionUsuario extends JDialog implements ActionListener, KeyListen
 
 		buscarButton = new JButton("Buscar");
 		buscarButton.addActionListener(this);
-		buscarButton.setBounds(404, 7, 116, 32);
+		buscarButton.setBounds(468, 10, 116, 32);
 		contentPane.add(buscarButton);
 		buscarButton.setIcon(new ImageIcon(BuscadorCliente.class.getResource("/image/search.png")));
 
@@ -147,14 +147,14 @@ public class GestionUsuario extends JDialog implements ActionListener, KeyListen
 
 		tipoComboBox = new JComboBox();
 		tipoComboBox.setModel(new DefaultComboBoxModel(new String[] {"DNI", "NOMBRE", "APELLIDO"}));
-		tipoComboBox.setBounds(280, 14, 114, 25);
+		tipoComboBox.setBounds(344, 14, 114, 25);
 		contentPane.add(tipoComboBox);
 
 		panelAtributos = new JPanel();
-		panelAtributos.setBounds(10, 140, 503, 192);
+		panelAtributos.setBounds(10, 140, 574, 192);
 		contentPane.add(panelAtributos);
 		GridBagLayout gbl_panelAtributos = new GridBagLayout();
-		gbl_panelAtributos.columnWidths = new int[]{0, 0, 0};
+		gbl_panelAtributos.columnWidths = new int[]{120, 0, 0};
 		gbl_panelAtributos.rowHeights = new int[]{30, 30, 30, 30, 30, 30, 0};
 		gbl_panelAtributos.columnWeights = new double[]{0.0, 1.0, Double.MIN_VALUE};
 		gbl_panelAtributos.rowWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
@@ -162,7 +162,7 @@ public class GestionUsuario extends JDialog implements ActionListener, KeyListen
 
 		labelUserName = new JLabel("User Name:");
 		GridBagConstraints gbc_labelUserName = new GridBagConstraints();
-		gbc_labelUserName.anchor = GridBagConstraints.EAST;
+		gbc_labelUserName.anchor = GridBagConstraints.WEST;
 		gbc_labelUserName.insets = new Insets(0, 0, 5, 5);
 		gbc_labelUserName.gridx = 0;
 		gbc_labelUserName.gridy = 0;
@@ -182,7 +182,7 @@ public class GestionUsuario extends JDialog implements ActionListener, KeyListen
 		labelNombre = new JLabel("Nombre:");
 		GridBagConstraints gbc_labelNombre = new GridBagConstraints();
 		gbc_labelNombre.insets = new Insets(0, 0, 5, 5);
-		gbc_labelNombre.anchor = GridBagConstraints.EAST;
+		gbc_labelNombre.anchor = GridBagConstraints.WEST;
 		gbc_labelNombre.gridx = 0;
 		gbc_labelNombre.gridy = 1;
 		panelAtributos.add(labelNombre, gbc_labelNombre);
@@ -198,7 +198,7 @@ public class GestionUsuario extends JDialog implements ActionListener, KeyListen
 
 		labelApellido = new JLabel("Apellido:");
 		GridBagConstraints gbc_labelApellido = new GridBagConstraints();
-		gbc_labelApellido.anchor = GridBagConstraints.EAST;
+		gbc_labelApellido.anchor = GridBagConstraints.WEST;
 		gbc_labelApellido.insets = new Insets(0, 0, 5, 5);
 		gbc_labelApellido.gridx = 0;
 		gbc_labelApellido.gridy = 2;
@@ -215,7 +215,7 @@ public class GestionUsuario extends JDialog implements ActionListener, KeyListen
 
 		lblTipodocumento = new JLabel("Tipo Doc:");
 		GridBagConstraints gbc_lblTipodocumento = new GridBagConstraints();
-		gbc_lblTipodocumento.anchor = GridBagConstraints.EAST;
+		gbc_lblTipodocumento.anchor = GridBagConstraints.WEST;
 		gbc_lblTipodocumento.insets = new Insets(0, 0, 5, 5);
 		gbc_lblTipodocumento.gridx = 0;
 		gbc_lblTipodocumento.gridy = 3;
@@ -233,7 +233,7 @@ public class GestionUsuario extends JDialog implements ActionListener, KeyListen
 		lblDnilu = new JLabel("Nro. Doc:");
 		GridBagConstraints gbc_lblDnilu = new GridBagConstraints();
 		gbc_lblDnilu.fill = GridBagConstraints.VERTICAL;
-		gbc_lblDnilu.anchor = GridBagConstraints.EAST;
+		gbc_lblDnilu.anchor = GridBagConstraints.WEST;
 		gbc_lblDnilu.insets = new Insets(0, 0, 5, 5);
 		gbc_lblDnilu.gridx = 0;
 		gbc_lblDnilu.gridy = 4;
@@ -250,7 +250,7 @@ public class GestionUsuario extends JDialog implements ActionListener, KeyListen
 
 		lblTipoUsuario = new JLabel("Tipo Usuario:");
 		GridBagConstraints gbc_lblTipoUsuario = new GridBagConstraints();
-		gbc_lblTipoUsuario.anchor = GridBagConstraints.EAST;
+		gbc_lblTipoUsuario.anchor = GridBagConstraints.WEST;
 		gbc_lblTipoUsuario.insets = new Insets(0, 0, 0, 5);
 		gbc_lblTipoUsuario.gridx = 0;
 		gbc_lblTipoUsuario.gridy = 5;
@@ -268,7 +268,7 @@ public class GestionUsuario extends JDialog implements ActionListener, KeyListen
 		panelAtributos.add(comboBoxTipoUsuario, gbc_comboBoxTipoUsuario);
 
 		panelClientes = new JPanel();
-		panelClientes.setBounds(10, 46, 503, 88);
+		panelClientes.setBounds(10, 46, 574, 88);
 		contentPane.add(panelClientes);
 		GridBagLayout gbl_panelClientes = new GridBagLayout();
 		gbl_panelClientes.columnWidths = new int[]{240, 0};
@@ -295,25 +295,25 @@ public class GestionUsuario extends JDialog implements ActionListener, KeyListen
 
 		btnCrearUsuarioAdministrador = new JButton("Crear Usuario Administrador");
 		btnCrearUsuarioAdministrador.setIcon(new ImageIcon(GestionUsuario.class.getResource("/image/plus.png")));
-		btnCrearUsuarioAdministrador.setBounds(10, 360, 200, 40);
+		btnCrearUsuarioAdministrador.setBounds(10, 360, 263, 40);
 		contentPane.add(btnCrearUsuarioAdministrador);
 		btnCrearUsuarioAdministrador.addActionListener(this);
 
 		btnCrearUsuarioOperador = new JButton("Crear Usuario Operador");
 		btnCrearUsuarioOperador.setIcon(new ImageIcon(GestionUsuario.class.getResource("/image/plus.png")));
 		btnCrearUsuarioOperador.addActionListener(this);
-		btnCrearUsuarioOperador.setBounds(10, 410, 200, 40);
+		btnCrearUsuarioOperador.setBounds(10, 410, 263, 40);
 		contentPane.add(btnCrearUsuarioOperador);
 
 		btnModificar = new JButton("Modificar Usuario");
 		btnModificar.setIcon(new ImageIcon(GestionUsuario.class.getResource("/image/modificar.png")));
 		btnModificar.addActionListener(this);
-		btnModificar.setBounds(225, 360, 155, 90);
+		btnModificar.setBounds(291, 360, 155, 90);
 		contentPane.add(btnModificar);
 
 		btnCancelar = new JButton("Cancelar");
 		btnCancelar.setIcon(new ImageIcon(GestionUsuario.class.getResource("/image/cancel.png")));
-		btnCancelar.setBounds(393, 360, 120, 90);
+		btnCancelar.setBounds(464, 360, 120, 90);
 		btnCancelar.addActionListener(this);
 		contentPane.add(btnCancelar);
 		listUsuarios.addListSelectionListener(this);

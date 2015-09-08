@@ -56,7 +56,8 @@ INSERT INTO Usuario (userName, password, permisos, nombre, apellido, tipoDocumen
 INSERT INTO Usuario (userName, password, permisos, nombre, apellido, tipoDocumento, numeroDocumento)  VALUES ('operador', 'operador', 1, 'Omar', 'Guida', 'DNI', 28652478);
 
 
-INSERT INTO Descuento (descripcion, descuento) VALUES ('0 UBA 20%', 20)
+INSERT INTO Descuento (descripcion, descuento) VALUES ('0 N/A 0%', 0)
+INSERT INTO Descuento (descripcion, descuento) VALUES ('3 UBA 20%', 20)
 INSERT INTO Descuento (descripcion, descuento) VALUES ('1 Efvo. 10%', 10)
 INSERT INTO Descuento (descripcion, descuento) VALUES ('2 Otro 15%', 15)
 

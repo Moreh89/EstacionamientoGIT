@@ -51,7 +51,7 @@ public class VerMovimientosCC extends JDialog implements ActionListener, KeyList
 	private JList listMovimientos;
 	private DefaultListModel<MovimientoCC> listModel;
 	private JPanel panelAtributos;
-	private JButton btnCancelar;
+	private JButton btnVolver;
 	private JXDatePicker fechaDesde;
 	private JLabel lblFechaHasta;
 	private JXDatePicker fechaHasta;
@@ -59,7 +59,6 @@ public class VerMovimientosCC extends JDialog implements ActionListener, KeyList
 	private JLabel lblDescripcin;
 	private JLabel lblMonto;
 	private JLabel lblUsuario;
-	private JLabel lblTicket;
 	private JTextField textFieldFecha;
 	private JTextField textFieldDescripcion;
 	private JTextField textFieldMonto;
@@ -77,7 +76,7 @@ public class VerMovimientosCC extends JDialog implements ActionListener, KeyList
 		setTitle("Movimientos Cuenta Corriente");
 		setResizable(false);
 		//setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 572, 613);
+		setBounds(100, 100, 572, 500);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
@@ -100,13 +99,13 @@ public class VerMovimientosCC extends JDialog implements ActionListener, KeyList
 		contentPane.add(separator);
 
 		panelAtributos = new JPanel();
-		panelAtributos.setBounds(17, 259, 539, 268);
+		panelAtributos.setBounds(17, 259, 539, 135);
 		contentPane.add(panelAtributos);
 		GridBagLayout gbl_panelAtributos = new GridBagLayout();
 		gbl_panelAtributos.columnWidths = new int[]{0, 0, 0};
-		gbl_panelAtributos.rowHeights = new int[]{30, 30, 30, 30, 0, 30, 0, 30, 0};
+		gbl_panelAtributos.rowHeights = new int[]{30, 30, 30, 30, 0};
 		gbl_panelAtributos.columnWeights = new double[]{0.0, 1.0, Double.MIN_VALUE};
-		gbl_panelAtributos.rowWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
+		gbl_panelAtributos.rowWeights = new double[]{0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
 		panelAtributos.setLayout(gbl_panelAtributos);
 
 		lblFecha = new JLabel("Fecha:");
@@ -169,7 +168,7 @@ public class VerMovimientosCC extends JDialog implements ActionListener, KeyList
 		lblUsuario = new JLabel("Usuario:");
 		GridBagConstraints gbc_lblUsuario = new GridBagConstraints();
 		gbc_lblUsuario.anchor = GridBagConstraints.EAST;
-		gbc_lblUsuario.insets = new Insets(0, 0, 5, 5);
+		gbc_lblUsuario.insets = new Insets(0, 0, 0, 5);
 		gbc_lblUsuario.gridx = 0;
 		gbc_lblUsuario.gridy = 3;
 		panelAtributos.add(lblUsuario, gbc_lblUsuario);
@@ -178,20 +177,11 @@ public class VerMovimientosCC extends JDialog implements ActionListener, KeyList
 		textFieldUsuario.setEditable(false);
 		textFieldUsuario.setEnabled(false);
 		GridBagConstraints gbc_textFieldUsuario = new GridBagConstraints();
-		gbc_textFieldUsuario.insets = new Insets(0, 0, 5, 0);
 		gbc_textFieldUsuario.fill = GridBagConstraints.HORIZONTAL;
 		gbc_textFieldUsuario.gridx = 1;
 		gbc_textFieldUsuario.gridy = 3;
 		panelAtributos.add(textFieldUsuario, gbc_textFieldUsuario);
 		textFieldUsuario.setColumns(10);
-
-		lblTicket = new JLabel("Ticket:");
-		GridBagConstraints gbc_lblTicket = new GridBagConstraints();
-		gbc_lblTicket.anchor = GridBagConstraints.EAST;
-		gbc_lblTicket.insets = new Insets(0, 0, 5, 5);
-		gbc_lblTicket.gridx = 0;
-		gbc_lblTicket.gridy = 4;
-		panelAtributos.add(lblTicket, gbc_lblTicket);
 		
 		panelClientes = new JPanel();
 		panelClientes.setBounds(10, 96, 546, 135);
@@ -220,11 +210,11 @@ public class VerMovimientosCC extends JDialog implements ActionListener, KeyList
 		scrollPaneClientes.setViewportView(listMovimientos);
 
 
-		btnCancelar = new JButton("Cancelar");
-		btnCancelar.setIcon(new ImageIcon(GestionUsuario.class.getResource("/image/cancel.png")));
-		btnCancelar.setBounds(395, 545, 120, 29);
-		btnCancelar.addActionListener(this);
-		contentPane.add(btnCancelar);
+		btnVolver = new JButton("Volver");
+		btnVolver.setIcon(new ImageIcon(VerMovimientosCC.class.getResource("/image/izq.png")));
+		btnVolver.setBounds(436, 405, 120, 50);
+		btnVolver.addActionListener(this);
+		contentPane.add(btnVolver);
 
 		Panel panel = new Panel();
 		panel.setBounds(10, 0, 546, 46);
@@ -317,7 +307,7 @@ public class VerMovimientosCC extends JDialog implements ActionListener, KeyList
 
 			}
 		}
-		if(e.getSource()==btnCancelar)
+		if(e.getSource()==btnVolver)
 		{
 			dispose();
 		}

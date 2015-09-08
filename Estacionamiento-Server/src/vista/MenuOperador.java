@@ -5,22 +5,31 @@ import javax.print.PrintServiceLookup;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+
 import java.awt.GridBagLayout;
+
 import javax.swing.JMenuBar;
 import javax.swing.JMenu;
 import javax.swing.JMenuItem;
 import javax.swing.JLabel;
+
 import java.awt.GridBagConstraints;
+
 import javax.swing.JComboBox;
+
 import java.awt.Insets;
+
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 import javax.swing.JButton;
 import javax.swing.ImageIcon;
 import javax.swing.SwingConstants;
+
 import modelo.Ticket;
 import controlador.Controlador;
+
+import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.Color;
 import java.awt.event.ActionEvent;
@@ -95,10 +104,12 @@ public class MenuOperador extends JFrame implements ActionListener, KeyListener 
 		setFont(new Font("Dialog", Font.BOLD, 20));
 		setIconImage(Toolkit.getDefaultToolkit().getImage(
 				MenuOperador.class.getResource("/image/printer.png")));
-		setResizable(false);
 		setTitle("Gertor Ingresos");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 1218, 775);
+
+//TODO PARA MAXIMIZAR LA VENTANA
+		setExtendedState(getExtendedState()| JFrame.MAXIMIZED_BOTH); 
 
 		menuBar = new JMenuBar();
 		menuBar.setFont(new Font("Segoe UI", Font.PLAIN, 20));

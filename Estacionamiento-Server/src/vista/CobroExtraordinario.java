@@ -45,8 +45,8 @@ public class CobroExtraordinario extends JDialog implements ActionListener{
 	private modelo.Cliente cliente=new Cliente();
 	private JTextField clienteTextField;
 	private JButton btnBuscarCliente;
-	
-	
+
+
 	/**
 	 * Launch the application.
 	 */
@@ -73,7 +73,7 @@ public class CobroExtraordinario extends JDialog implements ActionListener{
 		getContentPane().add(contentPanel, BorderLayout.CENTER);
 		contentPanel.setLayout(null);
 
-		
+
 		JLabel lblNuevaCon = new JLabel("Tipo Cobro:");
 		lblNuevaCon.setFont(new Font("Tahoma", Font.BOLD, 11));
 
@@ -97,7 +97,7 @@ public class CobroExtraordinario extends JDialog implements ActionListener{
 		contentPanel.add(cancelarButton);
 		cancelarButton.addActionListener(this);
 
-		
+
 		comboBoxTipoCobro = new JComboBox<String>();
 		comboBoxTipoCobro.setModel(new DefaultComboBoxModel<String>(new String[] {"1. EXPENSAS", "2. ALQUILER", "3. OTROS"}));
 		comboBoxTipoCobro.setBounds(80, 60, 145, 25);
@@ -107,23 +107,23 @@ public class CobroExtraordinario extends JDialog implements ActionListener{
 		montoCobradoTextField = new JTextField();
 		montoCobradoTextField.setBounds(80, 90, 145, 25);
 		contentPanel.add(montoCobradoTextField);
-		
+
 		JLabel clienteLabel = new JLabel("Cliente:");
 		clienteLabel.setFont(new Font("Tahoma", Font.BOLD, 11));
 		clienteLabel.setBounds(10, 30, 70, 25);
 		contentPanel.add(clienteLabel);
-		
+
 		clienteTextField = new JTextField();
 		clienteTextField.setBounds(80, 30, 145, 25);
 		contentPanel.add(clienteTextField);
 		clienteTextField.setEnabled(false);
-		
+
 		btnBuscarCliente = new JButton("");
 		btnBuscarCliente.setIcon(new ImageIcon(CobroExtraordinario.class.getResource("/image/search.png")));
 		btnBuscarCliente.setBounds(250, 30, 50, 25);
 		contentPanel.add(btnBuscarCliente);
 		btnBuscarCliente.addActionListener(this);
-		
+
 		;
 
 		this.setLocationRelativeTo(null);
@@ -134,14 +134,14 @@ public class CobroExtraordinario extends JDialog implements ActionListener{
 	{
 		this.cliente=cliente;
 	}
-	
+
 	@Override
 	public void actionPerformed(ActionEvent event) {
 		if(event.getSource()==cancelarButton)
 		{
 			dispose();
 		}
-		
+
 		if(event.getSource()==btnBuscarCliente)
 		{
 			new BuscadorCliente().setVisible(true);
@@ -153,19 +153,30 @@ public class CobroExtraordinario extends JDialog implements ActionListener{
 		}
 		if(event.getSource()==aceptarButton)
 		{
-			
+
 			long codigoReturn;
-			if(cliente!=null && !montoCobradoTextField.getText().isEmpty() && cliente.getCuentaCorriente()!=null)
+			if(cliente!=null &&  cliente.getCuentaCorriente()!=null)
 			{
-				codigoReturn=Controlador.getInstancia().generarCobroExtraordinario(comboBoxTipoCobro.getSelectedItem().toString(), Double.parseDouble(montoCobradoTextField.getText()),cliente);
-				if(codigoReturn == -1)
+				if(!montoCobradoTextField.getText().isEmpty()&&isNumeric(montoCobradoTextField.getText()))
 				{
-					JOptionPane.showMessageDialog(null, "Cobro no realizado", "No se pudo realizar el cobro.", JOptionPane.INFORMATION_MESSAGE);
+					codigoReturn=Controlador.getInstancia().generarCobroExtraordinario(comboBoxTipoCobro.getSelectedItem().toString(), Double.parseDouble(montoCobradoTextField.getText()),cliente);
+					if(codigoReturn == -1)
+					{
+						JOptionPane.showMessageDialog(null, "No se pudo realizar el cobro.", "Cobro Extraordinario", JOptionPane.INFORMATION_MESSAGE);
+					}
+					if(codigoReturn >= 0)
+					{
+						JOptionPane.showMessageDialog(null, "Se generó correctamente el cobro del pago de " + comboBoxTipoCobro.getSelectedItem().toString(),"Cobro Extraordinario", JOptionPane.INFORMATION_MESSAGE);
+					}
 				}
-				if(codigoReturn >= 0)
+				else
 				{
-					JOptionPane.showMessageDialog(null, "Cobro realizado exitosamente", "Se generó correctamente el cobro del pago de" + comboBoxTipoCobro.getSelectedItem().toString(), JOptionPane.INFORMATION_MESSAGE);
+					JOptionPane.showMessageDialog(null, "El campo Monto se encuentra incompleto o el valor ingresado no es válido.","Cobro Extraordinario", JOptionPane.INFORMATION_MESSAGE);
 				}
+			}
+			else
+			{
+				JOptionPane.showMessageDialog(null, "Cliente no seleccionado.", "Cobro Extraordinario", JOptionPane.INFORMATION_MESSAGE);
 			}
 			dispose();
 		}
@@ -173,5 +184,18 @@ public class CobroExtraordinario extends JDialog implements ActionListener{
 		{
 			montoCobradoTextField.setText("");
 		}
+	}
+
+	public static boolean isNumeric(String str)  
+	{  
+		try  
+		{  
+			double d = Double.parseDouble(str);  
+		}  
+		catch(NumberFormatException nfe)  
+		{  
+			return false;  
+		}  
+		return true;  
 	}
 }

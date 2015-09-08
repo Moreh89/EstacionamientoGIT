@@ -32,3 +32,16 @@ Cobro Extraordinario, tiene que validar datos antes de aceptar. ESTA HECHO.
 EL TEMA ES QUE CLIENTEACTUAL QUEDA EN MEMORIA
 
 Checkear ticket prepago no incluido en arqueo
+
+MENU OPERADOR NO BLOQUEA SELECTBOX DESPUES DE COBRAR TICKET
+
+
+Para qué tiene un vehiculo un Cliente? En el menú operador no debería poder autocompletar?
+
+Tickets Abiertos (Operador) debería poder imprimir el listado (fue un requerimiento).
+
+Prepago está mal escrito (Se ve en arqueo)
+
+Gestión de Usuario falla en la búsqueda, no refresca el listado si dejo en blanco la búsqueda
+
+Crear GestionDescuento, incluir ESTADO al Descuento.

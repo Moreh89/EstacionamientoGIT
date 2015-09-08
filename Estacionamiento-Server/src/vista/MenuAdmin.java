@@ -78,6 +78,10 @@ public class MenuAdmin extends JFrame implements ActionListener {
 		setTitle("Gestor Estacionamiento");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 704, 427);
+
+
+		//TODO PARA MAXIMIZAR LA VENTANA
+				setExtendedState(getExtendedState()| JFrame.MAXIMIZED_BOTH); 
 		
 		menuBar = new JMenuBar();
 		setJMenuBar(menuBar);
