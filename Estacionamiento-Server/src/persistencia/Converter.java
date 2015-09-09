@@ -13,6 +13,7 @@ import modelo.Vehiculo;
 import persistencia.clases.Cliente.ESTADO;
 import persistencia.clases.Cliente.TIPO_CLIENTE;
 import persistencia.clases.Cliente.TIPO_DOC;
+import persistencia.clases.IncrementoPrepago;
 
 public class Converter {
 
@@ -760,5 +761,27 @@ public class Converter {
 		}
 
 		return interesesM;
+	}
+
+	public static IncrementoPrepago convertIncrementoPrepagoModeloToPersistencia(
+			modelo.IncrementoPrepago incrementoPrepagoM) {
+		persistencia.clases.IncrementoPrepago incrementoP = new IncrementoPrepago(
+				incrementoPrepagoM.getIdIncremento(),
+				incrementoPrepagoM.getFecha(),
+				incrementoPrepagoM.getNumeroTicket(),
+				incrementoPrepagoM.getPrepago(),
+				incrementoPrepagoM.getNumeroUsuario());
+		return incrementoP;
+	}
+
+	public static modelo.IncrementoPrepago convertIncrementoPrepagoPersistenciaToModelo(
+			IncrementoPrepago incrementoPrepagoP) {
+		modelo.IncrementoPrepago incrementoM = new modelo.IncrementoPrepago(
+				incrementoPrepagoP.getIdIncremento(),
+				incrementoPrepagoP.getFecha(),
+				incrementoPrepagoP.getNumeroTicket(),
+				incrementoPrepagoP.getPrepago(),
+				incrementoPrepagoP.getNumeroUsuario());
+		return incrementoM;
 	}
 }

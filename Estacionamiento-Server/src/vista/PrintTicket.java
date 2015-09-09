@@ -3,6 +3,10 @@ package vista;
 import java.awt.Graphics2D;
 import javax.print.PrintService;
 import javax.print.PrintServiceLookup;
+import javax.print.attribute.HashPrintRequestAttributeSet;
+import javax.print.attribute.PrintRequestAttributeSet;
+import javax.print.attribute.Size2DSyntax;
+import javax.print.attribute.standard.MediaPrintableArea;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
@@ -45,7 +49,7 @@ public class PrintTicket extends JFrame {
 				PrintTicket.class.getResource("/image/printer.png")));
 		setResizable(false);
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-		setBounds(100, 100, 128, 300);
+		setBounds(100, 100, 260, 350);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
@@ -82,7 +86,7 @@ public class PrintTicket extends JFrame {
 			txtpnfechaIng.setFont(new Font("Tahoma", Font.PLAIN, 12));
 			txtpnfechaIng.setContentType("text/html");
 			txtpnfechaIng
-					.setText("<html><b>Fecha Ing:<br>"+new SimpleDateFormat("MM-dd-yyyy hh:mm:ss").format(ticket.getFechaLlegada())+"<br>Vehiculo:<br>"+ ticket.getCatergoriaVehiculo().getDescripcion()+"<br>Modelo:<br>"+ticket.getModeloVehiculo().getDescripcion()+"<br>Patente:<br>"+ticket.getPatente().toUpperCase()+"</b><br></html>");
+					.setText("<html><b>P.J.E.Uriburu 1058<br>Fecha Ing:<br>"+new SimpleDateFormat("MM-dd-yyyy hh:mm:ss").format(ticket.getFechaLlegada())+"<br>Vehiculo:<br>"+ ticket.getCatergoriaVehiculo().getDescripcion()+"<br>Modelo:<br>"+ticket.getModeloVehiculo().getDescripcion()+"<br>Patente:<br>"+ticket.getPatente().toUpperCase()+"</b><br></html>");
 			GridBagConstraints gbc_txtpnfechaIng = new GridBagConstraints();
 			gbc_txtpnfechaIng.fill = GridBagConstraints.BOTH;
 			gbc_txtpnfechaIng.gridx = 0;
@@ -101,9 +105,9 @@ public class PrintTicket extends JFrame {
 			while (numeroTck.length() < 10) {
 				numeroTck = "0" + numeroTck;
 			}
-			barcode = BarcodeFactory.create2of7(numeroTck);
+			barcode = BarcodeFactory.createCode128(numeroTck);
 			barcode.setBarHeight(30);
-			barcode.setBarWidth(1);
+			barcode.setBarWidth(2);
 
 			panel.add(barcode);
 			printWork(this);
@@ -196,8 +200,10 @@ public class PrintTicket extends JFrame {
 	            .lookupDefaultPrintService();
 			}
 
-			pj.setPrintService(printerTouse);
-			pj.print();
+			PrintRequestAttributeSet aset= new HashPrintRequestAttributeSet();
+		    aset.add(new MediaPrintableArea(2,2,210,160,Size2DSyntax.MM));
+			
+			pj.print(aset);
 			
 //Elegir printer end			
 

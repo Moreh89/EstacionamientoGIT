@@ -1,5 +1,6 @@
 package modelo;
 
+import java.text.DecimalFormat;
 import java.util.Date;
 import java.util.Calendar;
 import controlador.Controlador;
@@ -23,6 +24,7 @@ public class Ticket {
 	private String observacion;
 	private ColorVehiculo color;
 	private String patente;
+	
 	
 	public enum Estado {
 		ABIERTO,
@@ -134,7 +136,10 @@ public class Ticket {
 	
 	public double calcularMontoACobrar()
 	{
+		DecimalFormat numberFormat = new DecimalFormat("#.00");
 		
+		if(this.getEstado()!= Ticket.Estado.CERRADO && this.getEstado()!= Ticket.Estado.CREDITO){
+
 		Date horaLlegada = this.fechaLlegada;
 		Date horaSalida = Calendar.getInstance().getTime();
 		this.fechaSalida = horaSalida;
@@ -146,7 +151,8 @@ public class Ticket {
 				break;
 			}
 		} 
-		double montoCobrar = (this.prepago * -1);      
+		double montoCobrar = 0;
+			      
 		
 		long diff = horaSalida.getTime() - horaLlegada.getTime();
 		
@@ -176,8 +182,16 @@ public class Ticket {
 				double fracs = (restoHoras - restoFrac) / tarifaUsada.getTiempoFraccion();
 				
 				montoCobrar = montoCobrar + estadias * tarifaUsada.getCostoEstadia() + mediaEst * tarifaUsada.getCostoMediaEstadia() + horas * tarifaUsada.getCostoHora() + fracs * tarifaUsada.getCostoFraccion();
+
+				if(this.descuento!=null){
+					double desc = montoCobrar / 100 * this.descuento.getDescuento();
+					montoCobrar = montoCobrar - desc;
+				}
+				montoCobrar = montoCobrar - this.prepago;
 				if (montoCobrar < 0) montoCobrar=0;
+				montoCobrar = Double.parseDouble(numberFormat.format(montoCobrar));		
 				this.montoCobrado = montoCobrar;
+				
 				return montoCobrar;
 			}
 				//Si me quede mas de media estadia pero menos de una estadia entera
@@ -193,8 +207,16 @@ public class Ticket {
 					double fracs = (restoHoras - restoFrac) / tarifaUsada.getTiempoFraccion();
 					
 					montoCobrar = montoCobrar + mediaEst * tarifaUsada.getCostoMediaEstadia() + horas * tarifaUsada.getCostoHora() + fracs * tarifaUsada.getCostoFraccion();
+					
+					if(this.descuento!=null){
+						double desc = montoCobrar / 100 * this.descuento.getDescuento();
+						montoCobrar = montoCobrar - desc;
+					}
+					montoCobrar = montoCobrar - this.prepago;
 					if (montoCobrar < 0) montoCobrar=0;
+					montoCobrar = Double.parseDouble(numberFormat.format(montoCobrar));	
 					this.montoCobrado = montoCobrar;
+					
 					return montoCobrar;
 					
 				}
@@ -206,12 +228,26 @@ public class Ticket {
 						
 						double restoFrac = restoHoras % tarifaUsada.getTiempoFraccion();
 						double fracs = (restoHoras - restoFrac) / tarifaUsada.getTiempoFraccion();
+						if(restoFrac >= 1){
+							fracs = fracs + 1;
+						}
 						
 						montoCobrar = montoCobrar + horas * tarifaUsada.getCostoHora() + fracs * tarifaUsada.getCostoFraccion();
+						
+						if(this.descuento!=null){
+							double desc = montoCobrar / 100 * this.descuento.getDescuento();
+							montoCobrar = montoCobrar - desc;
+						}
+						montoCobrar = montoCobrar - this.prepago;
 						if (montoCobrar < 0) montoCobrar=0;
+						montoCobrar = Double.parseDouble(numberFormat.format(montoCobrar));	
 						this.montoCobrado = montoCobrar;
+						
+						
 						return montoCobrar;
 					}
+		}
+		return this.montoCobrado;
 	}
 
 	public void setColor(ColorVehiculo color) {
@@ -264,7 +300,9 @@ public class Ticket {
 				
 				double restoFrac = restoHoras % tarifaUsada.getTiempoFraccion();
 				double fracs = (restoHoras - restoFrac) / tarifaUsada.getTiempoFraccion();
-				
+				if(restoFrac >= 1){
+					fracs = fracs + 1;
+				}
 				String tiempoCobrar = (int)estadias + "Es " + (int)mediaEst + "Me " + (int)horas + "Hr " + (int)fracs + "Fr";
 
 				return tiempoCobrar;
@@ -280,7 +318,9 @@ public class Ticket {
 					
 					double restoFrac = restoHoras % tarifaUsada.getTiempoFraccion();
 					double fracs = (restoHoras - restoFrac) / tarifaUsada.getTiempoFraccion();
-					
+					if(restoFrac >= 1){
+						fracs = fracs + 1;
+					}
 					String tiempoCobrar = 0 + "Es " + (int)mediaEst + "Me " + (int)horas + "Hr " + (int)fracs + "Fr";
 
 					return tiempoCobrar;
@@ -294,7 +334,9 @@ public class Ticket {
 						
 						double restoFrac = restoHoras % tarifaUsada.getTiempoFraccion();
 						double fracs = (restoHoras - restoFrac) / tarifaUsada.getTiempoFraccion();
-						
+						if(restoFrac >= 1){
+							fracs = fracs + 1;
+						}
 						String tiempoCobrar = 0 + "Es " + 0 + "Me " + (int)horas + "Hr " + (int)fracs + "Fr";
 
 						return tiempoCobrar;
@@ -304,6 +346,10 @@ public class Ticket {
 
 	public String toString(){
 		return this.patente;
+	}
+	public void incrementarPrepago(double monto) {
+		this.prepago = this.prepago + monto;
+		
 	}
 
 }

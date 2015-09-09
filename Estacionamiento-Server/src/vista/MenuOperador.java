@@ -34,6 +34,8 @@ import java.awt.Font;
 import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.ItemEvent;
+import java.awt.event.ItemListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.awt.Toolkit;
@@ -42,7 +44,7 @@ import java.util.Calendar;
 import java.util.Date;
 
 @SuppressWarnings("rawtypes")
-public class MenuOperador extends JFrame implements ActionListener, KeyListener {
+public class MenuOperador extends JFrame implements ActionListener, KeyListener, ItemListener {
 
 	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
@@ -72,7 +74,6 @@ public class MenuOperador extends JFrame implements ActionListener, KeyListener 
 	private JComboBox comboBoxModelo;
 	private JLabel lblDescuento;
 	private JComboBox comboBoxDescuento;
-	private JLabel lblPrePago;
 	private JLabel lblCliente;
 	private JButton btnButtonBuscarCliente;
 	private JLabel lblPerdidaTicket;
@@ -97,6 +98,8 @@ public class MenuOperador extends JFrame implements ActionListener, KeyListener 
 	private JMenuItem mntmCobroExtraordinario;
 	private JMenuItem mntmModificacionCliente;
 	private JComboBox comboBoxImpresoras;
+	private JButton btnPrePago;
+	
 
 
 	@SuppressWarnings("unchecked")
@@ -193,10 +196,10 @@ public class MenuOperador extends JFrame implements ActionListener, KeyListener 
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		GridBagLayout gbl_contentPane = new GridBagLayout();
-		gbl_contentPane.columnWidths = new int[] { 200, 250, 67, 200, 0, 0 };
+		gbl_contentPane.columnWidths = new int[] { 200, 250, 67, 329, 0, 0 };
 		gbl_contentPane.rowHeights = new int[] { 70, 69, 70, 70, 70, 70, 0, 0,
 				60, 70, 0, 50, 0 };
-		gbl_contentPane.columnWeights = new double[] { 0.0, 0.0, 0.0, 1.0, 1.0,
+		gbl_contentPane.columnWeights = new double[] { 0.0, 0.0, 0.0, 0.0, 1.0,
 				Double.MIN_VALUE };
 		gbl_contentPane.rowWeights = new double[] { 0.0, 0.0, 0.0, 0.0, 0.0,
 				0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE };
@@ -269,9 +272,10 @@ public class MenuOperador extends JFrame implements ActionListener, KeyListener 
 		contentPane.add(comboBoxTipoVehiculo, gbc_comboBoxTipoVehiculo);
 
 		lblPatente = new JLabel("Patente:");
+		lblPatente.setHorizontalAlignment(SwingConstants.RIGHT);
 		lblPatente.setFont(new Font("Tahoma", Font.PLAIN, 30));
 		GridBagConstraints gbc_lblPatente = new GridBagConstraints();
-		gbc_lblPatente.anchor = GridBagConstraints.EAST;
+		gbc_lblPatente.fill = GridBagConstraints.HORIZONTAL;
 		gbc_lblPatente.insets = new Insets(0, 0, 5, 5);
 		gbc_lblPatente.gridx = 3;
 		gbc_lblPatente.gridy = 1;
@@ -313,9 +317,10 @@ public class MenuOperador extends JFrame implements ActionListener, KeyListener 
 		contentPane.add(comboBoxColor, gbc_comboBoxColor);
 
 		lblModelo = new JLabel("Modelo:");
+		lblModelo.setHorizontalAlignment(SwingConstants.RIGHT);
 		lblModelo.setFont(new Font("Tahoma", Font.PLAIN, 30));
 		GridBagConstraints gbc_lblModelo = new GridBagConstraints();
-		gbc_lblModelo.anchor = GridBagConstraints.EAST;
+		gbc_lblModelo.fill = GridBagConstraints.HORIZONTAL;
 		gbc_lblModelo.insets = new Insets(0, 0, 5, 5);
 		gbc_lblModelo.gridx = 3;
 		gbc_lblModelo.gridy = 2;
@@ -357,17 +362,23 @@ public class MenuOperador extends JFrame implements ActionListener, KeyListener 
 		gbc_comboBoxDescuento.gridx = 1;
 		gbc_comboBoxDescuento.gridy = 3;
 		contentPane.add(comboBoxDescuento, gbc_comboBoxDescuento);
-
-		lblPrePago = new JLabel("PrePago:");
-		lblPrePago.setFont(new Font("Tahoma", Font.PLAIN, 30));
-		GridBagConstraints gbc_lblEstadia = new GridBagConstraints();
-		gbc_lblEstadia.anchor = GridBagConstraints.EAST;
-		gbc_lblEstadia.insets = new Insets(0, 0, 5, 5);
-		gbc_lblEstadia.gridx = 3;
-		gbc_lblEstadia.gridy = 3;
-		contentPane.add(lblPrePago, gbc_lblEstadia);
+		comboBoxDescuento.addItemListener(this);
+		
+		btnPrePago = new JButton("PrePago:");
+		btnPrePago.setIcon(new ImageIcon(MenuOperador.class.getResource("/image/plus.png")));
+		btnPrePago.setHorizontalAlignment(SwingConstants.RIGHT);
+		btnPrePago.setFont(new Font("Tahoma", Font.PLAIN, 30));
+		GridBagConstraints gbc_btnPrePago = new GridBagConstraints();
+		gbc_btnPrePago.fill = GridBagConstraints.BOTH;
+		gbc_btnPrePago.insets = new Insets(0, 0, 5, 5);
+		gbc_btnPrePago.gridx = 3;
+		gbc_btnPrePago.gridy = 3;
+		contentPane.add(btnPrePago, gbc_btnPrePago);
+		btnPrePago.addActionListener(this);
+		btnPrePago.setEnabled(false);
 
 		textFieldPrepago = new JTextField();
+		textFieldPrepago.setEnabled(false);
 		textFieldPrepago.setFont(new Font("Tahoma", Font.PLAIN, 30));
 		textFieldPrepago.setColumns(10);
 		GridBagConstraints gbc_textFieldPrepado = new GridBagConstraints();
@@ -376,8 +387,7 @@ public class MenuOperador extends JFrame implements ActionListener, KeyListener 
 		gbc_textFieldPrepado.gridx = 4;
 		gbc_textFieldPrepado.gridy = 3;
 		contentPane.add(textFieldPrepago, gbc_textFieldPrepado);
-		textFieldPrepago.setText("0");
-		textFieldPrepago.addKeyListener(this);
+		textFieldPrepago.setText("0.0");
 
 		lblCliente = new JLabel("Cliente:");
 		lblCliente.setFont(new Font("Tahoma", Font.PLAIN, 30));
@@ -413,9 +423,10 @@ public class MenuOperador extends JFrame implements ActionListener, KeyListener 
 		btnButtonBuscarCliente.addActionListener(this);
 
 		lblPerdidaTicket = new JLabel("Perdida Ticket:");
+		lblPerdidaTicket.setHorizontalAlignment(SwingConstants.RIGHT);
 		lblPerdidaTicket.setFont(new Font("Tahoma", Font.PLAIN, 30));
 		GridBagConstraints gbc_lblPerdidaTicket = new GridBagConstraints();
-		gbc_lblPerdidaTicket.anchor = GridBagConstraints.EAST;
+		gbc_lblPerdidaTicket.fill = GridBagConstraints.HORIZONTAL;
 		gbc_lblPerdidaTicket.insets = new Insets(0, 0, 5, 5);
 		gbc_lblPerdidaTicket.gridx = 3;
 		gbc_lblPerdidaTicket.gridy = 4;
@@ -627,7 +638,6 @@ public class MenuOperador extends JFrame implements ActionListener, KeyListener 
 
 		btnCobrarF.setEnabled(false);
 		btnCanelarF.setEnabled(false);
-		btnGuardarF.setEnabled(false);
 		
 	}
 
@@ -727,6 +737,7 @@ public class MenuOperador extends JFrame implements ActionListener, KeyListener 
 		}
 		if (event.getSource() == btnLimpiarCampos) {
 			Controlador.getInstancia().setClienteActual(null);
+			Controlador.getInstancia().setTicket(null);
 			this.textFieldNumeroTicket.setBackground(new Color(Color.WHITE.getRGB()));
 			this.textFieldPrepago.setBackground(new Color(Color.WHITE.getRGB()));
 			this.textFieldPatente.setBackground(new Color(Color.WHITE.getRGB()));
@@ -746,14 +757,13 @@ public class MenuOperador extends JFrame implements ActionListener, KeyListener 
 			this.textFieldCliente.setText("");
 			this.textFieldNumeroTicket.setText("");
 			this.btnCanelarF.setEnabled(true);
-			this.btnGuardarF.setEnabled(true);
 			this.textFieldNumeroTicket.setEnabled(true);
 			this.btnTicketF.setEnabled(true);
 			this.btnBuscarPorTicketAbierto.setEnabled(true);
 			this.btnCobrarF.setEnabled(false);
 			this.btnCanelarF.setEnabled(false);
-			this.btnGuardarF.setEnabled(false);
 			this.textFieldPrepago.setText("0");
+			this.btnPrePago.setEnabled(false);
 			this.textFieldNumeroTicket.requestFocus();
 		}
 		if (event.getSource() == btnTicketF) {
@@ -794,8 +804,12 @@ public class MenuOperador extends JFrame implements ActionListener, KeyListener 
 				this.btnTicketF.setEnabled(false);
 				this.btnBuscarPorTicketAbierto.setEnabled(false);
 				this.btnCobrarF.setEnabled(false);
-
-				new PrintTicket(tck, (String) this.comboBoxImpresoras.getSelectedItem());
+				this.btnPrePago.setEnabled(true);
+				this.textFieldTotalAPagar.setText(String.valueOf(tck.calcularMontoACobrar()));
+				if(!((String) this.comboBoxImpresoras.getSelectedItem()).equalsIgnoreCase("NO IMPRIMIR")){
+					new PrintTicket(tck, (String) this.comboBoxImpresoras.getSelectedItem());
+				}
+				
 				
 			}else{
 				if(!isNumeric(this.textFieldPrepago.getText()))this.textFieldPrepago.setBackground(new Color(Color.PINK.getRGB()));
@@ -803,6 +817,21 @@ public class MenuOperador extends JFrame implements ActionListener, KeyListener 
 				this.textFieldNumeroTicket.requestFocus();
 			}
 
+		}
+		
+		if (event.getSource() == btnPrePago){
+			String resultado = (String) JOptionPane.showInputDialog(null, "Ingrese monto a incrementar", "Incremento Prepago", JOptionPane.PLAIN_MESSAGE, null , null, "0");
+			if(resultado!= null && isNumeric(resultado)){
+				
+				Double monto = Controlador.getInstancia().incrementarPrepago(Double.valueOf(resultado));
+				this.textFieldPrepago.setText(String.valueOf(monto));
+				Ticket tck = Controlador.getInstancia().getTicket();
+				this.textFieldTotalAPagar.setText("Prepago " + String.valueOf(tck.getPrepago()) + " restan: "+ String.valueOf(tck.calcularMontoACobrar()));
+
+			}else{
+				JOptionPane.showMessageDialog(null, "El formato ingresado no es valido", "Operacion fallida", JOptionPane.ERROR_MESSAGE);
+			}
+			
 		}
 
 		if (event.getSource() == mntmCerrarSesion){
@@ -868,8 +897,12 @@ public class MenuOperador extends JFrame implements ActionListener, KeyListener 
 				}else if(tck.getEstado() == Ticket.Estado.CERRADO){
 					this.textFieldTotalAPagar.setText("(PAGADO) " + String.valueOf(tck.getMontoCobrado()));
 				}else if (tck.getEstado() == Ticket.Estado.PREPAGO){
+					this.btnPrePago.setEnabled(true);
+					this.btnCobrarF.setEnabled(true);
 					this.textFieldTotalAPagar.setText("Prepago " + String.valueOf(tck.getPrepago()) + " restan: "+ String.valueOf(tck.getMontoCobrado()));
 				} else {
+					this.btnPrePago.setEnabled(true);
+					this.btnCobrarF.setEnabled(true);
 					this.textFieldTotalAPagar.setText(String.valueOf(tck.getMontoCobrado()));
 				}
 				if (tck.getCliente() != null){
@@ -878,7 +911,6 @@ public class MenuOperador extends JFrame implements ActionListener, KeyListener 
 				}else {this.textFieldCliente.setText("");}
 				
 				this.btnCanelarF.setEnabled(false);
-				this.btnGuardarF.setEnabled(false);
 				
 				Date horaCreado = tck.getFechaLlegada();
 				Date horaActual = Calendar.getInstance().getTime();
@@ -887,12 +919,11 @@ public class MenuOperador extends JFrame implements ActionListener, KeyListener 
 				//Solo acepto 5 min de tiempo para cancelar o modificar
 				if(diffMinutes<=5){
 					this.btnCanelarF.setEnabled(true);
-					this.btnGuardarF.setEnabled(true);
+					
 				}
 					this.textFieldNumeroTicket.setEnabled(false);
 					this.btnTicketF.setEnabled(false);
 					this.btnBuscarPorTicketAbierto.setEnabled(false);
-					this.btnCobrarF.setEnabled(true);
 					this.textFieldObsevacion.requestFocus();
 				
 			}else{
@@ -918,7 +949,6 @@ public class MenuOperador extends JFrame implements ActionListener, KeyListener 
 				this.textFieldTotalAPagar.setText("");
 				this.textFieldCliente.setText("");
 				this.btnCanelarF.setEnabled(true);
-				this.btnGuardarF.setEnabled(true);
 				this.textFieldNumeroTicket.setEnabled(true);
 				this.btnTicketF.setEnabled(true);
 				this.btnBuscarPorTicketAbierto.setEnabled(true);
@@ -927,7 +957,6 @@ public class MenuOperador extends JFrame implements ActionListener, KeyListener 
 			}
 		}else{
 			this.btnCanelarF.setEnabled(true);
-			this.btnGuardarF.setEnabled(true);
 			this.textFieldNumeroTicket.setEnabled(true);
 			this.btnTicketF.setEnabled(true);
 			this.btnBuscarPorTicketAbierto.setEnabled(true);
@@ -978,6 +1007,8 @@ public class MenuOperador extends JFrame implements ActionListener, KeyListener 
 	@SuppressWarnings("unused")
 	public static boolean isNumeric(String str)  
 	{  
+		if(str == null ) return false;
+		
 		try  
 		{  
 			double d = Double.parseDouble(str);  
@@ -987,6 +1018,23 @@ public class MenuOperador extends JFrame implements ActionListener, KeyListener 
 			return false;  
 		}  
 		return true;  
+	}
+
+	@Override
+	public void itemStateChanged(ItemEvent e) {
+		if (e.getSource() == comboBoxDescuento){
+			Ticket tck = Controlador.getInstancia().getTicket();
+			if(tck!=null){
+				Controlador.getInstancia().actualizarDescuentoTicket(tck,(String)comboBoxDescuento.getSelectedItem());
+				tck.calcularMontoACobrar();
+				if (tck.getEstado() == Ticket.Estado.PREPAGO){
+					this.textFieldTotalAPagar.setText("Prepago " + String.valueOf(tck.getPrepago()) + " restan: "+ String.valueOf(tck.getMontoCobrado()));
+				} else {
+					this.textFieldTotalAPagar.setText(String.valueOf(tck.getMontoCobrado()));
+
+				}
+			}
+		}
 	}
 
 

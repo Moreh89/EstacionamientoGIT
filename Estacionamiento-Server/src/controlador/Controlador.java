@@ -493,7 +493,7 @@ public class Controlador {
 
 		if (tckP != null) {
 			modelo.Ticket tckM = Converter.convertTicketPersistenciaToModelo(tckP);
-			if(tckM.getEstado()!= Ticket.Estado.CERRADO && tckM.getEstado()!= Ticket.Estado.CREDITO) tckM.calcularMontoACobrar();
+			tckM.calcularMontoACobrar();
 
 			this.ticket = tckM;
 			return tckM;
@@ -973,6 +973,43 @@ public class Controlador {
 		
 		
 	}
+	
+	public double incrementarPrepago (double monto){
+		
+		if(ticket!=null){
+			ticket.incrementarPrepago(monto);
+			ticket.setEstado(Ticket.Estado.PREPAGO);
+			IncrementoPrepago incremento = new IncrementoPrepago(
+					GregorianCalendar.getInstance().getTime(),
+					ticket.getIdTicket(), monto, usuarioActual.getIdUsuario());
+			DAOIncrementoPrepago.getInstance().persistir(incremento);
+			DAOTicket.getInstance().actualizar(ticket);
+		}
+		
+		return ticket.getPrepago();
+	}
 
+	public ArrayList<IncrementoPrepago> obternerIncrementos(Usuario usuario, Date fechaInicio,Date fechaFin){
+
+		
+		return DAOIncrementoPrepago.getInstance().getIncrementos(usuario.getIdUsuario(), fechaInicio, fechaFin);
+
+		
+	}
+
+	public void actualizarDescuentoTicket(Ticket tck, String descuento) {
+		if(tck.getEstado()==Ticket.Estado.ABIERTO || tck.getEstado()==Ticket.Estado.CREDITO){
+			for (Descuento desTemp : descuentos) {
+				if (desTemp.getDescripcion().equalsIgnoreCase(descuento)) {
+					tck.setDescuento(desTemp);
+					tck.setMontoCobrado(0);
+					DAOTicket.getInstance().actualizar(tck);
+					return;
+				}
+			}
+		}
+
+		
+	}
 
 }

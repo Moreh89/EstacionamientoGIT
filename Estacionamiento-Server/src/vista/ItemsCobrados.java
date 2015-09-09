@@ -16,6 +16,7 @@ import javax.swing.JScrollPane;
 import javax.swing.ListSelectionModel;
 import javax.swing.ScrollPaneConstants;
 
+import modelo.IncrementoPrepago;
 import modelo.MovimientoCC;
 import modelo.Ticket;
 import modelo.Usuario;
@@ -64,17 +65,23 @@ public class ItemsCobrados extends JDialog implements ActionListener, ListSelect
 		listModel = new DefaultListModel<String>();
 		for (Ticket ticketTemp : Controlador.getInstancia().obtenerTicketsCobrados(usuario, fechaInicio,fechaFin)) {
 			
-			if(ticketTemp.getEstado() == Ticket.Estado.PREPAGO && ticketTemp.getPrepago() > 0){
-				total = total + ticketTemp.getPrepago();
-				listModel.addElement("PREGPADO TICKET PATENTE: " + ticketTemp.getPatente().toUpperCase() + " MONTO: "+ String.valueOf(ticketTemp.getPrepago()));
-			}
+//			if(ticketTemp.getEstado() == Ticket.Estado.PREPAGO && ticketTemp.getPrepago() > 0){
+//				total = total + ticketTemp.getPrepago();
+//				listModel.addElement("PREGPADO TICKET PATENTE: " + ticketTemp.getPatente().toUpperCase() + " MONTO: "+ String.valueOf(ticketTemp.getPrepago()));
+//			}
 			if(ticketTemp.getEstado() == Ticket.Estado.CERRADO){
-				if(ticketTemp.getFechaLlegada().compareTo(fechaInicio) >= 0 && ticketTemp.getPrepago() > 0){
-					total = total + ticketTemp.getPrepago();
-					listModel.addElement("PREGPADO TICKET PATENTE: " + ticketTemp.getPatente().toUpperCase() + " MONTO: "+ String.valueOf(ticketTemp.getPrepago()));
-				}if ( ticketTemp.getMontoCobrado() > 0){
+//				if(ticketTemp.getFechaLlegada().compareTo(fechaInicio) >= 0 && ticketTemp.getPrepago() > 0){
+//					total = total + ticketTemp.getPrepago();
+//					listModel.addElement("PREGPADO TICKET PATENTE: " + ticketTemp.getPatente().toUpperCase() + " MONTO: "+ String.valueOf(ticketTemp.getPrepago()));
+//				}
+				if ( ticketTemp.getMontoCobrado() > 0){
 					total = total + ticketTemp.getMontoCobrado();
-					listModel.addElement("CIERRE TICKET PATENTE: " + ticketTemp.getPatente().toUpperCase() + " MONTO: "+ String.valueOf(ticketTemp.getMontoCobrado()));
+					String item = "CIERRE TICKET: " + String.valueOf(ticketTemp.getIdTicket()) + " MONTO: "+ String.valueOf(ticketTemp.getMontoCobrado());
+					if(ticketTemp.getDescuento()!=null){
+						item = item + " CON DESCUENTO: " + ticketTemp.getDescuento().getDescripcion();
+					}
+					item = item + " " + ticketTemp.getObservacion();
+					listModel.addElement(item);
 				}
 			}
 			
@@ -84,6 +91,10 @@ public class ItemsCobrados extends JDialog implements ActionListener, ListSelect
 			listModel.addElement("PAGO EXTRAORDINARIO CONCEPTO: " + movimientoCCTemp.getDescripcion() + " MONTO: " + movimientoCCTemp.getMontoCobrado());
 		}
 		
+		for (IncrementoPrepago incrementoTemp : Controlador.getInstancia().obternerIncrementos(usuario, fechaInicio,fechaFin)){
+			total = total + incrementoTemp.getPrepago();
+			listModel.addElement("PREPAGO TICKET: " + String.valueOf(incrementoTemp.getNumeroTicket()) + " MONTO: " + String.valueOf(incrementoTemp.getPrepago()));
+		}
 		
 		listElementos= new JList(listModel);
 		listElementos.setFont(new Font("Tahoma", Font.PLAIN, 16));
