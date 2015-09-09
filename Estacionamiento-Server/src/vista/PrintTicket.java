@@ -49,7 +49,7 @@ public class PrintTicket extends JFrame {
 				PrintTicket.class.getResource("/image/printer.png")));
 		setResizable(false);
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-		setBounds(100, 100, 260, 350);
+		setBounds(100, 100, 240, 350);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
@@ -95,21 +95,23 @@ public class PrintTicket extends JFrame {
 
 			panel = new JPanel();
 			GridBagConstraints gbc_panel = new GridBagConstraints();
-			gbc_panel.anchor = GridBagConstraints.SOUTHWEST;
 			gbc_panel.gridx = 0;
 			gbc_panel.gridy = 1;
 			contentPane.add(panel, gbc_panel);
 
 			// Always get a Barcode from the BarcodeFactory
 			String numeroTck = String.valueOf(ticket.getIdTicket());
-			while (numeroTck.length() < 10) {
-				numeroTck = "0" + numeroTck;
+			while(numeroTck.length() < 10){
+				numeroTck = "0"+numeroTck;
 			}
-			barcode = BarcodeFactory.createCode128(numeroTck);
+			
+			barcode = BarcodeFactory.create2of7(numeroTck);
 			barcode.setBarHeight(30);
-			barcode.setBarWidth(2);
+			barcode.setBarWidth(1);
 
 			panel.add(barcode);
+			this.setVisible(true);
+			this.toBack();
 			printWork(this);
 			this.dispose();
 		} catch (BarcodeException e) {
@@ -199,9 +201,9 @@ public class PrintTicket extends JFrame {
 				printerTouse = PrintServiceLookup
 	            .lookupDefaultPrintService();
 			}
-
+			pj.setPrintService(printerTouse);
 			PrintRequestAttributeSet aset= new HashPrintRequestAttributeSet();
-		    aset.add(new MediaPrintableArea(2,2,210,160,Size2DSyntax.MM));
+		    aset.add(new MediaPrintableArea(0,0,210,160,Size2DSyntax.MM));
 			
 			pj.print(aset);
 			

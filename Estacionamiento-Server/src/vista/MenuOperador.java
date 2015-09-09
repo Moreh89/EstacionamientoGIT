@@ -797,8 +797,10 @@ public class MenuOperador extends JFrame implements ActionListener, KeyListener,
 				this.btnCobrarF.setEnabled(false);
 				this.btnPrePago.setEnabled(true);
 				this.textFieldTotalAPagar.setText(String.valueOf(tck.calcularMontoACobrar()));
-				if(!((String) this.comboBoxImpresoras.getSelectedItem()).equalsIgnoreCase("NO IMPRIMIR")){
-					new PrintTicket(tck, (String) this.comboBoxImpresoras.getSelectedItem());
+				
+				String impresora = (String) this.comboBoxImpresoras.getSelectedItem();
+				if(!impresora.equalsIgnoreCase("NO IMPRIMIR")){
+					new PrintTicket(tck, impresora);
 				}
 				
 				
