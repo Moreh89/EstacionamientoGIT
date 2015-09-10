@@ -5,6 +5,7 @@ public class Descuento {
 	private long idDescuento;
 	private String descripcion;
 	private double descuento;
+	private ESTADO estado;
 	public long getIdDescuento() {
 		return idDescuento;
 	}
@@ -24,6 +25,22 @@ public class Descuento {
 		this.descuento = descuento;
 	}
 	
+	public enum ESTADO {
+		ACTIVO,
+		INACTIVO;
+	}
+
+	public ESTADO getEstado() {
+		return estado;
+	}
+	public void setEstado(ESTADO estado) {
+		this.estado = estado;
+	}
+
+	public String toString()
+	{
+		return this.getDescripcion();
+	}
 	
 }
 

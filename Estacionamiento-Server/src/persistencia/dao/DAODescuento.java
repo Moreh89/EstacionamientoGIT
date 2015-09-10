@@ -16,7 +16,7 @@ public class DAODescuento {
 
 	@SuppressWarnings("unchecked")
 	public ArrayList<modelo.Descuento> getDescuentos() {
-		ArrayList<persistencia.clases.Descuento> descuentosP=(ArrayList<persistencia.clases.Descuento>) HibernateDAO.getInstancia().getList("Descuento");
+		ArrayList<persistencia.clases.Descuento> descuentosP=(ArrayList<persistencia.clases.Descuento>) HibernateDAO.getInstancia().getListInt("Descuento", "estado", 1);
 		ArrayList<modelo.Descuento> descuentosM = Converter.convertDescuentosPersistenciaToModelo(descuentosP);
 		return descuentosM;
 	}
@@ -33,6 +33,27 @@ public class DAODescuento {
 			persistencia.clases.Descuento des = new persistencia.clases.Descuento();
 			des = (persistencia.clases.Descuento) HibernateDAO.getInstancia().get(persistencia.clases.Descuento.class, idDescuento);
 			return des;
+	}
+
+	public long deshabilitarDescuento(long idDescuento) {
+		long codigoReturn=-1;
+		persistencia.clases.Descuento descuentoP = new persistencia.clases.Descuento();
+		descuentoP = (persistencia.clases.Descuento) HibernateDAO.getInstancia().get(persistencia.clases.Descuento.class, idDescuento);
+		descuentoP.setEstado(persistencia.clases.Descuento.ESTADO.INACTIVO);
+		descuentoP=(Descuento) HibernateDAO.getInstancia().update(descuentoP);
+		codigoReturn=descuentoP.getIdDescuento();
+		return codigoReturn;
+	}
+
+	public long modificarDescuento(modelo.Descuento descuentoM) {
+		long codigoReturn=-1;
+		persistencia.clases.Descuento descuentoP = new persistencia.clases.Descuento();
+		descuentoP = (persistencia.clases.Descuento) HibernateDAO.getInstancia().get(persistencia.clases.Descuento.class, descuentoM.getIdDescuento());
+		descuentoP.setDescripcion(descuentoM.getDescripcion());
+		descuentoP.setDescuento(descuentoM.getDescuento());
+		descuentoP=(Descuento) HibernateDAO.getInstancia().update(descuentoP);
+		codigoReturn=descuentoP.getIdDescuento();
+		return codigoReturn;
 	}
 
 

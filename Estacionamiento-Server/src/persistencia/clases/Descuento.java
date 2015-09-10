@@ -6,6 +6,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+import persistencia.clases.Cliente.ESTADO;
+
 @Entity
 @Table(name = "Descuento")
 public class Descuento {
@@ -15,6 +17,7 @@ public class Descuento {
 	private long idDescuento;
 	String descripcion;
 	private double descuento;
+	private ESTADO estado;
 	
 	public long getIdDescuento() {
 		return idDescuento;
@@ -44,6 +47,17 @@ public class Descuento {
 		// TODO Auto-generated constructor stub
 	}
 	
+	public enum ESTADO {
+		INACTIVO,
+		ACTIVO;
+	}
+
+	public ESTADO getEstado() {
+		return estado;
+	}
+	public void setEstado(ESTADO estado) {
+		this.estado = estado;
+	}
 	
 	
 }

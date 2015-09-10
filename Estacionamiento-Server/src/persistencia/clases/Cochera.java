@@ -24,8 +24,8 @@ public class Cochera {
 	private String ubicacion;
 	
 	public enum ESTADO {
-		ACTIVO,
-		INACTIVO;
+		INACTIVO,
+		ACTIVO;
 	}
 
 	public long getIdCochera() {

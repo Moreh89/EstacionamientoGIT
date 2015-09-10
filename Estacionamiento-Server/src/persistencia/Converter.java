@@ -569,7 +569,15 @@ public class Converter {
 		descuentoP.setIdDescuento(descuentoM.getIdDescuento());
 		descuentoP.setDescripcion(descuentoM.getDescripcion());
 		descuentoP.setDescuento(descuentoM.getDescuento());
-
+		String estado = descuentoM.getEstado().toString();
+		if(estado.equals("ACTIVO"))
+		{
+			descuentoP.setEstado(persistencia.clases.Descuento.ESTADO.ACTIVO);
+		}
+		if(estado.equals("INACTIVO"))
+		{
+			descuentoP.setEstado(persistencia.clases.Descuento.ESTADO.INACTIVO);
+		}
 		return descuentoP;
 
 	}
@@ -580,7 +588,15 @@ public class Converter {
 		descuentoM.setIdDescuento(descuentoP.getIdDescuento());
 		descuentoM.setDescripcion(descuentoP.getDescripcion());
 		descuentoM.setDescuento(descuentoP.getDescuento());
-
+		String estado = descuentoP.getEstado().toString();
+		if(estado.equals("ACTIVO"))
+		{
+			descuentoM.setEstado(modelo.Descuento.ESTADO.ACTIVO);
+		}
+		if(estado.equals("INACTIVO"))
+		{
+			descuentoM.setEstado(modelo.Descuento.ESTADO.INACTIVO);
+		}
 		return descuentoM;
 	}
 

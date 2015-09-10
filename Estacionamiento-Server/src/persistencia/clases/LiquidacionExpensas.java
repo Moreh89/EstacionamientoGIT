@@ -23,8 +23,8 @@ public class LiquidacionExpensas {
 	private Estado estado;
 	
 	public enum Estado {
-		LIQUIDADO,
-		ANULADO;
+		ANULADO,
+		LIQUIDADO;
 	}
 	
 	

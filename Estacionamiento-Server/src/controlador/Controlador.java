@@ -366,13 +366,17 @@ public class Controlador {
 		return coloresVehiculos;
 	}
 
-	public Vector<String> getDescuentosActuales() {
+	public Vector<String> getDescuentosActualesString() {
 		Vector<String> descuentosActuales=new Vector<String>();
 		for(Descuento descuento:descuentos)
 		{
 			descuentosActuales.add(descuento.getDescripcion());
 		}
 		return descuentosActuales;
+	}
+	
+	public ArrayList<modelo.Descuento> getDescuentosActuales() {
+		return descuentos;
 	}
 
 
@@ -430,9 +434,11 @@ public class Controlador {
 		modelo.Descuento descuentoM = new Descuento();
 		descuentoM.setDescripcion(descripcion);
 		descuentoM.setDescuento(montoDescuento);
+		descuentoM.setEstado(modelo.Descuento.ESTADO.ACTIVO);
 		descuentoM.setIdDescuento(0);
-
-		return DAODescuento.getInstance().persistir(descuentoM);
+		long codigoReturn=DAODescuento.getInstance().persistir(descuentoM);
+		descuentos=DAODescuento.getInstance().getDescuentos();
+		return codigoReturn;
 
 
 	}
@@ -1107,5 +1113,20 @@ public class Controlador {
 			}
 
 		}
+	}
+
+	public long deshabilitarDescuento(long idDescuento) {
+		long codigoReturn= DAODescuento.getInstance().deshabilitarDescuento(idDescuento);
+		descuentos=DAODescuento.getInstance().getDescuentos();
+		return codigoReturn;
+	}
+
+	public long modificarDescuento(String descripcion, double porcentaje, modelo.Descuento descuentoM) {
+		long codigoReturn=-1;
+		descuentoM.setDescripcion(descripcion);
+		descuentoM.setDescuento(porcentaje);
+		codigoReturn=DAODescuento.getInstance().modificarDescuento(descuentoM);
+		descuentos=DAODescuento.getInstance().getDescuentos();
+		return codigoReturn;
 	}
 }

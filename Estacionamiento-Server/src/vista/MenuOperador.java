@@ -343,7 +343,7 @@ public class MenuOperador extends JFrame implements ActionListener, KeyListener,
 		comboBoxDescuento = new JComboBox();
 		comboBoxDescuento.setFont(new Font("Tahoma", Font.PLAIN, 30));
 		comboBoxDescuento.setModel(new DefaultComboBoxModel());
-		for (String descString : Controlador.getInstancia().getDescuentosActuales()) {
+		for (String descString : Controlador.getInstancia().getDescuentosActualesString()) {
 			comboBoxDescuento.addItem(descString);
 		}
 		GridBagConstraints gbc_comboBoxDescuento = new GridBagConstraints();

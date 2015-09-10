@@ -34,9 +34,7 @@ public class MenuAdmin extends JFrame implements ActionListener {
 	private JMenu mnColor;
 	private JMenuItem mntmGestionColor;
 	private JMenu mnDescuentos;
-	private JMenuItem mntmAltaDescuento;
-	private JMenuItem mntmModificacionDescuento;
-	private JMenuItem mntmBajaModificacion;
+	private JMenuItem mntmGestionDescuento;
 	private JMenu mnModelo;
 	private JMenuItem mntmGestionModelo;
 	private JMenu mnTarifas;
@@ -125,17 +123,9 @@ public class MenuAdmin extends JFrame implements ActionListener {
 		mnDescuentos = new JMenu("Descuentos");
 		mnGestionEstacionamiento.add(mnDescuentos);
 		
-		mntmAltaDescuento = new JMenuItem("Alta");
-		mnDescuentos.add(mntmAltaDescuento);
-		mntmAltaDescuento.addActionListener(this);
-		
-		mntmModificacionDescuento = new JMenuItem("Modificacion");
-		mnDescuentos.add(mntmModificacionDescuento);
-		mntmModificacionDescuento.addActionListener(this);
-		
-		mntmBajaModificacion = new JMenuItem("Baja");
-		mnDescuentos.add(mntmBajaModificacion);
-		mntmBajaModificacion.addActionListener(this);
+		mntmGestionDescuento = new JMenuItem("Gestionar");
+		mnDescuentos.add(mntmGestionDescuento);
+		mntmGestionDescuento.addActionListener(this);
 		
 		mnModelo = new JMenu("Modelos");
 		mnGestionEstacionamiento.add(mnModelo);
@@ -265,8 +255,8 @@ public class MenuAdmin extends JFrame implements ActionListener {
 			new Login().setVisible(true);
 			dispose();
 		}
-		if(event.getSource() == mntmAltaDescuento){
-			new AltaDescuento().setVisible(true);
+		if(event.getSource() == mntmGestionDescuento){
+			new GestionDescuento().setVisible(true);
 		}
 		if(event.getSource() == mntmLiquidarExpensas){
 			new EmitirLiquidacionExpensas().setVisible(true);

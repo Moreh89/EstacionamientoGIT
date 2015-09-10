@@ -65,8 +65,8 @@ public class Cliente {
 	}
 	
 	public enum ESTADO {
-		ACTIVO,
-		INACTIVO;
+		INACTIVO,
+		ACTIVO;
 	}
 	
 

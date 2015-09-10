@@ -503,15 +503,16 @@ public class AltaCliente extends JDialog implements ActionListener{
 		}
 		if(event.getSource()==buttonCrearCliente)
 		{
-			if(textFieldCUIT.getText().length()!=11)
+			if(textFieldCUIT.getText().length()==11 || textFieldCUIT.getText().length()==0)
 			{
-				JOptionPane.showMessageDialog(null, "El CUIT debe estár compuesto por 11 campos numéricos.", "Error Validación Datos.", JOptionPane.INFORMATION_MESSAGE);
-			}
-			else{
 				Controlador.getInstancia().altaCliente(textFieldNombre.getText(), textFieldApellido.getText(), textFieldTelefono1.getText(), textFieldTelefono2.getText(),
 						textFieldDireccion1.getText(), textFieldDireccion2.getText(), textFieldEmail.getText(), textFieldRazonSocial.getText()
 						,ListPersonasAutorizadas, ListPatentesVehiculos, comboBoxTipoDoc.getSelectedItem().toString(), textFieldNumeroDoc.getText(), comboBoxTipoCliente.getSelectedItem().toString(), textFieldCUIT.getText());
 				dispose();
+			}
+			else{
+				JOptionPane.showMessageDialog(null, "El CUIT debe estár compuesto por 11 campos numéricos.", "Error Validación Datos.", JOptionPane.INFORMATION_MESSAGE);
+
 			}
 		}
 	}
