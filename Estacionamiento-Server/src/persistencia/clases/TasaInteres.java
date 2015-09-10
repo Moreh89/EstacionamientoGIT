@@ -16,6 +16,7 @@ public class TasaInteres {
 	private long idTasaInteres;
 	private double monto;
 	private ESTADO estado;
+	private int deadLine;
 
 	
 	public enum ESTADO {
@@ -41,11 +42,20 @@ public class TasaInteres {
 		this.estado = estado;
 	} 
 
-	public TasaInteres(long idTI, double montoDescuento, ESTADO estado)
+
+	
+	public int getDeadLine() {
+		return deadLine;
+	}
+	public void setDeadLine(int deadLine) {
+		this.deadLine = deadLine;
+	}
+	public TasaInteres(long idTI, double montoDescuento, ESTADO estado, int deadLine)
 	{
 		this.idTasaInteres=idTI;
 		this.monto=montoDescuento;
 		this.estado=estado;
+		this.deadLine=deadLine;
 	}
 	
 	public TasaInteres()

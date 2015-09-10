@@ -24,6 +24,8 @@ public class Cliente {
 	private ESTADO estado;
 	private String cuil;
 	
+	private double estadoCrediticio;
+	
 //REVISAR ES STRING NO CLASE!
 	private List <PersonaAutorizada> personasAutorizadasARetirar;
 	
@@ -213,6 +215,12 @@ public class Cliente {
 		}
 		
 		return estadoCrediticio;
+	}
+	public double getEstadoCrediticio() {
+		return estadoCrediticio;
+	}
+	public void setEstadoCrediticio(double estadoCrediticio) {
+		this.estadoCrediticio = estadoCrediticio;
 	}
 	
 	

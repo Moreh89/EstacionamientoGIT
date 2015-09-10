@@ -256,7 +256,7 @@ public class MenuAdmin extends JFrame implements ActionListener {
 			new GestionModelo().setVisible(true);
 		}
 		if (event.getSource() == mntmGestionTasaInteres){
-			new ModificarInteres().setVisible(true);
+			new GestionTasaInteres().setVisible(true);
 		}
 		if (event.getSource() == menuItemBackUp){
 			new BackupBD().setVisible(true);

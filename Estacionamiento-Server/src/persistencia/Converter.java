@@ -622,6 +622,7 @@ public class Converter {
 
 		tasaInteresP.setIdTasaInteres(tasaInteresM.getIdTasaInteres());
 		tasaInteresP.setMonto(tasaInteresM.getMonto());
+		tasaInteresP.setDeadLine(tasaInteresM.getDeadLine());
 		String estadoTasaInteres = tasaInteresM.getEstado().toString();
 
 		if(estadoTasaInteres.equals("ACTIVO"))
@@ -638,7 +639,7 @@ public class Converter {
 		modelo.TasaInteres tasaInteresM = new modelo.TasaInteres();
 		tasaInteresM.setIdTasaInteres(tasaInteresP.getIdTasaInteres());
 		tasaInteresM.setMonto(tasaInteresP.getMonto());
-
+		tasaInteresM.setDeadLine(tasaInteresP.getDeadLine());
 		String estadoTasaInteres = tasaInteresP.getEstado().toString();
 
 		if(estadoTasaInteres.equals("ACTIVO"))

@@ -62,7 +62,7 @@ INSERT INTO Descuento (descripcion, descuento) VALUES ('1 Efvo. 10%', 10)
 INSERT INTO Descuento (descripcion, descuento) VALUES ('2 Otro 15%', 15)
 
 
-insert into TasaInteres (monto, estado) VALUES (3, 1);
+insert into TasaInteres (monto, estado, deadLine) VALUES (3, 1, 15);
 
 INSERT into Tarifa (costoMinimo,costoFraccion,costoHora,costoMediaEstadia, costoEstadia,tiempoMinimo,tiempoFraccion,tiempoMediaEstadia_minuto,tiempoEstadia_minuto,Categoria) VALUES (10,3,36,150,200,15,5,720,1440,1);
 INSERT into Tarifa (costoMinimo,costoFraccion,costoHora,costoMediaEstadia, costoEstadia,tiempoMinimo,tiempoFraccion,tiempoMediaEstadia_minuto,tiempoEstadia_minuto,Categoria) VALUES (20,5,60,200,250,15,5,720,1440,2);
