@@ -1018,16 +1018,11 @@ public class Controlador {
 
 	}
 
-	public void actualizarDescuentoTicket(Ticket tck, String descuento) {
+	public void actualizarDescuentoTicket(Ticket tck, Descuento descuento) {
 		if(tck.getEstado()==Ticket.Estado.ABIERTO || tck.getEstado()==Ticket.Estado.CREDITO || tck.getEstado()==Ticket.Estado.PREPAGO){
-			for (Descuento desTemp : descuentos) {
-				if (desTemp.getDescripcion().equalsIgnoreCase(descuento)) {
-					tck.setDescuento(desTemp);
+					tck.setDescuento(descuento);
 					tck.setMontoCobrado(0);
 					DAOTicket.getInstance().actualizar(tck);
-					return;
-				}
-			}
 		}
 	}
 

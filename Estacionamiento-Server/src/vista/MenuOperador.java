@@ -646,17 +646,22 @@ public class MenuOperador extends JFrame implements ActionListener, KeyListener,
 			if (Controlador.getInstancia().getTicket().getEstado() != Ticket.Estado.CERRADO
 					&& Controlador.getInstancia().getTicket().getEstado() != Ticket.Estado.CREDITO){
 				if(Controlador.getInstancia().getTicket().getCliente() !=null){
-					int resultado = JOptionPane.showConfirmDialog (null, "El ticket posee un Cliente, desea mover a Cuenta corriente?");
-					if (resultado == JOptionPane.OK_OPTION){
-						Controlador.getInstancia().cobrarTicket(Ticket.Estado.CREDITO);
-						JOptionPane.showMessageDialog(null, "El Ticket seleccionado fue movido a cuenta corriente", "Operacion Exitosa", JOptionPane.INFORMATION_MESSAGE);
-					} else {
-						Controlador.getInstancia().cobrarTicket(Ticket.Estado.CERRADO);
-						JOptionPane.showMessageDialog(null, "El Ticket seleccionado fue cobrado", "Operacion Exitosa", JOptionPane.INFORMATION_MESSAGE);
+		    		UIManager.put("OptionPane.yesButtonText", "Cuenta Corriente");
+		    		UIManager.put("OptionPane.noButtonText", "Efectivo/Tarjeta");
+					int resultado = JOptionPane.showConfirmDialog (null, "El ticket posee un Cliente, desea mover a Cuenta corriente?","Tipo de pago",JOptionPane.YES_NO_OPTION,JOptionPane.PLAIN_MESSAGE);
+		    		UIManager.put("OptionPane.yesButtonText", "Si");
+		    		UIManager.put("OptionPane.noButtonText", "No");
+					if(resultado != JOptionPane.CANCEL_OPTION && resultado != JOptionPane.CLOSED_OPTION){
+						if (resultado == JOptionPane.OK_OPTION){
+							Controlador.getInstancia().cobrarTicket(Ticket.Estado.CREDITO);
+							JOptionPane.showMessageDialog(null, "El Ticket seleccionado fue movido a cuenta corriente", "Operacion Exitosa", JOptionPane.INFORMATION_MESSAGE);
+						} else {
+							Controlador.getInstancia().cobrarTicket(Ticket.Estado.CERRADO);
+							JOptionPane.showMessageDialog(null, "El Ticket seleccionado fue cobrado", "Operacion Exitosa", JOptionPane.INFORMATION_MESSAGE);
+						}
+						buscarTicket();
+						this.btnCobrarF.setEnabled(false);
 					}
-					
-					buscarTicket();
-					this.btnCobrarF.setEnabled(false);
 				} else {
 					Controlador.getInstancia().cobrarTicket(Ticket.Estado.CERRADO);
 					JOptionPane.showMessageDialog(null, "El Ticket seleccionado fue cobrado", "Operacion Exitosa", JOptionPane.INFORMATION_MESSAGE);
@@ -762,6 +767,13 @@ public class MenuOperador extends JFrame implements ActionListener, KeyListener,
 			this.btnCanelarF.setEnabled(false);
 			this.textFieldPrepago.setText("0");
 			this.btnPrePago.setEnabled(false);
+			this.comboBoxDescuento.setEnabled(true);
+			this.comboBoxTipoVehiculo.setEnabled(true);
+			this.comboBoxColor.setEnabled(true);
+			this.comboBoxModelo.setEnabled(true);
+			this.btnButtonBuscarCliente.setEnabled(true);
+			this.textFieldPatente.setEnabled(true);
+			this.btnGuardarF.setEnabled(true);
 			this.textFieldNumeroTicket.requestFocus();
 		}
 		if (event.getSource() == btnTicketF) {
@@ -894,6 +906,17 @@ public class MenuOperador extends JFrame implements ActionListener, KeyListener,
 						break;
 					}
 				}
+				this.btnCanelarF.setEnabled(false);
+				Date horaCreado = tck.getFechaLlegada();
+				Date horaActual = Calendar.getInstance().getTime();
+				long diff  = horaActual.getTime() - horaCreado.getTime();
+				long diffMinutes = diff / (60 * 1000);
+				//Solo acepto 5 min de tiempo para cancelar o modificar
+				if(diffMinutes<=5){
+					this.btnCanelarF.setEnabled(true);
+					this.comboBoxTipoVehiculo.setEnabled(true);
+					
+				}
 				this.textFieldPatente.setText(tck.getPatente());
 				if (tck.getFechaSalida() != null) this.textFieldEgreso.setText(new SimpleDateFormat("dd-MM-yyyy hh:mm:ss").format(tck.getFechaSalida()));
 				this.textFieldObsevacion.setText(tck.getObservacion());
@@ -901,11 +924,31 @@ public class MenuOperador extends JFrame implements ActionListener, KeyListener,
 				this.textFieldPrepago.setEditable(false);
 				this.textFieldTiempoEstadia.setText(tck.getTiempoEstadia());
 				this.btnCobrarF.setEnabled(false);
+				this.comboBoxDescuento.setEnabled(true);
+				this.comboBoxColor.setEnabled(true);
+				this.comboBoxModelo.setEnabled(true);
+				this.btnButtonBuscarCliente.setEnabled(true);
+				this.textFieldPatente.setEnabled(true);
+				this.btnGuardarF.setEnabled(true);
 				String totalAPagar = "";
 				if(tck.getEstado() == Ticket.Estado.CREDITO){
 					totalAPagar=("(PAGADO A CUENTA) " + String.valueOf(tck.getMontoCobrado()));
+					this.comboBoxDescuento.setEnabled(false);
+					this.comboBoxTipoVehiculo.setEnabled(false);
+					this.comboBoxColor.setEnabled(false);
+					this.comboBoxModelo.setEnabled(false);
+					this.btnButtonBuscarCliente.setEnabled(false);
+					this.textFieldPatente.setEnabled(false);
+					this.btnGuardarF.setEnabled(false);
 				}else if(tck.getEstado() == Ticket.Estado.CERRADO){
-					totalAPagar=("(PAGADO) " + String.valueOf(tck.getMontoCobrado()));
+					totalAPagar=("(PAGADO) " + String.valueOf(tck.getMontoCobrado()+tck.getPrepago()));
+					this.comboBoxDescuento.setEnabled(false);
+					this.comboBoxTipoVehiculo.setEnabled(false);
+					this.comboBoxColor.setEnabled(false);
+					this.comboBoxModelo.setEnabled(false);
+					this.btnButtonBuscarCliente.setEnabled(false);
+					this.textFieldPatente.setEnabled(false);
+					this.btnGuardarF.setEnabled(false);
 				}else if (tck.getEstado() == Ticket.Estado.PREPAGO){
 					this.btnPrePago.setEnabled(true);
 					this.btnCobrarF.setEnabled(true);
@@ -920,21 +963,10 @@ public class MenuOperador extends JFrame implements ActionListener, KeyListener,
 				}
 				this.textFieldTotalAPagar.setText(totalAPagar);
 				if (tck.getCliente() != null){
-					this.btnCobrarF.setEnabled(true);
 					this.textFieldCliente.setText(tck.getCliente().toString());
 				}else {this.textFieldCliente.setText("");}
 				
-				this.btnCanelarF.setEnabled(false);
-				
-				Date horaCreado = tck.getFechaLlegada();
-				Date horaActual = Calendar.getInstance().getTime();
-				long diff  = horaActual.getTime() - horaCreado.getTime();
-				long diffMinutes = diff / (60 * 1000);
-				//Solo acepto 5 min de tiempo para cancelar o modificar
-				if(diffMinutes<=5){
-					this.btnCanelarF.setEnabled(true);
-					
-				}
+
 					this.textFieldNumeroTicket.setEnabled(false);
 					this.btnTicketF.setEnabled(false);
 					this.btnBuscarPorTicketAbierto.setEnabled(false);
@@ -1041,7 +1073,7 @@ public class MenuOperador extends JFrame implements ActionListener, KeyListener,
 			Descuento descSelec= (Descuento)comboBoxDescuento.getSelectedItem();
 			if(tck!=null){
 				if(tck.getDescuento().getIdDescuento() != descSelec.getIdDescuento()){
-					Controlador.getInstancia().actualizarDescuentoTicket(tck,((Descuento)comboBoxDescuento.getSelectedItem()).toString());
+					Controlador.getInstancia().actualizarDescuentoTicket(tck,descSelec);
 					tck.calcularMontoACobrar();
 				}
 				String totalAPagar = "";

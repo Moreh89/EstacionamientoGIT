@@ -89,8 +89,9 @@ public class Login extends javax.swing.JDialog implements ActionListener, KeyLis
 		    		
 		    		UIManager.put("OptionPane.cancelButtonText", "Cancelar");
 		    		UIManager.put("OptionPane.okButtonText", "Aceptar");
-		    
-		    
+		    		UIManager.put("OptionPane.yesButtonText", "Si");
+		    		UIManager.put("OptionPane.noButtonText", "No");
+				    
 					getContentPane().setLayout(null);
 				
 					jLabel1 = new JLabel();
