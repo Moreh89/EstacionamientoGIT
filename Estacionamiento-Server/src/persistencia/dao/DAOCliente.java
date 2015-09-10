@@ -136,5 +136,38 @@ public class DAOCliente {
 		return clienteM;	
 	}
 
+	@SuppressWarnings("unchecked")
+	public ArrayList<modelo.Cliente> getClientesPropietarios() {
+		ArrayList<modelo.Cliente> clientesReturn;
+		ArrayList<persistencia.clases.Cliente> clientesP = new ArrayList<persistencia.clases.Cliente>();
+		clientesP=(ArrayList<Cliente>) HibernateDAO.getInstancia().getListTwoInt("Cliente", "tipoCliente", 0, 3);
+		clientesReturn = Converter.convertClientesPersistenciaToModelo(clientesP);
+		return clientesReturn;
+	}
+
+	@SuppressWarnings("unchecked")
+	public ArrayList<modelo.Cliente> getClientesInquilinos() {
+		ArrayList<modelo.Cliente> clientesReturn;
+		ArrayList<persistencia.clases.Cliente> clientesP = new ArrayList<persistencia.clases.Cliente>();
+		clientesP=(ArrayList<Cliente>) HibernateDAO.getInstancia().getListTwoInt("Cliente", "tipoCliente", 1, 4);
+		clientesReturn = Converter.convertClientesPersistenciaToModelo(clientesP);
+		return clientesReturn;
+	}
+
+	public long agregarMovimientoCC_Alquileres(long idCliente, modelo.MovimientoCC movimientoNuevoM)
+	{
+		persistencia.clases.Cliente clienteP = new persistencia.clases.Cliente();
+		long codigoReturn = -1;
+		persistencia.clases.MovimientoCC movimientoNuevoP = new persistencia.clases.MovimientoCC();
+		movimientoNuevoP = Converter.convertMovimientoCuentaCorrienteModeloToPersistencia(movimientoNuevoM);
+
+		clienteP=(persistencia.clases.Cliente) HibernateDAO.getInstancia().get(persistencia.clases.Cliente.class, idCliente);
+		clienteP.getCuentaCorriente().addMovimientoCC(movimientoNuevoP);
+
+		clienteP=(Cliente) HibernateDAO.getInstancia().update(clienteP);
+		codigoReturn=clienteP.getCuentaCorriente().getMovimientos().get(clienteP.getCuentaCorriente().getMovimientos().size()-1).getIdMovimiento();
+
+		return codigoReturn;
+	}
 
 }

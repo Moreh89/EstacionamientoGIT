@@ -110,6 +110,7 @@ public class Controlador {
 		tarifas=DAOTarifa.getInstance().getTarifas();
 		clientes=DAOCliente.getInstance().getClientes();
 		this.aplicarInteres();
+		this.liquidarAlquileres();
 		return true;
 
 	}
@@ -143,12 +144,18 @@ public class Controlador {
 
 		cliente.setNumeroDocumento(numeroDoc);
 
-		if(tipoCliente.equals("1. FIJO_PERSONA"))
-			cliente.setTipoCliente(modelo.Cliente.TIPO_CLIENTE.FIJO_PERSONA);
-		if(tipoCliente.equals("2. FIJO_EMPRESA"))
-			cliente.setTipoCliente(modelo.Cliente.TIPO_CLIENTE.FIJO_EMPRESA);
-		if(tipoCliente.equals("3. TEMPORAL"))
-			cliente.setTipoCliente(modelo.Cliente.TIPO_CLIENTE.TEMPORAL);
+		if(tipoCliente.equals("1. PARTICULAR_PROPIETARIO"))
+			cliente.setTipoCliente(modelo.Cliente.TIPO_CLIENTE.PARTICULAR_PROPIETARIO);
+		if(tipoCliente.equals("2. PARTICULAR_INQUILINO"))
+			cliente.setTipoCliente(modelo.Cliente.TIPO_CLIENTE.PARTICULAR_INQUILINO);
+		if(tipoCliente.equals("3. PARTICULAR_FRECUENTE"))
+			cliente.setTipoCliente(modelo.Cliente.TIPO_CLIENTE.PARTICULAR_FRECUENTE);
+		if(tipoCliente.equals("4. EMPRESA_PROPIETARIO"))
+			cliente.setTipoCliente(modelo.Cliente.TIPO_CLIENTE.EMPRESA_PROPIETARIO);
+		if(tipoCliente.equals("5. EMPRESA_INQUILINO"))
+			cliente.setTipoCliente(modelo.Cliente.TIPO_CLIENTE.EMPRESA_INQUILINO);
+		if(tipoCliente.equals("6. EMPRESA_FRECUENTE"))
+			cliente.setTipoCliente(modelo.Cliente.TIPO_CLIENTE.EMPRESA_FRECUENTE);
 
 		cliente.setEstado(modelo.Cliente.ESTADO.ACTIVO);
 
@@ -647,7 +654,7 @@ public class Controlador {
 		String path= "'"+theDir.getPath()+"\\";
 		DateFormat dateFormat = new SimpleDateFormat("yyyyMMddHHmmss"); 
 		Date date = new Date(); 
-		excel.setOutputFile(theDir+"\\Liquidacion_"+new SimpleDateFormat("yyyy_MM_dd_HH_mm").format(fecha)+".xls");
+		excel.setOutputFile(theDir+"\\Expensas_"+new SimpleDateFormat("yyyy_MM_dd_HH_mm").format(fecha)+".xls");
 
 		try {
 			excel.writeList(expensasImprimir);
@@ -872,7 +879,8 @@ public class Controlador {
 
 
 	private long aplicarInteres()
-	{
+	{	
+		//aplica solo a clientes del tipo propietarios
 		int deadLine = tasaInteres.getDeadLine();
 		java.util.Date fechaActual= Calendar.getInstance().getTime();;
 		DateFormat dateFormatDay = new SimpleDateFormat("dd"); 
@@ -892,7 +900,7 @@ public class Controlador {
 
 			ArrayList<modelo.Cliente> clientes = new ArrayList<modelo.Cliente>();
 
-			clientes=DAOCliente.getInstance().getClientes();
+			clientes=DAOCliente.getInstance().getClientesPropietarios();
 			modelo.Interes interesM= new Interes();
 			interesM.setIdInteres(0);
 			interesM.setFechaAplicado(fechaActual);
@@ -901,7 +909,7 @@ public class Controlador {
 			{
 				if(clienteM.getCuentaCorriente()!=null && !clienteM.getCuentaCorriente().getMovimientos().isEmpty() )
 				{
-					double estadoCrediticioCliente=-100;
+					double estadoCrediticioCliente=0;
 					estadoCrediticioCliente= clienteM.getEstadoCrediticio(clienteM);
 					if(estadoCrediticioCliente<0)
 					{
@@ -952,7 +960,7 @@ public class Controlador {
 		ArrayList<modelo.Cliente> clientes = new ArrayList<Cliente>();
 		clientesConDeuda = new ArrayList<Cliente>();
 		clientes=DAOCliente.getInstance().getClientes();
-		
+
 		for(modelo.Cliente cliente : clientes)
 		{
 			double estadoCrediticio = cliente.getEstadoCrediticio(cliente);
@@ -960,7 +968,7 @@ public class Controlador {
 			{
 				cliente.setEstadoCrediticio(estadoCrediticio);
 				clientesConDeuda.add(cliente);
-				
+
 			}
 		}
 		return clientesConDeuda;
@@ -969,19 +977,19 @@ public class Controlador {
 	public ArrayList<MovimientoCC> obtenetMovimientosCobrados(Usuario usuario, Date fechaInicio,
 			Date fechaFin) {
 		ArrayList<MovimientoCC> movimientosM = new ArrayList<MovimientoCC>();
-		
+
 		ArrayList<persistencia.clases.MovimientoCC> movimientosP =  DAOMovimientoCC.getInstance().getMovimientosCobrados(usuario, fechaInicio, fechaFin);
 		for (persistencia.clases.MovimientoCC movimientoCCTemp : movimientosP) {
 			movimientosM.add(Converter.convertMovimientoCuentaCorrientePersistenciaToModelo(movimientoCCTemp));
 		}
-		
+
 		return movimientosM;
-		
-		
+
+
 	}
-	
+
 	public double incrementarPrepago (double monto){
-		
+
 		if(ticket!=null){
 			ticket.incrementarPrepago(monto);
 			ticket.setMontoCobrado(0);
@@ -992,16 +1000,16 @@ public class Controlador {
 			DAOIncrementoPrepago.getInstance().persistir(incremento);
 			DAOTicket.getInstance().actualizar(ticket);
 		}
-		
+
 		return ticket.getPrepago();
 	}
 
 	public ArrayList<IncrementoPrepago> obternerIncrementos(Usuario usuario, Date fechaInicio,Date fechaFin){
 
-		
+
 		return DAOIncrementoPrepago.getInstance().getIncrementos(usuario.getIdUsuario(), fechaInicio, fechaFin);
 
-		
+
 	}
 
 	public void actualizarDescuentoTicket(Ticket tck, String descuento) {
@@ -1016,20 +1024,88 @@ public class Controlador {
 			}
 		}
 	}
-	
+
 	public double getClienteEstadoCrediticio(long idCliente)
 	{
 		double estadoCrediticio=0;
 		for(modelo.Cliente cte : clientesConDeuda)
 		{
 			if(cte.getIdCliente()==idCliente)
-				
+
 			{
 				estadoCrediticio=cte.getEstadoCrediticio();
 			}
 		}
-		
+
 		return estadoCrediticio;
 	}
 
+	private void liquidarAlquileres() 
+	{
+
+		int deadLine = 9;
+		java.util.Date fechaActual= Calendar.getInstance().getTime();;
+		DateFormat dateFormatDay = new SimpleDateFormat("dd"); 
+
+		if(Integer.parseInt(dateFormatDay.format(fechaActual))==deadLine)
+		{	
+
+			ArrayList<modelo.Cliente> clientes = new ArrayList<modelo.Cliente>();
+			clientes=DAOCliente.getInstance().getClientesInquilinos();
+			ArrayList<String> alquileresImprimir = new ArrayList<String>();
+			alquileresImprimir.add("Cochera;Periodo a Liquidar;Nombre;Apellido;Monto");
+			new GregorianCalendar();
+			Date fecha= GregorianCalendar.getInstance().getTime();
+			for(modelo.Cliente clienteM : clientes)
+			{
+				if(!clienteM.getCocheras().isEmpty())
+				{
+					if(clienteM.getCuentaCorriente()!=null)
+					{
+
+						for(modelo.Cochera cocheraActual : clienteM.getCocheras())
+						{
+							double montoMovimiento=cocheraActual.getCostoCochera();
+
+							modelo.MovimientoCC movimientoNuevo= new modelo.MovimientoCC();
+							movimientoNuevo.setIdMovimiento(0);
+							movimientoNuevo.setFecha(fecha);
+							movimientoNuevo.setDescripcion("Alquiler Cochera "+cocheraActual.getUbicacion());
+							movimientoNuevo.setEstado("Liquidado");
+							movimientoNuevo.setTicket(null);
+							movimientoNuevo.setMontoCobrado((-1)*montoMovimiento);
+							movimientoNuevo.setLiquidacionExpensas(null);
+							movimientoNuevo.setUsuario(null);
+
+							DAOCliente.getInstance().agregarMovimientoCC_Alquileres(clienteM.getIdCliente(), movimientoNuevo);
+
+							alquileresImprimir.add(cocheraActual.getUbicacion()+";"+fecha +";"+ clienteM.getNombre()+";"+clienteM.getApellido()+";"+ montoMovimiento);
+						}
+
+					}
+				}
+			}
+
+
+			Excel excel = new Excel();
+			File theDir = new File("C:\\SIGE\\Liquidaciones\\");
+			if (!theDir.exists())
+			{ 
+				boolean result = theDir.mkdirs();    
+			}
+			String path= "'"+theDir.getPath()+"\\";
+			DateFormat dateFormat = new SimpleDateFormat("yyyyMMddHHmmss"); 
+			Date date = new Date(); 
+			excel.setOutputFile(theDir+"\\Alquileres_"+new SimpleDateFormat("yyyy_MM_dd_HH_mm").format(fecha)+".xls");
+
+			try {
+				excel.writeList(alquileresImprimir);
+			} catch (WriteException e) {
+				e.printStackTrace();
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+
+		}
+	}
 }

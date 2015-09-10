@@ -170,12 +170,18 @@ public class Converter {
 			clienteP.setTipoDocumento(TIPO_DOC.OTRO);
 
 		String tipoCliente=clienteM.getTipoCliente().toString();
-		if(tipoCliente.equals("FIJO_PERSONA"))
-			clienteP.setTipoCliente(TIPO_CLIENTE.FIJO_PERSONA);
-		if(tipoCliente.equals("FIJO_EMPRESA"))
-			clienteP.setTipoCliente(TIPO_CLIENTE.FIJO_EMPRESA);
-		if(tipoCliente.equals("TEMPORAL"))
-			clienteP.setTipoCliente(TIPO_CLIENTE.TEMPORAL);
+		if(tipoCliente.equals("PARTICULAR_PROPIETARIO"))
+			clienteP.setTipoCliente(persistencia.clases.Cliente.TIPO_CLIENTE.PARTICULAR_PROPIETARIO);
+		if(tipoCliente.equals("PARTICULAR_INQUILINO"))
+			clienteP.setTipoCliente(persistencia.clases.Cliente.TIPO_CLIENTE.PARTICULAR_INQUILINO);
+		if(tipoCliente.equals("PARTICULAR_FRECUENTE"))
+			clienteP.setTipoCliente(persistencia.clases.Cliente.TIPO_CLIENTE.PARTICULAR_FRECUENTE);
+		if(tipoCliente.equals("EMPRESA_PROPIETARIO"))
+			clienteP.setTipoCliente(persistencia.clases.Cliente.TIPO_CLIENTE.EMPRESA_PROPIETARIO);
+		if(tipoCliente.equals("EMPRESA_INQUILINO"))
+			clienteP.setTipoCliente(persistencia.clases.Cliente.TIPO_CLIENTE.EMPRESA_INQUILINO);
+		if(tipoCliente.equals("EMPRESA_FRECUENTE"))
+			clienteP.setTipoCliente(persistencia.clases.Cliente.TIPO_CLIENTE.EMPRESA_FRECUENTE);
 
 		String estadoCliente=clienteM.getEstado().toString();
 		if(estadoCliente.equals("ACTIVO"))
@@ -255,12 +261,19 @@ public class Converter {
 			clienteM.setTipoDocumento(modelo.Cliente.TIPO_DOC.OTRO);
 
 		String tipoCliente=clienteP.getTipoCliente().toString();
-		if(tipoCliente.equals("FIJO_PERSONA"))
-			clienteM.setTipoCliente(modelo.Cliente.TIPO_CLIENTE.FIJO_PERSONA);
-		if(tipoCliente.equals("FIJO_EMPRESA"))
-			clienteM.setTipoCliente(modelo.Cliente.TIPO_CLIENTE.FIJO_EMPRESA);
-		if(tipoCliente.equals("TEMPORAL"))
-			clienteM.setTipoCliente(modelo.Cliente.TIPO_CLIENTE.TEMPORAL);
+
+		if(tipoCliente.equals("PARTICULAR_PROPIETARIO"))
+			clienteM.setTipoCliente(modelo.Cliente.TIPO_CLIENTE.PARTICULAR_PROPIETARIO);
+		if(tipoCliente.equals("PARTICULAR_INQUILINO"))
+			clienteM.setTipoCliente(modelo.Cliente.TIPO_CLIENTE.PARTICULAR_INQUILINO);
+		if(tipoCliente.equals("PARTICULAR_FRECUENTE"))
+			clienteM.setTipoCliente(modelo.Cliente.TIPO_CLIENTE.PARTICULAR_FRECUENTE);
+		if(tipoCliente.equals("EMPRESA_PROPIETARIO"))
+			clienteM.setTipoCliente(modelo.Cliente.TIPO_CLIENTE.EMPRESA_PROPIETARIO);
+		if(tipoCliente.equals("EMPRESA_INQUILINO"))
+			clienteM.setTipoCliente(modelo.Cliente.TIPO_CLIENTE.EMPRESA_INQUILINO);
+		if(tipoCliente.equals("EMPRESA_FRECUENTE"))
+			clienteM.setTipoCliente(modelo.Cliente.TIPO_CLIENTE.EMPRESA_FRECUENTE);
 
 		String estadoCliente=clienteP.getEstado().toString();
 		if(estadoCliente.equals("ACTIVO"))

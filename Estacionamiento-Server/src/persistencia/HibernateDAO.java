@@ -1,11 +1,14 @@
 package persistencia;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
 import org.hibernate.SQLQuery;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+
+import persistencia.clases.Cliente;
 
 
 
@@ -209,6 +212,13 @@ public class HibernateDAO {
 //		estadoCrediticio = (Double) s.createQuery("SUM(m.montoCobrado)as suma from MovimientoCC m where m.CuentaCorriente= ?").setLong(0, idCuentaCorriente).uniqueResult();
 //		s.flush();		
 		return estadoCrediticio;
+	}
+
+	public List<?> getListTwoInt(String className, String columna,int condicion1, int condicion2) {
+		Session session=getSession();
+		List<?> list = session.createQuery("from "+className + " s where s. "+ columna + " =? OR s."+columna + " =?").setInteger(0, condicion1).setInteger(1, condicion2).list();
+		session.flush();
+		return list;
 	}
 	
 	
