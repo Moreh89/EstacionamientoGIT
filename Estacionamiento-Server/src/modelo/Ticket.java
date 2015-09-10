@@ -168,7 +168,7 @@ public class Ticket {
 			}
 			montoCobrar = montoCobrar - this.prepago;
 			if (montoCobrar < 0) montoCobrar=0.0;
-					
+			else montoCobrar = Double.parseDouble(numberFormat.format(montoCobrar).replace(",", "."));
 			this.montoCobrado = montoCobrar;
 			return montoCobrar;
 		}
@@ -195,7 +195,7 @@ public class Ticket {
 				}
 				montoCobrar = montoCobrar - this.prepago;
 				if (montoCobrar < 0) montoCobrar=0.0;
-				else montoCobrar = Double.parseDouble(numberFormat.format(montoCobrar));		
+				else montoCobrar = Double.parseDouble(numberFormat.format(montoCobrar).replace(",", "."));			
 				this.montoCobrado = montoCobrar;
 				
 				return montoCobrar;
@@ -220,7 +220,7 @@ public class Ticket {
 					}
 					montoCobrar = montoCobrar - this.prepago;
 					if (montoCobrar < 0) montoCobrar=0.0;
-					else montoCobrar = Double.parseDouble(numberFormat.format(montoCobrar));	
+					else montoCobrar = Double.parseDouble(numberFormat.format(montoCobrar).replace(",", "."));		
 					this.montoCobrado = montoCobrar;
 					
 					return montoCobrar;
@@ -246,7 +246,7 @@ public class Ticket {
 						}
 						montoCobrar = montoCobrar - this.prepago;
 						if (montoCobrar < 0) montoCobrar=0.0;
-						else montoCobrar = Double.parseDouble(numberFormat.format(montoCobrar));	
+						else montoCobrar = Double.parseDouble(numberFormat.format(montoCobrar).replace(",", "."));	
 						this.montoCobrado = montoCobrar;
 						
 						
