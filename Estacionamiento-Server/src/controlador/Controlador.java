@@ -44,8 +44,7 @@ public class Controlador {
 	public ArrayList<Cochera> cocherasActuales;
 	public ArrayList<Vehiculo> vehiculosActuales;
 	public ArrayList<PersonaAutorizada> personasAutorizadasActuales;
-
-
+	ArrayList<modelo.Cliente> clientesConDeuda;
 
 	private static Controlador instancia;
 
@@ -431,12 +430,16 @@ public class Controlador {
 
 	}
 
-	public double getTasaInteres()
+	public double getPorcentajeTasaInteres()
 	{
 		return tasaInteres.getMonto();
 	}
+	public int getDiaVencimientoInteres()
+	{
+		return tasaInteres.getDeadLine();
+	}
 
-	public long modificarTasaInteres(double montoTasaInteresNuevo)
+	public long modificarTasaInteres(double montoTasaInteresNuevo, int deadLine)
 	{
 		modelo.TasaInteres tasaInteresNueva = new modelo.TasaInteres();
 		tasaInteres.setEstado(modelo.TasaInteres.ESTADO.INACTIVO);
@@ -446,6 +449,7 @@ public class Controlador {
 			tasaInteresNueva.setEstado(modelo.TasaInteres.ESTADO.ACTIVO);
 			tasaInteresNueva.setMonto(montoTasaInteresNuevo);
 			tasaInteresNueva.setIdTasaInteres(0);
+			tasaInteresNueva.setDeadLine(deadLine);
 			codigoReturn=DAOTasaInteres.getInstance().persistir(tasaInteresNueva);
 
 			if(codigoReturn != -1)
@@ -869,12 +873,11 @@ public class Controlador {
 
 	private long aplicarInteres()
 	{
-		//APLICA EL 15 de cada mes
-		int fechaVencimiento =5;
+		int deadLine = tasaInteres.getDeadLine();
 		java.util.Date fechaActual= Calendar.getInstance().getTime();;
 		DateFormat dateFormatDay = new SimpleDateFormat("dd"); 
 
-		if(Integer.parseInt(dateFormatDay.format(fechaActual))==fechaVencimiento)
+		if(Integer.parseInt(dateFormatDay.format(fechaActual))==deadLine)
 		{
 			ArrayList<modelo.Interes> intereses = new ArrayList<modelo.Interes>();
 			intereses=DAOInteres.getInstance().getIntereses();
@@ -947,14 +950,17 @@ public class Controlador {
 
 	public ArrayList<Cliente> getClientesConDeuda() {
 		ArrayList<modelo.Cliente> clientes = new ArrayList<Cliente>();
-		ArrayList<modelo.Cliente> clientesConDeuda = new ArrayList<Cliente>();
+		clientesConDeuda = new ArrayList<Cliente>();
 		clientes=DAOCliente.getInstance().getClientes();
 		
 		for(modelo.Cliente cliente : clientes)
 		{
-			if(cliente.getEstadoCrediticio(cliente)<0)
+			double estadoCrediticio = cliente.getEstadoCrediticio(cliente);
+			if(estadoCrediticio<0)
 			{
+				cliente.setEstadoCrediticio(estadoCrediticio);
 				clientesConDeuda.add(cliente);
+				
 			}
 		}
 		return clientesConDeuda;
@@ -1009,8 +1015,21 @@ public class Controlador {
 				}
 			}
 		}
-
+	}
+	
+	public double getClienteEstadoCrediticio(long idCliente)
+	{
+		double estadoCrediticio=0;
+		for(modelo.Cliente cte : clientesConDeuda)
+		{
+			if(cte.getIdCliente()==idCliente)
+				
+			{
+				estadoCrediticio=cte.getEstadoCrediticio();
+			}
+		}
 		
+		return estadoCrediticio;
 	}
 
 }
