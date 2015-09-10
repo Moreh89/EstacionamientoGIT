@@ -151,7 +151,7 @@ public class Ticket {
 				break;
 			}
 		} 
-		double montoCobrar = 0;
+		double montoCobrar = 0.0;
 			      
 		
 		long diff = horaSalida.getTime() - horaLlegada.getTime();
@@ -162,7 +162,13 @@ public class Ticket {
 		if(tarifaUsada.getTiempoMinimo() >= diffMinutes ){
 			
 			montoCobrar = montoCobrar + tarifaUsada.getCostoMinimo();
-			if (montoCobrar < 0) montoCobrar=0;
+			if(this.descuento!=null){
+				double desc = montoCobrar / 100 * this.descuento.getDescuento();
+				montoCobrar = montoCobrar - desc;
+			}
+			montoCobrar = montoCobrar - this.prepago;
+			if (montoCobrar < 0) montoCobrar=0.0;
+					
 			this.montoCobrado = montoCobrar;
 			return montoCobrar;
 		}
@@ -188,8 +194,8 @@ public class Ticket {
 					montoCobrar = montoCobrar - desc;
 				}
 				montoCobrar = montoCobrar - this.prepago;
-				if (montoCobrar < 0) montoCobrar=0;
-				montoCobrar = Double.parseDouble(numberFormat.format(montoCobrar));		
+				if (montoCobrar < 0) montoCobrar=0.0;
+				else montoCobrar = Double.parseDouble(numberFormat.format(montoCobrar));		
 				this.montoCobrado = montoCobrar;
 				
 				return montoCobrar;
@@ -213,8 +219,8 @@ public class Ticket {
 						montoCobrar = montoCobrar - desc;
 					}
 					montoCobrar = montoCobrar - this.prepago;
-					if (montoCobrar < 0) montoCobrar=0;
-					montoCobrar = Double.parseDouble(numberFormat.format(montoCobrar));	
+					if (montoCobrar < 0) montoCobrar=0.0;
+					else montoCobrar = Double.parseDouble(numberFormat.format(montoCobrar));	
 					this.montoCobrado = montoCobrar;
 					
 					return montoCobrar;
@@ -239,8 +245,8 @@ public class Ticket {
 							montoCobrar = montoCobrar - desc;
 						}
 						montoCobrar = montoCobrar - this.prepago;
-						if (montoCobrar < 0) montoCobrar=0;
-						montoCobrar = Double.parseDouble(numberFormat.format(montoCobrar));	
+						if (montoCobrar < 0) montoCobrar=0.0;
+						else montoCobrar = Double.parseDouble(numberFormat.format(montoCobrar));	
 						this.montoCobrado = montoCobrar;
 						
 						

@@ -978,6 +978,7 @@ public class Controlador {
 		
 		if(ticket!=null){
 			ticket.incrementarPrepago(monto);
+			ticket.setMontoCobrado(0);
 			ticket.setEstado(Ticket.Estado.PREPAGO);
 			IncrementoPrepago incremento = new IncrementoPrepago(
 					GregorianCalendar.getInstance().getTime(),
@@ -998,7 +999,7 @@ public class Controlador {
 	}
 
 	public void actualizarDescuentoTicket(Ticket tck, String descuento) {
-		if(tck.getEstado()==Ticket.Estado.ABIERTO || tck.getEstado()==Ticket.Estado.CREDITO){
+		if(tck.getEstado()==Ticket.Estado.ABIERTO || tck.getEstado()==Ticket.Estado.CREDITO || tck.getEstado()==Ticket.Estado.PREPAGO){
 			for (Descuento desTemp : descuentos) {
 				if (desTemp.getDescripcion().equalsIgnoreCase(descuento)) {
 					tck.setDescuento(desTemp);
