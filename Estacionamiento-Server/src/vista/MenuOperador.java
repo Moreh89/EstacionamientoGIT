@@ -197,17 +197,18 @@ public class MenuOperador extends JFrame implements ActionListener, KeyListener,
 		gbl_contentPane.columnWidths = new int[] { 200, 250, 67, 329, 0, 0 };
 		gbl_contentPane.rowHeights = new int[] { 70, 69, 70, 70, 70, 70, 0, 0,
 				60, 70, 0, 50, 0 };
-		gbl_contentPane.columnWeights = new double[] { 0.0, 0.0, 0.0, 0.0, 1.0,
+		gbl_contentPane.columnWeights = new double[] { 0.0, 1.0, 0.0, 0.0, 1.0,
 				Double.MIN_VALUE };
 		gbl_contentPane.rowWeights = new double[] { 0.0, 0.0, 0.0, 0.0, 0.0,
-				0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE };
+				1.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, Double.MIN_VALUE };
 		contentPane.setLayout(gbl_contentPane);
 
 
 		lblCodigoTicket = new JLabel("Codigo Ticket:");
+		lblCodigoTicket.setHorizontalAlignment(SwingConstants.RIGHT);
 		lblCodigoTicket.setFont(new Font("Tahoma", Font.PLAIN, 30));
 		GridBagConstraints gbc_lblCodigoTicket = new GridBagConstraints();
-		gbc_lblCodigoTicket.anchor = GridBagConstraints.EAST;
+		gbc_lblCodigoTicket.fill = GridBagConstraints.HORIZONTAL;
 		gbc_lblCodigoTicket.insets = new Insets(0, 0, 5, 5);
 		gbc_lblCodigoTicket.gridx = 0;
 		gbc_lblCodigoTicket.gridy = 0;
@@ -240,6 +241,7 @@ public class MenuOperador extends JFrame implements ActionListener, KeyListener,
 		labelUsuario.setForeground(Color.BLUE);
 		labelUsuario.setFont(new Font("Dialog", Font.BOLD, 30));
 		GridBagConstraints gbc_labelUsuario = new GridBagConstraints();
+		gbc_labelUsuario.fill = GridBagConstraints.HORIZONTAL;
 		gbc_labelUsuario.insets = new Insets(0, 0, 5, 0);
 		gbc_labelUsuario.gridx = 4;
 		gbc_labelUsuario.gridy = 0;
@@ -247,10 +249,11 @@ public class MenuOperador extends JFrame implements ActionListener, KeyListener,
 		labelUsuario.setText(Controlador.getInstancia().getUsuarioActual().getNombre() + " " + Controlador.getInstancia().getUsuarioActual().getApellido());
 
 		lblCategoria = new JLabel("Categoria:");
+		lblCategoria.setHorizontalAlignment(SwingConstants.RIGHT);
 		lblCategoria.setFont(new Font("Tahoma", Font.PLAIN, 30));
 		GridBagConstraints gbc_lblCategoria = new GridBagConstraints();
+		gbc_lblCategoria.fill = GridBagConstraints.HORIZONTAL;
 		gbc_lblCategoria.insets = new Insets(0, 0, 5, 5);
-		gbc_lblCategoria.anchor = GridBagConstraints.EAST;
 		gbc_lblCategoria.gridx = 0;
 		gbc_lblCategoria.gridy = 1;
 		contentPane.add(lblCategoria, gbc_lblCategoria);
@@ -291,9 +294,10 @@ public class MenuOperador extends JFrame implements ActionListener, KeyListener,
 		textFieldPatente.addKeyListener(this);
 
 		lblColor = new JLabel("Color:");
+		lblColor.setHorizontalAlignment(SwingConstants.RIGHT);
 		lblColor.setFont(new Font("Tahoma", Font.PLAIN, 30));
 		GridBagConstraints gbc_lblColor = new GridBagConstraints();
-		gbc_lblColor.anchor = GridBagConstraints.EAST;
+		gbc_lblColor.fill = GridBagConstraints.HORIZONTAL;
 		gbc_lblColor.insets = new Insets(0, 0, 5, 5);
 		gbc_lblColor.gridx = 0;
 		gbc_lblColor.gridy = 2;
@@ -339,9 +343,10 @@ public class MenuOperador extends JFrame implements ActionListener, KeyListener,
 		contentPane.add(comboBoxModelo, gbc_comboBoxModelo);
 
 		lblDescuento = new JLabel("Descuento:");
+		lblDescuento.setHorizontalAlignment(SwingConstants.RIGHT);
 		lblDescuento.setFont(new Font("Tahoma", Font.PLAIN, 30));
 		GridBagConstraints gbc_lblDescuento = new GridBagConstraints();
-		gbc_lblDescuento.anchor = GridBagConstraints.EAST;
+		gbc_lblDescuento.fill = GridBagConstraints.HORIZONTAL;
 		gbc_lblDescuento.insets = new Insets(0, 0, 5, 5);
 		gbc_lblDescuento.gridx = 0;
 		gbc_lblDescuento.gridy = 3;
@@ -388,9 +393,10 @@ public class MenuOperador extends JFrame implements ActionListener, KeyListener,
 		textFieldPrepago.setText("0.0");
 
 		lblCliente = new JLabel("Cliente:");
+		lblCliente.setHorizontalAlignment(SwingConstants.RIGHT);
 		lblCliente.setFont(new Font("Tahoma", Font.PLAIN, 30));
 		GridBagConstraints gbc_lblCliente = new GridBagConstraints();
-		gbc_lblCliente.anchor = GridBagConstraints.EAST;
+		gbc_lblCliente.fill = GridBagConstraints.HORIZONTAL;
 		gbc_lblCliente.insets = new Insets(0, 0, 5, 5);
 		gbc_lblCliente.gridx = 0;
 		gbc_lblCliente.gridy = 4;
@@ -442,9 +448,10 @@ public class MenuOperador extends JFrame implements ActionListener, KeyListener,
 		btnBuscarPorTicketAbierto.addActionListener(this);
 
 		lblObservacion = new JLabel("Observacion:");
+		lblObservacion.setHorizontalAlignment(SwingConstants.RIGHT);
 		lblObservacion.setFont(new Font("Tahoma", Font.PLAIN, 30));
 		GridBagConstraints gbc_lblObservacion = new GridBagConstraints();
-		gbc_lblObservacion.anchor = GridBagConstraints.EAST;
+		gbc_lblObservacion.fill = GridBagConstraints.HORIZONTAL;
 		gbc_lblObservacion.insets = new Insets(0, 0, 5, 5);
 		gbc_lblObservacion.gridx = 0;
 		gbc_lblObservacion.gridy = 5;
@@ -522,8 +529,8 @@ public class MenuOperador extends JFrame implements ActionListener, KeyListener,
 		lblTotalAPagar.setFont(new Font("Dialog", Font.BOLD, 30));
 		lblTotalAPagar.setHorizontalAlignment(SwingConstants.CENTER);
 		GridBagConstraints gbc_lblTotalAPagar = new GridBagConstraints();
-		gbc_lblTotalAPagar.gridwidth = 4;
 		gbc_lblTotalAPagar.fill = GridBagConstraints.HORIZONTAL;
+		gbc_lblTotalAPagar.gridwidth = 4;
 		gbc_lblTotalAPagar.insets = new Insets(0, 0, 5, 5);
 		gbc_lblTotalAPagar.gridx = 0;
 		gbc_lblTotalAPagar.gridy = 8;
@@ -639,12 +646,29 @@ public class MenuOperador extends JFrame implements ActionListener, KeyListener,
 		
 	}
 
+	private void actualizarTicket(){
+		Controlador.getInstancia()
+		.actualizarTicket(
+				(String) comboBoxTipoVehiculo.getSelectedItem(),
+				(String) comboBoxModelo.getSelectedItem(),
+				(String) comboBoxColor.getSelectedItem(),
+				((Descuento)comboBoxDescuento.getSelectedItem()).toString(),
+				textFieldPatente.getText(),
+				textFieldCliente.getText(),
+				textFieldPrepago.getText(),
+				textFieldObsevacion.getText());
+	}
+	
+	
 	@Override
 	public void actionPerformed(ActionEvent event) {
 
 		if (event.getSource() == btnCobrarF) {
 			if (Controlador.getInstancia().getTicket().getEstado() != Ticket.Estado.CERRADO
 					&& Controlador.getInstancia().getTicket().getEstado() != Ticket.Estado.CREDITO){
+				
+				actualizarTicket();
+				
 				if(Controlador.getInstancia().getTicket().getCliente() !=null){
 		    		UIManager.put("OptionPane.yesButtonText", "Cuenta Corriente");
 		    		UIManager.put("OptionPane.noButtonText", "Efectivo/Tarjeta");
@@ -932,7 +956,7 @@ public class MenuOperador extends JFrame implements ActionListener, KeyListener,
 				this.btnGuardarF.setEnabled(true);
 				String totalAPagar = "";
 				if(tck.getEstado() == Ticket.Estado.CREDITO){
-					totalAPagar=("(PAGADO A CUENTA) " + String.valueOf(tck.getMontoCobrado()));
+					totalAPagar=("(A CUENTA) " + String.valueOf(tck.getMontoCobrado()));
 					this.comboBoxDescuento.setEnabled(false);
 					this.comboBoxTipoVehiculo.setEnabled(false);
 					this.comboBoxColor.setEnabled(false);
