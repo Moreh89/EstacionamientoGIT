@@ -5,6 +5,8 @@ import javax.print.PrintServiceLookup;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+import javax.swing.plaf.ColorUIResource;
+
 import java.awt.GridBagLayout;
 import javax.swing.JMenuBar;
 import javax.swing.JMenu;
@@ -19,6 +21,9 @@ import javax.swing.JTextField;
 import javax.swing.JButton;
 import javax.swing.ImageIcon;
 import javax.swing.SwingConstants;
+import javax.swing.UIManager;
+
+import modelo.Descuento;
 import modelo.Ticket;
 import controlador.Controlador;
 import java.awt.Font;
@@ -64,7 +69,7 @@ public class MenuOperador extends JFrame implements ActionListener, KeyListener,
 	private JLabel lblModelo;
 	private JComboBox comboBoxModelo;
 	private JLabel lblDescuento;
-	private JComboBox comboBoxDescuento;
+	private JComboBox<Descuento> comboBoxDescuento;
 	private JLabel lblCliente;
 	private JButton btnButtonBuscarCliente;
 	private JLabel lblPerdidaTicket;
@@ -95,6 +100,8 @@ public class MenuOperador extends JFrame implements ActionListener, KeyListener,
 
 	@SuppressWarnings("unchecked")
 	public MenuOperador() {
+		 UIManager.put("ComboBox.selectionBackground", new ColorUIResource(Color.magenta));
+		
 		setFont(new Font("Dialog", Font.BOLD, 20));
 		setIconImage(Toolkit.getDefaultToolkit().getImage(
 				MenuOperador.class.getResource("/image/printer.png")));
@@ -340,11 +347,11 @@ public class MenuOperador extends JFrame implements ActionListener, KeyListener,
 		gbc_lblDescuento.gridy = 3;
 		contentPane.add(lblDescuento, gbc_lblDescuento);
 
-		comboBoxDescuento = new JComboBox();
+		comboBoxDescuento = new JComboBox<Descuento>();
 		comboBoxDescuento.setFont(new Font("Tahoma", Font.PLAIN, 30));
 		comboBoxDescuento.setModel(new DefaultComboBoxModel());
-		for (String descString : Controlador.getInstancia().getDescuentosActualesString()) {
-			comboBoxDescuento.addItem(descString);
+		for (Descuento descT : Controlador.getInstancia().getDescuentosActuales()) {
+			comboBoxDescuento.addItem(descT);
 		}
 		GridBagConstraints gbc_comboBoxDescuento = new GridBagConstraints();
 		gbc_comboBoxDescuento.gridwidth = 2;
@@ -669,7 +676,7 @@ public class MenuOperador extends JFrame implements ActionListener, KeyListener,
 					(String) comboBoxTipoVehiculo.getSelectedItem(),
 					(String) comboBoxModelo.getSelectedItem(),
 					(String) comboBoxColor.getSelectedItem(),
-					(String) comboBoxDescuento.getSelectedItem(),
+					((Descuento)comboBoxDescuento.getSelectedItem()).toString(),
 					textFieldPatente.getText(),
 					textFieldCliente.getText(),
 					textFieldPrepago.getText(),
@@ -766,7 +773,7 @@ public class MenuOperador extends JFrame implements ActionListener, KeyListener,
 								(String) comboBoxTipoVehiculo.getSelectedItem(),
 								(String) comboBoxModelo.getSelectedItem(),
 								(String) comboBoxColor.getSelectedItem(),
-								(String) comboBoxDescuento.getSelectedItem(),
+								((Descuento)comboBoxDescuento.getSelectedItem()).toString(),
 								textFieldPatente.getText(),
 								textFieldCliente.getText(),
 								textFieldPrepago.getText(),
@@ -819,7 +826,11 @@ public class MenuOperador extends JFrame implements ActionListener, KeyListener,
 				Double monto = Controlador.getInstancia().incrementarPrepago(Double.valueOf(resultado));
 				this.textFieldPrepago.setText(String.valueOf(monto));
 				Ticket tck = Controlador.getInstancia().getTicket();
-				this.textFieldTotalAPagar.setText("Prepago " + String.valueOf(tck.getPrepago()) + " restan: "+ String.valueOf(tck.calcularMontoACobrar()));
+				String totalAPagar = "Prepago " + String.valueOf(tck.getPrepago()) + " restan: "+ String.valueOf(tck.calcularMontoACobrar());
+				if(tck.getDescuento() != null && (tck.getDescuento().getDescuento() > 0)){
+					totalAPagar =totalAPagar + " (Des. " + tck.getDescuento().getDescuento() + "%)";
+				}
+				this.textFieldTotalAPagar.setText(totalAPagar);
 
 			}else{
 				JOptionPane.showMessageDialog(null, "El formato ingresado no es valido", "Operacion fallida", JOptionPane.ERROR_MESSAGE);
@@ -877,7 +888,12 @@ public class MenuOperador extends JFrame implements ActionListener, KeyListener,
 				this.comboBoxTipoVehiculo.setSelectedItem(tck.getCatergoriaVehiculo().getDescripcion());
 				this.comboBoxColor.setSelectedItem(tck.getColor().getDescripcion());
 				this.comboBoxModelo.setSelectedItem(tck.getModeloVehiculo().getDescripcion());
-				this.comboBoxDescuento.setSelectedItem(tck.getDescuento().getDescripcion());
+				for (Descuento desT : Controlador.getInstancia().getDescuentosActuales()) {
+					if(desT.getDescripcion().equalsIgnoreCase(tck.getDescuento().getDescripcion())){
+						this.comboBoxDescuento.setSelectedItem(desT);
+						break;
+					}
+				}
 				this.textFieldPatente.setText(tck.getPatente());
 				if (tck.getFechaSalida() != null) this.textFieldEgreso.setText(new SimpleDateFormat("dd-MM-yyyy hh:mm:ss").format(tck.getFechaSalida()));
 				this.textFieldObsevacion.setText(tck.getObservacion());
@@ -885,19 +901,24 @@ public class MenuOperador extends JFrame implements ActionListener, KeyListener,
 				this.textFieldPrepago.setEditable(false);
 				this.textFieldTiempoEstadia.setText(tck.getTiempoEstadia());
 				this.btnCobrarF.setEnabled(false);
+				String totalAPagar = "";
 				if(tck.getEstado() == Ticket.Estado.CREDITO){
-					this.textFieldTotalAPagar.setText("(PAGADO A CUENTA) " + String.valueOf(tck.getMontoCobrado()));
+					totalAPagar=("(PAGADO A CUENTA) " + String.valueOf(tck.getMontoCobrado()));
 				}else if(tck.getEstado() == Ticket.Estado.CERRADO){
-					this.textFieldTotalAPagar.setText("(PAGADO) " + String.valueOf(tck.getMontoCobrado()));
+					totalAPagar=("(PAGADO) " + String.valueOf(tck.getMontoCobrado()));
 				}else if (tck.getEstado() == Ticket.Estado.PREPAGO){
 					this.btnPrePago.setEnabled(true);
 					this.btnCobrarF.setEnabled(true);
-					this.textFieldTotalAPagar.setText("Prepago " + String.valueOf(tck.getPrepago()) + " restan: "+ String.valueOf(tck.getMontoCobrado()));
+					totalAPagar=("Prepago " + String.valueOf(tck.getPrepago()) + " restan: "+ String.valueOf(tck.getMontoCobrado()));
 				} else {
 					this.btnPrePago.setEnabled(true);
 					this.btnCobrarF.setEnabled(true);
-					this.textFieldTotalAPagar.setText(String.valueOf(tck.getMontoCobrado()));
+					totalAPagar=(String.valueOf(tck.getMontoCobrado()));
 				}
+				if(tck.getDescuento() != null && (tck.getDescuento().getDescuento() > 0)){
+					totalAPagar =totalAPagar + " (Des. " + tck.getDescuento().getDescuento() + "%)";
+				}
+				this.textFieldTotalAPagar.setText(totalAPagar);
 				if (tck.getCliente() != null){
 					this.btnCobrarF.setEnabled(true);
 					this.textFieldCliente.setText(tck.getCliente().toString());
@@ -1017,16 +1038,25 @@ public class MenuOperador extends JFrame implements ActionListener, KeyListener,
 	public void itemStateChanged(ItemEvent e) {
 		if (e.getSource() == comboBoxDescuento){
 			Ticket tck = Controlador.getInstancia().getTicket();
+			Descuento descSelec= (Descuento)comboBoxDescuento.getSelectedItem();
 			if(tck!=null){
-				Controlador.getInstancia().actualizarDescuentoTicket(tck,(String)comboBoxDescuento.getSelectedItem());
-				tck.calcularMontoACobrar();
-				if (tck.getEstado() == Ticket.Estado.PREPAGO){
-					this.textFieldTotalAPagar.setText("Prepago " + String.valueOf(tck.getPrepago()) + " restan: "+ String.valueOf(tck.getMontoCobrado()));
-				} else {
-					this.textFieldTotalAPagar.setText(String.valueOf(tck.getMontoCobrado()));
-
+				if(tck.getDescuento().getIdDescuento() != descSelec.getIdDescuento()){
+					Controlador.getInstancia().actualizarDescuentoTicket(tck,((Descuento)comboBoxDescuento.getSelectedItem()).toString());
+					tck.calcularMontoACobrar();
 				}
+				String totalAPagar = "";
+				if (tck.getEstado() == Ticket.Estado.PREPAGO){
+					totalAPagar = "Prepago " + String.valueOf(tck.getPrepago()) + " restan: "+ String.valueOf(tck.getMontoCobrado());
+				} else {
+					totalAPagar = String.valueOf(tck.getMontoCobrado());
+				}
+				if(tck.getDescuento() != null && 
+						  (tck.getDescuento().getDescuento() > 0  || descSelec.getDescuento() > 0)){
+					totalAPagar =totalAPagar + " (Des. " + tck.getDescuento().getDescuento() + "%)";
+						}
+				this.textFieldTotalAPagar.setText(totalAPagar);
 			}
+		
 		}
 	}
 
