@@ -15,6 +15,7 @@ public class MovimientoCC
 	private LiquidacionExpensas liquidacionExpensas;
 	private Interes interes;
 	private Usuario usuario;
+	private LiquidacionAlquileres liquidacionAlquileres;
 	public long getIdMovimiento() {
 		return idMovimiento;
 	}
@@ -77,6 +78,16 @@ public class MovimientoCC
 		this.usuario = usuario;
 	}
 	
+	
+	
+	public LiquidacionAlquileres getLiquidacionAlquileres() {
+		return liquidacionAlquileres;
+	}
+
+	public void setLiquidacionAlquileres(LiquidacionAlquileres liquidacionAlquileres) {
+		this.liquidacionAlquileres = liquidacionAlquileres;
+	}
+
 	public String toString()
 	{
 		DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd-HH:mm"); 

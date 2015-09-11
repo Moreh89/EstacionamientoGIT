@@ -26,7 +26,7 @@ import java.awt.GridBagConstraints;
 import java.awt.Insets;
 import javax.swing.JLabel;
 
-public class AnularLiquidacionExpensas extends JDialog implements ActionListener, ListSelectionListener {
+public class AnularLiquidacionAlquileres extends JDialog implements ActionListener, ListSelectionListener {
 
 	/**
 	 * 
@@ -61,9 +61,9 @@ public class AnularLiquidacionExpensas extends JDialog implements ActionListener
 	 * Create the dialog.
 	 */
 	@SuppressWarnings({ "rawtypes", "unchecked" })
-	public AnularLiquidacionExpensas() {
+	public AnularLiquidacionAlquileres() {
 		setResizable(false);
-		setTitle("Anular Liquidacion de Expensas");
+		setTitle("Anular Liquidacion de Alquileres");
 		setBounds(100, 100, 403, 357);
 		getContentPane().setLayout(new BorderLayout());
 		contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -85,8 +85,8 @@ public class AnularLiquidacionExpensas extends JDialog implements ActionListener
 		gbc_scrollPane.gridy = 0;
 		contentPanel.add(scrollPane, gbc_scrollPane);
 
-		listModel = new DefaultListModel<modelo.LiquidacionExpensas>();
-		for (modelo.LiquidacionExpensas liquidacionTemp : Controlador.getInstancia().getLiquidacionesExpensasRecientes()) {
+		listModel = new DefaultListModel<modelo.LiquidacionAlquileres>();
+		for (modelo.LiquidacionAlquileres liquidacionTemp : Controlador.getInstancia().getLiquidacionesExpensasRecientes()) {
 			listModel.addElement(liquidacionTemp);
 		} 		
 		listLiquidaciones= new JList(listModel);

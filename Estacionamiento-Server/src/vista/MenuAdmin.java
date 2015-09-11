@@ -55,6 +55,9 @@ public class MenuAdmin extends JFrame implements ActionListener {
 	private JMenu mnExpensas;
 	private JMenuItem mntmAnularExpensas;
 	private JMenuItem mntmCobroExtraordinario;
+	private JMenu mnAlquileres;
+	private JMenuItem mntmLiquidarAlquileres;
+	private JMenuItem mntmAnularAlquileres;
 
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
@@ -112,6 +115,22 @@ public class MenuAdmin extends JFrame implements ActionListener {
 		mnGestionEstacionamiento.setIcon(new ImageIcon(MenuAdmin.class.getResource("/image/modificar.png")));
 		menuBar.add(mnGestionEstacionamiento);
 		
+				mntmCobroExtraordinario = new JMenuItem("Cobro Extraordinario");
+				mnGestionEstacionamiento.add(mntmCobroExtraordinario);
+				mntmCobroExtraordinario.addActionListener(this);
+		
+		mnAlquileres = new JMenu("Alquileres");
+		mnGestionEstacionamiento.add(mnAlquileres);
+		
+		
+		mntmLiquidarAlquileres = new JMenuItem("Emitir Liquidaci\u00F3n");
+		mnAlquileres.add(mntmLiquidarAlquileres);
+		mntmLiquidarAlquileres.addActionListener(this);
+		
+		mntmAnularAlquileres = new JMenuItem("Anular Liquidaci\u00F3n");
+		mnAlquileres.add(mntmAnularAlquileres);
+		mntmAnularAlquileres.addActionListener(this);
+		
 		mnColor = new JMenu("Color");
 		mnGestionEstacionamiento.add(mnColor);
 		
@@ -126,6 +145,17 @@ public class MenuAdmin extends JFrame implements ActionListener {
 		mntmGestionDescuento = new JMenuItem("Gestionar");
 		mnDescuentos.add(mntmGestionDescuento);
 		mntmGestionDescuento.addActionListener(this);
+		
+				mnExpensas = new JMenu("Expensas");
+				mnGestionEstacionamiento.add(mnExpensas);
+				
+				mntmLiquidarExpensas = new JMenuItem("Emitir Liquidaci\u00F3n");
+				mnExpensas.add(mntmLiquidarExpensas);
+				mntmLiquidarExpensas.addActionListener(this);
+				
+						mntmAnularExpensas = new JMenuItem("Anular Liquidaci\u00F3n");
+						mnExpensas.add(mntmAnularExpensas);
+						mntmAnularExpensas.addActionListener(this);
 		
 		mnModelo = new JMenu("Modelos");
 		mnGestionEstacionamiento.add(mnModelo);
@@ -147,21 +177,6 @@ public class MenuAdmin extends JFrame implements ActionListener {
 		mntmGestionTasaInteres = new JMenuItem("Gestionar");
 		mnTasaInteres.add(mntmGestionTasaInteres);
 		mntmGestionTasaInteres.addActionListener(this);
-
-		mnExpensas = new JMenu("Expensas");
-		mnGestionEstacionamiento.add(mnExpensas);
-		
-		mntmLiquidarExpensas = new JMenuItem("Emitir Liquidaci\u00F3n");
-		mnExpensas.add(mntmLiquidarExpensas);
-		mntmLiquidarExpensas.addActionListener(this);
-
-		mntmAnularExpensas = new JMenuItem("Anular Liquidaci\u00F3n");
-		mnExpensas.add(mntmAnularExpensas);
-		mntmAnularExpensas.addActionListener(this);
-
-		mntmCobroExtraordinario = new JMenuItem("Cobro Extraordinario");
-		mnGestionEstacionamiento.add(mntmCobroExtraordinario);
-		mntmCobroExtraordinario.addActionListener(this);
 		
 		
 		mnConsultas = new JMenu("Consultas");
@@ -286,6 +301,14 @@ public class MenuAdmin extends JFrame implements ActionListener {
 		}
 		if(event.getSource()==mntmDeudores){
 			new VerDeudores().setVisible(true);
+		}
+		if(event.getSource()==mntmLiquidarAlquileres)
+		{
+			new EmitirLiquidacionAlquileres().setVisible(true);
+		}
+		if(event.getSource()==mntmAnularAlquileres)
+		{
+//			new EmitirLiquidacionAlquileres().setVisible(true);
 		}
 		
 	}

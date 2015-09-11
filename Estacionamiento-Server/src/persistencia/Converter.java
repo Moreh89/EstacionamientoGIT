@@ -814,4 +814,41 @@ public class Converter {
 				incrementoPrepagoP.getNumeroUsuario());
 		return incrementoM;
 	}
+
+	public  static modelo.LiquidacionAlquileres convertLiquidacionAlquileresPersistenciaToModelo(persistencia.clases.LiquidacionAlquileres liquidacionP)
+	{
+		modelo.LiquidacionAlquileres liquidacionM = new modelo.LiquidacionAlquileres();
+		liquidacionM.setIdLiquidacionAlquileres(liquidacionP.getIdLiquidacionAlquileres());
+		liquidacionM.setFechaEmision(liquidacionP.getFechaEmision());
+		String estadoLiquidacion = liquidacionP.getEstado().toString();
+		if(estadoLiquidacion.equals("LIQUIDADO"))
+			liquidacionM.setEstado(modelo.LiquidacionAlquileres.Estado.LIQUIDADO);
+		if(estadoLiquidacion.equals("ANULADO"))
+			liquidacionM.setEstado(modelo.LiquidacionAlquileres.Estado.ANULADO);
+		return liquidacionM;
+	}
+
+	public  static persistencia.clases.LiquidacionAlquileres convertLiquidacionAlquileresModeloToPersistencia(modelo.LiquidacionAlquileres liquidacionM)
+	{
+		persistencia.clases.LiquidacionAlquileres liquidacionP = new persistencia.clases.LiquidacionAlquileres();
+		liquidacionP.setIdLiquidacionAlquileres(liquidacionM.getIdLiquidacionAlquileres());
+		liquidacionP.setFechaEmision(liquidacionM.getFechaEmision());
+		String estadoLiquidacion = liquidacionM.getEstado().toString();
+		if(estadoLiquidacion.equals("LIQUIDADO"))
+			liquidacionP.setEstado(persistencia.clases.LiquidacionAlquileres.Estado.LIQUIDADO
+					);
+		if(estadoLiquidacion.equals("ANULADO"))
+			liquidacionP.setEstado(persistencia.clases.LiquidacionAlquileres.Estado.ANULADO);
+		return liquidacionP;
+	}
+
+	public static ArrayList<modelo.LiquidacionAlquileres> convertLiquidacionesAlquileresPersistenciaToNegocio(ArrayList<persistencia.clases.LiquidacionAlquileres> liquidacionesRecientesP) {
+		ArrayList<modelo.LiquidacionAlquileres> liquidacionesAlquileresM = new ArrayList<modelo.LiquidacionAlquileres>();
+		for(persistencia.clases.LiquidacionAlquileres liquidacionP : liquidacionesRecientesP)
+		{
+			liquidacionesAlquileresM.add(convertLiquidacionAlquileresPersistenciaToModelo(liquidacionP));
+		}
+		return liquidacionesAlquileresM;
+	}
+
 }

@@ -6,6 +6,7 @@ import persistencia.Converter;
 import persistencia.HibernateDAO;
 import persistencia.clases.Cliente;
 import persistencia.clases.Interes;
+import persistencia.clases.LiquidacionAlquileres;
 import persistencia.clases.LiquidacionExpensas;
 
 public class DAOCliente {
@@ -160,7 +161,11 @@ public class DAOCliente {
 		long codigoReturn = -1;
 		persistencia.clases.MovimientoCC movimientoNuevoP = new persistencia.clases.MovimientoCC();
 		movimientoNuevoP = Converter.convertMovimientoCuentaCorrienteModeloToPersistencia(movimientoNuevoM);
-
+		if(movimientoNuevoM.getLiquidacionAlquileres().getIdLiquidacionAlquileres()!=0)
+		{
+			movimientoNuevoP.setLiquidacionAlquileres((LiquidacionAlquileres) HibernateDAO.getInstancia().getObjectWithLong("LiquidacionAlquileres", "idLiquidacionAlquileres", movimientoNuevoM.getLiquidacionAlquileres().getIdLiquidacionAlquileres()));
+		}
+		movimientoNuevoP.setUsuario((persistencia.clases.Usuario) HibernateDAO.getInstancia().getObjectWithLong("Usuario", "idUsuario", movimientoNuevoM.getUsuario().getIdUsuario()));
 		clienteP=(persistencia.clases.Cliente) HibernateDAO.getInstancia().get(persistencia.clases.Cliente.class, idCliente);
 		clienteP.getCuentaCorriente().addMovimientoCC(movimientoNuevoP);
 

@@ -110,7 +110,6 @@ public class Controlador {
 		tarifas=DAOTarifa.getInstance().getTarifas();
 		clientes=DAOCliente.getInstance().getClientes();
 		this.aplicarInteres();
-		this.liquidarAlquileres();
 		return true;
 
 	}
@@ -374,7 +373,7 @@ public class Controlador {
 		}
 		return descuentosActuales;
 	}
-	
+
 	public ArrayList<modelo.Descuento> getDescuentosActuales() {
 		return descuentos;
 	}
@@ -736,7 +735,7 @@ public class Controlador {
 		return codigoReturn;
 	}
 
-	public ArrayList<modelo.LiquidacionExpensas> getLiquidacionesRecientes() 
+	public ArrayList<modelo.LiquidacionExpensas> getLiquidacionesExpensasRecientes() 
 	{
 		//Liquidaciones generadas en los últimos 30 días.
 		return DAOLiquidacionExpensas.getInstance().getLiquidacionesRecientes();
@@ -1020,9 +1019,9 @@ public class Controlador {
 
 	public void actualizarDescuentoTicket(Ticket tck, Descuento descuento) {
 		if(tck.getEstado()==Ticket.Estado.ABIERTO || tck.getEstado()==Ticket.Estado.CREDITO || tck.getEstado()==Ticket.Estado.PREPAGO){
-					tck.setDescuento(descuento);
-					tck.setMontoCobrado(0);
-					DAOTicket.getInstance().actualizar(tck);
+			tck.setDescuento(descuento);
+			tck.setMontoCobrado(0);
+			DAOTicket.getInstance().actualizar(tck);
 		}
 	}
 
@@ -1041,74 +1040,77 @@ public class Controlador {
 		return estadoCrediticio;
 	}
 
-	private void liquidarAlquileres() 
+	public long liquidarAlquileres(String descripcion) 
 	{
+		long codigoReturn=0;
+		ArrayList<modelo.Cliente> clientes = new ArrayList<modelo.Cliente>();
+		clientes=DAOCliente.getInstance().getClientesInquilinos();
+		ArrayList<String> alquileresImprimir = new ArrayList<String>();
+		alquileresImprimir.add("Cochera;Periodo a Liquidar;Nombre;Apellido;Monto");
+		new GregorianCalendar();
+		Date fecha= GregorianCalendar.getInstance().getTime();
 
-		int deadLine = 9;
-		java.util.Date fechaActual= Calendar.getInstance().getTime();;
-		DateFormat dateFormatDay = new SimpleDateFormat("dd"); 
 
-		if(Integer.parseInt(dateFormatDay.format(fechaActual))==deadLine)
-		{	
+		modelo.LiquidacionAlquileres liquidacionAlquileres = new LiquidacionAlquileres();
+		liquidacionAlquileres.setIdLiquidacionAlquileres(0);
+		liquidacionAlquileres.setEstado(modelo.LiquidacionAlquileres.Estado.LIQUIDADO);
+		liquidacionAlquileres.setFechaEmision(fecha);
 
-			ArrayList<modelo.Cliente> clientes = new ArrayList<modelo.Cliente>();
-			clientes=DAOCliente.getInstance().getClientesInquilinos();
-			ArrayList<String> alquileresImprimir = new ArrayList<String>();
-			alquileresImprimir.add("Cochera;Periodo a Liquidar;Nombre;Apellido;Monto");
-			new GregorianCalendar();
-			Date fecha= GregorianCalendar.getInstance().getTime();
-			for(modelo.Cliente clienteM : clientes)
+
+		for(modelo.Cliente clienteM : clientes)
+		{
+			if(!clienteM.getCocheras().isEmpty())
 			{
-				if(!clienteM.getCocheras().isEmpty())
+				if(clienteM.getCuentaCorriente()!=null)
 				{
-					if(clienteM.getCuentaCorriente()!=null)
+					for(modelo.Cochera cocheraActual : clienteM.getCocheras())
 					{
+						codigoReturn++;
+						double montoMovimiento=cocheraActual.getCostoCochera();
 
-						for(modelo.Cochera cocheraActual : clienteM.getCocheras())
-						{
-							double montoMovimiento=cocheraActual.getCostoCochera();
+						modelo.MovimientoCC movimientoNuevo= new modelo.MovimientoCC();
+						movimientoNuevo.setIdMovimiento(0);
+						movimientoNuevo.setFecha(fecha);
+						movimientoNuevo.setDescripcion(descripcion+cocheraActual.getUbicacion());
+						movimientoNuevo.setEstado("Liquidado");
+						movimientoNuevo.setTicket(null);
+						movimientoNuevo.setMontoCobrado((-1)*montoMovimiento);
+						movimientoNuevo.setLiquidacionExpensas(null);
+						movimientoNuevo.setUsuario(usuarioActual);
+						movimientoNuevo.setLiquidacionAlquileres(liquidacionAlquileres);
 
-							modelo.MovimientoCC movimientoNuevo= new modelo.MovimientoCC();
-							movimientoNuevo.setIdMovimiento(0);
-							movimientoNuevo.setFecha(fecha);
-							movimientoNuevo.setDescripcion("Alquiler Cochera "+cocheraActual.getUbicacion());
-							movimientoNuevo.setEstado("Liquidado");
-							movimientoNuevo.setTicket(null);
-							movimientoNuevo.setMontoCobrado((-1)*montoMovimiento);
-							movimientoNuevo.setLiquidacionExpensas(null);
-							movimientoNuevo.setUsuario(null);
+						DAOCliente.getInstance().agregarMovimientoCC_Alquileres(clienteM.getIdCliente(), movimientoNuevo);
 
-							DAOCliente.getInstance().agregarMovimientoCC_Alquileres(clienteM.getIdCliente(), movimientoNuevo);
-
-							alquileresImprimir.add(cocheraActual.getUbicacion()+";"+fecha +";"+ clienteM.getNombre()+";"+clienteM.getApellido()+";"+ montoMovimiento);
-						}
+						alquileresImprimir.add(cocheraActual.getUbicacion()+";"+fecha +";"+ clienteM.getNombre()+";"+clienteM.getApellido()+";"+ montoMovimiento);
 
 					}
+
 				}
 			}
-
-
-			Excel excel = new Excel();
-			File theDir = new File("C:\\SIGE\\Liquidaciones\\");
-			if (!theDir.exists())
-			{ 
-				boolean result = theDir.mkdirs();    
-			}
-			String path= "'"+theDir.getPath()+"\\";
-			DateFormat dateFormat = new SimpleDateFormat("yyyyMMddHHmmss"); 
-			Date date = new Date(); 
-			excel.setOutputFile(theDir+"\\Alquileres_"+new SimpleDateFormat("yyyy_MM_dd_HH_mm").format(fecha)+".xls");
-
-			try {
-				excel.writeList(alquileresImprimir);
-			} catch (WriteException e) {
-				e.printStackTrace();
-			} catch (IOException e) {
-				e.printStackTrace();
-			}
-
 		}
+
+
+		Excel excel = new Excel();
+		File theDir = new File("C:\\SIGE\\Liquidaciones\\");
+		if (!theDir.exists())
+		{ 
+			boolean result = theDir.mkdirs();    
+		}
+		String path= "'"+theDir.getPath()+"\\";
+		DateFormat dateFormat = new SimpleDateFormat("yyyyMMddHHmmss"); 
+		Date date = new Date(); 
+		excel.setOutputFile(theDir+"\\Alquileres_"+new SimpleDateFormat("yyyy_MM_dd_HH_mm").format(fecha)+".xls");
+
+		try {
+			excel.writeList(alquileresImprimir);
+		} catch (WriteException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		return codigoReturn;
 	}
+
 
 	public long deshabilitarDescuento(long idDescuento) {
 		long codigoReturn= DAODescuento.getInstance().deshabilitarDescuento(idDescuento);
@@ -1124,4 +1126,11 @@ public class Controlador {
 		descuentos=DAODescuento.getInstance().getDescuentos();
 		return codigoReturn;
 	}
+	
+	public ArrayList<modelo.LiquidacionAlquileres> getLiquidacionesAlquileresRecientes() 
+	{
+		//Liquidaciones generadas en los últimos 30 días.
+		return DAOLiquidacionAlquileres.getInstance().getLiquidacionesRecientes();
+	}
+	
 }

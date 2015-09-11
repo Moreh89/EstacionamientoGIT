@@ -32,6 +32,11 @@ public class MovimientoCC {
 	@OneToOne(cascade=CascadeType.ALL)
 	@JoinColumn(name="LiquidacionExpensas")
 	private LiquidacionExpensas liquidacionExpensas;
+
+	@OneToOne(cascade=CascadeType.ALL)
+	@JoinColumn(name="LiquidacionAlquileres")
+	private LiquidacionAlquileres liquidacionAlquileres;
+
 	
 	@OneToOne(cascade=CascadeType.ALL)
 	@JoinColumn(name="Interes")
@@ -110,6 +115,14 @@ public class MovimientoCC {
 	public void setUsuario(Usuario usuario) {
 		this.usuario = usuario;
 	}
+	public LiquidacionAlquileres getLiquidacionAlquileres() {
+		return liquidacionAlquileres;
+	}
+	public void setLiquidacionAlquileres(LiquidacionAlquileres liquidacionAlquileres) {
+		this.liquidacionAlquileres = liquidacionAlquileres;
+	}
+	
+	
 	
 	
 	
