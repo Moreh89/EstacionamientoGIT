@@ -16,6 +16,8 @@ public class MovimientoCC
 	private Interes interes;
 	private Usuario usuario;
 	private LiquidacionAlquileres liquidacionAlquileres;
+	private MEDIOPAGO medioPago;
+	
 	public long getIdMovimiento() {
 		return idMovimiento;
 	}
@@ -79,13 +81,26 @@ public class MovimientoCC
 	}
 	
 	
-	
 	public LiquidacionAlquileres getLiquidacionAlquileres() {
 		return liquidacionAlquileres;
 	}
 
 	public void setLiquidacionAlquileres(LiquidacionAlquileres liquidacionAlquileres) {
 		this.liquidacionAlquileres = liquidacionAlquileres;
+	}
+
+	public enum MEDIOPAGO{
+		NOAPLICA,
+		EFECTIVO,
+		TARJETA;
+	}
+	
+	public MEDIOPAGO getMedioPago() {
+		return medioPago;
+	}
+
+	public void setMedioPago(MEDIOPAGO medioPago) {
+		this.medioPago = medioPago;
 	}
 
 	public String toString()

@@ -165,6 +165,7 @@ public class Controlador {
 		cliente.setCuentaCorriente(new modelo.CuentaCorriente());
 
 		DAOCliente.getInstance().persistir(cliente);
+
 	}
 
 	public void agregarVehiculo(String categoriaVehiculo, String patente,
@@ -536,6 +537,11 @@ public class Controlador {
 				movCC.setMontoCobrado(ticket.getMontoCobrado() * -1);
 				movCC.setTicket(this.ticket);
 				movCC.setUsuario(usuarioActual);
+//TODO
+// AGREGADO POR DAMIAN PARA MEDIOPAGO... NO LLEGA A LO VISUAL, POR DEFECTO ES NOAPLICA SI SON MOVIMIENTOS INTERNOS DEL SISTEMA,
+//				SI MUEVEN CAJA EL DEFECTO ES EFECTIVO A MENOS QUE SEA LO CONTRARIO.
+				movCC.setMedioPago(modelo.MovimientoCC.MEDIOPAGO.EFECTIVO);
+
 				DAOCliente.getInstance().agregarMovimientoCC(ticket.getCliente().getIdCliente(), movCC);
 			}			
 			return true;
@@ -594,8 +600,9 @@ public class Controlador {
 		movimientoM.setIdMovimiento(0);
 		movimientoM.setMontoCobrado(monto);
 		movimientoM.setUsuario(usuarioActual);
+		movimientoM.setMedioPago(modelo.MovimientoCC.MEDIOPAGO.NOAPLICA);
+
 		DAOCliente.getInstance().agregarMovimientoCC(cliente.getIdCliente(), movimientoM);
-		//		DAOMovimientoCC.getInstance().persistir(movimientoM);
 
 		return 0;
 	}
@@ -639,6 +646,7 @@ public class Controlador {
 						movimientoNuevo.setMontoCobrado((-1)*montoMovimiento);
 						movimientoNuevo.setLiquidacionExpensas(liquidacionExpensas);
 						movimientoNuevo.setUsuario(usuarioActual);
+						movimientoNuevo.setMedioPago(modelo.MovimientoCC.MEDIOPAGO.NOAPLICA);
 
 
 						liquidacionExpensas.setIdLiquidacionExpensas(DAOCliente.getInstance().agregarMovimientoCC_Expensas(clienteM.getIdCliente(), movimientoNuevo));
@@ -771,6 +779,7 @@ public class Controlador {
 						movimientoNuevo.setMontoCobrado((-1)*movimientoActual.getMontoCobrado());
 						movimientoNuevo.setLiquidacionExpensas(null);
 						movimientoNuevo.setUsuario(usuarioActual);
+						movimientoNuevo.setMedioPago(modelo.MovimientoCC.MEDIOPAGO.NOAPLICA);
 
 						DAOCliente.getInstance().agregarMovimientoCC(clienteM.getIdCliente(), movimientoNuevo);
 						codigoReturn=movimientoNuevo.getIdMovimiento();
@@ -928,6 +937,7 @@ public class Controlador {
 						movimientoNuevo.setLiquidacionExpensas(null);
 						movimientoNuevo.setInteres(interesM);
 						movimientoNuevo.setUsuario(usuarioActual);
+						movimientoNuevo.setMedioPago(modelo.MovimientoCC.MEDIOPAGO.NOAPLICA);
 
 						interesM.setIdInteres(DAOCliente.getInstance().agregarMovimientoCC_Interes(clienteM.getIdCliente(), movimientoNuevo));
 					}
@@ -1081,7 +1091,7 @@ public class Controlador {
 						movimientoNuevo.setLiquidacionExpensas(null);
 						movimientoNuevo.setUsuario(usuarioActual);
 						movimientoNuevo.setLiquidacionAlquileres(liquidacionAlquileres);
-
+						movimientoNuevo.setMedioPago(modelo.MovimientoCC.MEDIOPAGO.NOAPLICA);
 						liquidacionAlquileres.setIdLiquidacionAlquileres(DAOCliente.getInstance().agregarMovimientoCC_Alquileres(clienteM.getIdCliente(), movimientoNuevo));
 
 						alquileresImprimir.add(cocheraActual.getUbicacion()+";"+fecha +";"+ clienteM.getNombre()+";"+clienteM.getApellido()+";"+ montoMovimiento);
@@ -1129,13 +1139,13 @@ public class Controlador {
 		descuentos=DAODescuento.getInstance().getDescuentos();
 		return codigoReturn;
 	}
-	
+
 	public ArrayList<modelo.LiquidacionAlquileres> getLiquidacionesAlquileresRecientes() 
 	{
 		//Liquidaciones generadas en los últimos 30 días.
 		return DAOLiquidacionAlquileres.getInstance().getLiquidacionesRecientes();
 	}
-	
+
 	public long anularLiquidacionAlquileres(LiquidacionAlquileres liquidacionSeleccionado) {
 
 		long codigoReturn=-1;
@@ -1166,7 +1176,7 @@ public class Controlador {
 						movimientoNuevo.setMontoCobrado((-1)*movimientoActual.getMontoCobrado());
 						movimientoNuevo.setLiquidacionAlquileres(null);
 						movimientoNuevo.setUsuario(usuarioActual);
-
+						movimientoNuevo.setMedioPago(modelo.MovimientoCC.MEDIOPAGO.NOAPLICA);
 						DAOCliente.getInstance().agregarMovimientoCC(clienteM.getIdCliente(), movimientoNuevo);
 						codigoReturn=movimientoNuevo.getIdMovimiento();
 

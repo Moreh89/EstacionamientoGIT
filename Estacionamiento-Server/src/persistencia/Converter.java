@@ -357,6 +357,7 @@ public class Converter {
 		}
 		cuentaCorrienteM.setMovimientos(movimientosCCM);
 
+
 		return cuentaCorrienteM;
 	}
 
@@ -369,6 +370,14 @@ public class Converter {
 		movimientoCCP.setDescripcion(movimientoCCM.getDescripcion());
 		movimientoCCP.setMontoCobrado(movimientoCCM.getMontoCobrado());
 		movimientoCCP.setEstado(movimientoCCM.getEstado());
+		String medioPago=movimientoCCM.getMedioPago().toString();
+		if(medioPago.equals("EFECTIVO"))
+			movimientoCCP.setMedioPago(persistencia.clases.MovimientoCC.MEDIOPAGO.EFECTIVO);
+		if(medioPago.equals("TARJETA"))
+			movimientoCCP.setMedioPago(persistencia.clases.MovimientoCC.MEDIOPAGO.TARJETA);
+		if(medioPago.equals("NOAPLICA"))
+			movimientoCCP.setMedioPago(persistencia.clases.MovimientoCC.MEDIOPAGO.NOAPLICA);
+
 		if(movimientoCCM.getTicket()!=null)
 		{
 			movimientoCCP.setTicket(convertTicketModeloToPersistencia(movimientoCCM.getTicket()));
@@ -405,10 +414,14 @@ public class Converter {
 		movimientoCCM.setIdMovimiento(movimientoCCP.getIdMovimiento());
 		movimientoCCM.setMontoCobrado(movimientoCCP.getMontoCobrado());
 		movimientoCCM.setDescripcion(movimientoCCP.getDescripcion());
-		//		if(movimientoCCP.getTicket()!=null)
-		//		{
-		//			movimientoCCM.setTicket(convertTicketPersistenciaToModelo (movimientoCCP.getTicket()));
-		//		}
+		String medioPago=movimientoCCP.getMedioPago().toString();
+		if(medioPago.equals("EFECTIVO"))
+			movimientoCCM.setMedioPago(modelo.MovimientoCC.MEDIOPAGO.EFECTIVO);
+		if(medioPago.equals("TARJETA"))
+			movimientoCCM.setMedioPago(modelo.MovimientoCC.MEDIOPAGO.TARJETA);
+		if(medioPago.equals("NOAPLICA"))
+			movimientoCCM.setMedioPago(modelo.MovimientoCC.MEDIOPAGO.NOAPLICA);
+
 		if(movimientoCCP.getLiquidacionExpensas()!=null)
 		{
 			movimientoCCM.setLiquidacionExpensas(convertLiquidacionExpensasPersistenciaToModelo (movimientoCCP.getLiquidacionExpensas()));

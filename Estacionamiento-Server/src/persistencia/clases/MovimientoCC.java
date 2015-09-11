@@ -24,6 +24,7 @@ public class MovimientoCC {
 	private Date fecha;
 	private String descripcion;
 	private double montoCobrado;
+	private MEDIOPAGO medioPago;
 	private String estado;
 	@OneToOne
 	@JoinColumn(name="Ticket")
@@ -45,6 +46,10 @@ public class MovimientoCC {
 	@OneToOne(cascade=CascadeType.ALL)
 	@JoinColumn(name="Usuario")
 	private Usuario usuario;
+
+	
+	
+	
 	
 	public long getIdMovimiento() {
 		return idMovimiento;
@@ -122,7 +127,19 @@ public class MovimientoCC {
 		this.liquidacionAlquileres = liquidacionAlquileres;
 	}
 	
-	
+	public MEDIOPAGO getMedioPago() {
+		return medioPago;
+	}
+	public void setMedioPago(MEDIOPAGO medioPago) {
+		this.medioPago = medioPago;
+	}
+
+	public enum MEDIOPAGO
+	{
+		NOAPLICA,
+		EFECTIVO,
+		TARJETA;
+	}
 	
 	
 	
