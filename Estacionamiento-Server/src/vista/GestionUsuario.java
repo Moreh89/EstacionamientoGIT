@@ -31,6 +31,7 @@ import javax.swing.ScrollPaneConstants;
 import javax.swing.JList;
 import modelo.Usuario;
 import controlador.Controlador;
+import java.awt.Font;
 
 
 
@@ -110,6 +111,7 @@ public class GestionUsuario extends JDialog implements ActionListener, KeyListen
 		contentPane.setLayout(null);
 
 		JLabel lblBuscar = new JLabel("Buscar");
+		lblBuscar.setFont(new Font("Tahoma", Font.BOLD, 11));
 		lblBuscar.setBounds(10, 19, 46, 14);
 		contentPane.add(lblBuscar);
 
@@ -328,7 +330,7 @@ public class GestionUsuario extends JDialog implements ActionListener, KeyListen
 	public void actionPerformed(ActionEvent e) {
 
 		if(e.getSource() == this.buscarButton){
-			listModel.clear();
+			listModel = new DefaultListModel<modelo.Usuario>();
 			for (Usuario usuarioTemp : Controlador.getInstancia().getUsuarios()) {
 				listModel.addElement(usuarioTemp);
 			} 
@@ -388,13 +390,13 @@ public class GestionUsuario extends JDialog implements ActionListener, KeyListen
 					&& !textFieldUserName.getText().isEmpty())
 			{
 				//TODO codigoReturn no se usa
-				
+
 				@SuppressWarnings("unused")
 				long codigoReturn=-1;
 				modelo.Usuario usuarioSeleccionado = (Usuario) this.listUsuarios.getSelectedValue();
 				codigoReturn=Controlador.getInstancia().modificarUsuario(textFieldApellido.getText(),textFieldDNILU.getText(),textFieldNombre.getText()
 						,comboBoxTipoDoc.getSelectedItem().toString(), comboBoxTipoUsuario.getSelectedItem().toString(), usuarioSeleccionado);
-				
+
 				dispose();
 			}
 		}

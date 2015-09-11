@@ -142,6 +142,11 @@ public class CobroExtraordinario extends JDialog implements ActionListener{
 			dispose();
 		}
 
+		if(event.getSource()==limpiarCamposButton)
+		{
+			montoCobradoTextField.setText("");
+		}
+
 		if(event.getSource()==btnBuscarCliente)
 		{
 			new BuscadorCliente().setVisible(true);
@@ -153,36 +158,37 @@ public class CobroExtraordinario extends JDialog implements ActionListener{
 		}
 		if(event.getSource()==aceptarButton)
 		{
-
-			long codigoReturn;
-			if(cliente!=null &&  cliente.getCuentaCorriente()!=null)
+			if(!clienteTextField.getText().isEmpty())
 			{
-				if(!montoCobradoTextField.getText().isEmpty()&&isNumeric(montoCobradoTextField.getText()))
+				long codigoReturn;
+				if(cliente!=null &&  cliente.getCuentaCorriente()!=null)
 				{
-					codigoReturn=Controlador.getInstancia().generarCobroExtraordinario(comboBoxTipoCobro.getSelectedItem().toString(), Double.parseDouble(montoCobradoTextField.getText()),cliente);
-					if(codigoReturn == -1)
+					if(!montoCobradoTextField.getText().isEmpty()&&isNumeric(montoCobradoTextField.getText()))
 					{
-						JOptionPane.showMessageDialog(null, "No se pudo realizar el cobro.", "Cobro Extraordinario", JOptionPane.INFORMATION_MESSAGE);
+						codigoReturn=Controlador.getInstancia().generarCobroExtraordinario(comboBoxTipoCobro.getSelectedItem().toString(), Double.parseDouble(montoCobradoTextField.getText()),cliente);
+						if(codigoReturn == -1)
+						{
+							JOptionPane.showMessageDialog(null, "No se pudo realizar el cobro.", "Cobro Extraordinario", JOptionPane.INFORMATION_MESSAGE);
+						}
+						if(codigoReturn >= 0)
+						{
+							JOptionPane.showMessageDialog(null, "Se generó correctamente el cobro del pago de " + comboBoxTipoCobro.getSelectedItem().toString(),"Cobro Extraordinario", JOptionPane.INFORMATION_MESSAGE);
+						}
 					}
-					if(codigoReturn >= 0)
+					else
 					{
-						JOptionPane.showMessageDialog(null, "Se generó correctamente el cobro del pago de " + comboBoxTipoCobro.getSelectedItem().toString(),"Cobro Extraordinario", JOptionPane.INFORMATION_MESSAGE);
+						JOptionPane.showMessageDialog(null, "El campo Monto se encuentra incompleto o el valor ingresado no es válido.","Cobro Extraordinario", JOptionPane.INFORMATION_MESSAGE);
 					}
 				}
 				else
 				{
-					JOptionPane.showMessageDialog(null, "El campo Monto se encuentra incompleto o el valor ingresado no es válido.","Cobro Extraordinario", JOptionPane.INFORMATION_MESSAGE);
+					JOptionPane.showMessageDialog(null, "Cliente no seleccionado.", "Cobro Extraordinario", JOptionPane.INFORMATION_MESSAGE);
 				}
+				dispose();
 			}
-			else
-			{
+			else{
 				JOptionPane.showMessageDialog(null, "Cliente no seleccionado.", "Cobro Extraordinario", JOptionPane.INFORMATION_MESSAGE);
 			}
-			dispose();
-		}
-		if(event.getSource()==limpiarCamposButton)
-		{
-			montoCobradoTextField.setText("");
 		}
 	}
 
