@@ -308,7 +308,7 @@ public class MenuAdmin extends JFrame implements ActionListener {
 		}
 		if(event.getSource()==mntmAnularAlquileres)
 		{
-//			new EmitirLiquidacionAlquileres().setVisible(true);
+			new AnularLiquidacionAlquileres().setVisible(true);
 		}
 		
 	}

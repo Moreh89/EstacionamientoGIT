@@ -100,28 +100,7 @@ public class DAOCliente {
 		return codigoReturn;
 	}
 
-	public long agregarMovimientoCC_Expensas(long idCliente, modelo.MovimientoCC movimientoNuevoM)
-	{
-		persistencia.clases.Cliente clienteP = new persistencia.clases.Cliente();
-		long codigoReturn = -1;
-		persistencia.clases.MovimientoCC movimientoNuevoP = new persistencia.clases.MovimientoCC();
-		movimientoNuevoP = Converter.convertMovimientoCuentaCorrienteModeloToPersistencia(movimientoNuevoM);
-
-		clienteP=(persistencia.clases.Cliente) HibernateDAO.getInstancia().get(persistencia.clases.Cliente.class, idCliente);
-		if(movimientoNuevoM.getLiquidacionExpensas().getIdLiquidacionExpensas()!=0)
-		{
-			movimientoNuevoP.setLiquidacionExpensas((LiquidacionExpensas) HibernateDAO.getInstancia().getObjectWithLong("LiquidacionExpensas", "idLiquidacionExpensas", movimientoNuevoM.getLiquidacionExpensas().getIdLiquidacionExpensas()));
-		}
-		movimientoNuevoP.setUsuario((persistencia.clases.Usuario) HibernateDAO.getInstancia().getObjectWithLong("Usuario", "idUsuario", movimientoNuevoM.getUsuario().getIdUsuario()));
-
-
-		clienteP.getCuentaCorriente().addMovimientoCC(movimientoNuevoP);
-
-		clienteP=(Cliente) HibernateDAO.getInstancia().update(clienteP);
-		codigoReturn=clienteP.getCuentaCorriente().getMovimientos().get(clienteP.getCuentaCorriente().getMovimientos().size()-1).getLiquidacionExpensas().getIdLiquidacionExpensas();
-
-		return codigoReturn;
-	}
+	
 
 	public double getEstadoCrediticio(modelo.Cliente clienteM) {
 		double deuda=0;
@@ -154,7 +133,28 @@ public class DAOCliente {
 		clientesReturn = Converter.convertClientesPersistenciaToModelo(clientesP);
 		return clientesReturn;
 	}
+	public long agregarMovimientoCC_Expensas(long idCliente, modelo.MovimientoCC movimientoNuevoM)
+	{
+		persistencia.clases.Cliente clienteP = new persistencia.clases.Cliente();
+		long codigoReturn = -1;
+		persistencia.clases.MovimientoCC movimientoNuevoP = new persistencia.clases.MovimientoCC();
+		movimientoNuevoP = Converter.convertMovimientoCuentaCorrienteModeloToPersistencia(movimientoNuevoM);
 
+		clienteP=(persistencia.clases.Cliente) HibernateDAO.getInstancia().get(persistencia.clases.Cliente.class, idCliente);
+		if(movimientoNuevoM.getLiquidacionExpensas().getIdLiquidacionExpensas()!=0)
+		{
+			movimientoNuevoP.setLiquidacionExpensas((LiquidacionExpensas) HibernateDAO.getInstancia().getObjectWithLong("LiquidacionExpensas", "idLiquidacionExpensas", movimientoNuevoM.getLiquidacionExpensas().getIdLiquidacionExpensas()));
+		}
+		movimientoNuevoP.setUsuario((persistencia.clases.Usuario) HibernateDAO.getInstancia().getObjectWithLong("Usuario", "idUsuario", movimientoNuevoM.getUsuario().getIdUsuario()));
+
+
+		clienteP.getCuentaCorriente().addMovimientoCC(movimientoNuevoP);
+
+		clienteP=(Cliente) HibernateDAO.getInstancia().update(clienteP);
+		codigoReturn=clienteP.getCuentaCorriente().getMovimientos().get(clienteP.getCuentaCorriente().getMovimientos().size()-1).getLiquidacionExpensas().getIdLiquidacionExpensas();
+
+		return codigoReturn;
+	}
 	public long agregarMovimientoCC_Alquileres(long idCliente, modelo.MovimientoCC movimientoNuevoM)
 	{
 		persistencia.clases.Cliente clienteP = new persistencia.clases.Cliente();
@@ -170,7 +170,7 @@ public class DAOCliente {
 		clienteP.getCuentaCorriente().addMovimientoCC(movimientoNuevoP);
 
 		clienteP=(Cliente) HibernateDAO.getInstancia().update(clienteP);
-		codigoReturn=clienteP.getCuentaCorriente().getMovimientos().get(clienteP.getCuentaCorriente().getMovimientos().size()-1).getIdMovimiento();
+		codigoReturn=clienteP.getCuentaCorriente().getMovimientos().get(clienteP.getCuentaCorriente().getMovimientos().size()-1).getLiquidacionAlquileres().getIdLiquidacionAlquileres();
 
 		return codigoReturn;
 	}

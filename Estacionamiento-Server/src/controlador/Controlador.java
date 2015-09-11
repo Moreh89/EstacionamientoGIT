@@ -45,7 +45,7 @@ public class Controlador {
 	public ArrayList<Vehiculo> vehiculosActuales;
 	public ArrayList<PersonaAutorizada> personasAutorizadasActuales;
 	ArrayList<modelo.Cliente> clientesConDeuda;
-
+	private double resumenCuentaMovimientosClienteActual=0;
 	private static Controlador instancia;
 
 	public static void main(String[] args) {
@@ -939,7 +939,9 @@ public class Controlador {
 
 	}
 
+	@SuppressWarnings("deprecation")
 	public ArrayList<MovimientoCC> getMovimientosCliente(Date fechaDesde, Date fechaHasta) {
+		resumenCuentaMovimientosClienteActual=0;
 		ArrayList<MovimientoCC> movimientos= new ArrayList<MovimientoCC>();
 		modelo.Cliente cteAct=DAOCliente.getInstance().getClienteModelo(clienteActual.getIdCliente());
 		if(cteAct!=null)
@@ -955,6 +957,7 @@ public class Controlador {
 				if(fechaDesde.compareTo(movimientoAct.getFecha())<=0&& fechaHasta.compareTo(movimientoAct.getFecha())>=0)
 				{
 					movimientos.add(movimientoAct);
+					resumenCuentaMovimientosClienteActual=resumenCuentaMovimientosClienteActual+movimientoAct.getMontoCobrado();
 				}
 			}
 		}
@@ -1079,7 +1082,7 @@ public class Controlador {
 						movimientoNuevo.setUsuario(usuarioActual);
 						movimientoNuevo.setLiquidacionAlquileres(liquidacionAlquileres);
 
-						DAOCliente.getInstance().agregarMovimientoCC_Alquileres(clienteM.getIdCliente(), movimientoNuevo);
+						liquidacionAlquileres.setIdLiquidacionAlquileres(DAOCliente.getInstance().agregarMovimientoCC_Alquileres(clienteM.getIdCliente(), movimientoNuevo));
 
 						alquileresImprimir.add(cocheraActual.getUbicacion()+";"+fecha +";"+ clienteM.getNombre()+";"+clienteM.getApellido()+";"+ montoMovimiento);
 
@@ -1133,4 +1136,50 @@ public class Controlador {
 		return DAOLiquidacionAlquileres.getInstance().getLiquidacionesRecientes();
 	}
 	
+	public long anularLiquidacionAlquileres(LiquidacionAlquileres liquidacionSeleccionado) {
+
+		long codigoReturn=-1;
+
+		liquidacionSeleccionado.setEstado(modelo.LiquidacionAlquileres.Estado.ANULADO);
+		DAOLiquidacionAlquileres.getInstance().anularLiquidacion(liquidacionSeleccionado);
+
+		ArrayList<modelo.Cliente> clientes = new ArrayList<modelo.Cliente>();
+		clientes=DAOCliente.getInstance().getClientes();
+
+		new GregorianCalendar();
+		Date fecha= GregorianCalendar.getInstance().getTime();
+
+		for(modelo.Cliente clienteM : clientes)
+		{
+			if(!clienteM.getCocheras().isEmpty() && clienteM.getCuentaCorriente()!=null && !clienteM.getCuentaCorriente().getMovimientos().isEmpty() )
+			{
+				for(modelo.MovimientoCC movimientoActual : clienteM.getCuentaCorriente().getMovimientos())
+				{
+					if(movimientoActual.getLiquidacionAlquileres()!=null && movimientoActual.getLiquidacionAlquileres().getIdLiquidacionAlquileres()==liquidacionSeleccionado.getIdLiquidacionAlquileres())
+					{
+						modelo.MovimientoCC movimientoNuevo= new modelo.MovimientoCC();
+						movimientoNuevo.setIdMovimiento(0);
+						movimientoNuevo.setFecha(fecha);
+						movimientoNuevo.setDescripcion("ANULADO - "+movimientoActual.getDescripcion());
+						movimientoNuevo.setEstado("Anulado");
+						movimientoNuevo.setTicket(null);
+						movimientoNuevo.setMontoCobrado((-1)*movimientoActual.getMontoCobrado());
+						movimientoNuevo.setLiquidacionAlquileres(null);
+						movimientoNuevo.setUsuario(usuarioActual);
+
+						DAOCliente.getInstance().agregarMovimientoCC(clienteM.getIdCliente(), movimientoNuevo);
+						codigoReturn=movimientoNuevo.getIdMovimiento();
+
+					}
+				}
+			}
+		}
+
+
+		return codigoReturn;
+	}
+	public double getResumenCuentaMovimientosClienteActual()
+	{
+		return this.resumenCuentaMovimientosClienteActual;
+	}
 }

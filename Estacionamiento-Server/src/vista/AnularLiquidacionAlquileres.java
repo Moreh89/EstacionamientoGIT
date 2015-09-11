@@ -19,11 +19,13 @@ import javax.swing.JScrollPane;
 import javax.swing.ListSelectionModel;
 import javax.swing.ScrollPaneConstants;
 
-import modelo.LiquidacionExpensas;
+import modelo.LiquidacionAlquileres;
 import controlador.Controlador;
+
 import java.awt.GridBagLayout;
 import java.awt.GridBagConstraints;
 import java.awt.Insets;
+
 import javax.swing.JLabel;
 
 public class AnularLiquidacionAlquileres extends JDialog implements ActionListener, ListSelectionListener {
@@ -35,13 +37,11 @@ public class AnularLiquidacionAlquileres extends JDialog implements ActionListen
 	private final JPanel contentPanel = new JPanel();
 	private JButton anularButton;
 	private JButton cancelarButton;
-	private DefaultListModel<LiquidacionExpensas> listModel;
-	private JList<LiquidacionExpensas> listLiquidaciones;
+	private DefaultListModel<LiquidacionAlquileres> listModel;
+	private JList<LiquidacionAlquileres> listLiquidaciones;
 	private JLabel lblFechaEmisionLiquidacion;
-	private JLabel lblMontoTotalLiquidado;
 	private JTextField textFieldFechaEmisionLiquidacion;
-	private JTextField textFieldMontoTotalLiquidado;
-	private LiquidacionExpensas liquidacionSeleccionado;
+	private LiquidacionAlquileres liquidacionSeleccionado;
 
 
 	/**
@@ -64,15 +64,15 @@ public class AnularLiquidacionAlquileres extends JDialog implements ActionListen
 	public AnularLiquidacionAlquileres() {
 		setResizable(false);
 		setTitle("Anular Liquidacion de Alquileres");
-		setBounds(100, 100, 403, 357);
+		setBounds(100, 100, 403, 325);
 		getContentPane().setLayout(new BorderLayout());
 		contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
 		getContentPane().add(contentPanel, BorderLayout.CENTER);
 		GridBagLayout gbl_contentPanel = new GridBagLayout();
 		gbl_contentPanel.columnWidths = new int[]{50, 150, 150, 50, 0};
-		gbl_contentPanel.rowHeights = new int[]{234, 30, 30, 35, 0, 0};
+		gbl_contentPanel.rowHeights = new int[]{234, 30, 35, 0, 0};
 		gbl_contentPanel.columnWeights = new double[]{0.0, 0.0, 1.0, 0.0, Double.MIN_VALUE};
-		gbl_contentPanel.rowWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
+		gbl_contentPanel.rowWeights = new double[]{0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
 		contentPanel.setLayout(gbl_contentPanel);
 
 		JScrollPane scrollPane = new JScrollPane();
@@ -86,7 +86,7 @@ public class AnularLiquidacionAlquileres extends JDialog implements ActionListen
 		contentPanel.add(scrollPane, gbc_scrollPane);
 
 		listModel = new DefaultListModel<modelo.LiquidacionAlquileres>();
-		for (modelo.LiquidacionAlquileres liquidacionTemp : Controlador.getInstancia().getLiquidacionesExpensasRecientes()) {
+		for (modelo.LiquidacionAlquileres liquidacionTemp : Controlador.getInstancia().getLiquidacionesAlquileresRecientes()) {
 			listModel.addElement(liquidacionTemp);
 		} 		
 		listLiquidaciones= new JList(listModel);
@@ -112,25 +112,6 @@ public class AnularLiquidacionAlquileres extends JDialog implements ActionListen
 		gbc_textFieldFechaEmisionLiquidacion.gridy = 1;
 		contentPanel.add(textFieldFechaEmisionLiquidacion, gbc_textFieldFechaEmisionLiquidacion);
 		textFieldFechaEmisionLiquidacion.setColumns(10);
-
-		lblMontoTotalLiquidado = new JLabel("Monto Total Liquidado:");
-		GridBagConstraints gbc_lblMontoTotalLiquidado = new GridBagConstraints();
-		gbc_lblMontoTotalLiquidado.anchor = GridBagConstraints.WEST;
-		gbc_lblMontoTotalLiquidado.insets = new Insets(0, 0, 5, 5);
-		gbc_lblMontoTotalLiquidado.gridx = 1;
-		gbc_lblMontoTotalLiquidado.gridy = 2;
-		contentPanel.add(lblMontoTotalLiquidado, gbc_lblMontoTotalLiquidado);
-
-		textFieldMontoTotalLiquidado = new JTextField();
-		textFieldMontoTotalLiquidado.setEditable(false);
-		textFieldMontoTotalLiquidado.setEnabled(false);
-		GridBagConstraints gbc_textFieldMontoTotalLiquidado = new GridBagConstraints();
-		gbc_textFieldMontoTotalLiquidado.insets = new Insets(0, 0, 5, 5);
-		gbc_textFieldMontoTotalLiquidado.fill = GridBagConstraints.HORIZONTAL;
-		gbc_textFieldMontoTotalLiquidado.gridx = 2;
-		gbc_textFieldMontoTotalLiquidado.gridy = 2;
-		contentPanel.add(textFieldMontoTotalLiquidado, gbc_textFieldMontoTotalLiquidado);
-		textFieldMontoTotalLiquidado.setColumns(10);
 		//						listLiquidaciones.addListSelectionListener(this);
 
 		anularButton = new JButton("Anular Liquidacion");
@@ -139,7 +120,7 @@ public class AnularLiquidacionAlquileres extends JDialog implements ActionListen
 		gbc_anularButton.fill = GridBagConstraints.BOTH;
 		gbc_anularButton.insets = new Insets(0, 0, 5, 5);
 		gbc_anularButton.gridx = 1;
-		gbc_anularButton.gridy = 3;
+		gbc_anularButton.gridy = 2;
 		contentPanel.add(anularButton, gbc_anularButton);
 		anularButton.addActionListener(this);
 
@@ -149,7 +130,7 @@ public class AnularLiquidacionAlquileres extends JDialog implements ActionListen
 		gbc_cancelarButton.insets = new Insets(0, 0, 5, 5);
 		gbc_cancelarButton.fill = GridBagConstraints.BOTH;
 		gbc_cancelarButton.gridx = 2;
-		gbc_cancelarButton.gridy = 3;
+		gbc_cancelarButton.gridy = 2;
 		contentPanel.add(cancelarButton, gbc_cancelarButton);
 		cancelarButton.addActionListener(this);
 
@@ -169,7 +150,7 @@ public class AnularLiquidacionAlquileres extends JDialog implements ActionListen
 		}
 		if(event.getSource()==anularButton)
 		{
-			Controlador.getInstancia().anularLiquidacionExpensas((LiquidacionExpensas) listLiquidaciones.getSelectedValue());
+			Controlador.getInstancia().anularLiquidacionAlquileres((LiquidacionAlquileres) listLiquidaciones.getSelectedValue());
 			dispose();
 		}
 	}
@@ -177,9 +158,8 @@ public class AnularLiquidacionAlquileres extends JDialog implements ActionListen
 	@Override
 	public void valueChanged(ListSelectionEvent e) {
 		if(e.getSource() == this.listLiquidaciones){
-			liquidacionSeleccionado = (LiquidacionExpensas) this.listLiquidaciones.getSelectedValue();
+			liquidacionSeleccionado = (LiquidacionAlquileres) this.listLiquidaciones.getSelectedValue();
 			textFieldFechaEmisionLiquidacion.setText(new SimpleDateFormat("dd/MM/yyyy - HH:mm").format(liquidacionSeleccionado.getFechaEmision()));
-			textFieldMontoTotalLiquidado.setText(Double.toString(liquidacionSeleccionado.getMontoTotalLiquidado()));
 		}		
 	}
 }

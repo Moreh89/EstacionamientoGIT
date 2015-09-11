@@ -377,6 +377,10 @@ public class Converter {
 		{
 			movimientoCCP.setLiquidacionExpensas((convertLiquidacionExpensasModeloToPersistencia(movimientoCCM.getLiquidacionExpensas())));
 		}
+		if(movimientoCCM.getLiquidacionAlquileres()!=null)
+		{
+			movimientoCCP.setLiquidacionAlquileres((convertLiquidacionAlquileresModeloToPersistencia(movimientoCCM.getLiquidacionAlquileres())));
+		}
 		if(movimientoCCM.getInteres()!=null)
 		{
 			movimientoCCP.setInteres(convertInteresModeloToPersistencia(movimientoCCM.getInteres()));
@@ -408,6 +412,10 @@ public class Converter {
 		if(movimientoCCP.getLiquidacionExpensas()!=null)
 		{
 			movimientoCCM.setLiquidacionExpensas(convertLiquidacionExpensasPersistenciaToModelo (movimientoCCP.getLiquidacionExpensas()));
+		}
+		if(movimientoCCP.getLiquidacionAlquileres()!=null)
+		{
+			movimientoCCM.setLiquidacionAlquileres(convertLiquidacionAlquileresPersistenciaToModelo (movimientoCCP.getLiquidacionAlquileres()));
 		}
 		if(movimientoCCP.getInteres()!=null)
 		{

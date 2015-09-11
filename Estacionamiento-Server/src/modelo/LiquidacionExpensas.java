@@ -1,5 +1,7 @@
 package modelo;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 public class LiquidacionExpensas {
@@ -43,7 +45,7 @@ public class LiquidacionExpensas {
 
 	public String toString()
 	{
-		return this.fechaEmision.toString();
+		return new SimpleDateFormat("dd-MM-yyyy HH:mm").format(this.fechaEmision).toString();
 	}
 
 	

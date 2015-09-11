@@ -3,6 +3,7 @@ package vista;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
+
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import javax.swing.event.ListSelectionEvent;
@@ -16,20 +17,27 @@ import javax.swing.JTextField;
 import javax.swing.JButton;
 import javax.swing.JSeparator;
 import javax.swing.ListSelectionModel;
+
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+import java.awt.Color;
 import java.awt.GridBagLayout;
 import java.awt.GridBagConstraints;
 import java.awt.Insets;
+
 import javax.swing.JScrollPane;
 import javax.swing.ScrollPaneConstants;
 import javax.swing.JList;
+
 import org.jdesktop.swingx.JXDatePicker;
+
 import modelo.MovimientoCC;
 import controlador.Controlador;
+
 import java.awt.Panel;
+import java.awt.Font;
 
 
 
@@ -63,6 +71,7 @@ public class VerMovimientosCC extends JDialog implements ActionListener, KeyList
 	private JTextField textFieldDescripcion;
 	private JTextField textFieldMonto;
 	private JTextField textFieldUsuario;
+	private JTextField textFieldResumenCuenta;
 
 
 	public VerMovimientosCC() {
@@ -76,7 +85,7 @@ public class VerMovimientosCC extends JDialog implements ActionListener, KeyList
 		setTitle("Movimientos Cuenta Corriente");
 		setResizable(false);
 		//setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 572, 500);
+		setBounds(100, 100, 572, 600);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
@@ -99,21 +108,42 @@ public class VerMovimientosCC extends JDialog implements ActionListener, KeyList
 		contentPane.add(separator);
 
 		panelAtributos = new JPanel();
-		panelAtributos.setBounds(17, 259, 539, 135);
+		panelAtributos.setBounds(10, 314, 546, 185);
 		contentPane.add(panelAtributos);
 		GridBagLayout gbl_panelAtributos = new GridBagLayout();
 		gbl_panelAtributos.columnWidths = new int[]{0, 0, 0};
-		gbl_panelAtributos.rowHeights = new int[]{30, 30, 30, 30, 0};
+		gbl_panelAtributos.rowHeights = new int[]{30, 30, 30, 30, 30, 0};
 		gbl_panelAtributos.columnWeights = new double[]{0.0, 1.0, Double.MIN_VALUE};
-		gbl_panelAtributos.rowWeights = new double[]{0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
+		gbl_panelAtributos.rowWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
 		panelAtributos.setLayout(gbl_panelAtributos);
+
+		JLabel lblResumenCuenta = new JLabel("Resumen Cuenta:");
+		GridBagConstraints gbc_lblResumenCuenta = new GridBagConstraints();
+		gbc_lblResumenCuenta.anchor = GridBagConstraints.EAST;
+		gbc_lblResumenCuenta.insets = new Insets(0, 0, 5, 5);
+		gbc_lblResumenCuenta.gridx = 0;
+		gbc_lblResumenCuenta.gridy = 0;
+		panelAtributos.add(lblResumenCuenta, gbc_lblResumenCuenta);
+
+		textFieldResumenCuenta = new JTextField();
+		textFieldResumenCuenta.setFont(new Font("Tahoma", Font.BOLD, 11));
+		textFieldResumenCuenta.setEnabled(false);
+		textFieldResumenCuenta.setEditable(false);
+		textFieldResumenCuenta.setForeground(Color.red);
+		GridBagConstraints gbc_textFieldResumenCuenta = new GridBagConstraints();
+		gbc_textFieldResumenCuenta.insets = new Insets(0, 0, 5, 0);
+		gbc_textFieldResumenCuenta.fill = GridBagConstraints.HORIZONTAL;
+		gbc_textFieldResumenCuenta.gridx = 1;
+		gbc_textFieldResumenCuenta.gridy = 0;
+		panelAtributos.add(textFieldResumenCuenta, gbc_textFieldResumenCuenta);
+		textFieldResumenCuenta.setColumns(10);
 
 		lblFecha = new JLabel("Fecha:");
 		GridBagConstraints gbc_lblFecha = new GridBagConstraints();
 		gbc_lblFecha.anchor = GridBagConstraints.EAST;
 		gbc_lblFecha.insets = new Insets(0, 0, 5, 5);
 		gbc_lblFecha.gridx = 0;
-		gbc_lblFecha.gridy = 0;
+		gbc_lblFecha.gridy = 1;
 		panelAtributos.add(lblFecha, gbc_lblFecha);
 
 		textFieldFecha = new JTextField();
@@ -123,7 +153,7 @@ public class VerMovimientosCC extends JDialog implements ActionListener, KeyList
 		gbc_textFieldFecha.fill = GridBagConstraints.HORIZONTAL;
 		gbc_textFieldFecha.insets = new Insets(0, 0, 5, 0);
 		gbc_textFieldFecha.gridx = 1;
-		gbc_textFieldFecha.gridy = 0;
+		gbc_textFieldFecha.gridy = 1;
 		panelAtributos.add(textFieldFecha, gbc_textFieldFecha);
 		textFieldFecha.setColumns(10);
 
@@ -132,7 +162,7 @@ public class VerMovimientosCC extends JDialog implements ActionListener, KeyList
 		gbc_lblDescripcin.anchor = GridBagConstraints.EAST;
 		gbc_lblDescripcin.insets = new Insets(0, 0, 5, 5);
 		gbc_lblDescripcin.gridx = 0;
-		gbc_lblDescripcin.gridy = 1;
+		gbc_lblDescripcin.gridy = 2;
 		panelAtributos.add(lblDescripcin, gbc_lblDescripcin);
 
 		textFieldDescripcion = new JTextField();
@@ -142,7 +172,7 @@ public class VerMovimientosCC extends JDialog implements ActionListener, KeyList
 		gbc_textFieldDescripcion.fill = GridBagConstraints.HORIZONTAL;
 		gbc_textFieldDescripcion.insets = new Insets(0, 0, 5, 0);
 		gbc_textFieldDescripcion.gridx = 1;
-		gbc_textFieldDescripcion.gridy = 1;
+		gbc_textFieldDescripcion.gridy = 2;
 		panelAtributos.add(textFieldDescripcion, gbc_textFieldDescripcion);
 		textFieldDescripcion.setColumns(10);
 
@@ -151,7 +181,7 @@ public class VerMovimientosCC extends JDialog implements ActionListener, KeyList
 		gbc_lblMonto.anchor = GridBagConstraints.EAST;
 		gbc_lblMonto.insets = new Insets(0, 0, 5, 5);
 		gbc_lblMonto.gridx = 0;
-		gbc_lblMonto.gridy = 2;
+		gbc_lblMonto.gridy = 3;
 		panelAtributos.add(lblMonto, gbc_lblMonto);
 
 		textFieldMonto = new JTextField();
@@ -161,7 +191,7 @@ public class VerMovimientosCC extends JDialog implements ActionListener, KeyList
 		gbc_textFieldMonto.insets = new Insets(0, 0, 5, 0);
 		gbc_textFieldMonto.fill = GridBagConstraints.HORIZONTAL;
 		gbc_textFieldMonto.gridx = 1;
-		gbc_textFieldMonto.gridy = 2;
+		gbc_textFieldMonto.gridy = 3;
 		panelAtributos.add(textFieldMonto, gbc_textFieldMonto);
 		textFieldMonto.setColumns(10);
 
@@ -170,7 +200,7 @@ public class VerMovimientosCC extends JDialog implements ActionListener, KeyList
 		gbc_lblUsuario.anchor = GridBagConstraints.EAST;
 		gbc_lblUsuario.insets = new Insets(0, 0, 0, 5);
 		gbc_lblUsuario.gridx = 0;
-		gbc_lblUsuario.gridy = 3;
+		gbc_lblUsuario.gridy = 4;
 		panelAtributos.add(lblUsuario, gbc_lblUsuario);
 
 		textFieldUsuario = new JTextField();
@@ -179,12 +209,12 @@ public class VerMovimientosCC extends JDialog implements ActionListener, KeyList
 		GridBagConstraints gbc_textFieldUsuario = new GridBagConstraints();
 		gbc_textFieldUsuario.fill = GridBagConstraints.HORIZONTAL;
 		gbc_textFieldUsuario.gridx = 1;
-		gbc_textFieldUsuario.gridy = 3;
+		gbc_textFieldUsuario.gridy = 4;
 		panelAtributos.add(textFieldUsuario, gbc_textFieldUsuario);
 		textFieldUsuario.setColumns(10);
-		
+
 		panelClientes = new JPanel();
-		panelClientes.setBounds(10, 96, 546, 135);
+		panelClientes.setBounds(10, 81, 546, 190);
 		contentPane.add(panelClientes);
 		GridBagLayout gbl_panelClientes = new GridBagLayout();
 		gbl_panelClientes.columnWidths = new int[]{240, 0};
@@ -202,9 +232,6 @@ public class VerMovimientosCC extends JDialog implements ActionListener, KeyList
 		panelClientes.add(scrollPaneClientes, gbc_scrollPaneClientes);
 
 		listModel = new DefaultListModel<modelo.MovimientoCC>();
-		//		for (MovimientoCC movimientoTemp : Controlador.getInstancia().getMovimientos()) {
-		//			listModel.addElement(movimientoTemp);
-		//		} 
 		listMovimientos = new JList(listModel);
 		listMovimientos.setSelectionMode(ListSelectionModel.SINGLE_INTERVAL_SELECTION);
 		scrollPaneClientes.setViewportView(listMovimientos);
@@ -212,7 +239,7 @@ public class VerMovimientosCC extends JDialog implements ActionListener, KeyList
 
 		btnVolver = new JButton("Volver");
 		btnVolver.setIcon(new ImageIcon(VerMovimientosCC.class.getResource("/image/izq.png")));
-		btnVolver.setBounds(436, 405, 120, 50);
+		btnVolver.setBounds(436, 510, 120, 50);
 		btnVolver.addActionListener(this);
 		contentPane.add(btnVolver);
 
@@ -247,7 +274,7 @@ public class VerMovimientosCC extends JDialog implements ActionListener, KeyList
 		gbc_fechaDesde.gridy = 0;
 		panel.add(fechaDesde, gbc_fechaDesde);
 		fechaDesde.setDate(Calendar.getInstance().getTime());
-		fechaDesde.setFormats(new SimpleDateFormat("dd/MM/yyyy"));
+		fechaDesde.setFormats(new SimpleDateFormat("dd-MM-yyyy"));
 
 		lblFechaHasta = new JLabel("Fecha Hasta:");
 		GridBagConstraints gbc_lblFechaHasta = new GridBagConstraints();
@@ -265,7 +292,7 @@ public class VerMovimientosCC extends JDialog implements ActionListener, KeyList
 		gbc_fechaHasta.gridy = 0;
 		panel.add(fechaHasta, gbc_fechaHasta);
 		fechaHasta.setDate(Calendar.getInstance().getTime());
-		fechaHasta.setFormats(new SimpleDateFormat("dd/MM/yyyy"));
+		fechaHasta.setFormats(new SimpleDateFormat("dd-MM-yyyy"));
 
 
 		buscarButton = new JButton("Buscar");
@@ -278,7 +305,7 @@ public class VerMovimientosCC extends JDialog implements ActionListener, KeyList
 		buscarButton.setIcon(new ImageIcon(VerMovimientosCC.class.getResource("/image/search.png")));
 
 		JSeparator separator_1 = new JSeparator();
-		separator_1.setBounds(10, 242, 546, 6);
+		separator_1.setBounds(10, 297, 546, 6);
 		contentPane.add(separator_1);
 		listMovimientos.addListSelectionListener(this);
 
@@ -303,8 +330,7 @@ public class VerMovimientosCC extends JDialog implements ActionListener, KeyList
 				{
 					listModel.addElement(movimientoAct);
 				}
-
-
+				textFieldResumenCuenta.setText(Double.toString(Controlador.getInstancia().getResumenCuentaMovimientosClienteActual()));
 			}
 		}
 		if(e.getSource()==btnVolver)
