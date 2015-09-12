@@ -18,15 +18,12 @@ public class Cliente {
 	private String telefono2;
 	private String direccion;
 	private String direccion2;
-	//campo para comentarios
 	private String descripcion;
 	private String correoElectronico;
 	private ESTADO estado;
-	private String cuil;
-	
+	private String cuil;	
 	private double estadoCrediticio;
 	
-//REVISAR ES STRING NO CLASE!
 	private List <PersonaAutorizada> personasAutorizadasARetirar;
 	
 	String razonSocial;
@@ -216,7 +213,6 @@ public class Cliente {
 		{
 			estadoCrediticio=estadoCrediticio+movimientoM.getMontoCobrado();
 		}
-		
 		return estadoCrediticio;
 	}
 	public double getEstadoCrediticio() {

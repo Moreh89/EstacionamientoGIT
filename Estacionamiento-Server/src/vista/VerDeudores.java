@@ -11,6 +11,7 @@ import javax.swing.DefaultListModel;
 import javax.swing.ImageIcon;
 import javax.swing.JDialog;
 import javax.swing.JButton;
+import javax.swing.JOptionPane;
 import javax.swing.ListSelectionModel;
 
 import java.awt.event.ActionListener;
@@ -51,10 +52,12 @@ public class VerDeudores extends JDialog implements ActionListener, KeyListener,
 	private JScrollPane scrollPaneClientes;
 	private JList listDeudores;
 	private DefaultListModel<modelo.Cliente> listModel;
-	private JButton btnCancelar;
+	private JButton btnVolver;
 	private JButton btnExportarAExcel;
 	private JLabel lblMontoAdeudado;
 	private JTextField textFieldMontoAdeudado;
+	private JLabel lblTipoDeCliente;
+	private JTextField textFieldTipoCliente;
 	/**
 	 * Launch the application.
 	 */
@@ -104,15 +107,15 @@ public class VerDeudores extends JDialog implements ActionListener, KeyListener,
 		};
 		GridBagLayout gbl_contentPane = new GridBagLayout();
 		gbl_contentPane.columnWidths = new int[]{144, 239, 120, 0};
-		gbl_contentPane.rowHeights = new int[]{400, 0, 10, 35, 0};
+		gbl_contentPane.rowHeights = new int[]{400, 0, 0, 10, 35, 0};
 		gbl_contentPane.columnWeights = new double[]{0.0, 1.0, 0.0, Double.MIN_VALUE};
-		gbl_contentPane.rowWeights = new double[]{0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
+		gbl_contentPane.rowWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
 		contentPane.setLayout(gbl_contentPane);
 
 
-		btnCancelar = new JButton("Cancelar");
-		btnCancelar.setIcon(new ImageIcon(GestionUsuario.class.getResource("/image/cancel.png")));
-		btnCancelar.addActionListener(this);
+		btnVolver = new JButton("Volver");
+		btnVolver.setIcon(new ImageIcon(VerDeudores.class.getResource("/image/izq.png")));
+		btnVolver.addActionListener(this);
 
 		panelClientes = new JPanel();
 		GridBagConstraints gbc_panelClientes = new GridBagConstraints();
@@ -168,20 +171,40 @@ public class VerDeudores extends JDialog implements ActionListener, KeyListener,
 		gbc_textFieldMontoAdeudado.gridy = 1;
 		contentPane.add(textFieldMontoAdeudado, gbc_textFieldMontoAdeudado);
 		textFieldMontoAdeudado.setColumns(10);
+		
+		lblTipoDeCliente = new JLabel("Tipo de Cliente:");
+		GridBagConstraints gbc_lblTipoDeCliente = new GridBagConstraints();
+		gbc_lblTipoDeCliente.anchor = GridBagConstraints.EAST;
+		gbc_lblTipoDeCliente.insets = new Insets(0, 0, 5, 5);
+		gbc_lblTipoDeCliente.gridx = 0;
+		gbc_lblTipoDeCliente.gridy = 2;
+		contentPane.add(lblTipoDeCliente, gbc_lblTipoDeCliente);
+		
+		textFieldTipoCliente = new JTextField();
+		textFieldTipoCliente.setEnabled(false);
+		textFieldTipoCliente.setEditable(false);
+		GridBagConstraints gbc_textFieldTipoCliente = new GridBagConstraints();
+		gbc_textFieldTipoCliente.insets = new Insets(0, 0, 5, 5);
+		gbc_textFieldTipoCliente.fill = GridBagConstraints.HORIZONTAL;
+		gbc_textFieldTipoCliente.gridx = 1;
+		gbc_textFieldTipoCliente.gridy = 2;
+		contentPane.add(textFieldTipoCliente, gbc_textFieldTipoCliente);
+		textFieldTipoCliente.setColumns(10);
 
-		JButton btnExportarAExcel_1 = new JButton("Exportar a Excel");
-		btnExportarAExcel_1.setIcon(new ImageIcon(VerDeudores.class.getResource("/image/guardar.png")));
+		btnExportarAExcel = new JButton("Exportar a Excel");
+		btnExportarAExcel.setIcon(new ImageIcon(VerDeudores.class.getResource("/image/guardar.png")));
 		GridBagConstraints gbc_btnExportarAExcel_1 = new GridBagConstraints();
 		gbc_btnExportarAExcel_1.fill = GridBagConstraints.BOTH;
 		gbc_btnExportarAExcel_1.insets = new Insets(0, 0, 0, 5);
 		gbc_btnExportarAExcel_1.gridx = 0;
-		gbc_btnExportarAExcel_1.gridy = 3;
-		contentPane.add(btnExportarAExcel_1, gbc_btnExportarAExcel_1);
-		GridBagConstraints gbc_btnCancelar = new GridBagConstraints();
-		gbc_btnCancelar.fill = GridBagConstraints.BOTH;
-		gbc_btnCancelar.gridx = 2;
-		gbc_btnCancelar.gridy = 3;
-		contentPane.add(btnCancelar, gbc_btnCancelar);
+		gbc_btnExportarAExcel_1.gridy = 4;
+		contentPane.add(btnExportarAExcel, gbc_btnExportarAExcel_1);
+		GridBagConstraints gbc_btnVolver = new GridBagConstraints();
+		gbc_btnVolver.fill = GridBagConstraints.BOTH;
+		gbc_btnVolver.gridx = 2;
+		gbc_btnVolver.gridy = 4;
+		contentPane.add(btnVolver, gbc_btnVolver);
+		btnExportarAExcel.addActionListener(this);
 
 		GridBagConstraints gbc_fechaDesde_1_1 = new GridBagConstraints();
 		gbc_fechaDesde_1_1.anchor = GridBagConstraints.WEST;
@@ -198,14 +221,24 @@ public class VerDeudores extends JDialog implements ActionListener, KeyListener,
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		if(e.getSource()==btnCancelar)
+		if(e.getSource()==btnVolver)
 		{
 			dispose();
 		}
 
 		if(e.getSource()==btnExportarAExcel)
 		{
-			//TODO
+			long codigoReturn=-1;
+			codigoReturn=Controlador.getInstancia().exportarDeudoresExcel();
+			if(codigoReturn==1)
+			{
+				JOptionPane.showMessageDialog(null, "El listado de Deudores fue exportado exitosamente","Vista Deudores",  JOptionPane.INFORMATION_MESSAGE);
+			}
+			else
+			{
+				JOptionPane.showMessageDialog(null, "No se pudo exportar el listado de Deudores. Intente nuevamente","Vista Deudores",  JOptionPane.INFORMATION_MESSAGE);
+
+			}
 			dispose();
 		}
 	}
@@ -228,7 +261,10 @@ public class VerDeudores extends JDialog implements ActionListener, KeyListener,
 	public void valueChanged(ListSelectionEvent e) {
 		if(e.getSource() == this.listDeudores){
 			modelo.Cliente clienteSeleccionado = (Cliente) this.listDeudores.getSelectedValue();
-			textFieldMontoAdeudado.setText(Double.toString(Controlador.getInstancia().getClienteEstadoCrediticio(clienteSeleccionado.getIdCliente())));
+//			textFieldMontoAdeudado.setText(Double.toString(Controlador.getInstancia().getClienteEstadoCrediticio(clienteSeleccionado.getIdCliente())));
+			textFieldTipoCliente.setText(clienteSeleccionado.getTipoCliente().toString());
+			textFieldMontoAdeudado.setText(Double.toString(clienteSeleccionado.getEstadoCrediticio()));
+
 		}		
 	}
 }

@@ -537,9 +537,9 @@ public class Controlador {
 				movCC.setMontoCobrado(ticket.getMontoCobrado() * -1);
 				movCC.setTicket(this.ticket);
 				movCC.setUsuario(usuarioActual);
-//TODO
-// AGREGADO POR DAMIAN PARA MEDIOPAGO... NO LLEGA A LO VISUAL, POR DEFECTO ES NOAPLICA SI SON MOVIMIENTOS INTERNOS DEL SISTEMA,
-//				SI MUEVEN CAJA EL DEFECTO ES EFECTIVO A MENOS QUE SEA LO CONTRARIO.
+				//TODO
+				// AGREGADO POR DAMIAN PARA MEDIOPAGO... NO LLEGA A LO VISUAL, POR DEFECTO ES NOAPLICA SI SON MOVIMIENTOS INTERNOS DEL SISTEMA,
+				//				SI MUEVEN CAJA EL DEFECTO ES EFECTIVO A MENOS QUE SEA LO CONTRARIO.
 				movCC.setMedioPago(modelo.MovimientoCC.MEDIOPAGO.EFECTIVO);
 
 				DAOCliente.getInstance().agregarMovimientoCC(ticket.getCliente().getIdCliente(), movCC);
@@ -1038,21 +1038,6 @@ public class Controlador {
 		}
 	}
 
-	public double getClienteEstadoCrediticio(long idCliente)
-	{
-		double estadoCrediticio=0;
-		for(modelo.Cliente cte : clientesConDeuda)
-		{
-			if(cte.getIdCliente()==idCliente)
-
-			{
-				estadoCrediticio=cte.getEstadoCrediticio();
-			}
-		}
-
-		return estadoCrediticio;
-	}
-
 	public long liquidarAlquileres(String descripcion) 
 	{
 		long codigoReturn=0;
@@ -1192,4 +1177,53 @@ public class Controlador {
 	{
 		return this.resumenCuentaMovimientosClienteActual;
 	}
+
+	public long exportarDeudoresExcel()
+	{
+		//		clientesConDeuda
+		Date fecha= GregorianCalendar.getInstance().getTime();
+
+		ArrayList<String> deudoresImprimir = new ArrayList<String>();
+		deudoresImprimir.add("Fecha;Nombre;Apellido;Monto;Tipo Cliente;Cochera");
+		String cocherasCte="";
+		for(modelo.Cliente clienteAct : clientesConDeuda)
+		{
+			for(modelo.Cochera cocheraM:clienteAct.getCocheras())
+			{
+				if(cocherasCte.equalsIgnoreCase(""))
+				{
+					cocherasCte=cocheraM.getUbicacion();
+				}
+				else
+				{
+					cocherasCte.concat(" - ");
+					cocherasCte.concat(cocheraM.getUbicacion());
+				}
+			}
+			deudoresImprimir.add(new SimpleDateFormat("dd-MM-yyyy").format(fecha)+";"+clienteAct.getNombre()+";"+clienteAct.getApellido()+";"+clienteAct.getEstadoCrediticio()+";"+ clienteAct.getTipoCliente().toString()+";"+cocherasCte);
+
+		}
+
+		Excel excel = new Excel();
+		File theDir = new File("C:\\SIGE\\Deudores\\");
+		if (!theDir.exists())
+		{ 
+			boolean result = theDir.mkdirs();    
+		}
+		String path= "'"+theDir.getPath()+"\\";
+		//		DateFormat dateFormat = new SimpleDateFormat("yyyyMMddHHmmss"); 
+		//		Date date = new Date(); 
+		excel.setOutputFile(theDir+"\\Deudores_"+new SimpleDateFormat("yyyy_MM_dd_HH_mm").format(fecha)+".xls");
+
+		try {
+			excel.writeList(deudoresImprimir);
+			return 1;
+		} catch (WriteException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		return -1;
+	}
+
 }
