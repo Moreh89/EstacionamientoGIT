@@ -70,7 +70,7 @@ public class GestionTarifa extends JDialog implements ActionListener, ItemListen
 
 	@SuppressWarnings({ "rawtypes", "unchecked" })
 	public void initGUI(){
-		setTitle("Alta Tarifa");
+		setTitle("Gesti\u00F3n Tarifa");
 		setResizable(false);
 		setBounds(100, 100, 617, 325);
 		contentPane = new JPanel();

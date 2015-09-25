@@ -86,7 +86,7 @@ public class GestionDescuento extends JDialog implements ActionListener, ListSel
 	@SuppressWarnings({ "rawtypes", "unchecked" })
 	public GestionDescuento() {
 		setResizable(false);
-		setTitle("Gestion Descuento");
+		setTitle("Gesti\u00F3n Descuento");
 		setBounds(100, 100, 624, 540);
 		getContentPane().setLayout(new BorderLayout());
 		contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));

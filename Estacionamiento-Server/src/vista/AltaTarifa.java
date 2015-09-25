@@ -21,6 +21,8 @@ import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.Vector;
+import javax.swing.border.SoftBevelBorder;
+import javax.swing.border.BevelBorder;
 
 
 public class AltaTarifa extends JDialog implements ActionListener{
@@ -45,6 +47,7 @@ public class AltaTarifa extends JDialog implements ActionListener{
 	private JTextField textTiempoFinEstadia;
 	@SuppressWarnings("rawtypes")
 	private JComboBox comboBoxCategoria;
+
 	/**
 	 * Launch the application.
 	 */
@@ -74,15 +77,26 @@ public class AltaTarifa extends JDialog implements ActionListener{
 	public void initGUI(){
 		setTitle("Alta Tarifa");
 		setResizable(false);
-		setBounds(100, 100, 617, 325);
+		setBounds(100, 100, 710, 290);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
-		contentPane.setLayout(null);
+		GridBagLayout gbl_contentPane = new GridBagLayout();
+		gbl_contentPane.columnWidths = new int[]{281, 45, 278, 0};
+		gbl_contentPane.rowHeights = new int[]{182, 29, 32, 0};
+		gbl_contentPane.columnWeights = new double[]{0.0, 0.0, 0.0, Double.MIN_VALUE};
+		gbl_contentPane.rowWeights = new double[]{0.0, 0.0, 0.0, Double.MIN_VALUE};
+		contentPane.setLayout(gbl_contentPane);
 
 		JPanel panel = new JPanel();
-		panel.setBounds(6, 6, 604, 219);
-		contentPane.add(panel);
+		panel.setBorder(new SoftBevelBorder(BevelBorder.LOWERED, null, null, null, null));
+		GridBagConstraints gbc_panel = new GridBagConstraints();
+		gbc_panel.fill = GridBagConstraints.BOTH;
+		gbc_panel.insets = new Insets(0, 0, 5, 0);
+		gbc_panel.gridwidth = 3;
+		gbc_panel.gridx = 0;
+		gbc_panel.gridy = 0;
+		contentPane.add(panel, gbc_panel);
 		GridBagLayout gbl_panel = new GridBagLayout();
 		gbl_panel.columnWidths = new int[]{124, 200, 0, 0, 200, 0};
 		gbl_panel.rowHeights = new int[] {28, 28, 28, 28, 20, 20, 0};
@@ -97,10 +111,9 @@ public class AltaTarifa extends JDialog implements ActionListener{
 		gbc_labelCategoria.gridx = 0;
 		gbc_labelCategoria.gridy = 0;
 		panel.add(labelCategoria, gbc_labelCategoria);
-
 		comboBoxCategoria = new JComboBox();
-
 		Vector comboBoxCategoriasItems=Controlador.getInstancia().getCategoriasVehiculosActualesString();
+
 		comboBoxCategoria.setModel(new DefaultComboBoxModel(comboBoxCategoriasItems));
 
 		GridBagConstraints gbc_comboBoxCategoria = new GridBagConstraints();
@@ -279,17 +292,27 @@ public class AltaTarifa extends JDialog implements ActionListener{
 		gbc_textTiempoFraccion.gridy = 5;
 		panel.add(textTiempoFraccion, gbc_textTiempoFraccion);
 
-		buttonCancelar = new JButton("Cancelar");
-		buttonCancelar.setIcon(new ImageIcon(BuscadorCliente.class.getResource("/image/cancel.png")));
-		buttonCancelar.setBounds(139, 237, 148, 56);
-		contentPane.add(buttonCancelar);
-		buttonCancelar.addActionListener(this);
-
 		buttonCrearTarifa = new JButton("Crear Tarifa");
 		buttonCrearTarifa.setIcon(new ImageIcon(BuscadorCliente.class.getResource("/image/ok.png")));
-		buttonCrearTarifa.setBounds(332, 237, 148, 56);
-		contentPane.add(buttonCrearTarifa);
+		GridBagConstraints gbc_buttonCrearTarifa = new GridBagConstraints();
+		gbc_buttonCrearTarifa.anchor = GridBagConstraints.EAST;
+		gbc_buttonCrearTarifa.insets = new Insets(0, 0, 0, 5);
+		gbc_buttonCrearTarifa.fill = GridBagConstraints.VERTICAL;
+		gbc_buttonCrearTarifa.gridx = 0;
+		gbc_buttonCrearTarifa.gridy = 2;
+		contentPane.add(buttonCrearTarifa, gbc_buttonCrearTarifa);
+
+		buttonCancelar = new JButton("Cancelar");
+		buttonCancelar.setIcon(new ImageIcon(BuscadorCliente.class.getResource("/image/cancel.png")));
+		GridBagConstraints gbc_buttonCancelar = new GridBagConstraints();
+		gbc_buttonCancelar.anchor = GridBagConstraints.WEST;
+		gbc_buttonCancelar.fill = GridBagConstraints.VERTICAL;
+		gbc_buttonCancelar.gridx = 2;
+		gbc_buttonCancelar.gridy = 2;
+		contentPane.add(buttonCancelar, gbc_buttonCancelar);
+		buttonCancelar.addActionListener(this);
 		buttonCrearTarifa.addActionListener(this);
+
 
 		this.setLocationRelativeTo(null);
 
@@ -341,7 +364,7 @@ public class AltaTarifa extends JDialog implements ActionListener{
 
 
 	}
-    @SuppressWarnings("unused")
+	@SuppressWarnings("unused")
 	public static boolean isNumeric(String str)  
 	{  
 		try  
