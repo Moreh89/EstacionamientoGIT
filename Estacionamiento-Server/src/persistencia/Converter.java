@@ -374,7 +374,7 @@ public class Converter {
 		cuentaCorrienteM.setIdCuentaCorriente(cuentaCorrienteP.getIdCuentaCorriente());
 		List<modelo.MovimientoCC> movimientosCCM = new ArrayList<modelo.MovimientoCC>();
 		
-		if(!cuentaCorrienteP.getMovimientos().isEmpty())
+		if(cuentaCorrienteP.getMovimientos()!=null)
 		{
 			for (persistencia.clases.MovimientoCC movimientoCCP : cuentaCorrienteP.getMovimientos()) {
 				movimientosCCM.add(convertMovimientoCuentaCorrientePersistenciaToModelo(movimientoCCP));

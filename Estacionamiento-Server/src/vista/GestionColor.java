@@ -94,6 +94,12 @@ public class GestionColor extends JDialog implements ActionListener, ListSelecti
 				gbc_scrollPane.gridx = 0;
 				gbc_scrollPane.gridy = 0;
 				contentPanel.add(scrollPane, gbc_scrollPane);
+				
+
+				listModel = new DefaultListModel<modelo.ColorVehiculo>();
+				for (modelo.ColorVehiculo colorTemp : Controlador.getInstancia().getColoresActuales()) {
+					listModel.addElement(colorTemp);
+				} 
 				listColores= new JList(listModel);
 				listColores.setSelectionMode(ListSelectionModel.SINGLE_INTERVAL_SELECTION);
 				scrollPane.setViewportView(listColores);
@@ -217,10 +223,6 @@ public class GestionColor extends JDialog implements ActionListener, ListSelecti
 		cancelarButton.addActionListener(this);
 		
 
-		listModel = new DefaultListModel<modelo.ColorVehiculo>();
-		for (modelo.ColorVehiculo colorTemp : Controlador.getInstancia().getColoresActuales()) {
-			listModel.addElement(colorTemp);
-		} 
 		
 		this.setLocationRelativeTo(null);
 		setModal(true);

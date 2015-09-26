@@ -9,6 +9,8 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.Date;
 import java.util.GregorianCalendar;
 import java.util.List;
@@ -109,6 +111,15 @@ public class Controlador {
 		tasaInteres=DAOTasaInteres.getInstance().getTasaInteresActual();
 		tarifas=DAOTarifa.getInstance().getTarifas();
 		clientes=DAOCliente.getInstance().getClientes();
+
+//SORTS
+		Collections.sort(descuentos, new Descuento.CompDescripcion());
+		Collections.sort(coloresVehiculos, new ColorVehiculo.CompDescripcion());
+		Collections.sort(modelosVehiculos, new ModeloVehiculo.CompDescripcion());
+		Collections.sort(categoriasVehiculos, new CategoriaVehiculo.CompDescripcion());
+		Collections.sort(clientes, new Cliente.CompDescripcion());
+
+
 		this.aplicarInteres();
 		return true;
 
@@ -387,7 +398,9 @@ public class Controlador {
 		return descuentosActuales;
 	}
 
-	public ArrayList<modelo.Descuento> getDescuentosActuales() {
+	public ArrayList<modelo.Descuento> getDescuentosActuales() 
+	{
+		
 		return descuentos;
 	}
 
@@ -404,6 +417,7 @@ public class Controlador {
 
 
 	public ArrayList<modelo.ModeloVehiculo> getModelosActuales() {
+		
 		return modelosVehiculos;
 	}
 

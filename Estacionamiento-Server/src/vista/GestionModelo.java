@@ -140,6 +140,11 @@ public class GestionModelo extends JDialog implements ActionListener, ListSelect
 		gbc_scrollPane.gridx = 0;
 		gbc_scrollPane.gridy = 0;
 		contentPanel.add(scrollPane, gbc_scrollPane);
+
+		listModel = new DefaultListModel<modelo.ModeloVehiculo>();
+		for (modelo.ModeloVehiculo modeloTemp : Controlador.getInstancia().getModelosActuales()) {
+			listModel.addElement(modeloTemp);
+		} 
 		listModelos= new JList(listModel);
 		listModelos.setSelectionMode(ListSelectionModel.SINGLE_INTERVAL_SELECTION);
 		scrollPane.setViewportView(listModelos);
@@ -219,10 +224,6 @@ public class GestionModelo extends JDialog implements ActionListener, ListSelect
 		
 
 
-		listModel = new DefaultListModel<modelo.ModeloVehiculo>();
-		for (modelo.ModeloVehiculo modeloTemp : Controlador.getInstancia().getModelosActuales()) {
-			listModel.addElement(modeloTemp);
-		} 
 		
 		this.setLocationRelativeTo(null);
 		setModal(true);

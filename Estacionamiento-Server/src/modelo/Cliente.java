@@ -1,5 +1,6 @@
 package modelo;
 
+import java.util.Comparator;
 import java.util.List;
 
 import persistencia.clases.Cliente.TIPO_FACTURA;
@@ -7,7 +8,7 @@ import persistencia.clases.Cliente.TIPO_FACTURA;
 
 
 public class Cliente {
-	
+
 	//justifica herencia?
 
 	private long idCliente;
@@ -28,13 +29,13 @@ public class Cliente {
 	private TIPO_FACTURA tipoFactura;
 
 	private List <PersonaAutorizada> personasAutorizadasARetirar;
-	
+
 	String razonSocial;
 	private List <Cochera> cocheras; 
 	private CuentaCorriente cuentaCorriente;
 	private List<Vehiculo> vehiculos;
-	
-	
+
+
 	public enum TIPO_CLIENTE {
 		PARTICULAR_PROPIETARIO,
 		EMPRESA_PROPIETARIO,
@@ -43,26 +44,26 @@ public class Cliente {
 		PARTICULAR_FRECUENTE,
 		EMPRESA_FRECUENTE;
 	}
-	
+
 	public enum TIPO_DOC {
 		DNI,
 		LU,
 		PASS,
 		OTRO;
 	}
-	
+
 	public enum TIPO_FACTURA {
 		A,
 		B,
 		C,
 		NA;
 	}	
-	
+
 	public enum ESTADO {
 		ACTIVO,
 		INACTIVO;
 	}
-	
+
 
 	public String getCuil() {
 		return cuil;
@@ -206,22 +207,25 @@ public class Cliente {
 		this.cuentaCorriente = cuentaCorriente;
 		this.vehiculos = vehiculos;
 	}
-	
-	
+
+
 	public Cliente() {}
-	
+
 	public String toString(){
 
 		return this.apellido+ " " + this.nombre; 
 	}
 	public double getEstadoCrediticio(modelo.Cliente clienteM) {
-		
-//NO ANDA
-//		return DAOCliente.getInstance().getEstadoCrediticio(clienteM);
+
+		//NO ANDA
+		//		return DAOCliente.getInstance().getEstadoCrediticio(clienteM);
 		double estadoCrediticio=0;
-		for(MovimientoCC movimientoM : clienteM.getCuentaCorriente().getMovimientos())
+		if(clienteM.getCuentaCorriente().getMovimientos()!=null)
 		{
-			estadoCrediticio=estadoCrediticio+movimientoM.getMontoCobrado();
+			for(MovimientoCC movimientoM : clienteM.getCuentaCorriente().getMovimientos())
+			{
+				estadoCrediticio=estadoCrediticio+movimientoM.getMontoCobrado();
+			}
 		}
 		return estadoCrediticio;
 	}
@@ -237,6 +241,11 @@ public class Cliente {
 	public void setTipoFactura(TIPO_FACTURA tipoFactura) {
 		this.tipoFactura = tipoFactura;
 	}
-	
-	
+
+	public static class CompDescripcion implements Comparator<Cliente>
+	{
+		public int compare(Cliente o1, Cliente o2) {
+			return o1.getApellido().compareToIgnoreCase(o2.getApellido());
+		}
+	}
 }
