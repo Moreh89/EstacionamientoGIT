@@ -118,7 +118,7 @@ public class Controlador {
 	public void altaCliente(String nombre, String apellido, String telefono1,
 			String telefono2, String direccion1, String direccion2,
 			String email, String razonSocial, ArrayList<String> listPersonasAutorizadas,
-			ArrayList<String> listVehiculos, String tipoDoc, String numeroDoc, String tipoCliente, String cuil) 
+			ArrayList<String> listVehiculos, String tipoDoc, String numeroDoc, String tipoCliente, String cuil, String tipoFactura) 
 	{
 		Cliente cliente=new Cliente();
 		cliente.setNombre(nombre);
@@ -131,6 +131,14 @@ public class Controlador {
 		cliente.setRazonSocial(razonSocial);
 		cliente.setCuil(cuil);
 
+		if(tipoFactura.equals("1. NO APLICA"))
+			cliente.setTipoFactura(modelo.Cliente.TIPO_FACTURA.NA);
+		if(tipoFactura.equals("2. A"))
+			cliente.setTipoFactura(modelo.Cliente.TIPO_FACTURA.A);
+		if(tipoFactura.equals("3. B"))
+			cliente.setTipoFactura(modelo.Cliente.TIPO_FACTURA.B);
+		if(tipoFactura.equals("4. C"))
+			cliente.setTipoFactura(modelo.Cliente.TIPO_FACTURA.C);
 
 		if(tipoDoc.equals("1. DNI"))
 			cliente.setTipoDocumento(modelo.Cliente.TIPO_DOC.DNI);
@@ -165,6 +173,10 @@ public class Controlador {
 		cliente.setCuentaCorriente(new modelo.CuentaCorriente());
 
 		DAOCliente.getInstance().persistir(cliente);
+		
+//		TODO EXPLOTA CUANDO QUIERE VOLVER A LEVANTAR LOS CLIENTES...MUY EXTRAÑO
+		
+//		clientes=DAOCliente.getInstance().getClientes();
 
 	}
 

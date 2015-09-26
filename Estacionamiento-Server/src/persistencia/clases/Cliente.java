@@ -34,6 +34,8 @@ public class Cliente {
 	private String correoElectronico;
 	private ESTADO estado;
 	private String cuil;
+	private TIPO_FACTURA tipoFactura;
+	
 	@OneToMany(cascade=CascadeType.ALL)
 	@JoinColumn(name="Cliente")
 	private List<PersonaAutorizada> personasAutorizadasARetirar;
@@ -69,8 +71,12 @@ public class Cliente {
 		ACTIVO;
 	}
 	
-
-	
+	public enum TIPO_FACTURA {
+		A,
+		B,
+		C,
+		NA;
+	}	
 	
 	public String getCuil() {
 		return cuil;
@@ -217,6 +223,13 @@ public class Cliente {
 	public Cliente() {
 		// TODO Auto-generated constructor stub
 	}
+	public TIPO_FACTURA getTipoFactura() {
+		return tipoFactura;
+	}
+	public void setTipoFactura(TIPO_FACTURA tipoFactura) {
+		this.tipoFactura = tipoFactura;
+	}
+	
 	
 	
 	

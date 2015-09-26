@@ -13,6 +13,7 @@ import modelo.Vehiculo;
 import persistencia.clases.Cliente.ESTADO;
 import persistencia.clases.Cliente.TIPO_CLIENTE;
 import persistencia.clases.Cliente.TIPO_DOC;
+import persistencia.clases.Cliente.TIPO_FACTURA;
 import persistencia.clases.IncrementoPrepago;
 
 public class Converter {
@@ -189,6 +190,16 @@ public class Converter {
 		if(estadoCliente.equals("INACTIVO"))
 			clienteP.setEstado(ESTADO.INACTIVO);
 
+		String tipoFactura=clienteM.getTipoFactura().toString();
+		if(tipoFactura.equals("A"))
+			clienteP.setTipoFactura(TIPO_FACTURA.A);
+		if(tipoFactura.equals("B"))
+			clienteP.setTipoFactura(TIPO_FACTURA.B);
+		if(tipoFactura.equals("C"))
+			clienteP.setTipoFactura(TIPO_FACTURA.C);
+		if(tipoFactura.equals("NA"))
+			clienteP.setTipoFactura(TIPO_FACTURA.NA);
+
 		if(clienteM.getCuentaCorriente()!=null)
 		{
 			persistencia.clases.CuentaCorriente cCP = new persistencia.clases.CuentaCorriente();
@@ -281,6 +292,17 @@ public class Converter {
 		if(estadoCliente.equals("INACTIVO"))
 			clienteM.setEstado(modelo.Cliente.ESTADO.INACTIVO);
 
+
+		String tipoFactura=clienteP.getTipoFactura().toString();
+		if(tipoFactura.equals("A"))
+			clienteM.setTipoFactura(modelo.Cliente.TIPO_FACTURA.A);
+		if(tipoFactura.equals("B"))
+			clienteM.setTipoFactura(modelo.Cliente.TIPO_FACTURA.B);
+		if(tipoFactura.equals("C"))
+			clienteM.setTipoFactura(modelo.Cliente.TIPO_FACTURA.C);
+		if(tipoFactura.equals("NA"))
+			clienteM.setTipoFactura(modelo.Cliente.TIPO_FACTURA.NA);
+
 		if(clienteP.getCuentaCorriente()!=null)
 		{
 			modelo.CuentaCorriente cCM = new modelo.CuentaCorriente();
@@ -351,11 +373,14 @@ public class Converter {
 
 		cuentaCorrienteM.setIdCuentaCorriente(cuentaCorrienteP.getIdCuentaCorriente());
 		List<modelo.MovimientoCC> movimientosCCM = new ArrayList<modelo.MovimientoCC>();
-
-		for (persistencia.clases.MovimientoCC movimientoCCP : cuentaCorrienteP.getMovimientos()) {
-			movimientosCCM.add(convertMovimientoCuentaCorrientePersistenciaToModelo(movimientoCCP));
+		
+		if(!cuentaCorrienteP.getMovimientos().isEmpty())
+		{
+			for (persistencia.clases.MovimientoCC movimientoCCP : cuentaCorrienteP.getMovimientos()) {
+				movimientosCCM.add(convertMovimientoCuentaCorrientePersistenciaToModelo(movimientoCCP));
+			}
+			cuentaCorrienteM.setMovimientos(movimientosCCM);
 		}
-		cuentaCorrienteM.setMovimientos(movimientosCCM);
 
 
 		return cuentaCorrienteM;

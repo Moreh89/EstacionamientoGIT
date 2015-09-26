@@ -67,7 +67,8 @@ public class AltaCliente extends JDialog implements ActionListener{
 	private JTextArea textAreaCocheras;
 	private JLabel lblCuit;
 	private JTextField textFieldCUIT;
-
+	@SuppressWarnings("rawtypes")
+	private JComboBox comboBoxTipoFactura;
 	private ArrayList<String> ListPersonasAutorizadas=new ArrayList<String>();
 	private ArrayList<String> ListPatentesVehiculos=new ArrayList<String>();
 	private JLabel lblNroDocumentacion;
@@ -80,6 +81,7 @@ public class AltaCliente extends JDialog implements ActionListener{
 	private JLabel labelTipoCliente;
 	@SuppressWarnings("rawtypes")
 	private JComboBox comboBoxTipoCliente;
+	private JLabel lblTipoFactura;
 
 
 	/**
@@ -111,7 +113,7 @@ public class AltaCliente extends JDialog implements ActionListener{
 		setTitle("Alta Cliente");
 		setResizable(false);
 		//setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 764, 472);
+		setBounds(100, 100, 764, 482);
 		contentPaneAltaCliente = new JPanel();
 		contentPaneAltaCliente.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPaneAltaCliente);
@@ -119,13 +121,13 @@ public class AltaCliente extends JDialog implements ActionListener{
 
 
 		panelAltaCliente = new JPanel();
-		panelAltaCliente.setBounds(12, 13, 730, 419);
+		panelAltaCliente.setBounds(12, 13, 730, 429);
 		contentPaneAltaCliente.add(panelAltaCliente);
 		GridBagLayout gbl_panelAltaCliente = new GridBagLayout();
 		gbl_panelAltaCliente.columnWidths = new int[]{124, 227, 0, 0, 253, 0};
-		gbl_panelAltaCliente.rowHeights = new int[] {28, 0, 0, 28, 28, 28, 60, 59, 60, 0, 0};
+		gbl_panelAltaCliente.rowHeights = new int[] {28, 0, 0, 0, 28, 28, 28, 60, 59, 60, 0, 0, 0};
 		gbl_panelAltaCliente.columnWeights = new double[]{0.0, 1.0, 0.0, 0.0, 1.0, Double.MIN_VALUE};
-		gbl_panelAltaCliente.rowWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
+		gbl_panelAltaCliente.rowWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
 		panelAltaCliente.setLayout(gbl_panelAltaCliente);
 
 		labelNombre = new JLabel("Nombre:");
@@ -233,102 +235,29 @@ public class AltaCliente extends JDialog implements ActionListener{
 		gbc_textFieldCUIT.gridy = 2;
 		panelAltaCliente.add(textFieldCUIT, gbc_textFieldCUIT);
 
-		labelTelefono1 = new JLabel("Telefono 1:");
-		GridBagConstraints gbc_labelTelefono1 = new GridBagConstraints();
-		gbc_labelTelefono1.fill = GridBagConstraints.VERTICAL;
-		gbc_labelTelefono1.anchor = GridBagConstraints.WEST;
-		gbc_labelTelefono1.insets = new Insets(0, 0, 5, 5);
-		gbc_labelTelefono1.gridx = 0;
-		gbc_labelTelefono1.gridy = 3;
-		panelAltaCliente.add(labelTelefono1, gbc_labelTelefono1);
+		lblTipoFactura = new JLabel("Tipo Factura:");
+		GridBagConstraints gbc_lblTipoFactura = new GridBagConstraints();
+		gbc_lblTipoFactura.anchor = GridBagConstraints.WEST;
+		gbc_lblTipoFactura.insets = new Insets(0, 0, 5, 5);
+		gbc_lblTipoFactura.gridx = 0;
+		gbc_lblTipoFactura.gridy = 3;
+		panelAltaCliente.add(lblTipoFactura, gbc_lblTipoFactura);
 
-		textFieldTelefono1 = new JTextField();
-		textFieldTelefono1.setColumns(10);
-		GridBagConstraints gbc_textFieldTelefono1 = new GridBagConstraints();
-		gbc_textFieldTelefono1.fill = GridBagConstraints.BOTH;
-		gbc_textFieldTelefono1.insets = new Insets(0, 0, 5, 5);
-		gbc_textFieldTelefono1.gridx = 1;
-		gbc_textFieldTelefono1.gridy = 3;
-		panelAltaCliente.add(textFieldTelefono1, gbc_textFieldTelefono1);
-
-		labelTelefono2 = new JLabel("Telefono 2:");
-		GridBagConstraints gbc_labelTelefono2 = new GridBagConstraints();
-		gbc_labelTelefono2.fill = GridBagConstraints.VERTICAL;
-		gbc_labelTelefono2.anchor = GridBagConstraints.WEST;
-		gbc_labelTelefono2.insets = new Insets(0, 0, 5, 5);
-		gbc_labelTelefono2.gridx = 3;
-		gbc_labelTelefono2.gridy = 3;
-		panelAltaCliente.add(labelTelefono2, gbc_labelTelefono2);
-
-		textFieldTelefono2 = new JTextField();
-		textFieldTelefono2.setColumns(10);
-		GridBagConstraints gbc_textFieldTelefono2 = new GridBagConstraints();
-		gbc_textFieldTelefono2.fill = GridBagConstraints.BOTH;
-		gbc_textFieldTelefono2.insets = new Insets(0, 0, 5, 0);
-		gbc_textFieldTelefono2.gridx = 4;
-		gbc_textFieldTelefono2.gridy = 3;
-		panelAltaCliente.add(textFieldTelefono2, gbc_textFieldTelefono2);
-
-		labelDireccion1 = new JLabel("Direccion 1:");
-		GridBagConstraints gbc_labelDireccion1 = new GridBagConstraints();
-		gbc_labelDireccion1.fill = GridBagConstraints.VERTICAL;
-		gbc_labelDireccion1.anchor = GridBagConstraints.WEST;
-		gbc_labelDireccion1.insets = new Insets(0, 0, 5, 5);
-		gbc_labelDireccion1.gridx = 0;
-		gbc_labelDireccion1.gridy = 4;
-		panelAltaCliente.add(labelDireccion1, gbc_labelDireccion1);
-
-		textFieldDireccion1 = new JTextField();
-		textFieldDireccion1.setColumns(10);
-		GridBagConstraints gbc_textFieldDireccion1 = new GridBagConstraints();
-		gbc_textFieldDireccion1.fill = GridBagConstraints.BOTH;
-		gbc_textFieldDireccion1.insets = new Insets(0, 0, 5, 5);
-		gbc_textFieldDireccion1.gridx = 1;
-		gbc_textFieldDireccion1.gridy = 4;
-		panelAltaCliente.add(textFieldDireccion1, gbc_textFieldDireccion1);
-
-		labelDireccion2 = new JLabel("Direccion 2:");
-		GridBagConstraints gbc_labelDireccion2 = new GridBagConstraints();
-		gbc_labelDireccion2.fill = GridBagConstraints.VERTICAL;
-		gbc_labelDireccion2.anchor = GridBagConstraints.WEST;
-		gbc_labelDireccion2.insets = new Insets(0, 0, 5, 5);
-		gbc_labelDireccion2.gridx = 3;
-		gbc_labelDireccion2.gridy = 4;
-		panelAltaCliente.add(labelDireccion2, gbc_labelDireccion2);
-
-		textFieldDireccion2 = new JTextField();
-		textFieldDireccion2.setColumns(10);
-		GridBagConstraints gbc_textFieldDireccion2 = new GridBagConstraints();
-		gbc_textFieldDireccion2.fill = GridBagConstraints.BOTH;
-		gbc_textFieldDireccion2.insets = new Insets(0, 0, 5, 0);
-		gbc_textFieldDireccion2.gridx = 4;
-		gbc_textFieldDireccion2.gridy = 4;
-		panelAltaCliente.add(textFieldDireccion2, gbc_textFieldDireccion2);
-
-		labelEmail = new JLabel("Email:");
-		GridBagConstraints gbc_labelEmail = new GridBagConstraints();
-		gbc_labelEmail.fill = GridBagConstraints.VERTICAL;
-		gbc_labelEmail.anchor = GridBagConstraints.WEST;
-		gbc_labelEmail.insets = new Insets(0, 0, 5, 5);
-		gbc_labelEmail.gridx = 0;
-		gbc_labelEmail.gridy = 5;
-		panelAltaCliente.add(labelEmail, gbc_labelEmail);
-
-		textFieldEmail = new JTextField();
-		textFieldEmail.setColumns(10);
-		GridBagConstraints gbc_textFieldEmail = new GridBagConstraints();
-		gbc_textFieldEmail.fill = GridBagConstraints.BOTH;
-		gbc_textFieldEmail.insets = new Insets(0, 0, 5, 5);
-		gbc_textFieldEmail.gridx = 1;
-		gbc_textFieldEmail.gridy = 5;
-		panelAltaCliente.add(textFieldEmail, gbc_textFieldEmail);
+		comboBoxTipoFactura = new JComboBox();
+		comboBoxTipoFactura.setModel(new DefaultComboBoxModel(new String[] {"1. NO APLICA", "2. A", "3. B", "4. C"}));
+		GridBagConstraints gbc_comboBoxTipoFactura = new GridBagConstraints();
+		gbc_comboBoxTipoFactura.insets = new Insets(0, 0, 5, 5);
+		gbc_comboBoxTipoFactura.fill = GridBagConstraints.HORIZONTAL;
+		gbc_comboBoxTipoFactura.gridx = 1;
+		gbc_comboBoxTipoFactura.gridy = 3;
+		panelAltaCliente.add(comboBoxTipoFactura, gbc_comboBoxTipoFactura);
 
 		label_2 = new JLabel("Razon Social:");
 		GridBagConstraints gbc_label_2 = new GridBagConstraints();
 		gbc_label_2.anchor = GridBagConstraints.WEST;
 		gbc_label_2.insets = new Insets(0, 0, 5, 5);
 		gbc_label_2.gridx = 3;
-		gbc_label_2.gridy = 5;
+		gbc_label_2.gridy = 3;
 		panelAltaCliente.add(label_2, gbc_label_2);
 
 		textFieldRazonSocial = new JTextField();
@@ -337,8 +266,98 @@ public class AltaCliente extends JDialog implements ActionListener{
 		gbc_textFieldRazonSocial.insets = new Insets(0, 0, 5, 0);
 		gbc_textFieldRazonSocial.fill = GridBagConstraints.BOTH;
 		gbc_textFieldRazonSocial.gridx = 4;
-		gbc_textFieldRazonSocial.gridy = 5;
+		gbc_textFieldRazonSocial.gridy = 3;
 		panelAltaCliente.add(textFieldRazonSocial, gbc_textFieldRazonSocial);
+
+		labelTelefono1 = new JLabel("Telefono 1:");
+		GridBagConstraints gbc_labelTelefono1 = new GridBagConstraints();
+		gbc_labelTelefono1.fill = GridBagConstraints.VERTICAL;
+		gbc_labelTelefono1.anchor = GridBagConstraints.WEST;
+		gbc_labelTelefono1.insets = new Insets(0, 0, 5, 5);
+		gbc_labelTelefono1.gridx = 0;
+		gbc_labelTelefono1.gridy = 4;
+		panelAltaCliente.add(labelTelefono1, gbc_labelTelefono1);
+
+		textFieldTelefono1 = new JTextField();
+		textFieldTelefono1.setColumns(10);
+		GridBagConstraints gbc_textFieldTelefono1 = new GridBagConstraints();
+		gbc_textFieldTelefono1.fill = GridBagConstraints.BOTH;
+		gbc_textFieldTelefono1.insets = new Insets(0, 0, 5, 5);
+		gbc_textFieldTelefono1.gridx = 1;
+		gbc_textFieldTelefono1.gridy = 4;
+		panelAltaCliente.add(textFieldTelefono1, gbc_textFieldTelefono1);
+
+		labelTelefono2 = new JLabel("Telefono 2:");
+		GridBagConstraints gbc_labelTelefono2 = new GridBagConstraints();
+		gbc_labelTelefono2.fill = GridBagConstraints.VERTICAL;
+		gbc_labelTelefono2.anchor = GridBagConstraints.WEST;
+		gbc_labelTelefono2.insets = new Insets(0, 0, 5, 5);
+		gbc_labelTelefono2.gridx = 3;
+		gbc_labelTelefono2.gridy = 4;
+		panelAltaCliente.add(labelTelefono2, gbc_labelTelefono2);
+
+		textFieldTelefono2 = new JTextField();
+		textFieldTelefono2.setColumns(10);
+		GridBagConstraints gbc_textFieldTelefono2 = new GridBagConstraints();
+		gbc_textFieldTelefono2.fill = GridBagConstraints.BOTH;
+		gbc_textFieldTelefono2.insets = new Insets(0, 0, 5, 0);
+		gbc_textFieldTelefono2.gridx = 4;
+		gbc_textFieldTelefono2.gridy = 4;
+		panelAltaCliente.add(textFieldTelefono2, gbc_textFieldTelefono2);
+
+		labelDireccion1 = new JLabel("Direccion 1:");
+		GridBagConstraints gbc_labelDireccion1 = new GridBagConstraints();
+		gbc_labelDireccion1.fill = GridBagConstraints.VERTICAL;
+		gbc_labelDireccion1.anchor = GridBagConstraints.WEST;
+		gbc_labelDireccion1.insets = new Insets(0, 0, 5, 5);
+		gbc_labelDireccion1.gridx = 0;
+		gbc_labelDireccion1.gridy = 5;
+		panelAltaCliente.add(labelDireccion1, gbc_labelDireccion1);
+
+		textFieldDireccion1 = new JTextField();
+		textFieldDireccion1.setColumns(10);
+		GridBagConstraints gbc_textFieldDireccion1 = new GridBagConstraints();
+		gbc_textFieldDireccion1.fill = GridBagConstraints.BOTH;
+		gbc_textFieldDireccion1.insets = new Insets(0, 0, 5, 5);
+		gbc_textFieldDireccion1.gridx = 1;
+		gbc_textFieldDireccion1.gridy = 5;
+		panelAltaCliente.add(textFieldDireccion1, gbc_textFieldDireccion1);
+
+		labelDireccion2 = new JLabel("Direccion 2:");
+		GridBagConstraints gbc_labelDireccion2 = new GridBagConstraints();
+		gbc_labelDireccion2.fill = GridBagConstraints.VERTICAL;
+		gbc_labelDireccion2.anchor = GridBagConstraints.WEST;
+		gbc_labelDireccion2.insets = new Insets(0, 0, 5, 5);
+		gbc_labelDireccion2.gridx = 3;
+		gbc_labelDireccion2.gridy = 5;
+		panelAltaCliente.add(labelDireccion2, gbc_labelDireccion2);
+
+		textFieldDireccion2 = new JTextField();
+		textFieldDireccion2.setColumns(10);
+		GridBagConstraints gbc_textFieldDireccion2 = new GridBagConstraints();
+		gbc_textFieldDireccion2.fill = GridBagConstraints.BOTH;
+		gbc_textFieldDireccion2.insets = new Insets(0, 0, 5, 0);
+		gbc_textFieldDireccion2.gridx = 4;
+		gbc_textFieldDireccion2.gridy = 5;
+		panelAltaCliente.add(textFieldDireccion2, gbc_textFieldDireccion2);
+
+		labelEmail = new JLabel("Email:");
+		GridBagConstraints gbc_labelEmail = new GridBagConstraints();
+		gbc_labelEmail.fill = GridBagConstraints.VERTICAL;
+		gbc_labelEmail.anchor = GridBagConstraints.WEST;
+		gbc_labelEmail.insets = new Insets(0, 0, 5, 5);
+		gbc_labelEmail.gridx = 0;
+		gbc_labelEmail.gridy = 6;
+		panelAltaCliente.add(labelEmail, gbc_labelEmail);
+
+		textFieldEmail = new JTextField();
+		textFieldEmail.setColumns(10);
+		GridBagConstraints gbc_textFieldEmail = new GridBagConstraints();
+		gbc_textFieldEmail.fill = GridBagConstraints.BOTH;
+		gbc_textFieldEmail.insets = new Insets(0, 0, 5, 5);
+		gbc_textFieldEmail.gridx = 1;
+		gbc_textFieldEmail.gridy = 6;
+		panelAltaCliente.add(textFieldEmail, gbc_textFieldEmail);
 
 		labelVehiculos = new JLabel("Vehiculos:");
 		GridBagConstraints gbc_labelVehiculos = new GridBagConstraints();
@@ -346,7 +365,7 @@ public class AltaCliente extends JDialog implements ActionListener{
 		gbc_labelVehiculos.insets = new Insets(0, 0, 5, 5);
 		gbc_labelVehiculos.anchor = GridBagConstraints.WEST;
 		gbc_labelVehiculos.gridx = 0;
-		gbc_labelVehiculos.gridy = 6;
+		gbc_labelVehiculos.gridy = 7;
 		panelAltaCliente.add(labelVehiculos, gbc_labelVehiculos);
 
 		scrollPane = new JScrollPane();
@@ -355,7 +374,7 @@ public class AltaCliente extends JDialog implements ActionListener{
 		gbc_scrollPane.insets = new Insets(0, 0, 5, 5);
 		gbc_scrollPane.fill = GridBagConstraints.BOTH;
 		gbc_scrollPane.gridx = 1;
-		gbc_scrollPane.gridy = 6;
+		gbc_scrollPane.gridy = 7;
 		panelAltaCliente.add(scrollPane, gbc_scrollPane);
 
 		textAreaVehiculos = new JTextArea();
@@ -363,15 +382,13 @@ public class AltaCliente extends JDialog implements ActionListener{
 		textAreaVehiculos.setEnabled(false);
 		textAreaVehiculos.setEditable(false);
 
-		buttonAgregarVehiculo = new JButton("Agregar");
+		buttonAgregarVehiculo = new JButton("Agregar Vehiculo");
 		buttonAgregarVehiculo.setIcon(new ImageIcon(AltaCliente.class.getResource("/image/plus.png")));
 		GridBagConstraints gbc_buttonAgregarVehiculo = new GridBagConstraints();
-		gbc_buttonAgregarVehiculo.anchor = GridBagConstraints.WEST;
-		gbc_buttonAgregarVehiculo.gridwidth = 2;
-		gbc_buttonAgregarVehiculo.fill = GridBagConstraints.VERTICAL;
+		gbc_buttonAgregarVehiculo.fill = GridBagConstraints.HORIZONTAL;
 		gbc_buttonAgregarVehiculo.insets = new Insets(0, 0, 5, 0);
-		gbc_buttonAgregarVehiculo.gridx = 3;
-		gbc_buttonAgregarVehiculo.gridy = 6;
+		gbc_buttonAgregarVehiculo.gridx = 4;
+		gbc_buttonAgregarVehiculo.gridy = 7;
 		panelAltaCliente.add(buttonAgregarVehiculo, gbc_buttonAgregarVehiculo);
 		buttonAgregarVehiculo.addActionListener(this);
 
@@ -382,7 +399,7 @@ public class AltaCliente extends JDialog implements ActionListener{
 		gbc_labelPersonaAutorizada.anchor = GridBagConstraints.WEST;
 		gbc_labelPersonaAutorizada.insets = new Insets(0, 0, 5, 5);
 		gbc_labelPersonaAutorizada.gridx = 0;
-		gbc_labelPersonaAutorizada.gridy = 7;
+		gbc_labelPersonaAutorizada.gridy = 8;
 		panelAltaCliente.add(labelPersonaAutorizada, gbc_labelPersonaAutorizada);
 
 		scrollPane_1 = new JScrollPane();
@@ -391,7 +408,7 @@ public class AltaCliente extends JDialog implements ActionListener{
 		gbc_scrollPane_1.insets = new Insets(0, 0, 5, 5);
 		gbc_scrollPane_1.fill = GridBagConstraints.BOTH;
 		gbc_scrollPane_1.gridx = 1;
-		gbc_scrollPane_1.gridy = 7;
+		gbc_scrollPane_1.gridy = 8;
 		panelAltaCliente.add(scrollPane_1, gbc_scrollPane_1);
 
 		textAreaPersonasAutorizadas = new JTextArea();
@@ -399,14 +416,12 @@ public class AltaCliente extends JDialog implements ActionListener{
 		textAreaPersonasAutorizadas.setEditable(false);
 		textAreaPersonasAutorizadas.setEnabled(false);
 
-		buttonAgregarPersonaAutorizada = new JButton("Agregar");
+		buttonAgregarPersonaAutorizada = new JButton("Agregar Persona Autorizada");
 		GridBagConstraints gbc_buttonAgregarPersonaAutorizada = new GridBagConstraints();
+		gbc_buttonAgregarPersonaAutorizada.fill = GridBagConstraints.HORIZONTAL;
 		gbc_buttonAgregarPersonaAutorizada.insets = new Insets(0, 0, 5, 0);
-		gbc_buttonAgregarPersonaAutorizada.anchor = GridBagConstraints.WEST;
-		gbc_buttonAgregarPersonaAutorizada.gridwidth = 2;
-		gbc_buttonAgregarPersonaAutorizada.fill = GridBagConstraints.VERTICAL;
-		gbc_buttonAgregarPersonaAutorizada.gridx = 3;
-		gbc_buttonAgregarPersonaAutorizada.gridy = 7;
+		gbc_buttonAgregarPersonaAutorizada.gridx = 4;
+		gbc_buttonAgregarPersonaAutorizada.gridy = 8;
 		panelAltaCliente.add(buttonAgregarPersonaAutorizada, gbc_buttonAgregarPersonaAutorizada);
 		buttonAgregarPersonaAutorizada.setIcon(new ImageIcon(AltaCliente.class.getResource("/image/plus.png")));
 
@@ -416,7 +431,7 @@ public class AltaCliente extends JDialog implements ActionListener{
 		gbc_lblCocheras.fill = GridBagConstraints.VERTICAL;
 		gbc_lblCocheras.insets = new Insets(0, 0, 5, 5);
 		gbc_lblCocheras.gridx = 0;
-		gbc_lblCocheras.gridy = 8;
+		gbc_lblCocheras.gridy = 9;
 		panelAltaCliente.add(lblCocheras, gbc_lblCocheras);
 
 
@@ -426,7 +441,7 @@ public class AltaCliente extends JDialog implements ActionListener{
 		gbc_scrollPane_2.insets = new Insets(0, 0, 5, 5);
 		gbc_scrollPane_2.fill = GridBagConstraints.BOTH;
 		gbc_scrollPane_2.gridx = 1;
-		gbc_scrollPane_2.gridy = 8;
+		gbc_scrollPane_2.gridy = 9;
 		panelAltaCliente.add(scrollPane_2, gbc_scrollPane_2);
 
 		textAreaCocheras = new JTextArea();
@@ -434,34 +449,22 @@ public class AltaCliente extends JDialog implements ActionListener{
 		textAreaCocheras.setEditable(false);
 		scrollPane_2.setViewportView(textAreaCocheras);
 
-		buttonAgregarCocheras = new JButton("Agregar");
+		buttonAgregarCocheras = new JButton("Agregar Cochera");
 		buttonAgregarCocheras.setIcon(new ImageIcon(AltaCliente.class.getResource("/image/plus.png")));
 		GridBagConstraints gbc_buttonAgregarCocheras = new GridBagConstraints();
-		gbc_buttonAgregarCocheras.anchor = GridBagConstraints.WEST;
-		gbc_buttonAgregarCocheras.gridwidth = 2;
-		gbc_buttonAgregarCocheras.fill = GridBagConstraints.VERTICAL;
+		gbc_buttonAgregarCocheras.fill = GridBagConstraints.HORIZONTAL;
 		gbc_buttonAgregarCocheras.insets = new Insets(0, 0, 5, 0);
-		gbc_buttonAgregarCocheras.gridx = 3;
-		gbc_buttonAgregarCocheras.gridy = 8;
+		gbc_buttonAgregarCocheras.gridx = 4;
+		gbc_buttonAgregarCocheras.gridy = 9;
 		panelAltaCliente.add(buttonAgregarCocheras, gbc_buttonAgregarCocheras);
 		buttonAgregarCocheras.addActionListener(this);
 
-
-		buttonCancelar = new JButton("Cancelar");
-		GridBagConstraints gbc_buttonCancelar = new GridBagConstraints();
-		gbc_buttonCancelar.fill = GridBagConstraints.HORIZONTAL;
-		gbc_buttonCancelar.insets = new Insets(0, 0, 0, 5);
-		gbc_buttonCancelar.gridx = 1;
-		gbc_buttonCancelar.gridy = 9;
-		panelAltaCliente.add(buttonCancelar, gbc_buttonCancelar);
-		buttonCancelar.setIcon(new ImageIcon(BuscadorCliente.class.getResource("/image/cancel.png")));
-		buttonCancelar.addActionListener(this);
-
 		buttonCrearCliente = new JButton("Crear Cliente");
 		GridBagConstraints gbc_buttonCrearCliente = new GridBagConstraints();
+		gbc_buttonCrearCliente.insets = new Insets(0, 0, 0, 5);
 		gbc_buttonCrearCliente.fill = GridBagConstraints.HORIZONTAL;
-		gbc_buttonCrearCliente.gridx = 4;
-		gbc_buttonCrearCliente.gridy = 9;
+		gbc_buttonCrearCliente.gridx = 1;
+		gbc_buttonCrearCliente.gridy = 11;
 		panelAltaCliente.add(buttonCrearCliente, gbc_buttonCrearCliente);
 		buttonCrearCliente.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
@@ -469,6 +472,16 @@ public class AltaCliente extends JDialog implements ActionListener{
 		});
 		buttonCrearCliente.setIcon(new ImageIcon(BuscadorCliente.class.getResource("/image/ok.png")));
 		buttonCrearCliente.addActionListener(this);
+
+
+		buttonCancelar = new JButton("Cancelar");
+		GridBagConstraints gbc_buttonCancelar = new GridBagConstraints();
+		gbc_buttonCancelar.fill = GridBagConstraints.HORIZONTAL;
+		gbc_buttonCancelar.gridx = 4;
+		gbc_buttonCancelar.gridy = 11;
+		panelAltaCliente.add(buttonCancelar, gbc_buttonCancelar);
+		buttonCancelar.setIcon(new ImageIcon(BuscadorCliente.class.getResource("/image/cancel.png")));
+		buttonCancelar.addActionListener(this);
 		buttonAgregarPersonaAutorizada.addActionListener(this);
 
 		this.setLocationRelativeTo(null);
@@ -507,7 +520,7 @@ public class AltaCliente extends JDialog implements ActionListener{
 			{
 				Controlador.getInstancia().altaCliente(textFieldNombre.getText(), textFieldApellido.getText(), textFieldTelefono1.getText(), textFieldTelefono2.getText(),
 						textFieldDireccion1.getText(), textFieldDireccion2.getText(), textFieldEmail.getText(), textFieldRazonSocial.getText()
-						,ListPersonasAutorizadas, ListPatentesVehiculos, comboBoxTipoDoc.getSelectedItem().toString(), textFieldNumeroDoc.getText(), comboBoxTipoCliente.getSelectedItem().toString(), textFieldCUIT.getText());
+						,ListPersonasAutorizadas, ListPatentesVehiculos, comboBoxTipoDoc.getSelectedItem().toString(), textFieldNumeroDoc.getText(), comboBoxTipoCliente.getSelectedItem().toString(), textFieldCUIT.getText(), comboBoxTipoFactura.getSelectedItem().toString());
 				dispose();
 			}
 			else{

@@ -2,6 +2,8 @@ package modelo;
 
 import java.util.List;
 
+import persistencia.clases.Cliente.TIPO_FACTURA;
+
 
 
 public class Cliente {
@@ -23,7 +25,8 @@ public class Cliente {
 	private ESTADO estado;
 	private String cuil;	
 	private double estadoCrediticio;
-	
+	private TIPO_FACTURA tipoFactura;
+
 	private List <PersonaAutorizada> personasAutorizadasARetirar;
 	
 	String razonSocial;
@@ -47,6 +50,13 @@ public class Cliente {
 		PASS,
 		OTRO;
 	}
+	
+	public enum TIPO_FACTURA {
+		A,
+		B,
+		C,
+		NA;
+	}	
 	
 	public enum ESTADO {
 		ACTIVO,
@@ -220,6 +230,12 @@ public class Cliente {
 	}
 	public void setEstadoCrediticio(double estadoCrediticio) {
 		this.estadoCrediticio = estadoCrediticio;
+	}
+	public TIPO_FACTURA getTipoFactura() {
+		return tipoFactura;
+	}
+	public void setTipoFactura(TIPO_FACTURA tipoFactura) {
+		this.tipoFactura = tipoFactura;
 	}
 	
 	
