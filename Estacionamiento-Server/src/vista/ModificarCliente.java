@@ -503,9 +503,10 @@ public class ModificarCliente extends JDialog implements ActionListener{
 				JOptionPane.showMessageDialog(null, "El CUIT debe estár compuesto por 11 campos numéricos.", "Error Validación Datos.", JOptionPane.INFORMATION_MESSAGE);
 			}
 			else{
-				Controlador.getInstancia().altaCliente(textFieldNombre.getText(), textFieldApellido.getText(), textFieldTelefono1.getText(), textFieldTelefono2.getText(),
-						textFieldDireccion1.getText(), textFieldDireccion2.getText(), textFieldEmail.getText(), textFieldRazonSocial.getText()
-						,ListPersonasAutorizadas, ListPatentesVehiculos, comboBoxTipoDoc.getSelectedItem().toString(), textFieldNumeroDoc.getText(), comboBoxTipoCliente.getSelectedItem().toString(), textFieldCUIT.getText());
+//TODO
+//				Controlador.getInstancia().altaCliente(textFieldNombre.getText(), textFieldApellido.getText(), textFieldTelefono1.getText(), textFieldTelefono2.getText(),
+//						textFieldDireccion1.getText(), textFieldDireccion2.getText(), textFieldEmail.getText(), textFieldRazonSocial.getText()
+//						,ListPersonasAutorizadas, ListPatentesVehiculos, comboBoxTipoDoc.getSelectedItem().toString(), textFieldNumeroDoc.getText(), comboBoxTipoCliente.getSelectedItem().toString(), textFieldCUIT.getText());
 				dispose();
 			}
 		}
