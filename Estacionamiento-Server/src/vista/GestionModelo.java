@@ -35,8 +35,7 @@ public class GestionModelo extends JDialog implements ActionListener, ListSelect
 	 */
 	private static final long serialVersionUID = 1L;
 	private final JPanel contentPanel = new JPanel();
-	private JButton aceptarButton;
-	private JButton cancelarButton;
+	private JButton volverButton;
 	private JTextField textFieldAgregarModelo;
 	private JButton btnAgregarModelo;
 	private JTextField textFieldModeloActual;
@@ -69,15 +68,15 @@ public class GestionModelo extends JDialog implements ActionListener, ListSelect
 	public GestionModelo() {
 		setResizable(false);
 		setTitle("Gesti\u00F3n Modelo");
-		setBounds(100, 100, 625, 437);
+		setBounds(100, 100, 625, 443);
 		getContentPane().setLayout(new BorderLayout());
 		contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
 		getContentPane().add(contentPanel, BorderLayout.CENTER);
 		GridBagLayout gbl_contentPanel = new GridBagLayout();
 		gbl_contentPanel.columnWidths = new int[]{265, 30, 0, 203, 0};
-		gbl_contentPanel.rowHeights = new int[]{0, 35, 32, 29, 52, 32, 55, 10, 32, 0};
+		gbl_contentPanel.rowHeights = new int[]{0, 35, 32, 29, 52, 32, 55, 0};
 		gbl_contentPanel.columnWeights = new double[]{0.0, 0.0, 0.0, 1.0, Double.MIN_VALUE};
-		gbl_contentPanel.rowWeights = new double[]{0.0, 1.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
+		gbl_contentPanel.rowWeights = new double[]{0.0, 1.0, 0.0, 0.0, 1.0, 0.0, 0.0, Double.MIN_VALUE};
 		contentPanel.setLayout(gbl_contentPanel);
 		
 		panel = new JPanel();
@@ -135,7 +134,7 @@ public class GestionModelo extends JDialog implements ActionListener, ListSelect
 		GridBagConstraints gbc_scrollPane = new GridBagConstraints();
 		gbc_scrollPane.fill = GridBagConstraints.BOTH;
 		gbc_scrollPane.insets = new Insets(0, 0, 0, 5);
-		gbc_scrollPane.gridheight = 9;
+		gbc_scrollPane.gridheight = 7;
 		gbc_scrollPane.gridwidth = 2;
 		gbc_scrollPane.gridx = 0;
 		gbc_scrollPane.gridy = 0;
@@ -190,6 +189,7 @@ public class GestionModelo extends JDialog implements ActionListener, ListSelect
 		panel_1.add(textFieldModeloActual, gbc_textFieldModeloActual);
 		textFieldModeloActual.setColumns(10);
 		
+		
 		btnModificarModelo = new JButton("Modificar Modelo");
 		GridBagConstraints gbc_btnModificarModelo = new GridBagConstraints();
 		gbc_btnModificarModelo.fill = GridBagConstraints.HORIZONTAL;
@@ -199,29 +199,15 @@ public class GestionModelo extends JDialog implements ActionListener, ListSelect
 		btnModificarModelo.setIcon(new ImageIcon(GestionModelo.class.getResource("/image/modificar.png")));
 		btnModificarModelo.addActionListener(this);
 		
-		aceptarButton = new JButton("Aceptar");
-		aceptarButton.setIcon(new ImageIcon(GestionModelo.class.getResource("/image/ok.png")));
-		GridBagConstraints gbc_aceptarButton = new GridBagConstraints();
-		gbc_aceptarButton.anchor = GridBagConstraints.SOUTH;
-		gbc_aceptarButton.fill = GridBagConstraints.HORIZONTAL;
-		gbc_aceptarButton.insets = new Insets(0, 0, 5, 0);
-		gbc_aceptarButton.gridx = 3;
-		gbc_aceptarButton.gridy = 6;
-		contentPanel.add(aceptarButton, gbc_aceptarButton);
-		
-		cancelarButton = new JButton("Cancelar");
-		cancelarButton.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-				dispose();
-			}
-		});
-		cancelarButton.setIcon(new ImageIcon(GestionUsuario.class.getResource("/image/cancel.png")));
-		GridBagConstraints gbc_cancelarButton = new GridBagConstraints();
-		gbc_cancelarButton.fill = GridBagConstraints.HORIZONTAL;
-		gbc_cancelarButton.gridx = 3;
-		gbc_cancelarButton.gridy = 8;
-		contentPanel.add(cancelarButton, gbc_cancelarButton);
-		
+		volverButton = new JButton("Volver");
+		volverButton.setIcon(new ImageIcon(GestionModelo.class.getResource("/image/izq.png")));
+		GridBagConstraints gbc_volverButton = new GridBagConstraints();
+		gbc_volverButton.anchor = GridBagConstraints.SOUTH;
+		gbc_volverButton.fill = GridBagConstraints.HORIZONTAL;
+		gbc_volverButton.gridx = 3;
+		gbc_volverButton.gridy = 6;
+		contentPanel.add(volverButton, gbc_volverButton);
+		volverButton.addActionListener(this);
 
 
 		
@@ -233,10 +219,7 @@ public class GestionModelo extends JDialog implements ActionListener, ListSelect
 	
 	@Override
 	public void actionPerformed(ActionEvent event) {
-		if(event.getSource()==cancelarButton)
-		{
-			dispose();
-		}
+
 		if(event.getSource()==btnAgregarModelo)
 		{
 			long codigoReturn=-1;
@@ -271,6 +254,11 @@ public class GestionModelo extends JDialog implements ActionListener, ListSelect
 				dispose();
 			}
 		}
+		if(event.getSource()==volverButton)
+		{
+			dispose();
+		}
+		
 	}
 
 

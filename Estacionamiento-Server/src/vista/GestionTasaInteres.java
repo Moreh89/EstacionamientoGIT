@@ -3,6 +3,8 @@ package vista;
 import java.awt.BorderLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -17,11 +19,12 @@ import java.awt.Font;
 import javax.swing.JTextField;
 
 import controlador.Controlador;
+
 import java.awt.GridBagLayout;
 import java.awt.GridBagConstraints;
 import java.awt.Insets;
 
-public class GestionTasaInteres extends JDialog implements ActionListener{
+public class GestionTasaInteres extends JDialog implements ActionListener, KeyListener{
 
 	/**
 	 * 
@@ -118,7 +121,9 @@ public class GestionTasaInteres extends JDialog implements ActionListener{
 		gbc_textFieldnuevoInteres.gridx = 1;
 		gbc_textFieldnuevoInteres.gridy = 1;
 		contentPanel.add(textFieldnuevoInteres, gbc_textFieldnuevoInteres);
+		textFieldnuevoInteres.addKeyListener(this);
 
+		
 		label = new JLabel("%");
 		label.setFont(new Font("Tahoma", Font.BOLD, 11));
 		GridBagConstraints gbc_label = new GridBagConstraints();
@@ -169,7 +174,8 @@ public class GestionTasaInteres extends JDialog implements ActionListener{
 		gbc_textFieldDiaVencimiento.gridy = 3;
 		contentPanel.add(textFieldDiaVencimiento, gbc_textFieldDiaVencimiento);
 		textFieldDiaVencimiento.setColumns(10);
-
+		textFieldDiaVencimiento.addKeyListener(this);
+		
 		aceptarButton = new JButton("Aceptar");
 		aceptarButton.setIcon(new ImageIcon(GestionTasaInteres.class.getResource("/image/ok.png")));
 		GridBagConstraints gbc_aceptarButton = new GridBagConstraints();
@@ -274,5 +280,29 @@ public class GestionTasaInteres extends JDialog implements ActionListener{
 			return false;  
 		}  
 		return true;  
+	}
+
+	@Override
+	public void keyPressed(KeyEvent event) {
+
+		{
+			if (event.getKeyCode()== KeyEvent.VK_ENTER){
+				this.aceptarButton.doClick();
+			}
+
+		}
+
+	}
+
+	@Override
+	public void keyReleased(KeyEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void keyTyped(KeyEvent e) {
+		// TODO Auto-generated method stub
+		
 	}
 }

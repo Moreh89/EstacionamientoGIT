@@ -37,7 +37,7 @@ public class GestionColor extends JDialog implements ActionListener, ListSelecti
 	private static final long serialVersionUID = 1L;
 	private final JPanel contentPanel = new JPanel();
 	private JButton aceptarButton;
-	private JButton cancelarButton;
+	private JButton volverButton;
 	private JTextField textFieldAgregarColor;
 	private JButton btnAgregarColor;
 	private JTextField textFieldColorActual;
@@ -213,14 +213,14 @@ public class GestionColor extends JDialog implements ActionListener, ListSelecti
 		gbc_aceptarButton.gridy = 7;
 		contentPanel.add(aceptarButton, gbc_aceptarButton);
 		
-		cancelarButton = new JButton("Cancelar");
-		cancelarButton.setIcon(new ImageIcon(GestionUsuario.class.getResource("/image/cancel.png")));
-		GridBagConstraints gbc_cancelarButton = new GridBagConstraints();
-		gbc_cancelarButton.fill = GridBagConstraints.HORIZONTAL;
-		gbc_cancelarButton.gridx = 3;
-		gbc_cancelarButton.gridy = 9;
-		contentPanel.add(cancelarButton, gbc_cancelarButton);
-		cancelarButton.addActionListener(this);
+		volverButton = new JButton("Volver");
+		volverButton.setIcon(new ImageIcon(GestionColor.class.getResource("/image/izq.png")));
+		GridBagConstraints gbc_volverButton = new GridBagConstraints();
+		gbc_volverButton.fill = GridBagConstraints.HORIZONTAL;
+		gbc_volverButton.gridx = 3;
+		gbc_volverButton.gridy = 9;
+		contentPanel.add(volverButton, gbc_volverButton);
+		volverButton.addActionListener(this);
 		
 
 		
@@ -232,7 +232,7 @@ public class GestionColor extends JDialog implements ActionListener, ListSelecti
 
 	@Override
 	public void actionPerformed(ActionEvent event) {
-		if(event.getSource()==cancelarButton)
+		if(event.getSource()==volverButton)
 		{
 			dispose();
 		}

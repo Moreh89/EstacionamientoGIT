@@ -3,6 +3,8 @@ package vista;
 import java.awt.BorderLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -12,6 +14,8 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
+
+
 
 
 
@@ -26,7 +30,7 @@ import java.awt.Insets;
 import java.text.SimpleDateFormat;
 import java.util.GregorianCalendar;
 
-public class EmitirLiquidacionAlquileres extends JDialog implements ActionListener{
+public class EmitirLiquidacionAlquileres extends JDialog implements ActionListener, KeyListener{
 	/**
 	 * 
 	 */
@@ -105,23 +109,24 @@ public class EmitirLiquidacionAlquileres extends JDialog implements ActionListen
 		gbc_descripcionTextField.gridx = 1;
 		gbc_descripcionTextField.gridy = 2;
 		contentPanel.add(descripcionTextField, gbc_descripcionTextField);
+		descripcionTextField.addKeyListener(this);
+		
+		aceptarButton = new JButton("Aceptar");
+		aceptarButton.setIcon(new ImageIcon(CambioContrasenia.class.getResource("/image/ok.png")));
+		GridBagConstraints gbc_aceptarButton = new GridBagConstraints();
+		gbc_aceptarButton.insets = new Insets(0, 0, 0, 5);
+		gbc_aceptarButton.gridx = 0;
+		gbc_aceptarButton.gridy = 3;
+		contentPanel.add(aceptarButton, gbc_aceptarButton);
+		aceptarButton.addActionListener(this);
 
 		cancelarButton = new JButton("Cancelar");
 		cancelarButton.setIcon(new ImageIcon(GestionUsuario.class.getResource("/image/cancel.png")));
 		GridBagConstraints gbc_cancelarButton = new GridBagConstraints();
-		gbc_cancelarButton.insets = new Insets(0, 0, 0, 5);
-		gbc_cancelarButton.gridx = 0;
+		gbc_cancelarButton.gridx = 1;
 		gbc_cancelarButton.gridy = 3;
 		contentPanel.add(cancelarButton, gbc_cancelarButton);
 		cancelarButton.addActionListener(this);
-
-		aceptarButton = new JButton("Aceptar");
-		aceptarButton.setIcon(new ImageIcon(CambioContrasenia.class.getResource("/image/ok.png")));
-		GridBagConstraints gbc_aceptarButton = new GridBagConstraints();
-		gbc_aceptarButton.gridx = 1;
-		gbc_aceptarButton.gridy = 3;
-		contentPanel.add(aceptarButton, gbc_aceptarButton);
-		aceptarButton.addActionListener(this);
 
 		this.setLocationRelativeTo(null);
 		setModal(true);
@@ -162,6 +167,30 @@ public class EmitirLiquidacionAlquileres extends JDialog implements ActionListen
 			return false;  
 		}  
 		return true;  
+	}
+
+	@Override
+	public void keyPressed(KeyEvent event) {
+
+		{
+			if (event.getKeyCode()== KeyEvent.VK_ENTER){
+				this.aceptarButton.doClick();
+			}
+
+		}
+
+	}
+
+	@Override
+	public void keyReleased(KeyEvent e) {
+		// TODO Auto-generated method stub
+
+	}
+
+	@Override
+	public void keyTyped(KeyEvent e) {
+		// TODO Auto-generated method stub
+
 	}
 
 }

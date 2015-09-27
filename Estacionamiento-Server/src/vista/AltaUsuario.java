@@ -3,6 +3,9 @@ package vista;
 import java.awt.BorderLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
+
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -13,14 +16,18 @@ import javax.swing.JPanel;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
+
 import java.awt.Font;
+
 import controlador.Controlador;
+
 import java.awt.GridBagLayout;
 import java.awt.GridBagConstraints;
 import java.awt.Insets;
+
 import javax.swing.JComboBox;
 
-public class AltaUsuario extends JDialog implements ActionListener{
+public class AltaUsuario extends JDialog implements ActionListener, KeyListener{
 	/**
 	 * 
 	 */
@@ -91,7 +98,8 @@ public class AltaUsuario extends JDialog implements ActionListener{
 		gbc_textFieldUserName.gridy = 0;
 		contentPanel.add(textFieldUserName, gbc_textFieldUserName);
 		textFieldUserName.setColumns(10);
-
+		textFieldUserName.addKeyListener(this);
+		
 		JLabel lblPassword1 = new JLabel("Contrase\u00F1a:");
 		lblPassword1.setFont(new Font("Tahoma", Font.PLAIN, 11));
 		GridBagConstraints gbc_lblPassword1 = new GridBagConstraints();
@@ -109,6 +117,8 @@ public class AltaUsuario extends JDialog implements ActionListener{
 		gbc_textFieldPassword1.gridy = 1;
 		contentPanel.add(textFieldPassword1, gbc_textFieldPassword1);
 		textFieldPassword1.setColumns(10);
+		textFieldPassword1.addKeyListener(this);
+
 
 		lblPassword2 = new JLabel("Repita Contrase\u00F1a:");
 		GridBagConstraints gbc_lblPassword2 = new GridBagConstraints();
@@ -126,7 +136,9 @@ public class AltaUsuario extends JDialog implements ActionListener{
 		gbc_textFieldPassword2.gridy = 2;
 		contentPanel.add(textFieldPassword2, gbc_textFieldPassword2);
 		textFieldPassword2.setColumns(10);
+		textFieldPassword2.addKeyListener(this);
 
+		
 		lblNombre = new JLabel("Nombre:");
 		GridBagConstraints gbc_lblNombre = new GridBagConstraints();
 		gbc_lblNombre.anchor = GridBagConstraints.WEST;
@@ -143,7 +155,9 @@ public class AltaUsuario extends JDialog implements ActionListener{
 		gbc_textFieldNombre.gridy = 3;
 		contentPanel.add(textFieldNombre, gbc_textFieldNombre);
 		textFieldNombre.setColumns(10);
+		textFieldNombre.addKeyListener(this);
 
+		
 		lblApellido = new JLabel("Apellido:");
 		GridBagConstraints gbc_lblApellido = new GridBagConstraints();
 		gbc_lblApellido.anchor = GridBagConstraints.WEST;
@@ -160,7 +174,9 @@ public class AltaUsuario extends JDialog implements ActionListener{
 		gbc_textFieldApellido.gridy = 4;
 		contentPanel.add(textFieldApellido, gbc_textFieldApellido);
 		textFieldApellido.setColumns(10);
+		textFieldApellido.addKeyListener(this);
 
+		
 		lblTipoDoc = new JLabel("Tipo Doc:");
 		GridBagConstraints gbc_lblTipoDoc = new GridBagConstraints();
 		gbc_lblTipoDoc.anchor = GridBagConstraints.WEST;
@@ -194,7 +210,8 @@ public class AltaUsuario extends JDialog implements ActionListener{
 		gbc_textFieldNroDoc.gridy = 6;
 		contentPanel.add(textFieldNroDoc, gbc_textFieldNroDoc);
 		textFieldNroDoc.setColumns(10);
-
+		textFieldNroDoc.addKeyListener(this);
+		
 		lblTipoUsuario = new JLabel("Tipo Usuario:");
 		GridBagConstraints gbc_lblTipoUsuario = new GridBagConstraints();
 		gbc_lblTipoUsuario.anchor = GridBagConstraints.WEST;
@@ -315,5 +332,29 @@ public class AltaUsuario extends JDialog implements ActionListener{
 			return false;  
 		}  
 		return true;  
+	}
+
+	@Override
+	public void keyPressed(KeyEvent event) {
+
+		{
+			if (event.getKeyCode()== KeyEvent.VK_ENTER ){
+				this.aceptarButton.doClick();
+			}
+
+		}
+
+	}
+
+	@Override
+	public void keyReleased(KeyEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void keyTyped(KeyEvent e) {
+		// TODO Auto-generated method stub
+		
 	}
 }

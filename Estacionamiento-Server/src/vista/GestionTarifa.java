@@ -11,8 +11,10 @@ import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
+
 import modelo.Tarifa;
 import controlador.Controlador;
+
 import java.awt.GridBagLayout;
 import java.awt.GridBagConstraints;
 import java.awt.Insets;
@@ -20,8 +22,10 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 
-public class GestionTarifa extends JDialog implements ActionListener, ItemListener{
+public class GestionTarifa extends JDialog implements ActionListener, ItemListener, KeyListener{
 
 	/**
 	 * 
@@ -50,7 +54,7 @@ public class GestionTarifa extends JDialog implements ActionListener, ItemListen
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					AltaTarifa frame = new AltaTarifa();
+					GestionTarifa frame = new GestionTarifa();
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -101,7 +105,7 @@ public class GestionTarifa extends JDialog implements ActionListener, ItemListen
 			comboBoxCategoria.addItem(tarifaTemp);
 		} 
 		comboBoxCategoria.addItemListener(this);
-		
+
 
 
 		GridBagConstraints gbc_comboBoxCategoria = new GridBagConstraints();
@@ -127,7 +131,8 @@ public class GestionTarifa extends JDialog implements ActionListener, ItemListen
 		gbc_textCostoMinimo.gridx = 1;
 		gbc_textCostoMinimo.gridy = 1;
 		panel.add(textCostoMinimo, gbc_textCostoMinimo);
-
+		textCostoMinimo.addKeyListener(this);
+		
 		JLabel labelTiempoMinimo = new JLabel("Tiempo Minimo:");
 		GridBagConstraints gbc_labelTiempoMinimo = new GridBagConstraints();
 		gbc_labelTiempoMinimo.anchor = GridBagConstraints.WEST;
@@ -144,7 +149,8 @@ public class GestionTarifa extends JDialog implements ActionListener, ItemListen
 		gbc_textTiempoMinimo.gridx = 4;
 		gbc_textTiempoMinimo.gridy = 1;
 		panel.add(textTiempoMinimo, gbc_textTiempoMinimo);
-
+		textTiempoMinimo.addKeyListener(this);
+		
 		JLabel labelCostoFraccion = new JLabel("Costo Fraccion:");
 		GridBagConstraints gbc_labelCostoFraccion = new GridBagConstraints();
 		gbc_labelCostoFraccion.anchor = GridBagConstraints.WEST;
@@ -161,7 +167,9 @@ public class GestionTarifa extends JDialog implements ActionListener, ItemListen
 		gbc_textCostoFraccion.gridx = 1;
 		gbc_textCostoFraccion.gridy = 2;
 		panel.add(textCostoFraccion, gbc_textCostoFraccion);
+		textCostoFraccion.addKeyListener(this);
 
+		
 		JLabel lblTiempoFraccion = new JLabel("Tiempo Fraccion:");
 		GridBagConstraints gbc_lblTiempoFraccion = new GridBagConstraints();
 		gbc_lblTiempoFraccion.anchor = GridBagConstraints.WEST;
@@ -178,6 +186,7 @@ public class GestionTarifa extends JDialog implements ActionListener, ItemListen
 		gbc_textTiempoFraccion.gridx = 4;
 		gbc_textTiempoFraccion.gridy = 2;
 		panel.add(textTiempoFraccion, gbc_textTiempoFraccion);
+		textTiempoFraccion.addKeyListener(this);
 
 		labelCostoHora = new JLabel("Costo Hora:");
 		GridBagConstraints gbc_labelCostoHora = new GridBagConstraints();
@@ -195,6 +204,7 @@ public class GestionTarifa extends JDialog implements ActionListener, ItemListen
 		gbc_textCostoHora.gridx = 1;
 		gbc_textCostoHora.gridy = 3;
 		panel.add(textCostoHora, gbc_textCostoHora);
+		textCostoHora.addKeyListener(this);
 
 		JLabel labelTiempoMediaEstadia = new JLabel("Tiempo Media Estadia:");
 		GridBagConstraints gbc_labelTiempoMediaEstadia = new GridBagConstraints();
@@ -212,6 +222,7 @@ public class GestionTarifa extends JDialog implements ActionListener, ItemListen
 		gbc_textTiempoInicioMediaEstadia.gridx = 4;
 		gbc_textTiempoInicioMediaEstadia.gridy = 3;
 		panel.add(textTiempoInicioMediaEstadia, gbc_textTiempoInicioMediaEstadia);
+		textTiempoInicioMediaEstadia.addKeyListener(this);
 
 		JLabel lblCostoMediaEstadia = new JLabel("Costo Media Estadia:");
 		GridBagConstraints gbc_lblCostoMediaEstadia = new GridBagConstraints();
@@ -229,6 +240,7 @@ public class GestionTarifa extends JDialog implements ActionListener, ItemListen
 		gbc_textCostoMediaEstadia.gridx = 1;
 		gbc_textCostoMediaEstadia.gridy = 4;
 		panel.add(textCostoMediaEstadia, gbc_textCostoMediaEstadia);
+		textCostoMediaEstadia.addKeyListener(this);
 
 		JLabel labelTiempoEstadia = new JLabel("Tiempo Estadia:");
 		GridBagConstraints gbc_labelTiempoEstadia = new GridBagConstraints();
@@ -246,6 +258,7 @@ public class GestionTarifa extends JDialog implements ActionListener, ItemListen
 		gbc_textTiempoInicioEstadia.gridx = 4;
 		gbc_textTiempoInicioEstadia.gridy = 4;
 		panel.add(textTiempoInicioEstadia, gbc_textTiempoInicioEstadia);
+		textTiempoInicioEstadia.addKeyListener(this);
 
 		JLabel lblCostoEstadia = new JLabel("Costo Estadia:");
 		GridBagConstraints gbc_lblCostoEstadia = new GridBagConstraints();
@@ -263,6 +276,7 @@ public class GestionTarifa extends JDialog implements ActionListener, ItemListen
 		gbc_textCostoEstadia.gridx = 1;
 		gbc_textCostoEstadia.gridy = 5;
 		panel.add(textCostoEstadia, gbc_textCostoEstadia);
+		textCostoEstadia.addKeyListener(this);
 
 		buttonCancelar = new JButton("Cancelar");
 		buttonCancelar.setIcon(new ImageIcon(BuscadorCliente.class.getResource("/image/cancel.png")));
@@ -283,7 +297,6 @@ public class GestionTarifa extends JDialog implements ActionListener, ItemListen
 		textCostoHora.setText(Double.toString(tarifaSeleccionado.getCostoHora()));
 		textCostoMediaEstadia.setText(Double.toString(tarifaSeleccionado.getCostoMediaEstadia()));
 		textCostoMinimo.setText(Double.toString(tarifaSeleccionado.getCostoMinimo()));
-
 		textTiempoMinimo.setText(Double.toString(tarifaSeleccionado.getTiempoMinimo()));
 		textTiempoFraccion.setText(Double.toString(tarifaSeleccionado.getTiempoFraccion()));
 		textTiempoInicioMediaEstadia.setText(Double.toString(tarifaSeleccionado.getTiempoMediaEstadia_minuto()));
@@ -369,6 +382,26 @@ public class GestionTarifa extends JDialog implements ActionListener, ItemListen
 	}
 
 
+	public void keyPressed(KeyEvent event) {
 
+		{
+			if (event.getKeyCode()== KeyEvent.VK_ENTER ){
+				this.buttonModificarTarifa.doClick();
+			}
+
+		}
+
+	}
+
+	@Override
+	public void keyReleased(KeyEvent arg0) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void keyTyped(KeyEvent arg0) {
+		// TODO Auto-generated method stub
+		
+	}
 }
-
