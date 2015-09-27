@@ -242,7 +242,7 @@ public class Cliente {
 		this.tipoFactura = tipoFactura;
 	}
 
-	public static class CompDescripcion implements Comparator<Cliente>
+	public static class CompApellido implements Comparator<Cliente>
 	{
 		public int compare(Cliente o1, Cliente o2) {
 			return o1.getApellido().compareToIgnoreCase(o2.getApellido());

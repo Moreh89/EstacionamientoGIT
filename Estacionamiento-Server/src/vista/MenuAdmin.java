@@ -44,7 +44,7 @@ public class MenuAdmin extends JFrame implements ActionListener {
 	private JMenu mnConsultas;
 	private JMenuItem mntmArqueoDeCaja;
 	private JMenuItem mntmBuscarCliente;
-	private JMenuItem mntmCantidadAutos;
+	private JMenuItem mntmTicketsAbiertos;
 	private JMenuItem mntmDeudores;
 	private JMenu mnMiCuenta;
 	private JMenuItem mntmCambiarClave;
@@ -191,12 +191,12 @@ public class MenuAdmin extends JFrame implements ActionListener {
 		mnConsultas.add(mntmBuscarCliente);
 		mntmBuscarCliente.addActionListener(this);
 		
-		mntmCantidadAutos = new JMenuItem("Cantidad Autos");
-		mnConsultas.add(mntmCantidadAutos);
-		mntmCantidadAutos.addActionListener(this);
-		
 		mntmDeudores = new JMenuItem("Deudores");
 		mnConsultas.add(mntmDeudores);
+		
+		mntmTicketsAbiertos = new JMenuItem("Tickets Abiertos");
+		mnConsultas.add(mntmTicketsAbiertos);
+		mntmTicketsAbiertos.addActionListener(this);
 		mntmDeudores.addActionListener(this);
 		
 		menuSistema = new JMenu("Gestion Sistema");
@@ -310,7 +310,10 @@ public class MenuAdmin extends JFrame implements ActionListener {
 		{
 			new AnularLiquidacionAlquileres().setVisible(true);
 		}
-		
+		if(event.getSource()==mntmTicketsAbiertos)
+		{
+			new TicketsAbiertos().setVisible(true);
+		}
 	}
 
 }

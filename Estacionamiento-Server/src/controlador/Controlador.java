@@ -117,7 +117,7 @@ public class Controlador {
 		Collections.sort(coloresVehiculos, new ColorVehiculo.CompDescripcion());
 		Collections.sort(modelosVehiculos, new ModeloVehiculo.CompDescripcion());
 		Collections.sort(categoriasVehiculos, new CategoriaVehiculo.CompDescripcion());
-		Collections.sort(clientes, new Cliente.CompDescripcion());
+		Collections.sort(clientes, new Cliente.CompApellido());
 
 
 		this.aplicarInteres();
@@ -856,8 +856,11 @@ public class Controlador {
 		return this.ticket;
 	}
 
-	public ArrayList<modelo.Usuario> getUsuarios() {
-		return DAOUsuario.getInstance().getUsuarios();
+	public ArrayList<modelo.Usuario> getUsuarios() 
+	{
+		ArrayList<modelo.Usuario> usuariosReturn = DAOUsuario.getInstance().getUsuarios();
+		Collections.sort(usuariosReturn, new Usuario.CompApellido());
+		return usuariosReturn;
 	}
 
 	public long modificarUsuario(String apellido, String dni, String nombre, String tipoDoc, String tipoUsuario, modelo.Usuario usuarioM) {

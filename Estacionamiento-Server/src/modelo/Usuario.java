@@ -1,5 +1,7 @@
 package modelo;
 
+import java.util.Comparator;
+
 public class Usuario 
 {
 	private long idUsuario;
@@ -69,6 +71,13 @@ public class Usuario
 	
 	public String toString()
 	{
-		return this.nombre+" "+this.apellido;
+		return this.apellido+", "+this.nombre;
 	}
+	  public static class CompApellido implements Comparator<Usuario>
+	 {
+		public int compare(Usuario o1, Usuario o2) {
+			return o1.getApellido().compareToIgnoreCase(o2.getApellido());
+		}
+	}
+
 }
