@@ -61,7 +61,7 @@ public class EmitirLiquidacionAlquileres extends JDialog implements ActionListen
 	 */
 	public EmitirLiquidacionAlquileres() {
 		setResizable(false);
-		setTitle("Alta Liquidación Alquileres");
+		setTitle("Emitir Liquidaci\u00F3n de Alquileres");
 		setBounds(100, 100, 329, 180);
 		getContentPane().setLayout(new BorderLayout());
 		contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -145,13 +145,9 @@ public class EmitirLiquidacionAlquileres extends JDialog implements ActionListen
 		if(event.getSource()==aceptarButton)
 		{
 			double codigoReturn=-1;
-
 			codigoReturn=Controlador.getInstancia().liquidarAlquileres(descripcionTextField.getText());
-
 			JOptionPane.showMessageDialog(null, "Se liquidaron correctamente "+codigoReturn+" cocheras.", "Liquidación de Alquileres",  JOptionPane.INFORMATION_MESSAGE);
-
 			dispose();
-
 		}
 
 	}
