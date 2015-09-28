@@ -25,7 +25,7 @@ import javax.swing.border.SoftBevelBorder;
 import javax.swing.border.BevelBorder;
 
 
-public class AltaTarifa extends JDialog implements ActionListener{
+public class AltaTarifaOLD extends JDialog implements ActionListener{
 
 	/**
 	 * 
@@ -67,7 +67,7 @@ public class AltaTarifa extends JDialog implements ActionListener{
 	/**
 	 * Create the frame.
 	 */
-	public AltaTarifa() {
+	public AltaTarifaOLD() {
 		setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
 		initGUI();
 	}

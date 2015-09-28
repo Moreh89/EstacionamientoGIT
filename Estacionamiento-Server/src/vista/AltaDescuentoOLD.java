@@ -19,7 +19,7 @@ import java.awt.Font;
 
 import controlador.Controlador;
 
-public class AltaDescuento extends JDialog implements ActionListener{
+public class AltaDescuentoOLD extends JDialog implements ActionListener{
 	/**
 	 * 
 	 */
@@ -36,7 +36,7 @@ public class AltaDescuento extends JDialog implements ActionListener{
 	 */
 	public static void main(String[] args) {
 		try {
-			AltaDescuento dialog = new AltaDescuento();
+			AltaDescuentoOLD dialog = new AltaDescuentoOLD();
 			dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
 			dialog.setVisible(true);
 		} catch (Exception e) {
@@ -47,7 +47,7 @@ public class AltaDescuento extends JDialog implements ActionListener{
 	/**
 	 * Create the dialog.
 	 */
-	public AltaDescuento() {
+	public AltaDescuentoOLD() {
 		setResizable(false);
 		setTitle("Alta Descuento");
 		setBounds(100, 100, 363, 178);
