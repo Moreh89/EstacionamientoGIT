@@ -238,7 +238,8 @@ public class Login extends javax.swing.JDialog implements ActionListener, KeyLis
 						//Aqui guardo el usuario actual del sistema
 						boolean validar = Controlador.getInstancia().validarLogin(usuarioText.getText(), passwordText.getText());
 						
-						if (validar == true){
+						if (validar == true)
+						{
 							
 							//DIFERENCIA ENTRE USUARIO ADMIN Y OPERADOR
 

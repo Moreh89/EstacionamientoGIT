@@ -87,7 +87,7 @@ public class VerDeudores extends JDialog implements ActionListener, KeyListener,
 
 	@SuppressWarnings("unchecked")
 	public void initGUI(){
-		setTitle("Listado de Clientes con Deuda");
+		setTitle("Listado de Clientes Deudores");
 		setResizable(false);
 		//setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 531, 545);
@@ -160,9 +160,7 @@ public class VerDeudores extends JDialog implements ActionListener, KeyListener,
 		contentPane.add(lblMontoAdeudado, gbc_lblMontoAdeudado);
 
 		textFieldMontoAdeudado = new JTextField();
-		textFieldMontoAdeudado.setForeground(Color.RED);
 		textFieldMontoAdeudado.setFont(new Font("Tahoma", Font.BOLD, 11));
-		textFieldMontoAdeudado.setEnabled(false);
 		textFieldMontoAdeudado.setEditable(false);
 		GridBagConstraints gbc_textFieldMontoAdeudado = new GridBagConstraints();
 		gbc_textFieldMontoAdeudado.insets = new Insets(0, 0, 5, 5);
@@ -171,10 +169,13 @@ public class VerDeudores extends JDialog implements ActionListener, KeyListener,
 		gbc_textFieldMontoAdeudado.gridy = 1;
 		contentPane.add(textFieldMontoAdeudado, gbc_textFieldMontoAdeudado);
 		textFieldMontoAdeudado.setColumns(10);
+		textFieldMontoAdeudado.setForeground(Color.RED);
+		textFieldMontoAdeudado.setFocusable(false);
+
 		
 		lblTipoDeCliente = new JLabel("Tipo de Cliente:");
 		GridBagConstraints gbc_lblTipoDeCliente = new GridBagConstraints();
-		gbc_lblTipoDeCliente.anchor = GridBagConstraints.EAST;
+		gbc_lblTipoDeCliente.anchor = GridBagConstraints.WEST;
 		gbc_lblTipoDeCliente.insets = new Insets(0, 0, 5, 5);
 		gbc_lblTipoDeCliente.gridx = 0;
 		gbc_lblTipoDeCliente.gridy = 2;

@@ -36,7 +36,6 @@ public class GestionColor extends JDialog implements ActionListener, ListSelecti
 	 */
 	private static final long serialVersionUID = 1L;
 	private final JPanel contentPanel = new JPanel();
-	private JButton aceptarButton;
 	private JButton volverButton;
 	private JTextField textFieldAgregarColor;
 	private JButton btnAgregarColor;
@@ -79,9 +78,9 @@ public class GestionColor extends JDialog implements ActionListener, ListSelecti
 		getContentPane().add(contentPanel, BorderLayout.CENTER);
 		GridBagLayout gbl_contentPanel = new GridBagLayout();
 		gbl_contentPanel.columnWidths = new int[]{265, 30, 0, 203, 0};
-		gbl_contentPanel.rowHeights = new int[]{0, 0, 32, 29, 45, 32, 29, 0, 0, 0, 0};
+		gbl_contentPanel.rowHeights = new int[]{0, 0, 32, 29, 20, 32, 29, 0, 0};
 		gbl_contentPanel.columnWeights = new double[]{0.0, 0.0, 0.0, 1.0, Double.MIN_VALUE};
-		gbl_contentPanel.rowWeights = new double[]{0.0, 1.0, 0.0, 0.0, 1.0, 1.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
+		gbl_contentPanel.rowWeights = new double[]{0.0, 1.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, Double.MIN_VALUE};
 		contentPanel.setLayout(gbl_contentPanel);
 		
 				JScrollPane scrollPane = new JScrollPane();
@@ -89,7 +88,7 @@ public class GestionColor extends JDialog implements ActionListener, ListSelecti
 				GridBagConstraints gbc_scrollPane = new GridBagConstraints();
 				gbc_scrollPane.fill = GridBagConstraints.BOTH;
 				gbc_scrollPane.insets = new Insets(0, 0, 0, 5);
-				gbc_scrollPane.gridheight = 10;
+				gbc_scrollPane.gridheight = 8;
 				gbc_scrollPane.gridwidth = 2;
 				gbc_scrollPane.gridx = 0;
 				gbc_scrollPane.gridy = 0;
@@ -204,21 +203,12 @@ public class GestionColor extends JDialog implements ActionListener, ListSelecti
 		btnModificarColor.setIcon(new ImageIcon(GestionColor.class.getResource("/image/modificar.png")));
 		btnModificarColor.addActionListener(this);
 		
-		aceptarButton = new JButton("Aceptar");
-		aceptarButton.setIcon(new ImageIcon(GestionColor.class.getResource("/image/ok.png")));
-		GridBagConstraints gbc_aceptarButton = new GridBagConstraints();
-		gbc_aceptarButton.fill = GridBagConstraints.HORIZONTAL;
-		gbc_aceptarButton.insets = new Insets(0, 0, 5, 0);
-		gbc_aceptarButton.gridx = 3;
-		gbc_aceptarButton.gridy = 7;
-		contentPanel.add(aceptarButton, gbc_aceptarButton);
-		
 		volverButton = new JButton("Volver");
 		volverButton.setIcon(new ImageIcon(GestionColor.class.getResource("/image/izq.png")));
 		GridBagConstraints gbc_volverButton = new GridBagConstraints();
 		gbc_volverButton.fill = GridBagConstraints.HORIZONTAL;
 		gbc_volverButton.gridx = 3;
-		gbc_volverButton.gridy = 9;
+		gbc_volverButton.gridy = 7;
 		contentPanel.add(volverButton, gbc_volverButton);
 		volverButton.addActionListener(this);
 		

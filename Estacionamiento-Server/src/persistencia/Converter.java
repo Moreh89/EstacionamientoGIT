@@ -21,22 +21,24 @@ public class Converter {
 	public static modelo.Usuario convertUsuarioPersistenciaToModelo(persistencia.clases.Usuario usuarioPersistencia)
 	{
 		Usuario usuarioModelo=new modelo.Usuario();
+		if(usuarioPersistencia!=null)
+		{
+			usuarioModelo.setIdUsuario(usuarioPersistencia.getIdUsuario());
+			usuarioModelo.setUserName(usuarioPersistencia.getUserName());
+			usuarioModelo.setPassword(usuarioPersistencia.getPassword());
 
-		usuarioModelo.setIdUsuario(usuarioPersistencia.getIdUsuario());
-		usuarioModelo.setUserName(usuarioPersistencia.getUserName());
-		usuarioModelo.setPassword(usuarioPersistencia.getPassword());
-
-		String permisoPersistencia=usuarioPersistencia.getPermisos().toString();
-		if(permisoPersistencia.equals("ADMIN"))
-			usuarioModelo.setPermisos(PERMISOS.ADMIN);
-		if(permisoPersistencia.equals("CAJA"))
-			usuarioModelo.setPermisos(PERMISOS.CAJA);
+			String permisoPersistencia=usuarioPersistencia.getPermisos().toString();
+			if(permisoPersistencia.equals("ADMIN"))
+				usuarioModelo.setPermisos(PERMISOS.ADMIN);
+			if(permisoPersistencia.equals("CAJA"))
+				usuarioModelo.setPermisos(PERMISOS.CAJA);
 
 
-		usuarioModelo.setNombre(usuarioPersistencia.getNombre());
-		usuarioModelo.setApellido(usuarioPersistencia.getApellido());
-		usuarioModelo.setTipoDocumento(usuarioPersistencia.getTipoDocumento());
-		usuarioModelo.setNumeroDocumento(usuarioPersistencia.getNumeroDocumento());
+			usuarioModelo.setNombre(usuarioPersistencia.getNombre());
+			usuarioModelo.setApellido(usuarioPersistencia.getApellido());
+			usuarioModelo.setTipoDocumento(usuarioPersistencia.getTipoDocumento());
+			usuarioModelo.setNumeroDocumento(usuarioPersistencia.getNumeroDocumento());
+		}
 		return usuarioModelo;
 	}
 
@@ -373,7 +375,7 @@ public class Converter {
 
 		cuentaCorrienteM.setIdCuentaCorriente(cuentaCorrienteP.getIdCuentaCorriente());
 		List<modelo.MovimientoCC> movimientosCCM = new ArrayList<modelo.MovimientoCC>();
-		
+
 		if(cuentaCorrienteP.getMovimientos()!=null)
 		{
 			for (persistencia.clases.MovimientoCC movimientoCCP : cuentaCorrienteP.getMovimientos()) {

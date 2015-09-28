@@ -49,6 +49,7 @@ public class AltaUsuario extends JDialog implements ActionListener, KeyListener{
 	private JTextField textFieldTipoUsuario;
 	@SuppressWarnings("rawtypes")
 	private JComboBox comboBoxTipoDoc;
+	private JButton btnVolver;
 
 	/**
 	 * Launch the application.
@@ -70,14 +71,14 @@ public class AltaUsuario extends JDialog implements ActionListener, KeyListener{
 	public AltaUsuario(String tipoUsuario) {
 		setResizable(false);
 		setTitle("Alta Usuario");
-		setBounds(100, 100, 329, 365);
+		setBounds(100, 100, 329, 350);
 		getContentPane().setLayout(new BorderLayout());
 		contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
 		getContentPane().add(contentPanel, BorderLayout.CENTER);
 		GridBagLayout gbl_contentPanel = new GridBagLayout();
-		gbl_contentPanel.columnWidths = new int[]{100, 145, 0};
+		gbl_contentPanel.columnWidths = new int[]{100, 97, 72, 80, 0};
 		gbl_contentPanel.rowHeights = new int[]{22, 22, 0, 0, 0, 0, 0, 0, 10, 32, 0};
-		gbl_contentPanel.columnWeights = new double[]{0.0, 1.0, Double.MIN_VALUE};
+		gbl_contentPanel.columnWeights = new double[]{0.0, 1.0, 0.0, 0.0, Double.MIN_VALUE};
 		gbl_contentPanel.rowWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
 		contentPanel.setLayout(gbl_contentPanel);
 
@@ -92,6 +93,7 @@ public class AltaUsuario extends JDialog implements ActionListener, KeyListener{
 
 		textFieldUserName = new JTextField();
 		GridBagConstraints gbc_textFieldUserName = new GridBagConstraints();
+		gbc_textFieldUserName.gridwidth = 3;
 		gbc_textFieldUserName.insets = new Insets(0, 0, 5, 0);
 		gbc_textFieldUserName.fill = GridBagConstraints.HORIZONTAL;
 		gbc_textFieldUserName.gridx = 1;
@@ -111,6 +113,7 @@ public class AltaUsuario extends JDialog implements ActionListener, KeyListener{
 
 		textFieldPassword1 = new JPasswordField();
 		GridBagConstraints gbc_textFieldPassword1 = new GridBagConstraints();
+		gbc_textFieldPassword1.gridwidth = 3;
 		gbc_textFieldPassword1.insets = new Insets(0, 0, 5, 0);
 		gbc_textFieldPassword1.fill = GridBagConstraints.HORIZONTAL;
 		gbc_textFieldPassword1.gridx = 1;
@@ -130,6 +133,7 @@ public class AltaUsuario extends JDialog implements ActionListener, KeyListener{
 
 		textFieldPassword2 = new JPasswordField();
 		GridBagConstraints gbc_textFieldPassword2 = new GridBagConstraints();
+		gbc_textFieldPassword2.gridwidth = 3;
 		gbc_textFieldPassword2.insets = new Insets(0, 0, 5, 0);
 		gbc_textFieldPassword2.fill = GridBagConstraints.HORIZONTAL;
 		gbc_textFieldPassword2.gridx = 1;
@@ -149,6 +153,7 @@ public class AltaUsuario extends JDialog implements ActionListener, KeyListener{
 
 		textFieldNombre = new JTextField();
 		GridBagConstraints gbc_textFieldNombre = new GridBagConstraints();
+		gbc_textFieldNombre.gridwidth = 3;
 		gbc_textFieldNombre.insets = new Insets(0, 0, 5, 0);
 		gbc_textFieldNombre.fill = GridBagConstraints.HORIZONTAL;
 		gbc_textFieldNombre.gridx = 1;
@@ -168,6 +173,7 @@ public class AltaUsuario extends JDialog implements ActionListener, KeyListener{
 
 		textFieldApellido = new JTextField();
 		GridBagConstraints gbc_textFieldApellido = new GridBagConstraints();
+		gbc_textFieldApellido.gridwidth = 3;
 		gbc_textFieldApellido.insets = new Insets(0, 0, 5, 0);
 		gbc_textFieldApellido.fill = GridBagConstraints.HORIZONTAL;
 		gbc_textFieldApellido.gridx = 1;
@@ -188,6 +194,7 @@ public class AltaUsuario extends JDialog implements ActionListener, KeyListener{
 		comboBoxTipoDoc = new JComboBox();
 		comboBoxTipoDoc.setModel(new DefaultComboBoxModel(new String[] {"DNI", "LU", "PASAPORTE", "OTRO"}));
 		GridBagConstraints gbc_comboBoxTipoDoc = new GridBagConstraints();
+		gbc_comboBoxTipoDoc.gridwidth = 3;
 		gbc_comboBoxTipoDoc.insets = new Insets(0, 0, 5, 0);
 		gbc_comboBoxTipoDoc.fill = GridBagConstraints.HORIZONTAL;
 		gbc_comboBoxTipoDoc.gridx = 1;
@@ -204,6 +211,7 @@ public class AltaUsuario extends JDialog implements ActionListener, KeyListener{
 
 		textFieldNroDoc = new JTextField();
 		GridBagConstraints gbc_textFieldNroDoc = new GridBagConstraints();
+		gbc_textFieldNroDoc.gridwidth = 3;
 		gbc_textFieldNroDoc.insets = new Insets(0, 0, 5, 0);
 		gbc_textFieldNroDoc.fill = GridBagConstraints.HORIZONTAL;
 		gbc_textFieldNroDoc.gridx = 1;
@@ -224,6 +232,7 @@ public class AltaUsuario extends JDialog implements ActionListener, KeyListener{
 		textFieldTipoUsuario.setEnabled(false);
 		textFieldTipoUsuario.setEditable(false);
 		GridBagConstraints gbc_textFieldTipoUsuario = new GridBagConstraints();
+		gbc_textFieldTipoUsuario.gridwidth = 3;
 		gbc_textFieldTipoUsuario.insets = new Insets(0, 0, 5, 0);
 		gbc_textFieldTipoUsuario.fill = GridBagConstraints.HORIZONTAL;
 		gbc_textFieldTipoUsuario.gridx = 1;
@@ -235,12 +244,23 @@ public class AltaUsuario extends JDialog implements ActionListener, KeyListener{
 		aceptarButton = new JButton("Aceptar");
 		aceptarButton.setIcon(new ImageIcon(CambioContrasenia.class.getResource("/image/ok.png")));
 		GridBagConstraints gbc_aceptarButton = new GridBagConstraints();
+		gbc_aceptarButton.gridwidth = 2;
 		gbc_aceptarButton.insets = new Insets(0, 0, 0, 5);
 		gbc_aceptarButton.gridx = 0;
 		gbc_aceptarButton.gridy = 9;
 		contentPanel.add(aceptarButton, gbc_aceptarButton);
 		aceptarButton.addActionListener(this);
 
+		btnVolver = new JButton("Volver");
+		btnVolver.setIcon(new ImageIcon(AltaUsuario.class.getResource("/image/izq.png")));
+		GridBagConstraints gbc_btnVolver = new GridBagConstraints();
+		gbc_btnVolver.fill = GridBagConstraints.VERTICAL;
+		gbc_btnVolver.gridwidth = 2;
+		gbc_btnVolver.insets = new Insets(0, 0, 0, 5);
+		gbc_btnVolver.gridx = 2;
+		gbc_btnVolver.gridy = 9;
+		contentPanel.add(btnVolver, gbc_btnVolver);
+		btnVolver.addActionListener(this);
 		this.setLocationRelativeTo(null);
 		setModal(true);
 
@@ -251,6 +271,10 @@ public class AltaUsuario extends JDialog implements ActionListener, KeyListener{
 
 	@Override
 	public void actionPerformed(ActionEvent event) {
+		if(event.getSource()==btnVolver)
+		{
+			dispose();
+		}
 		if(event.getSource()==aceptarButton)
 		{
 			long codigoReturn=-1;
