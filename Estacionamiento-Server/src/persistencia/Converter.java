@@ -11,7 +11,6 @@ import modelo.Usuario;
 import modelo.Usuario.PERMISOS;
 import modelo.Vehiculo;
 import persistencia.clases.Cliente.ESTADO;
-import persistencia.clases.Cliente.TIPO_CLIENTE;
 import persistencia.clases.Cliente.TIPO_DOC;
 import persistencia.clases.Cliente.TIPO_FACTURA;
 import persistencia.clases.IncrementoPrepago;

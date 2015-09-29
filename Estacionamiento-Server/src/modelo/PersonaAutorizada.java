@@ -27,6 +27,9 @@ public class PersonaAutorizada {
 	public PersonaAutorizada() {
 	}
 	
+	public String toString (){
+		return this.nombre;
+	}
 	
 
 }

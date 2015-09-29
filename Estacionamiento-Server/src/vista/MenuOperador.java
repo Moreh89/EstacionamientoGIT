@@ -126,7 +126,7 @@ public class MenuOperador extends JFrame implements ActionListener, KeyListener,
 		mnCliente.add(mntmAltaCliente);
 		mntmAltaCliente.addActionListener(this);
 
-		mntmModificacionCliente = new JMenuItem("Modificaci\u00F3n");
+		mntmModificacionCliente = new JMenuItem("Modificaci\u00F3n/Baja");
 		mntmModificacionCliente.setFont(new Font("Segoe UI", Font.PLAIN, 20));
 		mnCliente.add(mntmModificacionCliente);
 		mntmModificacionCliente.addActionListener(this);

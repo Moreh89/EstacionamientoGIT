@@ -1,7 +1,5 @@
 package vista;
 
-import java.awt.EventQueue;
-
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import javax.swing.ImageIcon;
@@ -12,16 +10,14 @@ import javax.swing.JTextField;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.DefaultComboBoxModel;
-
 import java.awt.GridBagLayout;
 import java.awt.GridBagConstraints;
 import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-
 import javax.swing.JSeparator;
+import modelo.Cochera;
 
-import controlador.Controlador;
 
 
 public class AgregarCochera extends JDialog implements ActionListener{
@@ -38,29 +34,13 @@ public class AgregarCochera extends JDialog implements ActionListener{
 	private JButton buttonAgregarCochera;
 	@SuppressWarnings("rawtypes")
 	private JComboBox comboBoxPiso;
+	private AltaCliente altaCliente;
 
-	/**
-	 * Launch the application.
-	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					AgregarCochera frame = new AgregarCochera(null);
-					frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
-
-	/**
-	 * Create the frame.
-	 * @param altaCliente 
-	 */
+	
 	public AgregarCochera(AltaCliente altaCliente) {
+		
 		setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
+		this.altaCliente=altaCliente;
 		initGUI();
 	}
 
@@ -69,17 +49,17 @@ public class AgregarCochera extends JDialog implements ActionListener{
 	public void initGUI(){
 		setTitle("Alta Cochera");
 		setResizable(false);
-		setBounds(100, 100, 336, 242);
+		setBounds(100, 100, 377, 242);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 
 		JPanel panel = new JPanel();
-		panel.setBounds(6, 6, 306, 116);
+		panel.setBounds(6, 6, 353, 116);
 		contentPane.add(panel);
 		GridBagLayout gbl_panel = new GridBagLayout();
-		gbl_panel.columnWidths = new int[]{152, 148, 0};
+		gbl_panel.columnWidths = new int[]{181, 170, 0};
 		gbl_panel.rowHeights = new int[] {28, 28, 28, 0, 0};
 		gbl_panel.columnWeights = new double[]{0.0, 0.0, Double.MIN_VALUE};
 		gbl_panel.rowWeights = new double[]{0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
@@ -154,13 +134,13 @@ public class AgregarCochera extends JDialog implements ActionListener{
 
 		buttonCancelar = new JButton("Cancelar");
 		buttonCancelar.setIcon(new ImageIcon(BuscadorCliente.class.getResource("/image/cancel.png")));
-		buttonCancelar.setBounds(6, 146, 148, 56);
+		buttonCancelar.setBounds(6, 146, 172, 56);
 		contentPane.add(buttonCancelar);
 		buttonCancelar.addActionListener(this);
 
 		buttonAgregarCochera = new JButton("Agregar Cochera");
 		buttonAgregarCochera.setIcon(new ImageIcon(BuscadorCliente.class.getResource("/image/ok.png")));
-		buttonAgregarCochera.setBounds(164, 146, 148, 56);
+		buttonAgregarCochera.setBounds(199, 146, 160, 56);
 		contentPane.add(buttonAgregarCochera);
 		buttonAgregarCochera.addActionListener(this);
 
@@ -192,7 +172,14 @@ public class AgregarCochera extends JDialog implements ActionListener{
 				double porcentajeExp=Double.parseDouble(textFieldPorcentajeExpensas.getText().toString());
 				if((porcentajeExp<=100 || porcentajeExp>0))
 				{
-					Controlador.getInstancia().agregarCochera(textFieldUbicacion.getText(), Double.parseDouble(textCostoMensual.getText()), Float.parseFloat(textFieldPorcentajeExpensas.getText()),comboBoxPiso.getSelectedItem().toString());	
+					modelo.Cochera c = new Cochera();
+					c.setCostoCochera(Double.parseDouble(textCostoMensual.getText()));
+					c.setPorcentajeExpensas(Float.parseFloat(textFieldPorcentajeExpensas.getText()));
+					c.setEstado(modelo.Cochera.ESTADO.ACTIVO);
+					c.setUbicacion(textFieldUbicacion.getText());
+					c.setCliente(null);
+					altaCliente.agregarCocheraAltaCliente(c);
+					dispose();
 				}
 				else
 				{

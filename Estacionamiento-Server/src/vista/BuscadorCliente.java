@@ -10,7 +10,6 @@ import javax.swing.DefaultListModel;
 import javax.swing.ImageIcon;
 import javax.swing.JDialog;
 import javax.swing.JLabel;
-import javax.swing.JTextArea;
 import javax.swing.JTextField;
 import javax.swing.JButton;
 import javax.swing.JSeparator;
@@ -28,6 +27,10 @@ import javax.swing.JScrollPane;
 import javax.swing.ScrollPaneConstants;
 import javax.swing.JList;
 import modelo.Cliente;
+import modelo.Cochera;
+import modelo.MovimientoCC;
+import modelo.PersonaAutorizada;
+import modelo.Vehiculo;
 import controlador.Controlador;
 import java.awt.Font;
 
@@ -62,13 +65,10 @@ public class BuscadorCliente extends JDialog implements ActionListener, KeyListe
 	private JLabel lblCocheras;
 	private JScrollPane scrollPane_1;
 	private JScrollPane scrollPane_2;
-	private JTextArea textAreaVehiculos;
-	private JTextArea textAreaCocheras;
 	private JLabel lblDnilu;
 	private JLabel lblCuit;
 	private JTextField textFieldDNILU;
 	private JTextField textFieldCUIT;
-
 	private modelo.Cliente cliente = null;
 	private JButton buscarButton;
 	private JPanel panelClientes;
@@ -87,6 +87,16 @@ public class BuscadorCliente extends JDialog implements ActionListener, KeyListe
 	private JLabel labelNombre;
 	private JPanel panelAtributos;
 	private JButton btnVerCuentaCorriente;
+	private JList<PersonaAutorizada> listPersonas;
+	private DefaultListModel<PersonaAutorizada> listModelPersonas;
+	private JList<Vehiculo> listVehiculos;
+	private DefaultListModel<Vehiculo> listModelVehiculos;
+	private JList<Cochera> listCocheras;
+	private DefaultListModel<Cochera> listModelCocheras;
+	private JLabel lblTipoCliente;
+	private JTextField textFieldTipoCliente;
+	private JLabel lblDescripcion;
+	private JTextField textFieldDescripcion;
 		
 	public BuscadorCliente() {
 		initGUI();
@@ -95,74 +105,131 @@ public class BuscadorCliente extends JDialog implements ActionListener, KeyListe
 	public BuscadorCliente(CobroExtraordinario cobroExtraordinario) {
 		this.cobroExtraordinario=cobroExtraordinario;
 		initGUI();
-//TODO HAY QUE SETTEAR AL CLIENTE ELEGIDO
+		//TODO HAY QUE SETTEAR AL CLIENTE ELEGIDO
 		cobroExtraordinario.cobroExtraOrdinarioSetCliente(cliente);
 	}
 	
 
 	@SuppressWarnings("unchecked")
 	public void initGUI(){
+		
+		Controlador.getInstancia().actualizarClientes();
+		
 		setTitle("Buscar Clientes");
-		setResizable(false);
-		//setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 1059, 727);
+		setResizable(true);
+		setBounds(100, 100, 1059, 850);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
-		contentPane.setLayout(null);
+		GridBagLayout gbl_contentPane = new GridBagLayout();
+		gbl_contentPane.columnWidths = new int[] { 252, 45, 73, 121, 116, 166,
+				221, 0 };
+		gbl_contentPane.rowHeights = new int[] { 32, 560, 31, 43, 0 };
+		gbl_contentPane.columnWeights = new double[] { 0.0, 0.0, 0.0, 0.0, 0.0,
+				0.0, 1.0, Double.MIN_VALUE };
+		gbl_contentPane.rowWeights = new double[] { 0.0, 1.0, 0.0, 0.0,
+				Double.MIN_VALUE };
+		contentPane.setLayout(gbl_contentPane);
+
+		buscarTextField = new JTextField();
+		GridBagConstraints gbc_buscarTextField = new GridBagConstraints();
+		gbc_buscarTextField.fill = GridBagConstraints.HORIZONTAL;
+		gbc_buscarTextField.insets = new Insets(0, 0, 5, 5);
+		gbc_buscarTextField.gridwidth = 3;
+		gbc_buscarTextField.gridx = 0;
+		gbc_buscarTextField.gridy = 0;
+		contentPane.add(buscarTextField, gbc_buscarTextField);
+		buscarTextField.setColumns(10);
 
 		JLabel lblBuscar = new JLabel("Buscar");
 		lblBuscar.setFont(new Font("Tahoma", Font.BOLD, 16));
-		lblBuscar.setBounds(10, 19, 105, 14);
-		contentPane.add(lblBuscar);
+		GridBagConstraints gbc_lblBuscar = new GridBagConstraints();
+		gbc_lblBuscar.anchor = GridBagConstraints.WEST;
+		gbc_lblBuscar.insets = new Insets(0, 0, 5, 5);
+		gbc_lblBuscar.gridx = 0;
+		gbc_lblBuscar.gridy = 0;
+		contentPane.add(lblBuscar, gbc_lblBuscar);
 
-		buscarTextField = new JTextField();
-		buscarTextField.setBounds(78, 15, 302, 25);
-		contentPane.add(buscarTextField);
-		buscarTextField.setColumns(10);
-		model = new DefaultTableModel(){
-			/**
-			 * 
-			 */
-			private static final long serialVersionUID = 1L;
-
-			@Override
-			public boolean isCellEditable(int row, int column) {
-				return false;
-			}
-		};
-
-		model.addColumn("Nombre");
-		model.addColumn("Apellido");
-		model.addColumn("Tipo Doc.");
-		model.addColumn("Numero");
-
+		tipoComboBox = new JComboBox();
+		tipoComboBox.setFont(new Font("Tahoma", Font.BOLD, 16));
+		tipoComboBox.setModel(new DefaultComboBoxModel(new String[] { "DNI/LU",
+				"CUIT", "NOMBRE", "APELLIDO" }));
+		GridBagConstraints gbc_tipoComboBox = new GridBagConstraints();
+		gbc_tipoComboBox.anchor = GridBagConstraints.WEST;
+		gbc_tipoComboBox.insets = new Insets(0, 0, 5, 5);
+		gbc_tipoComboBox.gridx = 3;
+		gbc_tipoComboBox.gridy = 0;
+		contentPane.add(tipoComboBox, gbc_tipoComboBox);
 
 		buscarButton = new JButton("Buscar");
 		buscarButton.setFont(new Font("Tahoma", Font.BOLD, 16));
 		buscarButton.addActionListener(this);
-		buscarButton.setBounds(518, 11, 116, 32);
-		contentPane.add(buscarButton);
-		buscarButton.setIcon(new ImageIcon(BuscadorCliente.class.getResource("/image/search.png")));
+		GridBagConstraints gbc_buscarButton = new GridBagConstraints();
+		gbc_buscarButton.fill = GridBagConstraints.HORIZONTAL;
+		gbc_buscarButton.insets = new Insets(0, 0, 5, 5);
+		gbc_buscarButton.gridx = 4;
+		gbc_buscarButton.gridy = 0;
+		contentPane.add(buscarButton, gbc_buscarButton);
+		buscarButton.setIcon(new ImageIcon(BuscadorCliente.class
+				.getResource("/image/search.png")));
+
+		panelClientes = new JPanel();
+		GridBagConstraints gbc_panelClientes = new GridBagConstraints();
+		gbc_panelClientes.fill = GridBagConstraints.BOTH;
+		gbc_panelClientes.insets = new Insets(0, 0, 5, 5);
+		gbc_panelClientes.gridwidth = 4;
+		gbc_panelClientes.gridx = 0;
+		gbc_panelClientes.gridy = 1;
+		contentPane.add(panelClientes, gbc_panelClientes);
+		GridBagLayout gbl_panelClientes = new GridBagLayout();
+		gbl_panelClientes.columnWidths = new int[] { 240, 0 };
+		gbl_panelClientes.rowHeights = new int[] { 2, 0 };
+		gbl_panelClientes.columnWeights = new double[] { 1.0, Double.MIN_VALUE };
+		gbl_panelClientes.rowWeights = new double[] { 1.0, Double.MIN_VALUE };
+		panelClientes.setLayout(gbl_panelClientes);
+
+		scrollPaneClientes = new JScrollPane();
+		scrollPaneClientes
+				.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
+		GridBagConstraints gbc_scrollPaneClientes = new GridBagConstraints();
+		gbc_scrollPaneClientes.fill = GridBagConstraints.BOTH;
+		gbc_scrollPaneClientes.gridx = 0;
+		gbc_scrollPaneClientes.gridy = 0;
+		panelClientes.add(scrollPaneClientes, gbc_scrollPaneClientes);
+		listModel = new DefaultListModel<Cliente>();
+		listClientes = new JList(listModel);
+		listClientes
+				.setSelectionMode(ListSelectionModel.SINGLE_INTERVAL_SELECTION);
+		scrollPaneClientes.setViewportView(listClientes);
+		listClientes.addListSelectionListener(this);
 
 		JSeparator separator = new JSeparator();
-		separator.setBounds(10, 47, 510, 6);
-		contentPane.add(separator);
-
-		tipoComboBox = new JComboBox();
-		tipoComboBox.setFont(new Font("Tahoma", Font.BOLD, 16));
-		tipoComboBox.setModel(new DefaultComboBoxModel(new String[] {"DNI/LU", "CUIT", "NOMBRE", "APELLIDO"}));
-		tipoComboBox.setBounds(392, 14, 114, 25);
-		contentPane.add(tipoComboBox);
+		GridBagConstraints gbc_separator = new GridBagConstraints();
+		gbc_separator.anchor = GridBagConstraints.NORTH;
+		gbc_separator.fill = GridBagConstraints.HORIZONTAL;
+		gbc_separator.insets = new Insets(0, 0, 5, 5);
+		gbc_separator.gridwidth = 5;
+		gbc_separator.gridx = 0;
+		gbc_separator.gridy = 1;
+		contentPane.add(separator, gbc_separator);
 
 		panelAtributos = new JPanel();
-		panelAtributos.setBounds(518, 52, 503, 554);
-		contentPane.add(panelAtributos);
+		GridBagConstraints gbc_panelAtributos = new GridBagConstraints();
+		gbc_panelAtributos.fill = GridBagConstraints.BOTH;
+		gbc_panelAtributos.insets = new Insets(0, 0, 5, 0);
+		gbc_panelAtributos.gridwidth = 3;
+		gbc_panelAtributos.gridx = 4;
+		gbc_panelAtributos.gridy = 1;
+		contentPane.add(panelAtributos, gbc_panelAtributos);
 		GridBagLayout gbl_panelAtributos = new GridBagLayout();
-		gbl_panelAtributos.columnWidths = new int[]{0, 327, 0};
-		gbl_panelAtributos.rowHeights = new int[]{0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 40, 40, 40, 0};
-		gbl_panelAtributos.columnWeights = new double[]{0.0, 0.0, Double.MIN_VALUE};
-		gbl_panelAtributos.rowWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
+		gbl_panelAtributos.columnWidths = new int[] { 0, 327, 0 };
+		gbl_panelAtributos.rowHeights = new int[] { 0, 0, 0, 0, 0, 0, 0, 0, 0,
+				0, 0, 0, 0, 0, 40, 40, 40, 0 };
+		gbl_panelAtributos.columnWeights = new double[] { 0.0, 1.0,
+				Double.MIN_VALUE };
+		gbl_panelAtributos.rowWeights = new double[] { 0.0, 0.0, 0.0, 0.0, 0.0,
+				0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 1.0, 1.0, 1.0,
+				Double.MIN_VALUE };
 		panelAtributos.setLayout(gbl_panelAtributos);
 
 		labelNombre = new JLabel("Nombre:");
@@ -383,10 +450,12 @@ public class BuscadorCliente extends JDialog implements ActionListener, KeyListe
 		gbc_labelEstadoCuentaCorriente.insets = new Insets(0, 0, 5, 5);
 		gbc_labelEstadoCuentaCorriente.gridx = 0;
 		gbc_labelEstadoCuentaCorriente.gridy = 10;
-		panelAtributos.add(labelEstadoCuentaCorriente, gbc_labelEstadoCuentaCorriente);
+		panelAtributos.add(labelEstadoCuentaCorriente,
+				gbc_labelEstadoCuentaCorriente);
 
 		textFieldEstadoCuentaCorriente = new JTextField();
-		textFieldEstadoCuentaCorriente.setFont(new Font("Tahoma", Font.BOLD, 16));
+		textFieldEstadoCuentaCorriente
+				.setFont(new Font("Tahoma", Font.BOLD, 16));
 		textFieldEstadoCuentaCorriente.setEnabled(false);
 		textFieldEstadoCuentaCorriente.setEditable(false);
 		textFieldEstadoCuentaCorriente.setColumns(10);
@@ -395,7 +464,8 @@ public class BuscadorCliente extends JDialog implements ActionListener, KeyListe
 		gbc_textFieldEstadoCuentaCorriente.insets = new Insets(0, 0, 5, 0);
 		gbc_textFieldEstadoCuentaCorriente.gridx = 1;
 		gbc_textFieldEstadoCuentaCorriente.gridy = 10;
-		panelAtributos.add(textFieldEstadoCuentaCorriente, gbc_textFieldEstadoCuentaCorriente);
+		panelAtributos.add(textFieldEstadoCuentaCorriente,
+				gbc_textFieldEstadoCuentaCorriente);
 
 		labelEstadoCliente = new JLabel("Estado Cliente:");
 		labelEstadoCliente.setFont(new Font("Tahoma", Font.BOLD, 15));
@@ -418,6 +488,48 @@ public class BuscadorCliente extends JDialog implements ActionListener, KeyListe
 		gbc_textFieldEstadoCliente.gridy = 11;
 		panelAtributos.add(textFieldEstadoCliente, gbc_textFieldEstadoCliente);
 
+		lblTipoCliente = new JLabel("Tipo Cliente:");
+		lblTipoCliente.setFont(new Font("Tahoma", Font.BOLD, 15));
+		GridBagConstraints gbc_lblTipoCliente = new GridBagConstraints();
+		gbc_lblTipoCliente.anchor = GridBagConstraints.EAST;
+		gbc_lblTipoCliente.insets = new Insets(0, 0, 5, 5);
+		gbc_lblTipoCliente.gridx = 0;
+		gbc_lblTipoCliente.gridy = 12;
+		panelAtributos.add(lblTipoCliente, gbc_lblTipoCliente);
+
+		textFieldTipoCliente = new JTextField();
+		textFieldTipoCliente.setFont(new Font("Tahoma", Font.BOLD, 16));
+		textFieldTipoCliente.setEnabled(false);
+		textFieldTipoCliente.setEditable(false);
+		textFieldTipoCliente.setColumns(10);
+		GridBagConstraints gbc_textFieldTipoCliente = new GridBagConstraints();
+		gbc_textFieldTipoCliente.insets = new Insets(0, 0, 5, 0);
+		gbc_textFieldTipoCliente.fill = GridBagConstraints.HORIZONTAL;
+		gbc_textFieldTipoCliente.gridx = 1;
+		gbc_textFieldTipoCliente.gridy = 12;
+		panelAtributos.add(textFieldTipoCliente, gbc_textFieldTipoCliente);
+
+		lblDescripcion = new JLabel("Descripcion:");
+		lblDescripcion.setFont(new Font("Tahoma", Font.BOLD, 15));
+		GridBagConstraints gbc_lblDescripcion = new GridBagConstraints();
+		gbc_lblDescripcion.anchor = GridBagConstraints.EAST;
+		gbc_lblDescripcion.insets = new Insets(0, 0, 5, 5);
+		gbc_lblDescripcion.gridx = 0;
+		gbc_lblDescripcion.gridy = 13;
+		panelAtributos.add(lblDescripcion, gbc_lblDescripcion);
+
+		textFieldDescripcion = new JTextField();
+		textFieldDescripcion.setFont(new Font("Tahoma", Font.BOLD, 16));
+		textFieldDescripcion.setEnabled(false);
+		textFieldDescripcion.setEditable(false);
+		textFieldDescripcion.setColumns(10);
+		GridBagConstraints gbc_textFieldDescripcion = new GridBagConstraints();
+		gbc_textFieldDescripcion.insets = new Insets(0, 0, 5, 0);
+		gbc_textFieldDescripcion.fill = GridBagConstraints.HORIZONTAL;
+		gbc_textFieldDescripcion.gridx = 1;
+		gbc_textFieldDescripcion.gridy = 13;
+		panelAtributos.add(textFieldDescripcion, gbc_textFieldDescripcion);
+
 		labelPersonasAutorizadas = new JLabel("Personas Autorizadas:");
 		labelPersonasAutorizadas.setFont(new Font("Tahoma", Font.BOLD, 15));
 		GridBagConstraints gbc_labelPersonasAutorizadas = new GridBagConstraints();
@@ -425,22 +537,22 @@ public class BuscadorCliente extends JDialog implements ActionListener, KeyListe
 		gbc_labelPersonasAutorizadas.anchor = GridBagConstraints.EAST;
 		gbc_labelPersonasAutorizadas.insets = new Insets(0, 0, 5, 5);
 		gbc_labelPersonasAutorizadas.gridx = 0;
-		gbc_labelPersonasAutorizadas.gridy = 12;
-		panelAtributos.add(labelPersonasAutorizadas, gbc_labelPersonasAutorizadas);
+		gbc_labelPersonasAutorizadas.gridy = 14;
+		panelAtributos.add(labelPersonasAutorizadas,
+				gbc_labelPersonasAutorizadas);
 
 		scrollPane = new JScrollPane();
-		scrollPane.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
+		scrollPane
+				.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
 		GridBagConstraints gbc_scrollPane = new GridBagConstraints();
 		gbc_scrollPane.insets = new Insets(0, 0, 5, 0);
 		gbc_scrollPane.fill = GridBagConstraints.BOTH;
 		gbc_scrollPane.gridx = 1;
-		gbc_scrollPane.gridy = 12;
+		gbc_scrollPane.gridy = 14;
 		panelAtributos.add(scrollPane, gbc_scrollPane);
-
-		JTextArea textAreaPersonasAutorizadas = new JTextArea();
-		scrollPane.setViewportView(textAreaPersonasAutorizadas);
-		textAreaPersonasAutorizadas.setEnabled(false);
-		textAreaPersonasAutorizadas.setEditable(false);
+		listModelPersonas = new DefaultListModel<PersonaAutorizada>();
+		listPersonas = new JList(listModelPersonas);
+		scrollPane.setViewportView(listPersonas);
 
 		lblVehiculos = new JLabel("Vehiculos:");
 		lblVehiculos.setFont(new Font("Tahoma", Font.BOLD, 16));
@@ -449,22 +561,21 @@ public class BuscadorCliente extends JDialog implements ActionListener, KeyListe
 		gbc_lblVehiculos.anchor = GridBagConstraints.EAST;
 		gbc_lblVehiculos.insets = new Insets(0, 0, 5, 5);
 		gbc_lblVehiculos.gridx = 0;
-		gbc_lblVehiculos.gridy = 13;
+		gbc_lblVehiculos.gridy = 15;
 		panelAtributos.add(lblVehiculos, gbc_lblVehiculos);
 
 		scrollPane_1 = new JScrollPane();
-		scrollPane_1.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
+		scrollPane_1
+				.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
 		GridBagConstraints gbc_scrollPane_1 = new GridBagConstraints();
 		gbc_scrollPane_1.insets = new Insets(0, 0, 5, 0);
 		gbc_scrollPane_1.fill = GridBagConstraints.BOTH;
 		gbc_scrollPane_1.gridx = 1;
-		gbc_scrollPane_1.gridy = 13;
+		gbc_scrollPane_1.gridy = 15;
 		panelAtributos.add(scrollPane_1, gbc_scrollPane_1);
-
-		textAreaVehiculos = new JTextArea();
-		textAreaVehiculos.setEnabled(false);
-		textAreaVehiculos.setEditable(false);
-		scrollPane_1.setViewportView(textAreaVehiculos);
+		listModelVehiculos = new DefaultListModel<Vehiculo>();
+		listVehiculos = new JList(listModelVehiculos);
+		scrollPane_1.setViewportView(listVehiculos);
 
 		lblCocheras = new JLabel("Cocheras:");
 		lblCocheras.setFont(new Font("Tahoma", Font.BOLD, 16));
@@ -473,116 +584,136 @@ public class BuscadorCliente extends JDialog implements ActionListener, KeyListe
 		gbc_lblCocheras.anchor = GridBagConstraints.EAST;
 		gbc_lblCocheras.insets = new Insets(0, 0, 0, 5);
 		gbc_lblCocheras.gridx = 0;
-		gbc_lblCocheras.gridy = 14;
+		gbc_lblCocheras.gridy = 16;
 		panelAtributos.add(lblCocheras, gbc_lblCocheras);
 
 		scrollPane_2 = new JScrollPane();
-		scrollPane_2.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
+		scrollPane_2
+				.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
 		GridBagConstraints gbc_scrollPane_2 = new GridBagConstraints();
 		gbc_scrollPane_2.fill = GridBagConstraints.BOTH;
 		gbc_scrollPane_2.gridx = 1;
-		gbc_scrollPane_2.gridy = 14;
+		gbc_scrollPane_2.gridy = 16;
 		panelAtributos.add(scrollPane_2, gbc_scrollPane_2);
-
-		textAreaCocheras = new JTextArea();
-		textAreaCocheras.setEnabled(false);
-		textAreaCocheras.setEditable(false);
-		scrollPane_2.setViewportView(textAreaCocheras);
+		listModelCocheras = new DefaultListModel<Cochera>();
+		listCocheras = new JList(listModelCocheras);
+		scrollPane_2.setViewportView(listCocheras);
 
 		buttonCancelar = new JButton("Cancelar");
 		buttonCancelar.setFont(new Font("Tahoma", Font.BOLD, 16));
-		buttonCancelar.setIcon(new ImageIcon(BuscadorCliente.class.getResource("/image/cancel.png")));
-		buttonCancelar.setBounds(103, 637, 159, 42);
-		contentPane.add(buttonCancelar);
+		buttonCancelar.setIcon(new ImageIcon(BuscadorCliente.class
+				.getResource("/image/cancel.png")));
+		GridBagConstraints gbc_buttonCancelar = new GridBagConstraints();
+		gbc_buttonCancelar.fill = GridBagConstraints.BOTH;
+		gbc_buttonCancelar.insets = new Insets(0, 0, 0, 5);
+		gbc_buttonCancelar.gridx = 0;
+		gbc_buttonCancelar.gridy = 3;
+		contentPane.add(buttonCancelar, gbc_buttonCancelar);
 		buttonCancelar.addActionListener(this);
 
 		buttonAceptar = new JButton("Aceptar");
 		buttonAceptar.setFont(new Font("Tahoma", Font.BOLD, 16));
-		buttonAceptar.setIcon(new ImageIcon(BuscadorCliente.class.getResource("/image/ok.png")));
-		buttonAceptar.setBounds(307, 637, 166, 42);
-		contentPane.add(buttonAceptar);
+		buttonAceptar.setIcon(new ImageIcon(BuscadorCliente.class
+				.getResource("/image/ok.png")));
+		GridBagConstraints gbc_buttonAceptar = new GridBagConstraints();
+		gbc_buttonAceptar.fill = GridBagConstraints.BOTH;
+		gbc_buttonAceptar.insets = new Insets(0, 0, 0, 5);
+		gbc_buttonAceptar.gridwidth = 3;
+		gbc_buttonAceptar.gridx = 1;
+		gbc_buttonAceptar.gridy = 3;
+		contentPane.add(buttonAceptar, gbc_buttonAceptar);
 		buttonAceptar.addActionListener(this);
-		
-		panelClientes = new JPanel();
-		panelClientes.setBounds(10, 46, 503, 560);
-		contentPane.add(panelClientes);
-		GridBagLayout gbl_panelClientes = new GridBagLayout();
-		gbl_panelClientes.columnWidths = new int[]{240, 0};
-		gbl_panelClientes.rowHeights = new int[]{2, 0};
-		gbl_panelClientes.columnWeights = new double[]{1.0, Double.MIN_VALUE};
-		gbl_panelClientes.rowWeights = new double[]{1.0, Double.MIN_VALUE};
-		panelClientes.setLayout(gbl_panelClientes);
+		model = new DefaultTableModel() {
+			/**
+			 * 
+			 */
+			private static final long serialVersionUID = 1L;
 
-		scrollPaneClientes = new JScrollPane();
-		scrollPaneClientes.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
-		GridBagConstraints gbc_scrollPaneClientes = new GridBagConstraints();
-		gbc_scrollPaneClientes.fill = GridBagConstraints.BOTH;
-		gbc_scrollPaneClientes.gridx = 0;
-		gbc_scrollPaneClientes.gridy = 0;
-		panelClientes.add(scrollPaneClientes, gbc_scrollPaneClientes);
+			@Override
+			public boolean isCellEditable(int row, int column) {
+				return false;
+			}
+		};
 
-		listModel = new DefaultListModel<Cliente>();
-		for (Cliente clienteTemp : Controlador.getInstancia().getClientes()) {
-			listModel.addElement(clienteTemp);
-		} 
-		listClientes = new JList(listModel);
-		listClientes.setSelectionMode(ListSelectionModel.SINGLE_INTERVAL_SELECTION);
-		scrollPaneClientes.setViewportView(listClientes);
-		listClientes.addListSelectionListener(this);
+		model.addColumn("Nombre");
+		model.addColumn("Apellido");
+		model.addColumn("Tipo Doc.");
+		model.addColumn("Numero");
 
 		btnVerCuentaCorriente = new JButton("Ver Cuenta Corriente");
 		btnVerCuentaCorriente.setFont(new Font("Tahoma", Font.BOLD, 16));
-		btnVerCuentaCorriente.setBounds(800, 637, 221, 43);
-		contentPane.add(btnVerCuentaCorriente);
+		GridBagConstraints gbc_btnVerCuentaCorriente = new GridBagConstraints();
+		gbc_btnVerCuentaCorriente.fill = GridBagConstraints.BOTH;
+		gbc_btnVerCuentaCorriente.gridx = 6;
+		gbc_btnVerCuentaCorriente.gridy = 3;
+		contentPane.add(btnVerCuentaCorriente, gbc_btnVerCuentaCorriente);
 		btnVerCuentaCorriente.addActionListener(this);
 
+		listModel.clear();
+		for (Cliente clienteTemp : Controlador.getInstancia().getClientes()) {
+			listModel.addElement(clienteTemp);
+		}
+
 		this.setLocationRelativeTo(null);
-		setModal(true);
+		//Hace que esperes a que se cierre para seguir con lo demas
+		this.setModal(true); 
+		
 	}
 
-
-	
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		
-		if(e.getSource() == this.buscarButton){
+
+		if (e.getSource() == this.buscarButton) {
+			limpiarCampos();
 			listModel.clear();
 			for (Cliente clienteTemp : Controlador.getInstancia().getClientes()) {
 				listModel.addElement(clienteTemp);
-			} 
-			if(!buscarTextField.getText().isEmpty())
-			{
+			}
+			if (!buscarTextField.getText().isEmpty()) {
 				ArrayList<Cliente> listaABorrar = new ArrayList<Cliente>();
-				if(tipoComboBox.getSelectedItem().toString().equals("DNI/LU")){
+				if (tipoComboBox.getSelectedItem().toString().equals("DNI/LU")) {
 					for (int i = 0; i < listModel.getSize(); i++) {
 						Cliente clienteTemp = listModel.getElementAt(i);
-						if(!clienteTemp.getNumeroDocumento().contains(this.buscarTextField.getText())){
+						if (!clienteTemp.getNumeroDocumento().contains(
+								this.buscarTextField.getText())) {
 							listaABorrar.add(clienteTemp);
 						}
 					}
 				}
-				if(tipoComboBox.getSelectedItem().toString().equals("CUIT")){
+				if (tipoComboBox.getSelectedItem().toString().equals("CUIT")) {
 					for (int i = 0; i < listModel.getSize(); i++) {
 						Cliente clienteTemp = listModel.getElementAt(i);
-						if(!clienteTemp.getCuil().contains(this.buscarTextField.getText())){
+						if (!clienteTemp.getCuil().contains(
+								this.buscarTextField.getText())) {
 							listaABorrar.add(clienteTemp);
 						}
 					}
 				}
-				if(tipoComboBox.getSelectedItem().toString().equals("NOMBRE")){
+				if (tipoComboBox.getSelectedItem().toString().equals("NOMBRE")) {
 					for (int i = 0; i < listModel.getSize(); i++) {
 						Cliente clienteTemp = listModel.getElementAt(i);
-						if(!clienteTemp.getNombre().toLowerCase().contains(this.buscarTextField.getText().toLowerCase())){
+						if (!clienteTemp
+								.getNombre()
+								.toLowerCase()
+								.contains(
+										this.buscarTextField.getText()
+												.toLowerCase())) {
 							listaABorrar.add(clienteTemp);
 						}
 					}
 				}
-				if(tipoComboBox.getSelectedItem().toString().equals("APELLIDO")){
+				if (tipoComboBox.getSelectedItem().toString()
+						.equals("APELLIDO")) {
 					for (int i = 0; i < listModel.getSize(); i++) {
 						Cliente clienteTemp = listModel.getElementAt(i);
-						if(!clienteTemp.getApellido().toLowerCase().contains(this.buscarTextField.getText().toLowerCase())){
+						if (!clienteTemp
+								.getApellido()
+								.toLowerCase()
+								.contains(
+										this.buscarTextField.getText()
+												.toLowerCase())) {
 							listaABorrar.add(clienteTemp);
-							
+
 						}
 					}
 				}
@@ -591,11 +722,12 @@ public class BuscadorCliente extends JDialog implements ActionListener, KeyListe
 				}
 			}
 		}
-		if(e.getSource() == this.buttonAceptar){
-			Controlador.getInstancia().setClienteActual((Cliente) listClientes.getSelectedValue());
+		if (e.getSource() == this.buttonAceptar) {
+			Controlador.getInstancia().setClienteActual(
+					(Cliente) listClientes.getSelectedValue());
 			dispose();
 		}
-		if(e.getSource() == this.buttonCancelar){
+		if (e.getSource() == this.buttonCancelar) {
 			Controlador.getInstancia().setClienteActual(null);
 			dispose();
 		}
@@ -607,9 +739,29 @@ public class BuscadorCliente extends JDialog implements ActionListener, KeyListe
 		}
 	}
 
+	private void limpiarCampos() {
+		this.textFieldApellido.setText("");
+		this.textFieldCUIT.setText("");
+		this.textFieldDireccion1.setText("");
+		this.textFieldDireccion2.setText("");
+		this.textFieldDNILU.setText("");
+		this.textFieldEmail.setText("");
+		this.textFieldNombre.setText("");
+		this.textFieldRazonSocial.setText("");
+		this.textFieldTelefono1.setText("");
+		this.textFieldTelefono2.setText("");
+		this.textFieldEstadoCliente.setText("");
+		this.textFieldDescripcion.setText("");
+		this.textFieldTipoCliente.setText("");
+		this.textFieldEstadoCuentaCorriente.setText("");
+		this.listModelCocheras.clear();
+		this.listModelPersonas.clear();
+		this.listModelVehiculos.clear();
+		
+	}
+
 	@Override
 	public void keyPressed(KeyEvent arg0) {
-		// TODO Auto-generated method stub
 		
 	}
 
@@ -625,11 +777,11 @@ public class BuscadorCliente extends JDialog implements ActionListener, KeyListe
 
 	@Override
 	public void valueChanged(ListSelectionEvent e) {
-		if(e.getSource() == this.listClientes){
+		if(e.getSource() == this.listClientes && (Cliente) this.listClientes.getSelectedValue() != null){
 			Cliente clienteSeleccionado = (Cliente) this.listClientes.getSelectedValue();
 			this.textFieldApellido.setText(clienteSeleccionado.getApellido());
 			this.textFieldCUIT.setText(clienteSeleccionado.getCuil());
-			this.textFieldDireccion1.setText(clienteSeleccionado.getDescripcion());
+			this.textFieldDireccion1.setText(clienteSeleccionado.getDireccion());
 			this.textFieldDireccion2.setText(clienteSeleccionado.getDireccion2());
 			this.textFieldDNILU.setText(clienteSeleccionado.getNumeroDocumento());
 			this.textFieldEmail.setText(clienteSeleccionado.getCorreoElectronico());
@@ -637,7 +789,26 @@ public class BuscadorCliente extends JDialog implements ActionListener, KeyListe
 			this.textFieldRazonSocial.setText(clienteSeleccionado.getRazonSocial());
 			this.textFieldTelefono1.setText(clienteSeleccionado.getTelefono1());
 			this.textFieldTelefono2.setText(clienteSeleccionado.getTelefono2());
-			//TODO completar listas
+			this.textFieldEstadoCliente.setText(clienteSeleccionado.getEstado().toString());
+			this.textFieldDescripcion.setText(clienteSeleccionado.getDescripcion());
+			this.textFieldTipoCliente.setText(clienteSeleccionado.getTipoCliente().toString());
+			double total = 0;
+			for (MovimientoCC movimiento : clienteSeleccionado.getCuentaCorriente().getMovimientos()){
+				total = total + movimiento.getMontoCobrado();
+			}
+			this.textFieldEstadoCuentaCorriente.setText(String.valueOf(total));
+			this.listModelCocheras.clear();
+			this.listModelPersonas.clear();
+			this.listModelVehiculos.clear();
+			for(Cochera cochera : clienteSeleccionado.getCocheras()){
+				this.listModelCocheras.addElement(cochera);
+			}
+			for(PersonaAutorizada persona : clienteSeleccionado.getPersonasAutorizadasARetirar()){
+				this.listModelPersonas.addElement(persona);
+			}
+			for(Vehiculo vehiculo : clienteSeleccionado.getVehiculos()){
+				this.listModelVehiculos.addElement(vehiculo);
+			}
 		}
 		
 	}

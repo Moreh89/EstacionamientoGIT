@@ -7,13 +7,10 @@ import javax.print.attribute.HashPrintRequestAttributeSet;
 import javax.print.attribute.PrintRequestAttributeSet;
 import javax.print.attribute.Size2DSyntax;
 import javax.print.attribute.standard.MediaPrintableArea;
-import javax.swing.JDialog;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import java.awt.GridBagLayout;
-
-import modelo.Ticket;
 import net.sourceforge.barbecue.Barcode;
 import net.sourceforge.barbecue.BarcodeException;
 import net.sourceforge.barbecue.BarcodeFactory;
@@ -27,13 +24,9 @@ import java.awt.print.PrinterException;
 import java.awt.print.PrinterJob;
 import java.io.File;
 import java.io.IOException;
-import java.text.SimpleDateFormat;
 import java.awt.Graphics;
 import java.awt.Insets;
 import javax.swing.JTextPane;
-
-import vista.GestionColor;
-
 import java.awt.Toolkit;
 import java.awt.Font;
 
@@ -45,19 +38,20 @@ public class PrintTicketTest extends JFrame {
 	private JTextPane txtpnfechaIng;
 	private JPanel panel;
 	private Barcode barcode;
+	@SuppressWarnings("unused")
 	private static String impersora;
 
 	
 	/**
 	 * Launch the application.
 	 */
-	public static void main(String[] args) {
-		try {
-			PrintTicketTest dialog = new PrintTicketTest();
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-	}
+//	public static void main(String[] args) {
+//		try {
+//			PrintTicketTest dialog = new PrintTicketTest();
+//		} catch (Exception e) {
+//			e.printStackTrace();
+//		}
+//	}
 	
 
 	public PrintTicketTest() {
@@ -169,6 +163,7 @@ public class PrintTicketTest extends JFrame {
 		BarcodeImageHandler.saveJPEG(barcode3, new File("123456.jpg"));
 	}
 
+	@SuppressWarnings("unused")
 	public static void printWork(final JFrame frame) {
 		PrinterJob pj = PrinterJob.getPrinterJob();
 		pj.setJobName(" Imprimir Ticket ");

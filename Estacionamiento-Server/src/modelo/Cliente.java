@@ -3,9 +3,6 @@ package modelo;
 import java.util.Comparator;
 import java.util.List;
 
-import persistencia.clases.Cliente.TIPO_FACTURA;
-
-
 
 public class Cliente {
 

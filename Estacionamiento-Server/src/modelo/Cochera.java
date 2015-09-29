@@ -65,6 +65,8 @@ public class Cochera {
 		this.ubicacion = ubicacion;
 	}
 	
-	
+	public String toString(){
+		return this.ubicacion;
+	}
 	
 }

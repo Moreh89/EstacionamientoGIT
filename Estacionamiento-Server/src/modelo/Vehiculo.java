@@ -47,10 +47,26 @@ public class Vehiculo
 	public void setColor(ColorVehiculo color) {
 		this.color = color;
 	}
+	public Vehiculo(String patente,
+			CategoriaVehiculo categoria,
+			ModeloVehiculo modelo,
+			ColorVehiculo color,
+			String comentario) {
+		super();
+		this.idVehiculo = 0;
+		this.patente = patente;
+		this.categoria = categoria;
+		this.modelo = modelo;
+		this.color = color;
+		this.comentario = comentario;
+	}
 	
 	//aplica solo a clientes del tipo mensual
 	
+	public Vehiculo(){
+	}
 	
-	
-	
+	public String toString (){
+		return this.patente;
+	}
 }

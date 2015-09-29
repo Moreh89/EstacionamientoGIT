@@ -1,14 +1,10 @@
 package persistencia;
 
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
-
 import org.hibernate.SQLQuery;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
-
-import persistencia.clases.Cliente;
 
 
 

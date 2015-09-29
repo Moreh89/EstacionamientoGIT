@@ -124,12 +124,17 @@ public class Controlador {
 		return true;
 
 	}
+	
+	public void actualizarClientes(){
+		clientes=DAOCliente.getInstance().getClientes();
+		Collections.sort(clientes, new Cliente.CompApellido());
+	}
 
 
 	public void altaCliente(String nombre, String apellido, String telefono1,
 			String telefono2, String direccion1, String direccion2,
-			String email, String razonSocial, ArrayList<String> listPersonasAutorizadas,
-			ArrayList<String> listVehiculos, String tipoDoc, String numeroDoc, String tipoCliente, String cuil, String tipoFactura) 
+			String email, String razonSocial, ArrayList<PersonaAutorizada> listPersonasAutorizadas,
+			ArrayList<Vehiculo> listVehiculos, ArrayList<Cochera> listCocheras, String tipoDoc, String numeroDoc, String tipoCliente, String cuil, String tipoFactura, String descripcion) 
 	{
 		Cliente cliente=new Cliente();
 		cliente.setNombre(nombre);
@@ -141,6 +146,7 @@ public class Controlador {
 		cliente.setCorreoElectronico(email);
 		cliente.setRazonSocial(razonSocial);
 		cliente.setCuil(cuil);
+		cliente.setDescripcion(descripcion);
 
 		if(tipoFactura.equals("1. NO APLICA"))
 			cliente.setTipoFactura(modelo.Cliente.TIPO_FACTURA.NA);
@@ -177,81 +183,18 @@ public class Controlador {
 
 		cliente.setEstado(modelo.Cliente.ESTADO.ACTIVO);
 
-		cliente.setCocheras(cocherasActuales);
-		cliente.setPersonasAutorizadasARetirar(personasAutorizadasActuales);
-		cliente.setVehiculos(vehiculosActuales);
+		for (Cochera cochera : listCocheras){
+			cochera.setCliente(cliente);
+		}
+		cliente.setCocheras(listCocheras);
+		cliente.setPersonasAutorizadasARetirar(listPersonasAutorizadas);
+		cliente.setVehiculos(listVehiculos);
 
 		cliente.setCuentaCorriente(new modelo.CuentaCorriente());
 
-		DAOCliente.getInstance().persistir(cliente);
-		
-//		TODO EXPLOTA CUANDO QUIERE VOLVER A LEVANTAR LOS CLIENTES...MUY EXTRAÑO
-		
-//		clientes=DAOCliente.getInstance().getClientes();
-
-	}
-
-	public void agregarVehiculo(String categoriaVehiculo, String patente,
-			String color, String modelo, String observacion, String comentario) {
-
-		if (clienteActual == null) {
-			if (vehiculosActuales == null) 
-			{
-				vehiculosActuales = new ArrayList<Vehiculo>();
-			}
-
-			Vehiculo vehiculo = new Vehiculo();
-
-			//			modelo.CategoriaVehiculo categoriaVehiculo = new modelo.CategoriaVehiculo();
-			for(modelo.CategoriaVehiculo categoriaVehiculoM : categoriasVehiculos)
-			{
-				if(categoriaVehiculo.equals(categoriaVehiculoM.getDescripcion()))
-				{
-					vehiculo.setCategoria(categoriaVehiculoM);
-					break;
-				}
-			}
-
-			vehiculo.setPatente(patente);
-			vehiculo.setComentario(comentario);
-			//TODO BUSQUEDA EN MEMORIA, ya están por carga inicial
-
-			for(modelo.ColorVehiculo colorVehiculo : coloresVehiculos)
-			{
-				if(color.equals(colorVehiculo.getDescripcion()))
-				{
-					vehiculo.setColor(colorVehiculo);
-					break;
-				}
-			}
-			//			modelo.ColorVehiculo colorVehiculo = DAOColorVehiculo.getInstance().getColorVehiculo(color);
-
-
-			//			ModeloVehiculo modeloVehiculo = DAOModeloVehiculo.getInstance().getModeloVehiculo(modelo);
-
-			for(ModeloVehiculo modeloVehiculo : modelosVehiculos)
-			{
-				if(modelo.equals(modeloVehiculo.getDescripcion()))
-				{
-					vehiculo.setModelo(modeloVehiculo);
-					break;
-				}
-			}
-			vehiculosActuales.add(vehiculo);
-			// TODO PENDIENTE AGREGAR OBSERVACION
-
-		}
-	}
-
-	public void agregarPersonaAutorizada(String nombre, String apellido) {
-		if (clienteActual == null) {
-			if (personasAutorizadasActuales == null) {
-				personasAutorizadasActuales = new ArrayList<PersonaAutorizada>();
-			}
-			PersonaAutorizada personaAutorizada = new PersonaAutorizada();
-			personaAutorizada.setNombre(nombre + " " + apellido);
-			personasAutorizadasActuales.add(personaAutorizada);
-		}
+		long idCliente = DAOCliente.getInstance().persistir(cliente);
+		cliente.setIdCliente(idCliente);
+		this.clientes.add(cliente);
 
 	}
 
@@ -280,7 +223,6 @@ public class Controlador {
 
 		long numeroTck = DAOTicket.getInstance().persistir(tck);
 		tck.setIdTicket(numeroTck);
-		//TODO IMPRIMIR TICKET
 		return tck;
 
 	}
@@ -432,21 +374,6 @@ public class Controlador {
 		return categoriasVehiculosActuales;
 	}
 
-	public void agregarCochera(String ubicacion, double costoMensual, float porcentajeExpensas,String piso) 
-	{
-		modelo.Cochera cochera = new modelo.Cochera();
-		if (cocherasActuales == null) 
-		{
-			cocherasActuales = new ArrayList<Cochera>();
-		}
-		cochera.setCostoCochera(costoMensual);
-		cochera.setPorcentajeExpensas(porcentajeExpensas);
-		cochera.setEstado(modelo.Cochera.ESTADO.ACTIVO);
-		cochera.setUbicacion(ubicacion);
-		cochera.setCliente(null);
-
-		cocherasActuales.add(cochera);
-	}
 
 	public long altaDescuento(String descripcion,double montoDescuento)	
 	{
@@ -564,7 +491,7 @@ public class Controlador {
 				movCC.setTicket(this.ticket);
 				movCC.setUsuario(usuarioActual);
 				//TODO
-				// AGREGADO POR DAMIAN PARA MEDIOPAGO... NO LLEGA A LO VISUAL, POR DEFECTO ES NOAPLICA SI SON MOVIMIENTOS INTERNOS DEL SISTEMA,
+				// AGREGADO POR DAMIAN PARA MEDIOPAGO... NO LLEGA A LO VISUAL, POR DEFECTO ES NO APLICA SI SON MOVIMIENTOS INTERNOS DEL SISTEMA,
 				//				SI MUEVEN CAJA EL DEFECTO ES EFECTIVO A MENOS QUE SEA LO CONTRARIO.
 				movCC.setMedioPago(modelo.MovimientoCC.MEDIOPAGO.EFECTIVO);
 
@@ -1253,6 +1180,20 @@ public class Controlador {
 			e.printStackTrace();
 		}
 		return -1;
+	}
+
+	public ArrayList<CategoriaVehiculo> getCategoriasVehiculosActuales() {
+		return this.categoriasVehiculos;
+	}
+
+	public void actualizarCliente(String text, String text2, String text3,
+			String text4, String text5, String text6, String text7,
+			String text8, ArrayList<PersonaAutorizada> listPersonasAutorizadas,
+			ArrayList<Vehiculo> listPatentesVehiculos,
+			ArrayList<Cochera> listCocheras, String string, String text9,
+			String string2, String text10, String string3, String text11) {
+		// TODO Auto-generated method stub
+		
 	}
 
 }

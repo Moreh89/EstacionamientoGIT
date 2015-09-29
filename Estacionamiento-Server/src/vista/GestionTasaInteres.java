@@ -268,11 +268,11 @@ public class GestionTasaInteres extends JDialog implements ActionListener, KeyLi
 		return true;  
 	}
 
+	@SuppressWarnings("unused")
 	private static boolean isNumeric(String str)  
 	{  
 		try  
 		{  
-			@SuppressWarnings("unused")
 			double d = Double.parseDouble(str);  
 		}  
 		catch(NumberFormatException nfe)  

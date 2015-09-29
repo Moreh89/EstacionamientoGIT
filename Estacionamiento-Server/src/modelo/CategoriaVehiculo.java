@@ -24,5 +24,9 @@ public class CategoriaVehiculo {
 			return o1.getDescripcion().compareToIgnoreCase(o2.getDescripcion());
 		}
 	}
+	 
+	 public String toString (){
+		 return this.descripcion;
+	 }
 	
 }
