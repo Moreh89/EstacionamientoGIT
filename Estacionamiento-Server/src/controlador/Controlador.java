@@ -1186,13 +1186,72 @@ public class Controlador {
 		return this.categoriasVehiculos;
 	}
 
-	public void actualizarCliente(String text, String text2, String text3,
-			String text4, String text5, String text6, String text7,
-			String text8, ArrayList<PersonaAutorizada> listPersonasAutorizadas,
-			ArrayList<Vehiculo> listPatentesVehiculos,
-			ArrayList<Cochera> listCocheras, String string, String text9,
-			String string2, String text10, String string3, String text11) {
-		// TODO Auto-generated method stub
+	public void actualizarCliente(String nombre, String apellido,
+			String telefono1, String telefono2, String direccion1,
+			String direccion2, String email, String razonSocial,
+			ArrayList<PersonaAutorizada> listPersonasAutorizadas,
+			ArrayList<Vehiculo> listVehiculos, ArrayList<Cochera> listCocheras,
+			String tipoDoc, String numeroDoc, String tipoCliente, String cuil,
+			String tipoFactura, String descripcion, String estado) {
+
+		Cliente cliente=this.clienteActual;
+		cliente.setNombre(nombre);
+		cliente.setApellido(apellido);
+		cliente.setTelefono1(telefono1);
+		cliente.setTelefono2(telefono2);
+		cliente.setDireccion(direccion1);
+		cliente.setDireccion2(direccion2);
+		cliente.setCorreoElectronico(email);
+		cliente.setRazonSocial(razonSocial);
+		cliente.setCuil(cuil);
+		cliente.setDescripcion(descripcion);
+
+		if(tipoFactura.equals("1. NO APLICA"))
+			cliente.setTipoFactura(modelo.Cliente.TIPO_FACTURA.NA);
+		if(tipoFactura.equals("2. A"))
+			cliente.setTipoFactura(modelo.Cliente.TIPO_FACTURA.A);
+		if(tipoFactura.equals("3. B"))
+			cliente.setTipoFactura(modelo.Cliente.TIPO_FACTURA.B);
+		if(tipoFactura.equals("4. C"))
+			cliente.setTipoFactura(modelo.Cliente.TIPO_FACTURA.C);
+
+		if(tipoDoc.equals("1. DNI"))
+			cliente.setTipoDocumento(modelo.Cliente.TIPO_DOC.DNI);
+		if(tipoDoc.equals("2. LU"))
+			cliente.setTipoDocumento(modelo.Cliente.TIPO_DOC.LU);
+		if(tipoDoc.equals("3. PASAPORTE"))
+			cliente.setTipoDocumento(modelo.Cliente.TIPO_DOC.PASS);
+		if(tipoDoc.equals("4. OTRO"))
+			cliente.setTipoDocumento(modelo.Cliente.TIPO_DOC.OTRO);
+
+		cliente.setNumeroDocumento(numeroDoc);
+
+		if(tipoCliente.equals("1. PARTICULAR_PROPIETARIO"))
+			cliente.setTipoCliente(modelo.Cliente.TIPO_CLIENTE.PARTICULAR_PROPIETARIO);
+		if(tipoCliente.equals("2. PARTICULAR_INQUILINO"))
+			cliente.setTipoCliente(modelo.Cliente.TIPO_CLIENTE.PARTICULAR_INQUILINO);
+		if(tipoCliente.equals("3. PARTICULAR_FRECUENTE"))
+			cliente.setTipoCliente(modelo.Cliente.TIPO_CLIENTE.PARTICULAR_FRECUENTE);
+		if(tipoCliente.equals("4. EMPRESA_PROPIETARIO"))
+			cliente.setTipoCliente(modelo.Cliente.TIPO_CLIENTE.EMPRESA_PROPIETARIO);
+		if(tipoCliente.equals("5. EMPRESA_INQUILINO"))
+			cliente.setTipoCliente(modelo.Cliente.TIPO_CLIENTE.EMPRESA_INQUILINO);
+		if(tipoCliente.equals("6. EMPRESA_FRECUENTE"))
+			cliente.setTipoCliente(modelo.Cliente.TIPO_CLIENTE.EMPRESA_FRECUENTE);
+
+		if (estado.equals("ACTIVO"))
+		cliente.setEstado(modelo.Cliente.ESTADO.ACTIVO);
+		if (estado.equals("INACTIVO"))
+		cliente.setEstado(modelo.Cliente.ESTADO.INACTIVO);
+
+		for (Cochera cochera : listCocheras){
+			cochera.setCliente(cliente);
+		}
+		cliente.setCocheras(listCocheras);
+		cliente.setPersonasAutorizadasARetirar(listPersonasAutorizadas);
+		cliente.setVehiculos(listVehiculos);
+
+		long idCliente = DAOCliente.getInstance().actualizar(cliente);
 		
 	}
 

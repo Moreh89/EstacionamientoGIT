@@ -707,9 +707,23 @@ public class ModificarCliente extends AltaCliente implements ActionListener{
 		{
 			if(textFieldCUIT.getText().length()==11 || textFieldCUIT.getText().length()==0)
 			{
-				Controlador.getInstancia().actualizarCliente(textFieldNombre.getText(), textFieldApellido.getText(), textFieldTelefono1.getText(), textFieldTelefono2.getText(),
-						textFieldDireccion1.getText(), textFieldDireccion2.getText(), textFieldEmail.getText(), textFieldRazonSocial.getText()
-						,ListPersonasAutorizadas, ListPatentesVehiculos, ListCocheras, comboBoxTipoDoc.getSelectedItem().toString(), textFieldNumeroDoc.getText(), comboBoxTipoCliente.getSelectedItem().toString(), textFieldCUIT.getText(), comboBoxTipoFactura.getSelectedItem().toString(), textFieldObservacion.getText());
+				Controlador.getInstancia().actualizarCliente(
+						textFieldNombre.getText(), textFieldApellido.getText(),
+						textFieldTelefono1.getText(),
+						textFieldTelefono2.getText(),
+						textFieldDireccion1.getText(),
+						textFieldDireccion2.getText(),
+						textFieldEmail.getText(),
+						textFieldRazonSocial.getText(),
+						ListPersonasAutorizadas, ListPatentesVehiculos,
+						ListCocheras,
+						comboBoxTipoDoc.getSelectedItem().toString(),
+						textFieldNumeroDoc.getText(),
+						comboBoxTipoCliente.getSelectedItem().toString(),
+						textFieldCUIT.getText(),
+						comboBoxTipoFactura.getSelectedItem().toString(),
+						textFieldObservacion.getText(),
+						comboBoxEstado.getSelectedItem().toString());
 				dispose();
 			}
 			else{

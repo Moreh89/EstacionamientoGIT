@@ -1,6 +1,8 @@
 package persistencia.dao;
 import java.util.ArrayList;
+import java.util.List;
 
+import modelo.Cochera;
 import modelo.MovimientoCC;
 import persistencia.Converter;
 import persistencia.HibernateDAO;
@@ -8,6 +10,8 @@ import persistencia.clases.Cliente;
 import persistencia.clases.Interes;
 import persistencia.clases.LiquidacionAlquileres;
 import persistencia.clases.LiquidacionExpensas;
+import persistencia.clases.PersonaAutorizada;
+import persistencia.clases.Vehiculo;
 
 public class DAOCliente {
 
@@ -173,6 +177,110 @@ public class DAOCliente {
 		codigoReturn=clienteP.getCuentaCorriente().getMovimientos().get(clienteP.getCuentaCorriente().getMovimientos().size()-1).getLiquidacionAlquileres().getIdLiquidacionAlquileres();
 
 		return codigoReturn;
+	}
+
+	public long actualizar(modelo.Cliente clienteM) {
+		Cliente clienteP = (persistencia.clases.Cliente) HibernateDAO.getInstancia().get(persistencia.clases.Cliente.class, clienteM.getIdCliente());
+		
+		clienteP.setNombre(clienteM.getNombre());
+		clienteP.setApellido(clienteM.getApellido());
+		clienteP.setTelefono1(clienteM.getTelefono1());
+		clienteP.setTelefono2(clienteM.getTelefono2());
+		clienteP.setDireccion(clienteM.getDireccion());
+		clienteP.setDireccion2(clienteM.getDireccion2());
+		clienteP.setCorreoElectronico(clienteM.getCorreoElectronico());
+		clienteP.setRazonSocial(clienteM.getRazonSocial());
+		clienteP.setCuil(clienteM.getCuil());
+		clienteP.setDescripcion(clienteM.getDescripcion());
+
+		if(clienteM.getTipoFactura() == modelo.Cliente.TIPO_FACTURA.NA)
+			clienteP.setTipoFactura(persistencia.clases.Cliente.TIPO_FACTURA.NA);
+		if(clienteM.getTipoFactura() == modelo.Cliente.TIPO_FACTURA.A)
+			clienteP.setTipoFactura(persistencia.clases.Cliente.TIPO_FACTURA.A);
+		if(clienteM.getTipoFactura() == modelo.Cliente.TIPO_FACTURA.B)
+			clienteP.setTipoFactura(persistencia.clases.Cliente.TIPO_FACTURA.B);
+		if(clienteM.getTipoFactura() == modelo.Cliente.TIPO_FACTURA.C)
+			clienteP.setTipoFactura(persistencia.clases.Cliente.TIPO_FACTURA.C);
+
+		if(clienteM.getTipoDocumento()==modelo.Cliente.TIPO_DOC.DNI)
+			clienteP.setTipoDocumento(persistencia.clases.Cliente.TIPO_DOC.DNI);
+		if(clienteM.getTipoDocumento()==modelo.Cliente.TIPO_DOC.LU)
+			clienteP.setTipoDocumento(persistencia.clases.Cliente.TIPO_DOC.LU);
+		if(clienteM.getTipoDocumento()==modelo.Cliente.TIPO_DOC.PASS)
+			clienteP.setTipoDocumento(persistencia.clases.Cliente.TIPO_DOC.PASS);
+		if(clienteM.getTipoDocumento()==modelo.Cliente.TIPO_DOC.OTRO)
+			clienteP.setTipoDocumento(persistencia.clases.Cliente.TIPO_DOC.OTRO);
+
+		clienteP.setNumeroDocumento(clienteM.getNumeroDocumento());
+
+		if(clienteM.getTipoCliente()== modelo.Cliente.TIPO_CLIENTE.PARTICULAR_PROPIETARIO)
+			clienteP.setTipoCliente(persistencia.clases.Cliente.TIPO_CLIENTE.PARTICULAR_PROPIETARIO);
+		if(clienteM.getTipoCliente()== modelo.Cliente.TIPO_CLIENTE.PARTICULAR_INQUILINO)
+			clienteP.setTipoCliente(persistencia.clases.Cliente.TIPO_CLIENTE.PARTICULAR_INQUILINO);
+		if(clienteM.getTipoCliente()== modelo.Cliente.TIPO_CLIENTE.PARTICULAR_FRECUENTE)
+			clienteP.setTipoCliente(persistencia.clases.Cliente.TIPO_CLIENTE.PARTICULAR_FRECUENTE);
+		if(clienteM.getTipoCliente()== modelo.Cliente.TIPO_CLIENTE.EMPRESA_PROPIETARIO)
+			clienteP.setTipoCliente(persistencia.clases.Cliente.TIPO_CLIENTE.EMPRESA_PROPIETARIO);
+		if(clienteM.getTipoCliente()== modelo.Cliente.TIPO_CLIENTE.EMPRESA_INQUILINO)
+			clienteP.setTipoCliente(persistencia.clases.Cliente.TIPO_CLIENTE.EMPRESA_INQUILINO);
+		if(clienteM.getTipoCliente()== modelo.Cliente.TIPO_CLIENTE.EMPRESA_FRECUENTE)
+			clienteP.setTipoCliente(persistencia.clases.Cliente.TIPO_CLIENTE.EMPRESA_FRECUENTE);
+
+		if(clienteM.getEstado()==modelo.Cliente.ESTADO.ACTIVO)
+		clienteP.setEstado(persistencia.clases.Cliente.ESTADO.ACTIVO);
+		if(clienteM.getEstado()==modelo.Cliente.ESTADO.INACTIVO)
+			clienteP.setEstado(persistencia.clases.Cliente.ESTADO.INACTIVO);
+		
+		List<persistencia.clases.Cochera> listCocheras = new ArrayList<persistencia.clases.Cochera>();
+		
+		for (Cochera cocheraM : clienteM.getCocheras()){
+			//Nueva
+			if(cocheraM.getIdCochera()==0){
+				persistencia.clases.Cochera cocheraP = Converter.convertCocheraModeloToPersistencia(cocheraM);
+				cocheraP.setCliente(clienteP);
+				listCocheras.add(cocheraP);
+			//las que ya tengo
+			}else{
+				persistencia.clases.Cochera cocheraP = (persistencia.clases.Cochera) HibernateDAO.getInstancia().get(persistencia.clases.Cochera.class, cocheraM.getIdCochera());
+				listCocheras.add(cocheraP);
+			}
+			//las que no esten es porque las borre
+		}
+		clienteP.setCocheras(listCocheras);
+		
+		
+		List<PersonaAutorizada> listPersonasAutorizadas = new ArrayList<PersonaAutorizada>();
+		for (modelo.PersonaAutorizada personaM : clienteM.getPersonasAutorizadasARetirar()){
+			//Nueva
+			if(personaM.getIdPersonaAut()==0){
+				persistencia.clases.PersonaAutorizada personaP = Converter.convertPersonaAutorizadaModeloToPersistencia(personaM);
+				listPersonasAutorizadas.add(personaP);
+			//las que ya tengo
+			}else{
+				persistencia.clases.PersonaAutorizada personaP = (persistencia.clases.PersonaAutorizada) HibernateDAO.getInstancia().get(persistencia.clases.PersonaAutorizada.class, personaM.getIdPersonaAut());
+				listPersonasAutorizadas.add(personaP);
+			}
+			//las que no esten es porque las borre
+		}
+		clienteP.setPersonasAutorizadasARetirar(listPersonasAutorizadas);
+		
+		List<Vehiculo> listVehiculos = new ArrayList<Vehiculo>();
+		for (modelo.Vehiculo vehiculoM : clienteM.getVehiculos()){
+			//Nueva
+			if(vehiculoM.getIdVehiculo()==0){
+				persistencia.clases.Vehiculo vehiculoP = Converter.convertVehiculoModeloToPersistencia(vehiculoM);
+				listVehiculos.add(vehiculoP);
+			//las que ya tengo
+			}else{
+				persistencia.clases.Vehiculo vehiculoP = (persistencia.clases.Vehiculo) HibernateDAO.getInstancia().get(persistencia.clases.Vehiculo.class, vehiculoM.getIdVehiculo());
+				listVehiculos.add(vehiculoP);
+			}
+			//las que no esten es porque las borre
+		}
+		clienteP.setVehiculos(listVehiculos);
+
+		HibernateDAO.getInstancia().update(clienteP);
+		return clienteP.getIdCliente();
 	}
 
 }
