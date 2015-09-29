@@ -89,7 +89,7 @@ public class Usuario
 		this.numeroDocumento = numeroDocumento;
 	}
 	public Usuario() {
-		// TODO Auto-generated constructor stub
+		
 	}
 	
 	

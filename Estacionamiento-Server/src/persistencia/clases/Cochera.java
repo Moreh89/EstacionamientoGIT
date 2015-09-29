@@ -80,7 +80,7 @@ public class Cochera {
 	}
 
 	public Cochera() {
-		// TODO Auto-generated constructor stub
+
 	}
 
 	public String getUbicacion() {

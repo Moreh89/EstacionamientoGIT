@@ -347,7 +347,7 @@ public class GestionUsuario_OLD extends JDialog implements ActionListener {
 
 	@Override
 	public void actionPerformed(ActionEvent arg0) {
-		// TODO Auto-generated method stub
+	
 		
 	}
 }

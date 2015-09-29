@@ -302,7 +302,7 @@ public class Controlador {
 	}
 
 	public boolean probarConexion() {
-		//TODO
+		//TODO probar conexion
 		return true;
 	}
 
@@ -490,7 +490,7 @@ public class Controlador {
 				movCC.setMontoCobrado(ticket.getMontoCobrado() * -1);
 				movCC.setTicket(this.ticket);
 				movCC.setUsuario(usuarioActual);
-				//TODO
+				//TODO medio de pago
 				// AGREGADO POR DAMIAN PARA MEDIOPAGO... NO LLEGA A LO VISUAL, POR DEFECTO ES NO APLICA SI SON MOVIMIENTOS INTERNOS DEL SISTEMA,
 				//				SI MUEVEN CAJA EL DEFECTO ES EFECTIVO A MENOS QUE SEA LO CONTRARIO.
 				movCC.setMedioPago(modelo.MovimientoCC.MEDIOPAGO.EFECTIVO);

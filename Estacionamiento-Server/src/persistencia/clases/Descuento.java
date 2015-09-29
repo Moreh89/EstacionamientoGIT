@@ -42,7 +42,7 @@ public class Descuento {
 		this.descuento = descuento;
 	}
 	public Descuento() {
-		// TODO Auto-generated constructor stub
+		
 	}
 	
 	public enum ESTADO {

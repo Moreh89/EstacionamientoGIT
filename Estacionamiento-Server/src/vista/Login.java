@@ -183,7 +183,7 @@ public class Login extends javax.swing.JDialog implements ActionListener, KeyLis
 				
 			
 			
-//TODO					lblNewLabel = new JLabel("Sistema Integral para Gesti\u00F3n de Estacionamientos");
+					//TODO lblNewLabel = new JLabel("Sistema Integral para Gesti\u00F3n de Estacionamientos");
 					lblNewLabel = new JLabel("Estacionamiento");
 					lblNewLabel.setHorizontalAlignment(SwingConstants.CENTER);
 					lblNewLabel.setBounds(0, 58, 413, 14);
@@ -191,7 +191,7 @@ public class Login extends javax.swing.JDialog implements ActionListener, KeyLis
 					lblNewLabel.setFont(new Font("Tahoma", Font.BOLD | Font.ITALIC, 13));
 					getContentPane().add(lblNewLabel);
 
-//TODO					lblEstacionamiento = new JLabel("S.I.G.E.");
+					//TODO 	lblEstacionamiento = new JLabel("S.I.G.E.");
 					lblEstacionamiento = new JLabel("CANOPUS S.A.");
 
 					lblEstacionamiento.setHorizontalAlignment(SwingConstants.CENTER);

@@ -33,7 +33,7 @@ public class ModeloVehiculo {
 		this.descripcion = descripcion;
 	}
 	public ModeloVehiculo() {
-		// TODO Auto-generated constructor stub
+		
 	}
 	
 	

@@ -296,13 +296,12 @@ public class GestionTasaInteres extends JDialog implements ActionListener, KeyLi
 
 	@Override
 	public void keyReleased(KeyEvent e) {
-		// TODO Auto-generated method stub
 		
 	}
 
 	@Override
 	public void keyTyped(KeyEvent e) {
-		// TODO Auto-generated method stub
+		
 		
 	}
 }

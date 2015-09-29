@@ -35,7 +35,6 @@ public class CategoriaVehiculo {
 		this.descripcion = descripcion;
 	}
 	public CategoriaVehiculo() {
-		// TODO Auto-generated constructor stub
 	}
 	
 	

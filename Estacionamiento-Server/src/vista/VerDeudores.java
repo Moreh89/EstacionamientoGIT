@@ -246,7 +246,6 @@ public class VerDeudores extends JDialog implements ActionListener, KeyListener,
 
 	@Override
 	public void keyPressed(KeyEvent arg0) {
-		// TODO Auto-generated method stub
 
 	}
 

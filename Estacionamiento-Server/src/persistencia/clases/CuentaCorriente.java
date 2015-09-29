@@ -42,7 +42,6 @@ public class CuentaCorriente {
 		this.movimientos = movimientos;
 	}
 	public CuentaCorriente() {
-		// TODO Auto-generated constructor stub
 	}
 	
 	public void addMovimientoCC(persistencia.clases.MovimientoCC movimientoCC)

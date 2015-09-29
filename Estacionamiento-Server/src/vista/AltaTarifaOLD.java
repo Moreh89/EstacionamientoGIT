@@ -342,7 +342,7 @@ public class AltaTarifaOLD extends JDialog implements ActionListener{
 				double tiempoFraccion=Double.parseDouble(textTiempoFraccion.getText());
 				double tiempoMediaEstadia_minuto=Double.parseDouble(textTiempoInicioMediaEstadia.getText());
 				double tiempoEstadia_minuto=Double.parseDouble(textTiempoInicioMediaEstadia.getText());
-				//TODO NO SE USA EL TIEMPO_ESTADIA FIN	
+
 
 				codigoReturn=Controlador.getInstancia().altaTarifa(categoriaVehiculo, costoMinimo, costoFraccion, costoHora, costoMediaEstadia, costoEstadia,
 						tiempoMinimo, tiempoFraccion, tiempoMediaEstadia_minuto, tiempoEstadia_minuto);

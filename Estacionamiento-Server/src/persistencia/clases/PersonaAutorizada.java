@@ -34,7 +34,7 @@ public class PersonaAutorizada {
 		this.nombre = nombre;
 	}
 	public PersonaAutorizada() {
-		// TODO Auto-generated constructor stub
+		
 	}
 	
 	

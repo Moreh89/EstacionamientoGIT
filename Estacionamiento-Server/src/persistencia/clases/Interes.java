@@ -21,7 +21,7 @@ public class Interes {
 	private Date fechaAplicado;
 	
 	public Interes() {
-		// TODO Auto-generated constructor stub
+	
 	}
 
 

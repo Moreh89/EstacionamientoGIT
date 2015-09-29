@@ -221,7 +221,6 @@ public class Cliente {
 		this.vehiculos = vehiculos;
 	}
 	public Cliente() {
-		// TODO Auto-generated constructor stub
 	}
 	public TIPO_FACTURA getTipoFactura() {
 		return tipoFactura;

@@ -15,7 +15,7 @@ public class DAOCategoriaVehiculo {
 	}
 
 	public long persistir(DAOCategoriaVehiculo categoriaVehiculo) {
-		// TODO Auto-generated method stub
+		// TODO persistir categoria vehiculo
 		return 0;
 	}
 

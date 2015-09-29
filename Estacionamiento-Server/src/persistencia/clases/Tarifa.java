@@ -116,7 +116,7 @@ public class Tarifa {
 		this.tiempoEstadia_minuto = tiempoEstadia_minuto;
 	}
 	public Tarifa() {
-		// TODO Auto-generated constructor stub
+		
 	}
 
 

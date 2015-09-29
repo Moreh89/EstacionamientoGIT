@@ -389,12 +389,9 @@ public class GestionUsuario extends JDialog implements ActionListener, KeyListen
 			if(!textFieldApellido.getText().isEmpty() && !textFieldDNILU.getText().isEmpty() && !textFieldNombre.getText().isEmpty()
 					&& !textFieldUserName.getText().isEmpty())
 			{
-				//TODO codigoReturn no se usa
 
-				@SuppressWarnings("unused")
-				long codigoReturn=-1;
 				modelo.Usuario usuarioSeleccionado = (Usuario) this.listUsuarios.getSelectedValue();
-				codigoReturn=Controlador.getInstancia().modificarUsuario(textFieldApellido.getText(),textFieldDNILU.getText(),textFieldNombre.getText()
+				Controlador.getInstancia().modificarUsuario(textFieldApellido.getText(),textFieldDNILU.getText(),textFieldNombre.getText()
 						,comboBoxTipoDoc.getSelectedItem().toString(), comboBoxTipoUsuario.getSelectedItem().toString(), usuarioSeleccionado);
 
 				dispose();
@@ -404,7 +401,7 @@ public class GestionUsuario extends JDialog implements ActionListener, KeyListen
 
 	@Override
 	public void keyPressed(KeyEvent arg0) {
-		// TODO Auto-generated method stub
+		
 
 	}
 

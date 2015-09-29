@@ -99,7 +99,7 @@ public class MovimientoCC {
 		this.liquidacionExpensas=liquidacion;
 	}
 	public MovimientoCC() {
-		// TODO Auto-generated constructor stub
+		
 	}
 	
 	public LiquidacionExpensas getLiquidacionExpensas() {
