@@ -75,6 +75,7 @@ public class VerMovimientosCC extends JDialog implements ActionListener, KeyList
 
 
 	public VerMovimientosCC() {
+		setDefaultCloseOperation(JDialog.DO_NOTHING_ON_CLOSE);
 		initGUI();
 	}
 
@@ -85,7 +86,7 @@ public class VerMovimientosCC extends JDialog implements ActionListener, KeyList
 		setTitle("Movimientos Cuenta Corriente");
 		setResizable(false);
 		//setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 572, 600);
+		setBounds(100, 100, 611, 600);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
@@ -104,11 +105,11 @@ public class VerMovimientosCC extends JDialog implements ActionListener, KeyList
 
 
 		JSeparator separator = new JSeparator();
-		separator.setBounds(10, 64, 546, 6);
+		separator.setBounds(10, 64, 585, 4);
 		contentPane.add(separator);
 
 		panelAtributos = new JPanel();
-		panelAtributos.setBounds(10, 314, 546, 185);
+		panelAtributos.setBounds(10, 314, 585, 178);
 		contentPane.add(panelAtributos);
 		GridBagLayout gbl_panelAtributos = new GridBagLayout();
 		gbl_panelAtributos.columnWidths = new int[]{0, 0, 0};
@@ -214,7 +215,7 @@ public class VerMovimientosCC extends JDialog implements ActionListener, KeyList
 		textFieldUsuario.setColumns(10);
 
 		panelClientes = new JPanel();
-		panelClientes.setBounds(10, 81, 546, 190);
+		panelClientes.setBounds(10, 81, 585, 190);
 		contentPane.add(panelClientes);
 		GridBagLayout gbl_panelClientes = new GridBagLayout();
 		gbl_panelClientes.columnWidths = new int[]{240, 0};
@@ -239,15 +240,15 @@ public class VerMovimientosCC extends JDialog implements ActionListener, KeyList
 
 		btnVolver = new JButton("Volver");
 		btnVolver.setIcon(new ImageIcon(VerMovimientosCC.class.getResource("/image/izq.png")));
-		btnVolver.setBounds(436, 510, 120, 50);
+		btnVolver.setBounds(436, 510, 159, 50);
 		btnVolver.addActionListener(this);
 		contentPane.add(btnVolver);
 
 		Panel panel = new Panel();
-		panel.setBounds(10, 0, 546, 46);
+		panel.setBounds(10, 0, 585, 46);
 		contentPane.add(panel);
 		GridBagLayout gbl_panel = new GridBagLayout();
-		gbl_panel.columnWidths = new int[]{100, 80, 100, 80, 93, 0};
+		gbl_panel.columnWidths = new int[]{100, 80, 100, 80, 155, 0};
 		gbl_panel.rowHeights = new int[]{40, 0};
 		gbl_panel.columnWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
 		gbl_panel.rowWeights = new double[]{0.0, Double.MIN_VALUE};
@@ -297,7 +298,7 @@ public class VerMovimientosCC extends JDialog implements ActionListener, KeyList
 
 		buscarButton = new JButton("Buscar");
 		GridBagConstraints gbc_buscarButton = new GridBagConstraints();
-		gbc_buscarButton.fill = GridBagConstraints.BOTH;
+		gbc_buscarButton.fill = GridBagConstraints.VERTICAL;
 		gbc_buscarButton.gridx = 4;
 		gbc_buscarButton.gridy = 0;
 		panel.add(buscarButton, gbc_buscarButton);
@@ -305,7 +306,7 @@ public class VerMovimientosCC extends JDialog implements ActionListener, KeyList
 		buscarButton.setIcon(new ImageIcon(VerMovimientosCC.class.getResource("/image/search.png")));
 
 		JSeparator separator_1 = new JSeparator();
-		separator_1.setBounds(10, 297, 546, 6);
+		separator_1.setBounds(10, 297, 585, 4);
 		contentPane.add(separator_1);
 		listMovimientos.addListSelectionListener(this);
 
@@ -335,6 +336,7 @@ public class VerMovimientosCC extends JDialog implements ActionListener, KeyList
 		}
 		if(e.getSource()==btnVolver)
 		{
+			Controlador.getInstancia().setClienteActual(null);
 			dispose();
 		}
 	}

@@ -734,8 +734,8 @@ public class BuscadorCliente extends JDialog implements ActionListener, KeyListe
 		if(e.getSource()==this.btnVerCuentaCorriente)
 		{
 			Controlador.getInstancia().setClienteActual((Cliente) listClientes.getSelectedValue());
-			VerMovimientosCC verMovimientoCC = new VerMovimientosCC();
-			verMovimientoCC.setVisible(true);
+			if(Controlador.getInstancia().getClienteActual()!=null)
+			new VerMovimientosCC().setVisible(true);
 		}
 	}
 
