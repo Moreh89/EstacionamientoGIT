@@ -923,7 +923,7 @@ public class Controlador {
 				if(fechaDesde.compareTo(movimientoAct.getFecha())<=0&& fechaHasta.compareTo(movimientoAct.getFecha())>=0)
 				{
 					movimientos.add(movimientoAct);
-					resumenCuentaMovimientosClienteActual=resumenCuentaMovimientosClienteActual+movimientoAct.getMontoCobrado();
+					resumenCuentaMovimientosClienteActual=resumenCuentaMovimientosClienteActual+Math.round(movimientoAct.getMontoCobrado());
 				}
 			}
 		}

@@ -796,7 +796,7 @@ public class BuscadorCliente extends JDialog implements ActionListener, KeyListe
 			for (MovimientoCC movimiento : clienteSeleccionado.getCuentaCorriente().getMovimientos()){
 				total = total + movimiento.getMontoCobrado();
 			}
-			this.textFieldEstadoCuentaCorriente.setText(String.valueOf(total));
+			this.textFieldEstadoCuentaCorriente.setText(String.valueOf(Math.round(total)));
 			this.listModelCocheras.clear();
 			this.listModelPersonas.clear();
 			this.listModelVehiculos.clear();

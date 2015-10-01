@@ -1,5 +1,6 @@
 package modelo;
 
+import java.text.DecimalFormat;
 import java.util.Comparator;
 import java.util.List;
 
@@ -224,8 +225,9 @@ public class Cliente {
 				estadoCrediticio=estadoCrediticio+movimientoM.getMontoCobrado();
 			}
 		}
-		return estadoCrediticio;
+		return  Math.round(estadoCrediticio);
 	}
+	
 	public double getEstadoCrediticio() {
 		return estadoCrediticio;
 	}

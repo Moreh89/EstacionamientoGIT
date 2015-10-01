@@ -224,10 +224,10 @@ public class Login extends javax.swing.JDialog implements ActionListener, KeyLis
 		if (event.getSource() == this.aceptarButton ){
 			
 			if (usuarioText.getText().equalsIgnoreCase("")){
-				JOptionPane.showMessageDialog(null, "Debe Ingresar un usuario", "Login", JOptionPane.INFORMATION_MESSAGE);
+				JOptionPane.showMessageDialog(null, "Debe Ingresar un Usuario", "Login", JOptionPane.INFORMATION_MESSAGE);
 			}else
 				if (passwordText.getText().equalsIgnoreCase("")){
-					JOptionPane.showMessageDialog(null, "Debe Ingresar una contraseÃ±a", "Login", JOptionPane.INFORMATION_MESSAGE);
+					JOptionPane.showMessageDialog(null, "Debe Ingresar una Contraseña", "Login", JOptionPane.INFORMATION_MESSAGE);
 				}else{
 					
 					boolean con = Controlador.getInstancia().cargaInicial();
@@ -258,7 +258,7 @@ public class Login extends javax.swing.JDialog implements ActionListener, KeyLis
 							
 							
 						}else{
-							JOptionPane.showMessageDialog(null, "Usuario y ContraseÃ±a Invalidos", "Login", JOptionPane.ERROR_MESSAGE);
+							JOptionPane.showMessageDialog(null, "Combinación de Usuario y Contraseña incorrecta", "Login", JOptionPane.ERROR_MESSAGE);
 						}
 						
 					}
