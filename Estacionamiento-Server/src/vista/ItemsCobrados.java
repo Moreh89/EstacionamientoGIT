@@ -87,12 +87,12 @@ public class ItemsCobrados extends JDialog implements ActionListener, ListSelect
 			
 		} 
 		for (MovimientoCC movimientoCCTemp : Controlador.getInstancia().obtenetMovimientosCobrados(usuario, fechaInicio,fechaFin)){
-			total = total + movimientoCCTemp.getMontoCobrado();
+			total = total + Math.round(movimientoCCTemp.getMontoCobrado());
 			listModel.addElement("PAGO EXTRAORDINARIO CONCEPTO: " + movimientoCCTemp.getDescripcion() + " MONTO: " + movimientoCCTemp.getMontoCobrado());
 		}
 		
 		for (IncrementoPrepago incrementoTemp : Controlador.getInstancia().obternerIncrementos(usuario, fechaInicio,fechaFin)){
-			total = total + incrementoTemp.getPrepago();
+			total = total +  Math.round(incrementoTemp.getPrepago());
 			listModel.addElement("PREPAGO TICKET: " + String.valueOf(incrementoTemp.getNumeroTicket()) + " MONTO: " + String.valueOf(incrementoTemp.getPrepago()));
 		}
 		
@@ -111,7 +111,7 @@ public class ItemsCobrados extends JDialog implements ActionListener, ListSelect
 		contentPanel.add(lblTotalCobrado);
 		lblTotalCobrado.setForeground(Color.RED);
 		lblTotalCobrado.setFont(new Font("Tahoma", Font.BOLD, 20));
-		lblTotalCobrado.setText(String.valueOf(total));
+		lblTotalCobrado.setText(String.valueOf(Math.round(total)));
 		listElementos.addListSelectionListener(this);
 		
 		this.setLocationRelativeTo(null);
