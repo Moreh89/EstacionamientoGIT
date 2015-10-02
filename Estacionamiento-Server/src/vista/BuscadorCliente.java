@@ -28,7 +28,6 @@ import javax.swing.ScrollPaneConstants;
 import javax.swing.JList;
 import modelo.Cliente;
 import modelo.Cochera;
-import modelo.MovimientoCC;
 import modelo.PersonaAutorizada;
 import modelo.Vehiculo;
 import controlador.Controlador;
@@ -105,7 +104,7 @@ public class BuscadorCliente extends JDialog implements ActionListener, KeyListe
 	public BuscadorCliente(CobroExtraordinario cobroExtraordinario) {
 		this.cobroExtraordinario=cobroExtraordinario;
 		initGUI();
-		//TODO HAY QUE SETTEAR AL CLIENTE ELEGIDO
+		// HAY QUE SETTEAR AL CLIENTE ELEGIDO
 		cobroExtraordinario.cobroExtraOrdinarioSetCliente(cliente);
 	}
 	
@@ -199,7 +198,7 @@ public class BuscadorCliente extends JDialog implements ActionListener, KeyListe
 		listModel = new DefaultListModel<Cliente>();
 		listClientes = new JList(listModel);
 		listClientes
-				.setSelectionMode(ListSelectionModel.SINGLE_INTERVAL_SELECTION);
+				.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 		scrollPaneClientes.setViewportView(listClientes);
 		listClientes.addListSelectionListener(this);
 
@@ -552,6 +551,7 @@ public class BuscadorCliente extends JDialog implements ActionListener, KeyListe
 		panelAtributos.add(scrollPane, gbc_scrollPane);
 		listModelPersonas = new DefaultListModel<PersonaAutorizada>();
 		listPersonas = new JList(listModelPersonas);
+		listPersonas.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 		scrollPane.setViewportView(listPersonas);
 
 		lblVehiculos = new JLabel("Vehiculos:");
@@ -575,6 +575,7 @@ public class BuscadorCliente extends JDialog implements ActionListener, KeyListe
 		panelAtributos.add(scrollPane_1, gbc_scrollPane_1);
 		listModelVehiculos = new DefaultListModel<Vehiculo>();
 		listVehiculos = new JList(listModelVehiculos);
+		listVehiculos.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 		scrollPane_1.setViewportView(listVehiculos);
 
 		lblCocheras = new JLabel("Cocheras:");
@@ -597,6 +598,7 @@ public class BuscadorCliente extends JDialog implements ActionListener, KeyListe
 		panelAtributos.add(scrollPane_2, gbc_scrollPane_2);
 		listModelCocheras = new DefaultListModel<Cochera>();
 		listCocheras = new JList(listModelCocheras);
+		listCocheras.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 		scrollPane_2.setViewportView(listCocheras);
 
 		buttonCancelar = new JButton("Cancelar");
@@ -792,11 +794,7 @@ public class BuscadorCliente extends JDialog implements ActionListener, KeyListe
 			this.textFieldEstadoCliente.setText(clienteSeleccionado.getEstado().toString());
 			this.textFieldDescripcion.setText(clienteSeleccionado.getDescripcion());
 			this.textFieldTipoCliente.setText(clienteSeleccionado.getTipoCliente().toString());
-			double total = 0;
-			for (MovimientoCC movimiento : clienteSeleccionado.getCuentaCorriente().getMovimientos()){
-				total = total + movimiento.getMontoCobrado();
-			}
-			this.textFieldEstadoCuentaCorriente.setText(String.valueOf(Math.round(total)));
+			this.textFieldEstadoCuentaCorriente.setText(String.valueOf(Math.round(clienteSeleccionado.getEstadoCrediticio(clienteSeleccionado))));
 			this.listModelCocheras.clear();
 			this.listModelPersonas.clear();
 			this.listModelVehiculos.clear();
