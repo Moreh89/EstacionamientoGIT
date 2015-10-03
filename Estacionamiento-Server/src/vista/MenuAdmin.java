@@ -55,6 +55,7 @@ public class MenuAdmin extends JFrame implements ActionListener {
 	private JMenu mnAlquileres;
 	private JMenuItem mntmLiquidarAlquileres;
 	private JMenuItem mntmAnularAlquileres;
+	private JMenuItem mntmTicketsTarjeta;
 
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
@@ -105,7 +106,7 @@ public class MenuAdmin extends JFrame implements ActionListener {
 		mnCliente.add(mntmModificacionCliente);
 		mntmModificacionCliente.addActionListener(this);
 
-		mnGestionEstacionamiento = new JMenu("Gestion Estacionamiento");
+		mnGestionEstacionamiento = new JMenu("Gestion de Estacionamiento");
 		mnGestionEstacionamiento.setIcon(new ImageIcon(MenuAdmin.class
 				.getResource("/image/modificar.png")));
 		menuBar.add(mnGestionEstacionamiento);
@@ -125,7 +126,7 @@ public class MenuAdmin extends JFrame implements ActionListener {
 		mnAlquileres.add(mntmAnularAlquileres);
 		mntmAnularAlquileres.addActionListener(this);
 
-		mnColor = new JMenu("Color");
+		mnColor = new JMenu("Colores");
 		mnGestionEstacionamiento.add(mnColor);
 
 		mntmGestionColor = new JMenuItem("Gestionar");
@@ -184,15 +185,19 @@ public class MenuAdmin extends JFrame implements ActionListener {
 		mnConsultas.add(mntmBuscarCliente);
 		mntmBuscarCliente.addActionListener(this);
 
-		mntmDeudores = new JMenuItem("Deudores");
+		mntmDeudores = new JMenuItem("Ver Deudores");
 		mnConsultas.add(mntmDeudores);
 
 		mntmTicketsAbiertos = new JMenuItem("Tickets Abiertos");
 		mnConsultas.add(mntmTicketsAbiertos);
+		
+		mntmTicketsTarjeta = new JMenuItem("Tickets Tarjeta");
+		mnConsultas.add(mntmTicketsTarjeta);
 		mntmTicketsAbiertos.addActionListener(this);
 		mntmDeudores.addActionListener(this);
+		mntmTicketsTarjeta.addActionListener(this);
 
-		menuSistema = new JMenu("Gestion Sistema");
+		menuSistema = new JMenu("Gestion de Sistema");
 		menuBar.add(menuSistema);
 
 		menuItemBackUp = new JMenuItem("Realizar BackUp");
@@ -302,6 +307,11 @@ public class MenuAdmin extends JFrame implements ActionListener {
 		}
 		if (event.getSource() == mntmTicketsAbiertos) {
 			new TicketsAbiertos().setVisible(true);
+		}
+		if(event.getSource()==mntmTicketsTarjeta)
+		{
+			new VerTicketsAbonadosTarjeta().setVisible(true);
+
 		}
 	}
 

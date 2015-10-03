@@ -110,6 +110,19 @@ public class DAOTicket {
 		return listaPorUsuario;
 		
 	}
+
+	public ArrayList<modelo.Ticket> getTicketsTarjeta(Date fechaDesde, Date fechaHasta) {
+		ArrayList<Ticket> ticketsTarjetaModelo;
+		String fechaL = new SimpleDateFormat("MM-dd-yyyy").format(fechaDesde);
+		fechaL = fechaL + " 00:00:00";
+		String fechaS = new SimpleDateFormat("MM-dd-yyyy").format(fechaHasta);
+		fechaS = fechaS + " 23:59:59";
+		
+		@SuppressWarnings("unchecked")
+		ArrayList<persistencia.clases.Ticket> ticketsTarjetaPersistencia = (ArrayList<persistencia.clases.Ticket>) HibernateDAO.getInstancia().getListbetweenDates("Ticket", "estado", "3","fechaLlegada", fechaL, "fechaLlegada", fechaS);
+		ticketsTarjetaModelo = Converter.convertTicketsPersistenciaToModelo(ticketsTarjetaPersistencia);
+		return ticketsTarjetaModelo;
+	}
 	
 
 }

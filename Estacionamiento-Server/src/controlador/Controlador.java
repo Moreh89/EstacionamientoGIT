@@ -1255,4 +1255,10 @@ public class Controlador {
 		
 	}
 
+	public ArrayList<Ticket> getTicketsCobradosTarjeta(Date fechaDesde, Date fechaHasta) {
+		ArrayList<Ticket> ticketsTarjeta = new ArrayList<Ticket>();
+		ticketsTarjeta = DAOTicket.getInstance().getTicketsTarjeta(fechaDesde, fechaHasta);
+		return ticketsTarjeta;
+	}
+
 }

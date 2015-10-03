@@ -897,5 +897,17 @@ public class Converter {
 		}
 		return liquidacionesAlquileresM;
 	}
+	
+	public static ArrayList<modelo.Ticket> convertTicketsPersistenciaToModelo(
+			ArrayList<persistencia.clases.Ticket> ticketsP) {
+		ArrayList<modelo.Ticket> ticketsM = new ArrayList<modelo.Ticket>();
+
+		for(persistencia.clases.Ticket ticketP : ticketsP)
+		{
+			ticketsM.add(convertTicketPersistenciaToModelo((ticketP)));
+		}
+
+		return ticketsM;
+	}
 
 }
