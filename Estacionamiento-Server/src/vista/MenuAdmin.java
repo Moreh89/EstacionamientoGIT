@@ -185,7 +185,7 @@ public class MenuAdmin extends JFrame implements ActionListener {
 		mnConsultas.add(mntmBuscarCliente);
 		mntmBuscarCliente.addActionListener(this);
 
-		mntmDeudores = new JMenuItem("Ver Deudores");
+		mntmDeudores = new JMenuItem("Clientes Deudores");
 		mnConsultas.add(mntmDeudores);
 
 		mntmTicketsAbiertos = new JMenuItem("Tickets Abiertos");

@@ -112,7 +112,7 @@ public class Controlador {
 		tarifas=DAOTarifa.getInstance().getTarifas();
 		clientes=DAOCliente.getInstance().getClientes();
 
-//SORTS
+		//SORTS
 		Collections.sort(descuentos, new Descuento.CompDescripcion());
 		Collections.sort(coloresVehiculos, new ColorVehiculo.CompDescripcion());
 		Collections.sort(modelosVehiculos, new ModeloVehiculo.CompDescripcion());
@@ -124,7 +124,7 @@ public class Controlador {
 		return true;
 
 	}
-	
+
 	public void actualizarClientes(){
 		clientes=DAOCliente.getInstance().getClientes();
 		Collections.sort(clientes, new Cliente.CompApellido());
@@ -342,7 +342,7 @@ public class Controlador {
 
 	public ArrayList<modelo.Descuento> getDescuentosActuales() 
 	{
-		
+
 		return descuentos;
 	}
 
@@ -359,7 +359,7 @@ public class Controlador {
 
 
 	public ArrayList<modelo.ModeloVehiculo> getModelosActuales() {
-		
+
 		return modelosVehiculos;
 	}
 
@@ -1240,9 +1240,9 @@ public class Controlador {
 			cliente.setTipoCliente(modelo.Cliente.TIPO_CLIENTE.EMPRESA_FRECUENTE);
 
 		if (estado.equals("ACTIVO"))
-		cliente.setEstado(modelo.Cliente.ESTADO.ACTIVO);
+			cliente.setEstado(modelo.Cliente.ESTADO.ACTIVO);
 		if (estado.equals("INACTIVO"))
-		cliente.setEstado(modelo.Cliente.ESTADO.INACTIVO);
+			cliente.setEstado(modelo.Cliente.ESTADO.INACTIVO);
 
 		for (Cochera cochera : listCocheras){
 			cochera.setCliente(cliente);
@@ -1252,13 +1252,49 @@ public class Controlador {
 		cliente.setVehiculos(listVehiculos);
 
 		long idCliente = DAOCliente.getInstance().actualizar(cliente);
-		
+
 	}
 
 	public ArrayList<Ticket> getTicketsCobradosTarjeta(Date fechaDesde, Date fechaHasta) {
 		ArrayList<Ticket> ticketsTarjeta = new ArrayList<Ticket>();
 		ticketsTarjeta = DAOTicket.getInstance().getTicketsTarjeta(fechaDesde, fechaHasta);
 		return ticketsTarjeta;
+	}
+
+	public double exportarTicketsAbonadosTarjeta(ArrayList<Ticket> ticketsTarjeta) {
+		double codigoReturn = -1;
+
+		Date fecha= GregorianCalendar.getInstance().getTime();
+		ArrayList<String> ticketsTarjetaImprimir = new ArrayList<String>();
+		ticketsTarjetaImprimir.add("Fecha;Numero Ticket;Monto");
+
+		for(Ticket ticketActual : ticketsTarjeta)
+		{
+			ticketsTarjetaImprimir.add(ticketActual.getFechaSalida()+";"+ ticketActual.getIdTicket()+";"+ticketActual.getMontoCobrado());
+
+		}
+
+		Excel excel = new Excel();
+		File theDir = new File("C:\\SIGE\\TicketsTarjeta\\");
+		if (!theDir.exists())
+		{ 
+			boolean result = theDir.mkdirs();    
+		}
+		String path= "'"+theDir.getPath()+"\\";
+		DateFormat dateFormat = new SimpleDateFormat("yyyyMMddHHmmss"); 
+		Date date = new Date(); 
+		excel.setOutputFile(theDir+"\\TicketsTarjeta_"+new SimpleDateFormat("yyyy_MM_dd_HH_mm").format(fecha)+".xls");
+
+		try {
+			excel.writeList(ticketsTarjetaImprimir);
+			codigoReturn=1;
+		} catch (WriteException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		return codigoReturn;
+
 	}
 
 }
