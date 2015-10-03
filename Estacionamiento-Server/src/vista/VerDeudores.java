@@ -147,7 +147,6 @@ public class VerDeudores extends JDialog implements ActionListener, KeyListener,
 			listModel.addElement(clienteTemp);
 		} 
 		listDeudores = new JList(listModel);
-		listDeudores.setEnabled(false);
 		listDeudores.setSelectionMode(ListSelectionModel.SINGLE_INTERVAL_SELECTION);
 		scrollPaneClientes.setViewportView(listDeudores);
 		listDeudores.addListSelectionListener(this);
