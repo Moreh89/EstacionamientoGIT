@@ -1,6 +1,7 @@
 package vista;
 
 import java.util.ArrayList;
+
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import javax.swing.event.ListSelectionEvent;
@@ -16,21 +17,26 @@ import javax.swing.JSeparator;
 import javax.swing.JComboBox;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.ListSelectionModel;
+
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+import java.awt.Color;
 import java.awt.GridBagLayout;
 import java.awt.GridBagConstraints;
 import java.awt.Insets;
+
 import javax.swing.JScrollPane;
 import javax.swing.ScrollPaneConstants;
 import javax.swing.JList;
+
 import modelo.Cliente;
 import modelo.Cochera;
 import modelo.PersonaAutorizada;
 import modelo.Vehiculo;
 import controlador.Controlador;
+
 import java.awt.Font;
 
 
@@ -453,9 +459,9 @@ public class BuscadorCliente extends JDialog implements ActionListener, KeyListe
 				gbc_labelEstadoCuentaCorriente);
 
 		textFieldEstadoCuentaCorriente = new JTextField();
+		textFieldEstadoCuentaCorriente.setEnabled(false);
 		textFieldEstadoCuentaCorriente
 				.setFont(new Font("Tahoma", Font.BOLD, 16));
-		textFieldEstadoCuentaCorriente.setEnabled(false);
 		textFieldEstadoCuentaCorriente.setEditable(false);
 		textFieldEstadoCuentaCorriente.setColumns(10);
 		GridBagConstraints gbc_textFieldEstadoCuentaCorriente = new GridBagConstraints();
@@ -794,7 +800,18 @@ public class BuscadorCliente extends JDialog implements ActionListener, KeyListe
 			this.textFieldEstadoCliente.setText(clienteSeleccionado.getEstado().toString());
 			this.textFieldDescripcion.setText(clienteSeleccionado.getDescripcion());
 			this.textFieldTipoCliente.setText(clienteSeleccionado.getTipoCliente().toString());
-			this.textFieldEstadoCuentaCorriente.setText(String.valueOf(Math.round(clienteSeleccionado.getEstadoCrediticio(clienteSeleccionado))));
+			double estadoCrediticio=clienteSeleccionado.getEstadoCrediticio(clienteSeleccionado);
+			if(estadoCrediticio<0)
+			{
+				textFieldEstadoCuentaCorriente.setDisabledTextColor(Color.RED);
+
+			}
+			else
+			{
+				textFieldEstadoCuentaCorriente.setDisabledTextColor(Color.GREEN);
+
+			}
+			this.textFieldEstadoCuentaCorriente.setText(String.valueOf(Math.round(estadoCrediticio)));
 			this.listModelCocheras.clear();
 			this.listModelPersonas.clear();
 			this.listModelVehiculos.clear();

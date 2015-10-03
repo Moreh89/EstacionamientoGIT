@@ -147,6 +147,7 @@ public class VerDeudores extends JDialog implements ActionListener, KeyListener,
 			listModel.addElement(clienteTemp);
 		} 
 		listDeudores = new JList(listModel);
+		listDeudores.setEnabled(false);
 		listDeudores.setSelectionMode(ListSelectionModel.SINGLE_INTERVAL_SELECTION);
 		scrollPaneClientes.setViewportView(listDeudores);
 		listDeudores.addListSelectionListener(this);
@@ -160,6 +161,7 @@ public class VerDeudores extends JDialog implements ActionListener, KeyListener,
 		contentPane.add(lblMontoAdeudado, gbc_lblMontoAdeudado);
 
 		textFieldMontoAdeudado = new JTextField();
+		textFieldMontoAdeudado.setEnabled(false);
 		textFieldMontoAdeudado.setFont(new Font("Tahoma", Font.BOLD, 11));
 		textFieldMontoAdeudado.setEditable(false);
 		GridBagConstraints gbc_textFieldMontoAdeudado = new GridBagConstraints();
@@ -169,7 +171,7 @@ public class VerDeudores extends JDialog implements ActionListener, KeyListener,
 		gbc_textFieldMontoAdeudado.gridy = 1;
 		contentPane.add(textFieldMontoAdeudado, gbc_textFieldMontoAdeudado);
 		textFieldMontoAdeudado.setColumns(10);
-		textFieldMontoAdeudado.setForeground(Color.RED);
+		textFieldMontoAdeudado.setDisabledTextColor(Color.RED);
 		textFieldMontoAdeudado.setFocusable(false);
 
 		
