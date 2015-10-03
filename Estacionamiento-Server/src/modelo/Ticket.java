@@ -10,7 +10,7 @@ public class Ticket {
 
 	private long idTicket;
 	private double montoCobrado;
-	//Estado ABIERTO/PREPAGO/CERRADO
+	//Estado ABIERTO/PREPAGO/CERRADO/CREDITO
 	private Estado estado;
 	//Time puede cambiarse si no es compatible con hibernate
 	private Date fechaLlegada;
