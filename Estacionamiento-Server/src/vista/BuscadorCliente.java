@@ -38,6 +38,7 @@ import modelo.Vehiculo;
 import controlador.Controlador;
 
 import java.awt.Font;
+import javax.swing.SwingConstants;
 
 
 
@@ -64,10 +65,7 @@ public class BuscadorCliente extends JDialog implements ActionListener, KeyListe
 	private JTextField textFieldEstadoCuentaCorriente;
 	private JTextField textFieldEstadoCliente;
 	private JLabel labelEstadoCliente;
-	private JLabel labelPersonasAutorizadas;
 	private JScrollPane scrollPane;
-	private JLabel lblVehiculos;
-	private JLabel lblCocheras;
 	private JScrollPane scrollPane_1;
 	private JScrollPane scrollPane_2;
 	private JLabel lblDnilu;
@@ -102,8 +100,12 @@ public class BuscadorCliente extends JDialog implements ActionListener, KeyListe
 	private JTextField textFieldTipoCliente;
 	private JLabel lblDescripcion;
 	private JTextField textFieldDescripcion;
+	private JButton btnPersonasAutorizadas;
+	private JButton btnVehiculos;
+	private JButton btnCocheras;
 		
 	public BuscadorCliente() {
+		setDefaultCloseOperation(JDialog.DO_NOTHING_ON_CLOSE);
 		initGUI();
 	}
 
@@ -534,17 +536,18 @@ public class BuscadorCliente extends JDialog implements ActionListener, KeyListe
 		gbc_textFieldDescripcion.gridx = 1;
 		gbc_textFieldDescripcion.gridy = 13;
 		panelAtributos.add(textFieldDescripcion, gbc_textFieldDescripcion);
-
-		labelPersonasAutorizadas = new JLabel("Personas Autorizadas:");
-		labelPersonasAutorizadas.setFont(new Font("Tahoma", Font.BOLD, 15));
-		GridBagConstraints gbc_labelPersonasAutorizadas = new GridBagConstraints();
-		gbc_labelPersonasAutorizadas.fill = GridBagConstraints.VERTICAL;
-		gbc_labelPersonasAutorizadas.anchor = GridBagConstraints.EAST;
-		gbc_labelPersonasAutorizadas.insets = new Insets(0, 0, 5, 5);
-		gbc_labelPersonasAutorizadas.gridx = 0;
-		gbc_labelPersonasAutorizadas.gridy = 14;
-		panelAtributos.add(labelPersonasAutorizadas,
-				gbc_labelPersonasAutorizadas);
+		
+		btnPersonasAutorizadas = new JButton("Personas Autorizadas:");
+		btnPersonasAutorizadas.setIcon(new ImageIcon(BuscadorCliente.class.getResource("/image/search.png")));
+		btnPersonasAutorizadas.addActionListener(this);
+		btnPersonasAutorizadas.setHorizontalAlignment(SwingConstants.RIGHT);
+		btnPersonasAutorizadas.setFont(new Font("Tahoma", Font.BOLD, 16));
+		GridBagConstraints gbc_btnPersonasAutorizadas = new GridBagConstraints();
+		gbc_btnPersonasAutorizadas.fill = GridBagConstraints.BOTH;
+		gbc_btnPersonasAutorizadas.insets = new Insets(0, 0, 5, 5);
+		gbc_btnPersonasAutorizadas.gridx = 0;
+		gbc_btnPersonasAutorizadas.gridy = 14;
+		panelAtributos.add(btnPersonasAutorizadas, gbc_btnPersonasAutorizadas);
 
 		scrollPane = new JScrollPane();
 		scrollPane
@@ -559,16 +562,18 @@ public class BuscadorCliente extends JDialog implements ActionListener, KeyListe
 		listPersonas = new JList(listModelPersonas);
 		listPersonas.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 		scrollPane.setViewportView(listPersonas);
-
-		lblVehiculos = new JLabel("Vehiculos:");
-		lblVehiculos.setFont(new Font("Tahoma", Font.BOLD, 16));
-		GridBagConstraints gbc_lblVehiculos = new GridBagConstraints();
-		gbc_lblVehiculos.fill = GridBagConstraints.VERTICAL;
-		gbc_lblVehiculos.anchor = GridBagConstraints.EAST;
-		gbc_lblVehiculos.insets = new Insets(0, 0, 5, 5);
-		gbc_lblVehiculos.gridx = 0;
-		gbc_lblVehiculos.gridy = 15;
-		panelAtributos.add(lblVehiculos, gbc_lblVehiculos);
+		
+		btnVehiculos = new JButton("Vehiculos:");
+		btnVehiculos.setIcon(new ImageIcon(BuscadorCliente.class.getResource("/image/search.png")));
+		btnVehiculos.addActionListener(this);
+		btnVehiculos.setHorizontalAlignment(SwingConstants.RIGHT);
+		btnVehiculos.setFont(new Font("Tahoma", Font.BOLD, 16));
+		GridBagConstraints gbc_btnVehiculos = new GridBagConstraints();
+		gbc_btnVehiculos.fill = GridBagConstraints.BOTH;
+		gbc_btnVehiculos.insets = new Insets(0, 0, 5, 5);
+		gbc_btnVehiculos.gridx = 0;
+		gbc_btnVehiculos.gridy = 15;
+		panelAtributos.add(btnVehiculos, gbc_btnVehiculos);
 
 		scrollPane_1 = new JScrollPane();
 		scrollPane_1
@@ -583,16 +588,18 @@ public class BuscadorCliente extends JDialog implements ActionListener, KeyListe
 		listVehiculos = new JList(listModelVehiculos);
 		listVehiculos.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 		scrollPane_1.setViewportView(listVehiculos);
-
-		lblCocheras = new JLabel("Cocheras:");
-		lblCocheras.setFont(new Font("Tahoma", Font.BOLD, 16));
-		GridBagConstraints gbc_lblCocheras = new GridBagConstraints();
-		gbc_lblCocheras.fill = GridBagConstraints.VERTICAL;
-		gbc_lblCocheras.anchor = GridBagConstraints.EAST;
-		gbc_lblCocheras.insets = new Insets(0, 0, 0, 5);
-		gbc_lblCocheras.gridx = 0;
-		gbc_lblCocheras.gridy = 16;
-		panelAtributos.add(lblCocheras, gbc_lblCocheras);
+		
+		btnCocheras = new JButton("Cocheras:");
+		btnCocheras.setIcon(new ImageIcon(BuscadorCliente.class.getResource("/image/search.png")));
+		btnCocheras.addActionListener(this);
+		btnCocheras.setHorizontalAlignment(SwingConstants.RIGHT);
+		btnCocheras.setFont(new Font("Tahoma", Font.BOLD, 16));
+		GridBagConstraints gbc_btnCocheras = new GridBagConstraints();
+		gbc_btnCocheras.fill = GridBagConstraints.BOTH;
+		gbc_btnCocheras.insets = new Insets(0, 0, 0, 5);
+		gbc_btnCocheras.gridx = 0;
+		gbc_btnCocheras.gridy = 16;
+		panelAtributos.add(btnCocheras, gbc_btnCocheras);
 
 		scrollPane_2 = new JScrollPane();
 		scrollPane_2
@@ -670,6 +677,22 @@ public class BuscadorCliente extends JDialog implements ActionListener, KeyListe
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
+		
+		if (e.getSource() == this.btnCocheras) {
+			if (listCocheras.getSelectedValue() != null){
+				new VerCochera(listCocheras.getSelectedValue()).setVisible(true);
+				}
+		}
+		if (e.getSource() == this.btnPersonasAutorizadas) {
+			if (listPersonas.getSelectedValue() != null){
+				new VerPersonaAutorizada(listPersonas.getSelectedValue()).setVisible(true);
+				}
+		}
+		if (e.getSource() == this.btnVehiculos) {
+			if (listVehiculos.getSelectedValue() != null){
+				new VerVehiculo(listVehiculos.getSelectedValue()).setVisible(true);
+				}
+		}
 
 		if (e.getSource() == this.buscarButton) {
 			limpiarCampos();

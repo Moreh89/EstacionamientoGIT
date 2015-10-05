@@ -97,6 +97,12 @@ public class ModificarCliente extends AltaCliente implements ActionListener{
 	private JLabel lblEstado;
 	private JComboBox<String> comboBoxEstado;
 	private DefaultComboBoxModel<String>comboBoxModelEstado;
+	private JPanel panel;
+	private JButton buttonModificarVehiculo;
+	private JPanel panel_1;
+	private JButton buttonModificarPersona;
+	private JPanel panel_2;
+	private JButton buttonModificarCochera;
 	/**
 	 * Create the frame.
 	 * @param cliente 
@@ -114,7 +120,7 @@ public class ModificarCliente extends AltaCliente implements ActionListener{
 		setTitle("Modificar Cliente");
 		setResizable(false);
 		//setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 764, 529);
+		setBounds(100, 100, 764, 615);
 		contentPaneAltaCliente = new JPanel();
 		contentPaneAltaCliente.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPaneAltaCliente);
@@ -122,13 +128,13 @@ public class ModificarCliente extends AltaCliente implements ActionListener{
 
 
 		panelAltaCliente = new JPanel();
-		panelAltaCliente.setBounds(12, 13, 730, 481);
+		panelAltaCliente.setBounds(12, 13, 730, 554);
 		contentPaneAltaCliente.add(panelAltaCliente);
 		GridBagLayout gbl_panelAltaCliente = new GridBagLayout();
 		gbl_panelAltaCliente.columnWidths = new int[]{124, 217, 98, 253, 0};
 		gbl_panelAltaCliente.rowHeights = new int[] {28, 28, 28, 28, 28, 28, 28, 28, 60, 59, 60, 0, 28, 0};
-		gbl_panelAltaCliente.columnWeights = new double[]{0.0, 1.0, 0.0, 1.0, Double.MIN_VALUE};
-		gbl_panelAltaCliente.rowWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
+		gbl_panelAltaCliente.columnWeights = new double[]{0.0, 1.0, 1.0, 1.0, Double.MIN_VALUE};
+		gbl_panelAltaCliente.rowWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 1.0, 1.0, 1.0, 0.0, 0.0, Double.MIN_VALUE};
 		panelAltaCliente.setLayout(gbl_panelAltaCliente);
 
 		labelNombre = new JLabel("Nombre:");
@@ -489,13 +495,35 @@ public class ModificarCliente extends AltaCliente implements ActionListener{
 			this.listModelVehiculos.addElement(vehiculo);
 		}
 		
+		panel = new JPanel();
+		GridBagConstraints gbc_panel = new GridBagConstraints();
+		gbc_panel.insets = new Insets(0, 0, 5, 5);
+		gbc_panel.fill = GridBagConstraints.BOTH;
+		gbc_panel.gridx = 2;
+		gbc_panel.gridy = 8;
+		panelAltaCliente.add(panel, gbc_panel);
+		GridBagLayout gbl_panel = new GridBagLayout();
+		gbl_panel.columnWidths = new int[]{100, 0};
+		gbl_panel.rowHeights = new int[]{0, 0, 0};
+		gbl_panel.columnWeights = new double[]{0.0, Double.MIN_VALUE};
+		gbl_panel.rowWeights = new double[]{0.0, 0.0, Double.MIN_VALUE};
+		panel.setLayout(gbl_panel);
+		
 		btnEliminarVehiculo = new JButton("");
-		btnEliminarVehiculo.setIcon(new ImageIcon(AltaCliente.class.getResource("/image/cancel.png")));
 		GridBagConstraints gbc_btnEliminarVehiculo = new GridBagConstraints();
-		gbc_btnEliminarVehiculo.insets = new Insets(0, 0, 5, 5);
-		gbc_btnEliminarVehiculo.gridx = 2;
-		gbc_btnEliminarVehiculo.gridy = 8;
-		panelAltaCliente.add(btnEliminarVehiculo, gbc_btnEliminarVehiculo);
+		gbc_btnEliminarVehiculo.insets = new Insets(0, 0, 5, 0);
+		gbc_btnEliminarVehiculo.gridx = 0;
+		gbc_btnEliminarVehiculo.gridy = 0;
+		panel.add(btnEliminarVehiculo, gbc_btnEliminarVehiculo);
+		btnEliminarVehiculo.setIcon(new ImageIcon(AltaCliente.class.getResource("/image/cancel.png")));
+		
+		buttonModificarVehiculo = new JButton("");
+		buttonModificarVehiculo.addActionListener(this);
+		buttonModificarVehiculo.setIcon(new ImageIcon(ModificarCliente.class.getResource("/image/modificar.png")));
+		GridBagConstraints gbc_buttonModificarVehiculo = new GridBagConstraints();
+		gbc_buttonModificarVehiculo.gridx = 0;
+		gbc_buttonModificarVehiculo.gridy = 1;
+		panel.add(buttonModificarVehiculo, gbc_buttonModificarVehiculo);
 		btnEliminarVehiculo.addActionListener(this);
 
 		buttonAgregarVehiculo = new JButton("Agregar Vehiculo");
@@ -537,14 +565,36 @@ public class ModificarCliente extends AltaCliente implements ActionListener{
 			this.listModelPersonas.addElement(persona);
 		}
 		
+		panel_1 = new JPanel();
+		GridBagConstraints gbc_panel_1 = new GridBagConstraints();
+		gbc_panel_1.insets = new Insets(0, 0, 5, 5);
+		gbc_panel_1.fill = GridBagConstraints.BOTH;
+		gbc_panel_1.gridx = 2;
+		gbc_panel_1.gridy = 9;
+		panelAltaCliente.add(panel_1, gbc_panel_1);
+		GridBagLayout gbl_panel_1 = new GridBagLayout();
+		gbl_panel_1.columnWidths = new int[]{100, 0};
+		gbl_panel_1.rowHeights = new int[]{0, 0, 0};
+		gbl_panel_1.columnWeights = new double[]{0.0, Double.MIN_VALUE};
+		gbl_panel_1.rowWeights = new double[]{0.0, 0.0, Double.MIN_VALUE};
+		panel_1.setLayout(gbl_panel_1);
+		
 		
 		btnEliminarPersona = new JButton("");
-		btnEliminarPersona.setIcon(new ImageIcon(AltaCliente.class.getResource("/image/cancel.png")));
 		GridBagConstraints gbc_btnEliminarPersona = new GridBagConstraints();
-		gbc_btnEliminarPersona.insets = new Insets(0, 0, 5, 5);
-		gbc_btnEliminarPersona.gridx = 2;
-		gbc_btnEliminarPersona.gridy = 9;
-		panelAltaCliente.add(btnEliminarPersona, gbc_btnEliminarPersona);
+		gbc_btnEliminarPersona.insets = new Insets(0, 0, 5, 0);
+		gbc_btnEliminarPersona.gridx = 0;
+		gbc_btnEliminarPersona.gridy = 0;
+		panel_1.add(btnEliminarPersona, gbc_btnEliminarPersona);
+		btnEliminarPersona.setIcon(new ImageIcon(AltaCliente.class.getResource("/image/cancel.png")));
+		
+		buttonModificarPersona = new JButton("");
+		buttonModificarPersona.addActionListener(this);
+		buttonModificarPersona.setIcon(new ImageIcon(ModificarCliente.class.getResource("/image/modificar.png")));
+		GridBagConstraints gbc_buttonModificarPersona = new GridBagConstraints();
+		gbc_buttonModificarPersona.gridx = 0;
+		gbc_buttonModificarPersona.gridy = 1;
+		panel_1.add(buttonModificarPersona, gbc_buttonModificarPersona);
 		btnEliminarPersona.addActionListener(this);
 
 		buttonAgregarPersonaAutorizada = new JButton("Agregar Persona Autorizada");
@@ -585,13 +635,35 @@ public class ModificarCliente extends AltaCliente implements ActionListener{
 			this.listModelCocheras.addElement(cochera);
 		}
 		
+		panel_2 = new JPanel();
+		GridBagConstraints gbc_panel_2 = new GridBagConstraints();
+		gbc_panel_2.insets = new Insets(0, 0, 5, 5);
+		gbc_panel_2.fill = GridBagConstraints.BOTH;
+		gbc_panel_2.gridx = 2;
+		gbc_panel_2.gridy = 10;
+		panelAltaCliente.add(panel_2, gbc_panel_2);
+		GridBagLayout gbl_panel_2 = new GridBagLayout();
+		gbl_panel_2.columnWidths = new int[]{100, 0};
+		gbl_panel_2.rowHeights = new int[]{0, 0, 0};
+		gbl_panel_2.columnWeights = new double[]{0.0, Double.MIN_VALUE};
+		gbl_panel_2.rowWeights = new double[]{0.0, 0.0, Double.MIN_VALUE};
+		panel_2.setLayout(gbl_panel_2);
+		
 		btnEliminarCochera = new JButton("");
-		btnEliminarCochera.setIcon(new ImageIcon(AltaCliente.class.getResource("/image/cancel.png")));
 		GridBagConstraints gbc_btnEliminarCochera = new GridBagConstraints();
-		gbc_btnEliminarCochera.insets = new Insets(0, 0, 5, 5);
-		gbc_btnEliminarCochera.gridx = 2;
-		gbc_btnEliminarCochera.gridy = 10;
-		panelAltaCliente.add(btnEliminarCochera, gbc_btnEliminarCochera);
+		gbc_btnEliminarCochera.insets = new Insets(0, 0, 5, 0);
+		gbc_btnEliminarCochera.gridx = 0;
+		gbc_btnEliminarCochera.gridy = 0;
+		panel_2.add(btnEliminarCochera, gbc_btnEliminarCochera);
+		btnEliminarCochera.setIcon(new ImageIcon(AltaCliente.class.getResource("/image/cancel.png")));
+		
+		buttonModificarCochera = new JButton("");
+		buttonModificarCochera.addActionListener(this);
+		buttonModificarCochera.setIcon(new ImageIcon(ModificarCliente.class.getResource("/image/modificar.png")));
+		GridBagConstraints gbc_buttonModificarCochera = new GridBagConstraints();
+		gbc_buttonModificarCochera.gridx = 0;
+		gbc_buttonModificarCochera.gridy = 1;
+		panel_2.add(buttonModificarCochera, gbc_buttonModificarCochera);
 		btnEliminarCochera.addActionListener(this);
 
 		buttonAgregarCocheras = new JButton("Agregar Cochera");
@@ -634,6 +706,23 @@ public class ModificarCliente extends AltaCliente implements ActionListener{
 
 
 	public void actionPerformed(ActionEvent event) {
+		
+		if(event.getSource()==buttonModificarCochera){
+			if (listCocheras.getSelectedValue() != null){
+			new ModificarCochera(this).setVisible(true);
+			}
+		}
+		if(event.getSource()==buttonModificarPersona){
+			if (listPersonasAutorizadas.getSelectedValue() != null){
+			new ModificarPersonaAutorizada(this).setVisible(true);
+			}
+		}
+		if(event.getSource()==buttonModificarVehiculo){
+			if (listVehiculos.getSelectedValue() != null){
+				new ModificarVehiculo(this).setVisible(true);
+				}
+		}
+		
 		
 		if(event.getSource()==btnEliminarCochera){
 			if (listCocheras.getSelectedValue() != null){
@@ -763,5 +852,88 @@ public class ModificarCliente extends AltaCliente implements ActionListener{
 			listModelCocheras.addElement(cochera);
 		}
 	}
+	
+
+	public Cochera getSelectedCochera() {
+		if (listCocheras.getSelectedValue() != null){
+			 return listCocheras.getSelectedValue();
+		}
+		return null;
+	}
+
+
+	public void actualizarCochera(Cochera c) {
+		Cochera cocheraT1  = listCocheras.getSelectedValue();
+		for (Cochera cocheraT2 : ListCocheras){
+			if(cocheraT2.toString().equals(cocheraT1.toString())){
+				cocheraT2.setCostoCochera(c.getCostoCochera());
+				cocheraT2.setPorcentajeExpensas(c.getPorcentajeExpensas());
+				cocheraT2.setUbicacion(c.getUbicacion());
+				break;
+			}
+		}
+		listModelCocheras.clear();
+		for (Cochera cochera : ListCocheras) {
+			listModelCocheras.addElement(cochera);
+		}
+		
+	}
+
+
+	public PersonaAutorizada getSelectedPersona() {
+		if (listPersonasAutorizadas.getSelectedValue() != null){
+			 return listPersonasAutorizadas.getSelectedValue();
+		}
+		return null;
+	}
+
+
+	public void actualizarPersonaAutorizada(PersonaAutorizada p) {
+		if (listPersonasAutorizadas.getSelectedValue() != null){
+			PersonaAutorizada personaT1  = listPersonasAutorizadas.getSelectedValue();
+			for (PersonaAutorizada personaT2 : ListPersonasAutorizadas){
+				if(personaT2.toString().equals(personaT1.toString())){
+					personaT2.setNombre(p.getNombre());
+					break;
+				}
+			}
+			listModelPersonas.clear();
+			for (PersonaAutorizada personaAutorizada : ListPersonasAutorizadas) {
+				listModelPersonas.addElement(personaAutorizada);
+			}
+		}
+	}
+
+
+	public Vehiculo getSelectedVehiuclo() {
+		if (listVehiculos.getSelectedValue() != null){
+			 return listVehiculos.getSelectedValue();
+		}
+		return null;
+	}
+
+
+	public void actualizarVehiculo(Vehiculo v) {
+		if (listVehiculos.getSelectedValue() != null){
+			Vehiculo vehiculoT1  = listVehiculos.getSelectedValue();
+			for (Vehiculo vehiculoT2 : ListPatentesVehiculos){
+				if(vehiculoT2.toString().equals(vehiculoT1.toString())){
+					vehiculoT2.setCategoria(v.getCategoria());
+					vehiculoT2.setColor(v.getColor());
+					vehiculoT2.setComentario(v.getComentario());
+					vehiculoT2.setModelo(v.getModelo());
+					vehiculoT2.setPatente(v.getPatente());
+					break;
+				}
+			}
+			listModelVehiculos.clear();
+			for (Vehiculo vehiculo : ListPatentesVehiculos) {
+				listModelVehiculos.addElement(vehiculo);
+			}
+		}
+		
+	}
+	
+	
 }
 

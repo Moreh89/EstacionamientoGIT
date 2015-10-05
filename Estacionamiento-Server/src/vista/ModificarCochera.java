@@ -20,7 +20,7 @@ import modelo.Cochera;
 
 
 
-public class AgregarCochera extends JDialog implements ActionListener{
+public class ModificarCochera extends JDialog implements ActionListener{
 
 	/**
 	 * 
@@ -37,7 +37,7 @@ public class AgregarCochera extends JDialog implements ActionListener{
 	private AltaCliente altaCliente;
 
 	
-	public AgregarCochera(AltaCliente altaCliente) {
+	public ModificarCochera(AltaCliente altaCliente) {
 		
 		setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
 		this.altaCliente=altaCliente;
@@ -47,7 +47,7 @@ public class AgregarCochera extends JDialog implements ActionListener{
 
 	@SuppressWarnings({ "rawtypes", "unchecked" })
 	public void initGUI(){
-		setTitle("Alta Cochera");
+		setTitle("Modificar Cochera");
 		setResizable(false);
 		setBounds(100, 100, 377, 242);
 		contentPane = new JPanel();
@@ -81,6 +81,7 @@ public class AgregarCochera extends JDialog implements ActionListener{
 		gbc_comboBoxPiso.gridx = 1;
 		gbc_comboBoxPiso.gridy = 0;
 		panel.add(comboBoxPiso, gbc_comboBoxPiso);
+		//TODO PISO no se esta guardando, habria que sacar este combobox
 
 		JLabel labelCostoMensual = new JLabel("Costo Mensual:");
 		GridBagConstraints gbc_labelCostoMensual = new GridBagConstraints();
@@ -90,7 +91,7 @@ public class AgregarCochera extends JDialog implements ActionListener{
 		gbc_labelCostoMensual.gridy = 1;
 		panel.add(labelCostoMensual, gbc_labelCostoMensual);
 
-		textCostoMensual = new JTextField();
+		textCostoMensual = new JTextField(String.valueOf(altaCliente.getSelectedCochera().getCostoCochera()));
 		textCostoMensual.setColumns(10);
 		GridBagConstraints gbc_textCostoMensual = new GridBagConstraints();
 		gbc_textCostoMensual.fill = GridBagConstraints.HORIZONTAL;
@@ -107,7 +108,7 @@ public class AgregarCochera extends JDialog implements ActionListener{
 		gbc_labelUbicacion.gridy = 2;
 		panel.add(labelUbicacion, gbc_labelUbicacion);
 
-		textFieldUbicacion = new JTextField();
+		textFieldUbicacion = new JTextField(altaCliente.getSelectedCochera().getUbicacion());
 		textFieldUbicacion.setColumns(10);
 		GridBagConstraints gbc_textFieldUbicacion = new GridBagConstraints();
 		gbc_textFieldUbicacion.fill = GridBagConstraints.HORIZONTAL;
@@ -124,7 +125,7 @@ public class AgregarCochera extends JDialog implements ActionListener{
 		gbc_labelPorcentajeExpensas.gridy = 3;
 		panel.add(labelPorcentajeExpensas, gbc_labelPorcentajeExpensas);
 
-		textFieldPorcentajeExpensas = new JTextField();
+		textFieldPorcentajeExpensas = new JTextField(String.valueOf(altaCliente.getSelectedCochera().getPorcentajeExpensas()));
 		textFieldPorcentajeExpensas.setColumns(10);
 		GridBagConstraints gbc_textFieldPorcentajeExpensas = new GridBagConstraints();
 		gbc_textFieldPorcentajeExpensas.fill = GridBagConstraints.HORIZONTAL;
@@ -138,7 +139,7 @@ public class AgregarCochera extends JDialog implements ActionListener{
 		contentPane.add(buttonCancelar);
 		buttonCancelar.addActionListener(this);
 
-		buttonAgregarCochera = new JButton("Agregar Cochera");
+		buttonAgregarCochera = new JButton("Actualizar");
 		buttonAgregarCochera.setIcon(new ImageIcon(BuscadorCliente.class.getResource("/image/ok.png")));
 		buttonAgregarCochera.setBounds(199, 146, 160, 56);
 		contentPane.add(buttonAgregarCochera);
@@ -172,19 +173,13 @@ public class AgregarCochera extends JDialog implements ActionListener{
 				double porcentajeExp=Double.parseDouble(textFieldPorcentajeExpensas.getText().toString());
 				if((porcentajeExp<=100 || porcentajeExp>0))
 				{
-					if(porcentajeExp>0 && Double.parseDouble(textCostoMensual.getText())>0){
-						JOptionPane.showMessageDialog(null,"La cochera no puede tener Costo mensual y Porcentaje de Expensas al mismo tiempo.", "Validación Datos",  JOptionPane.INFORMATION_MESSAGE);
-					}else{
-						modelo.Cochera c = new Cochera();
-						c.setCostoCochera(Double.parseDouble(textCostoMensual.getText()));
-						c.setPorcentajeExpensas(Float.parseFloat(textFieldPorcentajeExpensas.getText()));
-						c.setEstado(modelo.Cochera.ESTADO.ACTIVO);
-						c.setUbicacion(textFieldUbicacion.getText());
-						c.setCliente(null);
-						altaCliente.agregarCocheraAltaCliente(c);
-						dispose();
-					}
-
+					Cochera c = altaCliente.getSelectedCochera();
+					c.setCostoCochera(Double.parseDouble(textCostoMensual.getText()));
+					c.setPorcentajeExpensas(Float.parseFloat(textFieldPorcentajeExpensas.getText()));
+					c.setEstado(modelo.Cochera.ESTADO.ACTIVO);
+					c.setUbicacion(textFieldUbicacion.getText());
+					altaCliente.actualizarCochera(c);
+					dispose();
 				}
 				else
 				{

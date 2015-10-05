@@ -6,10 +6,13 @@ import modelo.Cochera;
 import modelo.MovimientoCC;
 import persistencia.Converter;
 import persistencia.HibernateDAO;
+import persistencia.clases.CategoriaVehiculo;
 import persistencia.clases.Cliente;
+import persistencia.clases.ColorVehiculo;
 import persistencia.clases.Interes;
 import persistencia.clases.LiquidacionAlquileres;
 import persistencia.clases.LiquidacionExpensas;
+import persistencia.clases.ModeloVehiculo;
 import persistencia.clases.PersonaAutorizada;
 import persistencia.clases.Vehiculo;
 
@@ -239,9 +242,12 @@ public class DAOCliente {
 				persistencia.clases.Cochera cocheraP = Converter.convertCocheraModeloToPersistencia(cocheraM);
 				cocheraP.setCliente(clienteP);
 				listCocheras.add(cocheraP);
-			//las que ya tengo
+			//las que ya tengo las actualizo
 			}else{
 				persistencia.clases.Cochera cocheraP = (persistencia.clases.Cochera) HibernateDAO.getInstancia().get(persistencia.clases.Cochera.class, cocheraM.getIdCochera());
+				cocheraP.setCostoCochera(cocheraM.getCostoCochera());
+				cocheraP.setPorcentajeExpensas(cocheraM.getPorcentajeExpensas());
+				cocheraP.setUbicacion(cocheraM.getUbicacion());
 				listCocheras.add(cocheraP);
 			}
 			//las que no esten es porque las borre
@@ -255,9 +261,10 @@ public class DAOCliente {
 			if(personaM.getIdPersonaAut()==0){
 				persistencia.clases.PersonaAutorizada personaP = Converter.convertPersonaAutorizadaModeloToPersistencia(personaM);
 				listPersonasAutorizadas.add(personaP);
-			//las que ya tengo
+			//las que ya tengo las actualizo
 			}else{
 				persistencia.clases.PersonaAutorizada personaP = (persistencia.clases.PersonaAutorizada) HibernateDAO.getInstancia().get(persistencia.clases.PersonaAutorizada.class, personaM.getIdPersonaAut());
+				personaP.setNombre(personaM.getNombre());
 				listPersonasAutorizadas.add(personaP);
 			}
 			//las que no esten es porque las borre
@@ -270,9 +277,14 @@ public class DAOCliente {
 			if(vehiculoM.getIdVehiculo()==0){
 				persistencia.clases.Vehiculo vehiculoP = Converter.convertVehiculoModeloToPersistencia(vehiculoM);
 				listVehiculos.add(vehiculoP);
-			//las que ya tengo
+			//los que ya tengo los actualizo
 			}else{
 				persistencia.clases.Vehiculo vehiculoP = (persistencia.clases.Vehiculo) HibernateDAO.getInstancia().get(persistencia.clases.Vehiculo.class, vehiculoM.getIdVehiculo());
+				vehiculoP.setPatente(vehiculoM.getPatente());
+				vehiculoP.setCategoria((CategoriaVehiculo) HibernateDAO.getInstancia().get(persistencia.clases.CategoriaVehiculo.class, vehiculoM.getCategoria().getIdCategoria()));
+				vehiculoP.setColor((ColorVehiculo) HibernateDAO.getInstancia().get(persistencia.clases.ColorVehiculo.class, vehiculoM.getColor().getIdColor()));
+				vehiculoP.setComentario(vehiculoM.getComentario());
+				vehiculoP.setModelo((ModeloVehiculo) HibernateDAO.getInstancia().get(persistencia.clases.ModeloVehiculo.class, vehiculoM.getModelo().getIdModelo()));
 				listVehiculos.add(vehiculoP);
 			}
 			//las que no esten es porque las borre
