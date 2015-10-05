@@ -73,11 +73,11 @@ public class ItemsCobrados extends JDialog implements ActionListener, ListSelect
 //				if(ticketTemp.getFechaLlegada().compareTo(fechaInicio) >= 0 && ticketTemp.getPrepago() > 0){
 //					total = total + ticketTemp.getPrepago();
 //					listModel.addElement("PREGPADO TICKET PATENTE: " + ticketTemp.getPatente().toUpperCase() + " MONTO: "+ String.valueOf(ticketTemp.getPrepago()));
-//				}
+//				}//TODO que onda los pagados con tarjeta? los muestro si no? -- &&!ticketTemp.pagoTarjeta
 				if ( ticketTemp.getMontoCobrado() > 0){
 					total = total + ticketTemp.getMontoCobrado();
 					String item = "CIERRE TICKET: " + String.valueOf(ticketTemp.getIdTicket()) + " MONTO: "+ String.valueOf(ticketTemp.getMontoCobrado());
-					if(ticketTemp.getDescuento()!=null){
+					if(ticketTemp.getDescuento()!=null && ticketTemp.getDescuento().getDescuento() > 0){
 						item = item + " CON DESCUENTO: " + ticketTemp.getDescuento().getDescripcion();
 					}
 					item = item + " " + ticketTemp.getObservacion();
