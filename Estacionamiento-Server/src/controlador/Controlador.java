@@ -201,7 +201,7 @@ public class Controlador {
 
 	public Ticket generarTicket(String tipoVehiculo, String modelo,
 			String color, String descuento, String patente,
-			String cliente, String prepago, String obsevacion) {
+			String cliente, String prepago, String obsevacion, boolean pagoTarjeta) {
 
 		CategoriaVehiculo catve= buscarCategoriaVehiulo(tipoVehiculo);
 
@@ -218,7 +218,7 @@ public class Controlador {
 			prepT = Double.valueOf(prepago);
 		}
 
-		Ticket tck = new Ticket( catve, modve, cl, des, col,usuarioActual, prepT, obsevacion, patente);
+		Ticket tck = new Ticket( catve, modve, cl, des, col,usuarioActual, prepT, obsevacion, patente, pagoTarjeta);
 		this.ticket = tck;
 
 		long numeroTck = DAOTicket.getInstance().persistir(tck);
@@ -512,7 +512,7 @@ public class Controlador {
 
 	public void actualizarTicket(String tipoVehiculo, String modelo,
 			String color, String descuento, String patente,
-			String cliente, String prepago, String obsevacion) {
+			String cliente, String prepago, String obsevacion, boolean pagoTarjeta) {
 
 		CategoriaVehiculo catve= buscarCategoriaVehiulo(tipoVehiculo);
 
@@ -538,6 +538,7 @@ public class Controlador {
 		this.ticket.setPrepago(prepT);
 		this.ticket.setObservacion(obsevacion);
 		this.ticket.setPatente(patente);
+		this.ticket.setPagotarjeta(pagoTarjeta);
 
 		DAOTicket.getInstance().actualizar(this.ticket);
 

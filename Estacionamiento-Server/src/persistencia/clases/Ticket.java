@@ -54,6 +54,7 @@ public class Ticket {
 	@JoinColumn(name="Color")
 	private ColorVehiculo color;
 	private String patente;
+	private boolean pagotarjeta;
 	
 	public enum Estado {
 		ABIERTO,
@@ -146,6 +147,12 @@ public class Ticket {
 	}
 	public String getPatente() {
 		return patente;
+	}
+	public boolean isPagotarjeta() {
+		return pagotarjeta;
+	}
+	public void setPagotarjeta(boolean pagotarjeta) {
+		this.pagotarjeta = pagotarjeta;
 	}
 	
 

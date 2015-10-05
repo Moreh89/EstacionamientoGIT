@@ -77,6 +77,14 @@ public class HibernateDAO {
 		return list;
 	}
 	
+	public List<?> getListbetweenDates(String className, String columnaFiltro1 ,String valorFiltro1, String columnaFiltro2 , boolean valorFiltro2, String columnaFechaIni, String fehaInicio, String columanFechaFin, String fechaFin)
+	{
+		Session session=getSession();
+		List<?> list = session.createQuery("from "+className + " s where s."+ columnaFiltro1 + " =?" + " and " + columnaFiltro2 + " =?" + " and " + columnaFechaIni + ">=?" + " and " +  columanFechaFin + "<=?").setString(0, valorFiltro1).setBoolean(1, valorFiltro2).setString(2, fehaInicio).setString(3, fechaFin).list();
+		session.flush();
+		return list;
+	}
+	
 	public List<?> getListbetweenDates(String className, String columnaFiltro,long valorFiltro, String columnaFechaIni, String fehaInicio, String columanFechaFin, String fechaFin)
 	{
 		Session session=getSession();

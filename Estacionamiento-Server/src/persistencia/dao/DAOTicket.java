@@ -80,6 +80,7 @@ public class DAOTicket {
 		if(tckP.getUsuario().getIdUsuario()!=tckM.getUsuario().getIdUsuario()){
 			tckP.setUsuario(DAOUsuario.getInstance().getUsuario(tckM.getUsuario().getIdUsuario()));
 		}
+		tckP.setPagotarjeta(tckM.isPagotarjeta());
 		HibernateDAO.getInstancia().update(tckP);
 		
 	}
@@ -117,9 +118,8 @@ public class DAOTicket {
 		fechaL = fechaL + " 00:00:00";
 		String fechaS = new SimpleDateFormat("MM-dd-yyyy").format(fechaHasta);
 		fechaS = fechaS + " 23:59:59";
-		
 		@SuppressWarnings("unchecked")
-		ArrayList<persistencia.clases.Ticket> ticketsTarjetaPersistencia = (ArrayList<persistencia.clases.Ticket>) HibernateDAO.getInstancia().getListbetweenDates("Ticket", "estado", "3","fechaLlegada", fechaL, "fechaLlegada", fechaS);
+		ArrayList<persistencia.clases.Ticket> ticketsTarjetaPersistencia = (ArrayList<persistencia.clases.Ticket>) HibernateDAO.getInstancia().getListbetweenDates("Ticket", "estado", "2","pagoTarjeta",true,"fechaLlegada", fechaL, "fechaLlegada", fechaS);
 		ticketsTarjetaModelo = Converter.convertTicketsPersistenciaToModelo(ticketsTarjetaPersistencia);
 		return ticketsTarjetaModelo;
 	}

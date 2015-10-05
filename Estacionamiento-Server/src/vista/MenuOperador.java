@@ -38,6 +38,7 @@ import java.awt.Toolkit;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
+import javax.swing.JCheckBox;
 
 @SuppressWarnings("rawtypes")
 public class MenuOperador extends JFrame implements ActionListener, KeyListener, ItemListener {
@@ -79,7 +80,7 @@ public class MenuOperador extends JFrame implements ActionListener, KeyListener,
 	private JButton btnTicketF;
 	private JLabel lblTotalAPagar;
 	private JButton btnCobrarF;
-	private JPanel panel;
+	private JPanel panel_Fechas;
 	private JLabel lblIngreso;
 	private JLabel lblEgreso;
 	private JLabel lblEstadia;
@@ -95,6 +96,10 @@ public class MenuOperador extends JFrame implements ActionListener, KeyListener,
 	private JMenuItem mntmModificacionCliente;
 	private JComboBox comboBoxImpresoras;
 	private JButton btnPrePago;
+	private JPanel panel_aPagar;
+	private JPanel panel_tarjeta;
+	private JCheckBox chckbxPagoConTarjeta;
+	private JMenuItem menuItemTicektTarjeta;
 	
 
 
@@ -163,6 +168,11 @@ public class MenuOperador extends JFrame implements ActionListener, KeyListener,
 		mntmTicketsAbiertos.setFont(new Font("Segoe UI", Font.PLAIN, 20));
 		mnConsultas.add(mntmTicketsAbiertos);
 		mntmTicketsAbiertos.addActionListener(this);
+		
+		menuItemTicektTarjeta = new JMenuItem("Tickets Tarjeta");
+		menuItemTicektTarjeta.setFont(new Font("Segoe UI", Font.PLAIN, 20));
+		mnConsultas.add(menuItemTicektTarjeta);
+		menuItemTicektTarjeta.addActionListener(this);
 
 
 		mntmArqueoDeCaja = new JMenuItem("Arqueo de Caja");
@@ -196,11 +206,11 @@ public class MenuOperador extends JFrame implements ActionListener, KeyListener,
 		GridBagLayout gbl_contentPane = new GridBagLayout();
 		gbl_contentPane.columnWidths = new int[] { 200, 250, 67, 329, 0, 0 };
 		gbl_contentPane.rowHeights = new int[] { 70, 69, 70, 70, 70, 70, 0, 0,
-				60, 70, 0, 50, 0 };
-		gbl_contentPane.columnWeights = new double[] { 0.0, 1.0, 0.0, 0.0, 1.0,
+				60, 70, 0, 50, 0, 0 };
+		gbl_contentPane.columnWeights = new double[] { 1.0, 1.0, 0.0, 1.0, 1.0,
 				Double.MIN_VALUE };
 		gbl_contentPane.rowWeights = new double[] { 0.0, 0.0, 0.0, 0.0, 0.0,
-				1.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, Double.MIN_VALUE };
+				1.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 1.0, Double.MIN_VALUE };
 		contentPane.setLayout(gbl_contentPane);
 
 
@@ -523,18 +533,42 @@ public class MenuOperador extends JFrame implements ActionListener, KeyListener,
 		gbc_btnTicketF.gridy = 7;
 		contentPane.add(btnTicketF, gbc_btnTicketF);
 		btnTicketF.addActionListener(this);
-
-		lblTotalAPagar = new JLabel("Total a Pagar:");
-		lblTotalAPagar.setForeground(Color.BLUE);
-		lblTotalAPagar.setFont(new Font("Dialog", Font.BOLD, 30));
-		lblTotalAPagar.setHorizontalAlignment(SwingConstants.CENTER);
-		GridBagConstraints gbc_lblTotalAPagar = new GridBagConstraints();
-		gbc_lblTotalAPagar.fill = GridBagConstraints.HORIZONTAL;
-		gbc_lblTotalAPagar.gridwidth = 4;
-		gbc_lblTotalAPagar.insets = new Insets(0, 0, 5, 5);
-		gbc_lblTotalAPagar.gridx = 0;
-		gbc_lblTotalAPagar.gridy = 8;
-		contentPane.add(lblTotalAPagar, gbc_lblTotalAPagar);
+		
+		panel_aPagar = new JPanel();
+		GridBagConstraints gbc_panel_aPagar = new GridBagConstraints();
+		gbc_panel_aPagar.gridwidth = 2;
+		gbc_panel_aPagar.insets = new Insets(0, 0, 5, 5);
+		gbc_panel_aPagar.fill = GridBagConstraints.BOTH;
+		gbc_panel_aPagar.gridx = 0;
+		gbc_panel_aPagar.gridy = 8;
+		contentPane.add(panel_aPagar, gbc_panel_aPagar);
+		
+				lblTotalAPagar = new JLabel("Total a Pagar:");
+				panel_aPagar.add(lblTotalAPagar);
+				lblTotalAPagar.setForeground(Color.BLUE);
+				lblTotalAPagar.setFont(new Font("Dialog", Font.BOLD, 30));
+				lblTotalAPagar.setHorizontalAlignment(SwingConstants.CENTER);
+		
+		panel_tarjeta = new JPanel();
+		GridBagConstraints gbc_panel_tarjeta = new GridBagConstraints();
+		gbc_panel_tarjeta.insets = new Insets(0, 0, 5, 5);
+		gbc_panel_tarjeta.fill = GridBagConstraints.BOTH;
+		gbc_panel_tarjeta.gridx = 3;
+		gbc_panel_tarjeta.gridy = 8;
+		contentPane.add(panel_tarjeta, gbc_panel_tarjeta);
+		GridBagLayout gbl_panel_tarjeta = new GridBagLayout();
+		gbl_panel_tarjeta.columnWidths = new int[]{324, 0};
+		gbl_panel_tarjeta.rowHeights = new int[]{36, 0};
+		gbl_panel_tarjeta.columnWeights = new double[]{0.0, Double.MIN_VALUE};
+		gbl_panel_tarjeta.rowWeights = new double[]{0.0, Double.MIN_VALUE};
+		panel_tarjeta.setLayout(gbl_panel_tarjeta);
+		
+		chckbxPagoConTarjeta = new JCheckBox("Pago con Tarjeta");
+		chckbxPagoConTarjeta.setFont(new Font("Tahoma", Font.BOLD, 16));
+		GridBagConstraints gbc_chckbxPagoConTarjeta = new GridBagConstraints();
+		gbc_chckbxPagoConTarjeta.gridx = 0;
+		gbc_chckbxPagoConTarjeta.gridy = 0;
+		panel_tarjeta.add(chckbxPagoConTarjeta, gbc_chckbxPagoConTarjeta);
 
 		textFieldTotalAPagar = new JTextField();
 		textFieldTotalAPagar.setEditable(false);
@@ -564,20 +598,21 @@ public class MenuOperador extends JFrame implements ActionListener, KeyListener,
 		contentPane.add(btnCobrarF, gbc_btnCobrarF);
 		btnCobrarF.addActionListener(this);
 
-		panel = new JPanel();
-		GridBagConstraints gbc_panel = new GridBagConstraints();
-		gbc_panel.gridwidth = 5;
-		gbc_panel.fill = GridBagConstraints.BOTH;
-		gbc_panel.gridx = 0;
-		gbc_panel.gridy = 11;
-		contentPane.add(panel, gbc_panel);
-		GridBagLayout gbl_panel = new GridBagLayout();
-		gbl_panel.columnWidths = new int[] { 188, 202, 159, 207, 239, 202, 0 };
-		gbl_panel.rowHeights = new int[] { 22, 0 };
-		gbl_panel.columnWeights = new double[] { 0.0, 0.0, 0.0, 0.0, 0.0, 0.0,
+		panel_Fechas = new JPanel();
+		GridBagConstraints gbc_panel_Fechas = new GridBagConstraints();
+		gbc_panel_Fechas.insets = new Insets(0, 0, 5, 0);
+		gbc_panel_Fechas.gridwidth = 5;
+		gbc_panel_Fechas.fill = GridBagConstraints.BOTH;
+		gbc_panel_Fechas.gridx = 0;
+		gbc_panel_Fechas.gridy = 11;
+		contentPane.add(panel_Fechas, gbc_panel_Fechas);
+		GridBagLayout gbl_panel_Fechas = new GridBagLayout();
+		gbl_panel_Fechas.columnWidths = new int[] { 188, 202, 159, 207, 239, 202, 0 };
+		gbl_panel_Fechas.rowHeights = new int[] { 22, 0 };
+		gbl_panel_Fechas.columnWeights = new double[] { 0.0, 0.0, 0.0, 0.0, 0.0, 0.0,
 				Double.MIN_VALUE };
-		gbl_panel.rowWeights = new double[] { 1.0, Double.MIN_VALUE };
-		panel.setLayout(gbl_panel);
+		gbl_panel_Fechas.rowWeights = new double[] { 1.0, Double.MIN_VALUE };
+		panel_Fechas.setLayout(gbl_panel_Fechas);
 
 		lblIngreso = new JLabel("Ingreso:");
 		lblIngreso.setFont(new Font("Tahoma", Font.PLAIN, 30));
@@ -586,7 +621,7 @@ public class MenuOperador extends JFrame implements ActionListener, KeyListener,
 		gbc_lblIngreso.insets = new Insets(0, 0, 0, 5);
 		gbc_lblIngreso.gridx = 0;
 		gbc_lblIngreso.gridy = 0;
-		panel.add(lblIngreso, gbc_lblIngreso);
+		panel_Fechas.add(lblIngreso, gbc_lblIngreso);
 
 		textFieldIngreso = new JTextField();
 		textFieldIngreso.setFont(new Font("Tahoma", Font.BOLD, 15));
@@ -597,7 +632,7 @@ public class MenuOperador extends JFrame implements ActionListener, KeyListener,
 		gbc_textFieldIngreso.insets = new Insets(0, 0, 0, 5);
 		gbc_textFieldIngreso.gridx = 1;
 		gbc_textFieldIngreso.gridy = 0;
-		panel.add(textFieldIngreso, gbc_textFieldIngreso);
+		panel_Fechas.add(textFieldIngreso, gbc_textFieldIngreso);
 		textFieldIngreso.setColumns(10);
 
 		lblEgreso = new JLabel("Egreso:");
@@ -607,7 +642,7 @@ public class MenuOperador extends JFrame implements ActionListener, KeyListener,
 		gbc_lblEgreso.insets = new Insets(0, 0, 0, 5);
 		gbc_lblEgreso.gridx = 2;
 		gbc_lblEgreso.gridy = 0;
-		panel.add(lblEgreso, gbc_lblEgreso);
+		panel_Fechas.add(lblEgreso, gbc_lblEgreso);
 
 		textFieldEgreso = new JTextField();
 		textFieldEgreso.setFont(new Font("Tahoma", Font.BOLD, 15));
@@ -618,7 +653,7 @@ public class MenuOperador extends JFrame implements ActionListener, KeyListener,
 		gbc_textFieldEgreso.insets = new Insets(0, 0, 0, 5);
 		gbc_textFieldEgreso.gridx = 3;
 		gbc_textFieldEgreso.gridy = 0;
-		panel.add(textFieldEgreso, gbc_textFieldEgreso);
+		panel_Fechas.add(textFieldEgreso, gbc_textFieldEgreso);
 		textFieldEgreso.setColumns(10);
 
 		lblEstadia = new JLabel("Estadia:");
@@ -628,7 +663,7 @@ public class MenuOperador extends JFrame implements ActionListener, KeyListener,
 		gbc_lblEstadia_1.insets = new Insets(0, 0, 0, 5);
 		gbc_lblEstadia_1.gridx = 4;
 		gbc_lblEstadia_1.gridy = 0;
-		panel.add(lblEstadia, gbc_lblEstadia_1);
+		panel_Fechas.add(lblEstadia, gbc_lblEstadia_1);
 
 		textFieldTiempoEstadia = new JTextField();
 		textFieldTiempoEstadia.setFont(new Font("Tahoma", Font.BOLD, 15));
@@ -639,7 +674,7 @@ public class MenuOperador extends JFrame implements ActionListener, KeyListener,
 		gbc_textField_2.fill = GridBagConstraints.BOTH;
 		gbc_textField_2.gridx = 5;
 		gbc_textField_2.gridy = 0;
-		panel.add(textFieldTiempoEstadia, gbc_textField_2);
+		panel_Fechas.add(textFieldTiempoEstadia, gbc_textField_2);
 
 		btnCobrarF.setEnabled(false);
 		btnCanelarF.setEnabled(false);
@@ -656,13 +691,18 @@ public class MenuOperador extends JFrame implements ActionListener, KeyListener,
 				textFieldPatente.getText(),
 				textFieldCliente.getText(),
 				textFieldPrepago.getText(),
-				textFieldObsevacion.getText());
+				textFieldObsevacion.getText(),
+				chckbxPagoConTarjeta.isSelected());
 	}
 	
 	
 	@Override
 	public void actionPerformed(ActionEvent event) {
 
+		if (event.getSource() == menuItemTicektTarjeta){
+			new VerTicketsAbonadosTarjeta().setVisible(true);
+		}
+		
 		if (event.getSource() == btnCobrarF) {
 			if (Controlador.getInstancia().getTicket().getEstado() != Ticket.Estado.CERRADO
 					&& Controlador.getInstancia().getTicket().getEstado() != Ticket.Estado.CREDITO){
@@ -709,7 +749,8 @@ public class MenuOperador extends JFrame implements ActionListener, KeyListener,
 					textFieldPatente.getText(),
 					textFieldCliente.getText(),
 					textFieldPrepago.getText(),
-					textFieldObsevacion.getText());
+					textFieldObsevacion.getText(),
+					chckbxPagoConTarjeta.isSelected());
 		}
 
 		if (event.getSource() == btnCanelarF) {
@@ -765,6 +806,7 @@ public class MenuOperador extends JFrame implements ActionListener, KeyListener,
 		if (event.getSource() == btnLimpiarCampos) {
 			Controlador.getInstancia().setClienteActual(null);
 			Controlador.getInstancia().setTicket(null);
+			this.chckbxPagoConTarjeta.setSelected(false);
 			this.textFieldNumeroTicket.setBackground(new Color(Color.WHITE.getRGB()));
 			this.textFieldPrepago.setBackground(new Color(Color.WHITE.getRGB()));
 			this.textFieldPatente.setBackground(new Color(Color.WHITE.getRGB()));
@@ -813,7 +855,9 @@ public class MenuOperador extends JFrame implements ActionListener, KeyListener,
 								textFieldPatente.getText(),
 								textFieldCliente.getText(),
 								textFieldPrepago.getText(),
-								textFieldObsevacion.getText());
+								textFieldObsevacion.getText(),
+								chckbxPagoConTarjeta.isSelected()
+						);
 
 				this.textFieldNumeroTicket.setBackground(new Color(Color.WHITE.getRGB()));
 				this.textFieldPatente.setBackground(new Color(Color.WHITE.getRGB()));
@@ -990,7 +1034,7 @@ public class MenuOperador extends JFrame implements ActionListener, KeyListener,
 					this.textFieldCliente.setText(tck.getCliente().toString());
 				}else {this.textFieldCliente.setText("");}
 				
-
+					this.chckbxPagoConTarjeta.setSelected(tck.isPagotarjeta());
 					this.textFieldNumeroTicket.setEnabled(false);
 					this.btnTicketF.setEnabled(false);
 					this.btnBuscarPorTicketAbierto.setEnabled(false);
@@ -1023,6 +1067,7 @@ public class MenuOperador extends JFrame implements ActionListener, KeyListener,
 				this.btnTicketF.setEnabled(true);
 				this.btnBuscarPorTicketAbierto.setEnabled(true);
 				this.btnCobrarF.setEnabled(false);
+				this.chckbxPagoConTarjeta.setSelected(false);
 				this.textFieldNumeroTicket.requestFocus();
 			}
 		}else{
@@ -1031,6 +1076,7 @@ public class MenuOperador extends JFrame implements ActionListener, KeyListener,
 			this.btnTicketF.setEnabled(true);
 			this.btnBuscarPorTicketAbierto.setEnabled(true);
 			this.btnCobrarF.setEnabled(false);
+			this.chckbxPagoConTarjeta.setSelected(false);
 			this.textFieldNumeroTicket.requestFocus();
 			if(!isNumeric(textFieldNumeroTicket.getText()))
 				textFieldNumeroTicket.setBackground(new Color(Color.PINK.getRGB()));

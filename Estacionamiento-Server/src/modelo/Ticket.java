@@ -24,6 +24,7 @@ public class Ticket {
 	private String observacion;
 	private ColorVehiculo color;
 	private String patente;
+	private boolean pagotarjeta;
 	
 	
 	public enum Estado {
@@ -111,7 +112,7 @@ public class Ticket {
 	}
 	public Ticket(CategoriaVehiculo catvehiculo,ModeloVehiculo modVehiculo, Cliente cliente,
 			Descuento descuento, ColorVehiculo col, Usuario usuario,
-			double prepago, String obsevacion, String patente) {
+			double prepago, String obsevacion, String patente, boolean pagoTarjeta) {
 		super();
 		
 		this.fechaLlegada = Calendar.getInstance().getTime();
@@ -130,6 +131,7 @@ public class Ticket {
 		this.observacion = obsevacion;
 		this.color = col;
 		this.setPatente(patente);
+		this.pagotarjeta = pagoTarjeta;
 	}
 	public Ticket() {
 	}
@@ -357,5 +359,13 @@ public class Ticket {
 		this.prepago = this.prepago + monto;
 		
 	}
+	public boolean isPagotarjeta() {
+		return pagotarjeta;
+	}
+	public void setPagotarjeta(boolean pagotarjeta) {
+		this.pagotarjeta = pagotarjeta;
+	}
+	
+	
 
 }

@@ -497,7 +497,7 @@ public class Converter {
 		ticketP.setPatente(ticketM.getPatente());
 		ticketP.setUsuario(convertUsuarioModeloToPersistencia(ticketM.getUsuario()));
 		ticketP.setColor(convertColorModeloToPersistencia(ticketM.getColor()));
-
+		ticketP.setPagotarjeta(ticketM.isPagotarjeta());
 		return ticketP;
 	}
 
@@ -528,6 +528,7 @@ public class Converter {
 		ticketM.setPatente(ticketP.getPatente());
 		ticketM.setUsuario(convertUsuarioPersistenciaToModelo(ticketP.getUsuario()));
 		ticketM.setColor(convertColorPersistenciaToModelo(ticketP.getColor()));
+		ticketM.setPagotarjeta(ticketP.isPagotarjeta());
 		return ticketM;
 	}
 
