@@ -1,5 +1,6 @@
 package vista;
 
+import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -24,6 +25,7 @@ import java.awt.event.KeyListener;
 import java.awt.GridBagLayout;
 import java.awt.GridBagConstraints;
 import java.awt.Insets;
+import java.awt.ScrollPane;
 
 import javax.swing.JScrollPane;
 
@@ -36,7 +38,9 @@ import javax.swing.JTable;
 import javax.swing.JFormattedTextField;
 
 import org.jdesktop.swingx.JXDatePicker;
+
 import javax.swing.JTextField;
+
 import java.awt.Color;
 
 
@@ -57,11 +61,15 @@ public class VerTicketsAbonadosTarjeta extends JDialog implements ActionListener
 	private JXDatePicker fechaHasta;
 
 	ArrayList<Ticket> ticketsTarjeta;
-	private JScrollPane scrollPane_1;
-	private String[] colName;
+	private Object[] tableColumn;
 	private double montoTotalCobrado = 0;
 	private JLabel label;
 	private JTextField textFieldMontoTotalCobrado;
+	private JTable table;
+
+	private JScrollPane scrollPane;
+
+
 
 	public VerTicketsAbonadosTarjeta() {
 		initGUI();
@@ -81,9 +89,9 @@ public class VerTicketsAbonadosTarjeta extends JDialog implements ActionListener
 		setContentPane(contentPane);
 		GridBagLayout gbl_contentPane = new GridBagLayout();
 		gbl_contentPane.columnWidths = new int[] { 80, 150, 20, 80, 150, 116, 0 };
-		gbl_contentPane.rowHeights = new int[] { 32, 0, 31, 0, 0, 0, 20, 11, 0 };
+		gbl_contentPane.rowHeights = new int[] { 32, 31, 0, 0, 0 };
 		gbl_contentPane.columnWeights = new double[] { 1.0, 0.0, 1.0, 0.0, 0.0, 1.0, Double.MIN_VALUE };
-		gbl_contentPane.rowWeights = new double[] { 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 0.0, 0.0,
+		gbl_contentPane.rowWeights = new double[] { 0.0, 1.0, 0.0, 0.0,
 				Double.MIN_VALUE };
 		contentPane.setLayout(gbl_contentPane);
 
@@ -133,35 +141,36 @@ public class VerTicketsAbonadosTarjeta extends JDialog implements ActionListener
 
 		GridBagConstraints gbc_buscarButton = new GridBagConstraints();
 		gbc_buscarButton.fill = GridBagConstraints.HORIZONTAL;
-		gbc_buscarButton.insets = new Insets(0, 0, 5, 0);
+		gbc_buscarButton.insets = new Insets(0, 0, 5, 5);
 		gbc_buscarButton.gridx = 5;
 		gbc_buscarButton.gridy = 0;
 		contentPane.add(buscarButton, gbc_buscarButton);
-		buscarButton.setIcon(new ImageIcon(BuscadorCliente.class
-				.getResource("/image/search.png")));
+		buscarButton.setIcon(new ImageIcon(BuscadorCliente.class.getResource("/image/search.png")));
+		tableColumn = new String[] { "Fecha" ,"Numero Ticket", "Monto" };
 
-		colName = new String[] { "Fecha" ,"Numero Ticket", "Monto" };
+		model = new DefaultTableModel();
+		model.setColumnIdentifiers(tableColumn);
+		scrollPane= new JScrollPane();
 
-		model = new DefaultTableModel(colName,0) {
-			/**
-			 * 
-			 */
-			private static final long serialVersionUID = 1L;
+		GridBagConstraints gbc_table_1 = new GridBagConstraints();
+		gbc_table_1.gridwidth = 6;
+		gbc_table_1.insets = new Insets(0, 0, 5, 5);
+		gbc_table_1.fill = GridBagConstraints.BOTH;
+		gbc_table_1.gridx = 0;
+		gbc_table_1.gridy = 1;
 
-			@Override
-			public boolean isCellEditable(int row, int column) {
-				return false;
-			}
-		};
-
-		scrollPane_1 = new JScrollPane();
-		GridBagConstraints gbc_scrollPane_1 = new GridBagConstraints();
-		gbc_scrollPane_1.gridwidth = 6;
-		gbc_scrollPane_1.insets = new Insets(0, 0, 5, 0);
-		gbc_scrollPane_1.fill = GridBagConstraints.BOTH;
-		gbc_scrollPane_1.gridx = 0;
-		gbc_scrollPane_1.gridy = 2;
-		contentPane.add(scrollPane_1, gbc_scrollPane_1);
+		table=new JTable();
+		table.setModel(model);
+		//		scrollPane.add(table);
+		GridBagConstraints gbc = new GridBagConstraints();
+		gbc.fill = GridBagConstraints.BOTH;
+		gbc.gridwidth = 6;
+		gbc.insets = new Insets(0, 0, 5, 5);
+		gbc.gridx = 0;
+		gbc.gridy = 1;
+		JScrollPane scrollPane_1 = new JScrollPane(table);
+		getContentPane().add(scrollPane_1, gbc);
+		//		contentPane.add(scrollPane, gbc_table_1);
 
 		label = new JLabel("Monto Total Cobrado:");
 		label.setFont(new Font("Tahoma", Font.PLAIN, 16));
@@ -169,7 +178,7 @@ public class VerTicketsAbonadosTarjeta extends JDialog implements ActionListener
 		gbc_label.gridwidth = 2;
 		gbc_label.insets = new Insets(0, 0, 5, 5);
 		gbc_label.gridx = 0;
-		gbc_label.gridy = 3;
+		gbc_label.gridy = 2;
 		contentPane.add(label, gbc_label);
 
 		textFieldMontoTotalCobrado = new JTextField();
@@ -183,7 +192,7 @@ public class VerTicketsAbonadosTarjeta extends JDialog implements ActionListener
 		gbc_textField.insets = new Insets(0, 0, 5, 5);
 		gbc_textField.fill = GridBagConstraints.HORIZONTAL;
 		gbc_textField.gridx = 2;
-		gbc_textField.gridy = 3;
+		gbc_textField.gridy = 2;
 		contentPane.add(textFieldMontoTotalCobrado, gbc_textField);
 
 
@@ -193,11 +202,10 @@ public class VerTicketsAbonadosTarjeta extends JDialog implements ActionListener
 		buttonExportarExcel.setIcon(new ImageIcon(VerTicketsAbonadosTarjeta.class.getResource("/image/report.png")));
 		GridBagConstraints gbc_buttonExportarExcel = new GridBagConstraints();
 		gbc_buttonExportarExcel.fill = GridBagConstraints.VERTICAL;
-		gbc_buttonExportarExcel.gridheight = 2;
-		gbc_buttonExportarExcel.insets = new Insets(0, 0, 5, 5);
+		gbc_buttonExportarExcel.insets = new Insets(0, 0, 0, 5);
 		gbc_buttonExportarExcel.gridwidth = 2;
 		gbc_buttonExportarExcel.gridx = 1;
-		gbc_buttonExportarExcel.gridy = 5;
+		gbc_buttonExportarExcel.gridy = 3;
 		contentPane.add(buttonExportarExcel, gbc_buttonExportarExcel);
 		buttonExportarExcel.addActionListener(this);
 
@@ -205,17 +213,15 @@ public class VerTicketsAbonadosTarjeta extends JDialog implements ActionListener
 		buttonVolver.setFont(new Font("Tahoma", Font.BOLD, 16));
 		buttonVolver.setIcon(new ImageIcon(VerTicketsAbonadosTarjeta.class.getResource("/image/izq.png")));
 		GridBagConstraints gbc_buttonVolver = new GridBagConstraints();
-		gbc_buttonVolver.insets = new Insets(0, 0, 5, 5);
-		gbc_buttonVolver.gridheight = 2;
+		gbc_buttonVolver.insets = new Insets(0, 0, 0, 5);
 		gbc_buttonVolver.fill = GridBagConstraints.BOTH;
 		gbc_buttonVolver.gridx = 4;
-		gbc_buttonVolver.gridy = 5;
+		gbc_buttonVolver.gridy = 3;
 		contentPane.add(buttonVolver, gbc_buttonVolver);
 		buttonVolver.addActionListener(this);
 
 
 		this.setLocationRelativeTo(null);
-		//Hace que esperes a que se cierre para seguir con lo demas
 		this.setModal(true); 
 
 	}
@@ -277,15 +283,26 @@ public class VerTicketsAbonadosTarjeta extends JDialog implements ActionListener
 
 	public void cargarTabla()
 	{
-
+		model = new DefaultTableModel();
+		model.setColumnIdentifiers(tableColumn);
+		table.setModel(model);
+		montoTotalCobrado=0;
 		for(Ticket ticketActual : ticketsTarjeta)
 		{
-			Object[] ticket = { ticketActual.getFechaSalida(), ticketActual.getIdTicket(), ticketActual.getMontoCobrado() };
+			Object[] row = new Object[3];
+			DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm"); 
+
+			row[0]=dateFormat.format(ticketActual.getFechaSalida());
+			row[1]=Long.toString(ticketActual.getIdTicket());
+			row[2]=Double.toString(ticketActual.getMontoCobrado());
+
 			montoTotalCobrado=montoTotalCobrado+ticketActual.getMontoCobrado();
-			model.addRow(ticket);
+			model.addRow(row);
 		}
-		model = new DefaultTableModel(colName,model.getRowCount());
 		textFieldMontoTotalCobrado.setText(Double.toString(Math.round(montoTotalCobrado)));
+
+
+
 	}
 }
 
