@@ -210,7 +210,7 @@ public class Cliente {
 
 	public String toString(){
 
-		return this.apellido+ " " + this.nombre; 
+		return this.apellido+ ", " + this.nombre; 
 	}
 	public double getEstadoCrediticio(modelo.Cliente clienteM) {
 

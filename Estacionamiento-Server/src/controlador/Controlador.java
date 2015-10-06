@@ -549,7 +549,15 @@ public class Controlador {
 		modelo.MovimientoCC movimientoM = new MovimientoCC();
 		movimientoM.setTicket(null);
 		movimientoM.setDescripcion(tipoCobro.substring(2));
-		movimientoM.setEstado("PAGADO");
+		
+		if(tipoCobro.equals("3. TARJETA"))
+		{
+			movimientoM.setEstado("TARJETA");
+		}
+		else
+		{
+			movimientoM.setEstado("PAGADO");
+		}
 		movimientoM.setFecha(new java.sql.Date(Calendar.getInstance().getTime().getTime()));
 		movimientoM.setIdMovimiento(0);
 		movimientoM.setMontoCobrado(monto);
@@ -1026,7 +1034,7 @@ public class Controlador {
 						modelo.MovimientoCC movimientoNuevo= new modelo.MovimientoCC();
 						movimientoNuevo.setIdMovimiento(0);
 						movimientoNuevo.setFecha(fecha);
-						movimientoNuevo.setDescripcion(descripcion+cocheraActual.getUbicacion());
+						movimientoNuevo.setDescripcion(descripcion+" - "+cocheraActual.getUbicacion());
 						movimientoNuevo.setEstado("Liquidado");
 						movimientoNuevo.setTicket(null);
 						movimientoNuevo.setMontoCobrado((-1)*montoMovimiento);
