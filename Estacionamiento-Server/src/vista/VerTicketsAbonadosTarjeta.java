@@ -150,7 +150,7 @@ public class VerTicketsAbonadosTarjeta extends JDialog implements ActionListener
 
 		model = new DefaultTableModel();
 		model.setColumnIdentifiers(tableColumn);
-		scrollPane= new JScrollPane();
+
 
 		GridBagConstraints gbc_table_1 = new GridBagConstraints();
 		gbc_table_1.gridwidth = 6;
@@ -162,6 +162,7 @@ public class VerTicketsAbonadosTarjeta extends JDialog implements ActionListener
 		table=new JTable();
 		table.setModel(model);
 		//		scrollPane.add(table);
+		scrollPane= new JScrollPane(table);
 		GridBagConstraints gbc = new GridBagConstraints();
 		gbc.fill = GridBagConstraints.BOTH;
 		gbc.gridwidth = 6;

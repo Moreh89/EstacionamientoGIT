@@ -100,6 +100,8 @@ public class MenuOperador extends JFrame implements ActionListener, KeyListener,
 	private JPanel panel_tarjeta;
 	private JCheckBox chckbxPagoConTarjeta;
 	private JMenuItem menuItemTicektTarjeta;
+	private JMenu menuHelp;
+	private JMenuItem mnAbout;
 	
 
 
@@ -197,6 +199,15 @@ public class MenuOperador extends JFrame implements ActionListener, KeyListener,
 		mntmCerrarSesion = new JMenuItem("Cerrar Sesion");
 		mntmCerrarSesion.setFont(new Font("Segoe UI", Font.PLAIN, 20));
 		mnMiCuenta.add(mntmCerrarSesion);
+		
+		menuHelp = new JMenu("Ayuda");
+		menuHelp.setFont(new Font("Segoe UI", Font.BOLD, 20));
+		menuBar.add(menuHelp);
+		
+		mnAbout = new JMenuItem("System About");
+		mnAbout.setFont(new Font("Segoe UI", Font.PLAIN, 20));
+		menuHelp.add(mnAbout);
+		mnAbout.addActionListener(this);
 		mntmCerrarSesion.addActionListener(this);
 
 
@@ -948,6 +959,10 @@ public class MenuOperador extends JFrame implements ActionListener, KeyListener,
 			if(Controlador.getInstancia().getClienteActual()!=null)
 			new ModificarCliente(Controlador.getInstancia().getClienteActual()).setVisible(true);
 		}
+		if(event.getSource()==mnAbout)
+		{
+			new About().setVisible(true);
+		}
 	}
 
 	private void buscarTicket(){
@@ -1105,6 +1120,7 @@ public class MenuOperador extends JFrame implements ActionListener, KeyListener,
 		if (event.getKeyCode()== KeyEvent.VK_F6 ){
 			this.btnLimpiarCampos.doClick();
 		}
+		
 
 	}
 

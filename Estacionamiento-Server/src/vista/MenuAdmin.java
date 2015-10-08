@@ -56,6 +56,8 @@ public class MenuAdmin extends JFrame implements ActionListener {
 	private JMenuItem mntmLiquidarAlquileres;
 	private JMenuItem mntmAnularAlquileres;
 	private JMenuItem mntmTicketsTarjeta;
+	private JMenu menuHelp;
+	private JMenuItem mnAbout;
 
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
@@ -219,6 +221,16 @@ public class MenuAdmin extends JFrame implements ActionListener {
 		mntmSalir.setIcon(new ImageIcon(MenuAdmin.class
 				.getResource("/image/exit.png")));
 		mnMiCuenta.add(mntmSalir);
+		
+		menuHelp = new JMenu("Ayuda");
+		menuHelp.setFont(new Font("Segoe UI", Font.PLAIN, 12));
+		menuBar.add(menuHelp);
+		
+		mnAbout = new JMenuItem("System About");
+		mnAbout.setFont(new Font("Segoe UI", Font.PLAIN, 12));
+		menuHelp.add(mnAbout);
+		mnAbout.addActionListener(this);
+
 		mntmSalir.addActionListener(this);
 
 		contentPane = new JPanel();
@@ -312,6 +324,10 @@ public class MenuAdmin extends JFrame implements ActionListener {
 		{
 			new VerTicketsAbonadosTarjeta().setVisible(true);
 
+		}
+		if(event.getSource()==mnAbout)
+		{
+			new About().setVisible(true);
 		}
 	}
 
