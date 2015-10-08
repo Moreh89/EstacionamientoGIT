@@ -91,7 +91,7 @@ public class About extends JDialog implements ActionListener {
 		textAbout.setBackground(Color.WHITE);
 		textAbout.setBorder(new SoftBevelBorder(BevelBorder.LOWERED, null, null, null, null));
 		textAbout.setOpaque(false);
-		textAbout.setText("Sistema para Gesti\u00F3n de Estacionamientos\r\n\r\nBuilt: 12/10/2015\r\n\r\nVersion: 1.0");
+		textAbout.setText("Sistema para Gesti\u00F3n de Estacionamiento\r\n\r\nBuilt: 12/10/2015\r\n\r\nVersion: 1.0");
 		textAbout.setEditable(false);
 		GridBagConstraints gbc_textAbout = new GridBagConstraints();
 		gbc_textAbout.gridheight = 2;
