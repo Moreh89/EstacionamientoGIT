@@ -32,6 +32,7 @@ import javax.swing.JTextPane;
 import java.awt.Toolkit;
 import java.awt.Font;
 import java.awt.Color;
+import javax.swing.JTextField;
 
 @SuppressWarnings("serial")
 public class PrintTicket extends JFrame {
@@ -43,6 +44,7 @@ public class PrintTicket extends JFrame {
 	private Barcode barcode;
 	private static String impersora;
 	private JPanel panel_1;
+	private JTextField textField;
 
 
 	public PrintTicket (Ticket ticket, String printerName) {
@@ -65,7 +67,7 @@ public class PrintTicket extends JFrame {
 			gbl_contentPane.rowHeights = new int[] { 225, 64, 0, 0 };
 			gbl_contentPane.columnWeights = new double[] { 1.0,
 					Double.MIN_VALUE };
-			gbl_contentPane.rowWeights = new double[] { 0.0, 0.0, 1.0,
+			gbl_contentPane.rowWeights = new double[] { 0.0, 0.0, 0.0,
 					Double.MIN_VALUE };
 			contentPane.setLayout(gbl_contentPane);
 
@@ -90,7 +92,7 @@ public class PrintTicket extends JFrame {
 			txtpnfechaIng.setFont(new Font("Tahoma", Font.PLAIN, 12));
 			txtpnfechaIng.setContentType("text/html");
 			txtpnfechaIng
-					.setText("<html><b>P.J.E.Uriburu 1058<br>Fecha Ing:<br>"+new SimpleDateFormat("MM-dd-yyyy hh:mm:ss").format(ticket.getFechaLlegada())+"<br>Vehiculo:<br>"+ ticket.getCatergoriaVehiculo().getDescripcion()+"<br>Modelo:<br>"+ticket.getModeloVehiculo().getDescripcion()+"<br>Patente:<br>"+ticket.getPatente().toUpperCase()+"</b><br></html>");
+					.setText("<html><b>P.J.E.Uriburu 1058 CABA<br>Fecha Ing:<br>"+new SimpleDateFormat("MM-dd-yyyy HH:mm:ss").format(ticket.getFechaLlegada())+"<br>Vehiculo:<br>"+ ticket.getCatergoriaVehiculo().getDescripcion()+"<br>Modelo:<br>"+ticket.getModeloVehiculo().getDescripcion()+"<br>Patente:<br>"+ticket.getPatente().toUpperCase()+"</b><br></html>");
 			GridBagConstraints gbc_txtpnfechaIng = new GridBagConstraints();
 			gbc_txtpnfechaIng.fill = GridBagConstraints.BOTH;
 			gbc_txtpnfechaIng.gridx = 0;
@@ -124,6 +126,11 @@ public class PrintTicket extends JFrame {
 			gbc_panel_1.gridx = 0;
 			gbc_panel_1.gridy = 2;
 			contentPane.add(panel_1, gbc_panel_1);
+			
+			textField = new JTextField();
+			textField.setText(". . . . . . . . .");
+			panel_1.add(textField);
+			textField.setColumns(10);
 			this.setVisible(true);
 			this.toBack();
 			printWork(this);
