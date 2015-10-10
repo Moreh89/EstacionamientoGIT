@@ -9,6 +9,7 @@ import javax.swing.JDialog;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
+import javax.swing.UIManager;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 
@@ -132,7 +133,7 @@ public class GestionTarifa extends JDialog implements ActionListener, ItemListen
 		gbc_textCostoMinimo.gridy = 1;
 		panel.add(textCostoMinimo, gbc_textCostoMinimo);
 		textCostoMinimo.addKeyListener(this);
-		
+
 		JLabel labelTiempoMinimo = new JLabel("Tiempo Minimo:");
 		GridBagConstraints gbc_labelTiempoMinimo = new GridBagConstraints();
 		gbc_labelTiempoMinimo.anchor = GridBagConstraints.WEST;
@@ -150,7 +151,7 @@ public class GestionTarifa extends JDialog implements ActionListener, ItemListen
 		gbc_textTiempoMinimo.gridy = 1;
 		panel.add(textTiempoMinimo, gbc_textTiempoMinimo);
 		textTiempoMinimo.addKeyListener(this);
-		
+
 		JLabel labelCostoFraccion = new JLabel("Costo Fraccion:");
 		GridBagConstraints gbc_labelCostoFraccion = new GridBagConstraints();
 		gbc_labelCostoFraccion.anchor = GridBagConstraints.WEST;
@@ -169,7 +170,7 @@ public class GestionTarifa extends JDialog implements ActionListener, ItemListen
 		panel.add(textCostoFraccion, gbc_textCostoFraccion);
 		textCostoFraccion.addKeyListener(this);
 
-		
+
 		JLabel lblTiempoFraccion = new JLabel("Tiempo Fraccion:");
 		GridBagConstraints gbc_lblTiempoFraccion = new GridBagConstraints();
 		gbc_lblTiempoFraccion.anchor = GridBagConstraints.WEST;
@@ -317,36 +318,46 @@ public class GestionTarifa extends JDialog implements ActionListener, ItemListen
 					isNumeric(textCostoFraccion.getText())&& isNumeric(textTiempoFraccion.getText())&& 
 					isNumeric(textTiempoInicioMediaEstadia.getText())&& isNumeric(textTiempoInicioEstadia.getText()))
 			{
-				long codigoReturn;
-				modelo.Tarifa tarifaSeleccionada = (Tarifa) comboBoxCategoria.getSelectedItem();
-				double costoMinimo=Double.parseDouble(textCostoMinimo.getText()); 
-				double costoFraccion=Double.parseDouble(textCostoFraccion.getText()); 
-				double costoHora=Double.parseDouble(textCostoHora.getText());
-				double costoMediaEstadia=Double.parseDouble(textCostoMediaEstadia.getText()); 
-				double costoEstadia=Double.parseDouble(textCostoEstadia.getText());
-				double tiempoMinimo=Double.parseDouble(textTiempoMinimo.getText());
-				double tiempoFraccion=Double.parseDouble(textTiempoFraccion.getText());
-				double tiempoMediaEstadia_minuto=Double.parseDouble(textTiempoInicioMediaEstadia.getText());
-				double tiempoEstadia_minuto=Double.parseDouble(textTiempoInicioEstadia.getText());
-
-				codigoReturn=Controlador.getInstancia().modificarTarifa(tarifaSeleccionada, costoMinimo, costoFraccion, costoHora, costoMediaEstadia, costoEstadia,
-						tiempoMinimo, tiempoFraccion, tiempoMediaEstadia_minuto, tiempoEstadia_minuto);
-				if(codigoReturn == -1)
+				int resultado = JOptionPane.showConfirmDialog (null, "¿Está seguro?","Confirmación",JOptionPane.YES_NO_OPTION,JOptionPane.PLAIN_MESSAGE);
+				UIManager.put("OptionPane.yesButtonText", "Si");
+				UIManager.put("OptionPane.noButtonText", "No");
+				if(resultado != JOptionPane.CANCEL_OPTION && resultado != JOptionPane.CLOSED_OPTION)
 				{
-					JOptionPane.showMessageDialog(null, "No se pudo modificar la Tarifa seleccionada.", "Gestión de Tarifa", JOptionPane.INFORMATION_MESSAGE);
-				}
-				if(codigoReturn >= 0)
-				{
-					JOptionPane.showMessageDialog(null, "Se modificó correctamente la Tarifa.", "Gestión de Tarifa", JOptionPane.INFORMATION_MESSAGE);
-				}
-				dispose();
-			}
+					if (resultado == JOptionPane.OK_OPTION)
+					{
+						long codigoReturn;
+						modelo.Tarifa tarifaSeleccionada = (Tarifa) comboBoxCategoria.getSelectedItem();
+						double costoMinimo=Double.parseDouble(textCostoMinimo.getText()); 
+						double costoFraccion=Double.parseDouble(textCostoFraccion.getText()); 
+						double costoHora=Double.parseDouble(textCostoHora.getText());
+						double costoMediaEstadia=Double.parseDouble(textCostoMediaEstadia.getText()); 
+						double costoEstadia=Double.parseDouble(textCostoEstadia.getText());
+						double tiempoMinimo=Double.parseDouble(textTiempoMinimo.getText());
+						double tiempoFraccion=Double.parseDouble(textTiempoFraccion.getText());
+						double tiempoMediaEstadia_minuto=Double.parseDouble(textTiempoInicioMediaEstadia.getText());
+						double tiempoEstadia_minuto=Double.parseDouble(textTiempoInicioEstadia.getText());
 
-			else{
-				JOptionPane.showMessageDialog(null, "Alguno/s de los campos ingresados no son válidos.","Gestión de Tarifa",  JOptionPane.INFORMATION_MESSAGE);
+
+
+						codigoReturn=Controlador.getInstancia().modificarTarifa(tarifaSeleccionada, costoMinimo, costoFraccion, costoHora, costoMediaEstadia, costoEstadia,
+								tiempoMinimo, tiempoFraccion, tiempoMediaEstadia_minuto, tiempoEstadia_minuto);
+						if(codigoReturn == -1)
+						{
+							JOptionPane.showMessageDialog(null, "No se pudo modificar la Tarifa seleccionada.", "Gestión de Tarifa", JOptionPane.INFORMATION_MESSAGE);
+						}
+						if(codigoReturn >= 0)
+						{
+							JOptionPane.showMessageDialog(null, "Se modificó correctamente la Tarifa.", "Gestión de Tarifa", JOptionPane.INFORMATION_MESSAGE);
+						}
+						dispose();
+					}
+
+					else{
+						JOptionPane.showMessageDialog(null, "Alguno/s de los campos ingresados no son válidos.","Gestión de Tarifa",  JOptionPane.INFORMATION_MESSAGE);
+					}
+				}
 			}
 		}
-
 
 	}
 	@SuppressWarnings("unused")
@@ -395,13 +406,13 @@ public class GestionTarifa extends JDialog implements ActionListener, ItemListen
 
 	@Override
 	public void keyReleased(KeyEvent arg0) {
-	
-		
+
+
 	}
 
 	@Override
 	public void keyTyped(KeyEvent arg0) {
-		
-		
+
+
 	}
 }
