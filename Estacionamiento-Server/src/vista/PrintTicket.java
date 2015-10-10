@@ -42,6 +42,7 @@ public class PrintTicket extends JFrame {
 	private JPanel panel;
 	private Barcode barcode;
 	private static String impersora;
+	private JPanel panel_1;
 
 
 	public PrintTicket (Ticket ticket, String printerName) {
@@ -61,10 +62,10 @@ public class PrintTicket extends JFrame {
 		try {
 			GridBagLayout gbl_contentPane = new GridBagLayout();
 			gbl_contentPane.columnWidths = new int[] { 168, 0 };
-			gbl_contentPane.rowHeights = new int[] { 185, 64, 0 };
+			gbl_contentPane.rowHeights = new int[] { 225, 64, 0, 0 };
 			gbl_contentPane.columnWeights = new double[] { 1.0,
 					Double.MIN_VALUE };
-			gbl_contentPane.rowWeights = new double[] { 0.0, 0.0,
+			gbl_contentPane.rowWeights = new double[] { 0.0, 0.0, 1.0,
 					Double.MIN_VALUE };
 			contentPane.setLayout(gbl_contentPane);
 
@@ -78,7 +79,7 @@ public class PrintTicket extends JFrame {
 			contentPane.add(panelAttributes, gbc_panelAttributes);
 			GridBagLayout gbl_panelAttributes = new GridBagLayout();
 			gbl_panelAttributes.columnWidths = new int[] { 116, 0 };
-			gbl_panelAttributes.rowHeights = new int[] { 243, 0 };
+			gbl_panelAttributes.rowHeights = new int[] { 217, 0 };
 			gbl_panelAttributes.columnWeights = new double[] { 1.0,
 					Double.MIN_VALUE };
 			gbl_panelAttributes.rowWeights = new double[] { 0.0,
@@ -99,6 +100,7 @@ public class PrintTicket extends JFrame {
 			panel = new JPanel();
 			panel.setBackground(Color.WHITE);
 			GridBagConstraints gbc_panel = new GridBagConstraints();
+			gbc_panel.insets = new Insets(0, 0, 5, 0);
 			gbc_panel.gridx = 0;
 			gbc_panel.gridy = 1;
 			contentPane.add(panel, gbc_panel);
@@ -114,6 +116,14 @@ public class PrintTicket extends JFrame {
 			barcode.setBarWidth(1);
 
 			panel.add(barcode);
+			
+			panel_1 = new JPanel();
+			panel_1.setBackground(Color.WHITE);
+			GridBagConstraints gbc_panel_1 = new GridBagConstraints();
+			gbc_panel_1.fill = GridBagConstraints.BOTH;
+			gbc_panel_1.gridx = 0;
+			gbc_panel_1.gridy = 2;
+			contentPane.add(panel_1, gbc_panel_1);
 			this.setVisible(true);
 			this.toBack();
 			printWork(this);
