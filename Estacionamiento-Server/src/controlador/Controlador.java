@@ -1138,7 +1138,7 @@ public class Controlador {
 	}
 	public double getResumenCuentaMovimientosClienteActual()
 	{
-		return this.resumenCuentaMovimientosClienteActual;
+		return Math.round(this.resumenCuentaMovimientosClienteActual);
 	}
 
 	public long exportarDeudoresExcel()
