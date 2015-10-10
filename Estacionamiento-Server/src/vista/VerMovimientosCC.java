@@ -321,7 +321,7 @@ public class VerMovimientosCC extends JDialog implements ActionListener, KeyList
 
 		if(e.getSource() == this.buscarButton){
 			listModel.clear();
-			listMovimientos.clearSelection();
+			
 			if(fechaHasta.getDate().compareTo(fechaDesde.getDate())>=0)
 			{
 				//Fecha hasta mayor a Desde
@@ -332,7 +332,7 @@ public class VerMovimientosCC extends JDialog implements ActionListener, KeyList
 				}
 				double estadoCrediticio = 0;
 				estadoCrediticio=Controlador.getInstancia().getResumenCuentaMovimientosClienteActual();
-				textFieldResumenCuenta.setText(Double.toString(estadoCrediticio));
+				textFieldResumenCuenta.setText(String.format("%.0f", estadoCrediticio));
 				if(estadoCrediticio<0)
 				{
 					textFieldResumenCuenta.setDisabledTextColor(Color.RED);
@@ -369,11 +369,11 @@ public class VerMovimientosCC extends JDialog implements ActionListener, KeyList
 
 	@Override
 	public void valueChanged(ListSelectionEvent e) {
-		if(e.getSource() == this.listMovimientos){
+		if(e.getSource() == this.listMovimientos && this.listMovimientos.getSelectedValue() != null){
 			modelo.MovimientoCC movimientoSeleccionado = (MovimientoCC) this.listMovimientos.getSelectedValue();
 			this.textFieldDescripcion.setText(movimientoSeleccionado.getDescripcion());
 			this.textFieldFecha.setText(movimientoSeleccionado.getFecha().toString());
-			this.textFieldMonto.setText(Double.toString(movimientoSeleccionado.getMontoCobrado()));
+			this.textFieldMonto.setText(String.format("%.0f",movimientoSeleccionado.getMontoCobrado()));
 			this.textFieldUsuario.setText(movimientoSeleccionado.getUsuario().getUserName());
 		}
 	}
