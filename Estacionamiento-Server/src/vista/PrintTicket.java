@@ -92,7 +92,7 @@ public class PrintTicket extends JFrame {
 			txtpnfechaIng.setFont(new Font("Tahoma", Font.PLAIN, 12));
 			txtpnfechaIng.setContentType("text/html");
 			txtpnfechaIng
-					.setText("<html><b>P.J.E.Uriburu 1058 CABA<br>Fecha Ing:<br>"+new SimpleDateFormat("MM-dd-yyyy HH:mm:ss").format(ticket.getFechaLlegada())+"<br>Vehiculo:<br>"+ ticket.getCatergoriaVehiculo().getDescripcion()+"<br>Modelo:<br>"+ticket.getModeloVehiculo().getDescripcion()+"<br>Patente:<br>"+ticket.getPatente().toUpperCase()+"</b><br></html>");
+					.setText("<html><b>P.J.E.Uriburu 1058 CABA<br>Fecha Ing:<br>"+new SimpleDateFormat("dd-MM-yyyy HH:mm:ss").format(ticket.getFechaLlegada())+"<br>Vehiculo:<br>"+ ticket.getCatergoriaVehiculo().getDescripcion()+"<br>Modelo:<br>"+ticket.getModeloVehiculo().getDescripcion()+"<br>Patente:<br>"+ticket.getPatente().toUpperCase()+"</b><br></html>");
 			GridBagConstraints gbc_txtpnfechaIng = new GridBagConstraints();
 			gbc_txtpnfechaIng.fill = GridBagConstraints.BOTH;
 			gbc_txtpnfechaIng.gridx = 0;
