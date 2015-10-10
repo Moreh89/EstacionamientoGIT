@@ -27,6 +27,7 @@ import modelo.Usuario;
 
 import java.awt.Font;
 import java.awt.Color;
+import java.awt.Cursor;
 import java.awt.Graphics;
 import java.awt.Insets;
 import java.awt.Toolkit;
@@ -39,7 +40,7 @@ import javax.swing.SwingConstants;
 
 
 
-public class Login extends javax.swing.JDialog implements ActionListener, KeyListener{
+public class Login extends javax.swing.JFrame implements ActionListener, KeyListener{
 
 
 	private static final long serialVersionUID = 1L;
@@ -231,8 +232,10 @@ public class Login extends javax.swing.JDialog implements ActionListener, KeyLis
 				if (passwordText.getText().equalsIgnoreCase("")){
 					JOptionPane.showMessageDialog(null, "Debe Ingresar una Contraseña", "Login", JOptionPane.INFORMATION_MESSAGE);
 				}else{
-					
-					boolean con = Controlador.getInstancia().cargaInicial();
+							setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
+							boolean con = false;  
+		                    con = Controlador.getInstancia().cargaInicial();
+		                    setCursor(null);
 					
 					if (con == false){
 						JOptionPane.showMessageDialog(null, "No se pudo establecer conexion con la Base de Datos, consulte con el Administrador del Sistema", "Login", JOptionPane.ERROR_MESSAGE);
