@@ -321,8 +321,7 @@ public class VerMovimientosCC extends JDialog implements ActionListener, KeyList
 
 		if(e.getSource() == this.buscarButton){
 			listModel.clear();
-
-
+			listMovimientos.clearSelection();
 			if(fechaHasta.getDate().compareTo(fechaDesde.getDate())>=0)
 			{
 				//Fecha hasta mayor a Desde
@@ -331,7 +330,19 @@ public class VerMovimientosCC extends JDialog implements ActionListener, KeyList
 				{
 					listModel.addElement(movimientoAct);
 				}
-				textFieldResumenCuenta.setText(Double.toString(Controlador.getInstancia().getResumenCuentaMovimientosClienteActual()));
+				double estadoCrediticio = 0;
+				estadoCrediticio=Controlador.getInstancia().getResumenCuentaMovimientosClienteActual();
+				textFieldResumenCuenta.setText(Double.toString(estadoCrediticio));
+				if(estadoCrediticio<0)
+				{
+					textFieldResumenCuenta.setDisabledTextColor(Color.RED);
+
+				}
+				else
+				{
+					textFieldResumenCuenta.setDisabledTextColor(Color.GREEN);
+
+				}
 			}
 		}
 		if(e.getSource()==btnVolver)

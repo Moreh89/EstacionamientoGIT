@@ -106,7 +106,7 @@ public class MovimientoCC
 	public String toString()
 	{
 		DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd-HH:mm"); 
-		return dateFormat.format(this.fecha) + "  //  " + this.montoCobrado + "  //  " + this.descripcion;
+		return dateFormat.format(this.fecha) + "  //  " + Math.round(this.montoCobrado) + "  //  " + this.descripcion;
 	}
 	
 	
