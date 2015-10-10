@@ -29,6 +29,7 @@ import java.awt.Font;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Insets;
+import java.awt.Toolkit;
 
 import junit.framework.Test;
 
@@ -86,7 +87,8 @@ public class Login extends javax.swing.JDialog implements ActionListener, KeyLis
 		            break;
 		        }
 		    }
-		    		
+					setIconImage(Toolkit.getDefaultToolkit().getImage(
+					MenuOperador.class.getResource("/image/printer.png")));
 		    		UIManager.put("OptionPane.cancelButtonText", "Cancelar");
 		    		UIManager.put("OptionPane.okButtonText", "Aceptar");
 		    		UIManager.put("OptionPane.yesButtonText", "Si");

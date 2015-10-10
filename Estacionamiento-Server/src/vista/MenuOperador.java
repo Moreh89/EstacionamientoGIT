@@ -193,14 +193,17 @@ public class MenuOperador extends JFrame implements ActionListener, KeyListener,
 		mntmCambiarContrasea = new JMenuItem("Cambiar Contrase\u00F1a");
 		mntmCambiarContrasea.setFont(new Font("Segoe UI", Font.PLAIN, 20));
 		mnMiCuenta.add(mntmCambiarContrasea);
+		
+		
+				mntmCerrarSesion = new JMenuItem("Cerrar Sesion");
+				mnMiCuenta.add(mntmCerrarSesion);
+				mntmCerrarSesion.setIcon(null);
+				mntmCerrarSesion.setFont(new Font("Segoe UI", Font.PLAIN, 20));
+				mntmCerrarSesion.addActionListener(this);
 		mntmCambiarContrasea.addActionListener(this);
-
-
-		mntmCerrarSesion = new JMenuItem("Cerrar Sesion");
-		mntmCerrarSesion.setFont(new Font("Segoe UI", Font.PLAIN, 20));
-		mnMiCuenta.add(mntmCerrarSesion);
 		
 		menuHelp = new JMenu("Ayuda");
+		menuHelp.setIcon(new ImageIcon(MenuOperador.class.getResource("/image/question.png")));
 		menuHelp.setFont(new Font("Segoe UI", Font.BOLD, 20));
 		menuBar.add(menuHelp);
 		
@@ -208,7 +211,6 @@ public class MenuOperador extends JFrame implements ActionListener, KeyListener,
 		mnAbout.setFont(new Font("Segoe UI", Font.PLAIN, 20));
 		menuHelp.add(mnAbout);
 		mnAbout.addActionListener(this);
-		mntmCerrarSesion.addActionListener(this);
 
 
 		contentPane = new JPanel();

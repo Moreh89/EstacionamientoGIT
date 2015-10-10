@@ -13,6 +13,7 @@ import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 import controlador.Controlador;
 import java.awt.Font;
+import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -79,7 +80,8 @@ public class MenuAdmin extends JFrame implements ActionListener {
 		setTitle("Gestor Estacionamiento");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 704, 427);
-
+		setIconImage(Toolkit.getDefaultToolkit().getImage(
+				MenuOperador.class.getResource("/image/printer.png")));
 		// PARA MAXIMIZAR LA VENTANA
 		setExtendedState(getExtendedState() | JFrame.MAXIMIZED_BOTH);
 
@@ -200,6 +202,7 @@ public class MenuAdmin extends JFrame implements ActionListener {
 		mntmTicketsTarjeta.addActionListener(this);
 
 		menuSistema = new JMenu("Gestion de Sistema");
+		menuSistema.setIcon(new ImageIcon(MenuAdmin.class.getResource("/image/report.png")));
 		menuBar.add(menuSistema);
 
 		menuItemBackUp = new JMenuItem("Realizar BackUp");
@@ -212,17 +215,16 @@ public class MenuAdmin extends JFrame implements ActionListener {
 		menuBar.add(mnMiCuenta);
 
 		mntmCambiarClave = new JMenuItem("Cambiar Clave");
-		mntmCambiarClave.setIcon(new ImageIcon(MenuAdmin.class
-				.getResource("/image/key.png")));
+		mntmCambiarClave.setIcon(null);
 		mnMiCuenta.add(mntmCambiarClave);
 		mntmCambiarClave.addActionListener(this);
 
 		mntmSalir = new JMenuItem("Salir");
-		mntmSalir.setIcon(new ImageIcon(MenuAdmin.class
-				.getResource("/image/exit.png")));
+		mntmSalir.setIcon(null);
 		mnMiCuenta.add(mntmSalir);
 		
 		menuHelp = new JMenu("Ayuda");
+		menuHelp.setIcon(new ImageIcon(MenuAdmin.class.getResource("/image/question.png")));
 		menuHelp.setFont(new Font("Segoe UI", Font.PLAIN, 12));
 		menuBar.add(menuHelp);
 		
