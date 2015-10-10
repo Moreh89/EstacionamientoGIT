@@ -38,7 +38,7 @@ import modelo.Vehiculo;
 import controlador.Controlador;
 
 import java.awt.Font;
-import javax.swing.SwingConstants;
+
 
 
 
@@ -103,6 +103,7 @@ public class BuscadorCliente extends JDialog implements ActionListener, KeyListe
 	private JButton btnPersonasAutorizadas;
 	private JButton btnVehiculos;
 	private JButton btnCocheras;
+	private JPanel panel;
 		
 	public BuscadorCliente() {
 		setDefaultCloseOperation(JDialog.DO_NOTHING_ON_CLOSE);
@@ -124,17 +125,17 @@ public class BuscadorCliente extends JDialog implements ActionListener, KeyListe
 		
 		setTitle("Buscar Clientes");
 		setResizable(true);
-		setBounds(100, 100, 1059, 850);
+		setBounds(100, 100, 1372, 650);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		GridBagLayout gbl_contentPane = new GridBagLayout();
 		gbl_contentPane.columnWidths = new int[] { 252, 45, 73, 121, 116, 166,
 				221, 0 };
-		gbl_contentPane.rowHeights = new int[] { 32, 560, 31, 43, 0 };
+		gbl_contentPane.rowHeights = new int[] { 32, 560, 43, 0 };
 		gbl_contentPane.columnWeights = new double[] { 0.0, 0.0, 0.0, 0.0, 0.0,
 				0.0, 1.0, Double.MIN_VALUE };
-		gbl_contentPane.rowWeights = new double[] { 0.0, 1.0, 0.0, 0.0,
+		gbl_contentPane.rowWeights = new double[] { 0.0, 1.0, 0.0,
 				Double.MIN_VALUE };
 		contentPane.setLayout(gbl_contentPane);
 
@@ -223,8 +224,8 @@ public class BuscadorCliente extends JDialog implements ActionListener, KeyListe
 		panelAtributos = new JPanel();
 		GridBagConstraints gbc_panelAtributos = new GridBagConstraints();
 		gbc_panelAtributos.fill = GridBagConstraints.BOTH;
-		gbc_panelAtributos.insets = new Insets(0, 0, 5, 0);
-		gbc_panelAtributos.gridwidth = 3;
+		gbc_panelAtributos.insets = new Insets(0, 0, 5, 5);
+		gbc_panelAtributos.gridwidth = 2;
 		gbc_panelAtributos.gridx = 4;
 		gbc_panelAtributos.gridy = 1;
 		contentPane.add(panelAtributos, gbc_panelAtributos);
@@ -536,83 +537,94 @@ public class BuscadorCliente extends JDialog implements ActionListener, KeyListe
 		gbc_textFieldDescripcion.gridx = 1;
 		gbc_textFieldDescripcion.gridy = 13;
 		panelAtributos.add(textFieldDescripcion, gbc_textFieldDescripcion);
-		
-		btnPersonasAutorizadas = new JButton("Personas Autorizadas:");
-		btnPersonasAutorizadas.setIcon(new ImageIcon(BuscadorCliente.class.getResource("/image/search.png")));
-		btnPersonasAutorizadas.addActionListener(this);
-		btnPersonasAutorizadas.setHorizontalAlignment(SwingConstants.RIGHT);
-		btnPersonasAutorizadas.setFont(new Font("Tahoma", Font.BOLD, 16));
-		GridBagConstraints gbc_btnPersonasAutorizadas = new GridBagConstraints();
-		gbc_btnPersonasAutorizadas.fill = GridBagConstraints.BOTH;
-		gbc_btnPersonasAutorizadas.insets = new Insets(0, 0, 5, 5);
-		gbc_btnPersonasAutorizadas.gridx = 0;
-		gbc_btnPersonasAutorizadas.gridy = 14;
-		panelAtributos.add(btnPersonasAutorizadas, gbc_btnPersonasAutorizadas);
-
-		scrollPane = new JScrollPane();
-		scrollPane
-				.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
-		GridBagConstraints gbc_scrollPane = new GridBagConstraints();
-		gbc_scrollPane.insets = new Insets(0, 0, 5, 0);
-		gbc_scrollPane.fill = GridBagConstraints.BOTH;
-		gbc_scrollPane.gridx = 1;
-		gbc_scrollPane.gridy = 14;
-		panelAtributos.add(scrollPane, gbc_scrollPane);
 		listModelPersonas = new DefaultListModel<PersonaAutorizada>();
-		listPersonas = new JList(listModelPersonas);
-		listPersonas.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
-		scrollPane.setViewportView(listPersonas);
-		
-		btnVehiculos = new JButton("Vehiculos:");
-		btnVehiculos.setIcon(new ImageIcon(BuscadorCliente.class.getResource("/image/search.png")));
-		btnVehiculos.addActionListener(this);
-		btnVehiculos.setHorizontalAlignment(SwingConstants.RIGHT);
-		btnVehiculos.setFont(new Font("Tahoma", Font.BOLD, 16));
-		GridBagConstraints gbc_btnVehiculos = new GridBagConstraints();
-		gbc_btnVehiculos.fill = GridBagConstraints.BOTH;
-		gbc_btnVehiculos.insets = new Insets(0, 0, 5, 5);
-		gbc_btnVehiculos.gridx = 0;
-		gbc_btnVehiculos.gridy = 15;
-		panelAtributos.add(btnVehiculos, gbc_btnVehiculos);
-
-		scrollPane_1 = new JScrollPane();
-		scrollPane_1
-				.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
-		GridBagConstraints gbc_scrollPane_1 = new GridBagConstraints();
-		gbc_scrollPane_1.insets = new Insets(0, 0, 5, 0);
-		gbc_scrollPane_1.fill = GridBagConstraints.BOTH;
-		gbc_scrollPane_1.gridx = 1;
-		gbc_scrollPane_1.gridy = 15;
-		panelAtributos.add(scrollPane_1, gbc_scrollPane_1);
 		listModelVehiculos = new DefaultListModel<Vehiculo>();
-		listVehiculos = new JList(listModelVehiculos);
-		listVehiculos.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
-		scrollPane_1.setViewportView(listVehiculos);
-		
-		btnCocheras = new JButton("Cocheras:");
-		btnCocheras.setIcon(new ImageIcon(BuscadorCliente.class.getResource("/image/search.png")));
-		btnCocheras.addActionListener(this);
-		btnCocheras.setHorizontalAlignment(SwingConstants.RIGHT);
-		btnCocheras.setFont(new Font("Tahoma", Font.BOLD, 16));
-		GridBagConstraints gbc_btnCocheras = new GridBagConstraints();
-		gbc_btnCocheras.fill = GridBagConstraints.BOTH;
-		gbc_btnCocheras.insets = new Insets(0, 0, 0, 5);
-		gbc_btnCocheras.gridx = 0;
-		gbc_btnCocheras.gridy = 16;
-		panelAtributos.add(btnCocheras, gbc_btnCocheras);
-
-		scrollPane_2 = new JScrollPane();
-		scrollPane_2
-				.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
-		GridBagConstraints gbc_scrollPane_2 = new GridBagConstraints();
-		gbc_scrollPane_2.fill = GridBagConstraints.BOTH;
-		gbc_scrollPane_2.gridx = 1;
-		gbc_scrollPane_2.gridy = 16;
-		panelAtributos.add(scrollPane_2, gbc_scrollPane_2);
 		listModelCocheras = new DefaultListModel<Cochera>();
-		listCocheras = new JList(listModelCocheras);
-		listCocheras.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
-		scrollPane_2.setViewportView(listCocheras);
+		
+		panel = new JPanel();
+		GridBagConstraints gbc_panel = new GridBagConstraints();
+		gbc_panel.insets = new Insets(0, 0, 5, 0);
+		gbc_panel.fill = GridBagConstraints.BOTH;
+		gbc_panel.gridx = 6;
+		gbc_panel.gridy = 1;
+		contentPane.add(panel, gbc_panel);
+		GridBagLayout gbl_panel = new GridBagLayout();
+		gbl_panel.columnWidths = new int[]{378, 0};
+		gbl_panel.rowHeights = new int[]{96, 0, 96, 0, 96, 0, 0};
+		gbl_panel.columnWeights = new double[]{0.0, Double.MIN_VALUE};
+		gbl_panel.rowWeights = new double[]{1.0, 0.0, 1.0, 0.0, 1.0, 0.0, Double.MIN_VALUE};
+		panel.setLayout(gbl_panel);
+				
+						scrollPane = new JScrollPane();
+						GridBagConstraints gbc_scrollPane = new GridBagConstraints();
+						gbc_scrollPane.insets = new Insets(0, 0, 5, 0);
+						gbc_scrollPane.fill = GridBagConstraints.BOTH;
+						gbc_scrollPane.gridx = 0;
+						gbc_scrollPane.gridy = 0;
+						panel.add(scrollPane, gbc_scrollPane);
+						scrollPane
+								.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
+						listPersonas = new JList(listModelPersonas);
+						listPersonas.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+						scrollPane.setViewportView(listPersonas);
+				
+				btnPersonasAutorizadas = new JButton("Personas Autorizadas");
+				GridBagConstraints gbc_btnPersonasAutorizadas = new GridBagConstraints();
+				gbc_btnPersonasAutorizadas.insets = new Insets(0, 0, 5, 0);
+				gbc_btnPersonasAutorizadas.fill = GridBagConstraints.BOTH;
+				gbc_btnPersonasAutorizadas.gridx = 0;
+				gbc_btnPersonasAutorizadas.gridy = 1;
+				panel.add(btnPersonasAutorizadas, gbc_btnPersonasAutorizadas);
+				btnPersonasAutorizadas.setIcon(new ImageIcon(BuscadorCliente.class.getResource("/image/search.png")));
+				btnPersonasAutorizadas.addActionListener(this);
+				btnPersonasAutorizadas.setFont(new Font("Tahoma", Font.BOLD, 16));
+				
+						scrollPane_1 = new JScrollPane();
+						GridBagConstraints gbc_scrollPane_1 = new GridBagConstraints();
+						gbc_scrollPane_1.fill = GridBagConstraints.BOTH;
+						gbc_scrollPane_1.insets = new Insets(0, 0, 5, 0);
+						gbc_scrollPane_1.gridx = 0;
+						gbc_scrollPane_1.gridy = 2;
+						panel.add(scrollPane_1, gbc_scrollPane_1);
+						scrollPane_1
+								.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
+						listVehiculos = new JList(listModelVehiculos);
+						listVehiculos.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+						scrollPane_1.setViewportView(listVehiculos);
+				
+				btnVehiculos = new JButton("Vehiculos");
+				GridBagConstraints gbc_btnVehiculos = new GridBagConstraints();
+				gbc_btnVehiculos.insets = new Insets(0, 0, 5, 0);
+				gbc_btnVehiculos.fill = GridBagConstraints.BOTH;
+				gbc_btnVehiculos.gridx = 0;
+				gbc_btnVehiculos.gridy = 3;
+				panel.add(btnVehiculos, gbc_btnVehiculos);
+				btnVehiculos.setIcon(new ImageIcon(BuscadorCliente.class.getResource("/image/search.png")));
+				btnVehiculos.addActionListener(this);
+				btnVehiculos.setFont(new Font("Tahoma", Font.BOLD, 16));
+				
+						scrollPane_2 = new JScrollPane();
+						GridBagConstraints gbc_scrollPane_2 = new GridBagConstraints();
+						gbc_scrollPane_2.fill = GridBagConstraints.BOTH;
+						gbc_scrollPane_2.insets = new Insets(0, 0, 5, 0);
+						gbc_scrollPane_2.gridx = 0;
+						gbc_scrollPane_2.gridy = 4;
+						panel.add(scrollPane_2, gbc_scrollPane_2);
+						scrollPane_2
+								.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
+						listCocheras = new JList(listModelCocheras);
+						listCocheras.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+						scrollPane_2.setViewportView(listCocheras);
+						
+						btnCocheras = new JButton("Cocheras");
+						GridBagConstraints gbc_btnCocheras = new GridBagConstraints();
+						gbc_btnCocheras.fill = GridBagConstraints.BOTH;
+						gbc_btnCocheras.gridx = 0;
+						gbc_btnCocheras.gridy = 5;
+						panel.add(btnCocheras, gbc_btnCocheras);
+						btnCocheras.setIcon(new ImageIcon(BuscadorCliente.class.getResource("/image/search.png")));
+						btnCocheras.addActionListener(this);
+						btnCocheras.setFont(new Font("Tahoma", Font.BOLD, 16));
 
 		buttonCancelar = new JButton("Cancelar");
 		buttonCancelar.setFont(new Font("Tahoma", Font.BOLD, 16));
@@ -622,7 +634,7 @@ public class BuscadorCliente extends JDialog implements ActionListener, KeyListe
 		gbc_buttonCancelar.fill = GridBagConstraints.BOTH;
 		gbc_buttonCancelar.insets = new Insets(0, 0, 0, 5);
 		gbc_buttonCancelar.gridx = 0;
-		gbc_buttonCancelar.gridy = 3;
+		gbc_buttonCancelar.gridy = 2;
 		contentPane.add(buttonCancelar, gbc_buttonCancelar);
 		buttonCancelar.addActionListener(this);
 
@@ -635,7 +647,7 @@ public class BuscadorCliente extends JDialog implements ActionListener, KeyListe
 		gbc_buttonAceptar.insets = new Insets(0, 0, 0, 5);
 		gbc_buttonAceptar.gridwidth = 3;
 		gbc_buttonAceptar.gridx = 1;
-		gbc_buttonAceptar.gridy = 3;
+		gbc_buttonAceptar.gridy = 2;
 		contentPane.add(buttonAceptar, gbc_buttonAceptar);
 		buttonAceptar.addActionListener(this);
 		model = new DefaultTableModel() {
@@ -660,7 +672,7 @@ public class BuscadorCliente extends JDialog implements ActionListener, KeyListe
 		GridBagConstraints gbc_btnVerCuentaCorriente = new GridBagConstraints();
 		gbc_btnVerCuentaCorriente.fill = GridBagConstraints.BOTH;
 		gbc_btnVerCuentaCorriente.gridx = 6;
-		gbc_btnVerCuentaCorriente.gridy = 3;
+		gbc_btnVerCuentaCorriente.gridy = 2;
 		contentPane.add(btnVerCuentaCorriente, gbc_btnVerCuentaCorriente);
 		btnVerCuentaCorriente.addActionListener(this);
 
