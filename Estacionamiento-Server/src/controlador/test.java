@@ -9,7 +9,7 @@ public class test {
 	 */
 	public static void main(String[] args) {
 		HibernateDAO.getInstancia().getSession();
-		Controlador.getInstancia().cargaInicial();
+	//	Controlador.getInstancia().cargaInicial();
 	}
 
 }

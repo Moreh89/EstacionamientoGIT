@@ -1,9 +1,7 @@
 package vista;
 
 import java.awt.EventQueue;
-import java.util.ArrayList;
 import java.util.Vector;
-
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import javax.swing.event.ListSelectionEvent;
@@ -15,7 +13,6 @@ import javax.swing.JDialog;
 import javax.swing.JLabel;
 import javax.swing.JTextField;
 import javax.swing.JButton;
-import javax.swing.JSeparator;
 import javax.swing.JComboBox;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.ListSelectionModel;
@@ -31,9 +28,6 @@ import javax.swing.ScrollPaneConstants;
 import javax.swing.JList;
 import modelo.Usuario;
 import controlador.Controlador;
-import java.awt.Font;
-
-
 
 @SuppressWarnings("rawtypes")
 public class GestionUsuario extends JDialog implements ActionListener, KeyListener, ListSelectionListener {
@@ -41,9 +35,7 @@ public class GestionUsuario extends JDialog implements ActionListener, KeyListen
 
 	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
-	private JTextField buscarTextField;
 	private DefaultTableModel model;
-	private JComboBox tipoComboBox;
 	@SuppressWarnings("unused")
 	private CobroExtraordinario cobroExtraordinario;
 	private JTextField textFieldNombre;
@@ -52,12 +44,8 @@ public class GestionUsuario extends JDialog implements ActionListener, KeyListen
 	private JTextField textFieldDNILU;
 	private JComboBox comboBoxTipoUsuario;
 	private JComboBox comboBoxTipoDoc;
-
 	private JLabel lblDnilu;
 	private JLabel lblTipoUsuario;
-
-
-	private JButton buscarButton;
 	private JPanel panelClientes;
 	private JScrollPane scrollPaneClientes;
 	private JList listUsuarios;
@@ -109,16 +97,6 @@ public class GestionUsuario extends JDialog implements ActionListener, KeyListen
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
-
-		JLabel lblBuscar = new JLabel("Buscar");
-		lblBuscar.setFont(new Font("Tahoma", Font.BOLD, 11));
-		lblBuscar.setBounds(10, 19, 46, 14);
-		contentPane.add(lblBuscar);
-
-		buscarTextField = new JTextField();
-		buscarTextField.setBounds(55, 14, 279, 25);
-		contentPane.add(buscarTextField);
-		buscarTextField.setColumns(10);
 		model = new DefaultTableModel(){
 			/**
 			 * 
@@ -135,22 +113,6 @@ public class GestionUsuario extends JDialog implements ActionListener, KeyListen
 		model.addColumn("Apellido");
 		model.addColumn("Tipo Doc.");
 		model.addColumn("Numero");
-
-
-		buscarButton = new JButton("Buscar");
-		buscarButton.addActionListener(this);
-		buscarButton.setBounds(468, 10, 116, 32);
-		contentPane.add(buscarButton);
-		buscarButton.setIcon(new ImageIcon(BuscadorCliente.class.getResource("/image/search.png")));
-
-		JSeparator separator = new JSeparator();
-		separator.setBounds(10, 47, 510, 6);
-		contentPane.add(separator);
-
-		tipoComboBox = new JComboBox();
-		tipoComboBox.setModel(new DefaultComboBoxModel(new String[] {"DNI", "NOMBRE", "APELLIDO"}));
-		tipoComboBox.setBounds(344, 14, 114, 25);
-		contentPane.add(tipoComboBox);
 
 		panelAtributos = new JPanel();
 		panelAtributos.setBounds(10, 140, 574, 192);
@@ -270,7 +232,7 @@ public class GestionUsuario extends JDialog implements ActionListener, KeyListen
 		panelAtributos.add(comboBoxTipoUsuario, gbc_comboBoxTipoUsuario);
 
 		panelClientes = new JPanel();
-		panelClientes.setBounds(10, 46, 574, 88);
+		panelClientes.setBounds(10, 11, 574, 123);
 		contentPane.add(panelClientes);
 		GridBagLayout gbl_panelClientes = new GridBagLayout();
 		gbl_panelClientes.columnWidths = new int[]{240, 0};
@@ -328,45 +290,6 @@ public class GestionUsuario extends JDialog implements ActionListener, KeyListen
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
-
-		if(e.getSource() == this.buscarButton){
-			listModel = new DefaultListModel<modelo.Usuario>();
-			for (Usuario usuarioTemp : Controlador.getInstancia().getUsuarios()) {
-				listModel.addElement(usuarioTemp);
-			} 
-			if(!buscarTextField.getText().isEmpty())
-			{
-				ArrayList<Usuario> listaABorrar = new ArrayList<Usuario>();
-				if(tipoComboBox.getSelectedItem().toString().equals("DNI")){
-					for (int i = 0; i < listModel.getSize(); i++) {
-						Usuario usuarioTemp = listModel.getElementAt(i);
-						if(!usuarioTemp.getNumeroDocumento().contains(this.buscarTextField.getText())){
-							listaABorrar.add(usuarioTemp);
-						}
-					}
-				}
-				if(tipoComboBox.getSelectedItem().toString().equals("NOMBRE")){
-					for (int i = 0; i < listModel.getSize(); i++) {
-						Usuario usuarioTemp = listModel.getElementAt(i);
-						if(!usuarioTemp.getNombre().toLowerCase().contains(this.buscarTextField.getText().toLowerCase())){
-							listaABorrar.add(usuarioTemp);
-						}
-					}
-				}
-				if(tipoComboBox.getSelectedItem().toString().equals("APELLIDO")){
-					for (int i = 0; i < listModel.getSize(); i++) {
-						Usuario clienteTemp = listModel.getElementAt(i);
-						if(!clienteTemp.getApellido().toLowerCase().contains(this.buscarTextField.getText().toLowerCase())){
-							listaABorrar.add(clienteTemp);
-
-						}
-					}
-				}
-				for (Usuario usuarioABorrar : listaABorrar) {
-					listModel.removeElement(usuarioABorrar);
-				}
-			}
-		}
 		if(e.getSource()==btnCancelar)
 		{
 			dispose();
@@ -426,5 +349,8 @@ public class GestionUsuario extends JDialog implements ActionListener, KeyListen
 			this.comboBoxTipoUsuario.setSelectedItem(usuarioSeleccionado.getPermisos().toString());	
 		}
 	}
+	
+
+	
 }
 
