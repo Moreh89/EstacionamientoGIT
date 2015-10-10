@@ -15,9 +15,11 @@ import javax.swing.event.ListSelectionListener;
 import javax.swing.DefaultListModel;
 import javax.swing.JTextField;
 import javax.swing.JList;
+import javax.swing.JOptionPane;
 import javax.swing.JScrollPane;
 import javax.swing.ListSelectionModel;
 import javax.swing.ScrollPaneConstants;
+import javax.swing.UIManager;
 
 import modelo.LiquidacionExpensas;
 import controlador.Controlador;
@@ -169,8 +171,17 @@ public class AnularLiquidacionExpensas extends JDialog implements ActionListener
 		}
 		if(event.getSource()==anularButton)
 		{
-			Controlador.getInstancia().anularLiquidacionExpensas((LiquidacionExpensas) listLiquidaciones.getSelectedValue());
-			dispose();
+			int resultado = JOptionPane.showConfirmDialog (null, "¿Está seguro?","Confirmación",JOptionPane.YES_NO_OPTION,JOptionPane.PLAIN_MESSAGE);
+			UIManager.put("OptionPane.yesButtonText", "Si");
+			UIManager.put("OptionPane.noButtonText", "No");
+			if(resultado != JOptionPane.CANCEL_OPTION && resultado != JOptionPane.CLOSED_OPTION)
+			{
+				if (resultado == JOptionPane.OK_OPTION)
+				{
+					Controlador.getInstancia().anularLiquidacionExpensas((LiquidacionExpensas) listLiquidaciones.getSelectedValue());
+				}
+				dispose();
+			}
 		}
 	}
 

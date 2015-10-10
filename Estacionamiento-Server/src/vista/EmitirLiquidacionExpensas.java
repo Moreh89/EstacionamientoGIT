@@ -11,6 +11,7 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
+import javax.swing.UIManager;
 import javax.swing.border.EmptyBorder;
 
 
@@ -40,9 +41,6 @@ public class EmitirLiquidacionExpensas extends JDialog implements ActionListener
 	private JTextField textFieldImporteLiquidar;
 	private JTextField textFieldPeriodoLiquidar;
 
-	/**
-	 * Launch the application.
-	 */
 	public static void main(String[] args) {
 		try {
 			EmitirLiquidacionExpensas dialog = new EmitirLiquidacionExpensas();
@@ -160,24 +158,33 @@ public class EmitirLiquidacionExpensas extends JDialog implements ActionListener
 			double codigoReturn=-1;
 			if(!textFieldImporteLiquidar.getText().isEmpty() && isNumeric(textFieldImporteLiquidar.getText()))
 			{
-				codigoReturn=Controlador.getInstancia().liquidarExpensas(Double.parseDouble(textFieldImporteLiquidar.getText()), textFieldPeriodoLiquidar.getText(), descripcionTextField.getText());
-				if(codigoReturn == 0)
+				int resultado = JOptionPane.showConfirmDialog (null, "¿Está seguro?","Confirmación",JOptionPane.YES_NO_OPTION,JOptionPane.PLAIN_MESSAGE);
+				UIManager.put("OptionPane.yesButtonText", "Si");
+				UIManager.put("OptionPane.noButtonText", "No");
+				if(resultado != JOptionPane.CANCEL_OPTION && resultado != JOptionPane.CLOSED_OPTION)
 				{
-					JOptionPane.showMessageDialog(null, "No se pudo realizar la Liquidación de Expensas.","Liquidación de Expensas",  JOptionPane.INFORMATION_MESSAGE);
+					if (resultado == JOptionPane.OK_OPTION)
+					{
+						codigoReturn=Controlador.getInstancia().liquidarExpensas(Double.parseDouble(textFieldImporteLiquidar.getText()), textFieldPeriodoLiquidar.getText(), descripcionTextField.getText());
+						if(codigoReturn == 0)
+						{
+							JOptionPane.showMessageDialog(null, "No se pudo realizar la Liquidación de Expensas.","Liquidación de Expensas",  JOptionPane.INFORMATION_MESSAGE);
+						}
+						if(codigoReturn == 100)
+						{
+							JOptionPane.showMessageDialog(null, "Se liquidaron correctamente el 100% de las expensas.", "Liquidación de Expensas",  JOptionPane.INFORMATION_MESSAGE);
+						}
+						else
+						{
+							JOptionPane.showMessageDialog(null, "Expensas parcialmente liquidadas. Se liquidó el "+codigoReturn +"% de las expensas. \n La sumatoria de porcentajes asignado a las cochera no alcanza o lo supera el 100% .", "Liquidación de Expensas",  JOptionPane.INFORMATION_MESSAGE);
+						}
+						dispose();
+					}
+					else
+					{
+						JOptionPane.showMessageDialog(null, "El campo Importe a Liquidar no es válido.","Liquidación de Expensas",  JOptionPane.INFORMATION_MESSAGE);
+					}
 				}
-				if(codigoReturn == 100)
-				{
-					JOptionPane.showMessageDialog(null, "Se liquidaron correctamente el 100% de las expensas.", "Liquidación de Expensas",  JOptionPane.INFORMATION_MESSAGE);
-				}
-				else
-				{
-					JOptionPane.showMessageDialog(null, "Expensas parcialmente liquidadas. Se liquidó el "+codigoReturn +"% de las expensas. \n La sumatoria de porcentajes asignado a las cochera no alcanza o lo supera el 100% .", "Liquidación de Expensas",  JOptionPane.INFORMATION_MESSAGE);
-				}
-				dispose();
-			}
-			else
-			{
-				JOptionPane.showMessageDialog(null, "El campo Importe a Liquidar no es válido.","Liquidación de Expensas",  JOptionPane.INFORMATION_MESSAGE);
 			}
 		}
 

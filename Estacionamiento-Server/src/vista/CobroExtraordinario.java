@@ -15,6 +15,7 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
+import javax.swing.UIManager;
 import javax.swing.border.EmptyBorder;
 import controlador.Controlador;
 import modelo.Cliente;
@@ -158,15 +159,15 @@ public class CobroExtraordinario extends JDialog implements ActionListener, KeyL
 		gbc_aceptarButton.gridy = 5;
 		contentPanel.add(aceptarButton, gbc_aceptarButton);
 		aceptarButton.addActionListener(this);
-				
-						cancelarButton = new JButton("Cancelar");
-						cancelarButton.setIcon(new ImageIcon(GestionUsuario.class.getResource("/image/cancel.png")));
-						GridBagConstraints gbc_cancelarButton = new GridBagConstraints();
-						gbc_cancelarButton.insets = new Insets(0, 0, 0, 5);
-						gbc_cancelarButton.fill = GridBagConstraints.HORIZONTAL;
-						gbc_cancelarButton.gridx = 3;
-						gbc_cancelarButton.gridy = 5;
-						contentPanel.add(cancelarButton, gbc_cancelarButton);
+
+		cancelarButton = new JButton("Cancelar");
+		cancelarButton.setIcon(new ImageIcon(GestionUsuario.class.getResource("/image/cancel.png")));
+		GridBagConstraints gbc_cancelarButton = new GridBagConstraints();
+		gbc_cancelarButton.insets = new Insets(0, 0, 0, 5);
+		gbc_cancelarButton.fill = GridBagConstraints.HORIZONTAL;
+		gbc_cancelarButton.gridx = 3;
+		gbc_cancelarButton.gridy = 5;
+		contentPanel.add(cancelarButton, gbc_cancelarButton);
 		cancelarButton.addActionListener(this);
 
 		;
@@ -210,33 +211,41 @@ public class CobroExtraordinario extends JDialog implements ActionListener, KeyL
 				{
 					if(!montoCobradoTextField.getText().isEmpty()&&isNumeric(montoCobradoTextField.getText()))
 					{
-						codigoReturn=Controlador.getInstancia().generarCobroExtraordinario(comboBoxTipoCobro.getSelectedItem().toString(), Double.parseDouble(montoCobradoTextField.getText()),cliente);
-						if(codigoReturn == -1)
+						int resultado = JOptionPane.showConfirmDialog (null, "¿Está seguro?","Confirmación",JOptionPane.YES_NO_OPTION,JOptionPane.PLAIN_MESSAGE);
+						UIManager.put("OptionPane.yesButtonText", "Si");
+						UIManager.put("OptionPane.noButtonText", "No");
+						if(resultado != JOptionPane.CANCEL_OPTION && resultado != JOptionPane.CLOSED_OPTION)
 						{
-							JOptionPane.showMessageDialog(null, "No se pudo realizar el cobro.", "Cobro Extraordinario", JOptionPane.INFORMATION_MESSAGE);
+							if (resultado == JOptionPane.OK_OPTION)
+							{
+								codigoReturn=Controlador.getInstancia().generarCobroExtraordinario(comboBoxTipoCobro.getSelectedItem().toString(), Double.parseDouble(montoCobradoTextField.getText()),cliente);
+								if(codigoReturn == -1)
+								{
+									JOptionPane.showMessageDialog(null, "No se pudo realizar el cobro.", "Cobro Extraordinario", JOptionPane.INFORMATION_MESSAGE);
+								}
+								if(codigoReturn >= 0)
+								{
+									JOptionPane.showMessageDialog(null, "Se generó correctamente el cobro del pago de " + comboBoxTipoCobro.getSelectedItem().toString(),"Cobro Extraordinario", JOptionPane.INFORMATION_MESSAGE);
+									dispose();
+								}
+							}
+							else
+							{
+								JOptionPane.showMessageDialog(null, "El campo Monto se encuentra incompleto o el valor ingresado no es válido.","Cobro Extraordinario", JOptionPane.INFORMATION_MESSAGE);
+							}
 						}
-						if(codigoReturn >= 0)
+						else
 						{
-							JOptionPane.showMessageDialog(null, "Se generó correctamente el cobro del pago de " + comboBoxTipoCobro.getSelectedItem().toString(),"Cobro Extraordinario", JOptionPane.INFORMATION_MESSAGE);
-							dispose();
+							JOptionPane.showMessageDialog(null, "Cliente no seleccionado.", "Cobro Extraordinario", JOptionPane.INFORMATION_MESSAGE);
 						}
 					}
-					else
-					{
-						JOptionPane.showMessageDialog(null, "El campo Monto se encuentra incompleto o el valor ingresado no es válido.","Cobro Extraordinario", JOptionPane.INFORMATION_MESSAGE);
+					else{
+						JOptionPane.showMessageDialog(null, "Cliente no seleccionado.", "Cobro Extraordinario", JOptionPane.INFORMATION_MESSAGE);
 					}
 				}
-				else
-				{
-					JOptionPane.showMessageDialog(null, "Cliente no seleccionado.", "Cobro Extraordinario", JOptionPane.INFORMATION_MESSAGE);
-				}
-			}
-			else{
-				JOptionPane.showMessageDialog(null, "Cliente no seleccionado.", "Cobro Extraordinario", JOptionPane.INFORMATION_MESSAGE);
 			}
 		}
 	}
-
 	@SuppressWarnings("unused")
 	public static boolean isNumeric(String str)  
 	{  
@@ -271,7 +280,7 @@ public class CobroExtraordinario extends JDialog implements ActionListener, KeyL
 
 	@Override
 	public void keyTyped(KeyEvent e) {
-		
+
 
 	}
 }

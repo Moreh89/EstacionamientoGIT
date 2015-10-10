@@ -15,9 +15,11 @@ import javax.swing.event.ListSelectionListener;
 import javax.swing.DefaultListModel;
 import javax.swing.JTextField;
 import javax.swing.JList;
+import javax.swing.JOptionPane;
 import javax.swing.JScrollPane;
 import javax.swing.ListSelectionModel;
 import javax.swing.ScrollPaneConstants;
+import javax.swing.UIManager;
 
 import modelo.LiquidacionAlquileres;
 import controlador.Controlador;
@@ -28,11 +30,9 @@ import java.awt.Insets;
 
 import javax.swing.JLabel;
 
-public class AnularLiquidacionAlquileres extends JDialog implements ActionListener, ListSelectionListener {
+public class AnularLiquidacionAlquileres extends JDialog implements ActionListener, ListSelectionListener 
+{
 
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 1L;
 	private final JPanel contentPanel = new JPanel();
 	private JButton anularButton;
@@ -112,7 +112,6 @@ public class AnularLiquidacionAlquileres extends JDialog implements ActionListen
 		gbc_textFieldFechaEmisionLiquidacion.gridy = 1;
 		contentPanel.add(textFieldFechaEmisionLiquidacion, gbc_textFieldFechaEmisionLiquidacion);
 		textFieldFechaEmisionLiquidacion.setColumns(10);
-		//						listLiquidaciones.addListSelectionListener(this);
 
 		anularButton = new JButton("Anular Liquidacion");
 		anularButton.setIcon(new ImageIcon(GestionColor.class.getResource("/image/ok.png")));
@@ -134,12 +133,8 @@ public class AnularLiquidacionAlquileres extends JDialog implements ActionListen
 		contentPanel.add(cancelarButton, gbc_cancelarButton);
 		cancelarButton.addActionListener(this);
 
-
-
 		this.setLocationRelativeTo(null);
 		setModal(true);
-
-
 	}
 
 	@Override
@@ -150,7 +145,17 @@ public class AnularLiquidacionAlquileres extends JDialog implements ActionListen
 		}
 		if(event.getSource()==anularButton)
 		{
-			Controlador.getInstancia().anularLiquidacionAlquileres((LiquidacionAlquileres) listLiquidaciones.getSelectedValue());
+
+			int resultado = JOptionPane.showConfirmDialog (null, "¿Está seguro?","Confirmación",JOptionPane.YES_NO_OPTION,JOptionPane.PLAIN_MESSAGE);
+			UIManager.put("OptionPane.yesButtonText", "Si");
+			UIManager.put("OptionPane.noButtonText", "No");
+			if(resultado != JOptionPane.CANCEL_OPTION && resultado != JOptionPane.CLOSED_OPTION)
+			{
+				if (resultado == JOptionPane.OK_OPTION)
+				{
+					Controlador.getInstancia().anularLiquidacionAlquileres((LiquidacionAlquileres) listLiquidaciones.getSelectedValue());
+				}
+			}
 			dispose();
 		}
 	}

@@ -13,6 +13,7 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
+import javax.swing.UIManager;
 import javax.swing.border.EmptyBorder;
 
 
@@ -110,7 +111,7 @@ public class EmitirLiquidacionAlquileres extends JDialog implements ActionListen
 		gbc_descripcionTextField.gridy = 2;
 		contentPanel.add(descripcionTextField, gbc_descripcionTextField);
 		descripcionTextField.addKeyListener(this);
-		
+
 		aceptarButton = new JButton("Aceptar");
 		aceptarButton.setIcon(new ImageIcon(CambioContrasenia.class.getResource("/image/ok.png")));
 		GridBagConstraints gbc_aceptarButton = new GridBagConstraints();
@@ -145,11 +146,27 @@ public class EmitirLiquidacionAlquileres extends JDialog implements ActionListen
 		if(event.getSource()==aceptarButton)
 		{
 			double codigoReturn=-1;
-			codigoReturn=Controlador.getInstancia().liquidarAlquileres(descripcionTextField.getText());
-			JOptionPane.showMessageDialog(null, "Se liquidaron correctamente "+codigoReturn+" cocheras.", "Liquidación de Alquileres",  JOptionPane.INFORMATION_MESSAGE);
-			dispose();
-		}
+			int resultado = JOptionPane.showConfirmDialog (null, "¿Está seguro?","Confirmación",JOptionPane.YES_NO_OPTION,JOptionPane.PLAIN_MESSAGE);
+			UIManager.put("OptionPane.yesButtonText", "Si");
+			UIManager.put("OptionPane.noButtonText", "No");
+			if(resultado != JOptionPane.CANCEL_OPTION && resultado != JOptionPane.CLOSED_OPTION)
+			{
+				if (resultado == JOptionPane.OK_OPTION)
+				{
+					codigoReturn=Controlador.getInstancia().liquidarAlquileres(descripcionTextField.getText());
+					if(codigoReturn!=-1)
+					{
+						JOptionPane.showMessageDialog(null, "Se liquidaron correctamente "+codigoReturn+" cocheras.", "Liquidación de Alquileres",  JOptionPane.INFORMATION_MESSAGE);
+					}
+					else
+					{
+						JOptionPane.showMessageDialog(null, "Se produjo un error en la liquidación.", "Liquidación de Alquileres",  JOptionPane.INFORMATION_MESSAGE);
+					}
+				}
+				dispose();
 
+			}
+		}
 	}
 	@SuppressWarnings("unused")
 	public static boolean isNumeric(String str)  
@@ -179,7 +196,7 @@ public class EmitirLiquidacionAlquileres extends JDialog implements ActionListen
 
 	@Override
 	public void keyReleased(KeyEvent e) {
-		
+
 
 	}
 
