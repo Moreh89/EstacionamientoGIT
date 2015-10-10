@@ -348,9 +348,6 @@ public class GestionUsuario extends JDialog implements ActionListener, KeyListen
 			this.comboBoxTipoDoc.setSelectedItem(usuarioSeleccionado.getTipoDocumento());
 			this.comboBoxTipoUsuario.setSelectedItem(usuarioSeleccionado.getPermisos().toString());	
 		}
-	}
-	
-
-	
+	}	
 }
 
