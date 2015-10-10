@@ -239,10 +239,12 @@ public class CobroExtraordinario extends JDialog implements ActionListener, KeyL
 							JOptionPane.showMessageDialog(null, "Cliente no seleccionado.", "Cobro Extraordinario", JOptionPane.INFORMATION_MESSAGE);
 						}
 					}
-					else{
-						JOptionPane.showMessageDialog(null, "Cliente no seleccionado.", "Cobro Extraordinario", JOptionPane.INFORMATION_MESSAGE);
-					}
 				}
+				else
+				{
+					JOptionPane.showMessageDialog(null, "Cliente no seleccionado.", "Cobro Extraordinario", JOptionPane.INFORMATION_MESSAGE);
+				}
+
 			}
 		}
 	}
