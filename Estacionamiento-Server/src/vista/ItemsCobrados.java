@@ -77,6 +77,9 @@ public class ItemsCobrados extends JDialog implements ActionListener, ListSelect
 				if ( ticketTemp.getMontoCobrado() > 0){
 					total = total + ticketTemp.getMontoCobrado();
 					String item = "CIERRE TICKET: " + String.valueOf(ticketTemp.getIdTicket()) + " MONTO: "+ String.valueOf(ticketTemp.getMontoCobrado());
+					if(ticketTemp.isPagotarjeta()){
+						item = item + " (TARJETA)";
+					}
 					if(ticketTemp.getDescuento()!=null && ticketTemp.getDescuento().getDescuento() > 0){
 						item = item + " CON DESCUENTO: " + ticketTemp.getDescuento().getDescripcion();
 					}
@@ -87,10 +90,11 @@ public class ItemsCobrados extends JDialog implements ActionListener, ListSelect
 			
 		} 
 		for (MovimientoCC movimientoCCTemp : Controlador.getInstancia().obtenetMovimientosCobrados(usuario, fechaInicio,fechaFin)){
+			if(!movimientoCCTemp.getEstado().equalsIgnoreCase("anulado")){
 			total = total + Math.round(movimientoCCTemp.getMontoCobrado());
 			listModel.addElement("PAGO EXTRAORDINARIO CONCEPTO: " + movimientoCCTemp.getDescripcion() + " MONTO: " + movimientoCCTemp.getMontoCobrado());
+			}
 		}
-		
 		for (IncrementoPrepago incrementoTemp : Controlador.getInstancia().obternerIncrementos(usuario, fechaInicio,fechaFin)){
 			total = total +  Math.round(incrementoTemp.getPrepago());
 			listModel.addElement("PREPAGO TICKET: " + String.valueOf(incrementoTemp.getNumeroTicket()) + " MONTO: " + String.valueOf(incrementoTemp.getPrepago()));
