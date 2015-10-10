@@ -61,7 +61,7 @@ public class CobroExtraordinario extends JDialog implements ActionListener, KeyL
 	{
 		setResizable(false);
 		setTitle("Cobro Extraordinario");
-		setBounds(100, 100, 450, 265);
+		setBounds(100, 100, 450, 249);
 		getContentPane().setLayout(new BorderLayout());
 		contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
 		getContentPane().add(contentPanel, BorderLayout.CENTER);
