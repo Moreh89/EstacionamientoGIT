@@ -203,7 +203,7 @@ public class MenuOperador extends JFrame implements ActionListener, KeyListener,
 		mntmCambiarContrasea.addActionListener(this);
 		
 		menuHelp = new JMenu("Ayuda");
-		menuHelp.setIcon(new ImageIcon(MenuOperador.class.getResource("/image/question.png")));
+		menuHelp.setIcon(new ImageIcon(MenuOperador.class.getResource("/image/printer.png")));
 		menuHelp.setFont(new Font("Segoe UI", Font.BOLD, 20));
 		menuBar.add(menuHelp);
 		
