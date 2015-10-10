@@ -9,7 +9,6 @@ import javax.print.attribute.Size2DSyntax;
 import javax.print.attribute.standard.MediaPrintableArea;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
-import javax.swing.border.EmptyBorder;
 import java.awt.GridBagLayout;
 
 import modelo.Ticket;
@@ -32,6 +31,7 @@ import java.awt.Insets;
 import javax.swing.JTextPane;
 import java.awt.Toolkit;
 import java.awt.Font;
+import java.awt.Color;
 
 @SuppressWarnings("serial")
 public class PrintTicket extends JFrame {
@@ -45,13 +45,15 @@ public class PrintTicket extends JFrame {
 
 
 	public PrintTicket (Ticket ticket, String printerName) {
+		setBackground(Color.WHITE);
 		setIconImage(Toolkit.getDefaultToolkit().getImage(
 				PrintTicket.class.getResource("/image/printer.png")));
 		setResizable(false);
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-		setBounds(100, 100, 240, 350);
+		setBounds(100, 100, 240, 400);
 		contentPane = new JPanel();
-		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
+		contentPane.setBackground(Color.WHITE);
+		contentPane.setBorder(null);
 		setContentPane(contentPane);
 
 		impersora = printerName;
@@ -62,11 +64,12 @@ public class PrintTicket extends JFrame {
 			gbl_contentPane.rowHeights = new int[] { 185, 64, 0 };
 			gbl_contentPane.columnWeights = new double[] { 1.0,
 					Double.MIN_VALUE };
-			gbl_contentPane.rowWeights = new double[] { 1.0, 0.0,
+			gbl_contentPane.rowWeights = new double[] { 0.0, 0.0,
 					Double.MIN_VALUE };
 			contentPane.setLayout(gbl_contentPane);
 
 			panelAttributes = new JPanel();
+			panelAttributes.setBackground(Color.WHITE);
 			GridBagConstraints gbc_panelAttributes = new GridBagConstraints();
 			gbc_panelAttributes.insets = new Insets(0, 0, 5, 0);
 			gbc_panelAttributes.fill = GridBagConstraints.BOTH;
@@ -75,10 +78,10 @@ public class PrintTicket extends JFrame {
 			contentPane.add(panelAttributes, gbc_panelAttributes);
 			GridBagLayout gbl_panelAttributes = new GridBagLayout();
 			gbl_panelAttributes.columnWidths = new int[] { 116, 0 };
-			gbl_panelAttributes.rowHeights = new int[] { 22, 0 };
+			gbl_panelAttributes.rowHeights = new int[] { 243, 0 };
 			gbl_panelAttributes.columnWeights = new double[] { 1.0,
 					Double.MIN_VALUE };
-			gbl_panelAttributes.rowWeights = new double[] { 1.0,
+			gbl_panelAttributes.rowWeights = new double[] { 0.0,
 					Double.MIN_VALUE };
 			panelAttributes.setLayout(gbl_panelAttributes);
 
@@ -94,6 +97,7 @@ public class PrintTicket extends JFrame {
 			panelAttributes.add(txtpnfechaIng, gbc_txtpnfechaIng);
 
 			panel = new JPanel();
+			panel.setBackground(Color.WHITE);
 			GridBagConstraints gbc_panel = new GridBagConstraints();
 			gbc_panel.gridx = 0;
 			gbc_panel.gridy = 1;
@@ -105,7 +109,7 @@ public class PrintTicket extends JFrame {
 				numeroTck = "0"+numeroTck;
 			}
 			
-			barcode = BarcodeFactory.create2of7(numeroTck);
+			barcode = BarcodeFactory.createCode128(numeroTck);
 			barcode.setBarHeight(30);
 			barcode.setBarWidth(1);
 

@@ -27,7 +27,6 @@ import java.io.IOException;
 import java.awt.Graphics;
 import java.awt.Insets;
 import javax.swing.JTextPane;
-import java.awt.Toolkit;
 import java.awt.Font;
 
 @SuppressWarnings("serial")
@@ -40,26 +39,32 @@ public class PrintTicketTest extends JFrame {
 	private Barcode barcode;
 	@SuppressWarnings("unused")
 	private static String impersora;
+	private JPanel panel_1;
+	private Barcode barcode_1;
+	private JPanel panel_2;
+	private Barcode barcode_2;
+	private JPanel panel_3;
+	private Barcode barcode_3;
 
 	
 	/**
 	 * Launch the application.
 	 */
-//	public static void main(String[] args) {
-//		try {
-//			PrintTicketTest dialog = new PrintTicketTest();
-//		} catch (Exception e) {
-//			e.printStackTrace();
-//		}
-//	}
+	@SuppressWarnings("unused")
+	public static void main(String[] args) {
+		try {
+			PrintTicketTest dialog = new PrintTicketTest();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
 	
 
 	public PrintTicketTest() {
-		setIconImage(Toolkit.getDefaultToolkit().getImage(
-				PrintTicketTest.class.getResource("/image/printer.png")));
+
 		setResizable(false);
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-		setBounds(100, 100, 128, 300);
+		setBounds(100, 100, 243, 507);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
@@ -68,10 +73,10 @@ public class PrintTicketTest extends JFrame {
 		try {
 			GridBagLayout gbl_contentPane = new GridBagLayout();
 			gbl_contentPane.columnWidths = new int[] { 168, 0 };
-			gbl_contentPane.rowHeights = new int[] { 185, 64, 0 };
+			gbl_contentPane.rowHeights = new int[] { 185, 64, 0, 0, 0, 0 };
 			gbl_contentPane.columnWeights = new double[] { 1.0,
 					Double.MIN_VALUE };
-			gbl_contentPane.rowWeights = new double[] { 1.0, 0.0,
+			gbl_contentPane.rowWeights = new double[] { 0.0, 0.0, 0.0, 0.0, 1.0,
 					Double.MIN_VALUE };
 			contentPane.setLayout(gbl_contentPane);
 
@@ -84,10 +89,10 @@ public class PrintTicketTest extends JFrame {
 			contentPane.add(panelAttributes, gbc_panelAttributes);
 			GridBagLayout gbl_panelAttributes = new GridBagLayout();
 			gbl_panelAttributes.columnWidths = new int[] { 116, 0 };
-			gbl_panelAttributes.rowHeights = new int[] { 22, 0 };
+			gbl_panelAttributes.rowHeights = new int[] { 203, 0 };
 			gbl_panelAttributes.columnWeights = new double[] { 1.0,
 					Double.MIN_VALUE };
-			gbl_panelAttributes.rowWeights = new double[] { 1.0,
+			gbl_panelAttributes.rowWeights = new double[] { 0.0,
 					Double.MIN_VALUE };
 			panelAttributes.setLayout(gbl_panelAttributes);
 
@@ -104,7 +109,8 @@ public class PrintTicketTest extends JFrame {
 
 			panel = new JPanel();
 			GridBagConstraints gbc_panel = new GridBagConstraints();
-			gbc_panel.anchor = GridBagConstraints.SOUTHWEST;
+			gbc_panel.insets = new Insets(0, 0, 5, 0);
+			gbc_panel.fill = GridBagConstraints.VERTICAL;
 			gbc_panel.gridx = 0;
 			gbc_panel.gridy = 1;
 			contentPane.add(panel, gbc_panel);
@@ -117,6 +123,44 @@ public class PrintTicketTest extends JFrame {
 			barcode.setBarWidth(1);
 
 			panel.add(barcode);
+			
+			panel_1 = new JPanel();
+			GridBagConstraints gbc_panel_1 = new GridBagConstraints();
+			gbc_panel_1.insets = new Insets(0, 0, 5, 0);
+			gbc_panel_1.fill = GridBagConstraints.VERTICAL;
+			gbc_panel_1.gridx = 0;
+			gbc_panel_1.gridy = 2;
+			contentPane.add(panel_1, gbc_panel_1);
+			
+			barcode_1 = BarcodeFactory.createCode128("123456789");
+			barcode_1.setBarWidth(1);
+			barcode_1.setBarHeight(30);
+			panel_1.add(barcode_1);
+			
+			panel_2 = new JPanel();
+			GridBagConstraints gbc_panel_2 = new GridBagConstraints();
+			gbc_panel_2.insets = new Insets(0, 0, 5, 0);
+			gbc_panel_2.fill = GridBagConstraints.VERTICAL;
+			gbc_panel_2.gridx = 0;
+			gbc_panel_2.gridy = 3;
+			contentPane.add(panel_2, gbc_panel_2);
+			
+			barcode_2 = BarcodeFactory.createCode128A("123456789");
+			barcode_2.setBarWidth(1);
+			barcode_2.setBarHeight(30);
+			panel_2.add(barcode_2);
+			
+			panel_3 = new JPanel();
+			GridBagConstraints gbc_panel_3 = new GridBagConstraints();
+			gbc_panel_3.fill = GridBagConstraints.VERTICAL;
+			gbc_panel_3.gridx = 0;
+			gbc_panel_3.gridy = 4;
+			contentPane.add(panel_3, gbc_panel_3);
+			
+			barcode_3 = BarcodeFactory.createCode128B("123456789");
+			barcode_3.setBarWidth(1);
+			barcode_3.setBarHeight(30);
+			panel_3.add(barcode_3);
 			this.setVisible(true);
 			printWork(this);
 			
@@ -216,7 +260,7 @@ public class PrintTicketTest extends JFrame {
 			pj.setPrintService(printerTouse);
 			
 			PrintRequestAttributeSet aset= new HashPrintRequestAttributeSet();
-		    aset.add(new MediaPrintableArea(100,400,210,160,Size2DSyntax.MM));
+		    aset.add(new MediaPrintableArea(0,0,210,160,Size2DSyntax.MM));
 			
 			pj.print(aset);
 			
