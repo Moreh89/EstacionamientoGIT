@@ -174,16 +174,111 @@ tiempoMinimo,tiempoFraccion,tiempoMediaEstadia_minuto,tiempoEstadia_minuto,Categ
 SET IDENTITY_INSERT CuentaCorriente ON
  
  
-INSERT INTO CuentaCorriente (idCuentaCorriente) values (1)
-INSERT INTO CuentaCorriente (idCuentaCorriente) values (2)
-INSERT INTO CuentaCorriente (idCuentaCorriente) values (3)
-INSERT INTO CuentaCorriente (idCuentaCorriente) values (4)
-INSERT INTO CuentaCorriente (idCuentaCorriente) values (5)
-INSERT INTO CuentaCorriente (idCuentaCorriente) values (6)
+INSERT INTO CuentaCorriente idCuentaCorriente) values 1)
+INSERT INTO CuentaCorriente idCuentaCorriente) values 2)
+INSERT INTO CuentaCorriente idCuentaCorriente) values 3)
+INSERT INTO CuentaCorriente idCuentaCorriente) values 4)
+INSERT INTO CuentaCorriente idCuentaCorriente) values 5)
+INSERT INTO CuentaCorriente idCuentaCorriente) values 6)
+INSERT INTO CuentaCorriente idCuentaCorriente) values 7)
+INSERT INTO CuentaCorriente idCuentaCorriente) values 8)
+INSERT INTO CuentaCorriente idCuentaCorriente) values 9)
+INSERT INTO CuentaCorriente idCuentaCorriente) values 10)
+INSERT INTO CuentaCorriente idCuentaCorriente) values 11)
+INSERT INTO CuentaCorriente idCuentaCorriente) values 12)
+INSERT INTO CuentaCorriente idCuentaCorriente) values 13)
+INSERT INTO CuentaCorriente idCuentaCorriente) values 14)
+INSERT INTO CuentaCorriente idCuentaCorriente) values 15)
+INSERT INTO CuentaCorriente idCuentaCorriente) values 16)
+INSERT INTO CuentaCorriente idCuentaCorriente) values 17)
+INSERT INTO CuentaCorriente idCuentaCorriente) values 18)
+INSERT INTO CuentaCorriente idCuentaCorriente) values 19)
+INSERT INTO CuentaCorriente idCuentaCorriente) values 20)
+INSERT INTO CuentaCorriente idCuentaCorriente) values 21)
+INSERT INTO CuentaCorriente idCuentaCorriente) values 22)
+INSERT INTO CuentaCorriente idCuentaCorriente) values 23)
+INSERT INTO CuentaCorriente idCuentaCorriente) values 24)
+INSERT INTO CuentaCorriente idCuentaCorriente) values 25)
+INSERT INTO CuentaCorriente idCuentaCorriente) values 26)
+INSERT INTO CuentaCorriente idCuentaCorriente) values 27)
+INSERT INTO CuentaCorriente idCuentaCorriente) values 28)
+INSERT INTO CuentaCorriente idCuentaCorriente) values 29)
+INSERT INTO CuentaCorriente idCuentaCorriente) values 30)
+INSERT INTO CuentaCorriente idCuentaCorriente) values 31)
+INSERT INTO CuentaCorriente idCuentaCorriente) values 32)
+INSERT INTO CuentaCorriente idCuentaCorriente) values 33)
+INSERT INTO CuentaCorriente idCuentaCorriente) values 34)
+INSERT INTO CuentaCorriente idCuentaCorriente) values 35)
+INSERT INTO CuentaCorriente idCuentaCorriente) values 36)
+INSERT INTO CuentaCorriente idCuentaCorriente) values 37)
+INSERT INTO CuentaCorriente idCuentaCorriente) values 38)
+INSERT INTO CuentaCorriente idCuentaCorriente) values 39)
+INSERT INTO CuentaCorriente idCuentaCorriente) values 40)
+INSERT INTO CuentaCorriente idCuentaCorriente) values 41)
+INSERT INTO CuentaCorriente idCuentaCorriente) values 42)
+INSERT INTO CuentaCorriente idCuentaCorriente) values 43)
+INSERT INTO CuentaCorriente idCuentaCorriente) values 44)
+INSERT INTO CuentaCorriente idCuentaCorriente) values 45)
+INSERT INTO CuentaCorriente idCuentaCorriente) values 46)
+INSERT INTO CuentaCorriente idCuentaCorriente) values 47)
+INSERT INTO CuentaCorriente idCuentaCorriente) values 48)
+INSERT INTO CuentaCorriente idCuentaCorriente) values 49)
+INSERT INTO CuentaCorriente idCuentaCorriente) values 50)
+INSERT INTO CuentaCorriente idCuentaCorriente) values 51)
+INSERT INTO CuentaCorriente idCuentaCorriente) values 52)
+INSERT INTO CuentaCorriente idCuentaCorriente) values 53)
+INSERT INTO CuentaCorriente idCuentaCorriente) values 54)
+INSERT INTO CuentaCorriente idCuentaCorriente) values 55)
+INSERT INTO CuentaCorriente idCuentaCorriente) values 56)
+INSERT INTO CuentaCorriente idCuentaCorriente) values 57)
+INSERT INTO CuentaCorriente idCuentaCorriente) values 58)
+INSERT INTO CuentaCorriente idCuentaCorriente) values 59)
+INSERT INTO CuentaCorriente idCuentaCorriente) values 60)
+INSERT INTO CuentaCorriente idCuentaCorriente) values 61)
+INSERT INTO CuentaCorriente idCuentaCorriente) values 62)
+INSERT INTO CuentaCorriente idCuentaCorriente) values 63)
+INSERT INTO CuentaCorriente idCuentaCorriente) values 64)
+INSERT INTO CuentaCorriente idCuentaCorriente) values 65)
+INSERT INTO CuentaCorriente idCuentaCorriente) values 66)
+INSERT INTO CuentaCorriente idCuentaCorriente) values 67)
+INSERT INTO CuentaCorriente idCuentaCorriente) values 68)
+INSERT INTO CuentaCorriente idCuentaCorriente) values 69)
+INSERT INTO CuentaCorriente idCuentaCorriente) values 70)
+INSERT INTO CuentaCorriente idCuentaCorriente) values 71)
+INSERT INTO CuentaCorriente idCuentaCorriente) values 72)
+INSERT INTO CuentaCorriente idCuentaCorriente) values 73)
+INSERT INTO CuentaCorriente idCuentaCorriente) values 74)
+INSERT INTO CuentaCorriente idCuentaCorriente) values 75)
+INSERT INTO CuentaCorriente idCuentaCorriente) values 76)
+INSERT INTO CuentaCorriente idCuentaCorriente) values 77)
+INSERT INTO CuentaCorriente idCuentaCorriente) values 78)
+INSERT INTO CuentaCorriente idCuentaCorriente) values 79)
+INSERT INTO CuentaCorriente idCuentaCorriente) values 80)
+INSERT INTO CuentaCorriente idCuentaCorriente) values 81)
+INSERT INTO CuentaCorriente idCuentaCorriente) values 82)
+INSERT INTO CuentaCorriente idCuentaCorriente) values 83)
+INSERT INTO CuentaCorriente idCuentaCorriente) values 84)
+INSERT INTO CuentaCorriente idCuentaCorriente) values 85)
+INSERT INTO CuentaCorriente idCuentaCorriente) values 86)
+INSERT INTO CuentaCorriente idCuentaCorriente) values 87)
+INSERT INTO CuentaCorriente idCuentaCorriente) values 88)
+INSERT INTO CuentaCorriente idCuentaCorriente) values 89)
+INSERT INTO CuentaCorriente idCuentaCorriente) values 90)
+INSERT INTO CuentaCorriente idCuentaCorriente) values 91)
+INSERT INTO CuentaCorriente idCuentaCorriente) values 92)
+INSERT INTO CuentaCorriente idCuentaCorriente) values 93)
+INSERT INTO CuentaCorriente idCuentaCorriente) values 94)
+INSERT INTO CuentaCorriente idCuentaCorriente) values 95)
+INSERT INTO CuentaCorriente idCuentaCorriente) values 96)
+INSERT INTO CuentaCorriente idCuentaCorriente) values 97)
+INSERT INTO CuentaCorriente idCuentaCorriente) values 98)
+INSERT INTO CuentaCorriente idCuentaCorriente) values 99)
+INSERT INTO CuentaCorriente idCuentaCorriente) values 100)
+
+
  
 SET IDENTITY_INSERT CuentaCorriente OFF
- 
-INSERT INTO Cliente (apellido, correoElectronico,cuil,descripcion,direccion,estado,nombre,numeroDocumento,telefono1,tipoCliente,tipoDocumento, CuentaCorriente, tipoFactura)
+ INSERT INTO Cliente (apellido, correoElectronico,cuil,descripcion,direccion,estado,nombre,numeroDocumento,telefono1,tipoCliente,tipoDocumento, CuentaCorriente, tipoFactura)
 VALUES ('Silva', 'nano@gmail.com','22285642896','Description','Alba 123',1,'Mario','28564289','42545569',0,1,1,0);
 INSERT INTO Cliente (apellido, correoElectronico,cuil,descripcion,direccion,estado,nombre,numeroDocumento,telefono1,tipoCliente,tipoDocumento, CuentaCorriente, tipoFactura)
 VALUES ('Garcia', 'charly@me.com','23186583252','Description','Cordoba 532 3H',1,'Charly','18658325','42646666',0,1,2,1);
@@ -195,7 +290,194 @@ INSERT INTO Cliente (apellido, correoElectronico,cuil,descripcion,direccion,esta
 VALUES ('Gomez', 'santiago@outlook.com','23346660009','Description','Gral Hornos 1200',1,'Santiago','34666000','115782354',3,1,5,0);
 INSERT INTO Cliente (apellido, correoElectronico,cuil,descripcion,direccion,estado,nombre,numeroDocumento,telefono1,tipoCliente,tipoDocumento, CuentaCorriente, tipoFactura)
 VALUES ('Tevez', 'carlitos@outlook.com','23233440229','Description','Alvear 623',1,'Carlos','23344022','115782354',4,1,6,1);
- 
+INSERT INTO Cliente (apellido, correoElectronico,cuil,descripcion,direccion,estado,nombre,numeroDocumento,telefono1,tipoCliente,tipoDocumento, CuentaCorriente, tipoFactura)
+VALUES ('Silva', 'nano@gmail.com','22285642896','Description','Alba 123',1,'Mario','28564289','42545569',0,1,7,0);
+INSERT INTO Cliente (apellido, correoElectronico,cuil,descripcion,direccion,estado,nombre,numeroDocumento,telefono1,tipoCliente,tipoDocumento, CuentaCorriente, tipoFactura)
+VALUES ('Garcia', 'charly@me.com','23186583252','Description','Cordoba 532 3H',1,'Charly','18658325','42646666',0,1,8,1);
+INSERT INTO Cliente (apellido, correoElectronico,cuil,descripcion,direccion,estado,nombre,numeroDocumento,telefono1,tipoCliente,tipoDocumento, CuentaCorriente, tipoFactura)
+VALUES ('Fernandez', 'omar@yahoo.com','20156879526','Description','Amoedo 7895 PB1',1,'Omar','15687952','116049633',1,1,9,2);
+INSERT INTO Cliente (apellido, correoElectronico,cuil,descripcion,direccion,estado,nombre,numeroDocumento,telefono1,tipoCliente,tipoDocumento, CuentaCorriente, tipoFactura)
+VALUES ('Perez', 'martin@me.com','23336678902','Description','Lima 1200',1,'Pablo','33667890','116987820',1,1,10,3);
+INSERT INTO Cliente (apellido, correoElectronico,cuil,descripcion,direccion,estado,nombre,numeroDocumento,telefono1,tipoCliente,tipoDocumento, CuentaCorriente, tipoFactura)
+VALUES ('Gomez', 'santiago@outlook.com','23346660009','Description','Gral Hornos 1200',1,'Santiago','34666000','115782354',3,1,11,0);
+INSERT INTO Cliente (apellido, correoElectronico,cuil,descripcion,direccion,estado,nombre,numeroDocumento,telefono1,tipoCliente,tipoDocumento, CuentaCorriente, tipoFactura)
+VALUES ('Tevez', 'carlitos@outlook.com','23233440229','Description','Alvear 623',1,'Carlos','23344022','115782354',4,1,12,1);
+INSERT INTO Cliente (apellido, correoElectronico,cuil,descripcion,direccion,estado,nombre,numeroDocumento,telefono1,tipoCliente,tipoDocumento, CuentaCorriente, tipoFactura)
+VALUES ('Silva', 'nano@gmail.com','22285642896','Description','Alba 123',1,'Mario','28564289','42545569',0,1,13,0);
+INSERT INTO Cliente (apellido, correoElectronico,cuil,descripcion,direccion,estado,nombre,numeroDocumento,telefono1,tipoCliente,tipoDocumento, CuentaCorriente, tipoFactura)
+VALUES ('Garcia', 'charly@me.com','23186583252','Description','Cordoba 532 3H',1,'Charly','18658325','42646666',0,1,14,1);
+INSERT INTO Cliente (apellido, correoElectronico,cuil,descripcion,direccion,estado,nombre,numeroDocumento,telefono1,tipoCliente,tipoDocumento, CuentaCorriente, tipoFactura)
+VALUES ('Fernandez', 'omar@yahoo.com','20156879526','Description','Amoedo 7895 PB1',1,'Omar','15687952','116049633',1,1,15,2);
+INSERT INTO Cliente (apellido, correoElectronico,cuil,descripcion,direccion,estado,nombre,numeroDocumento,telefono1,tipoCliente,tipoDocumento, CuentaCorriente, tipoFactura)
+VALUES ('Perez', 'martin@me.com','23336678902','Description','Lima 1200',1,'Pablo','33667890','116987820',1,1,16,3);
+INSERT INTO Cliente (apellido, correoElectronico,cuil,descripcion,direccion,estado,nombre,numeroDocumento,telefono1,tipoCliente,tipoDocumento, CuentaCorriente, tipoFactura)
+VALUES ('Gomez', 'santiago@outlook.com','23346660009','Description','Gral Hornos 1200',1,'Santiago','34666000','115782354',3,1,17,0);
+INSERT INTO Cliente (apellido, correoElectronico,cuil,descripcion,direccion,estado,nombre,numeroDocumento,telefono1,tipoCliente,tipoDocumento, CuentaCorriente, tipoFactura)
+VALUES ('Tevez', 'carlitos@outlook.com','23233440229','Description','Alvear 623',1,'Carlos','23344022','115782354',4,1,18,1);
+INSERT INTO Cliente (apellido, correoElectronico,cuil,descripcion,direccion,estado,nombre,numeroDocumento,telefono1,tipoCliente,tipoDocumento, CuentaCorriente, tipoFactura)
+VALUES ('Silva', 'nano@gmail.com','22285642896','Description','Alba 123',1,'Mario','28564289','42545569',0,1,19,0);
+INSERT INTO Cliente (apellido, correoElectronico,cuil,descripcion,direccion,estado,nombre,numeroDocumento,telefono1,tipoCliente,tipoDocumento, CuentaCorriente, tipoFactura)
+VALUES ('Garcia', 'charly@me.com','23186583252','Description','Cordoba 532 3H',1,'Charly','18658325','42646666',0,1,20,1);
+INSERT INTO Cliente (apellido, correoElectronico,cuil,descripcion,direccion,estado,nombre,numeroDocumento,telefono1,tipoCliente,tipoDocumento, CuentaCorriente, tipoFactura)
+VALUES ('Fernandez', 'omar@yahoo.com','20156879526','Description','Amoedo 7895 PB1',1,'Omar','15687952','116049633',1,1,21,2);
+INSERT INTO Cliente (apellido, correoElectronico,cuil,descripcion,direccion,estado,nombre,numeroDocumento,telefono1,tipoCliente,tipoDocumento, CuentaCorriente, tipoFactura)
+VALUES ('Perez', 'martin@me.com','23336678902','Description','Lima 1200',1,'Pablo','33667890','116987820',1,1,22,3);
+INSERT INTO Cliente (apellido, correoElectronico,cuil,descripcion,direccion,estado,nombre,numeroDocumento,telefono1,tipoCliente,tipoDocumento, CuentaCorriente, tipoFactura)
+VALUES ('Gomez', 'santiago@outlook.com','23346660009','Description','Gral Hornos 1200',1,'Santiago','34666000','115782354',3,1,23,0);
+INSERT INTO Cliente (apellido, correoElectronico,cuil,descripcion,direccion,estado,nombre,numeroDocumento,telefono1,tipoCliente,tipoDocumento, CuentaCorriente, tipoFactura)
+VALUES ('Tevez', 'carlitos@outlook.com','23233440229','Description','Alvear 623',1,'Carlos','23344022','115782354',4,1,24,1);
+INSERT INTO Cliente (apellido, correoElectronico,cuil,descripcion,direccion,estado,nombre,numeroDocumento,telefono1,tipoCliente,tipoDocumento, CuentaCorriente, tipoFactura)
+VALUES ('Silva', 'nano@gmail.com','22285642896','Description','Alba 123',1,'Mario','28564289','42545569',0,1,25,0);
+INSERT INTO Cliente (apellido, correoElectronico,cuil,descripcion,direccion,estado,nombre,numeroDocumento,telefono1,tipoCliente,tipoDocumento, CuentaCorriente, tipoFactura)
+VALUES ('Garcia', 'charly@me.com','23186583252','Description','Cordoba 532 3H',1,'Charly','18658325','42646666',0,1,26,1);
+INSERT INTO Cliente (apellido, correoElectronico,cuil,descripcion,direccion,estado,nombre,numeroDocumento,telefono1,tipoCliente,tipoDocumento, CuentaCorriente, tipoFactura)
+VALUES ('Fernandez', 'omar@yahoo.com','20156879526','Description','Amoedo 7895 PB1',1,'Omar','15687952','116049633',1,1,27,2);
+INSERT INTO Cliente (apellido, correoElectronico,cuil,descripcion,direccion,estado,nombre,numeroDocumento,telefono1,tipoCliente,tipoDocumento, CuentaCorriente, tipoFactura)
+VALUES ('Perez', 'martin@me.com','23336678902','Description','Lima 1200',1,'Pablo','33667890','116987820',1,1,28,3);
+INSERT INTO Cliente (apellido, correoElectronico,cuil,descripcion,direccion,estado,nombre,numeroDocumento,telefono1,tipoCliente,tipoDocumento, CuentaCorriente, tipoFactura)
+VALUES ('Gomez', 'santiago@outlook.com','23346660009','Description','Gral Hornos 1200',1,'Santiago','34666000','115782354',3,1,29,0);
+INSERT INTO Cliente (apellido, correoElectronico,cuil,descripcion,direccion,estado,nombre,numeroDocumento,telefono1,tipoCliente,tipoDocumento, CuentaCorriente, tipoFactura)
+VALUES ('Tevez', 'carlitos@outlook.com','23233440229','Description','Alvear 623',1,'Carlos','23344022','115782354',4,1,30,1);
+INSERT INTO Cliente (apellido, correoElectronico,cuil,descripcion,direccion,estado,nombre,numeroDocumento,telefono1,tipoCliente,tipoDocumento, CuentaCorriente, tipoFactura)
+VALUES ('Silva', 'nano@gmail.com','22285642896','Description','Alba 123',1,'Mario','28564289','42545569',0,1,31,0);
+INSERT INTO Cliente (apellido, correoElectronico,cuil,descripcion,direccion,estado,nombre,numeroDocumento,telefono1,tipoCliente,tipoDocumento, CuentaCorriente, tipoFactura)
+VALUES ('Garcia', 'charly@me.com','23186583252','Description','Cordoba 532 3H',1,'Charly','18658325','42646666',0,1,32,1);
+INSERT INTO Cliente (apellido, correoElectronico,cuil,descripcion,direccion,estado,nombre,numeroDocumento,telefono1,tipoCliente,tipoDocumento, CuentaCorriente, tipoFactura)
+VALUES ('Fernandez', 'omar@yahoo.com','20156879526','Description','Amoedo 7895 PB1',1,'Omar','15687952','116049633',1,1,33,2);
+INSERT INTO Cliente (apellido, correoElectronico,cuil,descripcion,direccion,estado,nombre,numeroDocumento,telefono1,tipoCliente,tipoDocumento, CuentaCorriente, tipoFactura)
+VALUES ('Perez', 'martin@me.com','23336678902','Description','Lima 1200',1,'Pablo','33667890','116987820',1,1,34,3);
+INSERT INTO Cliente (apellido, correoElectronico,cuil,descripcion,direccion,estado,nombre,numeroDocumento,telefono1,tipoCliente,tipoDocumento, CuentaCorriente, tipoFactura)
+VALUES ('Gomez', 'santiago@outlook.com','23346660009','Description','Gral Hornos 1200',1,'Santiago','34666000','115782354',3,1,35,0);
+INSERT INTO Cliente (apellido, correoElectronico,cuil,descripcion,direccion,estado,nombre,numeroDocumento,telefono1,tipoCliente,tipoDocumento, CuentaCorriente, tipoFactura)
+VALUES ('Tevez', 'carlitos@outlook.com','23233440229','Description','Alvear 623',1,'Carlos','23344022','115782354',4,1,36,1);
+INSERT INTO Cliente (apellido, correoElectronico,cuil,descripcion,direccion,estado,nombre,numeroDocumento,telefono1,tipoCliente,tipoDocumento, CuentaCorriente, tipoFactura)
+VALUES ('Silva', 'nano@gmail.com','22285642896','Description','Alba 123',1,'Mario','28564289','42545569',0,1,37,0);
+INSERT INTO Cliente (apellido, correoElectronico,cuil,descripcion,direccion,estado,nombre,numeroDocumento,telefono1,tipoCliente,tipoDocumento, CuentaCorriente, tipoFactura)
+VALUES ('Garcia', 'charly@me.com','23186583252','Description','Cordoba 532 3H',1,'Charly','18658325','42646666',0,1,38,1);
+INSERT INTO Cliente (apellido, correoElectronico,cuil,descripcion,direccion,estado,nombre,numeroDocumento,telefono1,tipoCliente,tipoDocumento, CuentaCorriente, tipoFactura)
+VALUES ('Fernandez', 'omar@yahoo.com','20156879526','Description','Amoedo 7895 PB1',1,'Omar','15687952','116049633',1,1,39,2);
+INSERT INTO Cliente (apellido, correoElectronico,cuil,descripcion,direccion,estado,nombre,numeroDocumento,telefono1,tipoCliente,tipoDocumento, CuentaCorriente, tipoFactura)
+VALUES ('Perez', 'martin@me.com','23336678902','Description','Lima 1200',1,'Pablo','33667890','116987820',1,1,40,3);
+INSERT INTO Cliente (apellido, correoElectronico,cuil,descripcion,direccion,estado,nombre,numeroDocumento,telefono1,tipoCliente,tipoDocumento, CuentaCorriente, tipoFactura)
+VALUES ('Gomez', 'santiago@outlook.com','23346660009','Description','Gral Hornos 1200',1,'Santiago','34666000','115782354',3,1,41,0);
+INSERT INTO Cliente (apellido, correoElectronico,cuil,descripcion,direccion,estado,nombre,numeroDocumento,telefono1,tipoCliente,tipoDocumento, CuentaCorriente, tipoFactura)
+VALUES ('Tevez', 'carlitos@outlook.com','23233440229','Description','Alvear 623',1,'Carlos','23344022','115782354',4,1,42,1);
+INSERT INTO Cliente (apellido, correoElectronico,cuil,descripcion,direccion,estado,nombre,numeroDocumento,telefono1,tipoCliente,tipoDocumento, CuentaCorriente, tipoFactura)
+VALUES ('Silva', 'nano@gmail.com','22285642896','Description','Alba 123',1,'Mario','28564289','42545569',0,1,43,0);
+INSERT INTO Cliente (apellido, correoElectronico,cuil,descripcion,direccion,estado,nombre,numeroDocumento,telefono1,tipoCliente,tipoDocumento, CuentaCorriente, tipoFactura)
+VALUES ('Garcia', 'charly@me.com','23186583252','Description','Cordoba 532 3H',1,'Charly','18658325','42646666',0,1,44,1);
+INSERT INTO Cliente (apellido, correoElectronico,cuil,descripcion,direccion,estado,nombre,numeroDocumento,telefono1,tipoCliente,tipoDocumento, CuentaCorriente, tipoFactura)
+VALUES ('Fernandez', 'omar@yahoo.com','20156879526','Description','Amoedo 7895 PB1',1,'Omar','15687952','116049633',1,1,45,2);
+INSERT INTO Cliente (apellido, correoElectronico,cuil,descripcion,direccion,estado,nombre,numeroDocumento,telefono1,tipoCliente,tipoDocumento, CuentaCorriente, tipoFactura)
+VALUES ('Perez', 'martin@me.com','23336678902','Description','Lima 1200',1,'Pablo','33667890','116987820',1,1,46,3);
+INSERT INTO Cliente (apellido, correoElectronico,cuil,descripcion,direccion,estado,nombre,numeroDocumento,telefono1,tipoCliente,tipoDocumento, CuentaCorriente, tipoFactura)
+VALUES ('Gomez', 'santiago@outlook.com','23346660009','Description','Gral Hornos 1200',1,'Santiago','34666000','115782354',3,1,47,0);
+INSERT INTO Cliente (apellido, correoElectronico,cuil,descripcion,direccion,estado,nombre,numeroDocumento,telefono1,tipoCliente,tipoDocumento, CuentaCorriente, tipoFactura)
+VALUES ('Tevez', 'carlitos@outlook.com','23233440229','Description','Alvear 623',1,'Carlos','23344022','115782354',4,1,48,1);
+INSERT INTO Cliente (apellido, correoElectronico,cuil,descripcion,direccion,estado,nombre,numeroDocumento,telefono1,tipoCliente,tipoDocumento, CuentaCorriente, tipoFactura)
+VALUES ('Silva', 'nano@gmail.com','22285642896','Description','Alba 123',1,'Mario','28564289','42545569',0,1,49,0);
+INSERT INTO Cliente (apellido, correoElectronico,cuil,descripcion,direccion,estado,nombre,numeroDocumento,telefono1,tipoCliente,tipoDocumento, CuentaCorriente, tipoFactura)
+VALUES ('Garcia', 'charly@me.com','23186583252','Description','Cordoba 532 3H',1,'Charly','18658325','42646666',0,1,50,1);
+INSERT INTO Cliente (apellido, correoElectronico,cuil,descripcion,direccion,estado,nombre,numeroDocumento,telefono1,tipoCliente,tipoDocumento, CuentaCorriente, tipoFactura)
+VALUES ('Fernandez', 'omar@yahoo.com','20156879526','Description','Amoedo 7895 PB1',1,'Omar','15687952','116049633',1,1,51,2);
+INSERT INTO Cliente (apellido, correoElectronico,cuil,descripcion,direccion,estado,nombre,numeroDocumento,telefono1,tipoCliente,tipoDocumento, CuentaCorriente, tipoFactura)
+VALUES ('Perez', 'martin@me.com','23336678902','Description','Lima 1200',1,'Pablo','33667890','116987820',1,1,52,3);
+INSERT INTO Cliente (apellido, correoElectronico,cuil,descripcion,direccion,estado,nombre,numeroDocumento,telefono1,tipoCliente,tipoDocumento, CuentaCorriente, tipoFactura)
+VALUES ('Gomez', 'santiago@outlook.com','23346660009','Description','Gral Hornos 1200',1,'Santiago','34666000','115782354',3,1,53,0);
+INSERT INTO Cliente (apellido, correoElectronico,cuil,descripcion,direccion,estado,nombre,numeroDocumento,telefono1,tipoCliente,tipoDocumento, CuentaCorriente, tipoFactura)
+VALUES ('Tevez', 'carlitos@outlook.com','23233440229','Description','Alvear 623',1,'Carlos','23344022','115782354',4,1,54,1);
+INSERT INTO Cliente (apellido, correoElectronico,cuil,descripcion,direccion,estado,nombre,numeroDocumento,telefono1,tipoCliente,tipoDocumento, CuentaCorriente, tipoFactura)
+VALUES ('Silva', 'nano@gmail.com','22285642896','Description','Alba 123',1,'Mario','28564289','42545569',0,1,55,0);
+INSERT INTO Cliente (apellido, correoElectronico,cuil,descripcion,direccion,estado,nombre,numeroDocumento,telefono1,tipoCliente,tipoDocumento, CuentaCorriente, tipoFactura)
+VALUES ('Garcia', 'charly@me.com','23186583252','Description','Cordoba 532 3H',1,'Charly','18658325','42646666',0,1,56,1);
+INSERT INTO Cliente (apellido, correoElectronico,cuil,descripcion,direccion,estado,nombre,numeroDocumento,telefono1,tipoCliente,tipoDocumento, CuentaCorriente, tipoFactura)
+VALUES ('Fernandez', 'omar@yahoo.com','20156879526','Description','Amoedo 7895 PB1',1,'Omar','15687952','116049633',1,1,57,2);
+INSERT INTO Cliente (apellido, correoElectronico,cuil,descripcion,direccion,estado,nombre,numeroDocumento,telefono1,tipoCliente,tipoDocumento, CuentaCorriente, tipoFactura)
+VALUES ('Perez', 'martin@me.com','23336678902','Description','Lima 1200',1,'Pablo','33667890','116987820',1,1,58,3);
+INSERT INTO Cliente (apellido, correoElectronico,cuil,descripcion,direccion,estado,nombre,numeroDocumento,telefono1,tipoCliente,tipoDocumento, CuentaCorriente, tipoFactura)
+VALUES ('Gomez', 'santiago@outlook.com','23346660009','Description','Gral Hornos 1200',1,'Santiago','34666000','115782354',3,1,59,0);
+INSERT INTO Cliente (apellido, correoElectronico,cuil,descripcion,direccion,estado,nombre,numeroDocumento,telefono1,tipoCliente,tipoDocumento, CuentaCorriente, tipoFactura)
+VALUES ('Tevez', 'carlitos@outlook.com','23233440229','Description','Alvear 623',1,'Carlos','23344022','115782354',4,1,60,1);
+INSERT INTO Cliente (apellido, correoElectronico,cuil,descripcion,direccion,estado,nombre,numeroDocumento,telefono1,tipoCliente,tipoDocumento, CuentaCorriente, tipoFactura)
+VALUES ('Silva', 'nano@gmail.com','22285642896','Description','Alba 123',1,'Mario','28564289','42545569',0,1,61,0);
+INSERT INTO Cliente (apellido, correoElectronico,cuil,descripcion,direccion,estado,nombre,numeroDocumento,telefono1,tipoCliente,tipoDocumento, CuentaCorriente, tipoFactura)
+VALUES ('Garcia', 'charly@me.com','23186583252','Description','Cordoba 532 3H',1,'Charly','18658325','42646666',0,1,62,1);
+INSERT INTO Cliente (apellido, correoElectronico,cuil,descripcion,direccion,estado,nombre,numeroDocumento,telefono1,tipoCliente,tipoDocumento, CuentaCorriente, tipoFactura)
+VALUES ('Fernandez', 'omar@yahoo.com','20156879526','Description','Amoedo 7895 PB1',1,'Omar','15687952','116049633',1,1,63,2);
+INSERT INTO Cliente (apellido, correoElectronico,cuil,descripcion,direccion,estado,nombre,numeroDocumento,telefono1,tipoCliente,tipoDocumento, CuentaCorriente, tipoFactura)
+VALUES ('Perez', 'martin@me.com','23336678902','Description','Lima 1200',1,'Pablo','33667890','116987820',1,1,64,3);
+INSERT INTO Cliente (apellido, correoElectronico,cuil,descripcion,direccion,estado,nombre,numeroDocumento,telefono1,tipoCliente,tipoDocumento, CuentaCorriente, tipoFactura)
+VALUES ('Gomez', 'santiago@outlook.com','23346660009','Description','Gral Hornos 1200',1,'Santiago','34666000','115782354',3,1,65,0);
+INSERT INTO Cliente (apellido, correoElectronico,cuil,descripcion,direccion,estado,nombre,numeroDocumento,telefono1,tipoCliente,tipoDocumento, CuentaCorriente, tipoFactura)
+VALUES ('Tevez', 'carlitos@outlook.com','23233440229','Description','Alvear 623',1,'Carlos','23344022','115782354',4,1,66,1);
+INSERT INTO Cliente (apellido, correoElectronico,cuil,descripcion,direccion,estado,nombre,numeroDocumento,telefono1,tipoCliente,tipoDocumento, CuentaCorriente, tipoFactura)
+VALUES ('Silva', 'nano@gmail.com','22285642896','Description','Alba 123',1,'Mario','28564289','42545569',0,1,67,0);
+INSERT INTO Cliente (apellido, correoElectronico,cuil,descripcion,direccion,estado,nombre,numeroDocumento,telefono1,tipoCliente,tipoDocumento, CuentaCorriente, tipoFactura)
+VALUES ('Garcia', 'charly@me.com','23186583252','Description','Cordoba 532 3H',1,'Charly','18658325','42646666',0,1,68,1);
+INSERT INTO Cliente (apellido, correoElectronico,cuil,descripcion,direccion,estado,nombre,numeroDocumento,telefono1,tipoCliente,tipoDocumento, CuentaCorriente, tipoFactura)
+VALUES ('Fernandez', 'omar@yahoo.com','20156879526','Description','Amoedo 7895 PB1',1,'Omar','15687952','116049633',1,1,69,2);
+INSERT INTO Cliente (apellido, correoElectronico,cuil,descripcion,direccion,estado,nombre,numeroDocumento,telefono1,tipoCliente,tipoDocumento, CuentaCorriente, tipoFactura)
+VALUES ('Perez', 'martin@me.com','23336678902','Description','Lima 1200',1,'Pablo','33667890','116987820',1,1,70,3);
+INSERT INTO Cliente (apellido, correoElectronico,cuil,descripcion,direccion,estado,nombre,numeroDocumento,telefono1,tipoCliente,tipoDocumento, CuentaCorriente, tipoFactura)
+VALUES ('Gomez', 'santiago@outlook.com','23346660009','Description','Gral Hornos 1200',1,'Santiago','34666000','115782354',3,1,71,0);
+INSERT INTO Cliente (apellido, correoElectronico,cuil,descripcion,direccion,estado,nombre,numeroDocumento,telefono1,tipoCliente,tipoDocumento, CuentaCorriente, tipoFactura)
+VALUES ('Tevez', 'carlitos@outlook.com','23233440229','Description','Alvear 623',1,'Carlos','23344022','115782354',4,1,72,1);
+INSERT INTO Cliente (apellido, correoElectronico,cuil,descripcion,direccion,estado,nombre,numeroDocumento,telefono1,tipoCliente,tipoDocumento, CuentaCorriente, tipoFactura)
+VALUES ('Silva', 'nano@gmail.com','22285642896','Description','Alba 123',1,'Mario','28564289','42545569',0,1,73,0);
+INSERT INTO Cliente (apellido, correoElectronico,cuil,descripcion,direccion,estado,nombre,numeroDocumento,telefono1,tipoCliente,tipoDocumento, CuentaCorriente, tipoFactura)
+VALUES ('Garcia', 'charly@me.com','23186583252','Description','Cordoba 532 3H',1,'Charly','18658325','42646666',0,1,74,1);
+INSERT INTO Cliente (apellido, correoElectronico,cuil,descripcion,direccion,estado,nombre,numeroDocumento,telefono1,tipoCliente,tipoDocumento, CuentaCorriente, tipoFactura)
+VALUES ('Fernandez', 'omar@yahoo.com','20156879526','Description','Amoedo 7895 PB1',1,'Omar','15687952','116049633',1,1,75,2);
+INSERT INTO Cliente (apellido, correoElectronico,cuil,descripcion,direccion,estado,nombre,numeroDocumento,telefono1,tipoCliente,tipoDocumento, CuentaCorriente, tipoFactura)
+VALUES ('Perez', 'martin@me.com','23336678902','Description','Lima 1200',1,'Pablo','33667890','116987820',1,1,76,3);
+INSERT INTO Cliente (apellido, correoElectronico,cuil,descripcion,direccion,estado,nombre,numeroDocumento,telefono1,tipoCliente,tipoDocumento, CuentaCorriente, tipoFactura)
+VALUES ('Gomez', 'santiago@outlook.com','23346660009','Description','Gral Hornos 1200',1,'Santiago','34666000','115782354',3,1,77,0);
+INSERT INTO Cliente (apellido, correoElectronico,cuil,descripcion,direccion,estado,nombre,numeroDocumento,telefono1,tipoCliente,tipoDocumento, CuentaCorriente, tipoFactura)
+VALUES ('Tevez', 'carlitos@outlook.com','23233440229','Description','Alvear 623',1,'Carlos','23344022','115782354',4,1,78,1);
+INSERT INTO Cliente (apellido, correoElectronico,cuil,descripcion,direccion,estado,nombre,numeroDocumento,telefono1,tipoCliente,tipoDocumento, CuentaCorriente, tipoFactura)
+VALUES ('Silva', 'nano@gmail.com','22285642896','Description','Alba 123',1,'Mario','28564289','42545569',0,1,79,0);
+INSERT INTO Cliente (apellido, correoElectronico,cuil,descripcion,direccion,estado,nombre,numeroDocumento,telefono1,tipoCliente,tipoDocumento, CuentaCorriente, tipoFactura)
+VALUES ('Garcia', 'charly@me.com','23186583252','Description','Cordoba 532 3H',1,'Charly','18658325','42646666',0,1,80,1);
+INSERT INTO Cliente (apellido, correoElectronico,cuil,descripcion,direccion,estado,nombre,numeroDocumento,telefono1,tipoCliente,tipoDocumento, CuentaCorriente, tipoFactura)
+VALUES ('Fernandez', 'omar@yahoo.com','20156879526','Description','Amoedo 7895 PB1',1,'Omar','15687952','116049633',1,1,81,2);
+INSERT INTO Cliente (apellido, correoElectronico,cuil,descripcion,direccion,estado,nombre,numeroDocumento,telefono1,tipoCliente,tipoDocumento, CuentaCorriente, tipoFactura)
+VALUES ('Perez', 'martin@me.com','23336678902','Description','Lima 1200',1,'Pablo','33667890','116987820',1,1,82,3);
+INSERT INTO Cliente (apellido, correoElectronico,cuil,descripcion,direccion,estado,nombre,numeroDocumento,telefono1,tipoCliente,tipoDocumento, CuentaCorriente, tipoFactura)
+VALUES ('Gomez', 'santiago@outlook.com','23346660009','Description','Gral Hornos 1200',1,'Santiago','34666000','115782354',3,1,83,0);
+INSERT INTO Cliente (apellido, correoElectronico,cuil,descripcion,direccion,estado,nombre,numeroDocumento,telefono1,tipoCliente,tipoDocumento, CuentaCorriente, tipoFactura)
+VALUES ('Tevez', 'carlitos@outlook.com','23233440229','Description','Alvear 623',1,'Carlos','23344022','115782354',4,1,84,1);
+INSERT INTO Cliente (apellido, correoElectronico,cuil,descripcion,direccion,estado,nombre,numeroDocumento,telefono1,tipoCliente,tipoDocumento, CuentaCorriente, tipoFactura)
+VALUES ('Silva', 'nano@gmail.com','22285642896','Description','Alba 123',1,'Mario','28564289','42545569',0,1,85,0);
+INSERT INTO Cliente (apellido, correoElectronico,cuil,descripcion,direccion,estado,nombre,numeroDocumento,telefono1,tipoCliente,tipoDocumento, CuentaCorriente, tipoFactura)
+VALUES ('Garcia', 'charly@me.com','23186583252','Description','Cordoba 532 3H',1,'Charly','18658325','42646666',0,1,86,1);
+INSERT INTO Cliente (apellido, correoElectronico,cuil,descripcion,direccion,estado,nombre,numeroDocumento,telefono1,tipoCliente,tipoDocumento, CuentaCorriente, tipoFactura)
+VALUES ('Fernandez', 'omar@yahoo.com','20156879526','Description','Amoedo 7895 PB1',1,'Omar','15687952','116049633',1,1,87,2);
+INSERT INTO Cliente (apellido, correoElectronico,cuil,descripcion,direccion,estado,nombre,numeroDocumento,telefono1,tipoCliente,tipoDocumento, CuentaCorriente, tipoFactura)
+VALUES ('Perez', 'martin@me.com','23336678902','Description','Lima 1200',1,'Pablo','33667890','116987820',1,1,88,3);
+INSERT INTO Cliente (apellido, correoElectronico,cuil,descripcion,direccion,estado,nombre,numeroDocumento,telefono1,tipoCliente,tipoDocumento, CuentaCorriente, tipoFactura)
+VALUES ('Gomez', 'santiago@outlook.com','23346660009','Description','Gral Hornos 1200',1,'Santiago','34666000','115782354',3,1,89,0);
+INSERT INTO Cliente (apellido, correoElectronico,cuil,descripcion,direccion,estado,nombre,numeroDocumento,telefono1,tipoCliente,tipoDocumento, CuentaCorriente, tipoFactura)
+VALUES ('Tevez', 'carlitos@outlook.com','23233440229','Description','Alvear 623',1,'Carlos','23344022','115782354',4,1,90,1);
+INSERT INTO Cliente (apellido, correoElectronico,cuil,descripcion,direccion,estado,nombre,numeroDocumento,telefono1,tipoCliente,tipoDocumento, CuentaCorriente, tipoFactura)
+VALUES ('Silva', 'nano@gmail.com','22285642896','Description','Alba 123',1,'Mario','28564289','42545569',0,1,91,0);
+INSERT INTO Cliente (apellido, correoElectronico,cuil,descripcion,direccion,estado,nombre,numeroDocumento,telefono1,tipoCliente,tipoDocumento, CuentaCorriente, tipoFactura)
+VALUES ('Garcia', 'charly@me.com','23186583252','Description','Cordoba 532 3H',1,'Charly','18658325','42646666',0,1,92,1);
+INSERT INTO Cliente (apellido, correoElectronico,cuil,descripcion,direccion,estado,nombre,numeroDocumento,telefono1,tipoCliente,tipoDocumento, CuentaCorriente, tipoFactura)
+VALUES ('Fernandez', 'omar@yahoo.com','20156879526','Description','Amoedo 7895 PB1',1,'Omar','15687952','116049633',1,1,93,2);
+INSERT INTO Cliente (apellido, correoElectronico,cuil,descripcion,direccion,estado,nombre,numeroDocumento,telefono1,tipoCliente,tipoDocumento, CuentaCorriente, tipoFactura)
+VALUES ('Perez', 'martin@me.com','23336678902','Description','Lima 1200',1,'Pablo','33667890','116987820',1,1,94,3);
+INSERT INTO Cliente (apellido, correoElectronico,cuil,descripcion,direccion,estado,nombre,numeroDocumento,telefono1,tipoCliente,tipoDocumento, CuentaCorriente, tipoFactura)
+VALUES ('Gomez', 'santiago@outlook.com','23346660009','Description','Gral Hornos 1200',1,'Santiago','34666000','115782354',3,1,95,0);
+INSERT INTO Cliente (apellido, correoElectronico,cuil,descripcion,direccion,estado,nombre,numeroDocumento,telefono1,tipoCliente,tipoDocumento, CuentaCorriente, tipoFactura)
+VALUES ('Tevez', 'carlitos@outlook.com','23233440229','Description','Alvear 623',1,'Carlos','23344022','115782354',4,1,96,1);
+INSERT INTO Cliente (apellido, correoElectronico,cuil,descripcion,direccion,estado,nombre,numeroDocumento,telefono1,tipoCliente,tipoDocumento, CuentaCorriente, tipoFactura)
+VALUES ('Silva', 'nano@gmail.com','22285642896','Description','Alba 123',1,'Mario','28564289','42545569',0,1,97,0);
+INSERT INTO Cliente (apellido, correoElectronico,cuil,descripcion,direccion,estado,nombre,numeroDocumento,telefono1,tipoCliente,tipoDocumento, CuentaCorriente, tipoFactura)
+VALUES ('Garcia', 'charly@me.com','23186583252','Description','Cordoba 532 3H',1,'Charly','18658325','42646666',0,1,98,1);
+INSERT INTO Cliente (apellido, correoElectronico,cuil,descripcion,direccion,estado,nombre,numeroDocumento,telefono1,tipoCliente,tipoDocumento, CuentaCorriente, tipoFactura)
+VALUES ('Fernandez', 'omar@yahoo.com','20156879526','Description','Amoedo 7895 PB1',1,'Omar','15687952','116049633',1,1,99,2);
+INSERT INTO Cliente (apellido, correoElectronico,cuil,descripcion,direccion,estado,nombre,numeroDocumento,telefono1,tipoCliente,tipoDocumento, CuentaCorriente, tipoFactura)
+VALUES ('Perez', 'martin@me.com','23336678902','Description','Lima 1200',1,'Pablo','33667890','116987820',1,1,100,3);
  
 INSERT INTO Cochera     (costoCochera, estado, porcentajeExpensas, ubicacion, Cliente) values (200, 1, 2.5, '0A', 1)
 INSERT INTO Cochera     (costoCochera, estado, porcentajeExpensas, ubicacion, Cliente) values (200, 1, 2.5, '0B', 1)
