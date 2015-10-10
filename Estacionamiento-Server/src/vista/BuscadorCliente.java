@@ -120,8 +120,7 @@ public class BuscadorCliente extends JDialog implements ActionListener, KeyListe
 
 	@SuppressWarnings("unchecked")
 	public void initGUI(){
-		
-		Controlador.getInstancia().actualizarClientes();
+	
 		
 		setTitle("Buscar Clientes");
 		setResizable(true);
@@ -676,6 +675,8 @@ public class BuscadorCliente extends JDialog implements ActionListener, KeyListe
 		contentPane.add(btnVerCuentaCorriente, gbc_btnVerCuentaCorriente);
 		btnVerCuentaCorriente.addActionListener(this);
 
+		Controlador.getInstancia().actualizarClientes();
+		
 		listModel.clear();
 		for (Cliente clienteTemp : Controlador.getInstancia().getClientes()) {
 			listModel.addElement(clienteTemp);

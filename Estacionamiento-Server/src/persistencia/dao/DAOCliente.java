@@ -45,6 +45,9 @@ public class DAOCliente {
 		ArrayList<modelo.Cliente> clientesReturn;
 		ArrayList<persistencia.clases.Cliente> clientesP = new ArrayList<persistencia.clases.Cliente>();
 		clientesP=(ArrayList<Cliente>) HibernateDAO.getInstancia().getList("Cliente");
+		for (Cliente cliente : clientesP) {
+			HibernateDAO.getInstancia().getSession().refresh(cliente);
+		}
 		clientesReturn = Converter.convertClientesPersistenciaToModelo(clientesP);
 		return clientesReturn;
 	}
