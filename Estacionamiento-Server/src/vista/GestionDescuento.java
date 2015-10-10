@@ -323,7 +323,7 @@ public class GestionDescuento extends JDialog implements ActionListener, ListSel
 
 	@Override
 	public void valueChanged(ListSelectionEvent e) {
-		if(e.getSource() == this.listDescuentos){
+		if(e.getSource() == this.listDescuentos && listDescuentos.getSelectedValue()!=null){
 			modelo.Descuento descuentoSeleccionado = (modelo.Descuento) this.listDescuentos.getSelectedValue();
 			textFieldNombreDescuentoActual.setText(descuentoSeleccionado.getDescripcion());
 			textFieldPorcentajeDescuentoActual.setText(Double.toString(descuentoSeleccionado.getDescuento()));

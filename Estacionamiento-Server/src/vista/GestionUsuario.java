@@ -339,7 +339,7 @@ public class GestionUsuario extends JDialog implements ActionListener, KeyListen
 
 	@Override
 	public void valueChanged(ListSelectionEvent e) {
-		if(e.getSource() == this.listUsuarios){
+		if(e.getSource() == this.listUsuarios && listUsuarios.getSelectedValue()!=null){
 			modelo.Usuario usuarioSeleccionado = (Usuario) this.listUsuarios.getSelectedValue();
 			this.textFieldApellido.setText(usuarioSeleccionado.getApellido());
 			this.textFieldDNILU.setText(usuarioSeleccionado.getNumeroDocumento());

@@ -264,7 +264,7 @@ public class GestionColor extends JDialog implements ActionListener, ListSelecti
 
 	@Override
 	public void valueChanged(ListSelectionEvent e) {
-		if(e.getSource() == this.listColores){
+		if(e.getSource() == this.listColores && listColores.getSelectedValue()!=null){
 			ColorVehiculo colorSeleccionado = (ColorVehiculo) this.listColores.getSelectedValue();
 			textFieldColorActual.setText(colorSeleccionado.getDescripcion());
 		}		

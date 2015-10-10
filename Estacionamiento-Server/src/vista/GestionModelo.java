@@ -264,7 +264,7 @@ public class GestionModelo extends JDialog implements ActionListener, ListSelect
 
 	@Override
 	public void valueChanged(ListSelectionEvent e) {
-		if(e.getSource() == this.listModelos){
+		if(e.getSource() == this.listModelos && listModelos.getSelectedValue()!=null){
 			modelo.ModeloVehiculo modeloSeleccionado = (ModeloVehiculo) this.listModelos.getSelectedValue();
 			textFieldModeloActual.setText(modeloSeleccionado.getDescripcion());
 		}			
