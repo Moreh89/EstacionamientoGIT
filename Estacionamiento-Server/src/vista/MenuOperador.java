@@ -886,6 +886,8 @@ public class MenuOperador extends JFrame implements ActionListener, KeyListener,
 			this.textFieldPatente.setEnabled(true);
 			this.btnGuardarF.setEnabled(true);
 			this.textFieldNumeroTicket.requestFocus();
+			
+			
 		}
 		if (event.getSource() == btnTicketF) {
 
@@ -1148,6 +1150,7 @@ public class MenuOperador extends JFrame implements ActionListener, KeyListener,
 		}
 		if (event.getKeyCode()== KeyEvent.VK_F5 ){
 			this.btnTicketF.doClick();
+			this.textFieldNumeroTicket.requestFocus();
 		}
 		if (event.getKeyCode()== KeyEvent.VK_F7 ){
 			this.btnCobrarF.doClick();
@@ -1166,9 +1169,6 @@ public class MenuOperador extends JFrame implements ActionListener, KeyListener,
 
 	@Override
 	public void keyTyped(KeyEvent event) {
-
-
-
 	}
 
 	@SuppressWarnings("unused")
@@ -1217,65 +1217,65 @@ public class MenuOperador extends JFrame implements ActionListener, KeyListener,
 	public void focusGained(FocusEvent e) {
 		if(e.getSource()==textFieldNumeroTicket)
 		{
-			textFieldNumeroTicket.setBackground(Color.BLUE);
+			textFieldNumeroTicket.setBackground(Color.CYAN);
 		}
 		if(e.getSource()==textFieldPatente)
 		{
-			textFieldPatente.setBackground(Color.BLUE);
+			textFieldPatente.setBackground(Color.CYAN);
 		}
 		if(e.getSource()==btnBuscarPorTicketAbierto)
 		{
-			btnBuscarPorTicketAbierto.setBackground(Color.BLUE);
+			btnBuscarPorTicketAbierto.setBackground(Color.CYAN);
 		}
 		if(e.getSource()==btnLimpiarCampos)
 		{
-			btnLimpiarCampos.setBackground(Color.BLUE);
+			btnLimpiarCampos.setBackground(Color.CYAN);
 		}
 		if(e.getSource()==comboBoxTipoVehiculo)
 		{
-			comboBoxTipoVehiculo.setBackground(Color.BLUE);
+			comboBoxTipoVehiculo.setBackground(Color.CYAN);
 		}
 		if(e.getSource()==comboBoxColor)
 		{
-			comboBoxColor.setBackground(Color.BLUE);
+			comboBoxColor.setBackground(Color.CYAN);
 		}
 		if(e.getSource()==comboBoxDescuento)
 		{
-			comboBoxDescuento.setBackground(Color.BLUE);
+			comboBoxDescuento.setBackground(Color.CYAN);
 		}
 		if(e.getSource()==textFieldObsevacion)
 		{
-			textFieldObsevacion.setBackground(Color.BLUE);
+			textFieldObsevacion.setBackground(Color.CYAN);
 		}
 		if(e.getSource()==btnButtonBuscarCliente)
 		{
-			btnButtonBuscarCliente.setBackground(Color.BLUE);
+			btnButtonBuscarCliente.setBackground(Color.CYAN);
 		}
 		
 		if(e.getSource()==btnBuscarPorTicketAbierto)
 		{
-			btnBuscarPorTicketAbierto.setBackground(Color.BLUE);
+			btnBuscarPorTicketAbierto.setBackground(Color.CYAN);
 		}
 		if(e.getSource()==btnGuardarF)
 		{
-			btnGuardarF.setBackground(Color.BLUE);
+			btnGuardarF.setBackground(Color.CYAN);
 		}
 		if(e.getSource()==btnTicketF)
 		{
-			btnTicketF.setBackground(Color.BLUE);
+			btnTicketF.setBackground(Color.CYAN);
 		}
 		
 		if(e.getSource()==comboBoxModelo)
 		{
-			comboBoxModelo.setBackground(Color.BLUE);
+			comboBoxModelo.setBackground(Color.CYAN);
 		}
 		if(e.getSource()==comboBoxImpresoras)
 		{
-			comboBoxImpresoras.setBackground(Color.BLUE);
+			comboBoxImpresoras.setBackground(Color.CYAN);
 		}
 		if(e.getSource()==chckbxPagoConTarjeta)
 		{
-			chckbxPagoConTarjeta.setBackground(Color.BLUE);
+			chckbxPagoConTarjeta.setBackground(Color.CYAN);
 		}
 	
 		
