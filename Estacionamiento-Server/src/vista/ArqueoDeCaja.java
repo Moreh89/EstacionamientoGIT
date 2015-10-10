@@ -24,6 +24,8 @@ import java.awt.Font;
 import java.awt.GridBagLayout;
 import java.awt.GridBagConstraints;
 import java.awt.Insets;
+import java.awt.Toolkit;
+
 import javax.swing.JComboBox;
 import javax.swing.DefaultComboBoxModel;
 
@@ -59,6 +61,8 @@ public class ArqueoDeCaja extends JDialog implements ActionListener{
 	 */
 	@SuppressWarnings({ "rawtypes", "unchecked" })
 	public ArqueoDeCaja() {
+		setIconImage(Toolkit.getDefaultToolkit().getImage(
+				ArqueoDeCaja.class.getResource("/image/printer.png")));
 		setTitle("Arqueo de Caja");
 		setBounds(100, 100, 290, 212);
 		getContentPane().setLayout(new BorderLayout());

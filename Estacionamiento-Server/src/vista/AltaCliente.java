@@ -15,6 +15,7 @@ import java.awt.event.ActionEvent;
 import java.awt.GridBagLayout;
 import java.awt.GridBagConstraints;
 import java.awt.Insets;
+import java.awt.Toolkit;
 import java.util.ArrayList;
 import modelo.Cochera;
 import modelo.PersonaAutorizada;
@@ -105,6 +106,8 @@ public class AltaCliente extends JFrame implements ActionListener{
 	@SuppressWarnings({ "rawtypes", "unchecked" })
 	public void initGUI(){
 		setTitle("Alta Cliente");
+		setIconImage(Toolkit.getDefaultToolkit().getImage(
+				AltaCliente.class.getResource("/image/printer.png")));
 		setResizable(false);
 		//setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 764, 560);

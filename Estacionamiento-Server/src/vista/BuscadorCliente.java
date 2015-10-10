@@ -26,6 +26,7 @@ import java.awt.Color;
 import java.awt.GridBagLayout;
 import java.awt.GridBagConstraints;
 import java.awt.Insets;
+import java.awt.Toolkit;
 
 import javax.swing.JScrollPane;
 import javax.swing.ScrollPaneConstants;
@@ -121,7 +122,8 @@ public class BuscadorCliente extends JDialog implements ActionListener, KeyListe
 	@SuppressWarnings("unchecked")
 	public void initGUI(){
 	
-		
+		setIconImage(Toolkit.getDefaultToolkit().getImage(
+				BuscadorCliente.class.getResource("/image/printer.png")));
 		setTitle("Buscar Clientes");
 		setResizable(true);
 		setBounds(100, 100, 1372, 650);

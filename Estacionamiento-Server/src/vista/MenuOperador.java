@@ -110,8 +110,7 @@ public class MenuOperador extends JFrame implements ActionListener, KeyListener,
 		 UIManager.put("ComboBox.selectionBackground", new ColorUIResource(Color.magenta));
 		
 		setFont(new Font("Dialog", Font.BOLD, 20));
-		setIconImage(Toolkit.getDefaultToolkit().getImage(
-				MenuOperador.class.getResource("/image/printer.png")));
+		setIconImage(Toolkit.getDefaultToolkit().getImage(MenuOperador.class.getResource("/image/printer.png")));
 		setTitle("Gertor Ingresos");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 1218, 775);

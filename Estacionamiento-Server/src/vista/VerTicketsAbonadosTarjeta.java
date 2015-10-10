@@ -4,20 +4,16 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
-
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 import javax.swing.table.DefaultTableModel;
-import javax.swing.DefaultListModel;
 import javax.swing.ImageIcon;
 import javax.swing.JDialog;
 import javax.swing.JLabel;
 import javax.swing.JButton;
 import javax.swing.JOptionPane;
-import javax.swing.JSeparator;
-
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import java.awt.event.KeyEvent;
@@ -25,23 +21,17 @@ import java.awt.event.KeyListener;
 import java.awt.GridBagLayout;
 import java.awt.GridBagConstraints;
 import java.awt.Insets;
-import java.awt.ScrollPane;
+import java.awt.Toolkit;
 
 import javax.swing.JScrollPane;
-
 import modelo.Ticket;
 import controlador.Controlador;
-
 import java.awt.Font;
-
 import javax.swing.JTable;
-import javax.swing.JFormattedTextField;
-
 import org.jdesktop.swingx.JXDatePicker;
-
 import javax.swing.JTextField;
-
 import java.awt.Color;
+import javax.swing.ScrollPaneConstants;
 
 
 
@@ -65,9 +55,9 @@ public class VerTicketsAbonadosTarjeta extends JDialog implements ActionListener
 	private double montoTotalCobrado = 0;
 	private JLabel label;
 	private JTextField textFieldMontoTotalCobrado;
-	private JTable table;
+	private JTable tableTickets;
 
-	private JScrollPane scrollPane;
+//	private JScrollPane scrollPane;
 
 
 
@@ -80,10 +70,11 @@ public class VerTicketsAbonadosTarjeta extends JDialog implements ActionListener
 	public void initGUI(){
 
 		Controlador.getInstancia().actualizarClientes();
-
+		setIconImage(Toolkit.getDefaultToolkit().getImage(
+				VerTicketsAbonadosTarjeta.class.getResource("/image/printer.png")));
 		setTitle("Vista Tickets Abonados con Tarjeta");
 		setResizable(true);
-		setBounds(100, 100, 666, 780);
+		setBounds(100, 100, 666, 445);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
@@ -159,18 +150,19 @@ public class VerTicketsAbonadosTarjeta extends JDialog implements ActionListener
 		gbc_table_1.gridx = 0;
 		gbc_table_1.gridy = 1;
 
-		table=new JTable();
-		table.setModel(model);
+		tableTickets=new JTable();
+		tableTickets.setModel(model);
 		//		scrollPane.add(table);
-		scrollPane= new JScrollPane(table);
-		GridBagConstraints gbc = new GridBagConstraints();
-		gbc.fill = GridBagConstraints.BOTH;
-		gbc.gridwidth = 6;
-		gbc.insets = new Insets(0, 0, 5, 5);
-		gbc.gridx = 0;
-		gbc.gridy = 1;
-		JScrollPane scrollPane_1 = new JScrollPane(table);
-		getContentPane().add(scrollPane_1, gbc);
+//		scrollPane= new JScrollPane(table);
+		GridBagConstraints gbc_scrollPaneTickets = new GridBagConstraints();
+		gbc_scrollPaneTickets.fill = GridBagConstraints.BOTH;
+		gbc_scrollPaneTickets.gridwidth = 6;
+		gbc_scrollPaneTickets.insets = new Insets(0, 0, 5, 5);
+		gbc_scrollPaneTickets.gridx = 0;
+		gbc_scrollPaneTickets.gridy = 1;
+		JScrollPane scrollPaneTickets = new JScrollPane(tableTickets);
+		scrollPaneTickets.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
+		getContentPane().add(scrollPaneTickets, gbc_scrollPaneTickets);
 		//		contentPane.add(scrollPane, gbc_table_1);
 
 		label = new JLabel("Monto Total Cobrado:");
@@ -227,6 +219,7 @@ public class VerTicketsAbonadosTarjeta extends JDialog implements ActionListener
 
 	}
 
+	@SuppressWarnings("unused")
 	@Override
 	public void actionPerformed(ActionEvent e) {
 
@@ -286,7 +279,7 @@ public class VerTicketsAbonadosTarjeta extends JDialog implements ActionListener
 	{
 		model = new DefaultTableModel();
 		model.setColumnIdentifiers(tableColumn);
-		table.setModel(model);
+		tableTickets.setModel(model);
 		montoTotalCobrado=0;
 		for(Ticket ticketActual : ticketsTarjeta)
 		{

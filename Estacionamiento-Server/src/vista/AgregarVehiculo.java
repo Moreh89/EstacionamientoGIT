@@ -9,6 +9,8 @@ import javax.swing.JLabel;
 import java.awt.GridBagConstraints;
 import javax.swing.JComboBox;
 import java.awt.Insets;
+import java.awt.Toolkit;
+
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JTextField;
 import javax.swing.JButton;
@@ -45,6 +47,8 @@ public class AgregarVehiculo extends JFrame implements ActionListener{
 
 	@SuppressWarnings("unchecked")
 	public AgregarVehiculo(AltaCliente altaCliente) {
+		setIconImage(Toolkit.getDefaultToolkit().getImage(
+				AltaCliente.class.getResource("/image/printer.png")));
 		this.altaCliente=altaCliente;
 		setTitle("Agregar Vehiculo");
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);

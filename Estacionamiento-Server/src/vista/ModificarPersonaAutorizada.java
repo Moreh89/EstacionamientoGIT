@@ -7,6 +7,8 @@ import java.awt.GridBagLayout;
 import javax.swing.JLabel;
 import java.awt.GridBagConstraints;
 import java.awt.Insets;
+import java.awt.Toolkit;
+
 import javax.swing.JTextField;
 import javax.swing.JButton;
 import javax.swing.ImageIcon;
@@ -29,6 +31,8 @@ public class ModificarPersonaAutorizada extends JFrame implements ActionListener
 	public ModificarPersonaAutorizada(AltaCliente altaCliente) {
 		setResizable(false);
 		this.altaCliente=altaCliente;
+		setIconImage(Toolkit.getDefaultToolkit().getImage(
+				ModificarPersonaAutorizada.class.getResource("/image/printer.png")));
 		setTitle("Modificar Persona Autorizada");
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		setBounds(100, 100, 477, 203);

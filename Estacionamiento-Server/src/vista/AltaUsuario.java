@@ -24,6 +24,7 @@ import controlador.Controlador;
 import java.awt.GridBagLayout;
 import java.awt.GridBagConstraints;
 import java.awt.Insets;
+import java.awt.Toolkit;
 
 import javax.swing.JComboBox;
 
@@ -69,6 +70,8 @@ public class AltaUsuario extends JDialog implements ActionListener, KeyListener{
 	 */
 	@SuppressWarnings({ "rawtypes", "unchecked" })
 	public AltaUsuario(String tipoUsuario) {
+		setIconImage(Toolkit.getDefaultToolkit().getImage(
+				AltaUsuario.class.getResource("/image/printer.png")));
 		setResizable(false);
 		setTitle("Alta Usuario");
 		setBounds(100, 100, 329, 350);
