@@ -135,9 +135,9 @@ INSERT INTO Usuario (userName, password, permisos, nombre, apellido, tipoDocumen
  
 INSERT INTO Descuento (descripcion, descuento, estado) VALUES ('0 No Aplica', 0, 1);
 INSERT INTO Descuento (descripcion, descuento, estado) VALUES ('1 U.B.A. 35% Por Hs.', 35, 1);
-INSERT INTO Descuento (descripcion, descuento, estado) VALUES ('2 U.B.A. 25% Por E.', 20, 1)
-INSERT INTO Descuento (descripcion, descuento, estado) VALUES ('3 10%', 10, 1)
-INSERT INTO Descuento (descripcion, descuento, estado) VALUES ('4 Hotel Ancon 20%', 20, 1)
+INSERT INTO Descuento (descripcion, descuento, estado) VALUES ('2 U.B.A. 25% Por E.', 20, 1);
+INSERT INTO Descuento (descripcion, descuento, estado) VALUES ('3 10%', 10, 1);
+INSERT INTO Descuento (descripcion, descuento, estado) VALUES ('4 Hotel Ancon 20%', 20, 1);
  
  
 insert into TasaInteres (monto, estado, deadLine) VALUES (3, 1, 15);
