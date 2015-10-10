@@ -81,7 +81,6 @@ public class ModificarCochera extends JDialog implements ActionListener{
 		gbc_comboBoxPiso.gridx = 1;
 		gbc_comboBoxPiso.gridy = 0;
 		panel.add(comboBoxPiso, gbc_comboBoxPiso);
-		//TODO PISO no se esta guardando, habria que sacar este combobox
 
 		JLabel labelCostoMensual = new JLabel("Costo Mensual:");
 		GridBagConstraints gbc_labelCostoMensual = new GridBagConstraints();

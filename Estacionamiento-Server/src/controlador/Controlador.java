@@ -301,10 +301,9 @@ public class Controlador {
 		return DAOUsuario.getInstance().cambiarContrasenia(usuarioActual);
 	}
 
-	public boolean probarConexion() {
-		//TODO probar conexion
-		return true;
-	}
+//	public boolean probarConexion() {
+//		return true;
+//	}
 
 	public long altaTarifa(String categoriaVehiculo,double costoMinimo, double costoFraccion, double costoHora, double costoMediaEstadia, double costoEstadia,double tiempoMinimo,double tiempoFraccion, double tiempoMediaEstadia_minuto, double tiempoEstadia_minuto) 
 	{
@@ -483,14 +482,13 @@ public class Controlador {
 			if(estado==modelo.Ticket.Estado.CREDITO){
 				MovimientoCC movCC = new MovimientoCC();
 				movCC.setDescripcion("Ticket");
-				//TODO Que hace el estado??
-				movCC.setEstado("CREDITO");
+				movCC.setEstado("Credito");
 				movCC.setFecha(GregorianCalendar.getInstance().getTime());
 				movCC.setIdMovimiento(0);
 				movCC.setMontoCobrado(ticket.getMontoCobrado() * -1);
 				movCC.setTicket(this.ticket);
 				movCC.setUsuario(usuarioActual);
-				//TODO medio de pago
+				//TO DO medio de pago
 				// AGREGADO POR DAMIAN PARA MEDIOPAGO... NO LLEGA A LO VISUAL, POR DEFECTO ES NO APLICA SI SON MOVIMIENTOS INTERNOS DEL SISTEMA,
 				//				SI MUEVEN CAJA EL DEFECTO ES EFECTIVO A MENOS QUE SEA LO CONTRARIO.
 				movCC.setMedioPago(modelo.MovimientoCC.MEDIOPAGO.EFECTIVO);

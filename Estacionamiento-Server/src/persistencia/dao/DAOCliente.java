@@ -112,11 +112,11 @@ public class DAOCliente {
 
 	
 
-	public double getEstadoCrediticio(modelo.Cliente clienteM) {
-		double deuda=0;
-		deuda=HibernateDAO.getInstancia().getEstadoCrediticio(clienteM.getCuentaCorriente().getIdCuentaCorriente());
-		return deuda;
-	}
+//	public double getEstadoCrediticio(modelo.Cliente clienteM) {
+//		double deuda=0;
+//		deuda=HibernateDAO.getInstancia().getEstadoCrediticio(clienteM.getCuentaCorriente().getIdCuentaCorriente());
+//		return deuda;
+//	}
 
 	public modelo.Cliente getClienteModelo(long idCliente) {
 		persistencia.clases.Cliente cli = new persistencia.clases.Cliente();

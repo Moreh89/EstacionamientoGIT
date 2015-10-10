@@ -14,10 +14,10 @@ public class DAOCategoriaVehiculo {
 		return ins;
 	}
 
-	public long persistir(DAOCategoriaVehiculo categoriaVehiculo) {
-		// TODO persistir categoria vehiculo
-		return 0;
-	}
+//	public long persistir(DAOCategoriaVehiculo categoriaVehiculo) {
+//		// TO DO persistir categoria vehiculo
+//		return 0;
+//	}
 
 	public modelo.CategoriaVehiculo buscarCategoriaVehiculo(String descripcion) {
 		persistencia.clases.CategoriaVehiculo CategoriaVehiculoP = new persistencia.clases.CategoriaVehiculo();

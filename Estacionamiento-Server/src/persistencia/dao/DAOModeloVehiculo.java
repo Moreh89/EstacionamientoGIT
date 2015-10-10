@@ -15,10 +15,10 @@ public class DAOModeloVehiculo {
 		return ins;
 	}
 
-	public long persistir(DAOModeloVehiculo ModeloVehiculo) {
-		// TODO persistir modelo
-		return 0;
-	}
+//	public long persistir(DAOModeloVehiculo ModeloVehiculo) {
+//		// TO DO persistir modelo
+//		return 0;
+//	}
 
 	@SuppressWarnings("unchecked")
 	public ArrayList<modelo.ModeloVehiculo> getModelosVehiculos() {

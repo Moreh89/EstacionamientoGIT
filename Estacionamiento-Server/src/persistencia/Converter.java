@@ -545,7 +545,7 @@ public class Converter {
 		if(estadoCochera.equals("INACTIVO"))
 			cocheraP.setEstado(persistencia.clases.Cochera.ESTADO.INACTIVO);
 
-		//TODO - Revisar porque se vuelve ciclico - Porque cliente tiene cochera que tiene cliente
+		//TO DO - Revisar porque se vuelve ciclico - Porque cliente tiene cochera que tiene cliente
 		cocheraP.setCliente(null);
 
 		return cocheraP;
@@ -564,7 +564,7 @@ public class Converter {
 		if(estadoCochera.equals("INACTIVO"))
 			cocheraM.setEstado(modelo.Cochera.ESTADO.INACTIVO);
 
-		//TODO - Revisar porque se vuelve ciclico - porque cliente tiene cochera que tiene cliente
+		//TO DO - Revisar porque se vuelve ciclico - porque cliente tiene cochera que tiene cliente
 		cocheraM.setCliente(null);
 
 		return cocheraM;
