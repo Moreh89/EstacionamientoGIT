@@ -158,7 +158,7 @@ public class Ticket {
 		
 		long diff = horaSalida.getTime() - horaLlegada.getTime();
 		
-		long diffMinutes = diff / (60 * 1000);
+		double diffMinutes = diff / (60 * 1000);
 		
 		//Me quede menos del tiempo minimo
 		if(tarifaUsada.getTiempoMinimo() >= diffMinutes ){
@@ -177,11 +177,27 @@ public class Ticket {
 			//Si me quede mas de una estadia
 			else if(tarifaUsada.getTiempoEstadia_minuto() <= diffMinutes ){
 				
-				double restoEstadias = diffMinutes % tarifaUsada.getTiempoEstadia_minuto();
-				double estadias = (diffMinutes - restoEstadias)/tarifaUsada.getTiempoEstadia_minuto();
+				double estadias = 0;
+				//Las estadias de 24hs
+				while (diffMinutes >= 1440){
+					estadias++;
+					diffMinutes = diffMinutes - 1440;
+				}//La estadia de entre 24hs y el inicio de la estadia
+				if(diffMinutes >= tarifaUsada.getTiempoEstadia_minuto()){
+					estadias++;
+					diffMinutes = 0;
+				}
+				double restoEstadias = diffMinutes;
 				
-				double restoMediaEst = restoEstadias % tarifaUsada.getTiempoMediaEstadia_minuto();
-				double mediaEst = (restoEstadias - restoMediaEst)/tarifaUsada.getTiempoMediaEstadia_minuto();
+				//Media estadia
+				double mediaEst = 0;
+				if(restoEstadias >= tarifaUsada.getTiempoMediaEstadia_minuto()){
+					mediaEst++;
+					restoEstadias = restoEstadias - 720;
+					if (restoEstadias < 0) restoEstadias = 0;
+				}
+				
+				double restoMediaEst = restoEstadias;
 				
 				double restoHoras = restoMediaEst % 60;
 				double horas = (restoMediaEst - restoHoras)/60;
@@ -203,19 +219,12 @@ public class Ticket {
 				return montoCobrar;
 			}
 				//Si me quede mas de media estadia pero menos de una estadia entera
-				else if(tarifaUsada.getCostoMediaEstadia() <= diffMinutes){
+				else if(tarifaUsada.getTiempoMediaEstadia_minuto() <= diffMinutes){
 				
 					double restoMediaEst = diffMinutes % tarifaUsada.getTiempoMediaEstadia_minuto();
 					double mediaEst = (diffMinutes - restoMediaEst)/tarifaUsada.getTiempoMediaEstadia_minuto();
 					
-					double restoHoras = restoMediaEst % 60;
-					double horas = (restoMediaEst - restoHoras)/60;
-					
-					double restoFrac = restoHoras % tarifaUsada.getTiempoFraccion();
-					double fracs = (restoHoras - restoFrac) / tarifaUsada.getTiempoFraccion();
-					
-					montoCobrar = montoCobrar + mediaEst * tarifaUsada.getCostoMediaEstadia() + horas * tarifaUsada.getCostoHora() + fracs * tarifaUsada.getCostoFraccion();
-					
+					montoCobrar = montoCobrar + mediaEst * tarifaUsada.getCostoMediaEstadia();					
 					if(this.descuento!=null){
 						double desc = montoCobrar / 100 * this.descuento.getDescuento();
 						montoCobrar = montoCobrar - desc;
@@ -297,20 +306,34 @@ public class Ticket {
 			//Si me quede mas de una estadia
 			else if(tarifaUsada.getTiempoEstadia_minuto() <= diffMinutes ){
 				
-				double restoEstadias = diffMinutes % tarifaUsada.getTiempoEstadia_minuto();
-				double estadias = (diffMinutes - restoEstadias)/tarifaUsada.getTiempoEstadia_minuto();
+				double estadias = 0;
+				//Las estadias de 24hs
+				while (diffMinutes >= 1440){
+					estadias++;
+					diffMinutes = diffMinutes - 1440;
+				}//La estadia de entre 24hs y el inicio de la estadia
+				if(diffMinutes >= tarifaUsada.getTiempoEstadia_minuto()){
+					estadias++;
+					diffMinutes = 0;
+				}
+				double restoEstadias = diffMinutes;
 				
-				double restoMediaEst = restoEstadias % tarifaUsada.getTiempoMediaEstadia_minuto();
-				double mediaEst = (restoEstadias - restoMediaEst)/tarifaUsada.getTiempoMediaEstadia_minuto();
+				//Media estadia
+				double mediaEst = 0;
+				if(restoEstadias >= tarifaUsada.getTiempoMediaEstadia_minuto()){
+					mediaEst++;
+					restoEstadias = restoEstadias - 720;
+					if (restoEstadias < 0) restoEstadias = 0;
+				}
+				
+				double restoMediaEst = restoEstadias;
 				
 				double restoHoras = restoMediaEst % 60;
 				double horas = (restoMediaEst - restoHoras)/60;
 				
 				double restoFrac = restoHoras % tarifaUsada.getTiempoFraccion();
 				double fracs = (restoHoras - restoFrac) / tarifaUsada.getTiempoFraccion();
-				if(restoFrac >= 1){
-					fracs = fracs + 1;
-				}
+				
 				String tiempoCobrar = (int)estadias + "Es " + (int)mediaEst + "Me " + (int)horas + "Hr " + (int)fracs + "Fr";
 
 				return tiempoCobrar;
@@ -321,15 +344,7 @@ public class Ticket {
 					double restoMediaEst = diffMinutes % tarifaUsada.getTiempoMediaEstadia_minuto();
 					double mediaEst = (diffMinutes - restoMediaEst)/tarifaUsada.getTiempoMediaEstadia_minuto();
 					
-					double restoHoras = restoMediaEst % 60;
-					double horas = (restoMediaEst - restoHoras)/60;
-					
-					double restoFrac = restoHoras % tarifaUsada.getTiempoFraccion();
-					double fracs = (restoHoras - restoFrac) / tarifaUsada.getTiempoFraccion();
-					if(restoFrac >= 1){
-						fracs = fracs + 1;
-					}
-					String tiempoCobrar = 0 + "Es " + (int)mediaEst + "Me " + (int)horas + "Hr " + (int)fracs + "Fr";
+					String tiempoCobrar = 0 + "Es " + (int)mediaEst + "Me " + "0Hr " + "0Fr";
 
 					return tiempoCobrar;
 					

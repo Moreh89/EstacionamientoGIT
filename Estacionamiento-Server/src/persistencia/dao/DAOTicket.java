@@ -33,7 +33,7 @@ public class DAOTicket {
 
 		persistencia.clases.Ticket tck = new persistencia.clases.Ticket();
 		tck = (persistencia.clases.Ticket) HibernateDAO.getInstancia().get(persistencia.clases.Ticket.class, ticketNumber);
-		
+		HibernateDAO.getInstancia().getSession().refresh(tck);
 		return tck;
 	}
 

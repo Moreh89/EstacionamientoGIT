@@ -37,6 +37,8 @@ import java.awt.event.ItemListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.awt.Toolkit;
+import java.text.DecimalFormat;
+import java.text.NumberFormat;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
@@ -1004,6 +1006,9 @@ public class MenuOperador extends JFrame implements ActionListener, KeyListener,
 	}
 
 	private void buscarTicket(){
+		NumberFormat formatter = new DecimalFormat("#0.00");
+		
+		
 		if(isNumeric(textFieldNumeroTicket.getText()) && (textFieldPrepago.getText().equals("")||isNumeric(textFieldPrepago.getText()))){
 			Ticket tck = Controlador.getInstancia().buscarTicket(textFieldNumeroTicket.getText());
 			if (tck!=null){
@@ -1053,7 +1058,7 @@ public class MenuOperador extends JFrame implements ActionListener, KeyListener,
 				this.btnGuardarF.setEnabled(true);
 				String totalAPagar = "";
 				if(tck.getEstado() == Ticket.Estado.CREDITO){
-					totalAPagar=("(A CUENTA) " + String.valueOf(tck.getMontoCobrado()));
+					totalAPagar=("(A CUENTA) $" + formatter.format(tck.getMontoCobrado()));
 					this.comboBoxDescuento.setEnabled(false);
 					this.comboBoxTipoVehiculo.setEnabled(false);
 					this.comboBoxColor.setEnabled(false);
@@ -1062,7 +1067,7 @@ public class MenuOperador extends JFrame implements ActionListener, KeyListener,
 					this.textFieldPatente.setEnabled(false);
 					this.btnGuardarF.setEnabled(false);
 				}else if(tck.getEstado() == Ticket.Estado.CERRADO){
-					totalAPagar=("(PAGADO) " + String.valueOf(tck.getMontoCobrado()+tck.getPrepago()));
+					totalAPagar=("(PAGADO) $" + formatter.format(tck.getMontoCobrado()+tck.getPrepago()));
 					this.comboBoxDescuento.setEnabled(false);
 					this.comboBoxTipoVehiculo.setEnabled(false);
 					this.comboBoxColor.setEnabled(false);
@@ -1073,11 +1078,11 @@ public class MenuOperador extends JFrame implements ActionListener, KeyListener,
 				}else if (tck.getEstado() == Ticket.Estado.PREPAGO){
 					this.btnPrePago.setEnabled(true);
 					this.btnCobrarF.setEnabled(true);
-					totalAPagar=("Prepago " + String.valueOf(tck.getPrepago()) + " restan: "+ String.valueOf(tck.getMontoCobrado()));
+					totalAPagar=("Prepago " + "$" + formatter.format(tck.getPrepago()) + " restan: $"+ formatter.format(tck.getMontoCobrado()));
 				} else {
 					this.btnPrePago.setEnabled(true);
 					this.btnCobrarF.setEnabled(true);
-					totalAPagar=(String.valueOf(tck.getMontoCobrado()));
+					totalAPagar=("$" + formatter.format(tck.getMontoCobrado()));
 				}
 				if(tck.getDescuento() != null && (tck.getDescuento().getDescuento() > 0)){
 					totalAPagar =totalAPagar + " (Des. " + tck.getDescuento().getDescuento() + "%)";
@@ -1191,6 +1196,7 @@ public class MenuOperador extends JFrame implements ActionListener, KeyListener,
 	@Override
 	public void itemStateChanged(ItemEvent e) {
 		if (e.getSource() == comboBoxDescuento){
+			NumberFormat formatter = new DecimalFormat("#0.00");
 			Ticket tck = Controlador.getInstancia().getTicket();
 			Descuento descSelec= (Descuento)comboBoxDescuento.getSelectedItem();
 			if(tck!=null){
@@ -1200,13 +1206,13 @@ public class MenuOperador extends JFrame implements ActionListener, KeyListener,
 				}
 				String totalAPagar = "";
 				if (tck.getEstado() == Ticket.Estado.PREPAGO){
-					totalAPagar = "Prepago " + String.valueOf(tck.getPrepago()) + " restan: "+ String.valueOf(tck.getMontoCobrado());
+					totalAPagar = "Prepago $" + formatter.format(tck.getPrepago()) + " restan: $"+ formatter.format(tck.getMontoCobrado());
 				} else {
-					totalAPagar = String.valueOf(tck.getMontoCobrado());
+					totalAPagar = formatter.format(tck.getMontoCobrado());
 				}
 				if(tck.getDescuento() != null && 
 						  (tck.getDescuento().getDescuento() > 0  || descSelec.getDescuento() > 0)){
-					totalAPagar =totalAPagar + " (Des. " + tck.getDescuento().getDescuento() + "%)";
+					totalAPagar ="$"+ totalAPagar + " (Des. " + tck.getDescuento().getDescuento() + "%)";
 						}
 				this.textFieldTotalAPagar.setText(totalAPagar);
 			}
