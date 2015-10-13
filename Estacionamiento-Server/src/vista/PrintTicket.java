@@ -53,7 +53,7 @@ public class PrintTicket extends JFrame {
 				PrintTicket.class.getResource("/image/printer.png")));
 		setResizable(false);
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-		setBounds(100, 100, 240, 400);
+		setBounds(100, 100, 240, 300);
 		contentPane = new JPanel();
 		contentPane.setBackground(Color.WHITE);
 		contentPane.setBorder(null);
@@ -64,7 +64,7 @@ public class PrintTicket extends JFrame {
 		try {
 			GridBagLayout gbl_contentPane = new GridBagLayout();
 			gbl_contentPane.columnWidths = new int[] { 168, 0 };
-			gbl_contentPane.rowHeights = new int[] { 225, 64, 0, 0 };
+			gbl_contentPane.rowHeights = new int[] { 164, 54, 0, 0 };
 			gbl_contentPane.columnWeights = new double[] { 1.0,
 					Double.MIN_VALUE };
 			gbl_contentPane.rowWeights = new double[] { 0.0, 0.0, 0.0,
@@ -74,25 +74,25 @@ public class PrintTicket extends JFrame {
 			panelAttributes = new JPanel();
 			panelAttributes.setBackground(Color.WHITE);
 			GridBagConstraints gbc_panelAttributes = new GridBagConstraints();
+			gbc_panelAttributes.anchor = GridBagConstraints.NORTH;
 			gbc_panelAttributes.insets = new Insets(0, 0, 5, 0);
-			gbc_panelAttributes.fill = GridBagConstraints.BOTH;
+			gbc_panelAttributes.fill = GridBagConstraints.HORIZONTAL;
 			gbc_panelAttributes.gridx = 0;
 			gbc_panelAttributes.gridy = 0;
 			contentPane.add(panelAttributes, gbc_panelAttributes);
 			GridBagLayout gbl_panelAttributes = new GridBagLayout();
 			gbl_panelAttributes.columnWidths = new int[] { 116, 0 };
-			gbl_panelAttributes.rowHeights = new int[] { 217, 0 };
+			gbl_panelAttributes.rowHeights = new int[] {150};
 			gbl_panelAttributes.columnWeights = new double[] { 1.0,
 					Double.MIN_VALUE };
-			gbl_panelAttributes.rowWeights = new double[] { 0.0,
-					Double.MIN_VALUE };
+			gbl_panelAttributes.rowWeights = new double[] { 0.0 };
 			panelAttributes.setLayout(gbl_panelAttributes);
 
 			txtpnfechaIng = new JTextPane();
 			txtpnfechaIng.setFont(new Font("Tahoma", Font.PLAIN, 12));
 			txtpnfechaIng.setContentType("text/html");
 			txtpnfechaIng
-					.setText("<html><b>P.J.E.Uriburu 1058 CABA<br>Fecha Ing:<br>"+new SimpleDateFormat("dd-MM-yyyy HH:mm:ss").format(ticket.getFechaLlegada())+"<br>Vehiculo:<br>"+ ticket.getCatergoriaVehiculo().getDescripcion()+"<br>Modelo:<br>"+ticket.getModeloVehiculo().getDescripcion()+"<br>Patente:<br>"+ticket.getPatente().toUpperCase()+"</b><br></html>");
+					.setText("<html><b>P.J.E.Uriburu 1058 CABA<br>Fecha Ing:<br>"+new SimpleDateFormat("dd-MM-yyyy HH:mm:ss").format(ticket.getFechaLlegada())+"<br>Vehiculo: "+ ticket.getCatergoriaVehiculo().getDescripcion()+"<br>Modelo: "+ticket.getModeloVehiculo().getDescripcion()+"<br>Patente: "+ticket.getPatente().toUpperCase()+"</b><br></html>");
 			GridBagConstraints gbc_txtpnfechaIng = new GridBagConstraints();
 			gbc_txtpnfechaIng.fill = GridBagConstraints.BOTH;
 			gbc_txtpnfechaIng.gridx = 0;
@@ -102,6 +102,7 @@ public class PrintTicket extends JFrame {
 			panel = new JPanel();
 			panel.setBackground(Color.WHITE);
 			GridBagConstraints gbc_panel = new GridBagConstraints();
+			gbc_panel.anchor = GridBagConstraints.NORTH;
 			gbc_panel.insets = new Insets(0, 0, 5, 0);
 			gbc_panel.gridx = 0;
 			gbc_panel.gridy = 1;
@@ -128,9 +129,10 @@ public class PrintTicket extends JFrame {
 			contentPane.add(panel_1, gbc_panel_1);
 			
 			textField = new JTextField();
-			textField.setText(". . . . . . . . .");
+			textField.setForeground(Color.WHITE);
+			textField.setText(". ");
 			panel_1.add(textField);
-			textField.setColumns(10);
+			textField.setColumns(1);
 			this.setVisible(true);
 			this.toBack();
 			printWork(this);

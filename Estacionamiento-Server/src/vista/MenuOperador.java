@@ -620,6 +620,7 @@ public class MenuOperador extends JFrame implements ActionListener, KeyListener,
 		textFieldTotalAPagar.setHorizontalAlignment(SwingConstants.CENTER);
 		textFieldTotalAPagar.setFont(new Font("Dialog", Font.BOLD, 40));
 		textFieldTotalAPagar.setForeground(Color.RED);
+		textFieldTotalAPagar.setDisabledTextColor(Color.RED);
 		GridBagConstraints gbc_textField_1 = new GridBagConstraints();
 		gbc_textField_1.gridheight = 2;
 		gbc_textField_1.gridwidth = 4;
