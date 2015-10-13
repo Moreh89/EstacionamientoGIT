@@ -221,10 +221,21 @@ public class Ticket {
 				//Si me quede mas de media estadia pero menos de una estadia entera
 				else if(tarifaUsada.getTiempoMediaEstadia_minuto() <= diffMinutes){
 				
-					double restoMediaEst = diffMinutes % tarifaUsada.getTiempoMediaEstadia_minuto();
-					double mediaEst = (diffMinutes - restoMediaEst)/tarifaUsada.getTiempoMediaEstadia_minuto();
+					double restoMediaEst = 0;
+					double mediaEst = 0;
+					if(diffMinutes >= tarifaUsada.getTiempoMediaEstadia_minuto()){
+						mediaEst++;
+						restoMediaEst = diffMinutes - 720;
+						if (restoMediaEst < 0) restoMediaEst = 0;
+					}
 					
-					montoCobrar = montoCobrar + mediaEst * tarifaUsada.getCostoMediaEstadia();					
+					double restoHoras = restoMediaEst % 60;
+					double horas = (restoMediaEst - restoHoras)/60;
+					
+					double restoFrac = restoHoras % tarifaUsada.getTiempoFraccion();
+					double fracs = (restoHoras - restoFrac) / tarifaUsada.getTiempoFraccion();
+					
+					montoCobrar = montoCobrar + mediaEst * tarifaUsada.getCostoMediaEstadia() + horas * tarifaUsada.getCostoHora() + fracs * tarifaUsada.getCostoFraccion();					
 					if(this.descuento!=null){
 						double desc = montoCobrar / 100 * this.descuento.getDescuento();
 						montoCobrar = montoCobrar - desc;
@@ -339,12 +350,24 @@ public class Ticket {
 				return tiempoCobrar;
 			}
 				//Si me quede mas de media estadia pero menos de una estadia entera
-				else if(tarifaUsada.getCostoMediaEstadia() <= diffMinutes){
+				else if(tarifaUsada.getTiempoMediaEstadia_minuto() <= diffMinutes){
 				
-					double restoMediaEst = diffMinutes % tarifaUsada.getTiempoMediaEstadia_minuto();
-					double mediaEst = (diffMinutes - restoMediaEst)/tarifaUsada.getTiempoMediaEstadia_minuto();
 					
-					String tiempoCobrar = 0 + "Es " + (int)mediaEst + "Me " + "0Hr " + "0Fr";
+					double restoMediaEst = 0;
+					double mediaEst = 0;
+					if(diffMinutes >= tarifaUsada.getTiempoMediaEstadia_minuto()){
+						mediaEst++;
+						restoMediaEst = diffMinutes - 720;
+						if (restoMediaEst < 0) restoMediaEst = 0;
+					}
+					
+					double restoHoras = restoMediaEst % 60;
+					double horas = (restoMediaEst - restoHoras)/60;
+					
+					double restoFrac = restoHoras % tarifaUsada.getTiempoFraccion();
+					double fracs = (restoHoras - restoFrac) / tarifaUsada.getTiempoFraccion();
+					
+					String tiempoCobrar = 0 + "Es " + (int)mediaEst + "Me " + (int)horas + "Hr " + (int)fracs + "Fr";
 
 					return tiempoCobrar;
 					

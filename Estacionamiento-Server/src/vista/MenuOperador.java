@@ -1208,11 +1208,11 @@ public class MenuOperador extends JFrame implements ActionListener, KeyListener,
 				if (tck.getEstado() == Ticket.Estado.PREPAGO){
 					totalAPagar = "Prepago $" + formatter.format(tck.getPrepago()) + " restan: $"+ formatter.format(tck.getMontoCobrado());
 				} else {
-					totalAPagar = formatter.format(tck.getMontoCobrado());
+					totalAPagar = "$" + formatter.format(tck.getMontoCobrado());
 				}
 				if(tck.getDescuento() != null && 
 						  (tck.getDescuento().getDescuento() > 0  || descSelec.getDescuento() > 0)){
-					totalAPagar ="$"+ totalAPagar + " (Des. " + tck.getDescuento().getDescuento() + "%)";
+					totalAPagar = totalAPagar + " (Des. " + tck.getDescuento().getDescuento() + "%)";
 						}
 				this.textFieldTotalAPagar.setText(totalAPagar);
 			}
