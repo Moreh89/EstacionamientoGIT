@@ -106,13 +106,13 @@ public class MenuOperador extends JFrame implements ActionListener, KeyListener,
 	private JMenuItem menuItemTicektTarjeta;
 	private JMenu menuHelp;
 	private JMenuItem mnAbout;
-	
+
 
 
 	@SuppressWarnings("unchecked")
 	public MenuOperador() {
-		 UIManager.put("ComboBox.selectionBackground", new ColorUIResource(Color.magenta));
-		
+		UIManager.put("ComboBox.selectionBackground", new ColorUIResource(Color.magenta));
+
 		setFont(new Font("Dialog", Font.BOLD, 20));
 		setIconImage(Toolkit.getDefaultToolkit().getImage(MenuOperador.class.getResource("/image/printer.png")));
 		setTitle("Gertor Ingresos");
@@ -173,7 +173,7 @@ public class MenuOperador extends JFrame implements ActionListener, KeyListener,
 		mntmTicketsAbiertos.setFont(new Font("Segoe UI", Font.PLAIN, 20));
 		mnConsultas.add(mntmTicketsAbiertos);
 		mntmTicketsAbiertos.addActionListener(this);
-		
+
 		menuItemTicektTarjeta = new JMenuItem("Tickets Tarjeta");
 		menuItemTicektTarjeta.setFont(new Font("Segoe UI", Font.PLAIN, 20));
 		mnConsultas.add(menuItemTicektTarjeta);
@@ -196,20 +196,20 @@ public class MenuOperador extends JFrame implements ActionListener, KeyListener,
 		mntmCambiarContrasea = new JMenuItem("Cambiar Contrase\u00F1a");
 		mntmCambiarContrasea.setFont(new Font("Segoe UI", Font.PLAIN, 20));
 		mnMiCuenta.add(mntmCambiarContrasea);
-		
-		
-				mntmCerrarSesion = new JMenuItem("Cerrar Sesion");
-				mnMiCuenta.add(mntmCerrarSesion);
-				mntmCerrarSesion.setIcon(null);
-				mntmCerrarSesion.setFont(new Font("Segoe UI", Font.PLAIN, 20));
-				mntmCerrarSesion.addActionListener(this);
+
+
+		mntmCerrarSesion = new JMenuItem("Cerrar Sesion");
+		mnMiCuenta.add(mntmCerrarSesion);
+		mntmCerrarSesion.setIcon(null);
+		mntmCerrarSesion.setFont(new Font("Segoe UI", Font.PLAIN, 20));
+		mntmCerrarSesion.addActionListener(this);
 		mntmCambiarContrasea.addActionListener(this);
-		
+
 		menuHelp = new JMenu("Ayuda");
 		menuHelp.setIcon(new ImageIcon(MenuOperador.class.getResource("/image/printer.png")));
 		menuHelp.setFont(new Font("Segoe UI", Font.BOLD, 20));
 		menuBar.add(menuHelp);
-		
+
 		mnAbout = new JMenuItem("System About");
 		mnAbout.setFont(new Font("Segoe UI", Font.PLAIN, 20));
 		menuHelp.add(mnAbout);
@@ -300,7 +300,7 @@ public class MenuOperador extends JFrame implements ActionListener, KeyListener,
 		gbc_comboBoxTipoVehiculo.gridy = 1;
 		contentPane.add(comboBoxTipoVehiculo, gbc_comboBoxTipoVehiculo);
 		comboBoxTipoVehiculo.addFocusListener(this);
-		
+
 		lblPatente = new JLabel("Patente:");
 		lblPatente.setHorizontalAlignment(SwingConstants.RIGHT);
 		lblPatente.setFont(new Font("Tahoma", Font.PLAIN, 30));
@@ -350,7 +350,7 @@ public class MenuOperador extends JFrame implements ActionListener, KeyListener,
 		comboBoxColor.addFocusListener(this);
 		comboBoxColor.addKeyListener(this);
 
-		
+
 		lblModelo = new JLabel("Modelo:");
 		lblModelo.setHorizontalAlignment(SwingConstants.RIGHT);
 		lblModelo.setFont(new Font("Tahoma", Font.PLAIN, 30));
@@ -404,7 +404,7 @@ public class MenuOperador extends JFrame implements ActionListener, KeyListener,
 		comboBoxDescuento.addFocusListener(this);
 		comboBoxDescuento.addKeyListener(this);
 
-		
+
 		btnPrePago = new JButton("PrePago:");
 		btnPrePago.setIcon(new ImageIcon(MenuOperador.class.getResource("/image/plus.png")));
 		btnPrePago.setHorizontalAlignment(SwingConstants.RIGHT);
@@ -432,7 +432,7 @@ public class MenuOperador extends JFrame implements ActionListener, KeyListener,
 		textFieldPrepago.addFocusListener(this);
 		textFieldPrepago.addKeyListener(this);
 
-		
+
 		lblCliente = new JLabel("Cliente:");
 		lblCliente.setHorizontalAlignment(SwingConstants.RIGHT);
 		lblCliente.setFont(new Font("Tahoma", Font.PLAIN, 30));
@@ -456,7 +456,7 @@ public class MenuOperador extends JFrame implements ActionListener, KeyListener,
 		textFieldCliente.setColumns(10);
 		textFieldCliente.addFocusListener(this);
 		textFieldCliente.addKeyListener(this);
-		
+
 
 		btnButtonBuscarCliente = new JButton("");
 		btnButtonBuscarCliente.setHorizontalAlignment(SwingConstants.LEFT);
@@ -470,7 +470,7 @@ public class MenuOperador extends JFrame implements ActionListener, KeyListener,
 		contentPane.add(btnButtonBuscarCliente, gbc_btnButtonBuscarCliente);
 		btnButtonBuscarCliente.addActionListener(this);
 		btnButtonBuscarCliente.addFocusListener(this);
-		
+
 		lblPerdidaTicket = new JLabel("Perdida Ticket:");
 		lblPerdidaTicket.setHorizontalAlignment(SwingConstants.RIGHT);
 		lblPerdidaTicket.setFont(new Font("Tahoma", Font.PLAIN, 30));
@@ -494,7 +494,7 @@ public class MenuOperador extends JFrame implements ActionListener, KeyListener,
 		btnBuscarPorTicketAbierto.addFocusListener(this);
 		btnBuscarPorTicketAbierto.addKeyListener(this);
 
-		
+
 		lblObservacion = new JLabel("Observacion:");
 		lblObservacion.setHorizontalAlignment(SwingConstants.RIGHT);
 		lblObservacion.setFont(new Font("Tahoma", Font.PLAIN, 30));
@@ -545,7 +545,7 @@ public class MenuOperador extends JFrame implements ActionListener, KeyListener,
 		contentPane.add(btnGuardarF, gbc_btnGuardarF);
 		btnGuardarF.addActionListener(this);
 		btnGuardarF.addFocusListener(this);
-		
+
 		comboBoxImpresoras = new JComboBox();
 		GridBagConstraints gbc_comboBoxImpresoras = new GridBagConstraints();
 		gbc_comboBoxImpresoras.insets = new Insets(0, 0, 5, 5);
@@ -554,7 +554,7 @@ public class MenuOperador extends JFrame implements ActionListener, KeyListener,
 		gbc_comboBoxImpresoras.gridy = 7;
 		contentPane.add(comboBoxImpresoras, gbc_comboBoxImpresoras);
 		comboBoxImpresoras.addItem("NO IMPRIMIR");
-		
+
 		PrintService[] printServices = PrintServiceLookup.lookupPrintServices(
 				null, null);
 		//Para saber el nombre de tus impresoras
@@ -563,7 +563,7 @@ public class MenuOperador extends JFrame implements ActionListener, KeyListener,
 		}
 		comboBoxImpresoras.setSelectedIndex(1);
 		comboBoxImpresoras.addFocusListener(this);
-		
+
 		btnTicketF = new JButton("Ticket F5");
 		btnTicketF.setFont(new Font("Dialog", Font.PLAIN, 30));
 		btnTicketF.setIcon(new ImageIcon(MenuOperador.class
@@ -577,7 +577,7 @@ public class MenuOperador extends JFrame implements ActionListener, KeyListener,
 		contentPane.add(btnTicketF, gbc_btnTicketF);
 		btnTicketF.addActionListener(this);
 		btnTicketF.addFocusListener(this);
-		
+
 		panel_aPagar = new JPanel();
 		GridBagConstraints gbc_panel_aPagar = new GridBagConstraints();
 		gbc_panel_aPagar.gridwidth = 2;
@@ -586,13 +586,13 @@ public class MenuOperador extends JFrame implements ActionListener, KeyListener,
 		gbc_panel_aPagar.gridx = 0;
 		gbc_panel_aPagar.gridy = 8;
 		contentPane.add(panel_aPagar, gbc_panel_aPagar);
-		
-				lblTotalAPagar = new JLabel("Total a Pagar:");
-				panel_aPagar.add(lblTotalAPagar);
-				lblTotalAPagar.setForeground(Color.BLUE);
-				lblTotalAPagar.setFont(new Font("Dialog", Font.BOLD, 30));
-				lblTotalAPagar.setHorizontalAlignment(SwingConstants.CENTER);
-		
+
+		lblTotalAPagar = new JLabel("Total a Pagar:");
+		panel_aPagar.add(lblTotalAPagar);
+		lblTotalAPagar.setForeground(Color.BLUE);
+		lblTotalAPagar.setFont(new Font("Dialog", Font.BOLD, 30));
+		lblTotalAPagar.setHorizontalAlignment(SwingConstants.CENTER);
+
 		panel_tarjeta = new JPanel();
 		GridBagConstraints gbc_panel_tarjeta = new GridBagConstraints();
 		gbc_panel_tarjeta.insets = new Insets(0, 0, 5, 5);
@@ -606,7 +606,7 @@ public class MenuOperador extends JFrame implements ActionListener, KeyListener,
 		gbl_panel_tarjeta.columnWeights = new double[]{0.0, Double.MIN_VALUE};
 		gbl_panel_tarjeta.rowWeights = new double[]{0.0, Double.MIN_VALUE};
 		panel_tarjeta.setLayout(gbl_panel_tarjeta);
-		
+
 		chckbxPagoConTarjeta = new JCheckBox("Pago con Tarjeta");
 		chckbxPagoConTarjeta.setFont(new Font("Tahoma", Font.BOLD, 16));
 		GridBagConstraints gbc_chckbxPagoConTarjeta = new GridBagConstraints();
@@ -615,7 +615,7 @@ public class MenuOperador extends JFrame implements ActionListener, KeyListener,
 		panel_tarjeta.add(chckbxPagoConTarjeta, gbc_chckbxPagoConTarjeta);
 		chckbxPagoConTarjeta.addFocusListener(this);
 		chckbxPagoConTarjeta.addKeyListener(this);
-		
+
 		textFieldTotalAPagar = new JTextField();
 		textFieldTotalAPagar.setEnabled(false);
 		textFieldTotalAPagar.setEditable(false);
@@ -726,7 +726,7 @@ public class MenuOperador extends JFrame implements ActionListener, KeyListener,
 
 		btnCobrarF.setEnabled(false);
 		btnCancelarF.setEnabled(false);
-		
+
 	}
 
 	private void actualizarTicket(){
@@ -742,27 +742,27 @@ public class MenuOperador extends JFrame implements ActionListener, KeyListener,
 				textFieldObsevacion.getText(),
 				chckbxPagoConTarjeta.isSelected());
 	}
-	
-	
+
+
 	@Override
 	public void actionPerformed(ActionEvent event) {
 
 		if (event.getSource() == menuItemTicektTarjeta){
 			new VerTicketsAbonadosTarjeta().setVisible(true);
 		}
-		
+
 		if (event.getSource() == btnCobrarF) {
 			if (Controlador.getInstancia().getTicket().getEstado() != Ticket.Estado.CERRADO
 					&& Controlador.getInstancia().getTicket().getEstado() != Ticket.Estado.CREDITO){
-				
+
 				actualizarTicket();
-				
+
 				if(Controlador.getInstancia().getTicket().getCliente() !=null){
-		    		UIManager.put("OptionPane.yesButtonText", "Cuenta Corriente");
-		    		UIManager.put("OptionPane.noButtonText", "Efectivo/Tarjeta");
+					UIManager.put("OptionPane.yesButtonText", "Cuenta Corriente");
+					UIManager.put("OptionPane.noButtonText", "Efectivo/Tarjeta");
 					int resultado = JOptionPane.showConfirmDialog (null, "El ticket posee un Cliente, desea mover a Cuenta corriente?","Tipo de pago",JOptionPane.YES_NO_OPTION,JOptionPane.PLAIN_MESSAGE);
-		    		UIManager.put("OptionPane.yesButtonText", "Si");
-		    		UIManager.put("OptionPane.noButtonText", "No");
+					UIManager.put("OptionPane.yesButtonText", "Si");
+					UIManager.put("OptionPane.noButtonText", "No");
 					if(resultado != JOptionPane.CANCEL_OPTION && resultado != JOptionPane.CLOSED_OPTION){
 						if (resultado == JOptionPane.OK_OPTION){
 							Controlador.getInstancia().cobrarTicket(Ticket.Estado.CREDITO);
@@ -889,8 +889,8 @@ public class MenuOperador extends JFrame implements ActionListener, KeyListener,
 			this.textFieldPatente.setEnabled(true);
 			this.btnGuardarF.setEnabled(true);
 			this.textFieldNumeroTicket.requestFocus();
-			
-			
+
+
 		}
 		if (event.getSource() == btnTicketF) {
 
@@ -907,7 +907,7 @@ public class MenuOperador extends JFrame implements ActionListener, KeyListener,
 								textFieldPrepago.getText(),
 								textFieldObsevacion.getText(),
 								chckbxPagoConTarjeta.isSelected()
-						);
+								);
 
 				this.textFieldNumeroTicket.setBackground(new Color(Color.WHITE.getRGB()));
 				this.textFieldPatente.setBackground(new Color(Color.WHITE.getRGB()));
@@ -934,26 +934,26 @@ public class MenuOperador extends JFrame implements ActionListener, KeyListener,
 				this.btnCobrarF.setEnabled(false);
 				this.btnPrePago.setEnabled(true);
 				this.textFieldTotalAPagar.setText(String.valueOf(tck.calcularMontoACobrar()));
-				
+
 				String impresora = (String) this.comboBoxImpresoras.getSelectedItem();
 				if(!impresora.equalsIgnoreCase("NO IMPRIMIR")){
 					new PrintTicket(tck, impresora);
 				}
 				this.btnLimpiarCampos.doClick();
-				
-				
+
+
 			}else{
 				if(!isNumeric(this.textFieldPrepago.getText()))this.textFieldPrepago.setBackground(new Color(Color.PINK.getRGB()));
 				if(this.textFieldPatente.getText().equals(""))this.textFieldPatente.setBackground(new Color(Color.PINK.getRGB()));
 				this.textFieldNumeroTicket.requestFocus();
 			}
-			
+
 		}
-		
+
 		if (event.getSource() == btnPrePago){
 			String resultado = (String) JOptionPane.showInputDialog(null, "Ingrese monto a incrementar", "Incremento Prepago", JOptionPane.PLAIN_MESSAGE, null , null, "0");
 			if(resultado!= null && isNumeric(resultado)){
-				
+
 				Double monto = Controlador.getInstancia().incrementarPrepago(Double.valueOf(resultado));
 				this.textFieldPrepago.setText(String.valueOf(monto));
 				Ticket tck = Controlador.getInstancia().getTicket();
@@ -966,7 +966,7 @@ public class MenuOperador extends JFrame implements ActionListener, KeyListener,
 			}else{
 				JOptionPane.showMessageDialog(null, "El formato ingresado no es valido", "Operacion fallida", JOptionPane.ERROR_MESSAGE);
 			}
-			
+
 		}
 
 		if (event.getSource() == mntmCerrarSesion){
@@ -997,7 +997,7 @@ public class MenuOperador extends JFrame implements ActionListener, KeyListener,
 		if(event.getSource()==mntmModificacionCliente){
 			new BuscadorCliente().setVisible(true);
 			if(Controlador.getInstancia().getClienteActual()!=null)
-			new ModificarCliente(Controlador.getInstancia().getClienteActual()).setVisible(true);
+				new ModificarCliente(Controlador.getInstancia().getClienteActual()).setVisible(true);
 		}
 		if(event.getSource()==mnAbout)
 		{
@@ -1007,8 +1007,8 @@ public class MenuOperador extends JFrame implements ActionListener, KeyListener,
 
 	private void buscarTicket(){
 		NumberFormat formatter = new DecimalFormat("#0.00");
-		
-		
+
+
 		if(isNumeric(textFieldNumeroTicket.getText()) && (textFieldPrepago.getText().equals("")||isNumeric(textFieldPrepago.getText()))){
 			Ticket tck = Controlador.getInstancia().buscarTicket(textFieldNumeroTicket.getText());
 			if (tck!=null){
@@ -1018,7 +1018,8 @@ public class MenuOperador extends JFrame implements ActionListener, KeyListener,
 				this.textFieldPatente.setBackground(new Color(Color.WHITE.getRGB()));
 				this.textFieldPrepago.setBackground(new Color(Color.WHITE.getRGB()));
 				String numeroTck = String.valueOf(tck.getIdTicket());
-				while (numeroTck.length() < 10) {
+				while (numeroTck.length() < 10) 
+				{
 					numeroTck = "0"+numeroTck; 
 				}
 				this.textFieldNumeroTicket.setText(numeroTck);
@@ -1041,7 +1042,7 @@ public class MenuOperador extends JFrame implements ActionListener, KeyListener,
 				if(diffMinutes<=5){
 					this.btnCancelarF.setEnabled(true);
 					this.comboBoxTipoVehiculo.setEnabled(true);
-					
+
 				}
 				this.textFieldPatente.setText(tck.getPatente());
 				if (tck.getFechaSalida() != null) this.textFieldEgreso.setText(new SimpleDateFormat("dd-MM-yyyy hh:mm:ss").format(tck.getFechaSalida()));
@@ -1091,13 +1092,13 @@ public class MenuOperador extends JFrame implements ActionListener, KeyListener,
 				if (tck.getCliente() != null){
 					this.textFieldCliente.setText(tck.getCliente().toString());
 				}else {this.textFieldCliente.setText("");}
-				
-					this.chckbxPagoConTarjeta.setSelected(tck.isPagotarjeta());
-					this.textFieldNumeroTicket.setEnabled(false);
-					this.btnTicketF.setEnabled(false);
-					this.btnBuscarPorTicketAbierto.setEnabled(false);
-					this.textFieldObsevacion.requestFocus();
-				
+
+				this.chckbxPagoConTarjeta.setSelected(tck.isPagotarjeta());
+				this.textFieldNumeroTicket.setEnabled(false);
+				this.btnTicketF.setEnabled(false);
+				this.btnBuscarPorTicketAbierto.setEnabled(false);
+				this.textFieldObsevacion.requestFocus();
+
 			}else{
 				String numeroTck = textFieldNumeroTicket.getText();
 				while (numeroTck.length() < 10) {
@@ -1164,7 +1165,7 @@ public class MenuOperador extends JFrame implements ActionListener, KeyListener,
 		if (event.getKeyCode()== KeyEvent.VK_F6 ){
 			this.btnLimpiarCampos.doClick();
 		}
-		
+
 
 	}
 
@@ -1181,7 +1182,7 @@ public class MenuOperador extends JFrame implements ActionListener, KeyListener,
 	public static boolean isNumeric(String str)  
 	{  
 		if(str == null ) return false;
-		
+
 		try  
 		{  
 			double d = Double.parseDouble(str);  
@@ -1211,12 +1212,12 @@ public class MenuOperador extends JFrame implements ActionListener, KeyListener,
 					totalAPagar = "$" + formatter.format(tck.getMontoCobrado());
 				}
 				if(tck.getDescuento() != null && 
-						  (tck.getDescuento().getDescuento() > 0  || descSelec.getDescuento() > 0)){
+						(tck.getDescuento().getDescuento() > 0  || descSelec.getDescuento() > 0)){
 					totalAPagar = totalAPagar + " (Des. " + tck.getDescuento().getDescuento() + "%)";
-						}
+				}
 				this.textFieldTotalAPagar.setText(totalAPagar);
 			}
-		
+
 		}
 	}
 
@@ -1258,7 +1259,7 @@ public class MenuOperador extends JFrame implements ActionListener, KeyListener,
 		{
 			btnButtonBuscarCliente.setBackground(Color.CYAN);
 		}
-		
+
 		if(e.getSource()==btnBuscarPorTicketAbierto)
 		{
 			btnBuscarPorTicketAbierto.setBackground(Color.CYAN);
@@ -1271,7 +1272,7 @@ public class MenuOperador extends JFrame implements ActionListener, KeyListener,
 		{
 			btnTicketF.setBackground(Color.CYAN);
 		}
-		
+
 		if(e.getSource()==comboBoxModelo)
 		{
 			comboBoxModelo.setBackground(Color.CYAN);
@@ -1284,11 +1285,11 @@ public class MenuOperador extends JFrame implements ActionListener, KeyListener,
 		{
 			chckbxPagoConTarjeta.setBackground(Color.CYAN);
 		}
-	
-		
-		
-		
-	
+
+
+
+
+
 	}
 
 	@Override
@@ -1330,7 +1331,7 @@ public class MenuOperador extends JFrame implements ActionListener, KeyListener,
 		{
 			btnButtonBuscarCliente.setBackground(null);
 		}
-		
+
 		if(e.getSource()==btnBuscarPorTicketAbierto)
 		{
 			btnBuscarPorTicketAbierto.setBackground(null);
@@ -1343,7 +1344,7 @@ public class MenuOperador extends JFrame implements ActionListener, KeyListener,
 		{
 			btnTicketF.setBackground(null);
 		}
-		
+
 		if(e.getSource()==comboBoxModelo)
 		{
 			comboBoxModelo.setBackground(null);
