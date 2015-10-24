@@ -141,18 +141,25 @@ public class AgregarCochera extends JDialog implements ActionListener{
 		}
 		if(event.getSource()==buttonAgregarCochera)
 		{
-			if(!textCostoMensual.getText().isEmpty() 
-					&& !textFieldPorcentajeExpensas.getText().isEmpty() 
-					&& !textFieldUbicacion.getText().isEmpty() 
-					&& !textFieldPorcentajeExpensas.getText().toString().isEmpty() 
+
+			if(textCostoMensual.getText().isEmpty())
+			{
+				textCostoMensual.setText("0");
+			}
+			if(textFieldPorcentajeExpensas.getText().isEmpty())
+			{
+				textFieldPorcentajeExpensas.setText("0");
+			}
+			if(!textFieldUbicacion.getText().isEmpty() && isNumeric(textFieldPorcentajeExpensas.getText().toString()) 
 					&& isNumeric(textFieldPorcentajeExpensas.getText().toString()))
 			{
+				double costoMensual=Double.parseDouble(textCostoMensual.getText().toString());
 				double porcentajeExp=Double.parseDouble(textFieldPorcentajeExpensas.getText().toString());
-				if((porcentajeExp<=100 && porcentajeExp>=0))
+				if(porcentajeExp!=0 || costoMensual != 0)
 				{
-					if(porcentajeExp>0 && Double.parseDouble(textCostoMensual.getText())>0){
-						JOptionPane.showMessageDialog(null,"La cochera no puede tener Costo mensual y Porcentaje de Expensas al mismo tiempo.", "Validación Datos",  JOptionPane.INFORMATION_MESSAGE);
-					}else{
+					if((porcentajeExp<=100 && porcentajeExp>=0)
+							&& (costoMensual>=0))
+					{
 						modelo.Cochera c = new Cochera();
 						c.setCostoCochera(Double.parseDouble(textCostoMensual.getText()));
 						c.setPorcentajeExpensas(Float.parseFloat(textFieldPorcentajeExpensas.getText()));
@@ -162,20 +169,26 @@ public class AgregarCochera extends JDialog implements ActionListener{
 						altaCliente.agregarCocheraAltaCliente(c);
 						dispose();
 					}
-
+					else
+					{
+						JOptionPane.showMessageDialog(null,"Porcentaje Expensas debe ser un valor entre 0 y 100; y Costo Mensual debe ser positivo.", "Validación Datos",  JOptionPane.INFORMATION_MESSAGE);
+					}
 				}
 				else
 				{
-					JOptionPane.showMessageDialog(null,"Porcentaje Expensas debe ser un valor entre 0 y 100.", "Validación Datos",  JOptionPane.INFORMATION_MESSAGE);
+					//AMBOS VALORES 0
+					JOptionPane.showMessageDialog(null,"Los campos Costo Mensual y Porcentaje Expensas no pueden encontrarse en blanco o ser iguales a 0.", "Validación Datos",  JOptionPane.INFORMATION_MESSAGE);
+
 				}
+			}
+			else{
+				//UBICACION EMPTY o CAMPOS NO NUMERICOS
+				JOptionPane.showMessageDialog(null,"El campo Ubicacion no puede encontrarse en blanco. Los campos Costo Mensual y Porcentaje Expensas deben ser numericos", "Validación Datos",  JOptionPane.INFORMATION_MESSAGE);
 
 			}
-			else
-			{
-				JOptionPane.showMessageDialog(null,"Alguno/s de los campos ingresados no son válidos.", "Validación Datos",  JOptionPane.INFORMATION_MESSAGE);
-			}
+
+
 		}
-
 	}
 
 	@SuppressWarnings("unused")
