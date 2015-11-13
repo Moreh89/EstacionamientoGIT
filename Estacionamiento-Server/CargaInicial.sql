@@ -13,6 +13,7 @@ insert into ColorVehiculo  (descripcion) VALUES  ('7 Verde');
 insert into ColorVehiculo  (descripcion) VALUES  ('8 Rojo');
 insert into ColorVehiculo  (descripcion) VALUES  ('9 Bordeaux');
 insert into ColorVehiculo  (descripcion) VALUES  ('0 Otro');
+insert into ColorVehiculo  (descripcion) VALUES  ('0 Otro');
 insert into ModeloVehiculo  (descripcion) VALUES  ('1 Ford');
 insert into ModeloVehiculo  (descripcion) VALUES  ('1 Ford Ka');
 insert into ModeloVehiculo  (descripcion) VALUES  ('1 Ford Fiesta');
