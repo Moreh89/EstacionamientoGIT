@@ -113,15 +113,17 @@ public class CambioContrasenia extends JDialog implements ActionListener{
 				if(cambioBoolean==true)
 				{
 					JOptionPane.showMessageDialog(null, "Se cambio la contraseña correctamente", "Cambio Contraseña", JOptionPane.INFORMATION_MESSAGE);
+					dispose();
 				}
-				else{
+				else
+				{
 					JOptionPane.showMessageDialog(null, "No se cambió la contraseña, intente nuevamente", "Cambio Contraseña", JOptionPane.INFORMATION_MESSAGE);
+					dispose();
 				}
 			}
 			else
 			{
 				JOptionPane.showMessageDialog(null, "Por favor, verifique que ambas contraseñas coincidan", "Cambio Contraseña", JOptionPane.INFORMATION_MESSAGE);
-
 			}
 			
 		}
