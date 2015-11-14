@@ -689,7 +689,7 @@ public class MenuOperador2 extends JFrame implements ActionListener, KeyListener
 		panel_Fechas.add(lblEstadia, gbc_lblEstadia_1);
 
 		textFieldTiempoEstadia = new JTextField();
-		textFieldTiempoEstadia.setFont(new Font("Tahoma", Font.BOLD, 15));
+		textFieldTiempoEstadia.setFont(new Font("Tahoma", Font.BOLD, 20));
 		textFieldTiempoEstadia.setEnabled(false);
 		textFieldTiempoEstadia.setEditable(false);
 		textFieldTiempoEstadia.setColumns(10);
