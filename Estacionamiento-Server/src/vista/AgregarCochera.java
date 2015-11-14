@@ -160,14 +160,22 @@ public class AgregarCochera extends JDialog implements ActionListener{
 					if((porcentajeExp<=100 && porcentajeExp>=0)
 							&& (costoMensual>=0))
 					{
-						modelo.Cochera c = new Cochera();
-						c.setCostoCochera(Double.parseDouble(textCostoMensual.getText()));
-						c.setPorcentajeExpensas(Float.parseFloat(textFieldPorcentajeExpensas.getText()));
-						c.setEstado(modelo.Cochera.ESTADO.ACTIVO);
-						c.setUbicacion(textFieldUbicacion.getText());
-						c.setCliente(null);
-						altaCliente.agregarCocheraAltaCliente(c);
-						dispose();
+						//PORCENTAJE Y COSTO CON VALORES > 0 es invalido
+						if(porcentajeExp>0 && costoMensual>0)
+						{
+							JOptionPane.showMessageDialog(null,"Porcentaje Expensas y Costo Mensual no deben poseer valores mayor a 0 en la misma cochera.", "Validación Datos",  JOptionPane.INFORMATION_MESSAGE);
+						}
+						else
+						{
+							modelo.Cochera c = new Cochera();
+							c.setCostoCochera(Double.parseDouble(textCostoMensual.getText()));
+							c.setPorcentajeExpensas(Float.parseFloat(textFieldPorcentajeExpensas.getText()));
+							c.setEstado(modelo.Cochera.ESTADO.ACTIVO);
+							c.setUbicacion(textFieldUbicacion.getText());
+							c.setCliente(null);
+							altaCliente.agregarCocheraAltaCliente(c);
+							dispose();
+						}
 					}
 					else
 					{
