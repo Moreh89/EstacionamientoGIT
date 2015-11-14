@@ -7,11 +7,9 @@ import javax.print.attribute.HashPrintRequestAttributeSet;
 import javax.print.attribute.PrintRequestAttributeSet;
 import javax.print.attribute.Size2DSyntax;
 import javax.print.attribute.standard.MediaPrintableArea;
-import javax.swing.JDialog;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import java.awt.GridBagLayout;
-
 import modelo.Ticket;
 import net.sourceforge.barbecue.Barcode;
 import net.sourceforge.barbecue.BarcodeException;
@@ -33,7 +31,6 @@ import javax.swing.JTextPane;
 import java.awt.Toolkit;
 import java.awt.Font;
 import java.awt.Color;
-import javax.swing.JTextField;
 
 @SuppressWarnings("serial")
 public class PrintTicket extends JFrame {

@@ -71,6 +71,7 @@ public class Login extends javax.swing.JFrame implements ActionListener, KeyList
 	
 	public Login() {
 		super();
+		setIconImage(Toolkit.getDefaultToolkit().getImage(Login.class.getResource("/image/printer.png")));
 		setResizable(false);
 		initGUI();
 	}
@@ -88,8 +89,7 @@ public class Login extends javax.swing.JFrame implements ActionListener, KeyList
 		            break;
 		        }
 		    }
-					setIconImage(Toolkit.getDefaultToolkit().getImage(
-					MenuOperador.class.getResource("/image/printer.png")));
+
 		    		UIManager.put("OptionPane.cancelButtonText", "Cancelar");
 		    		UIManager.put("OptionPane.okButtonText", "Aceptar");
 		    		UIManager.put("OptionPane.yesButtonText", "Si");
@@ -256,7 +256,7 @@ public class Login extends javax.swing.JFrame implements ActionListener, KeyList
 							}
 							if(Controlador.getInstancia().getUsuarioActual().getPermisos().equals(Usuario.PERMISOS.CAJA))
 							{
-								MenuOperador mop = new MenuOperador ();
+								MenuOperador2 mop = new MenuOperador2();
 								mop.setVisible(true);
 								dispose();
 							}
