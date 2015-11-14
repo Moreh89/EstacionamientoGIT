@@ -7,6 +7,7 @@ import javax.print.attribute.HashPrintRequestAttributeSet;
 import javax.print.attribute.PrintRequestAttributeSet;
 import javax.print.attribute.Size2DSyntax;
 import javax.print.attribute.standard.MediaPrintableArea;
+import javax.swing.JDialog;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import java.awt.GridBagLayout;
@@ -44,8 +45,19 @@ public class PrintTicket extends JFrame {
 	private Barcode barcode;
 	private static String impersora;
 	private JPanel panel_1;
-	private JTextField textField;
+	private JTextPane txtpnGraciasPorSu;
+	private static PrintTicket standalone = null;
+	
+	public static PrintTicket getInstance(Ticket ticket, String printerName){
+		if(standalone == null) standalone = new PrintTicket(ticket, printerName);
+		
+		return standalone;
+	}
 
+	
+	public void imprimir(){
+		printWork(this);
+	}
 
 	public PrintTicket (Ticket ticket, String printerName) {
 		setBackground(Color.WHITE);
@@ -128,15 +140,14 @@ public class PrintTicket extends JFrame {
 			gbc_panel_1.gridy = 2;
 			contentPane.add(panel_1, gbc_panel_1);
 			
-			textField = new JTextField();
-			textField.setForeground(Color.WHITE);
-			textField.setText(". ");
-			panel_1.add(textField);
-			textField.setColumns(1);
+			txtpnGraciasPorSu = new JTextPane();
+			txtpnGraciasPorSu.setContentType("text/html");
+			txtpnGraciasPorSu.setText("<b>Gracias por su visita.</b>");
+			panel_1.add(txtpnGraciasPorSu);
 			this.setVisible(true);
 			this.toBack();
-			printWork(this);
-			this.dispose();
+//			printWork(this);
+//			this.dispose();
 		} catch (BarcodeException e) {
 			e.printStackTrace();
 		}
@@ -235,6 +246,19 @@ public class PrintTicket extends JFrame {
 		} catch (PrinterException xcp) {
 			xcp.printStackTrace(System.err);
 		}
+	}
+
+
+	public static PrintTicket getInstance() {
+		return standalone;
+	}
+
+
+	public PrintTicket clear() {
+		
+		PrintTicket temp = standalone;
+		standalone = null;
+		return temp;
 	}
 
 
