@@ -263,7 +263,7 @@ public class Login extends javax.swing.JFrame implements ActionListener, KeyList
 							
 							
 						}else{
-							JOptionPane.showMessageDialog(null, "Combinación de Usuario y Contraseña incorrecta", "Login", JOptionPane.ERROR_MESSAGE);
+							JOptionPane.showMessageDialog(null, "Combinacion de Usuario y Clave incorrecta o Usuario deshabilitado", "Login", JOptionPane.ERROR_MESSAGE);
 						}
 						
 					}

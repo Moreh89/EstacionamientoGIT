@@ -80,7 +80,7 @@ public class Controlador {
 
 		if (u!=null){
 
-			if(password.equals(u.getPassword())){
+			if(password.equals(u.getPassword()) && u.getEstado().equals(Usuario.ESTADO.ACTIVO)){
 				//		 usuarioActual = u.getView();
 				usuarioActual= u;
 				return true;
@@ -797,7 +797,7 @@ public class Controlador {
 		return usuariosReturn;
 	}
 
-	public long modificarUsuario(String apellido, String dni, String nombre, String tipoDoc, String tipoUsuario, modelo.Usuario usuarioM) {
+	public long modificarUsuario(String apellido, String dni, String nombre, String tipoDoc, String tipoUsuario,String estado, modelo.Usuario usuarioM) {
 		long codigoReturn=-1;
 		usuarioM.setApellido(apellido);
 		usuarioM.setNombre(nombre);
@@ -810,6 +810,14 @@ public class Controlador {
 		if(tipoUsuario.equals("CAJA"))
 		{
 			usuarioM.setPermisos(Usuario.PERMISOS.CAJA);
+		}
+		if(estado.equals("ACTIVO"))
+		{
+			usuarioM.setEstado(Usuario.ESTADO.ACTIVO);
+		}
+		if(estado.equals("INACTIVO"))
+		{
+			usuarioM.setEstado(Usuario.ESTADO.INACTIVO);
 		}
 
 		codigoReturn=DAOUsuario.getInstance().modificarUsuario(usuarioM);
@@ -837,6 +845,7 @@ public class Controlador {
 		{
 			usuarioM.setPermisos(Usuario.PERMISOS.CAJA);
 		}
+		usuarioM.setEstado(Usuario.ESTADO.ACTIVO);
 
 		codigoReturn=DAOUsuario.getInstance().persistir(usuarioM);
 		return codigoReturn;

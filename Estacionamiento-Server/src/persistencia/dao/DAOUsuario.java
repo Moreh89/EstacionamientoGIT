@@ -77,6 +77,15 @@ public class DAOUsuario {
 			usuarioP.setPermisos(persistencia.clases.Usuario.PERMISOS.ADMIN);
 		}
 		
+		if(usuarioM.getEstado().toString().equals("ACTIVO"))
+		{
+			usuarioP.setEstado(persistencia.clases.Usuario.ESTADO.ACTIVO);
+		}
+		if(usuarioM.getEstado().toString().equals("INACTIVO"))
+		{
+			usuarioP.setEstado(persistencia.clases.Usuario.ESTADO.INACTIVO);
+		}
+		
 		usuarioP=(persistencia.clases.Usuario) HibernateDAO.getInstancia().update(usuarioP);
 		
 		return usuarioP.getIdUsuario();

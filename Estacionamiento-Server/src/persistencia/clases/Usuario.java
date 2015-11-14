@@ -6,6 +6,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+import persistencia.clases.Cliente.ESTADO;
+
 @Entity
 @Table(name = "Usuario")
 public class Usuario 
@@ -20,12 +22,19 @@ public class Usuario
 	private String apellido;
 	private String tipoDocumento;
 	private String numeroDocumento;
+	private ESTADO estado;	
 	
+	public enum ESTADO {
+		INACTIVO,
+		ACTIVO;
+	}
 	
 	public enum PERMISOS {
 		ADMIN,
 		CAJA;
 	}
+	
+	
 	
 	public long getIdUsuario() {
 		return idUsuario;
@@ -90,6 +99,12 @@ public class Usuario
 	}
 	public Usuario() {
 		
+	}
+	public ESTADO getEstado() {
+		return estado;
+	}
+	public void setEstado(ESTADO estado) {
+		this.estado = estado;
 	}
 	
 	

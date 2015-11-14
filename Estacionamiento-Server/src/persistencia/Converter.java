@@ -32,7 +32,12 @@ public class Converter {
 			if(permisoPersistencia.equals("CAJA"))
 				usuarioModelo.setPermisos(PERMISOS.CAJA);
 
-
+			String estadoPersistencia=usuarioPersistencia.getEstado().toString();
+			if(estadoPersistencia.equals("ACTIVO"))
+				usuarioModelo.setEstado(Usuario.ESTADO.ACTIVO);
+			if(estadoPersistencia.equals("INACTIVO"))
+				usuarioModelo.setEstado(Usuario.ESTADO.INACTIVO);
+			
 			usuarioModelo.setNombre(usuarioPersistencia.getNombre());
 			usuarioModelo.setApellido(usuarioPersistencia.getApellido());
 			usuarioModelo.setTipoDocumento(usuarioPersistencia.getTipoDocumento());
@@ -55,6 +60,11 @@ public class Converter {
 		if(permisoModelo.equals("CAJA"))
 			usuarioP.setPermisos(persistencia.clases.Usuario.PERMISOS.CAJA);
 
+		String estadoModelo=usuarioM.getEstado().toString();
+		if(estadoModelo.equals("ACTIVO"))
+			usuarioP.setEstado(persistencia.clases.Usuario.ESTADO.ACTIVO);
+		if(estadoModelo.equals("INACTIVO"))
+			usuarioP.setEstado(persistencia.clases.Usuario.ESTADO.INACTIVO);
 
 		usuarioP.setNombre(usuarioM.getNombre());
 		usuarioP.setApellido(usuarioM.getApellido());

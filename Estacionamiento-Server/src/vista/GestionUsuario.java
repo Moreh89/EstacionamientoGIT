@@ -59,6 +59,8 @@ public class GestionUsuario extends JDialog implements ActionListener, KeyListen
 	private JButton btnCrearUsuarioOperador;
 	private JButton btnCrearUsuarioAdministrador;
 	private JButton btnModificar;
+	private JLabel labelEstado;
+	private JComboBox comboBoxEstado;
 
 	/**
 	 * Launch the application.
@@ -92,7 +94,7 @@ public class GestionUsuario extends JDialog implements ActionListener, KeyListen
 		setTitle("Gestión Usuarios");
 		setResizable(false);
 		//setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 600, 500);
+		setBounds(100, 100, 600, 530);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
@@ -115,13 +117,13 @@ public class GestionUsuario extends JDialog implements ActionListener, KeyListen
 		model.addColumn("Numero");
 
 		panelAtributos = new JPanel();
-		panelAtributos.setBounds(10, 140, 574, 192);
+		panelAtributos.setBounds(10, 140, 574, 249);
 		contentPane.add(panelAtributos);
 		GridBagLayout gbl_panelAtributos = new GridBagLayout();
 		gbl_panelAtributos.columnWidths = new int[]{120, 0, 0};
-		gbl_panelAtributos.rowHeights = new int[]{30, 30, 30, 30, 30, 30, 0};
+		gbl_panelAtributos.rowHeights = new int[]{30, 30, 30, 30, 30, 0, 30, 0};
 		gbl_panelAtributos.columnWeights = new double[]{0.0, 1.0, Double.MIN_VALUE};
-		gbl_panelAtributos.rowWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
+		gbl_panelAtributos.rowWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
 		panelAtributos.setLayout(gbl_panelAtributos);
 
 		labelUserName = new JLabel("User Name:");
@@ -211,26 +213,43 @@ public class GestionUsuario extends JDialog implements ActionListener, KeyListen
 		gbc_textFieldDNILU.gridx = 1;
 		gbc_textFieldDNILU.gridy = 4;
 		panelAtributos.add(textFieldDNILU, gbc_textFieldDNILU);
-
-		lblTipoUsuario = new JLabel("Tipo Usuario:");
-		GridBagConstraints gbc_lblTipoUsuario = new GridBagConstraints();
-		gbc_lblTipoUsuario.anchor = GridBagConstraints.WEST;
-		gbc_lblTipoUsuario.insets = new Insets(0, 0, 0, 5);
-		gbc_lblTipoUsuario.gridx = 0;
-		gbc_lblTipoUsuario.gridy = 5;
-		panelAtributos.add(lblTipoUsuario, gbc_lblTipoUsuario);
-
-		comboBoxTipoUsuario = new JComboBox();
 		Vector comboBoxTipoUsuarioItems=new Vector<String>();
 		comboBoxTipoUsuarioItems.add(modelo.Usuario.PERMISOS.ADMIN.toString());
 		comboBoxTipoUsuarioItems.add(modelo.Usuario.PERMISOS.CAJA.toString());
-		comboBoxTipoUsuario.setModel(new DefaultComboBoxModel(comboBoxTipoUsuarioItems));
-		GridBagConstraints gbc_comboBoxTipoUsuario = new GridBagConstraints();
-		gbc_comboBoxTipoUsuario.fill = GridBagConstraints.HORIZONTAL;
-		gbc_comboBoxTipoUsuario.gridx = 1;
-		gbc_comboBoxTipoUsuario.gridy = 5;
-		panelAtributos.add(comboBoxTipoUsuario, gbc_comboBoxTipoUsuario);
-
+		
+				lblTipoUsuario = new JLabel("Tipo Usuario:");
+				GridBagConstraints gbc_lblTipoUsuario = new GridBagConstraints();
+				gbc_lblTipoUsuario.anchor = GridBagConstraints.WEST;
+				gbc_lblTipoUsuario.insets = new Insets(0, 0, 5, 5);
+				gbc_lblTipoUsuario.gridx = 0;
+				gbc_lblTipoUsuario.gridy = 5;
+				panelAtributos.add(lblTipoUsuario, gbc_lblTipoUsuario);
+		
+				comboBoxTipoUsuario = new JComboBox();
+				comboBoxTipoUsuario.setModel(new DefaultComboBoxModel(comboBoxTipoUsuarioItems));
+				GridBagConstraints gbc_comboBoxTipoUsuario = new GridBagConstraints();
+				gbc_comboBoxTipoUsuario.insets = new Insets(0, 0, 5, 0);
+				gbc_comboBoxTipoUsuario.fill = GridBagConstraints.HORIZONTAL;
+				gbc_comboBoxTipoUsuario.gridx = 1;
+				gbc_comboBoxTipoUsuario.gridy = 5;
+				panelAtributos.add(comboBoxTipoUsuario, gbc_comboBoxTipoUsuario);
+				
+				labelEstado = new JLabel("Estado:");
+				GridBagConstraints gbc_labelEstado = new GridBagConstraints();
+				gbc_labelEstado.anchor = GridBagConstraints.WEST;
+				gbc_labelEstado.insets = new Insets(0, 0, 0, 5);
+				gbc_labelEstado.gridx = 0;
+				gbc_labelEstado.gridy = 6;
+				panelAtributos.add(labelEstado, gbc_labelEstado);
+				
+				comboBoxEstado = new JComboBox();
+				comboBoxEstado.setModel(new DefaultComboBoxModel(new String[] {"INACTIVO", "ACTIVO"}));
+				GridBagConstraints gbc_comboBoxEstado = new GridBagConstraints();
+				gbc_comboBoxEstado.fill = GridBagConstraints.HORIZONTAL;
+				gbc_comboBoxEstado.gridx = 1;
+				gbc_comboBoxEstado.gridy = 6;
+				panelAtributos.add(comboBoxEstado, gbc_comboBoxEstado);				
+				
 		panelClientes = new JPanel();
 		panelClientes.setBounds(10, 11, 574, 123);
 		contentPane.add(panelClientes);
@@ -259,25 +278,25 @@ public class GestionUsuario extends JDialog implements ActionListener, KeyListen
 
 		btnCrearUsuarioAdministrador = new JButton("Crear Usuario Administrador");
 		btnCrearUsuarioAdministrador.setIcon(new ImageIcon(GestionUsuario.class.getResource("/image/plus.png")));
-		btnCrearUsuarioAdministrador.setBounds(10, 360, 263, 40);
+		btnCrearUsuarioAdministrador.setBounds(10, 400, 263, 40);
 		contentPane.add(btnCrearUsuarioAdministrador);
 		btnCrearUsuarioAdministrador.addActionListener(this);
 
 		btnCrearUsuarioOperador = new JButton("Crear Usuario Operador");
 		btnCrearUsuarioOperador.setIcon(new ImageIcon(GestionUsuario.class.getResource("/image/plus.png")));
 		btnCrearUsuarioOperador.addActionListener(this);
-		btnCrearUsuarioOperador.setBounds(10, 410, 263, 40);
+		btnCrearUsuarioOperador.setBounds(10, 450, 263, 40);
 		contentPane.add(btnCrearUsuarioOperador);
 
 		btnModificar = new JButton("Modificar Usuario");
 		btnModificar.setIcon(new ImageIcon(GestionUsuario.class.getResource("/image/modificar.png")));
 		btnModificar.addActionListener(this);
-		btnModificar.setBounds(291, 360, 155, 90);
+		btnModificar.setBounds(291, 400, 155, 90);
 		contentPane.add(btnModificar);
 
 		btnCancelar = new JButton("Cancelar");
 		btnCancelar.setIcon(new ImageIcon(GestionUsuario.class.getResource("/image/cancel.png")));
-		btnCancelar.setBounds(464, 360, 120, 90);
+		btnCancelar.setBounds(464, 400, 120, 90);
 		btnCancelar.addActionListener(this);
 		contentPane.add(btnCancelar);
 		listUsuarios.addListSelectionListener(this);
@@ -315,7 +334,7 @@ public class GestionUsuario extends JDialog implements ActionListener, KeyListen
 
 				modelo.Usuario usuarioSeleccionado = (Usuario) this.listUsuarios.getSelectedValue();
 				Controlador.getInstancia().modificarUsuario(textFieldApellido.getText(),textFieldDNILU.getText(),textFieldNombre.getText()
-						,comboBoxTipoDoc.getSelectedItem().toString(), comboBoxTipoUsuario.getSelectedItem().toString(), usuarioSeleccionado);
+						,comboBoxTipoDoc.getSelectedItem().toString(), comboBoxTipoUsuario.getSelectedItem().toString(),comboBoxEstado.getSelectedItem().toString(), usuarioSeleccionado);
 
 				dispose();
 			}
@@ -347,6 +366,7 @@ public class GestionUsuario extends JDialog implements ActionListener, KeyListen
 			this.textFieldUserName.setText(usuarioSeleccionado.getUserName());
 			this.comboBoxTipoDoc.setSelectedItem(usuarioSeleccionado.getTipoDocumento());
 			this.comboBoxTipoUsuario.setSelectedItem(usuarioSeleccionado.getPermisos().toString());	
+			this.comboBoxEstado.setSelectedItem(usuarioSeleccionado.getEstado().toString());
 		}
 	}	
 }

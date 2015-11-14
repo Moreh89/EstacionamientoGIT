@@ -2,6 +2,8 @@ package modelo;
 
 import java.util.Comparator;
 
+import persistencia.clases.Usuario.ESTADO;
+
 public class Usuario 
 {
 	private long idUsuario;
@@ -12,12 +14,17 @@ public class Usuario
 	private String apellido;
 	private String tipoDocumento;
 	private String numeroDocumento;
-	
+	private ESTADO estado;	
+
+	public enum ESTADO {
+		INACTIVO,
+		ACTIVO;
+	}
 	public enum PERMISOS {
 		ADMIN,
 		CAJA;
 	}
-	
+
 	public long getIdUsuario() {
 		return idUsuario;
 	}
@@ -66,18 +73,25 @@ public class Usuario
 	public void setPassword(String password) {
 		this.password = password;
 	}
-	
+
 	public Usuario(){}
-	
+
 	public String toString()
 	{
 		return this.apellido+", "+this.nombre;
 	}
-	  public static class CompApellido implements Comparator<Usuario>
-	 {
+	public static class CompApellido implements Comparator<Usuario>
+	{
 		public int compare(Usuario o1, Usuario o2) {
 			return o1.getApellido().compareToIgnoreCase(o2.getApellido());
 		}
 	}
+	public ESTADO getEstado() {
+		return estado;
+	}
+	public void setEstado(ESTADO estado) {
+		this.estado = estado;
+	}
 
+		
 }

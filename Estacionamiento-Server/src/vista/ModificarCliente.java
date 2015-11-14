@@ -813,6 +813,7 @@ public class ModificarCliente extends AltaCliente implements ActionListener{
 						comboBoxTipoFactura.getSelectedItem().toString(),
 						textFieldObservacion.getText(),
 						comboBoxEstado.getSelectedItem().toString());
+				JOptionPane.showMessageDialog(null, "La modificacion del Cliente "+textFieldNombre.getText()+" "+textFieldApellido.getText() + " fue exitosa." , "Modificacion Cliente", JOptionPane.INFORMATION_MESSAGE);
 				dispose();
 			}
 			else{
