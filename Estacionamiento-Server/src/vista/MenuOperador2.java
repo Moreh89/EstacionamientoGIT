@@ -213,9 +213,9 @@ public class MenuOperador2 extends JFrame implements ActionListener, KeyListener
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		GridBagLayout gbl_contentPane = new GridBagLayout();
-		gbl_contentPane.columnWidths = new int[] { 200, 250, 329, 0 };
+		gbl_contentPane.columnWidths = new int[] { 300, 400, 0, 0 };
 		gbl_contentPane.rowHeights = new int[] { 70, 69, 69, 70, 70, 70, 0, 0, 60, 69, 0 };
-		gbl_contentPane.columnWeights = new double[] { 1.0, 1.0, 0.0, 1.0 };
+		gbl_contentPane.columnWeights = new double[] { 1.0, 1.0, 0.0, 0.0 };
 		gbl_contentPane.rowWeights = new double[] { 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0,
 				Double.MIN_VALUE };
 		contentPane.setLayout(gbl_contentPane);
@@ -245,7 +245,7 @@ public class MenuOperador2 extends JFrame implements ActionListener, KeyListener
 		btnLimpiarCampos = new JButton("Limpiar Campos F6/ESC");
 		btnLimpiarCampos.setFont(new Font("Dialog", Font.PLAIN, 30));
 		GridBagConstraints gbc_btnLimpiarCampos = new GridBagConstraints();
-		gbc_btnLimpiarCampos.fill = GridBagConstraints.BOTH;
+		gbc_btnLimpiarCampos.fill = GridBagConstraints.VERTICAL;
 		gbc_btnLimpiarCampos.insets = new Insets(0, 0, 5, 5);
 		gbc_btnLimpiarCampos.gridx = 2;
 		gbc_btnLimpiarCampos.gridy = 0;
@@ -292,7 +292,6 @@ public class MenuOperador2 extends JFrame implements ActionListener, KeyListener
 		lblDescuento.setHorizontalAlignment(SwingConstants.RIGHT);
 		lblDescuento.setFont(new Font("Tahoma", Font.PLAIN, 30));
 		GridBagConstraints gbc_lblDescuento = new GridBagConstraints();
-		gbc_lblDescuento.fill = GridBagConstraints.HORIZONTAL;
 		gbc_lblDescuento.insets = new Insets(0, 0, 5, 5);
 		gbc_lblDescuento.gridx = 2;
 		gbc_lblDescuento.gridy = 1;
@@ -337,7 +336,6 @@ public class MenuOperador2 extends JFrame implements ActionListener, KeyListener
 		lblCliente.setHorizontalAlignment(SwingConstants.RIGHT);
 		lblCliente.setFont(new Font("Tahoma", Font.PLAIN, 30));
 		GridBagConstraints gbc_lblCliente = new GridBagConstraints();
-		gbc_lblCliente.fill = GridBagConstraints.HORIZONTAL;
 		gbc_lblCliente.insets = new Insets(0, 0, 5, 5);
 		gbc_lblCliente.gridx = 2;
 		gbc_lblCliente.gridy = 2;
@@ -411,7 +409,7 @@ public class MenuOperador2 extends JFrame implements ActionListener, KeyListener
 		btnPrePago.setHorizontalAlignment(SwingConstants.RIGHT);
 		btnPrePago.setFont(new Font("Tahoma", Font.PLAIN, 30));
 		GridBagConstraints gbc_btnPrePago = new GridBagConstraints();
-		gbc_btnPrePago.fill = GridBagConstraints.BOTH;
+		gbc_btnPrePago.fill = GridBagConstraints.VERTICAL;
 		gbc_btnPrePago.insets = new Insets(0, 0, 5, 5);
 		gbc_btnPrePago.gridx = 2;
 		gbc_btnPrePago.gridy = 3;
@@ -460,7 +458,6 @@ public class MenuOperador2 extends JFrame implements ActionListener, KeyListener
 		lblPerdidaTicket.setHorizontalAlignment(SwingConstants.RIGHT);
 		lblPerdidaTicket.setFont(new Font("Tahoma", Font.PLAIN, 30));
 		GridBagConstraints gbc_lblPerdidaTicket = new GridBagConstraints();
-		gbc_lblPerdidaTicket.fill = GridBagConstraints.HORIZONTAL;
 		gbc_lblPerdidaTicket.insets = new Insets(0, 0, 5, 5);
 		gbc_lblPerdidaTicket.gridx = 2;
 		gbc_lblPerdidaTicket.gridy = 4;
@@ -533,7 +530,7 @@ public class MenuOperador2 extends JFrame implements ActionListener, KeyListener
 		comboBoxImpresoras = new JComboBox();
 		GridBagConstraints gbc_comboBoxImpresoras = new GridBagConstraints();
 		gbc_comboBoxImpresoras.insets = new Insets(0, 0, 5, 5);
-		gbc_comboBoxImpresoras.fill = GridBagConstraints.BOTH;
+		gbc_comboBoxImpresoras.fill = GridBagConstraints.VERTICAL;
 		gbc_comboBoxImpresoras.gridx = 2;
 		gbc_comboBoxImpresoras.gridy = 6;
 		contentPane.add(comboBoxImpresoras, gbc_comboBoxImpresoras);
@@ -632,7 +629,7 @@ public class MenuOperador2 extends JFrame implements ActionListener, KeyListener
 		gbc_panel_Fechas.gridy = 9;
 		contentPane.add(panel_Fechas, gbc_panel_Fechas);
 		GridBagLayout gbl_panel_Fechas = new GridBagLayout();
-		gbl_panel_Fechas.columnWidths = new int[] { 126, 202, 113, 207, 118, 202, 0, 0 };
+		gbl_panel_Fechas.columnWidths = new int[] { 126, 220, 113, 220, 118, 190, 0, 0 };
 		gbl_panel_Fechas.rowHeights = new int[] { 60, 0 };
 		gbl_panel_Fechas.columnWeights = new double[] { 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 1.0, Double.MIN_VALUE };
 		gbl_panel_Fechas.rowWeights = new double[] { 0.0, Double.MIN_VALUE };
@@ -653,7 +650,7 @@ public class MenuOperador2 extends JFrame implements ActionListener, KeyListener
 				gbc_textFieldIngreso.gridx = 1;
 				gbc_textFieldIngreso.gridy = 0;
 				panel_Fechas.add(textFieldIngreso, gbc_textFieldIngreso);
-				textFieldIngreso.setFont(new Font("Tahoma", Font.BOLD, 15));
+				textFieldIngreso.setFont(new Font("Tahoma", Font.BOLD, 20));
 				textFieldIngreso.setEnabled(false);
 				textFieldIngreso.setEditable(false);
 				textFieldIngreso.setColumns(10);
@@ -673,7 +670,7 @@ public class MenuOperador2 extends JFrame implements ActionListener, KeyListener
 				gbc_textFieldEgreso.gridx = 3;
 				gbc_textFieldEgreso.gridy = 0;
 				panel_Fechas.add(textFieldEgreso, gbc_textFieldEgreso);
-				textFieldEgreso.setFont(new Font("Tahoma", Font.BOLD, 15));
+				textFieldEgreso.setFont(new Font("Tahoma", Font.BOLD, 20));
 				textFieldEgreso.setEnabled(false);
 				textFieldEgreso.setEditable(false);
 				textFieldEgreso.setColumns(10);
@@ -937,13 +934,13 @@ public class MenuOperador2 extends JFrame implements ActionListener, KeyListener
 					numeroTck = "0"+numeroTck; 
 				}
 				this.textFieldNumeroTicket.setText(numeroTck);
-				this.textFieldIngreso.setText(new SimpleDateFormat("dd-MM-yyyy hh:mm:ss").format(tck.getFechaLlegada()));
+				this.textFieldIngreso.setText(new SimpleDateFormat("dd/MM/yy HH:mm:ss").format(tck.getFechaLlegada()));
 				this.comboBoxTipoVehiculo.setSelectedItem(tck.getCatergoriaVehiculo().getDescripcion());
 				this.comboBoxColor.setSelectedItem(tck.getColor().getDescripcion());
 				this.comboBoxModelo.setSelectedItem(tck.getModeloVehiculo().getDescripcion());
 				this.comboBoxDescuento.setSelectedItem(tck.getDescuento().getDescripcion());
 				this.textFieldPatente.setText(tck.getPatente());
-				if (tck.getFechaSalida() != null) this.textFieldEgreso.setText(new SimpleDateFormat("dd-MM-yyyy hh:mm:ss").format(tck.getFechaSalida()));
+				if (tck.getFechaSalida() != null) this.textFieldEgreso.setText(new SimpleDateFormat("dd/MM/yy HH:mm:ss").format(tck.getFechaSalida()));
 				this.textFieldObsevacion.setText(tck.getObservacion());
 				this.textFieldPrepago.setText(String.valueOf(tck.getPrepago()));
 				this.textFieldPrepago.setEditable(true);
@@ -1049,7 +1046,7 @@ public class MenuOperador2 extends JFrame implements ActionListener, KeyListener
 					numeroTck = "0"+numeroTck; 
 				}
 				this.textFieldNumeroTicket.setText(numeroTck);
-				this.textFieldIngreso.setText(new SimpleDateFormat("dd-MM-yyyy hh:mm:ss").format(tck.getFechaLlegada()));
+				this.textFieldIngreso.setText(new SimpleDateFormat("dd/MM/yy HH:mm:ss").format(tck.getFechaLlegada()));
 				this.comboBoxTipoVehiculo.setSelectedItem(tck.getCatergoriaVehiculo().getDescripcion());
 				this.comboBoxColor.setSelectedItem(tck.getColor().getDescripcion());
 				this.comboBoxModelo.setSelectedItem(tck.getModeloVehiculo().getDescripcion());
@@ -1071,7 +1068,7 @@ public class MenuOperador2 extends JFrame implements ActionListener, KeyListener
 
 				}
 				this.textFieldPatente.setText(tck.getPatente());
-				if (tck.getFechaSalida() != null) this.textFieldEgreso.setText(new SimpleDateFormat("dd-MM-yyyy hh:mm:ss").format(tck.getFechaSalida()));
+				if (tck.getFechaSalida() != null) this.textFieldEgreso.setText(new SimpleDateFormat("dd/MM/yy HH:mm:ss").format(tck.getFechaSalida()));
 				this.textFieldObsevacion.setText(tck.getObservacion());
 				this.textFieldPrepago.setText(String.valueOf(tck.getPrepago()));
 				this.textFieldPrepago.setEditable(false);

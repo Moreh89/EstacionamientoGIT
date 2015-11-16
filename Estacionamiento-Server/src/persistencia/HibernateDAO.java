@@ -2,9 +2,12 @@ package persistencia;
 
 import java.util.Date;
 import java.util.List;
+
+import org.hibernate.Query;
 import org.hibernate.SQLQuery;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.hibernate.Transaction;
 
 
 
@@ -60,7 +63,7 @@ public class HibernateDAO {
 		session.flush();
 		return list;
 	}
-	
+
 	public List<?> getListString(String className, String columna,String value)
 	{
 		Session session=getSession();
@@ -68,7 +71,7 @@ public class HibernateDAO {
 		session.flush();
 		return list;
 	}
-	
+
 	public List<?> getListbetweenDates(String className, String columnaFiltro,String valorFiltro, String columnaFechaIni, String fehaInicio, String columanFechaFin, String fechaFin)
 	{
 		Session session=getSession();
@@ -76,7 +79,7 @@ public class HibernateDAO {
 		session.flush();
 		return list;
 	}
-	
+
 	public List<?> getListbetweenDates(String className, String columnaFiltro1 ,String valorFiltro1, String columnaFiltro2 , boolean valorFiltro2, String columnaFechaIni, String fehaInicio, String columanFechaFin, String fechaFin)
 	{
 		Session session=getSession();
@@ -84,7 +87,7 @@ public class HibernateDAO {
 		session.flush();
 		return list;
 	}
-	
+
 	public List<?> getListbetweenDates(String className, String columnaFiltro,long valorFiltro, String columnaFechaIni, String fehaInicio, String columanFechaFin, String fechaFin)
 	{
 		Session session=getSession();
@@ -101,7 +104,7 @@ public class HibernateDAO {
 		session.flush();
 		return list;
 	}
-	
+
 
 	// Devuelve un objeto, en className recibe el nombre de la clase, campo es la columna y valor es el filtro.
 	public Object getObjectWithString(String className, String campo, String value) {
@@ -125,7 +128,7 @@ public class HibernateDAO {
 		s.flush();
 		return r;
 	}
-	
+
 	public void delete(Object obj) {
 		Session session = getSession();
 		session.beginTransaction();
@@ -151,7 +154,7 @@ public class HibernateDAO {
 		session.flush();
 		return obj;
 	}
-	
+
 	public List<?> getList(String className)
 	{
 		Session session=getSession();
@@ -159,7 +162,7 @@ public class HibernateDAO {
 		session.flush();
 		return list;
 	}
-	
+
 	@SuppressWarnings("rawtypes")
 	public Object get(Object clase, int id) {
 		Session session = getSession();
@@ -169,7 +172,7 @@ public class HibernateDAO {
 		session.flush();
 		return obj;
 	}
-	
+
 	@SuppressWarnings("rawtypes")
 	public Object get(Object clase, double id) {
 		Session session = getSession();
@@ -188,8 +191,8 @@ public class HibernateDAO {
 		session.flush();
 		return obj;
 	}
-	
-	
+
+
 	public String backUp(String databaseName, String path,String fileNameBackup)
 	{
 		Session session = getSession();
@@ -209,14 +212,14 @@ public class HibernateDAO {
 		return list;
 	}
 
-//	public double getEstadoCrediticio(long idCuentaCorriente) {
-//		double estadoCrediticio=0;
-////TO DO NO ANDA
-////		Session s = this.getSession();
-////		estadoCrediticio = (Double) s.createQuery("SUM(m.montoCobrado)as suma from MovimientoCC m where m.CuentaCorriente= ?").setLong(0, idCuentaCorriente).uniqueResult();
-////		s.flush();		
-//		return estadoCrediticio;
-//	}
+	//	public double getEstadoCrediticio(long idCuentaCorriente) {
+	//		double estadoCrediticio=0;
+	////TO DO NO ANDA
+	////		Session s = this.getSession();
+	////		estadoCrediticio = (Double) s.createQuery("SUM(m.montoCobrado)as suma from MovimientoCC m where m.CuentaCorriente= ?").setLong(0, idCuentaCorriente).uniqueResult();
+	////		s.flush();		
+	//		return estadoCrediticio;
+	//	}
 
 	public List<?> getListTwoInt(String className, String columna,int condicion1, int condicion2) {
 		Session session=getSession();
@@ -224,6 +227,20 @@ public class HibernateDAO {
 		session.flush();
 		return list;
 	}
-	
-	
+
+	public long eliminarTickets(Date fechaDesde, Date fechaHasta) {
+		long ret = -1;
+		Session session = getSession();
+		Transaction tx = session.beginTransaction();
+		session.beginTransaction();
+		String stringQ= "DELETE Ticket where Cliente is null AND fechaSalida IS NOT NULL AND estado = 2 AND DATEDIFF(dd, fechaSalida, :fechaD)<=0 AND DATEDIFF(dd, fechaSalida, :fechaH)>=0";
+		SQLQuery query=session.createSQLQuery(stringQ);
+		query.setDate("fechaD", fechaDesde);
+		query.setDate("fechaH", fechaHasta);
+		ret = query.executeUpdate();
+		tx.commit();
+		return ret;
+	}
+
+
 }

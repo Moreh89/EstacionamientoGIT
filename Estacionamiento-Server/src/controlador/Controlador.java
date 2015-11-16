@@ -1313,4 +1313,11 @@ public class Controlador {
 
 	}
 
+	public long eliminarTickets(Date fechaDesde, Date fechaHasta) {
+		long codReturn= -1;
+		codReturn=HibernateDAO.getInstancia().eliminarTickets(fechaDesde, fechaHasta);
+		
+		return codReturn;
+	}
+
 }

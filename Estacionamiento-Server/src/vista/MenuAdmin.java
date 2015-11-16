@@ -59,6 +59,7 @@ public class MenuAdmin extends JFrame implements ActionListener {
 	private JMenuItem mntmTicketsTarjeta;
 	private JMenu menuHelp;
 	private JMenuItem mnAbout;
+	private JMenuItem menuItemEliminarTickets;
 
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
@@ -204,7 +205,11 @@ public class MenuAdmin extends JFrame implements ActionListener {
 		menuSistema = new JMenu("Gestion de Sistema");
 		menuSistema.setIcon(new ImageIcon(MenuAdmin.class.getResource("/image/report.png")));
 		menuBar.add(menuSistema);
-
+		
+		menuItemEliminarTickets = new JMenuItem("Eliminar Tickets");
+		menuSistema.add(menuItemEliminarTickets);
+		menuItemEliminarTickets.addActionListener(this);
+		
 		menuItemBackUp = new JMenuItem("Realizar BackUp");
 		menuSistema.add(menuItemBackUp);
 		menuItemBackUp.addActionListener(this);
@@ -330,6 +335,11 @@ public class MenuAdmin extends JFrame implements ActionListener {
 		if(event.getSource()==mnAbout)
 		{
 			new About().setVisible(true);
+		}
+		
+		if(event.getSource()==menuItemEliminarTickets)
+		{
+			new EliminarTickets().setVisible(true);
 		}
 	}
 
