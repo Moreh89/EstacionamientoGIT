@@ -201,6 +201,11 @@ public class HibernateDAO {
 		query.executeUpdate();
 		session.flush();
 		return path+fileNameBackup;
+		
+
+//RESTORE DATABASE ESTACIONAMIENTO from disk = 'RUTA' with replace, MOVE 'ESTACIONAMIENTO' TO 'c:\temp\db2.mdf',
+//				  MOVE 'estacionamiento_log' TO 'c:\temp\db2.ldf';
+
 	}
 
 
