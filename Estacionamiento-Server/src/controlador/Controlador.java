@@ -565,7 +565,7 @@ public class Controlador {
 
 		DAOCliente.getInstance().agregarMovimientoCC(cliente.getIdCliente(), movimientoM);
 //TODO RODRI TODO TUYOOO -> IMPRIMIR
-		new PrintTicketCobroExtraordinario(movimientoM, impresora);
+		new PrintTicketCobroExtraordinario(movimientoM, impresora, cliente);
 		return 0;
 	}
 

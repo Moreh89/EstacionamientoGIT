@@ -56,7 +56,7 @@ public class PrintTicketCobroExtraordinario extends JFrame {
 		printWork(this);
 	}
 
-	public PrintTicketCobroExtraordinario (modelo.MovimientoCC cobroExtraordinario, String printerName) {
+	public PrintTicketCobroExtraordinario (modelo.MovimientoCC cobroExtraordinario, String printerName, modelo.Cliente cliente) {
 		setBackground(Color.WHITE);
 		setIconImage(Toolkit.getDefaultToolkit().getImage(
 				PrintTicket.class.getResource("/image/printer.png")));
@@ -100,7 +100,7 @@ public class PrintTicketCobroExtraordinario extends JFrame {
 			txtpnfechaIng = new JTextPane();
 			txtpnfechaIng.setFont(new Font("Tahoma", Font.PLAIN, 12));
 			txtpnfechaIng.setContentType("text/html");
-			txtpnfechaIng.setText("<html><b>P.J.E.Uriburu 1058 CABA<br>Fecha Ing:<br>"+new SimpleDateFormat("dd-MM-yyyy HH:mm:ss").format(cobroExtraordinario.getFecha())+"<br>Descripcion: "+ cobroExtraordinario.getDescripcion()+"<br>Monto: "+cobroExtraordinario.getMontoCobrado()+"</b><br></html>");
+			txtpnfechaIng.setText("<html><b>P.J.E.Uriburu 1058 CABA<br>Fecha Ing:<br>"+new SimpleDateFormat("dd-MM-yyyy HH:mm:ss").format(cobroExtraordinario.getFecha())+"<br>Cliente: "+ cliente.getNombre()+" "+cliente.getApellido()+"<br>Descripcion: "+ cobroExtraordinario.getDescripcion()+"<br>Monto: "+cobroExtraordinario.getMontoCobrado()+"</b><br></html>");
 			GridBagConstraints gbc_txtpnfechaIng = new GridBagConstraints();
 			gbc_txtpnfechaIng.fill = GridBagConstraints.BOTH;
 			gbc_txtpnfechaIng.gridx = 0;
@@ -115,18 +115,6 @@ public class PrintTicketCobroExtraordinario extends JFrame {
 			gbc_panel.gridx = 0;
 			gbc_panel.gridy = 1;
 			contentPane.add(panel, gbc_panel);
-
-			// Always get a Barcode from the BarcodeFactory
-			String numeroMovimiento = String.valueOf(cobroExtraordinario.getIdMovimiento());
-			while(numeroMovimiento.length() < 10){
-				numeroMovimiento = "0"+numeroMovimiento;
-			}
-			
-			barcode = BarcodeFactory.createCode128(numeroMovimiento);
-			barcode.setBarHeight(30);
-			barcode.setBarWidth(1);
-
-			panel.add(barcode);
 			
 			panel_1 = new JPanel();
 			panel_1.setBackground(Color.WHITE);
@@ -144,7 +132,7 @@ public class PrintTicketCobroExtraordinario extends JFrame {
 			this.toBack();
 //			printWork(this);
 //			this.dispose();
-		} catch (BarcodeException e) {
+		} catch (Exception e) {
 			e.printStackTrace();
 		}
 
@@ -257,7 +245,7 @@ public class PrintTicketCobroExtraordinario extends JFrame {
 		return temp;
 	}
 
-	public void PrintCobroExtraOrdinario (modelo.MovimientoCC cobroExtraordinario, String printerName) {
+	public void PrintCobroExtraOrdinario (modelo.MovimientoCC cobroExtraordinario, String printerName, modelo.Cliente cliente) {
 		setBackground(Color.WHITE);
 		setIconImage(Toolkit.getDefaultToolkit().getImage(
 				PrintTicket.class.getResource("/image/printer.png")));
@@ -301,7 +289,7 @@ public class PrintTicketCobroExtraordinario extends JFrame {
 			txtpnfechaIng = new JTextPane();
 			txtpnfechaIng.setFont(new Font("Tahoma", Font.PLAIN, 12));
 			txtpnfechaIng.setContentType("text/html");
-			txtpnfechaIng.setText("<html><b>P.J.E.Uriburu 1058 CABA<br>Fecha Ing:<br>"+new SimpleDateFormat("dd-MM-yyyy HH:mm:ss").format(cobroExtraordinario.getFecha())+"<br>Descripcion: "+ cobroExtraordinario.getDescripcion()+"<br>Monto: "+cobroExtraordinario.getMontoCobrado()+"</b><br></html>");
+			txtpnfechaIng.setText("<html><b>P.J.E.Uriburu 1058 CABA<br>Fecha Ing:<br>"+new SimpleDateFormat("dd-MM-yyyy HH:mm:ss").format(cobroExtraordinario.getFecha())+"<br>Cliente: "+ cliente.getNombre()+" "+cliente.getApellido()+"<br>Descripcion: "+ cobroExtraordinario.getDescripcion()+"<br>Monto: "+cobroExtraordinario.getMontoCobrado()+"</b><br></html>");
 			GridBagConstraints gbc_txtpnfechaIng = new GridBagConstraints();
 			gbc_txtpnfechaIng.fill = GridBagConstraints.BOTH;
 			gbc_txtpnfechaIng.gridx = 0;
@@ -317,17 +305,6 @@ public class PrintTicketCobroExtraordinario extends JFrame {
 			gbc_panel.gridy = 1;
 			contentPane.add(panel, gbc_panel);
 
-			// Always get a Barcode from the BarcodeFactory
-			String numeroMovimiento = String.valueOf(cobroExtraordinario.getIdMovimiento());
-			while(numeroMovimiento.length() < 10){
-				numeroMovimiento = "0"+numeroMovimiento;
-			}
-			
-			barcode = BarcodeFactory.createCode128(numeroMovimiento);
-			barcode.setBarHeight(30);
-			barcode.setBarWidth(1);
-
-			panel.add(barcode);
 			
 			panel_1 = new JPanel();
 			panel_1.setBackground(Color.WHITE);
@@ -345,7 +322,7 @@ public class PrintTicketCobroExtraordinario extends JFrame {
 			this.toBack();
 //			printWork(this);
 //			this.dispose();
-		} catch (BarcodeException e) {
+		} catch (Exception e) {
 			e.printStackTrace();
 		}
 
