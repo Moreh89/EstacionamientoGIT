@@ -4,8 +4,12 @@ import java.awt.BorderLayout;
 import java.awt.GridBagConstraints;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.FocusListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+
+import javax.print.PrintService;
+import javax.print.PrintServiceLookup;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -39,6 +43,8 @@ public class CobroExtraordinario extends JDialog implements ActionListener, KeyL
 	private JTextField clienteTextField;
 	private JButton btnBuscarCliente;
 	private GridBagConstraints gbc_comboBoxTipoCobro_1;
+	private JComboBox comboBoxImpresoras;
+	private JLabel labelImpresora;
 
 
 	/**
@@ -61,14 +67,14 @@ public class CobroExtraordinario extends JDialog implements ActionListener, KeyL
 	{
 		setResizable(false);
 		setTitle("Cobro Extraordinario");
-		setBounds(100, 100, 450, 249);
+		setBounds(100, 100, 450, 270);
 		getContentPane().setLayout(new BorderLayout());
 		contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
 		getContentPane().add(contentPanel, BorderLayout.CENTER);
 		GridBagLayout gbl_contentPanel = new GridBagLayout();
 		gbl_contentPanel.columnWidths = new int[]{70, 141, 89, 58, 10, 0};
-		gbl_contentPanel.rowHeights = new int[]{10, 40, 40, 40, 5, 32, 0};
-		gbl_contentPanel.columnWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
+		gbl_contentPanel.rowHeights = new int[]{40, 40, 40, 40, 0, 32, 0};
+		gbl_contentPanel.columnWeights = new double[]{0.0, 1.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
 		gbl_contentPanel.rowWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
 		contentPanel.setLayout(gbl_contentPanel);
 		GridBagConstraints gbc_comboBoxTipoCobro_1_1  = new GridBagConstraints();
@@ -85,7 +91,7 @@ public class CobroExtraordinario extends JDialog implements ActionListener, KeyL
 		gbc_clienteLabel.fill = GridBagConstraints.VERTICAL;
 		gbc_clienteLabel.insets = new Insets(0, 0, 5, 5);
 		gbc_clienteLabel.gridx = 0;
-		gbc_clienteLabel.gridy = 1;
+		gbc_clienteLabel.gridy = 0;
 		contentPanel.add(clienteLabel, gbc_clienteLabel);
 
 		clienteTextField = new JTextField();
@@ -94,7 +100,7 @@ public class CobroExtraordinario extends JDialog implements ActionListener, KeyL
 		gbc_clienteTextField.fill = GridBagConstraints.BOTH;
 		gbc_clienteTextField.insets = new Insets(0, 0, 5, 5);
 		gbc_clienteTextField.gridx = 1;
-		gbc_clienteTextField.gridy = 1;
+		gbc_clienteTextField.gridy = 0;
 		contentPanel.add(clienteTextField, gbc_clienteTextField);
 		clienteTextField.setEnabled(false);
 
@@ -104,7 +110,7 @@ public class CobroExtraordinario extends JDialog implements ActionListener, KeyL
 		gbc_btnBuscarCliente.fill = GridBagConstraints.BOTH;
 		gbc_btnBuscarCliente.insets = new Insets(0, 0, 5, 5);
 		gbc_btnBuscarCliente.gridx = 3;
-		gbc_btnBuscarCliente.gridy = 1;
+		gbc_btnBuscarCliente.gridy = 0;
 		contentPanel.add(btnBuscarCliente, gbc_btnBuscarCliente);
 		btnBuscarCliente.addActionListener(this);
 
@@ -116,18 +122,18 @@ public class CobroExtraordinario extends JDialog implements ActionListener, KeyL
 		gbc_lblNuevaCon.fill = GridBagConstraints.VERTICAL;
 		gbc_lblNuevaCon.insets = new Insets(0, 0, 5, 5);
 		gbc_lblNuevaCon.gridx = 0;
-		gbc_lblNuevaCon.gridy = 2;
+		gbc_lblNuevaCon.gridy = 1;
 		contentPanel.add(lblNuevaCon, gbc_lblNuevaCon);
 
 
 		comboBoxTipoCobro = new JComboBox<String>();
 		comboBoxTipoCobro.setModel(new DefaultComboBoxModel<String>(new String[] {"1. EXPENSAS", "2. ALQUILER", "3. OTROS"}));
 		gbc_comboBoxTipoCobro_1 = new GridBagConstraints();
-		gbc_comboBoxTipoCobro_1.gridwidth = 2;
+		gbc_comboBoxTipoCobro_1.gridwidth = 3;
 		gbc_comboBoxTipoCobro_1.fill = GridBagConstraints.BOTH;
 		gbc_comboBoxTipoCobro_1.insets = new Insets(0, 0, 5, 5);
 		gbc_comboBoxTipoCobro_1.gridx = 1;
-		gbc_comboBoxTipoCobro_1.gridy = 2;
+		gbc_comboBoxTipoCobro_1.gridy = 1;
 		contentPanel.add(comboBoxTipoCobro, gbc_comboBoxTipoCobro_1);
 
 		JLabel lblNuevaCon2 = new JLabel("Monto:");
@@ -137,19 +143,46 @@ public class CobroExtraordinario extends JDialog implements ActionListener, KeyL
 		gbc_lblNuevaCon2.fill = GridBagConstraints.VERTICAL;
 		gbc_lblNuevaCon2.insets = new Insets(0, 0, 5, 5);
 		gbc_lblNuevaCon2.gridx = 0;
-		gbc_lblNuevaCon2.gridy = 3;
+		gbc_lblNuevaCon2.gridy = 2;
 		contentPanel.add(lblNuevaCon2, gbc_lblNuevaCon2);
 
 		montoCobradoTextField = new JTextField();
 		GridBagConstraints gbc_montoCobradoTextField = new GridBagConstraints();
-		gbc_montoCobradoTextField.gridwidth = 2;
+		gbc_montoCobradoTextField.gridwidth = 3;
 		gbc_montoCobradoTextField.fill = GridBagConstraints.BOTH;
 		gbc_montoCobradoTextField.insets = new Insets(0, 0, 5, 5);
 		gbc_montoCobradoTextField.gridx = 1;
-		gbc_montoCobradoTextField.gridy = 3;
+		gbc_montoCobradoTextField.gridy = 2;
 		contentPanel.add(montoCobradoTextField, gbc_montoCobradoTextField);
 		montoCobradoTextField.addKeyListener(this);
-
+		
+		labelImpresora = new JLabel("Impresora:");
+		labelImpresora.setFont(new Font("Tahoma", Font.BOLD, 11));
+		GridBagConstraints gbc_labelImpresora = new GridBagConstraints();
+		gbc_labelImpresora.insets = new Insets(0, 0, 5, 5);
+		gbc_labelImpresora.anchor = GridBagConstraints.EAST;
+		gbc_labelImpresora.gridx = 0;
+		gbc_labelImpresora.gridy = 3;
+		contentPanel.add(labelImpresora, gbc_labelImpresora);
+		
+		comboBoxImpresoras = new JComboBox();
+		comboBoxImpresoras.setFocusable(false);
+		GridBagConstraints gbc_comboBoxImpresoras = new GridBagConstraints();
+		gbc_comboBoxImpresoras.gridwidth = 3;
+		gbc_comboBoxImpresoras.insets = new Insets(0, 0, 5, 5);
+		gbc_comboBoxImpresoras.fill = GridBagConstraints.BOTH;
+		gbc_comboBoxImpresoras.gridx = 1;
+		gbc_comboBoxImpresoras.gridy = 3;
+		comboBoxImpresoras.addItem("NO IMPRIMIR");
+		contentPanel.add(comboBoxImpresoras, gbc_comboBoxImpresoras);
+		PrintService[] printServices = PrintServiceLookup.lookupPrintServices(
+				null, null);
+		//Para saber el nombre de tus impresoras
+		for (PrintService printer : printServices) {
+			comboBoxImpresoras.addItem(printer.getName());
+		}
+		comboBoxImpresoras.setSelectedIndex(1);
+		
 		aceptarButton = new JButton("Aceptar");
 		aceptarButton.setIcon(new ImageIcon(CambioContrasenia.class.getResource("/image/ok.png")));
 		GridBagConstraints gbc_aceptarButton = new GridBagConstraints();
@@ -218,7 +251,8 @@ public class CobroExtraordinario extends JDialog implements ActionListener, KeyL
 						{
 							if (resultado == JOptionPane.OK_OPTION)
 							{
-								codigoReturn=Controlador.getInstancia().generarCobroExtraordinario(comboBoxTipoCobro.getSelectedItem().toString(), Double.parseDouble(montoCobradoTextField.getText()),cliente);
+								String impresora = (String) this.comboBoxImpresoras.getSelectedItem();
+								codigoReturn=Controlador.getInstancia().generarCobroExtraordinario(comboBoxTipoCobro.getSelectedItem().toString(), Double.parseDouble(montoCobradoTextField.getText()),cliente, impresora);
 								if(codigoReturn == -1)
 								{
 									JOptionPane.showMessageDialog(null, "No se pudo realizar el cobro.", "Cobro Extraordinario", JOptionPane.INFORMATION_MESSAGE);

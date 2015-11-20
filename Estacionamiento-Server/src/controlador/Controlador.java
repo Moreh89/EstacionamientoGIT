@@ -23,6 +23,7 @@ import net.sf.jasperreports.engine.virtualization.SqlDateSerializer;
 import persistencia.Converter;
 import persistencia.HibernateDAO;
 import persistencia.dao.*;
+import vista.PrintTicketCobroExtraordinario;
 import modelo.*;
 
 @SuppressWarnings("unused")
@@ -543,7 +544,7 @@ public class Controlador {
 	}
 
 	public long generarCobroExtraordinario(String tipoCobro, double monto,
-			modelo.Cliente cliente) {
+			modelo.Cliente cliente, String impresora) {
 		modelo.MovimientoCC movimientoM = new MovimientoCC();
 		movimientoM.setTicket(null);
 		movimientoM.setDescripcion(tipoCobro.substring(2));
@@ -563,7 +564,8 @@ public class Controlador {
 		movimientoM.setMedioPago(modelo.MovimientoCC.MEDIOPAGO.NOAPLICA);
 
 		DAOCliente.getInstance().agregarMovimientoCC(cliente.getIdCliente(), movimientoM);
-
+//TODO RODRI TODO TUYOOO -> IMPRIMIR
+		new PrintTicketCobroExtraordinario(movimientoM, impresora);
 		return 0;
 	}
 
