@@ -38,11 +38,8 @@ public class PrintTicketCobroExtraordinario extends JFrame {
 	private JPanel contentPane;
 	private JPanel panelAttributes;
 	private JTextPane txtpnfechaIng;
-	private JPanel panel;
 	private Barcode barcode;
 	private static String impersora;
-	private JPanel panel_1;
-	private JTextPane txtpnGraciasPorSu;
 	private static PrintTicket standalone = null;
 	
 	public static PrintTicket getInstance(Ticket ticket, String printerName){
@@ -62,7 +59,7 @@ public class PrintTicketCobroExtraordinario extends JFrame {
 				PrintTicket.class.getResource("/image/printer.png")));
 		setResizable(false);
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-		setBounds(100, 100, 240, 300);
+		setBounds(100, 100, 240, 150);
 		contentPane = new JPanel();
 		contentPane.setBackground(Color.WHITE);
 		contentPane.setBorder(null);
@@ -73,10 +70,10 @@ public class PrintTicketCobroExtraordinario extends JFrame {
 		try {
 			GridBagLayout gbl_contentPane = new GridBagLayout();
 			gbl_contentPane.columnWidths = new int[] { 168, 0 };
-			gbl_contentPane.rowHeights = new int[] { 164, 54, 0, 0 };
+			gbl_contentPane.rowHeights = new int[] { 164, 0 };
 			gbl_contentPane.columnWeights = new double[] { 1.0,
 					Double.MIN_VALUE };
-			gbl_contentPane.rowWeights = new double[] { 0.0, 0.0, 0.0,
+			gbl_contentPane.rowWeights = new double[] { 0.0,
 					Double.MIN_VALUE };
 			contentPane.setLayout(gbl_contentPane);
 
@@ -84,7 +81,6 @@ public class PrintTicketCobroExtraordinario extends JFrame {
 			panelAttributes.setBackground(Color.WHITE);
 			GridBagConstraints gbc_panelAttributes = new GridBagConstraints();
 			gbc_panelAttributes.anchor = GridBagConstraints.NORTH;
-			gbc_panelAttributes.insets = new Insets(0, 0, 5, 0);
 			gbc_panelAttributes.fill = GridBagConstraints.HORIZONTAL;
 			gbc_panelAttributes.gridx = 0;
 			gbc_panelAttributes.gridy = 0;
@@ -106,28 +102,6 @@ public class PrintTicketCobroExtraordinario extends JFrame {
 			gbc_txtpnfechaIng.gridx = 0;
 			gbc_txtpnfechaIng.gridy = 0;
 			panelAttributes.add(txtpnfechaIng, gbc_txtpnfechaIng);
-
-			panel = new JPanel();
-			panel.setBackground(Color.WHITE);
-			GridBagConstraints gbc_panel = new GridBagConstraints();
-			gbc_panel.anchor = GridBagConstraints.NORTH;
-			gbc_panel.insets = new Insets(0, 0, 5, 0);
-			gbc_panel.gridx = 0;
-			gbc_panel.gridy = 1;
-			contentPane.add(panel, gbc_panel);
-			
-			panel_1 = new JPanel();
-			panel_1.setBackground(Color.WHITE);
-			GridBagConstraints gbc_panel_1 = new GridBagConstraints();
-			gbc_panel_1.fill = GridBagConstraints.BOTH;
-			gbc_panel_1.gridx = 0;
-			gbc_panel_1.gridy = 2;
-			contentPane.add(panel_1, gbc_panel_1);
-			
-			txtpnGraciasPorSu = new JTextPane();
-			txtpnGraciasPorSu.setContentType("text/html");
-			txtpnGraciasPorSu.setText("<b>Gracias por su visita.</b>");
-			panel_1.add(txtpnGraciasPorSu);
 			this.setVisible(true);
 			this.toBack();
 //			printWork(this);
@@ -139,41 +113,6 @@ public class PrintTicketCobroExtraordinario extends JFrame {
 	}
 
 
-
-	//Otros ejemplos de creacion de barras
-	public static void drawingBarcodeDirectToGraphics()
-			throws BarcodeException, OutputException {
-		// Always get a Barcode from the BarcodeFactory
-		Barcode barcode = BarcodeFactory.createCode128A("My Barcode");
-
-		// We are created an image from scratch here, but for printing in Java,
-		// your print renderer should have a Graphics internally anyway
-		BufferedImage image = new BufferedImage(500, 500,
-				BufferedImage.TYPE_BYTE_GRAY);
-		// We need to cast the Graphics from the Image to a Graphics2D:
-		// this is OK
-		Graphics2D g = (Graphics2D) image.getGraphics();
-
-		// Barcode supports a direct draw method to Graphics2D that lets you
-		// position the barcode on the canvas
-		barcode.draw(g, 10, 56);
-	}
-
-	public static void outputtingBarcodeAsPNG() throws BarcodeException,
-			IOException, OutputException {
-		// get a Barcode from the BarcodeFactory
-		Barcode barcode = BarcodeFactory.createCode128A("My Barcode");
-		File f = new File("mybarcode.png");
-		// Let the barcode image handler do the hard work
-		BarcodeImageHandler.savePNG(barcode, f);
-	}
-
-	public static void outputtingBarcodeAsJPEG() throws BarcodeException,
-			IOException, OutputException {
-		Barcode barcode3 = BarcodeFactory.createCode128C("123456");
-		barcode3.setResolution(300);
-		BarcodeImageHandler.saveJPEG(barcode3, new File("123456.jpg"));
-	}
 
 	public static void printWork(final JFrame frame) {
 		PrinterJob pj = PrinterJob.getPrinterJob();
@@ -296,28 +235,7 @@ public class PrintTicketCobroExtraordinario extends JFrame {
 			gbc_txtpnfechaIng.gridy = 0;
 			panelAttributes.add(txtpnfechaIng, gbc_txtpnfechaIng);
 
-			panel = new JPanel();
-			panel.setBackground(Color.WHITE);
-			GridBagConstraints gbc_panel = new GridBagConstraints();
-			gbc_panel.anchor = GridBagConstraints.NORTH;
-			gbc_panel.insets = new Insets(0, 0, 5, 0);
-			gbc_panel.gridx = 0;
-			gbc_panel.gridy = 1;
-			contentPane.add(panel, gbc_panel);
-
-			
-			panel_1 = new JPanel();
-			panel_1.setBackground(Color.WHITE);
-			GridBagConstraints gbc_panel_1 = new GridBagConstraints();
-			gbc_panel_1.fill = GridBagConstraints.BOTH;
-			gbc_panel_1.gridx = 0;
-			gbc_panel_1.gridy = 2;
-			contentPane.add(panel_1, gbc_panel_1);
-			
-			txtpnGraciasPorSu = new JTextPane();
-			txtpnGraciasPorSu.setContentType("text/html");
-			txtpnGraciasPorSu.setText("<b>Gracias por su visita.</b>");
-			panel_1.add(txtpnGraciasPorSu);
+		
 			this.setVisible(true);
 			this.toBack();
 //			printWork(this);
