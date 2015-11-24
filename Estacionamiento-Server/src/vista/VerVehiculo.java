@@ -80,8 +80,7 @@ public class VerVehiculo extends JDialog implements ActionListener{
 		for (CategoriaVehiculo categoriaVehiculo : comboBoxCategoriasItems) {
 			categoriasComboBox.addElement(categoriaVehiculo);
 		}
-		comboBoxCategoriaVehiculo.setSelectedItem(this.vehiculo.getCategoria());
-		
+
 		GridBagConstraints gbc_comboBoxCategoriaVehiculo = new GridBagConstraints();
 		gbc_comboBoxCategoriaVehiculo.fill = GridBagConstraints.HORIZONTAL;
 		gbc_comboBoxCategoriaVehiculo.insets = new Insets(0, 0, 5, 5);
@@ -124,7 +123,7 @@ public class VerVehiculo extends JDialog implements ActionListener{
 		for (ColorVehiculo colorVehiculo : comboBoxColorItems) {
 			coloresComboBox.addElement(colorVehiculo);
 		}
-		comboBoxColor.setSelectedItem(this.vehiculo.getColor());
+
 		
 		GridBagConstraints gbc_comboBoxColor = new GridBagConstraints();
 		gbc_comboBoxColor.fill = GridBagConstraints.HORIZONTAL;
@@ -149,7 +148,7 @@ public class VerVehiculo extends JDialog implements ActionListener{
 		for (ModeloVehiculo modeloVehiculo : comboBoxModeloItems) {
 			modelosComboBox.addElement(modeloVehiculo);
 		}
-		comboBoxModelo.setSelectedItem(this.vehiculo.getModelo());
+
 		
 		GridBagConstraints gbc_comboBoxModelo = new GridBagConstraints();
 		gbc_comboBoxModelo.fill = GridBagConstraints.HORIZONTAL;
@@ -177,6 +176,7 @@ public class VerVehiculo extends JDialog implements ActionListener{
 		contentPane.add(textFieldObservacion, gbc_textFieldObservacion);
 		textFieldObservacion.setColumns(10);
 
+
 		btnVolver = new JButton("Volver");
 		btnVolver.setFont(new Font("Lucida Grande", Font.PLAIN, 16));
 		btnVolver.setIcon(new ImageIcon(VerVehiculo.class.getResource("/image/izq.png")));
@@ -188,7 +188,11 @@ public class VerVehiculo extends JDialog implements ActionListener{
 		btnVolver.addActionListener(this);
 		this.setModal(true); 
 		this.setLocationRelativeTo(null);
-
+		
+		comboBoxModelo.getModel().setSelectedItem(this.vehiculo.getModelo());
+		comboBoxCategoriaVehiculo.getModel().setSelectedItem(this.vehiculo.getCategoria());
+		comboBoxColor.getModel().setSelectedItem(this.vehiculo.getColor());
+		textFieldObservacion.setText(this.vehiculo.getComentario());
 	}
 	
 

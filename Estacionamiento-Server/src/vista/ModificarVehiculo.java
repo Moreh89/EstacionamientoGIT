@@ -81,7 +81,7 @@ public class ModificarVehiculo extends JFrame implements ActionListener{
 		for (CategoriaVehiculo categoriaVehiculo : comboBoxCategoriasItems) {
 			categoriasComboBox.addElement(categoriaVehiculo);
 		}
-		comboBoxCategoriaVehiculo.setSelectedItem(altaCliente.getSelectedVehiuclo().getCategoria());
+		comboBoxCategoriaVehiculo.getModel().setSelectedItem(altaCliente.getSelectedVehiuclo().getCategoria());
 		
 		GridBagConstraints gbc_comboBoxCategoriaVehiculo = new GridBagConstraints();
 		gbc_comboBoxCategoriaVehiculo.fill = GridBagConstraints.HORIZONTAL;
@@ -122,7 +122,7 @@ public class ModificarVehiculo extends JFrame implements ActionListener{
 		for (ColorVehiculo colorVehiculo : comboBoxColorItems) {
 			coloresComboBox.addElement(colorVehiculo);
 		}
-		comboBoxColor.setSelectedItem(altaCliente.getSelectedVehiuclo().getColor());
+		comboBoxColor.getModel().setSelectedItem(altaCliente.getSelectedVehiuclo().getColor());
 		
 		GridBagConstraints gbc_comboBoxColor = new GridBagConstraints();
 		gbc_comboBoxColor.fill = GridBagConstraints.HORIZONTAL;
@@ -146,7 +146,7 @@ public class ModificarVehiculo extends JFrame implements ActionListener{
 		for (ModeloVehiculo modeloVehiculo : comboBoxModeloItems) {
 			modelosComboBox.addElement(modeloVehiculo);
 		}
-		comboBoxModelo.setSelectedItem(altaCliente.getSelectedVehiuclo().getModelo());
+		comboBoxModelo.getModel().setSelectedItem(altaCliente.getSelectedVehiuclo().getModelo());
 		
 		GridBagConstraints gbc_comboBoxModelo = new GridBagConstraints();
 		gbc_comboBoxModelo.fill = GridBagConstraints.HORIZONTAL;
@@ -172,6 +172,7 @@ public class ModificarVehiculo extends JFrame implements ActionListener{
 		gbc_textFieldObservacion.gridy = 3;
 		contentPane.add(textFieldObservacion, gbc_textFieldObservacion);
 		textFieldObservacion.setColumns(10);
+		textFieldObservacion.setText(altaCliente.getSelectedVehiuclo().getComentario());
 		
 		btnCancelar = new JButton("Cancelar");
 		btnCancelar.setIcon(new ImageIcon(MenuOperador.class
