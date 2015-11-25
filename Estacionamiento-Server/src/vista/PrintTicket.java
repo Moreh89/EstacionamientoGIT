@@ -62,7 +62,7 @@ public class PrintTicket extends JFrame {
 				PrintTicket.class.getResource("/image/printer.png")));
 		setResizable(false);
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-		setBounds(100, 100, 240, 300);
+		setBounds(100, 100, 240, 224);
 		contentPane = new JPanel();
 		contentPane.setBackground(Color.WHITE);
 		contentPane.setBorder(null);
@@ -73,7 +73,7 @@ public class PrintTicket extends JFrame {
 		try {
 			GridBagLayout gbl_contentPane = new GridBagLayout();
 			gbl_contentPane.columnWidths = new int[] { 168, 0 };
-			gbl_contentPane.rowHeights = new int[] { 164, 54, 0, 0 };
+			gbl_contentPane.rowHeights = new int[] { 100, 50, 25, 0 };
 			gbl_contentPane.columnWeights = new double[] { 1.0,
 					Double.MIN_VALUE };
 			gbl_contentPane.rowWeights = new double[] { 0.0, 0.0, 0.0,
@@ -91,7 +91,7 @@ public class PrintTicket extends JFrame {
 			contentPane.add(panelAttributes, gbc_panelAttributes);
 			GridBagLayout gbl_panelAttributes = new GridBagLayout();
 			gbl_panelAttributes.columnWidths = new int[] { 116, 0 };
-			gbl_panelAttributes.rowHeights = new int[] {150};
+			gbl_panelAttributes.rowHeights = new int[] {100};
 			gbl_panelAttributes.columnWeights = new double[] { 1.0,
 					Double.MIN_VALUE };
 			gbl_panelAttributes.rowWeights = new double[] { 0.0 };
@@ -103,7 +103,8 @@ public class PrintTicket extends JFrame {
 			txtpnfechaIng
 					.setText("<html><b>P.J.E.Uriburu 1058 CABA<br>Fecha Ing:<br>"+new SimpleDateFormat("dd-MM-yyyy HH:mm:ss").format(ticket.getFechaLlegada())+"<br>Vehiculo: "+ ticket.getCatergoriaVehiculo().getDescripcion()+"<br>Modelo: "+ticket.getModeloVehiculo().getDescripcion()+"<br>Patente: "+ticket.getPatente().toUpperCase()+"</b><br></html>");
 			GridBagConstraints gbc_txtpnfechaIng = new GridBagConstraints();
-			gbc_txtpnfechaIng.fill = GridBagConstraints.BOTH;
+			gbc_txtpnfechaIng.anchor = GridBagConstraints.NORTH;
+			gbc_txtpnfechaIng.fill = GridBagConstraints.HORIZONTAL;
 			gbc_txtpnfechaIng.gridx = 0;
 			gbc_txtpnfechaIng.gridy = 0;
 			panelAttributes.add(txtpnfechaIng, gbc_txtpnfechaIng);
@@ -141,6 +142,9 @@ public class PrintTicket extends JFrame {
 			txtpnGraciasPorSu.setContentType("text/html");
 			txtpnGraciasPorSu.setText("<b>Gracias por su visita.</b>");
 			panel_1.add(txtpnGraciasPorSu);
+			
+			this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); // Already there
+			this.setUndecorated(true);
 			this.setVisible(true);
 			this.toBack();
 //			printWork(this);
