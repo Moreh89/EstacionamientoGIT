@@ -1321,4 +1321,10 @@ public class Controlador {
 		return codReturn;
 	}
 
+	public ArrayList<Cochera> getCocheras() {
+
+		return DAOCochera.getInstance().getCocheras();
+		
+	}
+
 }

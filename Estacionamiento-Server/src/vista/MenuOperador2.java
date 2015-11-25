@@ -585,11 +585,11 @@ public class MenuOperador2 extends JFrame implements ActionListener, KeyListener
 		gbc_panel_aPagar.gridy = 7;
 		contentPane.add(panel_aPagar, gbc_panel_aPagar);
 
-		lblTotalAPagar = new JLabel("Total a Pagar:");
-		panel_aPagar.add(lblTotalAPagar);
-		lblTotalAPagar.setForeground(Color.BLUE);
-		lblTotalAPagar.setFont(new Font("Dialog", Font.BOLD, 30));
-		lblTotalAPagar.setHorizontalAlignment(SwingConstants.CENTER);
+//		lblTotalAPagar = new JLabel("Total a Pagar:");
+//		panel_aPagar.add(lblTotalAPagar);
+//		lblTotalAPagar.setForeground(Color.BLUE);
+//		lblTotalAPagar.setFont(new Font("Dialog", Font.BOLD, 30));
+//		lblTotalAPagar.setHorizontalAlignment(SwingConstants.CENTER);
 
 		btnCobrarF = new JButton("Cobrar F7");
 		btnCobrarF.setFont(new Font("Dialog", Font.PLAIN, 30));
@@ -783,17 +783,17 @@ public class MenuOperador2 extends JFrame implements ActionListener, KeyListener
 					if(resultado != JOptionPane.CANCEL_OPTION && resultado != JOptionPane.CLOSED_OPTION){
 						if (resultado == JOptionPane.OK_OPTION){
 							Controlador.getInstancia().cobrarTicket(Ticket.Estado.CREDITO);
-							JOptionPane.showMessageDialog(null, "El Ticket seleccionado fue movido a cuenta corriente", "Operacion Exitosa", JOptionPane.INFORMATION_MESSAGE);
+							
 						} else {
 							Controlador.getInstancia().cobrarTicket(Ticket.Estado.CERRADO);
-							JOptionPane.showMessageDialog(null, "El Ticket seleccionado fue cobrado", "Operacion Exitosa", JOptionPane.INFORMATION_MESSAGE);
+
 						}
 						buscarTicket();
 						this.btnCobrarF.setEnabled(false);
 					}
 				} else {
 					Controlador.getInstancia().cobrarTicket(Ticket.Estado.CERRADO);
-					JOptionPane.showMessageDialog(null, "El Ticket seleccionado fue cobrado", "Operacion Exitosa", JOptionPane.INFORMATION_MESSAGE);
+					
 					buscarTicket();
 					this.btnCobrarF.setEnabled(false);
 				}

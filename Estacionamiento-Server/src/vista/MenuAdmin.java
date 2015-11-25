@@ -60,6 +60,7 @@ public class MenuAdmin extends JFrame implements ActionListener {
 	private JMenu menuHelp;
 	private JMenuItem mnAbout;
 	private JMenuItem menuItemEliminarTickets;
+	private JMenuItem mntmListadoCocheras;
 
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
@@ -198,6 +199,11 @@ public class MenuAdmin extends JFrame implements ActionListener {
 		
 		mntmTicketsTarjeta = new JMenuItem("Tickets Tarjeta");
 		mnConsultas.add(mntmTicketsTarjeta);
+		
+		mntmListadoCocheras = new JMenuItem("Listado Cocheras");
+		mnConsultas.add(mntmListadoCocheras);
+		mntmListadoCocheras.addActionListener(this);
+		
 		mntmTicketsAbiertos.addActionListener(this);
 		mntmDeudores.addActionListener(this);
 		mntmTicketsTarjeta.addActionListener(this);
@@ -327,6 +333,10 @@ public class MenuAdmin extends JFrame implements ActionListener {
 		if (event.getSource() == mntmTicketsAbiertos) {
 			new TicketsAbiertos().setVisible(true);
 		}
+		if (event.getSource() == mntmListadoCocheras) {
+			new ListadoCocheras().setVisible(true);
+		}
+		
 		if(event.getSource()==mntmTicketsTarjeta)
 		{
 			new VerTicketsAbonadosTarjeta().setVisible(true);
