@@ -544,10 +544,10 @@ public class Controlador {
 	}
 
 	public long generarCobroExtraordinario(String tipoCobro, double monto,
-			modelo.Cliente cliente, String impresora) {
+			modelo.Cliente cliente, String impresora, String comentario) {
 		modelo.MovimientoCC movimientoM = new MovimientoCC();
 		movimientoM.setTicket(null);
-		movimientoM.setDescripcion(tipoCobro.substring(2));
+		movimientoM.setDescripcion(tipoCobro.substring(2) +" "+ comentario);
 		
 		if(tipoCobro.equals("3. TARJETA"))
 		{

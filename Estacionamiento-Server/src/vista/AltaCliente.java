@@ -208,6 +208,7 @@ public class AltaCliente extends JFrame implements ActionListener{
 
 		comboBoxTipoCliente = new JComboBox();
 		comboBoxTipoCliente.setModel(new DefaultComboBoxModel(new String[] {"1. PARTICULAR_PROPIETARIO", "2. PARTICULAR_INQUILINO", "3. PARTICULAR_FRECUENTE", "4. EMPRESA_PROPIETARIO", "5. EMPRESA_INQUILINO", "6. EMPRESA_FRECUENTE"}));
+		comboBoxTipoCliente.setSelectedIndex(1);
 		GridBagConstraints gbc_comboBoxTipoCliente = new GridBagConstraints();
 		gbc_comboBoxTipoCliente.insets = new Insets(0, 0, 5, 5);
 		gbc_comboBoxTipoCliente.fill = GridBagConstraints.HORIZONTAL;

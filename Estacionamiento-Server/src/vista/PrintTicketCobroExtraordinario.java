@@ -96,7 +96,7 @@ public class PrintTicketCobroExtraordinario extends JFrame {
 			txtpnfechaIng = new JTextPane();
 			txtpnfechaIng.setFont(new Font("Tahoma", Font.PLAIN, 12));
 			txtpnfechaIng.setContentType("text/html");
-			txtpnfechaIng.setText("<html><b>P.J.E.Uriburu 1058 CABA<br>Fecha Ing:<br>"+new SimpleDateFormat("dd-MM-yyyy HH:mm:ss").format(cobroExtraordinario.getFecha())+"<br>Cliente: "+ cliente.getNombre()+" "+cliente.getApellido()+"<br>Descripcion: "+ cobroExtraordinario.getDescripcion()+"<br>Monto: "+cobroExtraordinario.getMontoCobrado()+"</b><br></html>");
+			txtpnfechaIng.setText("<html><b>P.J.E.Uriburu 1058 CABA<br>Fecha:"+new SimpleDateFormat("dd-MM-yyyy HH:mm").format(cobroExtraordinario.getFecha())+"<br>Cliente: "+ cliente.getNombre()+" "+cliente.getApellido()+"<br>Descripcion: "+ cobroExtraordinario.getDescripcion()+"<br>Monto: "+cobroExtraordinario.getMontoCobrado()+"</b><br></html>");
 			GridBagConstraints gbc_txtpnfechaIng = new GridBagConstraints();
 			gbc_txtpnfechaIng.fill = GridBagConstraints.BOTH;
 			gbc_txtpnfechaIng.gridx = 0;
