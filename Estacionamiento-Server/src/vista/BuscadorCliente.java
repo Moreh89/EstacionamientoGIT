@@ -161,8 +161,7 @@ public class BuscadorCliente extends JDialog implements ActionListener, KeyListe
 
 		tipoComboBox = new JComboBox();
 		tipoComboBox.setFont(new Font("Tahoma", Font.BOLD, 16));
-		tipoComboBox.setModel(new DefaultComboBoxModel(new String[] { "DNI/LU",
-				"CUIT", "NOMBRE", "APELLIDO" }));
+		tipoComboBox.setModel(new DefaultComboBoxModel(new String[] {"APELLIDO", "NOMBRE", "DNI/LU", "CUIT"}));
 		GridBagConstraints gbc_tipoComboBox = new GridBagConstraints();
 		gbc_tipoComboBox.anchor = GridBagConstraints.WEST;
 		gbc_tipoComboBox.insets = new Insets(0, 0, 5, 5);
