@@ -51,6 +51,7 @@ public class DAOCliente {
 		clientesReturn = Converter.convertClientesPersistenciaToModelo(clientesP);
 		return clientesReturn;
 	}
+	
 
 	public long agregarMovimientoCC(long idCliente, modelo.MovimientoCC movimientoNuevoM)
 	{

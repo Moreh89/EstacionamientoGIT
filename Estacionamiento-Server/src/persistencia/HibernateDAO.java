@@ -233,6 +233,7 @@ public class HibernateDAO {
 		return list;
 	}
 
+	//trae clientes propietarios , particulares o inquilinos (de a pares).
 	public long eliminarTickets(Date fechaDesde, Date fechaHasta) {
 		long ret = -1;
 		Session session = getSession();
@@ -247,5 +248,5 @@ public class HibernateDAO {
 		return ret;
 	}
 
-
+	
 }

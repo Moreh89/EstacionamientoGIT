@@ -340,7 +340,8 @@ public class CobroExtraordinario extends JDialog implements ActionListener, KeyL
 
 	@Override
 	public void keyTyped(KeyEvent e) {
-
-
 	}
+	
+
+
 }

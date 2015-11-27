@@ -32,6 +32,42 @@ public class Excel {
 		this.inputFile = inputFile;
 	}
 
+	public void exportarExcelLiquidacion(List<String> lista) throws IOException, WriteException {
+		File file = new File(inputFile);
+		WorkbookSettings wbSettings = new WorkbookSettings();
+
+		wbSettings.setLocale(new Locale("es", "ES"));
+
+		WritableWorkbook workbook = Workbook.createWorkbook(file, wbSettings);
+		workbook.createSheet("Report", 0);
+		WritableSheet excelSheet = workbook.getSheet(0);
+		int col=0;
+		int row=0;
+		createLabel(excelSheet);
+		for(String rowActual : lista)
+		{
+			col=0;
+			List<String> listaCeldasSeparadas = Arrays.asList(rowActual.split(";"));
+			for(String celdaActual : listaCeldasSeparadas)
+			{
+				if(isNumeric(celdaActual))
+				{
+					double intCeldaActual=Double.parseDouble(celdaActual);
+					addNumber(excelSheet,col, row,intCeldaActual);
+				}
+				else
+				{
+					addLabel(excelSheet, col, row, celdaActual);
+				}
+				col++;
+			}
+			row++;
+		}
+		workbook.write();
+		workbook.close();
+	}
+
+
 	public void writeList(List<String> lista) throws IOException, WriteException {
 		File file = new File(inputFile);
 		WorkbookSettings wbSettings = new WorkbookSettings();
@@ -60,6 +96,8 @@ public class Excel {
 		workbook.write();
 		workbook.close();
 	}
+
+
 
 	private void createLabel(WritableSheet sheet)
 			throws WriteException {
@@ -94,9 +132,9 @@ public class Excel {
 
 	@SuppressWarnings("unused")
 	private void addNumber(WritableSheet sheet, int column, int row,
-			Integer integer) throws WriteException, RowsExceededException {
+			Double nro) throws WriteException, RowsExceededException {
 		Number number;
-		number = new Number(column, row, integer, times);
+		number = new Number(column, row, nro, times);
 		sheet.addCell(number);
 	}
 
@@ -106,5 +144,19 @@ public class Excel {
 		label = new Label(column, row, s, times);
 		sheet.addCell(label);
 	}
+
+	public static boolean isNumeric(String str)  
+	{  
+		try  
+		{  
+			double d = Double.parseDouble(str);  
+		}  
+		catch(NumberFormatException nfe)  
+		{  
+			return false;  
+		}  
+		return true;  
+	}
+
 
 } 

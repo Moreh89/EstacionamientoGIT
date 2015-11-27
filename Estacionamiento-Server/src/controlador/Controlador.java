@@ -6,6 +6,8 @@ import java.io.File;
 import java.io.IOException;
 import java.sql.Time;
 import java.text.DateFormat;
+import java.text.DecimalFormat;
+import java.text.Format;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -19,6 +21,7 @@ import java.util.Vector;
 import javax.swing.JOptionPane;
 
 import jxl.write.WriteException;
+import net.sf.jasperreports.crosstabs.fill.JRPercentageCalculatorFactory.DoublePercentageCalculator;
 import net.sf.jasperreports.engine.virtualization.SqlDateSerializer;
 import persistencia.Converter;
 import persistencia.HibernateDAO;
@@ -302,9 +305,9 @@ public class Controlador {
 		return DAOUsuario.getInstance().cambiarContrasenia(usuarioActual);
 	}
 
-//	public boolean probarConexion() {
-//		return true;
-//	}
+	//	public boolean probarConexion() {
+	//		return true;
+	//	}
 
 	public long altaTarifa(String categoriaVehiculo,double costoMinimo, double costoFraccion, double costoHora, double costoMediaEstadia, double costoEstadia,double tiempoMinimo,double tiempoFraccion, double tiempoMediaEstadia_minuto, double tiempoEstadia_minuto) 
 	{
@@ -548,7 +551,7 @@ public class Controlador {
 		modelo.MovimientoCC movimientoM = new MovimientoCC();
 		movimientoM.setTicket(null);
 		movimientoM.setDescripcion(tipoCobro.substring(2) +" "+ comentario);
-		
+
 		if(tipoCobro.equals("3. TARJETA"))
 		{
 			movimientoM.setEstado("TARJETA");
@@ -571,8 +574,9 @@ public class Controlador {
 	public double liquidarExpensas(double importeLiquidar, String periodoLiquidar, String descripcion) 
 	{
 		ArrayList<modelo.Cliente> clientes = new ArrayList<modelo.Cliente>();
-		clientes=DAOCliente.getInstance().getClientes();
+		clientes=DAOCliente.getInstance().getClientesPropietarios();
 		ArrayList<String> expensasImprimir = new ArrayList<String>();
+		
 		expensasImprimir.add("Cochera;Periodo a Liquidar;Nombre;Apellido;Porcentaje;Monto");
 		double porcentajeTotalCobrado=0;
 		new GregorianCalendar();
@@ -630,15 +634,17 @@ public class Controlador {
 		Date date = new Date(); 
 		excel.setOutputFile(theDir+"\\Expensas_"+new SimpleDateFormat("yyyy_MM_dd_HH_mm").format(fecha)+".xls");
 
+
 		try {
-			excel.writeList(expensasImprimir);
+			excel.exportarExcelLiquidacion(expensasImprimir);
 		} catch (WriteException e) {
 			e.printStackTrace();
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
 
-		return porcentajeTotalCobrado;
+		DecimalFormat dF = new DecimalFormat("#.###");
+		return Double.parseDouble(dF.format(porcentajeTotalCobrado));
 	}
 
 	public ArrayList<Cliente> getClientes() {
@@ -1020,7 +1026,7 @@ public class Controlador {
 		alquileresImprimir.add("Cochera;Periodo a Liquidar;Nombre;Apellido;Monto");
 		new GregorianCalendar();
 		Date fecha= GregorianCalendar.getInstance().getTime();
-
+		String fechaLiquidacion = new SimpleDateFormat("MM-dd-yyyy").format(fecha);
 
 		modelo.LiquidacionAlquileres liquidacionAlquileres = new LiquidacionAlquileres();
 		liquidacionAlquileres.setIdLiquidacionAlquileres(0);
@@ -1052,7 +1058,7 @@ public class Controlador {
 						movimientoNuevo.setMedioPago(modelo.MovimientoCC.MEDIOPAGO.NOAPLICA);
 						liquidacionAlquileres.setIdLiquidacionAlquileres(DAOCliente.getInstance().agregarMovimientoCC_Alquileres(clienteM.getIdCliente(), movimientoNuevo));
 
-						alquileresImprimir.add(cocheraActual.getUbicacion()+";"+fecha +";"+ clienteM.getNombre()+";"+clienteM.getApellido()+";"+ montoMovimiento);
+						alquileresImprimir.add(cocheraActual.getUbicacion()+";"+fechaLiquidacion +";"+ clienteM.getNombre()+";"+clienteM.getApellido()+";"+ montoMovimiento);
 
 					}
 
@@ -1073,7 +1079,7 @@ public class Controlador {
 		excel.setOutputFile(theDir+"\\Alquileres_"+new SimpleDateFormat("yyyy_MM_dd_HH_mm").format(fecha)+".xls");
 
 		try {
-			excel.writeList(alquileresImprimir);
+			excel.exportarExcelLiquidacion(alquileresImprimir);
 		} catch (WriteException e) {
 			e.printStackTrace();
 		} catch (IOException e) {
@@ -1317,14 +1323,14 @@ public class Controlador {
 	public long eliminarTickets(Date fechaDesde, Date fechaHasta) {
 		long codReturn= -1;
 		codReturn=HibernateDAO.getInstancia().eliminarTickets(fechaDesde, fechaHasta);
-		
+
 		return codReturn;
 	}
 
 	public ArrayList<Cochera> getCocheras() {
 
 		return DAOCochera.getInstance().getCocheras();
-		
+
 	}
 
 }
