@@ -217,18 +217,11 @@ public class HibernateDAO {
 		return list;
 	}
 
-	//	public double getEstadoCrediticio(long idCuentaCorriente) {
-	//		double estadoCrediticio=0;
-	////TO DO NO ANDA
-	////		Session s = this.getSession();
-	////		estadoCrediticio = (Double) s.createQuery("SUM(m.montoCobrado)as suma from MovimientoCC m where m.CuentaCorriente= ?").setLong(0, idCuentaCorriente).uniqueResult();
-	////		s.flush();		
-	//		return estadoCrediticio;
-	//	}
+
 
 	public List<?> getListTwoInt(String className, String columna,int condicion1, int condicion2) {
 		Session session=getSession();
-		List<?> list = session.createQuery("from "+className + " s where s. "+ columna + " =? OR s."+columna + " =?").setInteger(0, condicion1).setInteger(1, condicion2).list();
+		List<?> list = session.createQuery("from "+className + " s where s.estado = 1 AND (s. "+ columna + " =? OR s."+columna + " =?)").setInteger(0, condicion1).setInteger(1, condicion2).list();
 		session.flush();
 		return list;
 	}

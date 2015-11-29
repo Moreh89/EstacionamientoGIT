@@ -773,7 +773,7 @@ public class MenuOperador2 extends JFrame implements ActionListener, KeyListener
 					&& Controlador.getInstancia().getTicket().getEstado() != Ticket.Estado.CREDITO){
 
 				actualizarTicket();
-
+				
 				if(Controlador.getInstancia().getTicket().getCliente() !=null){
 					UIManager.put("OptionPane.yesButtonText", "Cuenta Corriente");
 					UIManager.put("OptionPane.noButtonText", "Efectivo/Tarjeta");
@@ -906,6 +906,9 @@ public class MenuOperador2 extends JFrame implements ActionListener, KeyListener
 			this.textFieldPatente.setEnabled(true);
 			this.btnGuardarF.setEnabled(true);
 			this.textFieldNumeroTicket.requestFocusInWindow();
+			this.textFieldTotalAPagar.setSelectedTextColor(Color.RED);
+			this.textFieldTotalAPagar.setDisabledTextColor(Color.RED);
+
 
 
 		}
@@ -950,8 +953,13 @@ public class MenuOperador2 extends JFrame implements ActionListener, KeyListener
 				this.btnBuscarPorTicketAbierto.setEnabled(false);
 				this.btnCobrarF.setEnabled(false);
 				this.btnPrePago.setEnabled(true);
-				this.textFieldTotalAPagar.setText(String.valueOf(tck.calcularMontoACobrar()));
-
+				String totalAPagar = (String.valueOf(tck.calcularMontoACobrar()));
+				this.textFieldTotalAPagar.setText(totalAPagar);
+				if(totalAPagar.contains("PAGADO"))
+				{
+					textFieldTotalAPagar.setDisabledTextColor(Color.GREEN);
+					textFieldTotalAPagar.setSelectedTextColor(Color.GREEN);
+				}
 				String impresora = (String) this.comboBoxImpresoras.getSelectedItem();
 				if(!impresora.equalsIgnoreCase("NO IMPRIMIR")){
 					PrintTicket print = new PrintTicket(tck, impresora);
@@ -1090,6 +1098,8 @@ public class MenuOperador2 extends JFrame implements ActionListener, KeyListener
 					this.btnButtonBuscarCliente.setEnabled(false);
 					this.textFieldPatente.setEnabled(false);
 					this.btnGuardarF.setEnabled(false);
+					this.textFieldTotalAPagar.setDisabledTextColor(Color.GREEN);
+					this.textFieldTotalAPagar.setSelectedTextColor(Color.GREEN);
 				}else if(tck.getEstado() == Ticket.Estado.CERRADO){
 					totalAPagar=("(PAGADO) $" + formatter.format(tck.getMontoCobrado()+tck.getPrepago()));
 					this.comboBoxDescuento.setEnabled(false);
@@ -1099,10 +1109,15 @@ public class MenuOperador2 extends JFrame implements ActionListener, KeyListener
 					this.btnButtonBuscarCliente.setEnabled(false);
 					this.textFieldPatente.setEnabled(false);
 					this.btnGuardarF.setEnabled(false);
+					this.textFieldTotalAPagar.setDisabledTextColor(Color.GREEN);
+					this.textFieldTotalAPagar.setSelectedTextColor(Color.GREEN);
+
 				}else if (tck.getEstado() == Ticket.Estado.PREPAGO){
 					this.btnPrePago.setEnabled(true);
 					this.btnCobrarF.setEnabled(true);
 					totalAPagar=("Prepago " + "$" + formatter.format(tck.getPrepago()) + " restan: $"+ formatter.format(tck.getMontoCobrado()));
+					this.textFieldTotalAPagar.setDisabledTextColor(Color.RED);
+					this.textFieldTotalAPagar.setSelectedTextColor(Color.RED);
 				} else {
 					this.btnPrePago.setEnabled(true);
 					this.btnCobrarF.setEnabled(true);
