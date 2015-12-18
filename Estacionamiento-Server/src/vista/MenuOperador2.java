@@ -1204,8 +1204,13 @@ public class MenuOperador2 extends JFrame implements ActionListener, KeyListener
 			this.btnLimpiarCampos.doClick();
 		}
 		if(event.getKeyCode() == KeyEvent.VK_ENTER && event.getSource() == this.textFieldPatente){
-			this.comboBoxDescuento.requestFocus();
+//		Anterior
+//			this.comboBoxDescuento.requestFocus();
+			this.comboBoxTipoVehiculo.requestFocus();
 		}
+//		if(event.getKeyCode() == KeyEvent. && event.getSource() == this.textFieldPatente){
+//			this.comboBoxTipoVehiculo.requestFocus();
+//		}
 		if(event.getKeyCode() == KeyEvent.VK_ENTER && event.getSource() == this.comboBoxDescuento){
 			this.comboBoxTipoVehiculo.requestFocus();
 		}
@@ -1224,6 +1229,7 @@ public class MenuOperador2 extends JFrame implements ActionListener, KeyListener
 		if(event.getKeyCode() == KeyEvent.VK_ENTER && event.getSource() == this.btnTicketF){
 			this.btnTicketF.doClick();
 		}
+
 
 	}
 
