@@ -117,7 +117,7 @@ public class MenuAdmin extends JFrame implements ActionListener {
 				.getResource("/image/modificar.png")));
 		menuBar.add(mnGestionEstacionamiento);
 
-		mntmCobroExtraordinario = new JMenuItem("Cobro Extraordinario");
+		mntmCobroExtraordinario = new JMenuItem("Cobro");
 		mnGestionEstacionamiento.add(mntmCobroExtraordinario);
 		mntmCobroExtraordinario.addActionListener(this);
 

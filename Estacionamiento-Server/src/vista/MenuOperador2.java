@@ -158,7 +158,7 @@ public class MenuOperador2 extends JFrame implements ActionListener, KeyListener
 		mntmColor.setFont(new Font("Segoe UI", Font.PLAIN, 20));
 		mntmColor.addActionListener(this);
 
-		mntmCobroExtraordinario = new JMenuItem("Cobro Extraordinario");
+		mntmCobroExtraordinario = new JMenuItem("Cobro");
 		mntmCobroExtraordinario.setFont(new Font("Segoe UI", Font.PLAIN, 20));
 		mnGestionEstacionamiento.add(mntmCobroExtraordinario);
 		mntmCobroExtraordinario.addActionListener(this);

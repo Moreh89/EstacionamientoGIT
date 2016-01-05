@@ -129,7 +129,7 @@ public class CobroExtraordinario extends JDialog implements ActionListener, KeyL
 
 
 		comboBoxTipoCobro = new JComboBox<String>();
-		comboBoxTipoCobro.setModel(new DefaultComboBoxModel<String>(new String[] {"1. EXPENSAS", "2. ALQUILER", "3. OTROS"}));
+		comboBoxTipoCobro.setModel(new DefaultComboBoxModel(new String[] {"1. ALQUILER", "2. EXPENSAS", "3. OTROS"}));
 		gbc_comboBoxTipoCobro_1 = new GridBagConstraints();
 		gbc_comboBoxTipoCobro_1.gridwidth = 3;
 		gbc_comboBoxTipoCobro_1.fill = GridBagConstraints.BOTH;
