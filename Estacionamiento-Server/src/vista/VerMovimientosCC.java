@@ -75,7 +75,7 @@ public class VerMovimientosCC extends JDialog implements ActionListener, KeyList
 
 
 	public VerMovimientosCC() {
-		setDefaultCloseOperation(JDialog.DO_NOTHING_ON_CLOSE);
+		setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
 		initGUI();
 	}
 

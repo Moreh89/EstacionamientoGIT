@@ -107,7 +107,7 @@ public class BuscadorCliente extends JDialog implements ActionListener, KeyListe
 	private JPanel panelElementos;
 		
 	public BuscadorCliente() {
-		setDefaultCloseOperation(JDialog.DO_NOTHING_ON_CLOSE);
+		setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
 		initGUI();
 	}
 
