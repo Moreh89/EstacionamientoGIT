@@ -200,6 +200,9 @@ public class Converter {
 			clienteP.setEstado(ESTADO.ACTIVO);
 		if(estadoCliente.equals("INACTIVO"))
 			clienteP.setEstado(ESTADO.INACTIVO);
+		if(estadoCliente.equals("BORRADO"))
+			clienteP.setEstado(ESTADO.BORRADO);
+		
 
 		String tipoFactura=clienteM.getTipoFactura().toString();
 		if(tipoFactura.equals("A"))
@@ -302,6 +305,8 @@ public class Converter {
 			clienteM.setEstado(modelo.Cliente.ESTADO.ACTIVO);
 		if(estadoCliente.equals("INACTIVO"))
 			clienteM.setEstado(modelo.Cliente.ESTADO.INACTIVO);
+		if(estadoCliente.equals("BORRADO"))
+			clienteM.setEstado(modelo.Cliente.ESTADO.BORRADO);
 
 
 		String tipoFactura=clienteP.getTipoFactura().toString();

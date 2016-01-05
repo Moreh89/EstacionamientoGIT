@@ -1,5 +1,6 @@
 package persistencia;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -8,6 +9,8 @@ import org.hibernate.SQLQuery;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
+
+import persistencia.clases.Cliente;
 
 
 
@@ -239,6 +242,13 @@ public class HibernateDAO {
 		ret = query.executeUpdate();
 		tx.commit();
 		return ret;
+	}
+
+	public List<?> getListClientesNoBorrados() {
+		Session session=getSession();
+		List<?> list = session.createQuery("from Cliente c where c.estado <> 2").list();
+		session.flush();
+		return list;
 	}
 
 	

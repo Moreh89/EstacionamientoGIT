@@ -68,7 +68,8 @@ public class Cliente {
 	
 	public enum ESTADO {
 		INACTIVO,
-		ACTIVO;
+		ACTIVO,
+		BORRADO;
 	}
 	
 	public enum TIPO_FACTURA {

@@ -1266,6 +1266,8 @@ public class Controlador {
 			cliente.setEstado(modelo.Cliente.ESTADO.ACTIVO);
 		if (estado.equals("INACTIVO"))
 			cliente.setEstado(modelo.Cliente.ESTADO.INACTIVO);
+		if (estado.equals("BORRADO"))
+			cliente.setEstado(modelo.Cliente.ESTADO.BORRADO);
 
 		for (Cochera cochera : listCocheras){
 			cochera.setCliente(cliente);

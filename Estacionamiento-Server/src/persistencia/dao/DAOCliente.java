@@ -44,7 +44,10 @@ public class DAOCliente {
 	public ArrayList<modelo.Cliente> getClientes() {
 		ArrayList<modelo.Cliente> clientesReturn;
 		ArrayList<persistencia.clases.Cliente> clientesP = new ArrayList<persistencia.clases.Cliente>();
-		clientesP=(ArrayList<Cliente>) HibernateDAO.getInstancia().getList("Cliente");
+//		trae todos los clientes, inclusive los "Borrados"
+//		clientesP=(ArrayList<Cliente>) HibernateDAO.getInstancia().getList("Cliente");
+		clientesP= (ArrayList<Cliente>) HibernateDAO.getInstancia().getListClientesNoBorrados();
+		
 		for (Cliente cliente : clientesP) {
 			HibernateDAO.getInstancia().getSession().refresh(cliente);
 		}
@@ -237,6 +240,8 @@ public class DAOCliente {
 		clienteP.setEstado(persistencia.clases.Cliente.ESTADO.ACTIVO);
 		if(clienteM.getEstado()==modelo.Cliente.ESTADO.INACTIVO)
 			clienteP.setEstado(persistencia.clases.Cliente.ESTADO.INACTIVO);
+		if(clienteM.getEstado()==modelo.Cliente.ESTADO.BORRADO)
+			clienteP.setEstado(persistencia.clases.Cliente.ESTADO.BORRADO);
 		
 		List<persistencia.clases.Cochera> listCocheras = new ArrayList<persistencia.clases.Cochera>();
 		
