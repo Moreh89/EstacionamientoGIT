@@ -26,6 +26,7 @@ import net.sf.jasperreports.engine.virtualization.SqlDateSerializer;
 import persistencia.Converter;
 import persistencia.HibernateDAO;
 import persistencia.dao.*;
+import vista.PrintTicket;
 import vista.PrintTicketCobroExtraordinario;
 import modelo.*;
 
@@ -567,7 +568,8 @@ public class Controlador {
 		movimientoM.setMedioPago(modelo.MovimientoCC.MEDIOPAGO.NOAPLICA);
 
 		DAOCliente.getInstance().agregarMovimientoCC(cliente.getIdCliente(), movimientoM);
-		new PrintTicketCobroExtraordinario(movimientoM, impresora, cliente);
+		PrintTicketCobroExtraordinario print=new PrintTicketCobroExtraordinario(movimientoM, impresora, cliente);
+		print.imprimir();
 		return 0;
 	}
 
