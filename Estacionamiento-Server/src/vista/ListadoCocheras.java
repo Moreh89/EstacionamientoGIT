@@ -15,7 +15,6 @@ import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 
 import controlador.Controlador;
-import modelo.Cochera;
 
 public class ListadoCocheras extends JFrame {
 
@@ -65,30 +64,31 @@ public class ListadoCocheras extends JFrame {
 			new Object[][] {
 			},
 			new String[] {
-				"Cochera", "Cliente"
+				"Cochera", "Propietario", "Inquilino"
 			}
 		));
 		scrollPane.setViewportView(table);
 		
-		ArrayList<Cochera> cocheras = Controlador.getInstancia().getCocheras();
-		String numeroCochera = "";
+		ArrayList<controlador.Controlador.cocheraVisual> cocheras = Controlador.getInstancia().getCocherasViewConPropEInqui();
 		
-		for (Cochera cochera : cocheras) {
+		
+		int numeroCochera = 0;
+		DefaultTableModel model = (DefaultTableModel) table.getModel();
+		
+		for (controlador.Controlador.cocheraVisual cochera : cocheras) {
 			
-			while(!numeroCochera.equals("") && Integer.parseInt(cochera.getUbicacion()) > (Integer.parseInt(numeroCochera)+1)){
-				numeroCochera = String.valueOf(Integer.parseInt(numeroCochera)+1);
-				
-				DefaultTableModel model = (DefaultTableModel) table.getModel();
-				model.addRow(new Object[]{numeroCochera, ""});
-				
+			while( cochera.numero > numeroCochera+1){
+				numeroCochera++;
+				model.addRow(new Object[]{String.valueOf(numeroCochera), "", ""});
 			}
 			
-			DefaultTableModel model = (DefaultTableModel) table.getModel();
-			model.addRow(new Object[]{cochera.getUbicacion(), cochera.getCliente().getApellido() + " " + cochera.getCliente().getNombre()});
-			numeroCochera = cochera.getUbicacion();
+			model.addRow(new Object[]{String.valueOf(cochera.numero), cochera.propietario, cochera.inquilino});
+			numeroCochera = cochera.numero;
 			
 		}
 		
 	}
+	
+	
 
 }

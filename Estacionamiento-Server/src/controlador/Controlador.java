@@ -1334,5 +1334,58 @@ public class Controlador {
 		return DAOCochera.getInstance().getCocheras();
 
 	}
+	
+	public ArrayList<cocheraVisual> getCocherasViewConPropEInqui(){
+		
+		ArrayList<Cochera> cocheras = getCocheras();
+		
+		ArrayList<cocheraVisual> cocherasVisuales = new ArrayList<cocheraVisual>();
+		
+		for (Cochera cocheraTemp : cocheras) {
+			
+			cocheraVisual cocheraVisualTemp = buscarCocheraVisual(Integer.parseInt(cocheraTemp.getUbicacion()), cocherasVisuales);
+			if(cocheraVisualTemp == null){
+				cocheraVisualTemp = new cocheraVisual();
+				cocheraVisualTemp.numero = Integer.parseInt(cocheraTemp.getUbicacion());
+				cocherasVisuales.add(cocheraVisualTemp);
+			}
+			if(cocheraTemp.getCliente().getTipoCliente().equals(Cliente.TIPO_CLIENTE.EMPRESA_PROPIETARIO) || cocheraTemp.getCliente().getTipoCliente().equals(Cliente.TIPO_CLIENTE.PARTICULAR_PROPIETARIO)){
+				cocheraVisualTemp.propietario = cocheraTemp.getCliente().getApellido() + " " + cocheraTemp.getCliente().getNombre();
+			}else 
+			if(cocheraTemp.getCliente().getTipoCliente().equals(Cliente.TIPO_CLIENTE.EMPRESA_INQUILINO) || cocheraTemp.getCliente().getTipoCliente().equals(Cliente.TIPO_CLIENTE.PARTICULAR_INQUILINO)){
+				cocheraVisualTemp.inquilino = cocheraTemp.getCliente().getApellido() + " " + cocheraTemp.getCliente().getNombre();
+			}
+		}
+		Collections.sort(cocherasVisuales, new Comparator<cocheraVisual>() {
+			@Override
+	        public int compare(cocheraVisual  cochera1, cocheraVisual  cochera2)
+	        {
+
+	            return  Integer.compare(cochera1.numero, cochera2.numero);
+	        }
+			
+		});
+		return cocherasVisuales;
+	}
+	
+	public cocheraVisual buscarCocheraVisual (int numero, ArrayList<cocheraVisual> cocherasVisuales){
+		
+		for (cocheraVisual cocheraVisual : cocherasVisuales) {
+			if(cocheraVisual.numero == numero) return cocheraVisual;
+		}
+		
+		return null;
+	}
+	
+	
+	public class cocheraVisual{
+		public int numero;
+		public String propietario;
+		public String inquilino;
+	}
+
+	
+	
+	
 
 }

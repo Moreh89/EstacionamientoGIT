@@ -20,7 +20,6 @@ public class DAOCochera {
 		for (persistencia.clases.Cochera cochera : cocheraP) {
 			modelo.Cochera cocheraTemp = Converter.convertCocheraPersistenciaToModelo(cochera);
 			cocheraTemp.setCliente(Converter.convertClientePersistenciaToModelo(cochera.getCliente()));
-			
 			cocherasM.add(cocheraTemp);
 		}
 		return cocherasM;
