@@ -38,7 +38,6 @@ public class PrintTicketCobroExtraordinario extends JFrame {
 	private JPanel contentPane;
 	private JPanel panelAttributes;
 	private JTextPane txtpnfechaIng;
-	private Barcode barcode;
 	private static String impersora;
 	private static PrintTicket standalone = null;
 	
@@ -59,7 +58,7 @@ public class PrintTicketCobroExtraordinario extends JFrame {
 				PrintTicket.class.getResource("/image/printer.png")));
 		setResizable(false);
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-		setBounds(100, 100, 240, 150);
+		setBounds(100, 100, 240, 200);
 		contentPane = new JPanel();
 		contentPane.setBackground(Color.WHITE);
 		contentPane.setBorder(null);
@@ -96,7 +95,7 @@ public class PrintTicketCobroExtraordinario extends JFrame {
 			txtpnfechaIng = new JTextPane();
 			txtpnfechaIng.setFont(new Font("Tahoma", Font.PLAIN, 12));
 			txtpnfechaIng.setContentType("text/html");
-			txtpnfechaIng.setText("<html><b>P.J.E.Uriburu 1058 CABA<br>Fecha:"+new SimpleDateFormat("dd-MM-yyyy HH:mm").format(cobroExtraordinario.getFecha())+"<br>Cliente: "+ cliente.getNombre()+" "+cliente.getApellido()+"<br>Descripcion: "+ cobroExtraordinario.getDescripcion()+"<br>Monto: "+cobroExtraordinario.getMontoCobrado()+"</b><br></html>");
+			txtpnfechaIng.setText("<html><b>P.J.E.Uriburu 1058 CABA<br>Fecha:"+new SimpleDateFormat("dd-MM-yyyy HH:mm").format(cobroExtraordinario.getFecha())+"<br>Cliente: "+ cliente.getNombre()+" "+cliente.getApellido()+"<br>Descripcion: "+ cobroExtraordinario.getDescripcion()+"<br>Monto: "+cobroExtraordinario.getMontoCobrado()+"<br><br>Gracias por su Visita.</b><br></html>");
 			GridBagConstraints gbc_txtpnfechaIng = new GridBagConstraints();
 			gbc_txtpnfechaIng.fill = GridBagConstraints.BOTH;
 			gbc_txtpnfechaIng.gridx = 0;
