@@ -251,5 +251,18 @@ public class HibernateDAO {
 		return list;
 	}
 
+	public long generarAumentoAlquileres(double aumento) {
+		long ret = -1;
+		Session session = getSession();
+		Transaction tx = session.beginTransaction();
+		session.beginTransaction();
+		String stringQ= ("UPDATE Cochera SET costoCochera = costoCochera* :porcentajeAumento WHERE estado = 1 AND porcentajeExpensas=0 AND costoCochera > 0");
+		SQLQuery query=session.createSQLQuery(stringQ);
+		query.setDouble("porcentajeAumento", aumento);
+		ret = query.executeUpdate();
+		tx.commit();
+		return ret;
+	}
+
 	
 }

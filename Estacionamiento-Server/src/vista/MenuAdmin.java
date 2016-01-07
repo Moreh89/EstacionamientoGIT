@@ -61,6 +61,7 @@ public class MenuAdmin extends JFrame implements ActionListener {
 	private JMenuItem mnAbout;
 	private JMenuItem menuItemEliminarTickets;
 	private JMenuItem mntmListadoCocheras;
+	private JMenuItem mntmGenerarAumento;
 
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
@@ -124,13 +125,18 @@ public class MenuAdmin extends JFrame implements ActionListener {
 		mnAlquileres = new JMenu("Alquileres");
 		mnGestionEstacionamiento.add(mnAlquileres);
 
+		mntmAnularAlquileres = new JMenuItem("Anular Liquidaci\u00F3n");
+		mnAlquileres.add(mntmAnularAlquileres);
+		mntmAnularAlquileres.addActionListener(this);
+
 		mntmLiquidarAlquileres = new JMenuItem("Emitir Liquidaci\u00F3n");
 		mnAlquileres.add(mntmLiquidarAlquileres);
 		mntmLiquidarAlquileres.addActionListener(this);
 
-		mntmAnularAlquileres = new JMenuItem("Anular Liquidaci\u00F3n");
-		mnAlquileres.add(mntmAnularAlquileres);
-		mntmAnularAlquileres.addActionListener(this);
+		mntmGenerarAumento = new JMenuItem("Generar Aumento");
+		mnAlquileres.add(mntmGenerarAumento);
+		mntmGenerarAumento.addActionListener(this);
+
 
 		mnColor = new JMenu("Colores");
 		mnGestionEstacionamiento.add(mnColor);
@@ -149,13 +155,13 @@ public class MenuAdmin extends JFrame implements ActionListener {
 		mnExpensas = new JMenu("Expensas");
 		mnGestionEstacionamiento.add(mnExpensas);
 
-		mntmLiquidarExpensas = new JMenuItem("Emitir Liquidaci\u00F3n");
-		mnExpensas.add(mntmLiquidarExpensas);
-		mntmLiquidarExpensas.addActionListener(this);
-
 		mntmAnularExpensas = new JMenuItem("Anular Liquidaci\u00F3n");
 		mnExpensas.add(mntmAnularExpensas);
 		mntmAnularExpensas.addActionListener(this);
+
+		mntmLiquidarExpensas = new JMenuItem("Emitir Liquidaci\u00F3n");
+		mnExpensas.add(mntmLiquidarExpensas);
+		mntmLiquidarExpensas.addActionListener(this);
 
 		mnModelo = new JMenu("Modelos");
 		mnGestionEstacionamiento.add(mnModelo);
@@ -194,16 +200,16 @@ public class MenuAdmin extends JFrame implements ActionListener {
 		mntmDeudores = new JMenuItem("Clientes Deudores");
 		mnConsultas.add(mntmDeudores);
 
-		mntmTicketsAbiertos = new JMenuItem("Tickets Abiertos");
-		mnConsultas.add(mntmTicketsAbiertos);
-		
-		mntmTicketsTarjeta = new JMenuItem("Tickets Tarjeta");
-		mnConsultas.add(mntmTicketsTarjeta);
-		
 		mntmListadoCocheras = new JMenuItem("Listado Cocheras");
 		mnConsultas.add(mntmListadoCocheras);
 		mntmListadoCocheras.addActionListener(this);
-		
+
+		mntmTicketsAbiertos = new JMenuItem("Tickets Abiertos");
+		mnConsultas.add(mntmTicketsAbiertos);
+
+		mntmTicketsTarjeta = new JMenuItem("Tickets Tarjeta");
+		mnConsultas.add(mntmTicketsTarjeta);
+
 		mntmTicketsAbiertos.addActionListener(this);
 		mntmDeudores.addActionListener(this);
 		mntmTicketsTarjeta.addActionListener(this);
@@ -211,11 +217,11 @@ public class MenuAdmin extends JFrame implements ActionListener {
 		menuSistema = new JMenu("Gestion de Sistema");
 		menuSistema.setIcon(new ImageIcon(MenuAdmin.class.getResource("/image/report.png")));
 		menuBar.add(menuSistema);
-		
+
 		menuItemEliminarTickets = new JMenuItem("Eliminar Tickets");
 		menuSistema.add(menuItemEliminarTickets);
 		menuItemEliminarTickets.addActionListener(this);
-		
+
 		menuItemBackUp = new JMenuItem("Realizar BackUp");
 		menuSistema.add(menuItemBackUp);
 		menuItemBackUp.addActionListener(this);
@@ -233,12 +239,12 @@ public class MenuAdmin extends JFrame implements ActionListener {
 		mntmSalir = new JMenuItem("Salir");
 		mntmSalir.setIcon(null);
 		mnMiCuenta.add(mntmSalir);
-		
+
 		menuHelp = new JMenu("Ayuda");
 		menuHelp.setIcon(new ImageIcon(MenuAdmin.class.getResource("/image/printer.png")));
 		menuHelp.setFont(new Font("Segoe UI", Font.PLAIN, 12));
 		menuBar.add(menuHelp);
-		
+
 		mnAbout = new JMenuItem("System About");
 		mnAbout.setFont(new Font("Segoe UI", Font.PLAIN, 12));
 		menuHelp.add(mnAbout);
@@ -314,8 +320,8 @@ public class MenuAdmin extends JFrame implements ActionListener {
 		if (event.getSource() == mntmModificacionCliente) {
 			new BuscadorCliente().setVisible(true);
 			if (Controlador.getInstancia().getClienteActual()!= null)
-			new ModificarCliente(Controlador.getInstancia().getClienteActual()).setVisible(true);
-			
+				new ModificarCliente(Controlador.getInstancia().getClienteActual()).setVisible(true);
+
 
 		}
 		if (event.getSource() == mntmCobroExtraordinario) {
@@ -336,7 +342,7 @@ public class MenuAdmin extends JFrame implements ActionListener {
 		if (event.getSource() == mntmListadoCocheras) {
 			new ListadoCocheras().setVisible(true);
 		}
-		
+
 		if(event.getSource()==mntmTicketsTarjeta)
 		{
 			new VerTicketsAbonadosTarjeta().setVisible(true);
@@ -346,10 +352,15 @@ public class MenuAdmin extends JFrame implements ActionListener {
 		{
 			new About().setVisible(true);
 		}
-		
+
 		if(event.getSource()==menuItemEliminarTickets)
 		{
 			new EliminarTickets().setVisible(true);
+		}
+		
+		if(event.getSource()==mntmGenerarAumento)
+		{
+			new GenerarAumentoAlquileres().setVisible(true);
 		}
 	}
 

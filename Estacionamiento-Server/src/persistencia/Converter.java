@@ -562,7 +562,6 @@ public class Converter {
 
 		//TO DO - Revisar porque se vuelve ciclico - Porque cliente tiene cochera que tiene cliente
 		cocheraP.setCliente(null);
-
 		return cocheraP;
 	}
 

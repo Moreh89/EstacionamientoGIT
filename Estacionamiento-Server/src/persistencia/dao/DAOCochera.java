@@ -25,4 +25,9 @@ public class DAOCochera {
 		return cocherasM;
 	}
 
+	public long generarAumentoAlquileres(double aumento) {
+		return HibernateDAO.getInstancia().generarAumentoAlquileres(aumento);
+		
+	}
+
 }

@@ -44,17 +44,17 @@ public class DAOCliente {
 	public ArrayList<modelo.Cliente> getClientes() {
 		ArrayList<modelo.Cliente> clientesReturn;
 		ArrayList<persistencia.clases.Cliente> clientesP = new ArrayList<persistencia.clases.Cliente>();
-//		trae todos los clientes, inclusive los "Borrados"
-//		clientesP=(ArrayList<Cliente>) HibernateDAO.getInstancia().getList("Cliente");
+		//		trae todos los clientes, inclusive los "Borrados"
+		//		clientesP=(ArrayList<Cliente>) HibernateDAO.getInstancia().getList("Cliente");
 		clientesP= (ArrayList<Cliente>) HibernateDAO.getInstancia().getListClientesNoBorrados();
-		
+
 		for (Cliente cliente : clientesP) {
 			HibernateDAO.getInstancia().getSession().refresh(cliente);
 		}
 		clientesReturn = Converter.convertClientesPersistenciaToModelo(clientesP);
 		return clientesReturn;
 	}
-	
+
 
 	public long agregarMovimientoCC(long idCliente, modelo.MovimientoCC movimientoNuevoM)
 	{
@@ -114,13 +114,13 @@ public class DAOCliente {
 		return codigoReturn;
 	}
 
-	
 
-//	public double getEstadoCrediticio(modelo.Cliente clienteM) {
-//		double deuda=0;
-//		deuda=HibernateDAO.getInstancia().getEstadoCrediticio(clienteM.getCuentaCorriente().getIdCuentaCorriente());
-//		return deuda;
-//	}
+
+	//	public double getEstadoCrediticio(modelo.Cliente clienteM) {
+	//		double deuda=0;
+	//		deuda=HibernateDAO.getInstancia().getEstadoCrediticio(clienteM.getCuentaCorriente().getIdCuentaCorriente());
+	//		return deuda;
+	//	}
 
 	public modelo.Cliente getClienteModelo(long idCliente) {
 		persistencia.clases.Cliente cli = new persistencia.clases.Cliente();
@@ -191,7 +191,7 @@ public class DAOCliente {
 
 	public long actualizar(modelo.Cliente clienteM) {
 		Cliente clienteP = (persistencia.clases.Cliente) HibernateDAO.getInstancia().get(persistencia.clases.Cliente.class, clienteM.getIdCliente());
-		
+
 		clienteP.setNombre(clienteM.getNombre());
 		clienteP.setApellido(clienteM.getApellido());
 		clienteP.setTelefono1(clienteM.getTelefono1());
@@ -237,40 +237,45 @@ public class DAOCliente {
 			clienteP.setTipoCliente(persistencia.clases.Cliente.TIPO_CLIENTE.EMPRESA_FRECUENTE);
 
 		if(clienteM.getEstado()==modelo.Cliente.ESTADO.ACTIVO)
-		clienteP.setEstado(persistencia.clases.Cliente.ESTADO.ACTIVO);
+			clienteP.setEstado(persistencia.clases.Cliente.ESTADO.ACTIVO);
 		if(clienteM.getEstado()==modelo.Cliente.ESTADO.INACTIVO)
 			clienteP.setEstado(persistencia.clases.Cliente.ESTADO.INACTIVO);
 		if(clienteM.getEstado()==modelo.Cliente.ESTADO.BORRADO)
 			clienteP.setEstado(persistencia.clases.Cliente.ESTADO.BORRADO);
-		
+
 		List<persistencia.clases.Cochera> listCocheras = new ArrayList<persistencia.clases.Cochera>();
-		
+
 		for (Cochera cocheraM : clienteM.getCocheras()){
 			//Nueva
 			if(cocheraM.getIdCochera()==0){
 				persistencia.clases.Cochera cocheraP = Converter.convertCocheraModeloToPersistencia(cocheraM);
 				cocheraP.setCliente(clienteP);
 				listCocheras.add(cocheraP);
-			//las que ya tengo las actualizo
+				//las que ya tengo las actualizo
 			}else{
 				persistencia.clases.Cochera cocheraP = (persistencia.clases.Cochera) HibernateDAO.getInstancia().get(persistencia.clases.Cochera.class, cocheraM.getIdCochera());
 				cocheraP.setCostoCochera(cocheraM.getCostoCochera());
 				cocheraP.setPorcentajeExpensas(cocheraM.getPorcentajeExpensas());
 				cocheraP.setUbicacion(cocheraM.getUbicacion());
+				if(clienteM.getEstado()==modelo.Cliente.ESTADO.BORRADO)
+				{
+					cocheraP.setEstado(persistencia.clases.Cochera.ESTADO.INACTIVO);
+				}
+
 				listCocheras.add(cocheraP);
 			}
 			//las que no esten es porque las borre
 		}
 		clienteP.setCocheras(listCocheras);
-		
-		
+
+
 		List<PersonaAutorizada> listPersonasAutorizadas = new ArrayList<PersonaAutorizada>();
 		for (modelo.PersonaAutorizada personaM : clienteM.getPersonasAutorizadasARetirar()){
 			//Nueva
 			if(personaM.getIdPersonaAut()==0){
 				persistencia.clases.PersonaAutorizada personaP = Converter.convertPersonaAutorizadaModeloToPersistencia(personaM);
 				listPersonasAutorizadas.add(personaP);
-			//las que ya tengo las actualizo
+				//las que ya tengo las actualizo
 			}else{
 				persistencia.clases.PersonaAutorizada personaP = (persistencia.clases.PersonaAutorizada) HibernateDAO.getInstancia().get(persistencia.clases.PersonaAutorizada.class, personaM.getIdPersonaAut());
 				personaP.setNombre(personaM.getNombre());
@@ -279,14 +284,14 @@ public class DAOCliente {
 			//las que no esten es porque las borre
 		}
 		clienteP.setPersonasAutorizadasARetirar(listPersonasAutorizadas);
-		
+
 		List<Vehiculo> listVehiculos = new ArrayList<Vehiculo>();
 		for (modelo.Vehiculo vehiculoM : clienteM.getVehiculos()){
 			//Nueva
 			if(vehiculoM.getIdVehiculo()==0){
 				persistencia.clases.Vehiculo vehiculoP = Converter.convertVehiculoModeloToPersistencia(vehiculoM);
 				listVehiculos.add(vehiculoP);
-			//los que ya tengo los actualizo
+				//los que ya tengo los actualizo
 			}else{
 				persistencia.clases.Vehiculo vehiculoP = (persistencia.clases.Vehiculo) HibernateDAO.getInstancia().get(persistencia.clases.Vehiculo.class, vehiculoM.getIdVehiculo());
 				vehiculoP.setPatente(vehiculoM.getPatente());

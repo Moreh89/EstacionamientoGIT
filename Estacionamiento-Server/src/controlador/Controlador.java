@@ -578,7 +578,7 @@ public class Controlador {
 		ArrayList<modelo.Cliente> clientes = new ArrayList<modelo.Cliente>();
 		clientes=DAOCliente.getInstance().getClientesPropietarios();
 		ArrayList<String> expensasImprimir = new ArrayList<String>();
-		
+
 		expensasImprimir.add("Cochera;Periodo a Liquidar;Nombre;Apellido;Porcentaje;Monto");
 		double porcentajeTotalCobrado=0;
 		new GregorianCalendar();
@@ -1269,10 +1269,20 @@ public class Controlador {
 		if (estado.equals("INACTIVO"))
 			cliente.setEstado(modelo.Cliente.ESTADO.INACTIVO);
 		if (estado.equals("BORRADO"))
+		{
 			cliente.setEstado(modelo.Cliente.ESTADO.BORRADO);
+			for (Cochera cochera : listCocheras)
+			{
+				cochera.setCliente(cliente);
+				cochera.setEstado(modelo.Cochera.ESTADO.INACTIVO);
+			}
+		}
+		else
+		{
 
-		for (Cochera cochera : listCocheras){
-			cochera.setCliente(cliente);
+			for (Cochera cochera : listCocheras){
+				cochera.setCliente(cliente);
+			}
 		}
 		cliente.setCocheras(listCocheras);
 		cliente.setPersonasAutorizadasARetirar(listPersonasAutorizadas);
@@ -1336,15 +1346,15 @@ public class Controlador {
 		return DAOCochera.getInstance().getCocheras();
 
 	}
-	
+
 	public ArrayList<cocheraVisual> getCocherasViewConPropEInqui(){
-		
+
 		ArrayList<Cochera> cocheras = getCocheras();
-		
+
 		ArrayList<cocheraVisual> cocherasVisuales = new ArrayList<cocheraVisual>();
-		
+
 		for (Cochera cocheraTemp : cocheras) {
-			
+
 			cocheraVisual cocheraVisualTemp = buscarCocheraVisual(Integer.parseInt(cocheraTemp.getUbicacion()), cocherasVisuales);
 			if(cocheraVisualTemp == null){
 				cocheraVisualTemp = new cocheraVisual();
@@ -1354,40 +1364,50 @@ public class Controlador {
 			if(cocheraTemp.getCliente().getTipoCliente().equals(Cliente.TIPO_CLIENTE.EMPRESA_PROPIETARIO) || cocheraTemp.getCliente().getTipoCliente().equals(Cliente.TIPO_CLIENTE.PARTICULAR_PROPIETARIO)){
 				cocheraVisualTemp.propietario = cocheraTemp.getCliente().getApellido() + " " + cocheraTemp.getCliente().getNombre();
 			}else 
-			if(cocheraTemp.getCliente().getTipoCliente().equals(Cliente.TIPO_CLIENTE.EMPRESA_INQUILINO) || cocheraTemp.getCliente().getTipoCliente().equals(Cliente.TIPO_CLIENTE.PARTICULAR_INQUILINO)){
-				cocheraVisualTemp.inquilino = cocheraTemp.getCliente().getApellido() + " " + cocheraTemp.getCliente().getNombre();
-			}
+				if(cocheraTemp.getCliente().getTipoCliente().equals(Cliente.TIPO_CLIENTE.EMPRESA_INQUILINO) || cocheraTemp.getCliente().getTipoCliente().equals(Cliente.TIPO_CLIENTE.PARTICULAR_INQUILINO)){
+					cocheraVisualTemp.inquilino = cocheraTemp.getCliente().getApellido() + " " + cocheraTemp.getCliente().getNombre();
+				}
 		}
 		Collections.sort(cocherasVisuales, new Comparator<cocheraVisual>() {
 			@Override
-	        public int compare(cocheraVisual  cochera1, cocheraVisual  cochera2)
-	        {
+			public int compare(cocheraVisual  cochera1, cocheraVisual  cochera2)
+			{
 
-	            return  Integer.compare(cochera1.numero, cochera2.numero);
-	        }
-			
+				return  Integer.compare(cochera1.numero, cochera2.numero);
+			}
+
 		});
 		return cocherasVisuales;
 	}
-	
+
 	public cocheraVisual buscarCocheraVisual (int numero, ArrayList<cocheraVisual> cocherasVisuales){
-		
+
 		for (cocheraVisual cocheraVisual : cocherasVisuales) {
 			if(cocheraVisual.numero == numero) return cocheraVisual;
 		}
-		
+
 		return null;
 	}
-	
-	
+
+
 	public class cocheraVisual{
 		public int numero;
 		public String propietario;
 		public String inquilino;
 	}
 
-	
-	
-	
+
+	public double generarAumentoAlquieres(double porcentajeAumento) {
+		long codReturn = -1;
+		double aumento=1+(porcentajeAumento/100);
+		
+		codReturn=DAOCochera.getInstance().generarAumentoAlquileres(aumento);
+
+		return codReturn;
+	}
+
+
+
+
 
 }
