@@ -147,28 +147,33 @@ public class MenuOperador2 extends JFrame implements ActionListener, KeyListener
 		mnGestionEstacionamiento.setIcon(new ImageIcon(MenuOperador2.class.getResource("/image/modificar.png")));
 		mnGestionEstacionamiento.setFont(new Font("Segoe UI", Font.BOLD, 20));
 		menuBar.add(mnGestionEstacionamiento);
+				
+						mntmCobroExtraordinario = new JMenuItem("Cobro");
+						mntmCobroExtraordinario.setFont(new Font("Segoe UI", Font.PLAIN, 20));
+						mnGestionEstacionamiento.add(mntmCobroExtraordinario);
+						mntmCobroExtraordinario.addActionListener(this);
+		
+				mntmColor = new JMenuItem("Color");
+				mnGestionEstacionamiento.add(mntmColor);
+				mntmColor.setFont(new Font("Segoe UI", Font.PLAIN, 20));
+				mntmColor.addActionListener(this);
 
 		mntmModelo = new JMenuItem("Modelo");
 		mnGestionEstacionamiento.add(mntmModelo);
 		mntmModelo.setFont(new Font("Segoe UI", Font.PLAIN, 20));
 		mntmModelo.addActionListener(this);
 
-		mntmColor = new JMenuItem("Color");
-		mnGestionEstacionamiento.add(mntmColor);
-		mntmColor.setFont(new Font("Segoe UI", Font.PLAIN, 20));
-		mntmColor.addActionListener(this);
-
-		mntmCobroExtraordinario = new JMenuItem("Cobro");
-		mntmCobroExtraordinario.setFont(new Font("Segoe UI", Font.PLAIN, 20));
-		mnGestionEstacionamiento.add(mntmCobroExtraordinario);
-		mntmCobroExtraordinario.addActionListener(this);
-
 		mnConsultas = new JMenu("Consultas");
 		mnConsultas.setFont(new Font("Segoe UI", Font.BOLD, 20));
 		mnConsultas.setIcon(new ImageIcon(MenuOperador2.class.getResource("/image/buscar.png")));
 		menuBar.add(mnConsultas);
+		
+				mntmArqueoDeCaja = new JMenuItem("Arqueo de Caja");
+				mntmArqueoDeCaja.setFont(new Font("Segoe UI", Font.PLAIN, 20));
+				mnConsultas.add(mntmArqueoDeCaja);
+				mntmArqueoDeCaja.addActionListener(this);
 
-		mntmTicketsAbiertos = new JMenuItem("Tickets abiertos");
+		mntmTicketsAbiertos = new JMenuItem("Tickets Abiertos");
 		mntmTicketsAbiertos.setFont(new Font("Segoe UI", Font.PLAIN, 20));
 		mnConsultas.add(mntmTicketsAbiertos);
 		mntmTicketsAbiertos.addActionListener(this);
@@ -177,11 +182,6 @@ public class MenuOperador2 extends JFrame implements ActionListener, KeyListener
 		menuItemTicektTarjeta.setFont(new Font("Segoe UI", Font.PLAIN, 20));
 		mnConsultas.add(menuItemTicektTarjeta);
 		menuItemTicektTarjeta.addActionListener(this);
-
-		mntmArqueoDeCaja = new JMenuItem("Arqueo de Caja");
-		mntmArqueoDeCaja.setFont(new Font("Segoe UI", Font.PLAIN, 20));
-		mnConsultas.add(mntmArqueoDeCaja);
-		mntmArqueoDeCaja.addActionListener(this);
 
 		mnMiCuenta = new JMenu("Mi Cuenta");
 		mnMiCuenta.setFont(new Font("Segoe UI", Font.BOLD, 20));
