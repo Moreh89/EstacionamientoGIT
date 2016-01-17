@@ -125,7 +125,6 @@ public class Controlador {
 		Collections.sort(clientes, new Cliente.CompApellido());
 
 
-		this.aplicarInteres();
 		return true;
 
 	}
@@ -873,7 +872,7 @@ public class Controlador {
 	}
 
 
-	private long aplicarInteres()
+	public long aplicarInteres()
 	{	
 		//aplica solo a clientes del tipo propietarios
 		int deadLine = tasaInteres.getDeadLine();
@@ -892,10 +891,13 @@ public class Controlador {
 					return -1;
 				}
 			}
+			
+			JOptionPane.showMessageDialog(null, "Se está aplicando el Interés a todos los Clientes.\nLa operación puede demorar algunos minutos.", "Aplicar Interes",  JOptionPane.INFORMATION_MESSAGE);
 
 			ArrayList<modelo.Cliente> clientes = new ArrayList<modelo.Cliente>();
 
-			clientes=DAOCliente.getInstance().getClientesPropietarios();
+//			clientes=DAOCliente.getInstance().getClientesPropietarios();
+			clientes = DAOCliente.getInstance().getClientes();
 			modelo.Interes interesM= new Interes();
 			interesM.setIdInteres(0);
 			interesM.setFechaAplicado(fechaActual);

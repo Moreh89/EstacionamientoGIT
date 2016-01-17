@@ -245,7 +245,8 @@ public class Login extends javax.swing.JFrame implements ActionListener, KeyList
 						
 						if (validar == true)
 						{
-							
+							Controlador.getInstancia().aplicarInteres();
+
 							//DIFERENCIA ENTRE USUARIO ADMIN Y OPERADOR
 
 							if(Controlador.getInstancia().getUsuarioActual().getPermisos().equals(Usuario.PERMISOS.ADMIN))
