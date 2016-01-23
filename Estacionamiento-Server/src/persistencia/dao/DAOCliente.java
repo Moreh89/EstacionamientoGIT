@@ -308,5 +308,20 @@ public class DAOCliente {
 		HibernateDAO.getInstancia().update(clienteP);
 		return clienteP.getIdCliente();
 	}
+	
+
+	public ArrayList<modelo.Cliente> getClientesDeudores() {
+		ArrayList<modelo.Cliente> clientesReturn;
+		ArrayList<persistencia.clases.Cliente> clientesP = new ArrayList<persistencia.clases.Cliente>();
+		//		trae todos los clientes, inclusive los "Borrados"
+		//		clientesP=(ArrayList<Cliente>) HibernateDAO.getInstancia().getList("Cliente");
+		clientesP= (ArrayList<Cliente>) HibernateDAO.getInstancia().getListClientesNoBorrados();
+
+		for (Cliente cliente : clientesP) {
+			HibernateDAO.getInstancia().getSession().refresh(cliente);
+		}
+		clientesReturn = Converter.convertClientesPersistenciaToModelo(clientesP);
+		return clientesReturn;
+	}
 
 }

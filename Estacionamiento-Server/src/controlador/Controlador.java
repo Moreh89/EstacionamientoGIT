@@ -897,7 +897,7 @@ public class Controlador {
 			ArrayList<modelo.Cliente> clientes = new ArrayList<modelo.Cliente>();
 
 //			clientes=DAOCliente.getInstance().getClientesPropietarios();
-			clientes = DAOCliente.getInstance().getClientes();
+			clientes = DAOCliente.getInstance().getClientesDeudores();
 			modelo.Interes interesM= new Interes();
 			interesM.setIdInteres(0);
 			interesM.setFechaAplicado(fechaActual);

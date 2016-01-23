@@ -263,6 +263,13 @@ public class HibernateDAO {
 		tx.commit();
 		return ret;
 	}
+	
+	public List<?> getListClientesDeudoresNoBorrados() {
+		Session session=getSession();
+		List<?> list = session.createQuery("c2.* from Cliente c2  JOIN (select mcc.CuentaCorriente, SUM(montoCobrado)as estadoCrediticio from MovimientoCC mCC JOIN Cliente c ON c.CuentaCorriente=mcc.CuentaCorriente WHERE c.estado<>2 GROUP BY mcc.CuentaCorriente HAVING SUM(montoCobrado)<0) a ON a.CuentaCorriente=c2.CuentaCorriente").list();
+		session.flush();
+		return list;
+	}
 
 	
 }
