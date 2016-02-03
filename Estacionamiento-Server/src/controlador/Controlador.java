@@ -1281,7 +1281,6 @@ public class Controlador {
 		}
 		else
 		{
-
 			for (Cochera cochera : listCocheras){
 				cochera.setCliente(cliente);
 			}

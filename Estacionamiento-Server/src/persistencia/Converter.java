@@ -262,7 +262,8 @@ public class Converter {
 	{
 		modelo.Cliente clienteM = new modelo.Cliente();
 
-		if (clienteP.getCorreoElectronico() != null )clienteM.setCorreoElectronico(clienteP.getCorreoElectronico());
+		if (clienteP.getCorreoElectronico() != null )
+				clienteM.setCorreoElectronico(clienteP.getCorreoElectronico());
 		clienteM.setCuil(clienteP.getCuil());
 		clienteM.setIdCliente(clienteP.getIdCliente());
 		clienteM.setNombre(clienteP.getNombre());

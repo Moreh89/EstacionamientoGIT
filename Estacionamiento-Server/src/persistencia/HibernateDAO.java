@@ -11,6 +11,7 @@ import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 
 import persistencia.clases.Cliente;
+import persistencia.clases.Cochera;
 
 
 
@@ -204,10 +205,10 @@ public class HibernateDAO {
 		query.executeUpdate();
 		session.flush();
 		return path+fileNameBackup;
-		
 
-//RESTORE DATABASE ESTACIONAMIENTO from disk = 'RUTA' with replace, MOVE 'ESTACIONAMIENTO' TO 'c:\temp\db2.mdf',
-//				  MOVE 'estacionamiento_log' TO 'c:\temp\db2.ldf';
+
+		//RESTORE DATABASE ESTACIONAMIENTO from disk = 'RUTA' with replace, MOVE 'ESTACIONAMIENTO' TO 'c:\temp\db2.mdf',
+		//				  MOVE 'estacionamiento_log' TO 'c:\temp\db2.ldf';
 
 	}
 
@@ -263,7 +264,7 @@ public class HibernateDAO {
 		tx.commit();
 		return ret;
 	}
-	
+
 	public List<?> getListClientesDeudoresNoBorrados() {
 		Session session=getSession();
 		List<?> list = session.createQuery("c2.* from Cliente c2  JOIN (select mcc.CuentaCorriente, SUM(montoCobrado)as estadoCrediticio from MovimientoCC mCC JOIN Cliente c ON c.CuentaCorriente=mcc.CuentaCorriente WHERE c.estado<>2 GROUP BY mcc.CuentaCorriente HAVING SUM(montoCobrado)<0) a ON a.CuentaCorriente=c2.CuentaCorriente").list();
@@ -271,5 +272,14 @@ public class HibernateDAO {
 		return list;
 	}
 
-	
+	public List<?> getListCocheras(String className, String columna,int value) {
+
+		Session session=getSession();
+		List<?> list = session.createQuery("from "+className + " s where s."+ columna + "=?").setInteger(0, value).list();
+		session.flush();
+		return list;
+
+	}
+
+
 }
