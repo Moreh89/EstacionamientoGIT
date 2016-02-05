@@ -15,8 +15,9 @@ public class DAOCochera {
 
 	@SuppressWarnings("unchecked")
 	public ArrayList<modelo.Cochera> getCocheras() {
+		this.actualizarEstadoCochera();
 		ArrayList<persistencia.clases.Cochera> cocheraP =(ArrayList<persistencia.clases.Cochera>) HibernateDAO.getInstancia().getListInt("Cochera", "estado", 1);
-//		ArrayList<persistencia.clases.Cochera> cocheraP =(ArrayList<persistencia.clases.Cochera>) HibernateDAO.getInstancia().getListCocheras("Cochera", "estado", 1);
+		//		ArrayList<persistencia.clases.Cochera> cocheraP =(ArrayList<persistencia.clases.Cochera>) HibernateDAO.getInstancia().getListCocheras("Cochera", "estado", 1);
 		ArrayList<modelo.Cochera> cocherasM = new ArrayList<modelo.Cochera>();
 		for (persistencia.clases.Cochera cochera : cocheraP) {
 			modelo.Cochera cocheraTemp = Converter.convertCocheraPersistenciaToModelo(cochera);
@@ -28,7 +29,12 @@ public class DAOCochera {
 
 	public long generarAumentoAlquileres(double aumento) {
 		return HibernateDAO.getInstancia().generarAumentoAlquileres(aumento);
-		
+
+	}
+
+	public void actualizarEstadoCochera()
+	{
+		HibernateDAO.getInstancia().updateTableCochera_Estado();
 	}
 
 }

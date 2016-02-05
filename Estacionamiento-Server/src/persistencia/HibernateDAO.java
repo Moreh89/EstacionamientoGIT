@@ -278,8 +278,17 @@ public class HibernateDAO {
 		List<?> list = session.createQuery("from "+className + " s where s."+ columna + "=?").setInteger(0, value).list();
 		session.flush();
 		return list;
-
 	}
 
+	public void updateTableCochera_Estado()
+	{
+		Session session = getSession();
+		Transaction tx = session.beginTransaction();
+		session.beginTransaction();
+		String stringQ= ("UPDATE Cochera SET estado = 0 where Cliente is NULL AND estado = 1");
+		SQLQuery query=session.createSQLQuery(stringQ);
+		System.out.println("\n\n\n\n"+query.executeUpdate()+"\n\n\n");
+		tx.commit();
+	}
 
 }

@@ -1290,6 +1290,8 @@ public class Controlador {
 		cliente.setVehiculos(listVehiculos);
 
 		long idCliente = DAOCliente.getInstance().actualizar(cliente);
+		
+		DAOCochera.getInstance().actualizarEstadoCochera();
 
 	}
 
