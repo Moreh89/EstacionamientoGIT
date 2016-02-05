@@ -287,7 +287,7 @@ public class HibernateDAO {
 		session.beginTransaction();
 		String stringQ= ("UPDATE Cochera SET estado = 0 where Cliente is NULL AND estado = 1");
 		SQLQuery query=session.createSQLQuery(stringQ);
-		System.out.println("\n\n\n\n"+query.executeUpdate()+"\n\n\n");
+		query.executeUpdate();
 		tx.commit();
 	}
 
