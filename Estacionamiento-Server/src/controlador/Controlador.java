@@ -1171,16 +1171,17 @@ public class Controlador {
 		String cocherasCte="";
 		for(modelo.Cliente clienteAct : clientesConDeuda)
 		{
+			cocherasCte="";
 			for(modelo.Cochera cocheraM:clienteAct.getCocheras())
 			{
 				if(cocherasCte.equalsIgnoreCase(""))
 				{
-					cocherasCte=cocheraM.getUbicacion();
+					cocherasCte=cocherasCte.concat(cocheraM.getUbicacion());
 				}
 				else
 				{
-					cocherasCte.concat(" - ");
-					cocherasCte.concat(cocheraM.getUbicacion());
+					cocherasCte=cocherasCte.concat(" - ");
+					cocherasCte=cocherasCte.concat(cocheraM.getUbicacion());
 				}
 			}
 			deudoresImprimir.add(new SimpleDateFormat("dd-MM-yyyy").format(fecha)+";"+clienteAct.getNombre()+";"+clienteAct.getApellido()+";"+clienteAct.getEstadoCrediticio()+";"+ clienteAct.getTipoCliente().toString()+";"+cocherasCte);
