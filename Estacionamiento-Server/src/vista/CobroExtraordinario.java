@@ -157,7 +157,7 @@ public class CobroExtraordinario extends JDialog implements ActionListener, KeyL
 		gbc_montoCobradoTextField.gridy = 2;
 		contentPanel.add(montoCobradoTextField, gbc_montoCobradoTextField);
 		montoCobradoTextField.addKeyListener(this);
-		
+
 		labelComentario = new JLabel("Comentario:");
 		labelComentario.setFont(new Font("Tahoma", Font.BOLD, 11));
 		GridBagConstraints gbc_labelComentario = new GridBagConstraints();
@@ -166,7 +166,7 @@ public class CobroExtraordinario extends JDialog implements ActionListener, KeyL
 		gbc_labelComentario.gridx = 0;
 		gbc_labelComentario.gridy = 3;
 		contentPanel.add(labelComentario, gbc_labelComentario);
-		
+
 		textFieldComentario = new JTextField();
 		GridBagConstraints gbc_textFieldComentario = new GridBagConstraints();
 		gbc_textFieldComentario.gridwidth = 3;
@@ -175,7 +175,7 @@ public class CobroExtraordinario extends JDialog implements ActionListener, KeyL
 		gbc_textFieldComentario.gridx = 1;
 		gbc_textFieldComentario.gridy = 3;
 		contentPanel.add(textFieldComentario, gbc_textFieldComentario);
-		
+
 		labelImpresora = new JLabel("Impresora:");
 		labelImpresora.setFont(new Font("Tahoma", Font.BOLD, 11));
 		GridBagConstraints gbc_labelImpresora = new GridBagConstraints();
@@ -184,7 +184,7 @@ public class CobroExtraordinario extends JDialog implements ActionListener, KeyL
 		gbc_labelImpresora.gridx = 0;
 		gbc_labelImpresora.gridy = 4;
 		contentPanel.add(labelImpresora, gbc_labelImpresora);
-		
+
 		comboBoxImpresoras = new JComboBox();
 		comboBoxImpresoras.setFocusable(false);
 		GridBagConstraints gbc_comboBoxImpresoras = new GridBagConstraints();
@@ -202,7 +202,7 @@ public class CobroExtraordinario extends JDialog implements ActionListener, KeyL
 			comboBoxImpresoras.addItem(printer.getName());
 		}
 		comboBoxImpresoras.setSelectedIndex(1);
-		
+
 		aceptarButton = new JButton("Aceptar");
 		aceptarButton.setIcon(new ImageIcon(CambioContrasenia.class.getResource("/image/ok.png")));
 		GridBagConstraints gbc_aceptarButton = new GridBagConstraints();
@@ -252,7 +252,30 @@ public class CobroExtraordinario extends JDialog implements ActionListener, KeyL
 			this.cliente=Controlador.getInstancia().getClienteActual();
 			if(cliente!=null)
 			{
-				clienteTextField.setText(cliente.getNombre()+cliente.getApellido());
+				clienteTextField.setText(cliente.getApellido()+", "+cliente.getNombre());
+				double estadoCrediticioCliente=Math.round(cliente.getEstadoCrediticio(cliente));
+				if(estadoCrediticioCliente<0)
+				{
+					estadoCrediticioCliente=estadoCrediticioCliente*(-1);
+				}
+				else
+				{
+					estadoCrediticioCliente=0;
+				}
+				montoCobradoTextField.setText(String.valueOf(estadoCrediticioCliente));
+				String tipoCliente = cliente.getTipoCliente().toString();
+				if(tipoCliente.equals("PARTICULAR_PROPIETARIO")||tipoCliente.equals("EMPRESA_PROPIETARIO"))
+				{
+					comboBoxTipoCobro.setSelectedIndex(1);
+				}
+				if(tipoCliente.equals("PARTICULAR_INQUILINO")||tipoCliente.equals("EMPRESA_INQUILINO"))
+				{
+					comboBoxTipoCobro.setSelectedIndex(0);
+				}
+				if(tipoCliente.equals("PARTICULAR_FRECUENTE")||tipoCliente.equals("EMPRESA_FRECUENTE"))
+				{
+					comboBoxTipoCobro.setSelectedIndex(2);
+				}
 			}
 		}
 		if(event.getSource()==aceptarButton)
@@ -264,46 +287,67 @@ public class CobroExtraordinario extends JDialog implements ActionListener, KeyL
 				{
 					if(!montoCobradoTextField.getText().isEmpty()&&isNumeric(montoCobradoTextField.getText()))
 					{
-						int resultado = JOptionPane.showConfirmDialog (null, "¿Está seguro?","Confirmación",JOptionPane.YES_NO_OPTION,JOptionPane.PLAIN_MESSAGE);
-						UIManager.put("OptionPane.yesButtonText", "Si");
-						UIManager.put("OptionPane.noButtonText", "No");
-						if(resultado != JOptionPane.CANCEL_OPTION && resultado != JOptionPane.CLOSED_OPTION)
+						String impresora = (String) this.comboBoxImpresoras.getSelectedItem();
+						codigoReturn=Controlador.getInstancia().generarCobroExtraordinario(comboBoxTipoCobro.getSelectedItem().toString(), Double.parseDouble(montoCobradoTextField.getText()),cliente, impresora, textFieldComentario.getText());
+						if(codigoReturn == -1)
 						{
-							if (resultado == JOptionPane.OK_OPTION)
-							{
-								String impresora = (String) this.comboBoxImpresoras.getSelectedItem();
-								codigoReturn=Controlador.getInstancia().generarCobroExtraordinario(comboBoxTipoCobro.getSelectedItem().toString(), Double.parseDouble(montoCobradoTextField.getText()),cliente, impresora, textFieldComentario.getText());
-								if(codigoReturn == -1)
-								{
-									JOptionPane.showMessageDialog(null, "No se pudo realizar el cobro.", "Cobro Extraordinario", JOptionPane.INFORMATION_MESSAGE);
-								}
-								if(codigoReturn >= 0)
-								{
-									JOptionPane.showMessageDialog(null, "Se generó correctamente el cobro del pago de " + comboBoxTipoCobro.getSelectedItem().toString(),"Cobro Extraordinario", JOptionPane.INFORMATION_MESSAGE);
-									dispose();
-								}
-							}
-							else
-							{
-								JOptionPane.showMessageDialog(null, "El campo Monto se encuentra incompleto o el valor ingresado no es válido.","Cobro Extraordinario", JOptionPane.INFORMATION_MESSAGE);
-							}
+							JOptionPane.showMessageDialog(null, "No se pudo realizar el cobro.", "Cobro Extraordinario", JOptionPane.INFORMATION_MESSAGE);
 						}
-						else
+						if(codigoReturn >= 0)
 						{
-							JOptionPane.showMessageDialog(null, "Cliente no seleccionado.", "Cobro Extraordinario", JOptionPane.INFORMATION_MESSAGE);
+							JOptionPane.showMessageDialog(null, "Se generó correctamente el cobro del pago de " + comboBoxTipoCobro.getSelectedItem().toString(),"Cobro Extraordinario", JOptionPane.INFORMATION_MESSAGE);
+							dispose();
 						}
 					}
-
 					else
 					{
-						JOptionPane.showMessageDialog(null, "Cliente no seleccionado.", "Cobro Extraordinario", JOptionPane.INFORMATION_MESSAGE);
+						JOptionPane.showMessageDialog(null, "El campo Monto se encuentra incompleto o el valor ingresado no es válido.","Cobro Extraordinario", JOptionPane.INFORMATION_MESSAGE);
 					}
 				}
+				else
+				{
+					JOptionPane.showMessageDialog(null, "Cliente no seleccionado.", "Cobro Extraordinario", JOptionPane.INFORMATION_MESSAGE);
+				}
+
 			}
+
 			else
 			{
 				JOptionPane.showMessageDialog(null, "Cliente no seleccionado.", "Cobro Extraordinario", JOptionPane.INFORMATION_MESSAGE);
 			}
+			//						int resultado = JOptionPane.showConfirmDialog (null, "¿Está seguro?","Confirmación",JOptionPane.YES_NO_OPTION,JOptionPane.PLAIN_MESSAGE);
+			//						UIManager.put("OptionPane.yesButtonText", "Si");
+			//						UIManager.put("OptionPane.noButtonText", "No");
+			//						if(resultado != JOptionPane.CANCEL_OPTION && resultado != JOptionPane.CLOSED_OPTION)
+			//						{
+			//							if (resultado == JOptionPane.OK_OPTION)
+			//							{
+			//								String impresora = (String) this.comboBoxImpresoras.getSelectedItem();
+			//								codigoReturn=Controlador.getInstancia().generarCobroExtraordinario(comboBoxTipoCobro.getSelectedItem().toString(), Double.parseDouble(montoCobradoTextField.getText()),cliente, impresora, textFieldComentario.getText());
+			//								if(codigoReturn == -1)
+			//								{
+			//									JOptionPane.showMessageDialog(null, "No se pudo realizar el cobro.", "Cobro Extraordinario", JOptionPane.INFORMATION_MESSAGE);
+			//								}
+			//								if(codigoReturn >= 0)
+			//								{
+			//									JOptionPane.showMessageDialog(null, "Se generó correctamente el cobro del pago de " + comboBoxTipoCobro.getSelectedItem().toString(),"Cobro Extraordinario", JOptionPane.INFORMATION_MESSAGE);
+			//									dispose();
+			//								}
+			//							}
+			//							else
+			//							{
+			//								JOptionPane.showMessageDialog(null, "El campo Monto se encuentra incompleto o el valor ingresado no es válido.","Cobro Extraordinario", JOptionPane.INFORMATION_MESSAGE);
+			//							}
+			//						}
+			//						else
+			//						{
+			//							JOptionPane.showMessageDialog(null, "Cliente no seleccionado.", "Cobro Extraordinario", JOptionPane.INFORMATION_MESSAGE);
+			//						}
+
+
+
+
+
 		}
 	}
 	@SuppressWarnings("unused")
@@ -341,7 +385,7 @@ public class CobroExtraordinario extends JDialog implements ActionListener, KeyL
 	@Override
 	public void keyTyped(KeyEvent e) {
 	}
-	
+
 
 
 }
