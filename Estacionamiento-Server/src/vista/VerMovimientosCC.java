@@ -274,7 +274,11 @@ public class VerMovimientosCC extends JDialog implements ActionListener, KeyList
 		gbc_fechaDesde.gridx = 1;
 		gbc_fechaDesde.gridy = 0;
 		panel.add(fechaDesde, gbc_fechaDesde);
-		fechaDesde.setDate(Calendar.getInstance().getTime());
+		
+		Calendar calendar = Calendar.getInstance();
+		calendar.set(calendar.DAY_OF_MONTH,1);
+//		fechaDesde.setDate(Calendar.getInstance().getTime());
+		fechaDesde.setDate(calendar.getTime());
 		fechaDesde.setFormats(new SimpleDateFormat("dd-MM-yyyy"));
 
 		lblFechaHasta = new JLabel("Fecha Hasta:");

@@ -39,6 +39,7 @@ import modelo.Vehiculo;
 import controlador.Controlador;
 
 import java.awt.Font;
+import javax.swing.SwingConstants;
 
 
 
@@ -105,6 +106,8 @@ public class BuscadorCliente extends JDialog implements ActionListener, KeyListe
 	private JButton btnVehiculos;
 	private JButton btnCocheras;
 	private JPanel panelElementos;
+	private JLabel lblFechaAlta;
+	private JTextField textFieldFechaAlta;
 		
 	public BuscadorCliente() {
 		setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
@@ -537,6 +540,26 @@ public class BuscadorCliente extends JDialog implements ActionListener, KeyListe
 		gbc_textFieldDescripcion.gridx = 1;
 		gbc_textFieldDescripcion.gridy = 13;
 		panelAtributos.add(textFieldDescripcion, gbc_textFieldDescripcion);
+		
+		lblFechaAlta = new JLabel("Fecha Alta:");
+		lblFechaAlta.setHorizontalAlignment(SwingConstants.RIGHT);
+		lblFechaAlta.setFont(new Font("Tahoma", Font.BOLD, 15));
+		GridBagConstraints gbc_lblFechaAlta = new GridBagConstraints();
+		gbc_lblFechaAlta.anchor = GridBagConstraints.EAST;
+		gbc_lblFechaAlta.insets = new Insets(0, 0, 5, 5);
+		gbc_lblFechaAlta.gridx = 0;
+		gbc_lblFechaAlta.gridy = 14;
+		panelAtributos.add(lblFechaAlta, gbc_lblFechaAlta);
+		
+		textFieldFechaAlta = new JTextField();
+		textFieldFechaAlta.setFont(new Font("Tahoma", Font.BOLD, 16));
+		textFieldFechaAlta.setColumns(10);
+		GridBagConstraints gbc_textFieldFechaAlta = new GridBagConstraints();
+		gbc_textFieldFechaAlta.insets = new Insets(0, 0, 5, 0);
+		gbc_textFieldFechaAlta.fill = GridBagConstraints.HORIZONTAL;
+		gbc_textFieldFechaAlta.gridx = 1;
+		gbc_textFieldFechaAlta.gridy = 14;
+		panelAtributos.add(textFieldFechaAlta, gbc_textFieldFechaAlta);
 		listModelPersonas = new DefaultListModel<PersonaAutorizada>();
 		listModelVehiculos = new DefaultListModel<Vehiculo>();
 		listModelCocheras = new DefaultListModel<Cochera>();
