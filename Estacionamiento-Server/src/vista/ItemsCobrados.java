@@ -20,6 +20,7 @@ import modelo.IncrementoPrepago;
 import modelo.MovimientoCC;
 import modelo.Ticket;
 import modelo.Usuario;
+import persistencia.dao.DAOMovimientoCC;
 import controlador.Controlador;
 import javax.swing.JLabel;
 import java.awt.Font;
@@ -83,6 +84,9 @@ public class ItemsCobrados extends JDialog implements ActionListener, ListSelect
 					if(ticketTemp.getDescuento()!=null && ticketTemp.getDescuento().getDescuento() > 0){
 						item = item + " CON DESCUENTO: " + ticketTemp.getDescuento().getDescripcion();
 					}
+					if(ticketTemp.getCliente()!=null){
+						item = item + " CLIENTE: " + ticketTemp.getCliente().toString().toUpperCase();
+					}
 					item = item + " " + ticketTemp.getObservacion();
 					listModel.addElement(item);
 				}
@@ -92,7 +96,9 @@ public class ItemsCobrados extends JDialog implements ActionListener, ListSelect
 		for (MovimientoCC movimientoCCTemp : Controlador.getInstancia().obtenetMovimientosCobrados(usuario, fechaInicio,fechaFin)){
 			if(!movimientoCCTemp.getEstado().equalsIgnoreCase("anulado")){
 			total = total + Math.round(movimientoCCTemp.getMontoCobrado());
-			listModel.addElement("PAGO EXTRAORDINARIO CONCEPTO: " + movimientoCCTemp.getDescripcion() + " MONTO: " + movimientoCCTemp.getMontoCobrado());
+			String lineTemp = "PAGO EXTRAORDINARIO CONCEPTO: " + movimientoCCTemp.getDescripcion() + " MONTO: " + movimientoCCTemp.getMontoCobrado();
+			lineTemp = lineTemp + " CLIENTE: " + DAOMovimientoCC.getInstance().getNombreCliente(movimientoCCTemp.getIdMovimiento()).toUpperCase();
+			listModel.addElement(lineTemp);
 			}
 		}
 		for (IncrementoPrepago incrementoTemp : Controlador.getInstancia().obternerIncrementos(usuario, fechaInicio,fechaFin)){

@@ -41,7 +41,7 @@ public class ArqueoDeCaja extends JDialog implements ActionListener{
 	private JButton generarButton;
 	private JButton cancelarButton;
 	@SuppressWarnings("rawtypes")
-	private JComboBox comboBox;
+	private JComboBox comboBoxOperadores;
 
 	/**
 	 * Launch the application.
@@ -75,14 +75,19 @@ public class ArqueoDeCaja extends JDialog implements ActionListener{
 		gbl_contentPanel.rowWeights = new double[]{0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
 		contentPanel.setLayout(gbl_contentPanel);
 		
-		comboBox = new JComboBox();
-		comboBox.setModel(new DefaultComboBoxModel());
+		comboBoxOperadores = new JComboBox();
+		comboBoxOperadores.setModel(new DefaultComboBoxModel());
 		if(Controlador.getInstancia().getUsuarioActual().getPermisos() == Usuario.PERMISOS.ADMIN){
+			Usuario usuarioTemp1 = new Usuario();
+			usuarioTemp1.setApellido("Busqueda General");
+			usuarioTemp1.setNombre("");
+			usuarioTemp1.setIdUsuario(-1);
+			comboBoxOperadores.addItem(usuarioTemp1);
 			for (Usuario usuarioTemp : Controlador.getInstancia().getUsuarios()) {
-				comboBox.addItem(usuarioTemp);
+				comboBoxOperadores.addItem(usuarioTemp);
 			}
 		}else{
-			comboBox.addItem(Controlador.getInstancia().getUsuarioActual());
+			comboBoxOperadores.addItem(Controlador.getInstancia().getUsuarioActual());
 		}
 
 		GridBagConstraints gbc_comboBox = new GridBagConstraints();
@@ -91,7 +96,7 @@ public class ArqueoDeCaja extends JDialog implements ActionListener{
 		gbc_comboBox.fill = GridBagConstraints.HORIZONTAL;
 		gbc_comboBox.gridx = 0;
 		gbc_comboBox.gridy = 0;
-		contentPanel.add(comboBox, gbc_comboBox);
+		contentPanel.add(comboBoxOperadores, gbc_comboBox);
 		
 		JLabel lblFechaaDesde = new JLabel("Fecha Desde:");
 		lblFechaaDesde.setFont(new Font("Tahoma", Font.BOLD, 11));
@@ -163,7 +168,7 @@ public class ArqueoDeCaja extends JDialog implements ActionListener{
 			dispose();
 		}
 		if(e.getSource()==this.generarButton){
-			new ItemsCobrados((Usuario) this.comboBox.getSelectedItem(),this.fechaDesde.getDate(),this.fechaHasta.getDate()).setVisible(true);
+			new ItemsCobrados((Usuario) this.comboBoxOperadores.getSelectedItem(),this.fechaDesde.getDate(),this.fechaHasta.getDate()).setVisible(true);
 			dispose();
 		}
 	}

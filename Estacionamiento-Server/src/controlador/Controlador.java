@@ -567,8 +567,10 @@ public class Controlador {
 		movimientoM.setMedioPago(modelo.MovimientoCC.MEDIOPAGO.NOAPLICA);
 
 		DAOCliente.getInstance().agregarMovimientoCC(cliente.getIdCliente(), movimientoM);
-		PrintTicketCobroExtraordinario print=new PrintTicketCobroExtraordinario(movimientoM, impresora, cliente);
-		print.imprimir();
+		if(!impresora.equalsIgnoreCase("no imprimir")){
+			PrintTicketCobroExtraordinario print=new PrintTicketCobroExtraordinario(movimientoM, impresora, cliente);
+			print.imprimir();
+		}
 		return 0;
 	}
 

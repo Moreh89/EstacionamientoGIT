@@ -36,7 +36,11 @@ public class DAOIncrementoPrepago {
 		fechaL = fechaL + " 00:00:00";
 		String fechaS = new SimpleDateFormat("MM-dd-yyyy").format(fechaFin);
 		fechaS = fechaS + " 23:59:59";
+		if(idUsuario>0)
 		interesesP=(ArrayList<IncrementoPrepago>) HibernateDAO.getInstancia().getListbetweenDates("IncrementoPrepago", "numeroUsuario", idUsuario, "fecha", fechaL, "fecha", fechaS);
+		else
+		interesesP=(ArrayList<IncrementoPrepago>) HibernateDAO.getInstancia().getListbetweenDates("IncrementoPrepago", "fecha", fechaL, "fecha", fechaS);
+		
 		for (IncrementoPrepago incrementoPrepago : interesesP) {
 			interesesM.add(Converter.convertIncrementoPrepagoPersistenciaToModelo(incrementoPrepago));
 		}

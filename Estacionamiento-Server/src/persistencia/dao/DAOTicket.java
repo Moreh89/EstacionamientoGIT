@@ -102,9 +102,16 @@ public class DAOTicket {
 		listaTickets.addAll((List<persistencia.clases.Ticket>) HibernateDAO.getInstancia().getListbetweenDates("Ticket", "estado", "2","fechaSalida", fechaL, "fechaSalida", fechaS));
 		
 		ArrayList<persistencia.clases.Ticket> listaPorUsuario = new ArrayList<persistencia.clases.Ticket>();
-		for (persistencia.clases.Ticket ticketTemp : listaTickets) {
-			if(ticketTemp.getUsuario().getIdUsuario() == usuario.getIdUsuario()){
-				listaPorUsuario.add(ticketTemp);
+		
+		if (usuario.getIdUsuario()>0) {
+			for (persistencia.clases.Ticket ticketTemp : listaTickets) {
+				if(ticketTemp.getUsuario().getIdUsuario() == usuario.getIdUsuario()){
+					listaPorUsuario.add(ticketTemp);
+				}
+			}
+		}else{
+			for (persistencia.clases.Ticket ticketTemp : listaTickets) {
+					listaPorUsuario.add(ticketTemp);
 			}
 		}
 		

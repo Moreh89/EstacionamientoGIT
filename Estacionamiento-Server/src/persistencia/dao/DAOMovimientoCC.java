@@ -36,12 +36,26 @@ public class DAOMovimientoCC {
 		fechaL = fechaL + " 00:00:00";
 		String fechaS = new SimpleDateFormat("MM-dd-yyyy").format(fechaFin);
 		fechaS = fechaS + " 23:59:59";
-		List<persistencia.clases.MovimientoCC> movimientosT = (List<MovimientoCC>) HibernateDAO.getInstancia().getListbetweenDates("MovimientoCC", "usuario", usuario.getIdUsuario(), "fecha", fechaL, "fecha", fechaS);
-		
+		List<persistencia.clases.MovimientoCC> movimientosT = new ArrayList<MovimientoCC>();
+		if(usuario.getIdUsuario()>0){
+			movimientosT = (List<MovimientoCC>) HibernateDAO.getInstancia().getListbetweenDates("MovimientoCC", "usuario", usuario.getIdUsuario(), "fecha", fechaL, "fecha", fechaS);
+		}else{
+			movimientosT = (List<MovimientoCC>) HibernateDAO.getInstancia().getListbetweenDates("MovimientoCC", "estado", "PAGADO","fecha", fechaL, "fecha", fechaS);
+		}
+
 		for (MovimientoCC movimientoCC : movimientosT) {
 			if(movimientoCC.getMontoCobrado() >0 ) movimientosP.add(movimientoCC);
 		}
 		
 		return movimientosP;
+	}
+	
+	public String getNombreCliente (long idMovimiento){
+	
+		String nombre = (String) HibernateDAO.getInstancia().getSession().createSQLQuery("SELECT (ISNULL(apellido,'') + ', ' + ISNULL(nombre,'')) from Cliente cli INNER JOIN MovimientoCC mc on cli.CuentaCorriente = mc.CuentaCorriente WHERE  mc.idMovimiento =?").setLong(0, idMovimiento).uniqueResult();
+
+	
+		return nombre;
+	
 	}
 }
