@@ -151,6 +151,7 @@ public class Controlador {
 		cliente.setRazonSocial(razonSocial);
 		cliente.setCuil(cuil);
 		cliente.setDescripcion(descripcion);
+		cliente.setFechaAlta(Calendar.getInstance().getTime());
 
 		if(tipoFactura.equals("1. NO APLICA"))
 			cliente.setTipoFactura(modelo.Cliente.TIPO_FACTURA.NA);

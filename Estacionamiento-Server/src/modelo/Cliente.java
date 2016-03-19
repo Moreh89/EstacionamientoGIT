@@ -1,6 +1,7 @@
 package modelo;
 
 import java.util.Comparator;
+import java.util.Date;
 import java.util.List;
 
 
@@ -24,6 +25,7 @@ public class Cliente {
 	private String cuil;	
 	private double estadoCrediticio;
 	private TIPO_FACTURA tipoFactura;
+	private Date fechaAlta;
 
 	private List <PersonaAutorizada> personasAutorizadasARetirar;
 
@@ -247,4 +249,13 @@ public class Cliente {
 			return o1.getApellido().compareToIgnoreCase(o2.getApellido());
 		}
 	}
+
+	public Date getFechaAlta() {
+		return fechaAlta;
+	}
+	public void setFechaAlta(Date fechaAlta) {
+		this.fechaAlta = fechaAlta;
+	}
+	
+	
 }

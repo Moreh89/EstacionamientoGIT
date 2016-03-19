@@ -170,6 +170,7 @@ public class Converter {
 		clienteP.setTelefono1(clienteM.getTelefono1());
 		clienteP.setTelefono2(clienteM.getTelefono2());
 		clienteP.setRazonSocial(clienteM.getRazonSocial());
+		clienteP.setFechaAlta(clienteM.getFechaAlta());
 
 		String tipoDoc=clienteM.getTipoDocumento().toString();
 		if(tipoDoc.equals("DNI"))
@@ -275,6 +276,7 @@ public class Converter {
 		clienteM.setTelefono1(clienteP.getTelefono1());
 		clienteM.setTelefono2(clienteP.getTelefono2());
 		clienteM.setRazonSocial(clienteP.getRazonSocial());
+		clienteM.setFechaAlta(clienteP.getFechaAlta());
 
 		String tipoDoc=clienteP.getTipoDocumento().toString();
 		if(tipoDoc.equals("DNI"))

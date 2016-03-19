@@ -22,6 +22,8 @@ import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.awt.Color;
 import java.awt.GridBagLayout;
 import java.awt.GridBagConstraints;
@@ -555,6 +557,8 @@ public class BuscadorCliente extends JDialog implements ActionListener, KeyListe
 		textFieldFechaAlta.setEditable(false);
 		textFieldFechaAlta.setFont(new Font("Tahoma", Font.BOLD, 16));
 		textFieldFechaAlta.setColumns(10);
+		
+
 		GridBagConstraints gbc_textFieldFechaAlta = new GridBagConstraints();
 		gbc_textFieldFechaAlta.insets = new Insets(0, 0, 5, 0);
 		gbc_textFieldFechaAlta.fill = GridBagConstraints.HORIZONTAL;
@@ -861,6 +865,10 @@ public class BuscadorCliente extends JDialog implements ActionListener, KeyListe
 			this.textFieldEstadoCliente.setText(clienteSeleccionado.getEstado().toString());
 			this.textFieldDescripcion.setText(clienteSeleccionado.getDescripcion());
 			this.textFieldTipoCliente.setText(clienteSeleccionado.getTipoCliente().toString());
+			
+
+			this.textFieldFechaAlta.setText(new SimpleDateFormat("dd/MM/yyyy").format(clienteSeleccionado.getFechaAlta()));
+
 			double estadoCrediticio=clienteSeleccionado.getEstadoCrediticio(clienteSeleccionado);
 			if(estadoCrediticio<0)
 			{

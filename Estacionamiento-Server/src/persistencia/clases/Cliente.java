@@ -1,5 +1,6 @@
 package persistencia.clases;
 
+import java.util.Date;
 import java.util.List;
 
 import javax.persistence.CascadeType;
@@ -35,6 +36,7 @@ public class Cliente {
 	private ESTADO estado;
 	private String cuil;
 	private TIPO_FACTURA tipoFactura;
+	private Date fechaAlta;
 	
 	@OneToMany(cascade=CascadeType.ALL)
 	@JoinColumn(name="Cliente")
@@ -228,6 +230,12 @@ public class Cliente {
 	}
 	public void setTipoFactura(TIPO_FACTURA tipoFactura) {
 		this.tipoFactura = tipoFactura;
+	}
+	public Date getFechaAlta() {
+		return fechaAlta;
+	}
+	public void setFechaAlta(Date fechaAlta) {
+		this.fechaAlta = fechaAlta;
 	}
 	
 	
