@@ -129,7 +129,7 @@ public class BuscadorCliente extends JDialog implements ActionListener, KeyListe
 				BuscadorCliente.class.getResource("/image/printer.png")));
 		setTitle("Buscar Clientes");
 		setResizable(true);
-		setBounds(100, 100, 1372, 650);
+		setBounds(100, 100, 1372, 725);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
@@ -235,11 +235,11 @@ public class BuscadorCliente extends JDialog implements ActionListener, KeyListe
 		GridBagLayout gbl_panelAtributos = new GridBagLayout();
 		gbl_panelAtributos.columnWidths = new int[] { 0, 327, 0 };
 		gbl_panelAtributos.rowHeights = new int[] { 0, 0, 0, 0, 0, 0, 0, 0, 0,
-				0, 0, 0, 0, 0, 40, 40, 40, 0 };
+				0, 0, 0, 0, 0, 0, 40, 40, 0 };
 		gbl_panelAtributos.columnWeights = new double[] { 0.0, 1.0,
 				Double.MIN_VALUE };
 		gbl_panelAtributos.rowWeights = new double[] { 0.0, 0.0, 0.0, 0.0, 0.0,
-				0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 1.0, 1.0, 1.0,
+				0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 1.0, 1.0,
 				Double.MIN_VALUE };
 		panelAtributos.setLayout(gbl_panelAtributos);
 
@@ -552,6 +552,7 @@ public class BuscadorCliente extends JDialog implements ActionListener, KeyListe
 		panelAtributos.add(lblFechaAlta, gbc_lblFechaAlta);
 		
 		textFieldFechaAlta = new JTextField();
+		textFieldFechaAlta.setEditable(false);
 		textFieldFechaAlta.setFont(new Font("Tahoma", Font.BOLD, 16));
 		textFieldFechaAlta.setColumns(10);
 		GridBagConstraints gbc_textFieldFechaAlta = new GridBagConstraints();
