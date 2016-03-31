@@ -295,7 +295,8 @@ public class CobroExtraordinario extends JDialog implements ActionListener, KeyL
 						}
 						if(codigoReturn >= 0)
 						{
-							JOptionPane.showMessageDialog(null, "Se generó correctamente el cobro del pago de " + comboBoxTipoCobro.getSelectedItem().toString(),"Cobro Extraordinario", JOptionPane.INFORMATION_MESSAGE);
+//	Se removió a pedido de Marcelo porque es meramente informativo.
+//							JOptionPane.showMessageDialog(null, "Se generó correctamente el cobro del pago de " + comboBoxTipoCobro.getSelectedItem().toString(),"Cobro Extraordinario", JOptionPane.INFORMATION_MESSAGE);
 							dispose();
 						}
 					}

@@ -554,6 +554,7 @@ public class BuscadorCliente extends JDialog implements ActionListener, KeyListe
 		panelAtributos.add(lblFechaAlta, gbc_lblFechaAlta);
 		
 		textFieldFechaAlta = new JTextField();
+		textFieldFechaAlta.setEnabled(false);
 		textFieldFechaAlta.setEditable(false);
 		textFieldFechaAlta.setFont(new Font("Tahoma", Font.BOLD, 16));
 		textFieldFechaAlta.setColumns(10);
