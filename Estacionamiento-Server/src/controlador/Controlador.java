@@ -572,6 +572,7 @@ public class Controlador {
 			PrintTicketCobroExtraordinario print=new PrintTicketCobroExtraordinario(movimientoM, impresora, cliente);
 			print.imprimir();
 		}
+		this.clienteActual=null;
 		return 0;
 	}
 

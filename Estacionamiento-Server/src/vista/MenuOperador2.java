@@ -108,6 +108,7 @@ public class MenuOperador2 extends JFrame implements ActionListener, KeyListener
 	private JPanel panel;
 	private ArrayList<PrintTicket> ticketsABorrar;
 	private JButton btnLimpiarTickets;
+	private JMenuItem mntmListadoCocheras;
 
 
 
@@ -172,7 +173,12 @@ public class MenuOperador2 extends JFrame implements ActionListener, KeyListener
 				mntmArqueoDeCaja.setFont(new Font("Segoe UI", Font.PLAIN, 20));
 				mnConsultas.add(mntmArqueoDeCaja);
 				mntmArqueoDeCaja.addActionListener(this);
-
+		
+		mntmListadoCocheras = new JMenuItem("Listado Cocheras");
+		mntmListadoCocheras.setFont(new Font("Segoe UI", Font.PLAIN, 20));
+		mnConsultas.add(mntmListadoCocheras);
+		mntmListadoCocheras.addActionListener(this);
+		
 		mntmTicketsAbiertos = new JMenuItem("Tickets Abiertos");
 		mntmTicketsAbiertos.setFont(new Font("Segoe UI", Font.PLAIN, 20));
 		mnConsultas.add(mntmTicketsAbiertos);
@@ -1033,6 +1039,11 @@ public class MenuOperador2 extends JFrame implements ActionListener, KeyListener
 		if(event.getSource()==mnAbout)
 		{
 			new About().setVisible(true);
+		}
+		
+		if(event.getSource()==mntmListadoCocheras)
+		{
+			new ListadoCocheras().setVisible(true);
 		}
 	}
 
