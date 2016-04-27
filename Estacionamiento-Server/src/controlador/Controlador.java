@@ -17,6 +17,8 @@ import java.util.Date;
 import java.util.GregorianCalendar;
 import java.util.List;
 import java.util.Vector;
+import java.util.concurrent.Executors;
+import java.util.concurrent.ScheduledExecutorService;
 
 import javax.swing.JOptionPane;
 
@@ -29,6 +31,9 @@ import persistencia.dao.*;
 import vista.PrintTicket;
 import vista.PrintTicketCobroExtraordinario;
 import modelo.*;
+import java.util.concurrent.Executors;
+import java.util.concurrent.ScheduledExecutorService;
+import java.util.concurrent.TimeUnit;
 
 @SuppressWarnings("unused")
 public class Controlador {
@@ -45,7 +50,7 @@ public class Controlador {
 	private ArrayList<CategoriaVehiculo> categoriasVehiculos;
 	private ArrayList<Descuento> descuentos;
 	private modelo.TasaInteres tasaInteres;
-	private ArrayList<Cliente> clientes;
+	ArrayList<Cliente> clientes;
 
 	//fin carga inicial
 	public ArrayList<Cochera> cocherasActuales;
@@ -59,10 +64,13 @@ public class Controlador {
 
 	}
 
+
+
 	public static Controlador getInstancia() {
 		if (instancia == null) 
 		{
 			instancia = new Controlador();
+		
 		}
 		return instancia;
 	}
@@ -116,15 +124,15 @@ public class Controlador {
 		tasaInteres=DAOTasaInteres.getInstance().getTasaInteresActual();
 		tarifas=DAOTarifa.getInstance().getTarifas();
 		clientes=DAOCliente.getInstance().getClientes();
-
+		
 		//SORTS
 		Collections.sort(descuentos, new Descuento.CompDescripcion());
 		Collections.sort(coloresVehiculos, new ColorVehiculo.CompDescripcion());
 		Collections.sort(modelosVehiculos, new ModeloVehiculo.CompDescripcion());
 		Collections.sort(categoriasVehiculos, new CategoriaVehiculo.CompDescripcion());
 		Collections.sort(clientes, new Cliente.CompApellido());
-
-
+//		ActualizationThread actThread = new ActualizationThread();
+//		actThread.actualizarEnMemoria(this);
 		return true;
 
 	}
@@ -895,12 +903,12 @@ public class Controlador {
 					return -1;
 				}
 			}
-			
+
 			JOptionPane.showMessageDialog(null, "Se está aplicando el Interés a todos los Clientes.\nLa operación puede demorar algunos minutos.", "Aplicar Interes",  JOptionPane.INFORMATION_MESSAGE);
 
 			ArrayList<modelo.Cliente> clientes = new ArrayList<modelo.Cliente>();
 
-//			clientes=DAOCliente.getInstance().getClientesPropietarios();
+			//			clientes=DAOCliente.getInstance().getClientesPropietarios();
 			clientes = DAOCliente.getInstance().getClientesDeudores();
 			modelo.Interes interesM= new Interes();
 			interesM.setIdInteres(0);
@@ -1295,7 +1303,7 @@ public class Controlador {
 		cliente.setVehiculos(listVehiculos);
 
 		long idCliente = DAOCliente.getInstance().actualizar(cliente);
-		
+
 		DAOCochera.getInstance().actualizarEstadoCochera();
 
 	}
@@ -1408,14 +1416,10 @@ public class Controlador {
 	public double generarAumentoAlquieres(double porcentajeAumento) {
 		long codReturn = -1;
 		double aumento=1+(porcentajeAumento/100);
-		
+
 		codReturn=DAOCochera.getInstance().generarAumentoAlquileres(aumento);
 
 		return codReturn;
 	}
-
-
-
-
 
 }

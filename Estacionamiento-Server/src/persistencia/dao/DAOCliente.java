@@ -48,9 +48,9 @@ public class DAOCliente {
 		//		clientesP=(ArrayList<Cliente>) HibernateDAO.getInstancia().getList("Cliente");
 		clientesP= (ArrayList<Cliente>) HibernateDAO.getInstancia().getListClientesNoBorrados();
 
-		for (Cliente cliente : clientesP) {
-			HibernateDAO.getInstancia().getSession().refresh(cliente);
-		}
+		//		for (Cliente cliente : clientesP) {
+		//			HibernateDAO.getInstancia().getSession().refresh(cliente);
+		//		}
 		clientesReturn = Converter.convertClientesPersistenciaToModelo(clientesP);
 		return clientesReturn;
 	}
@@ -308,7 +308,7 @@ public class DAOCliente {
 		HibernateDAO.getInstancia().update(clienteP);
 		return clienteP.getIdCliente();
 	}
-	
+
 
 	public ArrayList<modelo.Cliente> getClientesDeudores() {
 		ArrayList<modelo.Cliente> clientesReturn;
@@ -323,5 +323,16 @@ public class DAOCliente {
 		clientesReturn = Converter.convertClientesPersistenciaToModelo(clientesP);
 		return clientesReturn;
 	}
+
+	public ArrayList<modelo.Cliente> refreshClientes(ArrayList<Cliente> clientesP)
+	{
+		ArrayList<modelo.Cliente> clientesReturn;
+		for (Cliente cliente : clientesP) {
+			HibernateDAO.getInstancia().getSession().refresh(cliente);
+		}
+		clientesReturn = Converter.convertClientesPersistenciaToModelo(clientesP);
+		return clientesReturn;
+	}
+
 
 }
