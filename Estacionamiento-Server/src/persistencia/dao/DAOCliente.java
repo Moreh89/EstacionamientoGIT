@@ -52,6 +52,7 @@ public class DAOCliente {
 		//			HibernateDAO.getInstancia().getSession().refresh(cliente);
 		//		}
 		clientesReturn = Converter.convertClientesPersistenciaToModelo(clientesP);
+		HibernateDAO.getInstancia().clearChache();
 		return clientesReturn;
 	}
 

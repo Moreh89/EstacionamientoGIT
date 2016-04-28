@@ -298,5 +298,10 @@ public class HibernateDAO {
 		query.executeUpdate();
 		tx.commit();
 	}
+	
+	public void clearChache (){
+		Session session=getSession();
+		session.clear();
+	}
 
 }
