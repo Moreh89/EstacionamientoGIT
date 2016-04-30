@@ -1,4 +1,7 @@
 20/02/2016
 	Export de clientes deudores mostraba solo la primer ubicación de cochera. Se corrigió el bug.
 
+30/04
+	Se elimina el update de clase DAOCliente para mejorar tiempos de respuesta. Esto se había establecido para solucionar un bug que aparentemente no está más presente.
+
 	
